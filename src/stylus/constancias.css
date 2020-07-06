@@ -1,0 +1,35 @@
+.taConst{
+    width: 100%;
+    border: 1px solid black;
+}
+.campDat{
+    display: flex;
+    width: 100%;
+}
+.tiConst{
+    text-align: center;
+}
+.tdConst{
+    width:24%;
+}
+.textConst{
+    width: 258px;
+    height: 33px;
+}
+.numText{
+    width: 117px;
+    height: 33px;
+}
+.codigo2{
+    width: 40px;
+    height: 33px;
+}
+.direc1{
+    width: 600px;
+}
+.btnSig1{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+}

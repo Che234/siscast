@@ -1,0 +1,20 @@
+
+.negritas{
+    font-weight: bold;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+.contUsuario{
+    width:100%;
+}
+.titCentro{
+    margin-top: 5%;
+    margin-bottom: 2%;
+}
+.filasUser{
+    margin-bottom: 2%;
+}
+.campos button{
+    margin-left: 10%;
+}

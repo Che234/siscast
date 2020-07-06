@@ -1,0 +1,16 @@
+var er_areas = /^[A-Z\a-z\À-ÿ\s+\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1]{3,125}$/;
+var ex_cedula = /^[0-9\.\a-z\A-Z\s+\-]{8,125}$/;
+var ex_nac = /^[a-z\À-ÿ\A-z\\u00f1\\u00d1]{1,1}$/;
+var ex_datcort= /^[A-Z\À-ÿ\a-z\s+\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\,]{1,65}$/;
+var ex_Telefono = /^[0-9\a-z\A-Z\s+]{2,7}$/;
+var ex_rif = /^[0-9\.\a-z\A-Z\s+\-]{6,125}$/;
+var er_cont= /^[0-9\a-z\A-Z\À-ÿ\\u00f1\\u00d1]{5,65}$/;
+var ex_datos= /^[A-Z\À-ÿ\s+\a-z\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1]{3,65}$/;
+var ex_carnet=/^[0-9\-\.\A-Z\s+]{1,19}$/;
+var ex_telef=/^[0-9\-]{2,18}$/;
+var ex_trayec=/^[0-9\À-ÿ\s+\.\,\a-z\A-Z\\u00f1\\u00d1]{1,35}$/;
+var ex_fecha=/^[0-9\-\.\/]{2,55}$/;
+var ex_user = /^[0-9\À-ÿ\A-Z\a-z\\u00f1\\u00d1\*\_\@\$\%\&\/]{4,8}$/
+var ex_pass = /^[0-9\À-ÿ\a-z\A-Z\\u00f1\\u00d1\*\_\@\$\%\&\/]{6,15}$/
+var ex_correo= /^[a-zÀ-ÿA-Z0-9_\\u00f1\\u00d1]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5}$/;
+var ex_money = /^[0-9\.]{1,15}\,{1}[0-9]{2}$/
