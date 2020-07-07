@@ -193,7 +193,6 @@ class constancias{
                             <option value="0"></option>
                         </select>
                     </div>
-                    
                 </td>
             </tr>
             <tr>
@@ -1030,16 +1029,16 @@ class constancias{
                 <option value="0"></option>
                 <option value="LA GABARRA (LA MORITA)">LA GABARRA (LA MORITA)</option>
                 <option value="LA MORITA">LA MORITA</option>
-                <option value="LOS MANGUTOS">LOS MANGUTOS</option>
+                <option value="LOS MANGUTOS">LOS MANGUITOS</option>
                 <option value="VILLA PARAISO">VILLA PARAISO</option>
-                <option value="VALLE LORENA I">ALLE LORENA I</option>
+                <option value="VALLE LORENA I">VALLE LORENA I</option>
                 <option value="VALLE LORENA II">VALLE LORENA II</option>
                 <option value="12 DE OCTUBRE">12 DE OCTUBRE</option>
                 <option value="NARANJALES">NARANJALES</option>
-                <option value="BARRIO LA PAZ"> BARRIO LA PAZ</option>
-                <option value="LA BOLIVARIANA"> LA BOLIVARIANA</option>
-                <option value="27 DE FEBRERO PARTE ALTA"> 27 DE FEBRERO PARTE ALTA</option>
-                <option value="27 DE FEBRERO PARTE BAJA"> 27 DE FEBRERO PARTE BAJA</option>
+                <option value="BARRIO LA PAZ">BARRIO LA PAZ</option>
+                <option value="LA BOLIVARIANA">LA BOLIVARIANA</option>
+                <option value="27 DE FEBRERO PARTE ALTA">27 DE FEBRERO PARTE ALTA</option>
+                <option value="27 DE FEBRERO PARTE BAJA">27 DE FEBRERO PARTE BAJA</option>
                 <option value="VILLA MORTERREY">VILLA MORTERREY</option>
                 <option value="TETEO I">TETEO I</option>
                 <option value="TETEO II">TETEO II</option>
@@ -1194,6 +1193,8 @@ class constancias{
 
 
         //LISTA DE INSERT SQL
+            
+            
             //PROPIETARIOS (LISTO)
                 $propSql = "INSERT INTO propietarios(cedula,rif,nombre,apellido,telef,dir_hab) value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFul."','".$this->direcProp."')";
                 $link->query($propSql);
@@ -1242,8 +1243,7 @@ class constancias{
                 $InmuebleSql= "INSERT INTO inmueble(telef,direccion,parroquia,sector,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios)value('".$this->telfFul2."','".$this->direcInmue."','".$this->parrInmue."','".$this->secInmue."',".$idCarcConst.",".$idProt.",".$idCarc.",".$idLindDoc.",".$idLindGen.",".$idLindPosVenta.",".$idTerreno.",".$idServ.")";
                 $link->query($InmuebleSql);
                 $idInmueble= $link->insert_id;
-                
-                echo'<h1>PROCESO COMPLETADO CON EXITO</h1>
+              echo'<h1>PROCESO COMPLETADO CON EXITO</h1>
             <div id="iconGuard">
                 <img src="./assets/guard.png"/>
             </div>
@@ -1272,6 +1272,13 @@ class constancias{
                             </select>
                         </div>
                     </td>
+                </tr>
+                <tr>
+                    <td class="tdConst">
+                        <div class="campDat">
+                            <p class="negritas">Numero Factura:</p>
+                            <input type="number" id="numFact"/>
+                        </div>
                     <td class="tdConst">
                         <div class="campDat">
                             <p class="negritas">Fecha:</p>

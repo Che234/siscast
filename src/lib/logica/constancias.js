@@ -13,7 +13,7 @@ class constancias{
         arTotal,NivConstTotal,arConstTotal,parte2,parte1,arTotalVenta,arRestante,valorTerreno,valorInmueble,
         valorConstruc,nuExp,montoFact,fechFact,idInmueble,telfFul,telfFul2,regInmue,Acue,AcueRural,AguasSub,
         AguasServ,PavFlex,PavRig,viaEngran,acera,AlumPublico,aseo,transPublic,pozoSept,ElectResidencial,ElectriIndust,
-        linTelf,empadro,multa,idProp){
+        linTelf,empadro,multa,idProp,numFact){
 
         this.cedR = cedR
         this.cedConst = cedConst
@@ -121,6 +121,7 @@ class constancias{
         this.empadro = empadro
         this.multa = multa
         this.idProp = idProp
+        this.numFact = numFact
     }
     test1(){
         if(!ex_nac.test(this.cedR)){
@@ -585,14 +586,14 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`nuExp=${this.nuExp}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&accion=imprConst2`);
+        ajax.send(`nuExp=${this.nuExp}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&accion=imprConst2`);
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     let nuExp = document.getElementById("nuExp").value
-                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed src="http://localhost/SisCast/assets/constancias/${nuExp}.pdf" type="application/pdf"></div>`;
+                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="http://localhost/SisCast/assets/constancias/${nuExp}.pdf" type="application/pdf"></div>`;
 			     }
 	       	}
     }
@@ -849,6 +850,7 @@ function btnImprConst(){
     consta.idInmueble = document.getElementById("idInmueble").value
     consta.empadro = document.getElementById("empadro").value
     consta.idProp =document.getElementById("idProp").value
+    consta.numFact= document.getElementById("numFact").value
     if(consta.veriInmu() == true){
         consta.imprConst()
     }

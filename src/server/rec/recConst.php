@@ -567,6 +567,11 @@ if($accion == "imprConst2"){
     }else{
         $f002->idProp= "nada";
     }
+    if(isset($_POST["numFact"])){
+        $f002->numFact=$_POST["numFact"];
+    }else{
+        $f002->numFact= "nada";
+    }
     echo'<div id="enlacePdf"></div>';
     $f002->imprimir();
     

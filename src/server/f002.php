@@ -1,6 +1,5 @@
 <?php
 require('../../lib/fpdf/fpdf.php');
- 
 class PDF extends FPDF{
     // Cabecera de página
     function Header(){
@@ -33,13 +32,13 @@ class PDF extends FPDF{
     // Pie de página
     function Footer(){
         // Posición: a 1,5 cm del final
-        $this->Image('../../../assets/fondoFooter.jpg',47,395,204);
+        $this->Image('../../../assets/fondoFooter.jpg',19,395,260,20);
         $this->SetY(395);    
         $this->SetX(100);
-        $this->Cell(100,10,'PIÑAL, CALLE 3 ENTRE CARRERAS 3 Y 4,',0,0,'C',false);
+        $this->Cell(100,10,utf8_decode('PIÑAL, CALLE 3 ENTRE CARRERAS 3 Y 4,'),0,0,'C',false);
         $this->SetY(400);    
-        $this->SetX(100);
-        $this->Cell(100,10,'PALACIO MUNICIPAL, MUNICIPIO FERNANDEZ FEO – ESTADO TACHIRA',0,0,'C');
+        $this->SetX(95);
+        $this->Cell(100,10,utf8_decode('PALACIO MUNICIPAL, MUNICIPIO FERNANDEZ FEO – ESTADO TACHIRA'),0,'C');
         $this->SetY(405);    
         $this->SetX(99);
         $this->cell(100,10,'IAMOTFF@GMAIL.COM.',0,0,'C');
@@ -54,11 +53,25 @@ class f002{
     var $nuExp = "";
     var $montoFact = "";
     var $fechFact = "";
+    var $numFact= "";
     function imprimir(){
+        session_start();
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
+        //BUSQUEDA DE USUARIO
+            $userSql = "SELECT nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resultUser= $link->query($userSql);
+            $idUser= $resultUser->fetch_assoc();
+        //INSERT EXPEDIENTE
+            $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,fk_cod_catastral,n_expediente)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",0,".$nuExp.")";
+            $link->query($expediSql);
+            $idExpediente = $link->insert_id;
+        //INSERT FACTURA
+            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha,fk_expediente)value(".$this->montoFact.",".$this->nuExp.",".$this->fechFact.",".$idExpediente.")";
+            $link->query($expFactSql);
+            $idExpFact= $link->insert_id;
         //BUSQUEDA DEL INMUEBLE
-            $expSql= "SELECT telef,direccion,parroquia,sector,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios from inmueble where id=".$this->idInmueble." ";
+            $expSql= "SELECT telef,direccion,parroquia,sector,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
             $resultInmue = $resInmue->fetch_assoc();
             $idProt= $resultInmue["fk_protocolizacion"];
@@ -69,9 +82,10 @@ class f002{
             $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
             $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
-            $expSql= "SELECT cedula,rif,nombre,apellido,telef,dir_hab from propietarios where id=".$this->idProp." ";
+            $expSql= "SELECT * from propietarios where id=".$this->idProp."";
             $resProp= $link->query($expSql);
-            $resultProp = $resProp->fetch_assoc();
+            $resultPropie = $resProp->fetch_assoc();
+            $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
             $protSql = "SELECT documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble from datos_protocolizacion where id=".$idProt."";
             $resProt = $link->query($protSql);
@@ -81,11 +95,11 @@ class f002{
             $resLindDoc = $link->query($lindDocSql);
             $resultLindDoc= $resLindDoc->fetch_assoc();
         //BUSQUEDA DE DATOS TERRENO
-            $terrSql= "SELECT area_total_venta,area_total,area_restante,valor_terreno,valor_inmueble,valor_construccion where id=".$idTerreno."";
+            $terrSql= "SELECT area_total_venta,area_total,area_restante,valor_terreno,valor_inmueble,valor_construccion FROM terreno where id=".$idTerreno."";
             $resTerr= $link->query($terrSql);
             $resultTerr= $resTerr->fetch_assoc();
         //BUSQUEDA DE DATOS CONSTRUCCION
-            $constSql= "SELECT destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,piezas_sanitarias,ventanas,puertas,insta_electricas,complementos,estado_conservacion,ambientes,observ,nivel,areaC where id=".$idConst."";
+            $constSql= "SELECT destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,piezas_sanitarias,ventanas,puertas,insta_electricas,complementos,estado_conservacion,ambientes,observ,nivel,areaC from caracteristicas_construccion where id=".$idConst."";
             $resConst= $link->query($constSql);
             $resultConst= $resConst->fetch_assoc();
         //BUSQUEDA DE SERVICIOS
@@ -93,9 +107,9 @@ class f002{
             $resServ= $link->query($servSql);
             $resultServ= $resServ->fetch_assoc();
         //BUSQUEDA DE CARACTERISTICAS DEL INMUEBLE
-            $caracInmue= "SELECT * FROM carc_inmueble where id=".$idCaracInmue."";
-            $resCaracInmue= $link->query();
-            $resulCaracInmue= $resCaracInmue->fetch_assoc();
+            $carastInmue= "SELECT * FROM carc_inmueble where id=".$idCaracInmue."";
+            $rescarastInmue= $link->query($carastInmue);
+            $mostcarastInmue= $rescarastInmue->fetch_assoc();
         //BUSQUEDA DE CARACTERISTICAS DE LA CONSTRUCCION
             $carcConstSql= "SELECT * FROM caracteristicas_construccion where id=".$idcaracConstruccion."";
             $resCaracConst= $link->query($carcConstSql);
@@ -109,10 +123,9 @@ class f002{
             $pdf->SetFont('Times','B',12);
             $pdf->SetX(38);
             $pdf->SetY(44);
-            $pdf->MultiCell(0,6,'Quien suscribe, Presidente del Instituto Autónomo Municipal de
+            $pdf->MultiCell(0,6,''.utf8_decode('Quien suscribe, Presidente del Instituto Autónomo Municipal de
             Ordenamiento Territorial  del Municipio Fernández Feo 
-            (I.A.M.O.T.F.F)
-            ',0,'C');
+            (I.A.M.O.T.F.F)').'',0,'C');
             $pdf->SetX(260);
             $pdf->Cell(20,10,'F-002');
             $pdf->SetY(65);
@@ -123,19 +136,19 @@ class f002{
             $pdf->Cell(40,10,'HACE CONSTAR:','0,0,0,B:1',0,'C');
             $pdf->SetY(78);
             $pdf->SetX(22);
-            $pdf->cell(40,10,'Fecha:');
+            $pdf->cell(40,10,'Fecha: '.date('d-m-Y').'');
             $pdf->SetY(78);
             $pdf->SetX(215);
-            $pdf->cell(40,10,'No de Factura:');
+            $pdf->cell(40,10,'No de Factura: '.$this->numFact.'');
             $pdf->SetY(84);
             $pdf->SetX(22);
-            $pdf->cell(40,10,'No Civico:');
+            $pdf->cell(40,10,'No Civico: No Aplica');
             $pdf->SetY(84);
             $pdf->SetX(215);
-            $pdf->cell(40,10,'No Expediente:');
+            $pdf->cell(40,10,'No Expediente: '.$this->nuExp.'');
             $pdf->SetY(90);
             $pdf->SetX(22);
-            $pdf->cell(40,10,'Tipo de Operación:');
+            $pdf->cell(40,10,''.utf8_decode('Tipo de Operación: Inscripción').'');
         //CODIGO CATASTRAL
             $pdf->SetY(100);
             $pdf->SetX(19);
@@ -188,7 +201,13 @@ class f002{
             $pdf->cell(13,7,'0',1,0,'C');
             $pdf->SetY(110);
             $pdf->SetX(84);
-            $pdf->cell(13,7,'0',1,0,'C');
+            if($resultInmue["parroquia"]=="Capital"){
+                $pdf->cell(13,7,'1',1,0,'C');
+            }elseif($resultInmue["parroquia"]=="Dr. Alberto Adriani"){
+                $pdf->cell(13,7,'2',1,0,'C');
+            }elseif($resultInmue["parroquia"]=="Santo Domingo"){
+                $pdf->cell(13,7,'3',1,0,'C');
+            }
             $pdf->SetY(110);
             $pdf->SetX(97.2);
             $pdf->cell(8.6,7,'3',1,0,'C');
@@ -200,7 +219,7 @@ class f002{
             $pdf->cell(8.6,7,'0',1,0,'C');
             $pdf->SetY(110);
             $pdf->SetX(123);
-            $pdf->cell(8.6,7,'4',1,0,'C');
+            $pdf->cell(8.6,7,'0',1,0,'C');
             $pdf->SetY(110);
             $pdf->SetX(131.6);
             $pdf->cell(8.6,7,'0',1,0,'C');
@@ -209,7 +228,7 @@ class f002{
             $pdf->cell(8.9,7,'0',1,0,'C');
             $pdf->SetY(110);
             $pdf->SetX(149);
-            $pdf->cell(8.6,7,'5',1,0,'C');
+            $pdf->cell(8.6,7,'0',1,0,'C');
             $pdf->SetY(110);
             $pdf->SetX(157.5);
             $pdf->cell(8.6,7,'0',1,0,'C');
@@ -236,7 +255,7 @@ class f002{
             $pdf->cell(8.6,7,'0',1,0,'C');
             $pdf->SetY(110);
             $pdf->SetX(226);
-            $pdf->cell(8.6,7,'3',1,0,'C');
+            $pdf->cell(8.6,7,'0',1,0,'C');
             $pdf->SetY(110);
             $pdf->SetX(234.6);
             $pdf->cell(8.6,7,'0',1,0,'C');
@@ -261,44 +280,46 @@ class f002{
             $pdf->cell(50,6,'No de Cedula:',1,0,'L');
             $pdf->SetY(122);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultProp["cedula"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropie["cedula"].'',1,0,'L');
             $pdf->SetY(128);
             $pdf->SetX(19);
             $pdf->cell(50,6,'Rif:',1,0,'L');
             $pdf->SetY(128);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultProp["rif"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropie["rif"].'',1,0,'L');
             $pdf->SetY(134);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'Apellidos Y Nombres:',1,0,'L');
+            $pdf->cell(50,6,'Apellidos Y Nombres: ',1,0,'L');
             $pdf->SetY(134);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultProp["nombre"].' '.$resultProp["apellido"].'',1,0,'L');
+            $pdf->Cell(0,6,''.utf8_decode($nombreProp).'',1,0,'L');
+            $pdf->SetX(88);
+            $pdf->Cell(0,6,'' ,0,0,'L');
             $pdf->SetY(140);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'No de Teléfono:',1,0,'L');
+            $pdf->cell(50,6,utf8_decode('No de Teléfono: '),1,0,'L');
             $pdf->SetY(140);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultProp["telef"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropie["telef"].'',1,0,'L');
             $pdf->SetY(146);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'Dirección Del Propietario:',1,0,'L');
+            $pdf->cell(50,6,utf8_decode('Dirección Del Propietario:'),1,0,'L');
             $pdf->SetY(146);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultProp["dir_hab"].'',1,0,'L');
+            $pdf->cell(0,6,''.utf8_decode($resultPropie["dir_hab"]).'',1,0,'L');
         //DATOS DE PROTOCOLIZACION
             $pdf->SetY(152);
             $pdf->SetX(19);
-            $pdf->cell(0,6,'DATOS DE PROTOCOLIZACIÓN:',1,0,'C');
+            $pdf->cell(0,6,''.utf8_decode("DATOS DE PROTOCOLIZACIÓN:").'',1,0,'C');
             $pdf->SetY(158);
             $pdf->SetX(19);
-            $pdf->cell(110,6,'Documento Debidamente:'.$resultProp["documento"].'',1,0,'L');
+            $pdf->cell(110,6,'Documento Debidamente: '.$resultProp["documento"].'',1,0,'L');
             $pdf->SetY(158);
             $pdf->SetX(129);
-            $pdf->cell(0,6,'Dirección:'.$resultProp["direccion"].'',1,0,'L');
+            $pdf->cell(0,6,utf8_decode('Dirección: '.$resultProp["direccion"].''),1,0,'L');
             $pdf->SetY(164);
             $pdf->SetX(19);
-            $pdf->cell(25,6,'Número:',1,0,'C');
+            $pdf->cell(25,6,utf8_decode('Número:'),1,0,'C');
             $pdf->SetY(170);
             $pdf->SetX(19);
             $pdf->cell(25,6,''.$resultProp["numero"].'',1,0,'C');
@@ -341,7 +362,7 @@ class f002{
         //DATOS DE COLINDANTES SEGUN DOCUMENTO
             $pdf->SetY(176);
             $pdf->SetX(19);
-            $pdf->cell(0,6,'DATOS DE COLINDANTES SEGÚN DOCUMENTO :',1,0,'C');
+            $pdf->cell(0,6,utf8_decode('DATOS DE COLINDANTES SEGÚN DOCUMENTO :'),1,0,'C');
             $pdf->SetY(182);
             $pdf->SetX(19);
             $pdf->cell(60,6,'Puntos Cardinales:',1,0,'C');
@@ -350,13 +371,13 @@ class f002{
             $pdf->cell(150,6,'Alinderado:',1,0,'C');
             $pdf->SetY(182);
             $pdf->SetX(229);
-            $pdf->cell(0,6,'Medida (Mts):',1,0,'C');
+            $pdf->cell(0,6,'Medida (m):',1,0,'C');
             $pdf->SetY(188);
             $pdf->SetX(19);
             $pdf->cell(60,6,'NORTE',1,0,'C');
             $pdf->SetY(188);
             $pdf->SetX(79);
-            $pdf->cell(150,6,''.$resultLindDoc["alind_n"].'',1,0,'C');
+            $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_n"].''),1,0,'C');
             $pdf->SetY(188);
             $pdf->SetX(229);
             $pdf->cell(0,6,''.$resultLindDoc["norte"].'',1,0,'C');
@@ -365,7 +386,7 @@ class f002{
             $pdf->cell(60,6,'SUR',1,0,'C');
             $pdf->SetY(194);
             $pdf->SetX(79);
-            $pdf->cell(150,6,''.$resultLindDoc["alind_s"].'',1,0,'C');
+            $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_s"].''),1,0,'C');
             $pdf->SetY(194);
             $pdf->SetX(229);
             $pdf->cell(0,6,''.$resultLindDoc["sur"].'',1,0,'C');
@@ -374,7 +395,7 @@ class f002{
             $pdf->cell(60,6,'ESTE',1,0,'C');
             $pdf->SetY(200);
             $pdf->SetX(79);
-            $pdf->cell(150,6,''.$resultLindDoc["alind_e"].'',1,0,'C');
+            $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_e"].''),1,0,'C');
             $pdf->SetY(200);
             $pdf->SetX(229);
             $pdf->cell(0,6,''.$resultLindDoc["este"].'',1,0,'C');
@@ -383,7 +404,7 @@ class f002{
             $pdf->cell(60,6,'OESTE',1,0,'C');
             $pdf->SetY(206);
             $pdf->SetX(79);
-            $pdf->cell(150,6,'alind_o',1,0,'C');
+            $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_o"].''),1,0,'C');
             $pdf->SetY(206);
             $pdf->SetX(229);
             $pdf->cell(0,6,''.$resultLindDoc["oeste"].'',1,0,'C');
@@ -396,22 +417,22 @@ class f002{
             $pdf->cell(40,6,''.$resultTerr["area_total"].'',1,0,'C');
             $pdf->SetY(212);    
             $pdf->SetX(99);
-            $pdf->cell(60,6,'Niveles de Construcción',1,0,'C');
+            $pdf->cell(60,6,utf8_decode('Niveles de Construcción'),1,0,'C');
             $pdf->SetY(212);    
             $pdf->SetX(159);
             $pdf->cell(30,6,''.$resultConst["nivel"].'',1,0,'C');
             $pdf->SetY(212);    
             $pdf->SetX(189);
-            $pdf->cell(50,6,'Area de Construcción',1,0,'C');
+            $pdf->cell(50,6,utf8_decode('Area de Construcción'),1,0,'C');
             $pdf->SetY(212);    
             $pdf->SetX(239);
             $pdf->cell(36,6,''.$resultConst["areaC"].'',1,0,'C');
             $pdf->SetY(218);    
             $pdf->SetX(19);
-            $pdf->cell(60,6,'Dirección del Inmueble:',1,0,'C');
+            $pdf->cell(60,6,utf8_decode('Dirección del Inmueble:'),1,0,'L');
             $pdf->SetY(218);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$resultConst["direccion"].'',1,0,'C');
+            $pdf->cell(0,6,''.$resultInmue["direccion"].'',1,0,'C');
         //SERVICIOS 1
             $pdf->SetY(224);    
             $pdf->SetX(19);
@@ -441,7 +462,7 @@ class f002{
             }
             $pdf->SetY(236);    
             $pdf->SetX(62);
-            $pdf->cell(30,10,'Aguas Subterráneas',0,0,'L');
+            $pdf->cell(30,10,utf8_decode('Aguas Subterráneas'),0,0,'L');
             $pdf->SetY(239);    
             $pdf->SetX(106);
             if($resultServ["aguasSubter"]=="si"){
@@ -482,7 +503,7 @@ class f002{
             }
             $pdf->SetY(236);    
             $pdf->SetX(113);
-            $pdf->cell(30,10,'Vía Engranzonada',0,0,'L');
+            $pdf->cell(30,10,utf8_decode('Vía Engranzonada'),0,0,'L');
             $pdf->SetY(239);    
             $pdf->SetX(156);
             if($resultServ["viaEngran"]=="si"){
@@ -503,7 +524,7 @@ class f002{
         //SERVICIOS 3
             $pdf->SetY(224);    
             $pdf->SetX(163);
-            $pdf->cell(30,10,'Alumbrado Público',0,0,'L');
+            $pdf->cell(30,10,utf8_decode('Alumbrado Público'),0,0,'L');
             $pdf->SetY(227);    
             $pdf->SetX(205);
             if($resultServ["alumbradoPub"]=="si"){
@@ -523,7 +544,7 @@ class f002{
             }
             $pdf->SetY(236);    
             $pdf->SetX(163);
-            $pdf->cell(30,10,'Transporte Público',0,0,'L');
+            $pdf->cell(30,10,utf8_decode('Transporte Público'),0,0,'L');
             $pdf->SetY(239);    
             $pdf->SetX(205);
             if($resultServ["transportePublic"]=="si"){
@@ -533,10 +554,10 @@ class f002{
             }
             $pdf->SetY(242);    
             $pdf->SetX(163);
-            $pdf->cell(30,10,'Pozo Séptico',0,0,'L');
+            $pdf->cell(30,10,utf8_decode('Pozo Séptico'),0,0,'L');
             $pdf->SetY(245);    
             $pdf->SetX(205);
-            if($resultServ["PozoSept"]=="si"){
+            if($resultServ["pozoSept"]=="si"){
                 $pdf->cell(4,4,'',1,0,'L',true);
             }else{
                 $pdf->cell(4,4,'',1,0,'L');
@@ -564,7 +585,7 @@ class f002{
             }
             $pdf->SetY(236);    
             $pdf->SetX(210);
-            $pdf->cell(30,10,'Línea Telefónica',0,0,'L');
+            $pdf->cell(30,10,utf8_decode('Línea Telefónica'),0,0,'L');
             $pdf->SetY(239);    
             $pdf->SetX(260);
             if($resultServ["lineaTelef"]=="si"){
@@ -581,11 +602,14 @@ class f002{
             $pdf->cell(110,14,'',1,0,'L');
             $pdf->SetY(302);    
             $pdf->SetX(20);
-            $pdf->cell(30,6,'Observaciones:',0,0,'L');
+            $pdf->Cell(30,6,'Observaciones:',0,0,'L');
+            $pdf->SetY(308);    
+            $pdf->SetX(20);
+            $pdf->Cell(30,6,$resultConst["observ"],0,0,'L');
             //TOPOGRAFIA
                 $pdf->SetY(257);    
                 $pdf->SetX(19);
-                $pdf->cell(50,6,'Topografía',1,0,'C');
+                $pdf->cell(50,6,utf8_decode('Topografía'),1,0,'C');
                 $pdf->SetY(257);    
                 $pdf->SetX(19);
                 $pdf->cell(50,17,'',1,0,'C');
@@ -594,7 +618,7 @@ class f002{
                 $pdf->cell(30,17,'Terreno Llano',0,0,'C');
                 $pdf->SetY(264);    
                 $pdf->SetX(59);
-                if($resultServ["topografia"]=="Terreno Llano"){
+                if($mostcarastInmue["topografia"]=="Terreno Llano"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -604,7 +628,7 @@ class f002{
                 $pdf->cell(30,17,'Terreno Quebrado',0,0,'C');
                 $pdf->SetY(269);    
                 $pdf->SetX(59);
-                if($resultServ["topografia"]=="Terreno Quebrado"){
+                if($mostcarastInmue["topografia"]=="Terreno Quebrado"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -621,18 +645,17 @@ class f002{
                 $pdf->cell(50,7,'Regular',0,'C');
                 $pdf->SetY(282.5);    
                 $pdf->SetX(49);
-                if($resultServ["forma"]=="Regular"){
+                if($mostcarastInmue["forma"]=="Regular"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
                 }
-                $pdf->cell(4,4,'',1,'C');
                 $pdf->SetY(288);    
                 $pdf->SetX(22);
                 $pdf->cell(50,7,'Irregular',0,'C');
                 $pdf->SetY(289);    
                 $pdf->SetX(49);
-                if($resultServ["forma"]=="Irregular"){
+                if($mostcarastInmue["forma"]=="Irregular"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -649,7 +672,7 @@ class f002{
                 $pdf->cell(30,6,'Residencial',0,0,'L');
                 $pdf->SetY(264);    
                 $pdf->SetX(120);
-                if($resultServ["uso"]=="Residencial"){
+                if($mostcarastInmue["uso"]=="Residencial"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -659,7 +682,7 @@ class f002{
                 $pdf->cell(30,6,'Comercial',0,0,'L');
                 $pdf->SetY(270);    
                 $pdf->SetX(120);
-                if($resultServ["uso"]=="Comercial"){
+                if($mostcarastInmue["uso"]=="Comercial"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -669,7 +692,7 @@ class f002{
                 $pdf->cell(30,6,'Residencial-Comercial',0,0,'L');
                 $pdf->SetY(276);    
                 $pdf->SetX(120);
-                if($resultServ["uso"]=="Residencial-Comercial"){
+                if($mostcarastInmue["uso"]=="Residencial-Comercial"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -679,17 +702,17 @@ class f002{
                 $pdf->cell(30,6,'Industrial',0,0,'L');
                 $pdf->SetY(282);    
                 $pdf->SetX(120);
-                if($resultServ["uso"]=="Industrial"){
+                if($mostcarastInmue["uso"]=="Industrial"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
                 }
                 $pdf->SetY(286.5);    
                 $pdf->SetX(72);
-                $pdf->cell(30,6,'Espacios Públicos',0,0,'L');
+                $pdf->cell(30,6,utf8_decode('Espacios Públicos'),0,0,'L');
                 $pdf->SetY(288);    
                 $pdf->SetX(120);
-                if($resultServ["uso"]=="Espacios-Publicos"){
+                if($mostcarastInmue["uso"]=="Espacios-Publicos"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -699,7 +722,7 @@ class f002{
                 $pdf->cell(30,7,'Rural',0,0,'L');
                 $pdf->SetY(294);    
                 $pdf->SetX(120);
-                if($resultServ["uso"]=="Rural"){
+                if($mostcarastInmue["uso"]=="Rural"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -716,7 +739,7 @@ class f002{
                 $pdf->cell(25,5,'Municipio',0,0,'L');
                 $pdf->SetY(266);    
                 $pdf->SetX(160);
-                if($resultServ["tenencia"]=="Municipio"){
+                if($mostcarastInmue["tenencia"]=="Municipio"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -726,7 +749,7 @@ class f002{
                 $pdf->cell(25,5,'Comunidad',0,0,'L');
                 $pdf->SetY(272);    
                 $pdf->SetX(160);
-                if($resultServ["tenencia"]=="Comunidad"){
+                if($mostcarastInmue["tenencia"]=="Comunidad"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -736,7 +759,7 @@ class f002{
                 $pdf->cell(25,5,'INTU',0,0,'L');
                 $pdf->SetY(278);    
                 $pdf->SetX(160);
-                if($resultServ["tenencia"]=="INTU"){
+                if($mostcarastInmue["tenencia"]=="INTU"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -746,7 +769,7 @@ class f002{
                 $pdf->cell(25,5,'INTI',0,0,'L');
                 $pdf->SetY(284);    
                 $pdf->SetX(160);
-                if($resultServ["tenencia"]=="INTI"){
+                if($mostcarastInmue["tenencia"]=="INTI"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -756,7 +779,7 @@ class f002{
                 $pdf->cell(25,5,'Propio',0,0,'L');
                 $pdf->SetY(290);    
                 $pdf->SetX(160);
-                if($resultServ["tenencia"]=="Propio"){
+                if($mostcarastInmue["tenencia"]=="Propio"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -766,29 +789,27 @@ class f002{
                 $pdf->cell(25,5,'Enfiteusis',0,0,'L');
                 $pdf->SetY(296);    
                 $pdf->SetX(160);
-                if($resultServ["tenencia"]=="Enfiteusis"){
+                if($mostcarastInmue["tenencia"]=="Enfiteusis"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
                 }
-                $pdf->cell(4,4,'',1,0,'L');
                 $pdf->SetY(302);    
                 $pdf->SetX(130);
                 $pdf->cell(25,5,'Ocupado',0,0,'L');
                 $pdf->SetY(302);    
                 $pdf->SetX(160);
-                if($resultServ["tenencia"]=="Ocupado"){
+                if($mostcarastInmue["tenencia"]=="Ocupado"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
                 }
-                $pdf->cell(4,4,'',1,0,'L');
                 $pdf->SetY(308);    
                 $pdf->SetX(130);
                 $pdf->cell(25,5,'Otros',0,0,'L');
                 $pdf->SetY(308);    
                 $pdf->SetX(160);
-                if($resultServ["tenencia"]=="Otros"){
+                if($mostcarastInmue["tenencia"]=="Otros"){
                     $pdf->cell(4,4,'',1,0,'L',true);
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
@@ -797,10 +818,10 @@ class f002{
             //TIPOS DE CONSTRUCCION
                 $pdf->SetY(251);    
                 $pdf->SetX(169);
-                $pdf->cell(0,6,'Caracteristicas del Construcción',1,0,'C');
+                $pdf->cell(0,6,utf8_decode('Caracteristicas del Construcción'),1,0,'C');
                 $pdf->SetY(257);    
                 $pdf->SetX(169);
-                $pdf->cell(50,6,'Tipo de Construcción',1,0,'C');
+                $pdf->cell(50,6,utf8_decode('Tipo de Construcción'),1,0,'C');
                 $pdf->SetY(266);    
                 $pdf->SetX(170);
                 $pdf->cell(4,4,'Concreto',0,0,'L');
@@ -821,7 +842,6 @@ class f002{
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
                 }
-                $pdf->cell(4,4,'',1,0,'C');
                 $pdf->SetY(278);    
                 $pdf->SetX(170);
                 $pdf->cell(4,4,'Concreto-Acero',0,0,'L');
@@ -832,7 +852,6 @@ class f002{
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
                 }
-                $pdf->cell(4,4,'',1,0,'C');
                 $pdf->SetY(284);    
                 $pdf->SetX(170);
                 $pdf->cell(4,4,'Paredes Portantes',0,0,'L');
@@ -843,7 +862,6 @@ class f002{
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
                 }
-                $pdf->cell(4,4,'',1,0,'C');
                 $pdf->SetY(290);    
                 $pdf->SetX(170);
                 $pdf->cell(4,4,'Madera',0,0,'L');
@@ -854,7 +872,6 @@ class f002{
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
                 }
-                $pdf->cell(4,4,'',1,0,'C');
                 $pdf->SetY(296);    
                 $pdf->SetX(170);
                 $pdf->cell(4,4,'Prefabricado',0,0,'L');
@@ -865,7 +882,6 @@ class f002{
                 }else{
                     $pdf->cell(4,4,'',1,0,'L');
                 }
-                $pdf->cell(4,4,'',1,0,'C');
                 $pdf->SetY(302);    
                 $pdf->SetX(170);
                 $pdf->cell(4,4,'Otros',0,0,'L');
@@ -882,7 +898,7 @@ class f002{
             //DESTINO DE LA EDIFICACION
                 $pdf->SetY(257);    
                 $pdf->SetX(219);
-                $pdf->cell(0,6,'Destino de la Edificación',1,0,'C');
+                $pdf->cell(0,6,utf8_decode('Destino de la Edificación'),1,0,'C');
                 $pdf->SetY(263);    
                 $pdf->SetX(219);
                 $pdf->cell(0,52,'',1,0,'C');
@@ -948,7 +964,7 @@ class f002{
                 }
                 $pdf->SetY(302);    
                 $pdf->SetX(221);
-                $pdf->cell(4,4,'Institución Pública',0,0,'L');
+                $pdf->cell(4,4,utf8_decode('Institución Pública'),0,0,'L');
                 $pdf->SetY(302);    
                 $pdf->SetX(266);
                 if($resulCaracInmue["destino"]=="Institución Pública"){
@@ -958,7 +974,7 @@ class f002{
                 }
                 $pdf->SetY(308);    
                 $pdf->SetX(221);
-                $pdf->cell(4,4,'Espacios Públicos',0,0,'L');
+                $pdf->cell(4,4,utf8_decode('Espacios Públicos'),0,0,'L');
                 $pdf->SetY(308);    
                 $pdf->SetX(266);
                 if($resulCaracInmue["destino"]=="Espacios Públicos"){
@@ -971,45 +987,49 @@ class f002{
             $pdf->SetY(318);    
             $pdf->SetX(19);
             $pdf->SetFont('Times','B',10);
-            $pdf->cell(50,6,'REDACCIÓN:',0,'C');
+            $pdf->cell(50,6,utf8_decode('REDACCIÓN:'),0,'C');
             $pdf->SetY(318);    
             $pdf->SetX(47);
             $pdf->SetFont('Times','',11);
-            $pdf->cell(50,6,'Jose Ignacio Millan Colina:',0,'C');
+            $pdf->cell(50,6,utf8_decode(''.$idUser["nombre"].' '.$idUser["apellido"].''),0,'C');
             $pdf->SetY(325);    
             $pdf->SetX(19);
             $pdf->SetFont('Times','B',10);
             $pdf->Cell(100,7,'OBSERVACIONES:',0,'C');
             $pdf->SetY(325);    
-            $pdf->SetX(54);
+            $pdf->SetX(53);
             $pdf->SetFont('Times','',10);
-            $pdf->Cell(100,7,'Actualmente El (I.G.V.S.B) Y El ',0,'J');
+            $pdf->Cell(100,7,'Actualmente El (I.G.V.S.B) Y El (I.A.M.O.T.F.F),',0,'J');
             $pdf->SetY(332);    
             $pdf->SetX(19);
-            $pdf->MultiCell(100,7,'(I.A.M.O.T.F.F), Están Realizando El Trabajo De Actualización De La Nomenclatura De Los Inmuebles Del Municipio Fernández Feo.',0,'J');
-            $pdf->SetY(352);    
+            $pdf->MultiCell(110,7,utf8_decode('Están Realizando El Trabajo De Actualización De La Nomenclatura De Los Inmuebles Del Municipio Fernández Feo.'),0,'J');
+            $pdf->SetY(351.5);    
             $pdf->SetX(19);
-            $pdf->SetFont('Times','B',10);
-            $pdf->Cell(100,7,'NOTA:',0,'C');
+            $pdf->SetFont('Times','B',11);
+            $pdf->Cell(80,7,'NOTA:',0,'C');
             $pdf->SetY(352);    
-            $pdf->SetX(32);
-            $pdf->SetFont('Times','',10);
-            $pdf->Cell(100,7,'Constancia que se expide a solicitud de parte interesada',0,'J');
-            $pdf->SetY(358);    
+            $pdf->SetX(35);
+            $pdf->SetFont('Times','',11);
+            $pdf->Cell(80,6,'Constancia que se expide a solicitud de parte interesada para',0,'J');
+            $pdf->SetY(357.5);    
             $pdf->SetX(19);
-            $pdf->SetFont('Times','',10);
-            $pdf->MultiCell(100,7,'para fines legales en la fecha antes descrita, La presente tiene vigencia para el año fiscal en curso.',0,'J');
+            $pdf->SetFont('Times','',11);
+            $pdf->MultiCell(100,6,utf8_decode('fines legales en la fecha antes descrita,                                                          '),0,'J');
+            $pdf->SetY(357.5);    
+            $pdf->SetX(19);
+            $pdf->SetFont('Times','B',11);
+            $pdf->MultiCell(115,6,utf8_decode('                                                               La presente tiene vigencia para el año fiscal en curso. '),0,'J');
         //FIRMA
             $pdf->SetY(360);    
             $pdf->SetX(160);
             $pdf->SetDrawColor(0,0,0,0);
             $pdf->SetFont('Times','B',9);
             $pdf->SetLineWidth(0.5);
-            $pdf->MultiCell(120,6,'ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
-            ','T:1','C');
+            $pdf->MultiCell(120,6,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
+            '),'T:1','C');
         
         $pdf->Output('F','../../../assets/constancias/'.$this->nuExp.'.pdf');
-        echo'<input type="hidde" id="nuExp" value="'.$this->nuExp.'">';
+        echo'<input type="hidden" id="nuExp" value="'.$this->nuExp.'">';
         
     }
 }
