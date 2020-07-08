@@ -854,8 +854,8 @@ function btnGuardConst(){
         consta.arTotal3= document.getElementById("arTotal3").value
         consta.NivConstTotal3 = document.getElementById("NivConstTotal3").value
         consta.arConstTotal3 = document.getElementById("arConstTotal3").value
-        consta.uniNorte3 = document.getElementById("uniNorte").value
-        consta.uniSur3 = document.getElementById("uniSur").value
+        consta.uniNorte3 = document.getElementById("uniNorte3").value
+        consta.uniSur3 = document.getElementById("uniSur3").value
         consta.uniEste3= document.getElementById("uniEste3").value
         consta.uniOeste3 = document.getElementById("uniOeste3").value
     }else{

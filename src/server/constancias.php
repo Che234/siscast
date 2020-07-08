@@ -1435,39 +1435,39 @@ class constancias{
                         </div>
                     </td>
                 </tr>';
-                //GENERAL
-                    $sqlIdGen = "SELECT norte from linderos_general where id=".$idLindGen."";
-                    $resGen=$link->query($sqlIdGen);
-                    $norteGen = $resGen->fetch_assoc();
-                //SEGUN DOCUMENTO
-                    $sqlIdDoc = "SELECT norte from linderos_documento where id=".$idLindDoc."";
-                    $resDoc=$link->query($sqlIdDoc);
-                    $norteDoc = $resDoc->fetch_assoc();
-                //POSIBLE VENTA
-                    $sqlIdPosVenta = "SELECT norte from linderos_posible_venta where id=".$idLindPosVenta."";
-                    $resPosVenta=$link->query($sqlIdPosVenta);
-                    $nortePosVenta = $resPosVenta->fetch_assoc();
+        //GENERAL
+            $sqlIdGen = "SELECT * from linderos_general where id=".$idLindGen."";
+            $resGen=$link->query($sqlIdGen);
+            $norteGen = $resGen->fetch_assoc();
+        //SEGUN DOCUMENTO
+            $sqlIdDoc = "SELECT norte from linderos_documento where id=".$idLindDoc."";
+            $resDoc=$link->query($sqlIdDoc);
+            $norteDoc = $resDoc->fetch_assoc();
+        //POSIBLE VENTA
+            $sqlIdPosVenta = "SELECT norte from linderos_posible_venta where id=".$idLindPosVenta."";
+            $resPosVenta=$link->query($sqlIdPosVenta);
+            $nortePosVenta = $resPosVenta->fetch_assoc();
 
 
-                //IF DEL F002
-                    if($norteGen['norte']=="nada"){
-                        if($norteDoc['norte']!="nada"){
-                            if($nortePosVenta['norte']=="nada"){
-                                if($this->multa =="no"){
-                                    echo'
-                                    <tr>
-                                        <td class="tdConst">
-                                            <div class="btnSig1">
-                                                <input type="button" value="Imprimir" onclick="btnImprConst()" class=" botones btn btn-primary" />
-                                            </div>
-                                        </td>
-                                        
-                                    </tr>
-                                ';
-                                }
-                            }
+        //IF DEL F002
+            if($norteGen['norte']=="nada"){
+                if($norteDoc['norte']!="nada"){
+                    if($nortePosVenta['norte']=="nada"){
+                        if($this->multa =="no"){
+                            echo'
+                            <tr>
+                                <td class="tdConst">
+                                    <div class="btnSig1">
+                                        <input type="button" value="Imprimir" onclick="btnImprConst()" class=" botones btn btn-primary" />
+                                    </div>
+                                </td>
+                                
+                            </tr>
+                        ';
                         }
                     }
+                }
+            }
             echo'</table>';
                 //if para caso f001
                     if($norteGen['norte']!="nada"){
