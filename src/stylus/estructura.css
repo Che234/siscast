@@ -68,8 +68,10 @@ body{
 .campos{
     display: flex;
 }
-.campos .direc1{
-
+.campBuscador{
+    text-align: center;
+    position: relative;
+    top: 20px;
 }
 .campos input{
     width:85%;

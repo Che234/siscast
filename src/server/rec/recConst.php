@@ -6,6 +6,7 @@ include('../f002.php');
 $nconst = new constancias;
 $f002 = new f002;
 $f001 = new f001;
+$f003 = new f003;
 
 
 if(isset($_POST["accion"])){
@@ -638,6 +639,11 @@ if($accion == "imprConst2"){
     }else{
         $f002->idInmueble= "nada";
     }
+    if(isset($_POST["operacion"])){
+        $f002->operacion=$_POST["operacion"];
+    }else{
+        $f002->operacion= "nada";
+    }
     if(isset($_POST["nuExp"])){
         $f002->nuExp=$_POST["nuExp"];
     }else{
@@ -677,6 +683,11 @@ if($accion=="imprConst1"){
     }else{
         $f001->idInmueble= "nada";
     }
+    if(isset($_POST["operacion"])){
+        $f001->operacion=$_POST["operacion"];
+    }else{
+        $f001->operacion= "nada";
+    }
     if(isset($_POST["nuExp"])){
         $f001->nuExp=$_POST["nuExp"];
     }else{
@@ -709,5 +720,49 @@ if($accion=="imprConst1"){
     }
     echo'<div id="enlacePdf"></div>';
     $f001->imprimir();
+}
+if($accion=="imprConst3"){
+    if(isset($_POST["idInmueble"])){
+        $f003->idInmueble=$_POST["idInmueble"];
+    }else{
+        $f003->idInmueble= "nada";
+    }
+    if(isset($_POST["operacion"])){
+        $f003->operacion=$_POST["operacion"];
+    }else{
+        $f003->operacion= "nada";
+    }
+    if(isset($_POST["nuExp"])){
+        $f003->nuExp=$_POST["nuExp"];
+    }else{
+        $f003->nuExp= "nada";
+    }
+    if(isset($_POST["montoFact"])){
+        $f003->montoFact=$_POST["montoFact"];
+    }else{
+        $f003->montoFact= "nada";
+    }
+    if(isset($_POST["fechFact"])){
+        $f003->fechFact=$_POST["fechFact"];
+    }else{
+        $f003->fechFact= "nada";
+    }
+    if(isset($_POST["empadro"])){
+        $f003->empadro=$_POST["empadro"];
+    }else{
+        $f003->empadro= "nada";
+    }
+    if(isset($_POST["idProp"])){
+        $f003->idProp=$_POST["idProp"];
+    }else{
+        $f003->idProp= "nada";
+    }
+    if(isset($_POST["numFact"])){
+        $f003->numFact=$_POST["numFact"];
+    }else{
+        $f003->numFact= "nada";
+    }
+    echo'<div id="enlacePdf"></div>';
+    $f003->imprimir();
 }
 ?>

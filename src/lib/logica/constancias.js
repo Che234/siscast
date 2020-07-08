@@ -15,7 +15,7 @@ class constancias{
         AguasServ,PavFlex,PavRig,viaEngran,acera,AlumPublico,aseo,transPublic,pozoSept,ElectResidencial,ElectriIndust,
         linTelf,empadro,multa,idProp,numFact,ambInmue,arTotal3,NivConstTotal3,arConstTotal3,arTotal2,NivConstTotal2,
         arConstTotal2,uniNorte,uniSur,uniEste,uniOeste,uniNorte2,uniSur2,uniEste2,uniOeste2,uniNorte3,
-        uniSur3,uniEste3,uniOeste3){
+        uniSur3,uniEste3,uniOeste3,operacion){
 
         this.cedR = cedR
         this.cedConst = cedConst
@@ -143,6 +143,7 @@ class constancias{
         this.uniSur3 = uniSur3
         this.uniEste3 = uniEste3
         this.uniOeste3 = uniOeste3
+        this.operacion = operacion
     }
     test1(){
         if(!ex_nac.test(this.cedR)){
@@ -611,7 +612,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`nuExp=${this.nuExp}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&accion=imprConst2`);
+        ajax.send(`nuExp=${this.nuExp}&operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&accion=imprConst2`);
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -631,7 +632,27 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`nuExp=${this.nuExp}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&accion=imprConst1`);
+        ajax.send(`nuExp=${this.nuExp}&operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&accion=imprConst1`);
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                    let nuExp = document.getElementById("nuExp").value
+                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="http://localhost/SisCast/assets/constancias/${nuExp}.pdf" type="application/pdf"></div>`;
+			     }
+	       	}
+    }
+    imprConst3(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`nuExp=${this.nuExp}&operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&accion=imprConst3`);
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -956,6 +977,7 @@ function btnImprConst(){
     consta.empadro = document.getElementById("empadro").value
     consta.idProp =document.getElementById("idProp").value
     consta.numFact= document.getElementById("numFact").value
+    consta.operacion = document.getElementById("operacion").value
     if(consta.veriInmu() == true){
         consta.imprConst()
     }
@@ -969,8 +991,23 @@ function btnImprConst1(){
     consta.empadro = document.getElementById("empadro").value
     consta.idProp =document.getElementById("idProp").value
     consta.numFact= document.getElementById("numFact").value
+    consta.operacion = document.getElementById("operacion").value
     if(consta.veriInmu() == true){
         consta.imprConst1()
+    }
+}
+function btnImprConst3(){
+    let consta = new constancias
+    consta.nuExp = document.getElementById("nuExp").value
+    consta.montoFact = document.getElementById("montoFact").value
+    consta.fechFact = document.getElementById("fechFact").value
+    consta.idInmueble = document.getElementById("idInmueble").value
+    consta.empadro = document.getElementById("empadro").value
+    consta.idProp =document.getElementById("idProp").value
+    consta.numFact= document.getElementById("numFact").value
+    consta.operacion = document.getElementById("operacion").value
+    if(consta.veriInmu() == true){
+        consta.imprConst3()
     }
 }
 /**EVENTOS */

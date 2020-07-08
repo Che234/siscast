@@ -45,7 +45,18 @@
         }
         function body(){
             echo'
-            <div id="campGeneral"></div>
+            <div id="campGeneral">
+              <div class="campBuscador">
+                <h1>BUSCAR POR EXPEDIENTE</h1>
+                <input type="text" id="campBuscar" />
+                <input type="button" value="Consultar" onclick="busConstExp()" class="botones btn btn-primary />
+              </div>
+              <div class="campBuscador">
+                <h1>BUSCAR POR CEDULA</h1>
+                <input type="text" id="campBuscar" />
+                <input type="button" value="Consultar" class="botones btn btn-primary />
+              </div>
+            </div>
             <div id="campOculto"></div>
             ';
         }

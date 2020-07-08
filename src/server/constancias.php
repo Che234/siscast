@@ -335,7 +335,7 @@ class constancias{
             </tr>
         </table>
         <div class="btnSig1">
-            <input type="button" value="Siguiente" onclick="btnfCarac()" class=" botones btn btn-primary" />
+            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
         </div>
         ';
     }
@@ -1348,7 +1348,7 @@ class constancias{
                 $link->query($propSql);
                 $idProp = $link->insert_id;
 
-            //CARACTERISTICAS DEL INMUEBLE ()
+            //CARACTERISTICAS DEL INMUEBLE (LISTO)
                 $carcSql = "INSERT INTO carc_inmueble(topografia,forma,uso,tenencia,ocupante,dimenciones,regimen)value('".$this->topoConst."','".$this->formaConst."','".$this->usoConst."','".$this->tenenConst."','".$this->ocupConst."','".$this->dimeConst."','".$this->regInmue."')";
                 $link->query($carcSql);
                 $idCarc= $link->insert_id;
@@ -1386,7 +1386,7 @@ class constancias{
                 $servSql = "INSERT INTO servicios_inmue(acued,acuedRural,aguasSubter,aguasServ,pavimentoFlex,pavimentoRig,viaEngran,acera,alumbradoPub,aseo,transportePublic,pozoSept,electriResi,electriIndus,lineaTelef)value('".$this->Acue."','".$this->AcueRural."','".$this->AguasSub."','".$this->AguasServ."','".$this->PavFlex."','".$this->PavRig."','".$this->viaEngran."','".$this->acera."','".$this->AlumPublico."','".$this->aseo."','".$this->transPublic."','".$this->pozoSept."','".$this->ElectResidencial."','".$this->ElectriIndust."','".$this->linTelf."')";
                 $link->query($servSql);
                 $idServ= $link->insert_id;
-            //INMUEBLE()
+            //INMUEBLE(LISTO)
                 $InmuebleSql= "INSERT INTO inmueble(telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios)value('".$this->telfFul2."','".$this->direcInmue."','".$this->parrInmue."','".$this->secInmue."','".$this->ambInmue."',".$idCarcConst.",".$idProt.",".$idCarc.",".$idLindDoc.",".$idLindGen.",".$idLindPosVenta.",".$idTerreno.",".$idServ.")";
                 $link->query($InmuebleSql);
                 $idInmueble= $link->insert_id;
@@ -1432,6 +1432,7 @@ class constancias{
                             <input type="date" id="fechFact"/>
                             <input type="hidden" id="idInmueble" value="'.$idInmueble.'">
                             <input type="hidden" id="idProp" value="'.$idProp.'">
+                            <input type="hidden" id="operacion" value="Nueva Inscripción">
                         </div>
                     </td>
                 </tr>';
@@ -1469,30 +1470,37 @@ class constancias{
                 }
             }
             echo'</table>';
-                //if para caso f001
-                    if($norteGen['norte']!="nada"){
-                        if($norteDoc['norte']!="nada"){
-                            if($nortePosVenta['norte']=="nada"){
-                                if($this->multa =="no"){
-                                    echo'
-                                        <div class="btnSig1">
-                                            <input type="button" value="Imprimir" onclick="btnImprConst1()" class=" botones btn btn-primary" />
-                                        </div>
-                                    ';
-                                }
-                            }
+        //IF DEL F001
+            if($norteGen['norte']!="nada"){
+                if($norteDoc['norte']!="nada"){
+                    if($nortePosVenta['norte']=="nada"){
+                        if($this->multa =="no"){
+                            echo'
+                                <div class="btnSig1">
+                                    <input type="button" value="Imprimir" onclick="btnImprConst1()" class=" botones btn btn-primary" />
+                                </div>
+                            ';
                         }
                     }
+                }
+            }
         
             
-        // //if para caso f003
-        //     if(($idLindGen==0) && ($idLindDoc!=0) && ($idLindPosVenta!=0) && ($this->multa=="no")){
-        //         echo'
-        //             <div class="btnSig1">
-        //                 <input type="button" value="Imprimir" onclick="btnImprConst3()" class=" botones btn btn-primary" />
-        //             </div>
-        //         ';
-        //     }
+        //IF DEL F003
+            if($norteGen['norte']=="nada"){
+                if($norteDoc['norte']!="nada"){
+                    if($nortePosVenta['norte']!="nada"){
+                        if($this->multa=="no"){
+                            echo'
+                                <div class="btnSig1">
+                                    <input type="button" value="Imprimir" onclick="btnImprConst3()" class=" botones btn btn-primary" />
+                                </div>
+                            ';
+                        }
+                    }       
+                }
+            }
+                
         // //if para caso Multas
         //     if(($idLindGen==0) && ($idLindDoc==0) && ($idLindPosVenta==0) && ($this->multa!="si")){
         //         echo'
