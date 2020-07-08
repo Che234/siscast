@@ -5,6 +5,7 @@ include('../f002.php');
 
 $nconst = new constancias;
 $f002 = new f002;
+$f001 = new f001;
 
 
 if(isset($_POST["accion"])){
@@ -510,6 +511,101 @@ if(isset($_POST["multa"])){
 }else{
     $nconst->multa= "nada";
 }
+if(isset($_POST["ambInmue"])){
+    $nconst->ambInmue=$_POST["ambInmue"];
+}else{
+    $nconst->ambInmue= "nada";
+}
+if(isset($_POST["arTotal3"])){
+    $nconst->arTotal3=$_POST["arTotal3"];
+}else{
+    $nconst->arTotal3= "nada";
+}
+if(isset($_POST["NivConstTotal3"])){
+    $nconst->NivConstTotal3=$_POST["NivConstTotal3"];
+}else{
+    $nconst->NivConstTotal3= "nada";
+}
+if(isset($_POST["arConstTotal3"])){
+    $nconst->arConstTotal3=$_POST["arConstTotal3"];
+}else{
+    $nconst->arConstTotal3= "nada";
+}
+if(isset($_POST["arTotal2"])){
+    $nconst->arTotal2=$_POST["arTotal2"];
+}else{
+    $nconst->arTotal2= "nada";
+}
+if(isset($_POST["NivConstTotal2"])){
+    $nconst->NivConstTotal2=$_POST["NivConstTotal2"];
+}else{
+    $nconst->NivConstTotal2= "nada";
+}
+if(isset($_POST["arConstTotal2"])){
+    $nconst->arConstTotal2=$_POST["arConstTotal2"];
+}else{
+    $nconst->arConstTotal2= "nada";
+}
+if(isset($_POST["uniNorte"])){
+    $nconst->uniNorte=$_POST["uniNorte"];
+}else{
+    $nconst->uniNorte= "nada";
+}
+if(isset($_POST["uniSur"])){
+    $nconst->uniSur=$_POST["uniSur"];
+}else{
+    $nconst->uniSur= "nada";
+}
+if(isset($_POST["uniEste"])){
+    $nconst->uniEste=$_POST["uniEste"];
+}else{
+    $nconst->uniEste= "nada";
+}
+if(isset($_POST["uniOeste"])){
+    $nconst->uniOeste=$_POST["uniOeste"];
+}else{
+    $nconst->uniOeste= "nada";
+}
+if(isset($_POST["uniNorte2"])){
+    $nconst->uniNorte2=$_POST["uniNorte2"];
+}else{
+    $nconst->uniNorte2= "nada";
+}
+if(isset($_POST["uniSur2"])){
+    $nconst->uniSur2=$_POST["uniSur2"];
+}else{
+    $nconst->uniSur2= "nada";
+}
+if(isset($_POST["uniEste2"])){
+    $nconst->uniEste2=$_POST["uniEste2"];
+}else{
+    $nconst->uniEste2= "nada";
+}
+if(isset($_POST["uniOeste2"])){
+    $nconst->uniOeste2=$_POST["uniOeste2"];
+}else{
+    $nconst->uniOeste2= "nada";
+}
+if(isset($_POST["uniNorte3"])){
+    $nconst->uniNorte3=$_POST["uniNorte3"];
+}else{
+    $nconst->uniNorte3= "nada";
+}
+if(isset($_POST["uniSur3"])){
+    $nconst->uniSur3=$_POST["uniSur3"];
+}else{
+    $nconst->uniSur3= "nada";
+}
+if(isset($_POST["uniEste3"])){
+    $nconst->uniEste3=$_POST["uniEste3"];
+}else{
+    $nconst->uniEste3= "nada";
+}
+if(isset($_POST["uniOeste3"])){
+    $nconst->uniOeste3=$_POST["uniOeste3"];
+}else{
+    $nconst->uniOeste3= "nada";
+}
 
 if($accion== "fProp"){
     $nconst->fPropietario();
@@ -574,6 +670,44 @@ if($accion == "imprConst2"){
     }
     echo'<div id="enlacePdf"></div>';
     $f002->imprimir();
-    
+}
+if($accion=="imprConst1"){
+    if(isset($_POST["idInmueble"])){
+        $f001->idInmueble=$_POST["idInmueble"];
+    }else{
+        $f001->idInmueble= "nada";
+    }
+    if(isset($_POST["nuExp"])){
+        $f001->nuExp=$_POST["nuExp"];
+    }else{
+        $f001->nuExp= "nada";
+    }
+    if(isset($_POST["montoFact"])){
+        $f001->montoFact=$_POST["montoFact"];
+    }else{
+        $f001->montoFact= "nada";
+    }
+    if(isset($_POST["fechFact"])){
+        $f001->fechFact=$_POST["fechFact"];
+    }else{
+        $f001->fechFact= "nada";
+    }
+    if(isset($_POST["empadro"])){
+        $f001->empadro=$_POST["empadro"];
+    }else{
+        $f001->empadro= "nada";
+    }
+    if(isset($_POST["idProp"])){
+        $f001->idProp=$_POST["idProp"];
+    }else{
+        $f001->idProp= "nada";
+    }
+    if(isset($_POST["numFact"])){
+        $f001->numFact=$_POST["numFact"];
+    }else{
+        $f001->numFact= "nada";
+    }
+    echo'<div id="enlacePdf"></div>';
+    $f001->imprimir();
 }
 ?>

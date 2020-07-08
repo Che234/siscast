@@ -71,7 +71,7 @@ class f002{
             $link->query($expFactSql);
             $idExpFact= $link->insert_id;
         //BUSQUEDA DEL INMUEBLE
-            $expSql= "SELECT telef,direccion,parroquia,sector,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios from inmueble where id=".$this->idInmueble."";
+            $expSql= "SELECT telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
             $resultInmue = $resInmue->fetch_assoc();
             $idProt= $resultInmue["fk_protocolizacion"];
@@ -210,7 +210,11 @@ class f002{
             }
             $pdf->SetY(110);
             $pdf->SetX(97.2);
-            $pdf->cell(8.6,7,'3',1,0,'C');
+            if($resultInmue["ambito"]=="Urbano"){
+                $pdf->cell(8.6,7,'U',1,0,'C');
+            }elseif($resultInmue["ambito"]=="Rural"){
+                $pdf->cell(8.6,7,'R',1,0,'C');
+            }
             $pdf->SetY(110);
             $pdf->SetX(106);
             $pdf->cell(8.6,7,'0',1,0,'C');
@@ -1034,11 +1038,81 @@ class f002{
     }
 }
 class f001{
+    var $empadro = "";
+    var $idInmueble = "";
+    var $idProp = "";
+    var $nuExp = "";
+    var $montoFact = "";
+    var $fechFact = "";
+    var $numFact= "";
     function imprimir(){
         $pdf = new PDF('P','mm','A3');
         $pdf->SetMargins(20,0,22);
         $pdf->AliasNbPages();
         $pdf->AddPage();
+        session_start();
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        //BUSQUEDA DE USUARIO
+            $userSql = "SELECT nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resultUser= $link->query($userSql);
+            $idUser= $resultUser->fetch_assoc();
+        //INSERT EXPEDIENTE
+            $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,fk_cod_catastral,n_expediente)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",0,".$nuExp.")";
+            $link->query($expediSql);
+            $idExpediente = $link->insert_id;
+        //INSERT FACTURA
+            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha,fk_expediente)value(".$this->montoFact.",".$this->nuExp.",".$this->fechFact.",".$idExpediente.")";
+            $link->query($expFactSql);
+            $idExpFact= $link->insert_id;
+        //BUSQUEDA DEL INMUEBLE
+            $expSql= "SELECT telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios from inmueble where id=".$this->idInmueble."";
+            $resInmue= $link->query($expSql);
+            $resultInmue = $resInmue->fetch_assoc();
+            $idProt= $resultInmue["fk_protocolizacion"];
+            $idLindDoc= $resultInmue["fk_lind_documento"];
+            $idTerreno = $resultInmue["fk_terreno"];
+            $idConst= $resultInmue["fk_carac_construccion"];
+            $idServicios= $resultInmue["fk_servicios"];
+            $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
+            $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
+        //BUSQUEDA DEL PROPIETARIO
+            $expSql= "SELECT * from propietarios where id=".$this->idProp."";
+            $resProp= $link->query($expSql);
+            $resultPropie = $resProp->fetch_assoc();
+            $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
+        //BUSQUEDA DE PROTOCOLIZACION
+            $protSql = "SELECT documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble from datos_protocolizacion where id=".$idProt."";
+            $resProt = $link->query($protSql);
+            $resultProp = $resProt->fetch_assoc();
+        //BUSQUEDA DE LINDEROS SEGUN DOCUMENTO
+            $lindDocSql= "SELECT norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o FROM linderos_documento where id=".$idLindDoc."";
+            $resLindDoc = $link->query($lindDocSql);
+            $resultLindDoc= $resLindDoc->fetch_assoc();
+        //BUSQUEDA DE LINDEROS GENERAL
+            $lindDocSql= "SELECT norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o FROM linderos_documento where id=".$idLindDoc."";
+            $resLindDoc = $link->query($lindDocSql);
+            $resultLindDoc= $resLindDoc->fetch_assoc();
+        //BUSQUEDA DE DATOS TERRENO
+            $terrSql= "SELECT area_total_venta,area_total,area_restante,valor_terreno,valor_inmueble,valor_construccion FROM terreno where id=".$idTerreno."";
+            $resTerr= $link->query($terrSql);
+            $resultTerr= $resTerr->fetch_assoc();
+        //BUSQUEDA DE DATOS CONSTRUCCION
+            $constSql= "SELECT destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,piezas_sanitarias,ventanas,puertas,insta_electricas,complementos,estado_conservacion,ambientes,observ,nivel,areaC from caracteristicas_construccion where id=".$idConst."";
+            $resConst= $link->query($constSql);
+            $resultConst= $resConst->fetch_assoc();
+        //BUSQUEDA DE SERVICIOS
+            $servSql= "SELECT * FROM servicios_inmue where id=".$idServicios."";
+            $resServ= $link->query($servSql);
+            $resultServ= $resServ->fetch_assoc();
+        //BUSQUEDA DE CARACTERISTICAS DEL INMUEBLE
+            $carastInmue= "SELECT * FROM carc_inmueble where id=".$idCaracInmue."";
+            $rescarastInmue= $link->query($carastInmue);
+            $mostcarastInmue= $rescarastInmue->fetch_assoc();
+        //BUSQUEDA DE CARACTERISTICAS DE LA CONSTRUCCION
+            $carcConstSql= "SELECT * FROM caracteristicas_construccion where id=".$idcaracConstruccion."";
+            $resCaracConst= $link->query($carcConstSql);
+            $resulCaracInmue= $resCaracConst->fetch_assoc();
         //CONTINUACION HEADER
             $pdf->SetFont('Times','B',12);
             $pdf->SetX(38);

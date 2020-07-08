@@ -13,7 +13,9 @@ class constancias{
         arTotal,NivConstTotal,arConstTotal,parte2,parte1,arTotalVenta,arRestante,valorTerreno,valorInmueble,
         valorConstruc,nuExp,montoFact,fechFact,idInmueble,telfFul,telfFul2,regInmue,Acue,AcueRural,AguasSub,
         AguasServ,PavFlex,PavRig,viaEngran,acera,AlumPublico,aseo,transPublic,pozoSept,ElectResidencial,ElectriIndust,
-        linTelf,empadro,multa,idProp,numFact){
+        linTelf,empadro,multa,idProp,numFact,ambInmue,arTotal3,NivConstTotal3,arConstTotal3,arTotal2,NivConstTotal2,
+        arConstTotal2,uniNorte,uniSur,uniEste,uniOeste,uniNorte2,uniSur2,uniEste2,uniOeste2,uniNorte3,
+        uniSur3,uniEste3,uniOeste3){
 
         this.cedR = cedR
         this.cedConst = cedConst
@@ -122,6 +124,25 @@ class constancias{
         this.multa = multa
         this.idProp = idProp
         this.numFact = numFact
+        this.ambInmue = ambInmue
+        this.arTotal3= arTotal3
+        this.NivConstTotal3= NivConstTotal3
+        this.arConstTotal3= arConstTotal3
+        this.arTotal2 = arTotal2
+        this.NivConstTotal2 = NivConstTotal2
+        this.arConstTotal2 = arConstTotal2
+        this.uniNorte = uniNorte
+        this.uniSur = uniSur
+        this.uniEste = uniEste
+        this.uniOeste = uniOeste
+        this.uniNorte2 = uniNorte2
+        this.uniSur2 = uniSur2
+        this.uniEste2= uniEste2
+        this.uniOeste2 = uniOeste2
+        this.uniNorte3 = uniNorte3
+        this.uniSur3 = uniSur3
+        this.uniEste3 = uniEste3
+        this.uniOeste3 = uniOeste3
     }
     test1(){
         if(!ex_nac.test(this.cedR)){
@@ -198,6 +219,10 @@ class constancias{
         }
         if(!ex_datcort.test(this.dimeConst)){
             alert("Error en el formato de Dimensiones");
+            return false;
+        }
+        if(!ex_datcort.test(this.ambInmue)){
+            alert("Error en el formato de Ambito del Inmueble");
             return false;
         }
         return true;
@@ -472,7 +497,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send("cedFul="+this.cedFul+"&rifConst="+this.rifConst+"&nomProp="+this.nomProp+"&apelProp="+this.apelProp+"&codTelf="+this.codTelf+"&numText="+this.numText+"&direcProp="+this.direcProp+"&codTelf2="+this.codTelf2+"&numTelf2="+this.numTelf2+"&parrInmue="+this.parrInmue+"&secInmue="+this.secInmue+"&direcInmue="+this.direcInmue+"&topoConst="+this.topoConst+"&formaConst="+this.formaConst+"&usoConst="+this.usoConst+"&tenenConst="+this.tenenConst+"&ocupConst="+this.ocupConst+"&dimeConst="+this.dimeConst+"&regInmue="+this.regInmue+"&accion=fCarac"); 
+        ajax.send("cedFul="+this.cedFul+"&rifConst="+this.rifConst+"&nomProp="+this.nomProp+"&apelProp="+this.apelProp+"&codTelf="+this.codTelf+"&numText="+this.numText+"&direcProp="+this.direcProp+"&codTelf2="+this.codTelf2+"&numTelf2="+this.numTelf2+"&parrInmue="+this.parrInmue+"&secInmue="+this.secInmue+"&direcInmue="+this.direcInmue+"&topoConst="+this.topoConst+"&formaConst="+this.formaConst+"&usoConst="+this.usoConst+"&tenenConst="+this.tenenConst+"&ocupConst="+this.ocupConst+"&dimeConst="+this.dimeConst+"&regInmue="+this.regInmue+"&ambInmue="+this.ambInmue+"&accion=fCarac"); 
         ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -567,7 +592,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`nortGen=${this.nortGen}&alindNort=${this.alindNort}&surGen=${this.surGen}&alindSur=${this.alindSur}&esteGen=${this.esteGen}&alindEste=${this.alindEste}&oesteGen=${this.oesteGen}&alindOeste=${this.alindOeste}&nortPosVenta=${this.nortPosVenta}&alindPosNort=${this.alindPosNort}&surPosVenta=${this.surPosVenta}&alindPosSur=${this.alindPosSur}&estePosVenta=${this.estePosVenta}&alindPosEste=${this.alindPosEste}&oestePosVenta=${this.oestePosVenta}&alindPosOeste=${this.alindPosOeste}&nortSecDoc=${this.nortSecDoc}&alindSecNorte=${this.alindSecNorte}&surSecDoc=${this.surSecDoc}&alindSecSur=${this.alindSecSur}&esteSecDoc=${this.esteSecDoc}&alindSecEste=${this.alindSecEste}&oesteSecDoc=${this.oesteSecDoc}&alindSecOeste=${this.alindSecOeste}&arTotal=${this.arTotal}&NivConstTotal=${this.NivConstTotal}&arConstTotal=${this.arConstTotal}&arTotalVenta=${this.arTotalVenta}&arRestante=${this.arRestante}&valorTerreno=${this.valorTerreno}&valorInmueble=${this.valorInmueble}&valorConstruc=${this.valorConstruc}&parte2=${this.parte2}&parte1=${this.parte1}&cedFul=${this.cedFul}&rifConst=${this.rifConst}&nomProp=${this.nomProp}&apelProp=${this.apelProp}&telfFul=${this.telfFul}&direcProp=${this.direcProp}&telfFul2=${this.telfFul2}&parrInmue=${this.parrInmue}&secInmue=${this.secInmue}&direcInmue=${this.direcInmue}&topoConst=${this.topoConst}&formaConst=${this.formaConst}&usoConst=${this.usoConst}&tenenConst=${this.tenenConst}&ocupConst=${this.ocupConst}&dimeConst=${this.dimeConst}&regInmue=${this.regInmue}&destConst=${this.destConst}&estConst=${this.estConst}&pareTipoInmue=${this.pareTipoInmue}&pareAcaInmue=${this.pareAcaInmue}&pintConst=${this.pintConst}&techoConst=${this.techoConst}&pisosConst=${this.pisosConst}&piezConst=${this.piezConst}&ventConst=${this.ventConst}&puertConst=${this.puertConst}&instElect=${this.instElect}&ambConst=${this.ambConst}&compConst=${this.compConst}&estConserv=${this.estConserv}&obsConst=${this.obsConst}&docDebConst=${this.docDebConst}&direcProtConst=${this.direcProtConst}&numProtConst=${this.numProtConst}&tomoProtConst=${this.tomoProtConst}&folioProtConst=${this.folioProtConst}&protoConst=${this.protoConst}&trimProtConst=${this.trimProtConst}&dateProtConst=${this.dateProtConst}&valorProtConst=${this.valorProtConst}&Acue=${this.Acue}&AcueRural=${this.AcueRural}&AguasSub=${this.AguasSub}&AguasServ=${this.AguasServ}&PavFlex=${this.PavFlex}&PavRig=${this.PavRig}&viaEngran=${this.viaEngran}&acera=${this.acera}&AlumPublico=${this.AlumPublico}&aseo=${this.aseo}&transPublic=${this.transPublic}&pozoSept=${this.pozoSept}&ElectResidencial=${this.ElectResidencial}&ElectriIndust=${this.ElectriIndust}&linTelf=${this.linTelf}&multa=${this.multa}&accion=guardConst`)
+        ajax.send(`nortGen=${this.nortGen}&alindNort=${this.alindNort}&surGen=${this.surGen}&alindSur=${this.alindSur}&esteGen=${this.esteGen}&alindEste=${this.alindEste}&oesteGen=${this.oesteGen}&alindOeste=${this.alindOeste}&nortPosVenta=${this.nortPosVenta}&alindPosNort=${this.alindPosNort}&surPosVenta=${this.surPosVenta}&alindPosSur=${this.alindPosSur}&estePosVenta=${this.estePosVenta}&alindPosEste=${this.alindPosEste}&oestePosVenta=${this.oestePosVenta}&alindPosOeste=${this.alindPosOeste}&nortSecDoc=${this.nortSecDoc}&alindSecNorte=${this.alindSecNorte}&surSecDoc=${this.surSecDoc}&alindSecSur=${this.alindSecSur}&esteSecDoc=${this.esteSecDoc}&alindSecEste=${this.alindSecEste}&oesteSecDoc=${this.oesteSecDoc}&alindSecOeste=${this.alindSecOeste}&arTotal=${this.arTotal}&NivConstTotal=${this.NivConstTotal}&arConstTotal=${this.arConstTotal}&arTotalVenta=${this.arTotalVenta}&arRestante=${this.arRestante}&valorTerreno=${this.valorTerreno}&valorInmueble=${this.valorInmueble}&valorConstruc=${this.valorConstruc}&parte2=${this.parte2}&parte1=${this.parte1}&cedFul=${this.cedFul}&rifConst=${this.rifConst}&nomProp=${this.nomProp}&apelProp=${this.apelProp}&telfFul=${this.telfFul}&direcProp=${this.direcProp}&telfFul2=${this.telfFul2}&parrInmue=${this.parrInmue}&secInmue=${this.secInmue}&direcInmue=${this.direcInmue}&topoConst=${this.topoConst}&formaConst=${this.formaConst}&usoConst=${this.usoConst}&tenenConst=${this.tenenConst}&ocupConst=${this.ocupConst}&dimeConst=${this.dimeConst}&regInmue=${this.regInmue}&destConst=${this.destConst}&estConst=${this.estConst}&pareTipoInmue=${this.pareTipoInmue}&pareAcaInmue=${this.pareAcaInmue}&pintConst=${this.pintConst}&techoConst=${this.techoConst}&pisosConst=${this.pisosConst}&piezConst=${this.piezConst}&ventConst=${this.ventConst}&puertConst=${this.puertConst}&instElect=${this.instElect}&ambConst=${this.ambConst}&compConst=${this.compConst}&estConserv=${this.estConserv}&obsConst=${this.obsConst}&docDebConst=${this.docDebConst}&direcProtConst=${this.direcProtConst}&numProtConst=${this.numProtConst}&tomoProtConst=${this.tomoProtConst}&folioProtConst=${this.folioProtConst}&protoConst=${this.protoConst}&trimProtConst=${this.trimProtConst}&dateProtConst=${this.dateProtConst}&valorProtConst=${this.valorProtConst}&Acue=${this.Acue}&AcueRural=${this.AcueRural}&AguasSub=${this.AguasSub}&AguasServ=${this.AguasServ}&PavFlex=${this.PavFlex}&PavRig=${this.PavRig}&viaEngran=${this.viaEngran}&acera=${this.acera}&AlumPublico=${this.AlumPublico}&aseo=${this.aseo}&transPublic=${this.transPublic}&pozoSept=${this.pozoSept}&ElectResidencial=${this.ElectResidencial}&ElectriIndust=${this.ElectriIndust}&linTelf=${this.linTelf}&multa=${this.multa}&ambInmue=${this.ambInmue}&arTotal2=${this.arTotal2}&NivConstTotal2=${this.NivConstTotal2}&arConstTotal2=${this.arConstTotal2}&arTotal3=${this.arTotal3}&NivConstTotal3=${this.NivConstTotal3}&arConstTotal3=${this.arConstTotal3}&uniNorte=${this.uniNorte}&uniSur=${this.uniSur}&uniEste=${this.uniEste}&uniOeste=${this.uniOeste}&uniNorte2=${this.uniNorte2}&uniSur2=${this.uniSur2}&uniEste2=${this.uniEste2}&uniOeste2=${this.uniOeste2}&uniNorte3=${this.uniNorte3}&uniSur3=${this.uniSur3}&uniEste3=${this.uniEste3}&uniOeste3=${this.uniOeste3}&accion=guardConst`)
         ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -587,6 +612,26 @@ class constancias{
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`nuExp=${this.nuExp}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&accion=imprConst2`);
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                    let nuExp = document.getElementById("nuExp").value
+                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="http://localhost/SisCast/assets/constancias/${nuExp}.pdf" type="application/pdf"></div>`;
+			     }
+	       	}
+    }
+    imprConst1(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`nuExp=${this.nuExp}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&accion=imprConst1`);
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -627,6 +672,7 @@ function btnfCarac(){
     consta.ocupConst= document.getElementById("ocupConst").value;
     consta.dimeConst= document.getElementById("dimeConst").value;
     consta.regInmue = document.getElementById("regInmue").value;
+    consta.ambInmue = document.getElementById("ambInmue").value;
     if(consta.test1()==true){
         consta.fCarac();
     }
@@ -695,6 +741,26 @@ function btnfLind(){
     
 }
 function calLind(){
+    norte = document.getElementById("nortGen").value
+    sur = document.getElementById("surGen").value
+    este = document.getElementById("esteGen").value
+    oeste = document.getElementById("oesteGen").value
+    norSur = (parseInt(norte) + parseInt(sur))/2
+    estOest = (parseInt(este)+parseInt(oeste))/2
+    area2 = norSur*estOest
+    document.getElementById("arTotal").value=area2
+}
+function calLindVenta(){
+    norte = document.getElementById("nortPosVenta").value
+    sur = document.getElementById("surPosVenta").value
+    este = document.getElementById("estePosVenta").value
+    oeste = document.getElementById("oestePosVenta").value
+    norSur = (parseInt(norte) + parseInt(sur))/2
+    estOest = (parseInt(este)+parseInt(oeste))/2
+    area2 = norSur*estOest
+    document.getElementById("arTotal2").value=area2
+}
+function calLindDoc(){
     norte = document.getElementById("nortSecDoc").value
     sur = document.getElementById("surSecDoc").value
     este = document.getElementById("esteSecDoc").value
@@ -702,7 +768,7 @@ function calLind(){
     norSur = (parseInt(norte) + parseInt(sur))/2
     estOest = (parseInt(este)+parseInt(oeste))/2
     area2 = norSur*estOest
-    document.getElementById("arTotal").value=area2
+    document.getElementById("arTotal3").value=area2
 }
 function btnGuardConst(){
     let consta = new constancias()
@@ -716,6 +782,13 @@ function btnGuardConst(){
         consta.alindEste = document.getElementById("alindEste").value
         consta.oesteGen = document.getElementById("oesteGen").value
         consta.alindOeste = document.getElementById("alindOeste").value
+        consta.arTotal = document.getElementById("arTotal").value
+        consta.NivConstTotal = document.getElementById("NivConstTotal").value
+        consta.arConstTotal = document.getElementById("arConstTotal").value
+        consta.uniNorte = document.getElementById("uniNorte").value
+        consta.uniSur = document.getElementById("uniSur").value
+        consta.uniEste = document.getElementById("uniEste").value
+        consta.uniOeste = document.getElementById("uniOeste").value
     }else{
         consta.nortGen = "nada"
         consta.alindNort = "nada"
@@ -725,6 +798,13 @@ function btnGuardConst(){
         consta.alindEste = "nada"
         consta.oesteGen = "nada"
         consta.alindOeste = "nada"
+        consta.arTotal = "nada"
+        consta.NivConstTotal = "nada"
+        consta.arConstTotal = "nada"
+        consta.uniNorte= "nada"
+        consta.uniSur = "nada"
+        consta.uniEste= "nada"
+        consta.uniOeste = "nada"
     }
     posVenta = document.getElementById("posVenta").value
     if(posVenta =="si"){
@@ -736,6 +816,13 @@ function btnGuardConst(){
         consta.alindPosEste = document.getElementById("alindPosEste").value
         consta.oestePosVenta = document.getElementById("oestePosVenta").value
         consta.alindPosOeste = document.getElementById("alindPosOeste").value
+        consta.arTotal2 = document.getElementById("arTotal2").value
+        consta.NivConstTotal2= document.getElementById("NivConstTotal2").value
+        consta.arConstTotal2 = document.getElementById("arConstTotal2").value
+        consta.uniNorte2 = document.getElementById("uniNorte2").value
+        consta.uniSur2 = document.getElementById("uniSur2").value
+        consta.uniEste2 = document.getElementById("uniEste2").value
+        consta.uniOeste2 = document.getElementById("uniOeste2").value
     }else{
         consta.posVent = "0"
         consta.nortPosVenta = "nada"
@@ -746,6 +833,13 @@ function btnGuardConst(){
         consta.alindPosEste = "nada"
         consta.oestePosVenta = "nada"
         consta.alindPosOeste = "nada"
+        consta.arTotal2 = "nada"
+        consta.NivConstTotal2= "nada"
+        consta.arConstTotal2 = "nada"
+        consta.uniNorte2 = "nada"
+        consta.uniSur2 = "nada"
+        consta.uniEste2 = "nada"
+        consta.uniOeste2= "nada"
     }
     secDoc = document.getElementById("secDoc").value
     if(secDoc == "si"){
@@ -757,7 +851,13 @@ function btnGuardConst(){
         consta.alindSecEste = document.getElementById("alindSecEste").value
         consta.oesteSecDoc = document.getElementById("oesteSecDoc").value
         consta.alindSecOeste = document.getElementById("alindSecOeste").value
-        
+        consta.arTotal3= document.getElementById("arTotal3").value
+        consta.NivConstTotal3 = document.getElementById("NivConstTotal3").value
+        consta.arConstTotal3 = document.getElementById("arConstTotal3").value
+        consta.uniNorte3 = document.getElementById("uniNorte").value
+        consta.uniSur3 = document.getElementById("uniSur").value
+        consta.uniEste3= document.getElementById("uniEste3").value
+        consta.uniOeste3 = document.getElementById("uniOeste3").value
     }else{
         consta.secDocument = "0"
         consta.nortSecDoc = "nada"
@@ -768,10 +868,14 @@ function btnGuardConst(){
         consta.alindSecEste = "nada"
         consta.oesteSecDoc = "nada"
         consta.alindSecOeste = "nada"
+        consta.arTotal3= "nada"
+        consta.NivConstTotal3 = "nada"
+        consta.arConstTotal3 = "nada"
+        consta.uniNorte3 ="nada"
+        consta.uniSur3 = "nada"
+        consta.uniEste3 = "nada"
+        consta.uniOeste3 = "nada"
     }
-    consta.arTotal = document.getElementById("arTotal").value
-    consta.NivConstTotal = document.getElementById("NivConstTotal").value
-    consta.arConstTotal = document.getElementById("arConstTotal").value
     consta.arTotalVenta = document.getElementById("arTotalVenta").value
     consta.arRestante = document.getElementById("arRestante").value
     consta.valorTerreno = document.getElementById("valorTerreno").value
@@ -798,6 +902,7 @@ function btnGuardConst(){
     consta.ocupConst = datos1[16]
     consta.dimeConst = datos1[17]
     consta.regInmue = datos1[18]
+    consta.ambInmue = datos1[19]
     consta.destConst = datos2[0]
     consta.estConst = datos2[1]
     consta.pareAcaInmue = datos2[3]
@@ -855,7 +960,19 @@ function btnImprConst(){
         consta.imprConst()
     }
 }
-
+function btnImprConst1(){
+    let consta = new constancias
+    consta.nuExp = document.getElementById("nuExp").value
+    consta.montoFact = document.getElementById("montoFact").value
+    consta.fechFact = document.getElementById("fechFact").value
+    consta.idInmueble = document.getElementById("idInmueble").value
+    consta.empadro = document.getElementById("empadro").value
+    consta.idProp =document.getElementById("idProp").value
+    consta.numFact= document.getElementById("numFact").value
+    if(consta.veriInmu() == true){
+        consta.imprConst1()
+    }
+}
 /**EVENTOS */
 function btnCambSec(){
         let consta = new constancias()

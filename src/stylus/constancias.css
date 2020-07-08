@@ -25,7 +25,12 @@
     height: 33px;
 }
 .direc1{
-    width: 600px;
+    width: 425px;
+    height: 35px;
+}
+.direc2{
+    width: 76%;
+    height: 35px;
 }
 .btnSig1{
     display: flex;

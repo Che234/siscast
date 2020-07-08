@@ -98,6 +98,25 @@ class constancias{
         var $linTelf = "";
         var $multa = "";
         var $empadro = "";
+        var $ambInmue = "";
+        var $arTotal3 = "";
+        var $NivConstTotal3= "";
+        var $arConstTotal3= "";
+        var $arTotal2 = "";
+        var $NivConstTotal2 ="";
+        var $arConstTotal2 = "";
+        var $uniNorte = "";
+        var $uniSur = "";
+        var $uniEste = "";
+        var $uniOeste = "";
+        var $uniNorte2 = "";
+        var $uniSur2 = "";
+        var $uniEste2 = "";
+        var $uniOeste2 = "";
+        var $uniNorte3 = "";
+        var $uniSur3 = "";
+        var $uniEste3 = "";
+        var $uniOeste3 = "";
 
     function fPropietario(){
         echo'<table border="1px" class="taConst">
@@ -155,7 +174,7 @@ class constancias{
                 <td colspan="3">
                     <div class="campDat">
                         <p class="negritas">Dirección del propietario</p>
-                        <input type="text" class="direc1" id="direcProp" />
+                        <input type="text" class="direc2" id="direcProp" />
                     </div>
                 </td>
             </tr>
@@ -196,10 +215,20 @@ class constancias{
                 </td>
             </tr>
             <tr>
-                <td colspan="3">
+                <td colspan="2">
                     <div class="campDat">
                         <p class="negritas">Dirección del inmueble</p>
                         <input type="text" class="direc1" id="direcInmue" />
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Ambito inmueble</p>
+                        <select id="ambInmue">
+                            <option value="nada"></option>
+                            <option value="Urbano">Urbano</option>
+                            <option value="Rural">Rural</option>
+                        </select>
                     </div>
                 </td>
             </tr>
@@ -332,7 +361,8 @@ class constancias{
             15 => $this->tenenConst,
             16 => $this->ocupConst,
             17 => $this->dimeConst,
-            18 => $this->regInmue
+            18 => $this->regInmue,
+            19 => $this->ambInmue
         );
         echo'
         <table border="1px" class="taConst">
@@ -644,7 +674,7 @@ class constancias{
         <div class="btnSig1">
             <input type="button" value="Siguiente" onclick="btnfLind()" class=" botones btn btn-primary" />
         </div>
-        <input type="hidden" id="parte1" value="'.$parte1[0].'|'.$parte1[1].'|'.$parte1[2].'|'.$parte1[3].'|'.$parte1[4].'|'.$parte1[5].'|'.$parte1[6].'|'.$parte1[7].'|'.$parte1[8].'|'.$parte1[9].'|'.$parte1[10].'|'.$parte1[11].'|'.$parte1[12].'|'.$parte1[13].'|'.$parte1[14].'|'.$parte1[15].'|'.$parte1[16].'|'.$parte1[17].'|'.$parte1[18].'">
+        <input type="hidden" id="parte1" value="'.$parte1[0].'|'.$parte1[1].'|'.$parte1[2].'|'.$parte1[3].'|'.$parte1[4].'|'.$parte1[5].'|'.$parte1[6].'|'.$parte1[7].'|'.$parte1[8].'|'.$parte1[9].'|'.$parte1[10].'|'.$parte1[11].'|'.$parte1[12].'|'.$parte1[13].'|'.$parte1[14].'|'.$parte1[15].'|'.$parte1[16].'|'.$parte1[17].'|'.$parte1[18].'|'.$parte1[19].'">
         ';
         }
     function fProtConst(){
@@ -720,37 +750,11 @@ class constancias{
                     <div id="lindSecDoc"></div>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    <input type="button" class="btn btn-success" onclick="calLind()" value="Calcular">
-                    <input type="button" class="btn btn-danger" onclick="LimLind()" value="Modificar">
-                </td>
-            </tr>
         </table>
         <table border="1px" class="taConst">
             <tr>
                 <td colspan="3" class="tiConst">
                     <p class="h1">Áreas del Terreno</p>
-                </td>
-            </tr>
-            <tr>
-                <td >
-                    <div class="campDat">
-                        <p class="negritas">Área Total</p>
-                        <input type="disabled" id="arTotal" >
-                    </div>
-                </td>
-                <td >
-                    <div class="campDat">
-                        <p class="negritas">Niveles de Construcción</p>
-                        <input type="text" id="NivConstTotal" >
-                    </div>
-                </td>
-                <td >
-                    <div class="campDat">
-                        <p class="negritas">Área de Construcción</p>
-                        <input type="text" id="arConstTotal" >
-                    </div>
                 </td>
             </tr>
             <tr>
@@ -1094,30 +1098,78 @@ class constancias{
                     <td class="tiConst">
                         <p class="negritas">Mts Norte</p>
                         <input type="text" id="nortGen" />
+                        <select id="uniNorte">
+                            <option></option>
+                            <option value="m">m</option>
+                            <option value="Lq">Lq</option>
+                        </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindNort" />
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Sur</p>
                         <input type="text" id="surGen" />
+                        <select id="uniSur">
+                            <option></option>
+                            <option value="m">m</option>
+                            <option value="Lq">Lq</option>
+                        </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindSur" />
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Este</p>
                         <input type="text" id="esteGen" />
+                        <select id="uniEste">
+                            <option></option>
+                            <option value="m">m</option>
+                            <option value="Lq">Lq</option>
+                        </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindEste" />
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Oeste</p>
                         <input type="text" id="oesteGen" />
+                        <select id="uniOeste">
+                            <option></option>
+                            <option value="m">m</option>
+                            <option value="Lq">Lq</option>
+                        </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindOeste" />
                     </td>
                 </tr>
             </table>
-        
+            <table border="1px" class="taConst">
+                <tr>
+                    <td >
+                        <div class="campDat">
+                            <p class="negritas">Área Total</p>
+                            <input type="text" id="arTotal" >
+                        </div>
+                    </td>
+                    <td >
+                        <div class="campDat">
+                            <p class="negritas">Niveles de Construcción</p>
+                            <input type="text" id="NivConstTotal" >
+                        </div>
+                    </td>
+                    <td >
+                        <div class="campDat">
+                            <p class="negritas">Área de Construcción</p>
+                            <input type="text" id="arConstTotal" >
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table border="1px" class="taConst">
+                <tr>
+                    <td>
+                        <input type="button" class="btn btn-success" onclick="calLind()" value="Calcular">
+                    </td>
+                </tr>
+            </table>
         ';
     }
     function actPosVenta(){
@@ -1127,30 +1179,78 @@ class constancias{
                     <td class="tiConst">
                         <p class="negritas">Mts Norte</p>
                         <input type="text" id="nortPosVenta" />
+                        <select id="uniNorte2">
+                            <option></option>
+                            <option value="m">m</option>
+                            <option value="Lq">Lq</option>
+                        </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindPosNort" />
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Sur</p>
                         <input type="text" id="surPosVenta" />
+                        <select id="uniSur2">
+                            <option></option>
+                            <option value="m">m</option>
+                            <option value="Lq">Lq</option>
+                        </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindPosSur" />
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Este</p>
                         <input type="text" id="estePosVenta" />
+                        <select id="uniEste2">
+                            <option></option>
+                            <option value="m">m</option>
+                            <option value="Lq">Lq</option>
+                        </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindPosEste" />
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Oeste</p>
                         <input type="text" id="oestePosVenta" />
+                        <select id="uniOeste2">
+                            <option></option>
+                            <option value="m">m</option>
+                            <option value="Lq">Lq</option>
+                        </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindPosOeste" />
                     </td>
                 </tr>
             </table>
-        
+            <table border="1px" class="taConst">
+                <tr>
+                    <td >
+                        <div class="campDat">
+                            <p class="negritas">Área Total</p>
+                            <input type="disabled" id="arTotal2" >
+                        </div>
+                    </td>
+                    <td >
+                        <div class="campDat">
+                            <p class="negritas">Niveles de Construcción</p>
+                            <input type="text" id="NivConstTotal2" >
+                        </div>
+                    </td>
+                    <td >
+                        <div class="campDat">
+                            <p class="negritas">Área de Construcción</p>
+                            <input type="text" id="arConstTotal2" >
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table border="1px" class="taConst">
+                <tr>
+                    <td>
+                        <input type="button" class="btn btn-success" onclick="calLindVenta()" value="Calcular">
+                    </td>
+                </tr>
+            </table>
         ';
     }
     function SecDoc(){
@@ -1160,30 +1260,78 @@ class constancias{
                     <td class="tiConst">
                         <p class="negritas">Mts Norte</p>
                         <input type="number" id="nortSecDoc" />
+                        <select id="uniNorte3">
+                            <option></option>
+                            <option value="m">m</option>
+                            <option value="Lq">Lq</option>
+                        </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindSecNorte" />
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Sur</p>
                         <input type="number" id="surSecDoc" />
+                        <select id="uniSur3">
+                            <option></option>
+                            <option value="m">m</option>
+                            <option value="Lq">Lq</option>
+                        </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindSecSur" />
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Este</p>
                         <input type="number" id="esteSecDoc" />
+                        <select id="uniEste3">
+                            <option></option>
+                            <option value="m">m</option>
+                            <option value="Lq">Lq</option>
+                        </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindSecEste" />
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Oeste</p>
                         <input type="number" id="oesteSecDoc" />
+                        <select id="uniOeste3">
+                            <option></option>
+                            <option value="m">m</option>
+                            <option value="Lq">Lq</option>
+                        </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindSecOeste" />
                     </td>
                 </tr>
             </table>
-        
+            <table border="1px" class="taConst">
+                <tr>
+                    <td >
+                        <div class="campDat">
+                            <p class="negritas">Área Total</p>
+                            <input type="text" id="arTotal3" >
+                        </div>
+                    </td>
+                    <td >
+                        <div class="campDat">
+                            <p class="negritas">Niveles de Construcción</p>
+                            <input type="text" id="NivConstTotal3" >
+                        </div>
+                    </td>
+                    <td >
+                        <div class="campDat">
+                            <p class="negritas">Área de Construcción</p>
+                            <input type="text" id="arConstTotal3" >
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table border="1px" class="taConst">
+                <tr>
+                    <td>
+                        <input type="button" class="btn btn-success" onclick="calLindDoc()" value="Calcular">
+                    </td>
+                </tr>
+            </table>
         ';
     }
     function guardConst(){
@@ -1211,36 +1359,35 @@ class constancias{
                 $idProt= $link->insert_id;
 
             //CARACTERISTICAS DE LA CONSTRUCCION (LISTO)
-                $carcConstSql= "INSERT INTO caracteristicas_construccion(destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,piezas_sanitarias,ventanas,puertas,insta_electricas,complementos,estado_conservacion,ambientes,observ,nivel,areaC)value('".$this->destConst."','".$this->estConst."','".$this->pareTipoInmue."','".$this->pareAcaInmue."','".$this->pintConst."','".$this->techoConst."','".$this->pisosConst."','".$this->piezConst."','".$this->ventConst."','".$this->puertConst."','".$this->instElect."','".$this->compConst."','".$this->estConserv."','".$this->ambConst."','".$this->obsConst."','".$this->NivConstTotal."','".$this->arConstTotal."')";
+                $carcConstSql= "INSERT INTO caracteristicas_construccion(destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,piezas_sanitarias,ventanas,puertas,insta_electricas,complementos,estado_conservacion,ambientes,observ)value('".$this->destConst."','".$this->estConst."','".$this->pareTipoInmue."','".$this->pareAcaInmue."','".$this->pintConst."','".$this->techoConst."','".$this->pisosConst."','".$this->piezConst."','".$this->ventConst."','".$this->puertConst."','".$this->instElect."','".$this->compConst."','".$this->estConserv."','".$this->ambConst."','".$this->obsConst."')";
                 $link->query($carcConstSql);
                 $idCarcConst = $link->insert_id;
 
             //TERRENO(LISTO)
-                $terrSql= "INSERT INTO terreno(area_total_venta,area_total,area_restante,valor_terreno,valor_inmueble,valor_construccion)value('".$this->arTotalVenta."','".$this->arTotal."','".$this->arRestante."','".$this->valorTerreno."','".$this->valorInmueble."','".$this->valorConstruc."')";
+                $terrSql= "INSERT INTO terreno(area_total_venta,area_restante,valor_terreno,valor_inmueble,valor_construccion)value('".$this->arTotalVenta."','".$this->arRestante."','".$this->valorTerreno."','".$this->valorInmueble."','".$this->valorConstruc."')";
                 $link->query($terrSql);
                 $idTerreno= $link->insert_id;
 
             //LINDEROS DOCUMENTO(LISTO)
-                $lindDocSql = "INSERT INTO linderos_documento(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o)value('".$this->nortSecDoc."','".$this->surSecDoc."','".$this->esteSecDoc."','".$this->oesteSecDoc."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."')";
+                $lindDocSql = "INSERT INTO linderos_documento(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,nivelesConst,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$this->nortSecDoc."','".$this->surSecDoc."','".$this->esteSecDoc."','".$this->oesteSecDoc."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."','".$this->arTotal3."','".$this->NivConstTotal3."','".$this->arConstTotal3."','".$this->uniNorte3."','".$this->uniSur3."','".$this->uniEste3."','".$this->uniOeste3."')";
                 $link->query($lindDocSql);
                 $idLindDoc= $link->insert_id;
 
             //LINDEROS GENERAL (LISTO)
-                $lindGenSql = "INSERT INTO linderos_general(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o)value('".$this->nortGen."','".$this->surGen."','".$this->esteGen."','".$this->oesteGen."','".$this->alindNort."','".$this->alindSur."','".$this->alindEste."','".$this->alindOeste."')";
+                $lindGenSql = "INSERT INTO linderos_general(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,nivelesConst,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$this->nortGen."','".$this->surGen."','".$this->esteGen."','".$this->oesteGen."','".$this->alindNort."','".$this->alindSur."','".$this->alindEste."','".$this->alindOeste."','".$this->arTotal."','".$this->NivConstTotal."','".$this->arConstTotal."','".$this->uniNorte."','".$this->uniSur."','".$this->uniEste."','".$this->uniOeste."')";
                 $link->query($lindGenSql);
                 $idLindGen = $link->insert_id;
                 
             //LINDEROS PARA VENTA (LISTO)
-                $lindPosVentaSql = "INSERT INTO linderos_posible_venta(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o)value('".$this->nortPosVenta."','".$this->surPosVenta."','".$this->estePosVenta."','".$this->oestePosVenta."','".$this->alindPosNort."','".$this->alindPosSur."','".$this->alindPosEste."','".$this->alindPosOeste."')";
+                $lindPosVentaSql = "INSERT INTO linderos_posible_venta(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,nivelesConst,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$this->nortPosVenta."','".$this->surPosVenta."','".$this->estePosVenta."','".$this->oestePosVenta."','".$this->alindPosNort."','".$this->alindPosSur."','".$this->alindPosEste."','".$this->alindPosOeste."','".$this->arTotal2."','".$this->NivConstTotal2."','".$this->arConstTotal2."','".$this->uniNorte2."','".$this->uniSur."','".$this->uniEste."','".$this->uniOeste."')";
                 $link->query($lindPosVentaSql);
                 $idLindPosVenta = $link->insert_id;
-
             //SERVICIOS(LISTO)
                 $servSql = "INSERT INTO servicios_inmue(acued,acuedRural,aguasSubter,aguasServ,pavimentoFlex,pavimentoRig,viaEngran,acera,alumbradoPub,aseo,transportePublic,pozoSept,electriResi,electriIndus,lineaTelef)value('".$this->Acue."','".$this->AcueRural."','".$this->AguasSub."','".$this->AguasServ."','".$this->PavFlex."','".$this->PavRig."','".$this->viaEngran."','".$this->acera."','".$this->AlumPublico."','".$this->aseo."','".$this->transPublic."','".$this->pozoSept."','".$this->ElectResidencial."','".$this->ElectriIndust."','".$this->linTelf."')";
                 $link->query($servSql);
                 $idServ= $link->insert_id;
             //INMUEBLE()
-                $InmuebleSql= "INSERT INTO inmueble(telef,direccion,parroquia,sector,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios)value('".$this->telfFul2."','".$this->direcInmue."','".$this->parrInmue."','".$this->secInmue."',".$idCarcConst.",".$idProt.",".$idCarc.",".$idLindDoc.",".$idLindGen.",".$idLindPosVenta.",".$idTerreno.",".$idServ.")";
+                $InmuebleSql= "INSERT INTO inmueble(telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios)value('".$this->telfFul2."','".$this->direcInmue."','".$this->parrInmue."','".$this->secInmue."','".$this->ambInmue."',".$idCarcConst.",".$idProt.",".$idCarc.",".$idLindDoc.",".$idLindGen.",".$idLindPosVenta.",".$idTerreno.",".$idServ.")";
                 $link->query($InmuebleSql);
                 $idInmueble= $link->insert_id;
               echo'<h1>PROCESO COMPLETADO CON EXITO</h1>
@@ -1289,47 +1436,54 @@ class constancias{
                     </td>
                 </tr>';
                 //GENERAL
-                $sqlIdGen = "SELECT norte from linderos_general where id=".$idLindGen."";
-                $resGen=$link->query($sqlIdGen);
-                $norteGen = $resGen->fetch_assoc();
+                    $sqlIdGen = "SELECT norte from linderos_general where id=".$idLindGen."";
+                    $resGen=$link->query($sqlIdGen);
+                    $norteGen = $resGen->fetch_assoc();
                 //SEGUN DOCUMENTO
-                $sqlIdDoc = "SELECT norte from linderos_documento where id=".$idLindDoc."";
-                $resDoc=$link->query($sqlIdDoc);
-                $norteDoc = $resDoc->fetch_assoc();
+                    $sqlIdDoc = "SELECT norte from linderos_documento where id=".$idLindDoc."";
+                    $resDoc=$link->query($sqlIdDoc);
+                    $norteDoc = $resDoc->fetch_assoc();
                 //POSIBLE VENTA
-                $sqlIdPosVenta = "SELECT norte from linderos_posible_venta where id=".$idLindPosVenta."";
-                $resPosVenta=$link->query($sqlIdPosVenta);
-                $nortePosVenta = $resPosVenta->fetch_assoc();
-                if($norteGen['norte']!="nada"){
-                    if($norteDoc['norte']!="nada"){
-                        if($nortePosVenta['norte']=="nada"){
-                            if($this->multa =="no"){
-                                echo'
-                                <tr>
-                                    <td class="tdConst">
-                                        <div class="btnSig1">
-                                            <input type="button" value="Imprimir" onclick="btnImprConst()" class=" botones btn btn-primary" />
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-                            ';
+                    $sqlIdPosVenta = "SELECT norte from linderos_posible_venta where id=".$idLindPosVenta."";
+                    $resPosVenta=$link->query($sqlIdPosVenta);
+                    $nortePosVenta = $resPosVenta->fetch_assoc();
+
+
+                //IF DEL F002
+                    if($norteGen['norte']=="nada"){
+                        if($norteDoc['norte']!="nada"){
+                            if($nortePosVenta['norte']=="nada"){
+                                if($this->multa =="no"){
+                                    echo'
+                                    <tr>
+                                        <td class="tdConst">
+                                            <div class="btnSig1">
+                                                <input type="button" value="Imprimir" onclick="btnImprConst()" class=" botones btn btn-primary" />
+                                            </div>
+                                        </td>
+                                        
+                                    </tr>
+                                ';
+                                }
                             }
                         }
                     }
-                }
             echo'</table>';
-            echo ''.$idLindGen.','.$idLindDoc.','.$idLindPosVenta.','.$this->multa.'';
-        // //if para caso f001
-        //     if(($idLindGen!=0) && ($idLindDoc!=0) && ($idLindPosVenta==0) && ($this->multa=="no")){
-        //         echo'
-        //             <div class="btnSig1">
-        //                 <input type="button" value="Imprimir" onclick="btnImprConst1()" class=" botones btn btn-primary" />
-        //             </div>
-        //         ';
-        //     }
-        //if para caso f002
-        echo gettype($this->multa);
+                //if para caso f001
+                    if($norteGen['norte']!="nada"){
+                        if($norteDoc['norte']!="nada"){
+                            if($nortePosVenta['norte']=="nada"){
+                                if($this->multa =="no"){
+                                    echo'
+                                        <div class="btnSig1">
+                                            <input type="button" value="Imprimir" onclick="btnImprConst1()" class=" botones btn btn-primary" />
+                                        </div>
+                                    ';
+                                }
+                            }
+                        }
+                    }
+        
             
         // //if para caso f003
         //     if(($idLindGen==0) && ($idLindDoc!=0) && ($idLindPosVenta!=0) && ($this->multa=="no")){
