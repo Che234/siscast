@@ -68,11 +68,13 @@ class f002{
             $link->query($expFactSql);
             $idExpFact= $link->insert_id;
         //INSERT EXPEDIENTE
-            $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",".$this->nuExp.",".$this->fechFact.")";
+            $fechaExp= date('Y-m-d');
+            $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",".$this->nuExp.",'".$fechaExp."')";
             $link->query($expediSql);
             $idExpediente = $link->insert_id;
         //INSERT CONSTANCIA
-            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".date('d-m-Y')."',".$idUser["id"].",".$idExpediente.")";
+            $fechaConst= date('Y-m-d');
+            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$idExpediente.")";
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
         //INSERT PAGOS
@@ -1064,7 +1066,7 @@ class f001{
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
         //BUSQUEDA DE USUARIO
-            $userSql = "SELECT nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
             $idUser= $resultUser->fetch_assoc();
         //INSERT FACTURA
@@ -1072,15 +1074,17 @@ class f001{
             $link->query($expFactSql);
             $idExpFact= $link->insert_id;
         //INSERT EXPEDIENTE
-            $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",".$this->nuExp.",".$this->fechFact.")";
+            $fechaExp= date('Y-m-d');
+            $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",".$this->nuExp.",'".$fechaExp."')";
             $link->query($expediSql);
             $idExpediente = $link->insert_id;
         //INSERT CONSTANCIA
-            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".date('d-m-Y')."',".$idUser["id"].",".$idExpediente.")";
+            $fechaConst= date('Y-m-d');
+            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$idExpediente.")";
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
         //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$idExpediente.",".$idExpFact.",".$this->fechFact.")";
+            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fecha)value(".$idExpediente.",".$idExpFact.",'".$this->fechFact."')";
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
         //BUSQUEDA DEL INMUEBLE
@@ -2150,7 +2154,7 @@ class f003{
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
         //BUSQUEDA DE USUARIO
-            $userSql = "SELECT nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
             $idUser= $resultUser->fetch_assoc();
         //INSERT FACTURA
@@ -2158,11 +2162,13 @@ class f003{
             $link->query($expFactSql);
             $idExpFact= $link->insert_id;
         //INSERT EXPEDIENTE
-            $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",".$this->nuExp.",".$this->fechFact.")";
+            $fechaExp= date('Y-m-d');
+            $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",".$this->nuExp.",'".$fechaExp."')";
             $link->query($expediSql);
             $idExpediente = $link->insert_id;
         //INSERT CONSTANCIA
-            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".date('d-m-Y')."',".$idUser["id"].",".$idExpediente.")";
+            $fechaConst= date('Y-m-d');
+            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$idExpediente.")";
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
         //INSERT PAGOS

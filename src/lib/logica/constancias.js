@@ -674,8 +674,8 @@ function btnfCarac(){
     consta.cedConst= document.getElementById("cedConst").value;
     consta.rifR= document.getElementById("rifR").value;
     consta.rifN= document.getElementById("rifN").value;
-    consta.rifConst= consta.rifR+consta.rifN;
-    consta.cedFul= consta.cedR+consta.cedConst;
+    consta.rifConst= consta.rifR+"-"+consta.rifN;
+    consta.cedFul= consta.cedR+"-"+consta.cedConst;
     consta.nomProp= document.getElementById("nomProp").value;
     consta.apelProp = document.getElementById("apelProp").value;
     consta.codTelf= document.getElementById("codTelf").value;
