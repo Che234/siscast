@@ -11,7 +11,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active ">
-                  <a class="nav-link" href="#">Inicio <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="http://localhost/SisCast/">Inicio <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,14 +47,15 @@
             echo'
             <div id="campGeneral">
               <div class="campBuscador">
-                <h1>BUSCAR POR EXPEDIENTE</h1>
+                <h2>CONSULTA</h2>
+                <select id="tipoBuscar">
+                  <option value="0"></option>
+                  <option value="Expediente">Expediente</option>
+                  <option value="cedula">Cedula</option>
+                  <option value="rif">Rif</option>
+                </select>
                 <input type="text" id="campBuscar" />
-                <input type="button" value="Consultar" onclick="busConstExp()" class="botones btn btn-primary />
-              </div>
-              <div class="campBuscador">
-                <h1>BUSCAR POR CEDULA</h1>
-                <input type="text" id="campBuscar" />
-                <input type="button" value="Consultar" class="botones btn btn-primary />
+                <input type="button" value="Consultar" onclick="btnConsultExp()" class="botones btn btn-primary />
               </div>
             </div>
             <div id="campOculto"></div>

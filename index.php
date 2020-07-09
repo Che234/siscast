@@ -48,6 +48,7 @@
 <script src="./src/lib/logica/expresiones.js"></script>
 <script src="./src/lib/logica/login.js"></script>
 <script src="./src/lib/logica/constancias.js"></script>
+<script src="./src/lib/logica/busquedas.js"></script>
 <script src="./src/lib/logica/usuarios.js"></script>
 <script src="./src/lib/jquery/jquery.min.js"></script>
 <script src="./src/lib/bootstrap/js/bootstrap.js"></script>
