@@ -1,7 +1,8 @@
 class busquedas{
 
     constructor(campBuscar,tipoBuscar,secciones,expBuscar,cedula,rif,nomProp,apelProp,
-        telefono,direcProp,cedula2){}
+        telefono,direcProp,cedula2,parrInmue,secInmue,direcInmue,ambInmue,idInmueble,topoConst,formaConst,
+        regInmue,usoConst,tenenConst,ocupConst,dimeConst,idCarac){}
     veriBuscar(){
         if(!ex_datcort.test(this.campBuscar)){
             alert("Campo de buscar no puede estar vacio");
@@ -48,6 +49,25 @@ class busquedas{
         }
         if(!er_areas.test(this.direcProp)){
             alert("Error en campo de Dirección");
+            return false;
+        }
+        return true
+    }
+    veriActInmue(){
+        if(!ex_datcort.test(this.parrInmue)){
+            alert("Error en campo de Parroquia");
+            return false;
+        }
+        if(!ex_datcort.test(this.secInmue)){
+            alert("Error en campo de Sector");
+            return false;
+        }
+        if(!er_areas.test(this.direcInmue)){
+            alert("Error en campo de Dirección");
+            return false;
+        }
+        if(!ex_datcort.test(this.ambInmue)){
+            alert("Error en campo de Ambito");
             return false;
         }
         return true
@@ -127,6 +147,42 @@ class busquedas{
 			     }
 	       	}
     }
+    guarActInmue(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('modificaciones');
+        var divsitiomaterial = document.getElementById('modificaciones');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`telefono=${this.telefono}&parrInmue=${this.parrInmue}&secInmue=${this.secInmue}&direcInmue=${this.direcInmue}&ambInmue=${this.ambInmue}&idInmueble=${this.idInmueble}&accion=actInmue`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    actCaracInmue(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('modificaciones');
+        var divsitiomaterial = document.getElementById('modificaciones');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`topoConst=${this.topoConst}&formaConst=${this.formaConst}&regInmue=${this.regInmue}&usoConst=${this.usoConst}&tenenConst=${this.tenenConst}&ocupConst=${this.ocupConst}&dimeConst=${this.dimeConst}&idCarac=${this.idCarac}&accion=actCaracInmue`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
 }
 function btnConsultExp(){
     let busque = new busquedas;
@@ -194,6 +250,46 @@ function dividirCed(secciones="no"){
         },100)
         
     }
+    if(secciones=="Caract Terreno"){
+        let topografia = document.getElementById("topografia").value
+        let formaConst = document.getElementById("forma").value
+        let regimen = document.getElementById("regimen").value
+        let tenencia = document.getElementById("tenencia").value
+        let ocupante = document.getElementById("ocupante").value
+        if(topografia=="Terreno Llano"){
+            document.getElementById("topoConst").selectedIndex=1
+        }
+        if(topografia=="Terreno Quebrado"){
+            document.getElementById("topoConst").selectedIndex=2
+        }
+        if(formaConst=="Regular"){
+            document.getElementById("formaConst").selectedIndex=1
+        }
+        if(formaConst =="Irregular"){
+            document.getElementById("formaConst").selectedIndex=2
+        }
+        if(regimen =="Propiedad Horizontal"){
+            document.getElementById("regInmue").selectedIndex=1
+        }
+        if(regimen =="Condominio"){
+            document.getElementById("regInmue").selectedIndex=2
+        }
+        if(regimen=="Sucesion"){
+            document.getElementById("regInmue").selectedIndex=3
+        }
+        setTimeout(function(){
+            usoCarac()
+        },100)
+        setTimeout(function(){
+            tenenciaCarac()
+        },100)
+        setTimeout(function(){
+            ocupConst()
+        },100)
+        setTimeout(function(){
+            dimesionConst()
+        },100)
+    }
 }
 function btnActProp(){
     let busque = new busquedas
@@ -215,6 +311,7 @@ function btnActProp(){
     }
     
 }
+//INMUEBLE
 function sectorCamb(){
     let sector = document.getElementById("sector").value
     let sect = document.getElementById("secInmue")
@@ -225,6 +322,69 @@ function sectorCamb(){
         }
 }
 function btnActInmue(){
+    let busque = new busquedas
     codTelf2 = document.getElementById("codTelf2").value
+    numTelf2 = document.getElementById("numTelf2").value
+    busque.telefono = codTelf2+"-"+numTelf2
+    busque.parrInmue = document.getElementById("parrInmue").value
+    busque.secInmue = document.getElementById("secInmue").value
+    busque.direcInmue = document.getElementById("direcInmue").value
+    busque.ambInmue = document.getElementById("ambInmue").value
+    busque.idInmueble = document.getElementById("idInmueble").value
+    if(busque.veriActInmue()==true){
+        busque.guarActInmue()
+    }
     
+
+
+    
+}
+//CARACTERISTICAS DEL TERRENO
+function usoCarac(){
+    let uso = document.getElementById("uso").value
+        let usoConst = document.getElementById("usoConst")
+        let k=0
+    while(uso !=usoConst.value){
+        document.getElementById("usoConst").selectedIndex=k
+        k++
+    }
+}
+function tenenciaCarac(){
+        let tenencia = document.getElementById("tenencia").value
+        let tenenConst = document.getElementById("tenenConst")
+        let k=0
+    while(tenencia !=tenenConst.value){
+        document.getElementById("tenenConst").selectedIndex=k
+        k++
+    }
+}
+function ocupConst(){
+    let ocupante = document.getElementById("ocupante").value
+    let ocupConst = document.getElementById("ocupConst")
+    let k=0
+    while(ocupante !=ocupConst.value){
+        document.getElementById("ocupConst").selectedIndex=k
+        k++
+    }
+}
+function dimesionConst(){
+    let dimenciones = document.getElementById("dimenciones").value
+    let dimeConst = document.getElementById("dimeConst")
+    let k=0
+    while(dimenciones !=dimeConst.value){
+        document.getElementById("dimeConst").selectedIndex=k
+        k++
+    }
+}
+function btnActCaracInmue(){
+    let busque = new busquedas
+    busque.topoConst = document.getElementById("topoConst").value
+    busque.formaConst = document.getElementById("formaConst").value
+    busque.regInmue = document.getElementById("regInmue").value
+    busque.usoConst = document.getElementById("usoConst").value
+    busque.tenenConst = document.getElementById("tenenConst").value
+    busque.ocupConst = document.getElementById("ocupConst").value
+    busque.dimeConst = document.getElementById("dimeConst").value
+    busque.idCarac = document.getElementById("idCarac").value
+    busque.actCaracInmue()
 }

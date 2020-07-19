@@ -94,6 +94,47 @@ if(isset($_POST["idInmueble"])){
 }else{
     $bus->idInmueble = "nada";
 }
+if(isset($_POST["topoConst"])){
+    $bus->topoConst = $_POST["topoConst"];
+}else{
+    $bus->topoConst = "nada";
+}
+if(isset($_POST["formaConst"])){
+    $bus->formaConst = $_POST["formaConst"];
+}else{
+    $bus->formaConst = "nada";
+}
+if(isset($_POST["regInmue"])){
+    $bus->regInmue = $_POST["regInmue"];
+}else{
+    $bus->regInmue = "nada";
+}
+if(isset($_POST["usoConst"])){
+    $bus->usoConst = $_POST["usoConst"];
+}else{
+    $bus->usoConst = "nada";
+}
+if(isset($_POST["tenenConst"])){
+    $bus->tenenConst = $_POST["tenenConst"];
+}else{
+    $bus->tenenConst = "nada";
+}
+if(isset($_POST["ocupConst"])){
+    $bus->ocupConst = $_POST["ocupConst"];
+}else{
+    $bus->ocupConst = "nada";
+}
+if(isset($_POST["dimeConst"])){
+    $bus->dimeConst = $_POST["dimeConst"];
+}else{
+    $bus->dimeConst = "nada";
+}
+if(isset($_POST["idCarac"])){
+    $bus->idCarac = $_POST["idCarac"];
+}else{
+    $bus->idCarac = "nada";
+}
+
 
 if($accion =="busExp"){
     $bus->mostBusqueda();
@@ -107,6 +148,9 @@ if($secciones=="Propietario"){
 if($secciones=="Inmueble"){
     $bus->modifInmueble();
 }
+if($secciones == "Caract Terreno"){
+    $bus->modifcarcTerreno();
+}
 if($accion == "actProp"){
     $bus->actProp();
 }
@@ -115,6 +159,9 @@ if($accion == "cambSecMod"){
 }
 if($accion == "actInmue"){
     $bus->actInmue();
+}
+if($accion=="actCaracInmue"){
+    $bus->actCaracInmue();
 }
 if($_POST["parrInmue2"]=="Capital"){
     $bus->cambSecMod();
