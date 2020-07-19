@@ -42,29 +42,58 @@ if(isset($_POST["rif"])){
 if(isset($_POST["nomProp"])){
     $bus->nomProp = $_POST["nomProp"];
 }else{
-    $bus->nomProp = "nomProp";
+    $bus->nomProp = "nada";
 }
 if(isset($_POST["apelProp"])){
     $bus->apelProp = $_POST["apelProp"];
 }else{
-    $bus->apelProp = "apelProp";
+    $bus->apelProp = "nada";
 }
 if(isset($_POST["telefono"])){
     $bus->telefono = $_POST["telefono"];
 }else{
-    $bus->telefono = "telefono";
+    $bus->telefono = "nada";
 }
 if(isset($_POST["direcProp"])){
     $bus->direcProp = $_POST["direcProp"];
 }else{
-    $bus->direcProp = "direcProp";
+    $bus->direcProp = "nada";
 }
 if(isset($_POST["cedula2"])){
     $bus->cedula2 = $_POST["cedula2"];
 }else{
-    $bus->cedula2 = "cedula2";
+    $bus->cedula2 = "nada";
 }
-
+if(isset($_POST["telefono2"])){
+    $bus->telefono2 = $_POST["telefono2"];
+}else{
+    $bus->telefono2 = "nada";
+}
+if(isset($_POST["parrInmue"])){
+    $bus->parrInmue = $_POST["parrInmue"];
+}else{
+    $bus->parrInmue = "nada";
+}
+if(isset($_POST["secInmue"])){
+    $bus->secInmue = $_POST["secInmue"];
+}else{
+    $bus->secInmue = "nada";
+}
+if(isset($_POST["direcInmue"])){
+    $bus->direcInmue = $_POST["direcInmue"];
+}else{
+    $bus->direcInmue = "nada";
+}
+if(isset($_POST["ambInmue"])){
+    $bus->ambInmue = $_POST["ambInmue"];
+}else{
+    $bus->ambInmue = "nada";
+}
+if(isset($_POST["idInmueble"])){
+    $bus->idInmueble = $_POST["idInmueble"];
+}else{
+    $bus->idInmueble = "nada";
+}
 
 if($accion =="busExp"){
     $bus->mostBusqueda();
@@ -75,7 +104,22 @@ if($accion == "mostRest"){
 if($secciones=="Propietario"){
     $bus->modifPropietario();
 }
+if($secciones=="Inmueble"){
+    $bus->modifInmueble();
+}
 if($accion == "actProp"){
     $bus->actProp();
+}
+if($accion == "cambSecMod"){
+    $bus->cambSecMod();
+}
+if($accion == "actInmue"){
+    $bus->actInmue();
+}
+if($_POST["parrInmue2"]=="Capital"){
+    $bus->cambSecMod();
+}
+if($_POST["parrInmue2"]=="Dr. Alberto Adriani"){
+    $bus->cambSecMod();
 }
 ?>

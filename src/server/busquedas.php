@@ -12,6 +12,12 @@ class busquedas{
         var $telefono = "";
         var $direcProp = "";
         var $cedula2 = "";
+        var $telefono2 = "";
+        var $parrInmue = "";
+        var $secInmue = "";
+        var $direcInmue = "";
+        var $ambInmue = "";
+        var $idInmueble = "";
 
     function mostBusqueda(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
@@ -111,7 +117,18 @@ class busquedas{
             <div id="modificaciones"></div>';
     }
     function modifInmueble(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        //BUSQUEDA DEL EXPEDIENTE
+            $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
+            $resExp = $link->query($expSql);
+            $expRes = $resExp->fetch_assoc();
+        //BUSQUEDA DEL INMUEBLE
+            $inmuSql = "SELECT * FROM inmueble where id=".$expRes["id"]."";
+            $resInmue = $link->query($inmuSql);
+            $inmueRes = $resInmue->fetch_assoc();
         echo'
+        
         <table border="1px" class="taConst">
             <tr>
                 <td colspan="4" class="tiConst">
@@ -129,7 +146,7 @@ class busquedas{
                 <td >
                     <div class="campDat">
                         <p class="negritas">Parroquia</p>
-                        <select onchange="btnCambSec()" id="parrInmue">
+                        <select id="parrInmue">
                             <option value="0"></option>
                             <option value="Capital">Capital</option>
                             <option value="Dr. Alberto Adriani">Dr. Alberto Adriani</option>
@@ -140,9 +157,8 @@ class busquedas{
                 <td >
                     <div class="campDat">
                         <p class="negritas">Sector</p>
-                        <select id="secInmue">
-                            <option value="0"></option>
-                        </select>
+                        <select id="secInmue" >
+                         </select>
                     </div>
                 </td>
             </tr>
@@ -150,7 +166,7 @@ class busquedas{
                 <td colspan="2">
                     <div class="campDat">
                         <p class="negritas">Dirección del inmueble</p>
-                        <input type="text" class="direc1" id="direcInmue" />
+                        <input type="text" value="'.$inmueRes["direccion"].'" class="direc1" id="direcInmue" />
                     </div>
                 </td>
                 <td>
@@ -165,14 +181,18 @@ class busquedas{
                 </td>
             </tr>
         </table>
-        
+        <input type="hidden" id="telefono" value="'.$inmueRes["telef"].'"/>
+        <input type="hidden" id="parr" value="'.$inmueRes["parroquia"].'" />
+        <input type="hidden" id="sector" value="'.$inmueRes["sector"].'"/>
+        <input type="hidden" id="ambito" value="'.$inmueRes["ambito"].'"/>
+        <input type="hidden" id="idInmueble" value="'.$inmueRes["id"].'"/>
         <div class="btnSig1">
-            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            <input type="button" value="Siguiente" onclick="btnActInmue()" class="botones btn btn-primary" />
         </div>
         
         ';
     }
-    fuction modifcarcTerreno(){
+    function modifcarcTerreno(){
         echo'
         <table border="1px" class="taConst">
             <tr>
@@ -277,6 +297,7 @@ class busquedas{
         </table>
         ';
     }
+    
     function modifPropietario(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
@@ -363,6 +384,128 @@ class busquedas{
         $propSql = "UPDATE propietarios SET cedula='".$this->cedula."',rif='".$this->rif."',nombre='".$this->nomProp."',apellido='".$this->apelProp."',telef='".$this->telefono."',dir_hab='".$this->direcProp."' WHERE cedula='".$this->cedula2."' ";
         $link->query($propSql);
         echo 'ACTUALIZADO CON EXITO';
+    }
+    function actInmue(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $inmueSql = "UPDATE inmueble SET telef='".$this->telefono2."',direccion='".$this->direcInmue."',parroquia='".$this->parrInmue."',sector='".$this->secInmue."',ambito='".$this->ambInmue."' WHERE id='".$this->idInmueble."' ";
+        $link->query($inmueSql);
+        echo 'ACTUALIZADO CON EXITO';
+    }
+    function cambSecMod(){
+        if($inmueRes["parroquia"]=="Capital"){
+            echo'
+                <option value="'.$inmueRes["sector"].'">'.$inmueRes["sector"].'</option>
+                <option value="URB RENATO LAPORTA">URB RENATO LAPORTA</option>
+                <option value="URB LOS LEONES">URB LOS LEONES</option>
+                <option value="EL PIÑALITO">EL PIÑALITO</option>
+                <option value="EL PLAN">EL PLAN</option>
+                <option value="LA GUADALUPE">LA GUADALUPE</option>
+                <option value="JOSE FRLIX RIVAS">JOSE FRLIX RIVAS</option>
+                <option value="MORICHITOS">MORICHITOS</option>
+                <option value="LA MILAGROSA">LA MILAGROSA</option>
+                <option value="TECHO PARA MIS HIJOS">TECHO PARA MIS HIJOS</option>
+                <option value="BRISAS DEL PIÑAL">BRISAS DEL PIÑAL</option>
+                <option value="LA URIBANTINA"> LA URIBANTINA</option>
+                <option value="EL ARAGUANEY">EL ARAGUANEY</option>
+                <option value="BRISAS DE URIBANTE">BRISAS DE URIBANTE</option>
+                <option value="PROHENSA">PROHENSA</option>
+                <option value="CANTA RANA">CANTA RANA</option>
+                <option value="CHURURU (TRONCAL)">CHURURU (TRONCAL)</option>
+                <option value="LAS PALMERAS">LAS PALMERAS</option>
+                <option value="MORONI">MORONI</option>
+                <option value="LOS MIRTOS">LOS MIRTOS</option>
+                <option value="JUAN PABLO">JUAN PABLO</option>
+                <option value="BARRIO COLOMBIA">BARRIO COLOMBIA</option>
+                <option value="COSTA RICA">COSTA RICA</option>
+                <option value="MAPACA">MAPACA</option>
+                <option value="KM 8">KM 8</option>
+                <option value="SANTA MARIA">SANTA MARIA</option>
+                <option value="TIERRA LINDA">TIERRA LINDA</option>
+                <option value="EL PABELLON">EL PABELLON</option>
+                <option value="EL OASIS">EL OASIS</option>
+                <option value="LOS NARANJOS">LOS NARANJOS</option>
+                <option value="GUAFITAS">GUAFITAS</option>
+                <option value="DORADAS">DORADAS</option>
+                <option value="SAN MIGUEL">SAN MIGUEL</option>
+                <option value="EL MONERO">EL MONERO</option>
+                <option value="EL CANAL">EL CANAL</option>
+                <option value="RECTA DE AYARI">RECTA DE AYARI</option>
+                <option value="CAÑO TIGRE">CAÑO TIGRE</option>
+                <option value="EL YUYE">EL YUYE</option>
+                <option value="LA ISLA DE BENTACOURT">LA ISLA DE BENTACOURT</option>
+                <option value="EL TROMPEZON">EL TROMPEZON</option>
+                <option value="EL ROISAL">EL ROISAL</option>
+                <option value="LA ORQUIDEA">LA ORQUIDEA</option>
+                <option value="19 DE ABRIL">19 DE ABRIL</option>
+                <option value="COLINAS DE BELLO MONTE">COLINAS DE BELLO MONTE</option>
+                <option value="IRCO">IRCO</option>
+                <option value="VEGAS DE URIBANTE">VEGAS DE URIBANTE</option>
+                <option value="LA VALERIA">LA VALERIA</option>
+                <option value="SAN HISIDRO">SAN HISIDRO</option>
+                <option value="EL TOPACIO">EL TOPACIO</option>
+            ';
+        }elseif($inmueRes["parroquia"]=="Dr. Alberto Adriani"){
+            echo'
+                <option value="'.$inmueRes["sector"].'">'.$inmueRes["sector"].'</option>
+                <option value="LA GABARRA (LA MORITA)">LA GABARRA (LA MORITA)</option>
+                <option value="LA MORITA">LA MORITA</option>
+                <option value="LOS MANGUTOS">LOS MANGUITOS</option>
+                <option value="VILLA PARAISO">VILLA PARAISO</option>
+                <option value="VALLE LORENA I">VALLE LORENA I</option>
+                <option value="VALLE LORENA II">VALLE LORENA II</option>
+                <option value="12 DE OCTUBRE">12 DE OCTUBRE</option>
+                <option value="NARANJALES">NARANJALES</option>
+                <option value="BARRIO LA PAZ">BARRIO LA PAZ</option>
+                <option value="LA BOLIVARIANA">LA BOLIVARIANA</option>
+                <option value="27 DE FEBRERO PARTE ALTA">27 DE FEBRERO PARTE ALTA</option>
+                <option value="27 DE FEBRERO PARTE BAJA">27 DE FEBRERO PARTE BAJA</option>
+                <option value="VILLA MORTERREY">VILLA MORTERREY</option>
+                <option value="TETEO I">TETEO I</option>
+                <option value="TETEO II">TETEO II</option>
+                <option value="BUENOS AIRES">BUENOS AIRES</option>
+                <option value="CAUCAGUITA">CAUCAGUITA</option>
+                <option value="SAN ANTONIO">SAN ANTONIO</option>
+                <option value="SANTA LUCIA">SANTA LUCIA</option>
+                <option value="EL JORDAN">EL JORDAN</option>
+                <option value="RANCHO CHIRE">RANCHO CHIRE</option>
+                <option value="EL RENUEVO">EL RENUEVO</option>
+                <option value="LA REFORMA">LA REFORMA</option>
+                <option value="EL CRISOL">EL CRISOL</option>
+                <option value="CUITE">CUITE</option>
+                <option value="EL SOCORRO">EL SOCORRO</option>
+                <option value="EL TALADRO">EL TALADRO</option>
+                <option value="LA VICTORIA">LA VICTORIA</option>
+                <option value="LA ZANCUDA">LA ZANCUDA</option>
+                <option value="LA COLORADA">LA COLORADA</option>
+                <option value="LA ESPUMA">LA ESPUMA</option>
+                <option value="LA ROCHELA">LA ROCHELA</option>
+            ';
+        }elseif($inmueRes["parroquia"] =="Santo Domingo"){
+            echo'
+                <option value="'.$inmueRes["sector"].'">'.$inmueRes["sector"].'</option>
+                <option value="CHURURU VIEJO">CHURURU VIEJO</option>
+                <option value="I ETAPA DE SAN LORENZO">I ETAPA DE SAN LORENZO</option>
+                <option value="II ETAPA DE SAN LORENZO">II ETAPA DE SAN LORENZO</option>
+                <option value="III ETAPA DE SAN LORENZO">III ETAPA DE SAN LORENZO</option>
+                <option value="IV ETAPA DE SAN LORENZO">IV ETAPA DE SAN LORENZO</option>
+                <option value="LA MANUELITA">LA MANUELITA</option>
+                <option value="Z SAN LORENZO">Z SAN LORENZO</option>
+                <option value="SANTO DOMINGO">SANTO DOMINGO</option>
+                <option value="EL VARIANTE">EL VARIANTE</option>
+                <option value="PUENTE URIBANTE">PUENTE URIBANTE</option>
+                <option value="LA LAGUNA">LA LAGUNA</option>
+                <option value="CESAR DARIO">CESAR DARIO</option>
+                <option value="MATA DE CAFÉ">MATA DE CAFÉ</option>
+                <option value="EL ZIG ZAG">EL ZIG ZAG</option>
+                <option value="LA RAYA">LA RAYA</option>
+                <option value="FUNDOS ZAMORANOS">FUNDOS ZAMORANOS</option>
+                <option value="LA PALMITA">LA PALMITA</option>
+                <option value="MANAURE">MANAURE</option>
+                <option value="CAÑO NEGRO">CAÑO NEGRO</option>
+                
+            ';
+        }
     }
 }
 

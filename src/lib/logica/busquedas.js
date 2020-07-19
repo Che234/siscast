@@ -102,10 +102,12 @@ class busquedas{
             {
 			if (ajax.readyState==4) 
                 {
-                    divsitioform.innerHTML = ajax.responseText; 
-                    dividirCed();
-			     }
-	       	}
+                    divsitioform.innerHTML = ajax.responseText;
+                    let secciones = document.getElementById("secciones").value ;
+                    dividirCed(secciones);
+                 }
+               }
+               
     }
     guarActProp(){
         var ajax = new objetoAjax();
@@ -145,19 +147,53 @@ function btnFormCambios(){
     busque.FormCambios();
 }
 //PROPIETARIO
-function dividirCed(){
-    cedula = document.getElementById("divCedula").value;
-    rif = document.getElementById("divRif").value;
-    telf = document.getElementById("divTelf").value;
-    divCed= cedula.split('-')
-    divRif = rif.split('-')
-    divTelf = telf.split('-')
-    document.getElementById("cedR").value=divCed[0];
-    document.getElementById("cedConst").value=divCed[1];
-    document.getElementById("rifR").value=divRif[0]
-    document.getElementById("rifN").value=divRif[1]
-    document.getElementById("codTelf").value= divTelf[0]
-    document.getElementById("numTelf").value = divTelf[1]
+function dividirCed(secciones="no"){
+    if(secciones=="Propietario"){
+        cedula = document.getElementById("divCedula").value;
+        rif = document.getElementById("divRif").value;
+        telf = document.getElementById("divTelf").value;
+        divCed= cedula.split('-')
+        divRif = rif.split('-')
+        divTelf = telf.split('-')
+        document.getElementById("cedR").value=divCed[0];
+        document.getElementById("cedConst").value=divCed[1];
+        document.getElementById("rifR").value=divRif[0]
+        document.getElementById("rifN").value=divRif[1]
+        document.getElementById("codTelf").value= divTelf[0]
+        document.getElementById("numTelf").value = divTelf[1]
+    }
+    if(secciones=="Inmueble"){
+        telefono = document.getElementById("telefono").value
+        diviTelef = telefono.split("-")
+        document.getElementById("codTelf2").value= diviTelef[0]
+        document.getElementById("numTelf2").value = diviTelef[1]
+        parr=document.getElementById("parr").value
+        
+        if(parr=="Capital"){
+            document.getElementById("parrInmue").selectedIndex=1
+            btnCambSec()
+        }
+        if(parr=="Dr. Alberto Adriani"){
+            document.getElementById("parrInmue").selectedIndex=2
+            btnCambSec()
+        }
+        if(parr=="Santo Domingo"){
+            document.getElementById("parrInmue").selectedIndex=3
+            btnCambSec()
+        }
+        
+        let ambito = document.getElementById("ambito").value
+        if(ambito=="Urbano"){
+            document.getElementById("ambInmue").selectedIndex=1
+        }
+        if(ambito=="Rural"){
+            document.getElementById("ambInmue").selectedIndex=2
+        }
+        setTimeout(function (){
+            sectorCamb()
+        },100)
+        
+    }
 }
 function btnActProp(){
     let busque = new busquedas
@@ -177,5 +213,18 @@ function btnActProp(){
     if(busque.veriActProp()==true){
         busque.guarActProp();
     }
+    
+}
+function sectorCamb(){
+    let sector = document.getElementById("sector").value
+    let sect = document.getElementById("secInmue")
+    let l=0
+        while(sect.value != sector){
+            document.getElementById("secInmue").selectedIndex=l
+            l++
+        }
+}
+function btnActInmue(){
+    codTelf2 = document.getElementById("codTelf2").value
     
 }
