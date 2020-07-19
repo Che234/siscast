@@ -134,7 +134,136 @@ if(isset($_POST["idCarac"])){
 }else{
     $bus->idCarac = "nada";
 }
-
+if(isset($_POST["destConst"])){
+    $bus->destConst = $_POST["destConst"];
+}else{
+    $bus->destConst = "nada";
+}
+if(isset($_POST["estConst"])){
+    $bus->estConst = $_POST["estConst"];
+}else{
+    $bus->estConst = "nada";
+}
+if(isset($_POST["pareTipoInmue"])){
+    $bus->pareTipoInmue = $_POST["pareTipoInmue"];
+}else{
+    $bus->pareTipoInmue = "nada";
+}
+if(isset($_POST["pareAcaInmue"])){
+    $bus->pareAcaInmue = $_POST["pareAcaInmue"];
+}else{
+    $bus->pareAcaInmue = "nada";
+}
+if(isset($_POST["pintConst"])){
+    $bus->pintConst = $_POST["pintConst"];
+}else{
+    $bus->pintConst = "nada";
+}
+if(isset($_POST["estConserv"])){
+    $bus->estConserv = $_POST["estConserv"];
+}else{
+    $bus->estConserv = "nada";
+}
+if(isset($_POST["techoConst"])){
+    $bus->techoConst = $_POST["techoConst"];
+}else{
+    $bus->techoConst = "nada";
+}
+if(isset($_POST["pisosConst"])){
+    $bus->pisosConst = $_POST["pisosConst"];
+}else{
+    $bus->pisosConst = "nada";
+}
+if(isset($_POST["piezConst"])){
+    $bus->piezConst = $_POST["piezConst"];
+}else{
+    $bus->piezConst = "nada";
+}
+if(isset($_POST["ventConst"])){
+    $bus->ventConst = $_POST["ventConst"];
+}else{
+    $bus->ventConst = "nada";
+}
+if(isset($_POST["puertConst"])){
+    $bus->puertConst = $_POST["puertConst"];
+}else{
+    $bus->puertConst = "nada";
+}
+if(isset($_POST["instElect"])){
+    $bus->instElect = $_POST["instElect"];
+}else{
+    $bus->instElect = "nada";
+}
+if(isset($_POST["ambConst"])){
+    $bus->ambConst = $_POST["ambConst"];
+}else{
+    $bus->ambConst = "nada";
+}
+if(isset($_POST["compConst"])){
+    $bus->compConst = $_POST["compConst"];
+}else{
+    $bus->compConst = "nada";
+}
+if(isset($_POST["obsConst"])){
+    $bus->obsConst = $_POST["obsConst"];
+}else{
+    $bus->obsConst = "nada";
+}
+if(isset($_POST["idCaracConst"])){
+    $bus->idCaracConst = $_POST["idCaracConst"];
+}else{
+    $bus->idCaracConst = "nada";
+}
+if(isset($_POST["docDebConst"])){
+    $bus->docDebConst = $_POST["docDebConst"];
+}else{
+    $bus->docDebConst = "nada";
+}
+if(isset($_POST["direcProtConst"])){
+    $bus->direcProtConst = $_POST["direcProtConst"];
+}else{
+    $bus->direcProtConst = "nada";
+}
+if(isset($_POST["numProtConst"])){
+    $bus->numProtConst = $_POST["numProtConst"];
+}else{
+    $bus->numProtConst = "nada";
+}
+if(isset($_POST["tomoProtConst"])){
+    $bus->tomoProtConst = $_POST["tomoProtConst"];
+}else{
+    $bus->tomoProtConst = "nada";
+}
+if(isset($_POST["folioProtConst"])){
+    $bus->folioProtConst = $_POST["folioProtConst"];
+}else{
+    $bus->folioProtConst = "nada";
+}
+if(isset($_POST["protoConst"])){
+    $bus->protoConst = $_POST["protoConst"];
+}else{
+    $bus->protoConst = "nada";
+}
+if(isset($_POST["trimProtConst"])){
+    $bus->trimProtConst = $_POST["trimProtConst"];
+}else{
+    $bus->trimProtConst = "nada";
+}
+if(isset($_POST["dateProtConst"])){
+    $bus->dateProtConst = $_POST["dateProtConst"];
+}else{
+    $bus->dateProtConst = "nada";
+}
+if(isset($_POST["valorProtConst"])){
+    $bus->valorProtConst = $_POST["valorProtConst"];
+}else{
+    $bus->valorProtConst = "nada";
+}
+if(isset($_POST["idProto"])){
+    $bus->idProto = $_POST["idProto"];
+}else{
+    $bus->idProto = "nada";
+}
 
 if($accion =="busExp"){
     $bus->mostBusqueda();
@@ -151,6 +280,12 @@ if($secciones=="Inmueble"){
 if($secciones == "Caract Terreno"){
     $bus->modifcarcTerreno();
 }
+if($secciones == "Caract Construccion"){
+    $bus->modifcarcConstruccion();
+}
+if($secciones == "Protocolizacion"){
+    $bus->modificarProtocol();
+}
 if($accion == "actProp"){
     $bus->actProp();
 }
@@ -163,10 +298,20 @@ if($accion == "actInmue"){
 if($accion=="actCaracInmue"){
     $bus->actCaracInmue();
 }
+if($accion=="actConst"){
+    $bus->actConst();
+}
+if($accion=="actProtocol"){
+    $bus->actProtocol();
+}
+
 if($_POST["parrInmue2"]=="Capital"){
     $bus->cambSecMod();
 }
 if($_POST["parrInmue2"]=="Dr. Alberto Adriani"){
+    $bus->cambSecMod();
+}
+if($_POST["parrInmue2"] =="Santo Domingo"){
     $bus->cambSecMod();
 }
 ?>

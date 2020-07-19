@@ -2,7 +2,10 @@ class busquedas{
 
     constructor(campBuscar,tipoBuscar,secciones,expBuscar,cedula,rif,nomProp,apelProp,
         telefono,direcProp,cedula2,parrInmue,secInmue,direcInmue,ambInmue,idInmueble,topoConst,formaConst,
-        regInmue,usoConst,tenenConst,ocupConst,dimeConst,idCarac){}
+        regInmue,usoConst,tenenConst,ocupConst,dimeConst,idCarac,destConst,estConst,pareTipoInmue,
+        pareAcaInmue,pintConst,estConserv,techoConst,pisosConst,piezConst,ventConst,puertConst,
+        instElect,ambConst,compConst,obsConst,idCaracConst,docDebConst,direcProtConst,numProtConst,
+        tomoProtConst,folioProtConst,protoConst,trimProtConst,dateProtConst,valorProtConst,idProto){}
     veriBuscar(){
         if(!ex_datcort.test(this.campBuscar)){
             alert("Campo de buscar no puede estar vacio");
@@ -68,6 +71,108 @@ class busquedas{
         }
         if(!ex_datcort.test(this.ambInmue)){
             alert("Error en campo de Ambito");
+            return false;
+        }
+        return true
+    }
+    veriConst(){
+        if(!ex_datcort.test(this.destConst)){
+            alert("Error en campo de Destino");
+            return false;
+        }
+        if(!ex_datcort.test(this.estConst)){
+            alert("Error en campo de Estructura");
+            return false;
+        }
+        if(!ex_datcort.test(this.pareTipoInmue)){
+            alert("Error en campo de Paredes Tipo");
+            return false;
+        }
+        if(!ex_datcort.test(this.pareAcaInmue)){
+            alert("Error en campo de Paredes Acabado");
+            return false;
+        }
+        if(!ex_datcort.test(this.pintConst)){
+            alert("Error en campo de Pintura");
+            return false;
+        }
+        if(!ex_datcort.test(this.estConserv)){
+            alert("Error en campo de Estado de Conservación");
+            return false;
+        }
+        if(!ex_datcort.test(this.techoConst)){
+            alert("Error en campo de Techo");
+            return false;
+        }
+        if(!ex_datcort.test(this.pisosConst)){
+            alert("Error en campo de Pisos");
+            return false;
+        }
+        if(!ex_datcort.test(this.piezConst)){
+            alert("Error en campo de Piezas Sanitarias");
+            return false;
+        }
+        if(!ex_datcort.test(this.ventConst)){
+            alert("Error en campo de Ventanas");
+            return false;
+        }
+        if(!ex_datcort.test(this.puertConst)){
+            alert("Error en campo de Puertas");
+            return false;
+        }
+        if(!ex_datcort.test(this.instElect)){
+            alert("Error en campo de Instalaciones Electricas");
+            return false;
+        }
+        if(!ex_datcort.test(this.ambConst)){
+            alert("Error en campo de Ambientes");
+            return false;
+        }
+        if(!ex_datcort.test(this.compConst)){
+            alert("Error en campo de Complementos");
+            return false;
+        }
+        if(!ex_datcort.test(this.obsConst)){
+            alert("Error en campo de Observaciones");
+            return false;
+        }
+        return true
+    }
+    veriProto(){
+        if(!ex_datcort.test(this.docDebConst)){
+            alert("Error en el formato de Documento debidamente");
+            return false;
+        }
+        if(!ex_datcort.test(this.direcProtConst)){
+            alert("Error en el formato de Dirección de protocolización");
+            return false;
+        }
+        if(!ex_carnet.test(this.numProtConst)){
+            alert("Error en el formato de Numero de protocolización");
+            return false;
+        }
+        if(!ex_trayec.test(this.tomoProtConst)){
+            alert("Error en el formato de Tomo");
+            return false;
+        }
+        if(!ex_fecha.test(this.folioProtConst)){
+            alert("Error en el formato de Folio");
+            return false;
+        }
+        if(!ex_trayec.test(this.protoConst)){
+            alert("Error en el formato de Protocolo");
+            return false;
+        }
+        if(!ex_trayec.test(this.trimProtConst)){
+            alert("Error en el formato de Trimestre");
+            return false;
+        }
+        if(!ex_fecha.test(this.dateProtConst)){
+            alert("Error en el formato de Fecha");
+            return false;
+        }
+        if(!ex_money.test(this.valorProtConst)){
+            alert("Error en el formato de Valor del inmueble");
             return false;
         }
         return true
@@ -183,6 +288,42 @@ class busquedas{
 			     }
 	       	}
     }
+    actConst(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('modificaciones');
+        var divsitiomaterial = document.getElementById('modificaciones');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`destConst=${this.destConst}&estConst=${this.estConst}&pareTipoInmue=${this.pareTipoInmue}&pareAcaInmue=${this.pareAcaInmue}&pintConst=${this.pintConst}&estConserv=${this.estConserv}&techoConst=${this.techoConst}&pisosConst=${this.pisosConst}&piezConst=${this.piezConst}&ventConst=${this.ventConst}&puertConst=${this.puertConst}&instElect=${this.instElect}&ambConst=${this.ambConst}&compConst=${this.compConst}&obsConst=${this.obsConst}&idCaracConst=${this.idCaracConst}&accion=actConst`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    actProtocol(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('modificaciones');
+        var divsitiomaterial = document.getElementById('modificaciones');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`docDebConst=${this.docDebConst}&direcProtConst=${this.direcProtConst}&numProtConst=${this.numProtConst}&tomoProtConst=${this.tomoProtConst}&folioProtConst=${this.folioProtConst}&protoConst=${this.protoConst}&trimProtConst=${this.trimProtConst}&dateProtConst=${this.dateProtConst}&valorProtConst=${this.valorProtConst}&idProto=${this.idProto}&accion=actProtocol`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
 }
 function btnConsultExp(){
     let busque = new busquedas;
@@ -290,6 +431,53 @@ function dividirCed(secciones="no"){
             dimesionConst()
         },100)
     }
+    if(secciones=="Caract Construccion"){
+        setTimeout(function(){
+            destinoConstru()
+        },100)
+        setTimeout(function(){
+            estructuraConst()
+        },100)
+        setTimeout(function(){
+            paredesConstru()
+        },100)
+        setTimeout(function(){
+            acabadoConstru()
+        },100)
+        setTimeout(function(){
+            pinturaConstru()
+        },100)
+        setTimeout(function(){
+            estadoConstru()
+        },100)
+        setTimeout(function(){
+            techoConstru()
+        },100)
+        setTimeout(function(){
+            pisosConstru()
+        },100)
+        setTimeout(function(){
+            piezasConst()
+        },100)
+        setTimeout(function(){
+            ventanasConst()
+        },100)
+        setTimeout(function(){
+            puertasConst()
+        },100)
+        setTimeout(function(){
+            electConst()
+        },100)
+        setTimeout(function(){
+            compleConst()
+        },100)
+        setTimeout(function(){
+            ambConst()
+        },100)
+    }
+    if(secciones=="Protocolizacion"){
+
+    }
 }
 function btnActProp(){
     let busque = new busquedas
@@ -387,4 +575,173 @@ function btnActCaracInmue(){
     busque.dimeConst = document.getElementById("dimeConst").value
     busque.idCarac = document.getElementById("idCarac").value
     busque.actCaracInmue()
+}
+//CARACTERISTICAS DE LA CONSTRUCCION
+function destinoConstru(){
+    let destino = document.getElementById("destino").value
+    let destConst = document.getElementById("destConst")
+    let k=0
+    while(destino !=destConst.value){
+        document.getElementById("destConst").selectedIndex=k
+        k++
+    }
+}
+function estructuraConst(){
+    let estructura = document.getElementById("estructura").value
+    let estConst = document.getElementById("estConst")
+    let k=0
+    while(estructura !=estConst.value){
+        document.getElementById("estConst").selectedIndex=k
+        k++
+    }
+}
+function paredesConstru(){
+    let paredes_tipo = document.getElementById("paredes_tipo").value
+    let pareTipoInmue = document.getElementById("pareTipoInmue")
+    let k=0
+    while(paredes_tipo !=pareTipoInmue.value){
+        document.getElementById("pareTipoInmue").selectedIndex=k
+        k++
+    }
+}
+function acabadoConstru(){
+    let paredes_acabado = document.getElementById("paredes_acabado").value
+    let pareAcaInmue = document.getElementById("pareAcaInmue")
+    let k=0
+    while(paredes_acabado !=pareAcaInmue.value){
+        document.getElementById("pareAcaInmue").selectedIndex=k
+        k++
+    }
+}
+function pinturaConstru(){
+    let pintura = document.getElementById("pintura").value
+    let pintConst = document.getElementById("pintConst")
+    let k=0
+    while(pintura !=pintConst.value){
+        document.getElementById("pintConst").selectedIndex=k
+        k++
+    }
+}
+function estadoConstru(){
+    let estado_conservacion = document.getElementById("estado_conservacion").value
+    let estConserv = document.getElementById("estConserv")
+    let k=0
+    while(estado_conservacion !=estConserv.value){
+        document.getElementById("estConserv").selectedIndex=k
+        k++
+    }
+}
+function techoConstru(){
+    let techo = document.getElementById("techo").value
+    let techoConst = document.getElementById("techoConst")
+    let k=0
+    while(techo !=techoConst.value){
+        document.getElementById("techoConst").selectedIndex=k
+        k++
+    }
+}
+function pisosConstru(){
+    let pisos = document.getElementById("pisos").value
+    let pisosConst = document.getElementById("pisosConst")
+    let k=0
+    while(pisos !=pisosConst.value){
+        document.getElementById("pisosConst").selectedIndex=k
+        k++
+    }
+}
+function piezasConst(){
+    let piezas_sanitarias = document.getElementById("piezas_sanitarias").value
+    let piezConst = document.getElementById("piezConst")
+    let k=0
+    while(piezas_sanitarias !=piezConst.value){
+        document.getElementById("piezConst").selectedIndex=k
+        k++
+    }
+}
+function ventanasConst(){
+    let ventanas = document.getElementById("ventanas").value
+    let ventConst = document.getElementById("ventConst")
+    let k=0
+    while(ventanas !=ventConst.value){
+        document.getElementById("ventConst").selectedIndex=k
+        k++
+    }
+}
+function puertasConst(){
+    let puertas = document.getElementById("puertas").value
+    let puertConst = document.getElementById("puertConst")
+    let k=0
+    while(puertas !=puertConst.value){
+        document.getElementById("puertConst").selectedIndex=k
+        k++
+    }
+}
+function electConst(){
+    let insta_electricas = document.getElementById("insta_electricas").value
+    let instElect = document.getElementById("instElect")
+    let k=0
+    while(insta_electricas !=instElect.value){
+        document.getElementById("instElect").selectedIndex=k
+        k++
+    }
+}
+function compleConst(){
+    let complementos = document.getElementById("complementos").value
+    let compConst = document.getElementById("compConst")
+    let k=0
+    while(complementos !=compConst.value){
+        document.getElementById("compConst").selectedIndex=k
+        k++
+    }
+}
+function ambConst(){
+    let ambientes = document.getElementById("ambientes").value
+    let ambConst = document.getElementById("ambConst")
+    let k=0
+    while(ambientes !=ambConst.value){
+        document.getElementById("ambConst").selectedIndex=k
+        k++
+    }
+}
+function btnActConst(){
+    let busque = new busquedas
+    busque.destConst = document.getElementById("destConst").value
+    busque.estConst = document.getElementById("estConst").value
+    busque.pareTipoInmue = document.getElementById("pareTipoInmue").value
+    busque.pareAcaInmue = document.getElementById("pareAcaInmue").value
+    busque.pintConst = document.getElementById("pintConst").value
+    busque.estConserv = document.getElementById("estConserv").value
+    busque.techoConst = document.getElementById("techoConst").value
+    busque.pisosConst = document.getElementById("pisosConst").value
+    busque.piezConst = document.getElementById("piezConst").value
+    busque.ventConst = document.getElementById("ventConst").value
+    busque.puertConst = document.getElementById("puertConst").value
+    busque.instElect = document.getElementById("instElect").value
+    busque.ambConst = document.getElementById("ambConst").value
+    busque.compConst = document.getElementById("compConst").value
+    busque.obsConst = document.getElementById("obsConst").value
+    busque.expBuscar = document.getElementById("expBuscar").value
+    busque.idCaracConst = document.getElementById("idCaracConst").value
+    if(busque.veriConst()==true){
+        busque.actConst()
+    }
+    
+
+}
+//DATOS DE PROTOCOLIZACION
+function btnActProtocol(){
+    let busque = new busquedas()
+    busque.docDebConst = document.getElementById("docDebConst").value
+    busque.direcProtConst = document.getElementById("direcProtConst").value
+    busque.numProtConst = document.getElementById("numProtConst").value
+    busque.tomoProtConst = document.getElementById("tomoProtConst").value
+    busque.folioProtConst = document.getElementById("folioProtConst").value
+    busque.protoConst = document.getElementById("protoConst").value
+    busque.trimProtConst= document.getElementById("trimProtConst").value
+    busque.dateProtConst = document.getElementById("dateProtConst").value
+    busque.valorProtConst = document.getElementById("valorProtConst").value
+    busque.idProto = document.getElementById("idProto").value
+    if(busque.veriProto()==true){
+        busque.actProtocol()
+    }
 }
