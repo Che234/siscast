@@ -1097,7 +1097,7 @@ class constancias{
                 <tr>
                     <td class="tiConst">
                         <p class="negritas">Mts Norte</p>
-                        <input type="text" id="nortGen" />
+                        <input type="text" value="" id="nortGen" />
                         <select id="uniNorte">
                             <option></option>
                             <option value="m">m</option>

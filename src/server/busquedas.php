@@ -52,6 +52,95 @@ class busquedas{
         var $dateProtConst = "";
         var $valorProtConst = "";
         var $idProto = "";
+        var $lindGen = "";
+        var $lindPosVenta = "";
+        var $lindDocumento = "";
+        var $idlindGen = "";
+        var $idlindPosVenta ="";
+        var $idlindDocumento = "";
+        var $n_gen = "";
+        var $s_gen = "";
+        var $e_gen = "";
+        var $o_gen = "";
+        var $alindN_gen = "";
+        var $alindS_gen = "";
+        var $alindE_gen = "";
+        var $alindO_gen = "";
+        var $area_gen = "";
+        var $niveles_gen = "";
+        var $areaConst_gen = "";
+        var $uniN_gen = "";
+        var $uniS_gen = "";
+        var $uniE_gen = "";
+        var $uniO_gen = "";
+        var $idGen = "";
+        var $nortGen = "";
+        var $uniNorte = "";
+        var $alindNort = "";
+        var $surGen = "";
+        var $uniSur = "";
+        var $alindSur = "";
+        var $esteGen = "";
+        var $uniEste = "";
+        var $alindEste = "";
+        var $oesteGen = "";
+        var $uniOeste = "";
+        var $alindOeste = "";
+        var $arTotal = "";
+        var $NivConstTotal = "";
+        var $arConstTotal = "";
+        var $nortPosVenta = "";
+        var $uniNorte2 = "";
+        var $alindPosNort = "";
+        var $surPosVenta = "";
+        var $uniSur2 = "";
+        var $alindPosSur = "";
+        var $estePosVenta = "";
+        var $uniEste2 = "";
+        var $alindPosEste = "";
+        var $oestePosVenta = "";
+        var $uniOeste2 = "";
+        var $alindPosOeste = "";
+        var $arTotal2 = "";
+        var $NivConstTotal2 = "";
+        var $arConstTotal2 = "";
+        var $nortSecDoc = "";
+        var $uniNorte3 = "";
+        var $alindSecNorte = "";
+        var $surSecDoc = "";
+        var $uniSur3 = "";
+        var $alindSecSur = "";
+        var $esteSecDoc = "";
+        var $uniEste3 = "";
+        var $alindSecEste = "";
+        var $oesteSecDoc = "";
+        var $uniOeste3 = "";
+        var $alindSecOeste = "";
+        var $arTotal3 = "";
+        var $NivConstTotal3 = "";
+        var $arConstTotal3 = "";
+        var $arTotalVenta = "";
+        var $arRestante = "";
+        var $valorTerreno = "";
+        var $valorInmueble = "";
+        var $valorConstruc = "";
+        var $idTerreno = "";
+        var $Acue = "";
+        var $AcueRural = "";
+        var $AguasSub = "";
+        var $AguasServ = "";
+        var $PavFlex = "";
+        var $PavRig = "";
+        var $viaEngran = "";
+        var $acera = "";
+        var $AlumPublico = "";
+        var $aseo ="";
+        var $transPublic = "";
+        var $pozoSept = "";
+        var $ElectResidencial = "";
+        var $ElectriIndust = "";
+        var $linTelf = "";
+        var $idServ = "";
 
     function mostBusqueda(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
@@ -145,10 +234,12 @@ class busquedas{
                 <option value="Linderos">Linderos</option>
                 <option value="Areas Terreno">Areas del Terreno</option>
                 <option value="Servicios">Servicios</option>
-                <option value="Inmueble">Datos del Inmueble</option>
-                <option value="Inmueble">Datos de la Factura</option>
+                <option value="Factura">Datos de la Factura</option>
             </select>
-            <div id="modificaciones"></div>';
+            <div id="modificaciones"></div>
+            <div id="identifiId"></div>
+            <div id="identifiId2"></div>
+            <div id="identifiId3"></div>';
     }
     function modifInmueble(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
@@ -356,7 +447,6 @@ class busquedas{
         </div>
         ';
     }
-    
     function modifPropietario(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
@@ -724,79 +814,110 @@ class busquedas{
         echo'
         <input type="hidden" value="'.$caracInmu["id"].'" id="idProto">
         <table border="1px" class="taConst">
-        <tr>
-            <td colspan="3">
-                <p class="h1">DATOS DE PROTOCOLIZACION DEL INMUEBLE</p>
-            </td>
-        </tr>
-        <tr>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Documento Debidamente:</p>
-                    <input type="text" value="'.$caracInmu["documento"].'" id="docDebConst"/>
-                </div>
-            </td>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Dirección:</p>
-                    <input type="text" value="'.$caracInmu["direccion"].'" id="direcProtConst"/>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Numero:</p>
-                    <input type="text" value="'.$caracInmu["numero"].'" id="numProtConst"/>
-                </div>
-            </td>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Tomo:</p>
-                    <input type="text" value="'.$caracInmu["tomo"].'" id="tomoProtConst"/>
-                </div>
-            </td>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Folio:</p>
-                    <input type="text" value="'.$caracInmu["folio"].'" id="folioProtConst"/>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Protocolo:</p>
-                    <input type="text" value="'.$caracInmu["protocolo"].'" id="protoConst"/>
-                </div>
-            </td>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Trimestre:</p>
-                    <input type="text" value="'.$caracInmu["trimestre"].'" id="trimProtConst"/>
-                </div>
-            </td>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Fecha:</p>
-                    <input type="date" value="'.$caracInmu["fecha"].'" id="dateProtConst"/>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Valor del Inmueble:</p>
-                    <input type="text" value="'.$caracInmu["valor_inmueble"].'" id="valorProtConst"/>
-                </div>
-            </td>
-        </tr>
+            <tr>
+                <td colspan="3">
+                    <p class="h1">DATOS DE PROTOCOLIZACION DEL INMUEBLE</p>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Documento Debidamente:</p>
+                        <input type="text" value="'.$caracInmu["documento"].'" id="docDebConst"/>
+                    </div>
+                </td>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Dirección:</p>
+                        <input type="text" value="'.$caracInmu["direccion"].'" id="direcProtConst"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Numero:</p>
+                        <input type="text" value="'.$caracInmu["numero"].'" id="numProtConst"/>
+                    </div>
+                </td>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Tomo:</p>
+                        <input type="text" value="'.$caracInmu["tomo"].'" id="tomoProtConst"/>
+                    </div>
+                </td>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Folio:</p>
+                        <input type="text" value="'.$caracInmu["folio"].'" id="folioProtConst"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Protocolo:</p>
+                        <input type="text" value="'.$caracInmu["protocolo"].'" id="protoConst"/>
+                    </div>
+                </td>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Trimestre:</p>
+                        <input type="text" value="'.$caracInmu["trimestre"].'" id="trimProtConst"/>
+                    </div>
+                </td>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Fecha:</p>
+                        <input type="date" value="'.$caracInmu["fecha"].'" id="dateProtConst"/>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Valor del Inmueble:</p>
+                        <input type="text" value="'.$caracInmu["valor_inmueble"].'" id="valorProtConst"/>
+                    </div>
+                </td>
+            </tr>
         </table>
         <div class="btnSig1">
             <input type="button" value="Actualizar" onclick="btnActProtocol()" class=" botones btn btn-primary" />
         </div>';
     }
     function modifLinderos(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        //BUSQUEDA DEL EXPEDIENTE
+            $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
+            $resExp = $link->query($expSql);
+            $expRes = $resExp->fetch_assoc();
+        //BUSQUEDA DEL INMUEBLE
+            $inmuSql = "SELECT * FROM inmueble where id=".$expRes["id"]."";
+            $resInmue = $link->query($inmuSql);
+            $inmueRes = $resInmue->fetch_assoc();
+        //LINDEROS GENERAL
+            $lindGenSql = "SELECT * FROM linderos_general where id=".$inmueRes["fk_lind_general"]."";
+            $resLindGen = $link->query($lindGenSql);
+            $lindGenRes= $resLindGen->fetch_assoc();
+        //LINDEROS POSIBLE VENTA
+            $lindPosVentaSql = "SELECT * FROM linderos_posible_venta where id=".$inmueRes["fk_lind_pos_venta"]."";
+            $resPosVenta = $link->query($lindPosVentaSql);
+            $posVentaRes= $resPosVenta->fetch_assoc();
+        //LINDEROS SEGUN DOCUMENTO
+            $lindDocumentoSql = "SELECT * FROM linderos_documento where id=".$inmueRes["fk_lind_documento"]."";
+            $resDocumento = $link->query($lindDocumentoSql);
+            $documentoRes= $resDocumento->fetch_assoc();
+                echo'
+                <input type="hidden" value="'.$lindGenRes["norte"].'" id="lindGen" />
+                <input type="hidden" value="'.$posVentaRes["norte"].'" id="lindPosVenta" />
+                <input type="hidden" value="'.$documentoRes["norte"].'" id="lindDocumento" />
+                <input type="hidden" value="'.$lindGenRes["id"].'" id="idlindGen" />
+                <input type="hidden" value="'.$posVentaRes["id"].'" id="idlindPosVenta" />
+                <input type="hidden" value="'.$documentoRes["id"].'" id="idlindDocumento" />
+                ';
+
         echo'
         <table border="1px" class="taConst">
             <tr>
@@ -804,7 +925,7 @@ class busquedas{
                     <p class="h1">Linderos</p>
                 </td>
             </tr>
-            <tr>
+            <tr>  
                 <td>
                     <p class="negritas">General:</p>
                     <select onchange="actGeneral()" id="lindGeneral">
@@ -844,8 +965,331 @@ class busquedas{
                 </td>
             </tr>
         </table>
+        <div class="btnSig1">
+            <input type="button" value="Actualizar" onclick="btnActLinderos()" class=" botones btn btn-primary" />
+        </div>
         ';
     }
+    function modifAreaTerreno(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        //BUSQUEDA DEL EXPEDIENTE
+            $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
+            $resExp = $link->query($expSql);
+            $expRes = $resExp->fetch_assoc();
+        //BUSQUEDA DEL INMUEBLE
+            $inmuSql = "SELECT * FROM inmueble where id=".$expRes["id"]."";
+            $resInmue = $link->query($inmuSql);
+            $inmueRes = $resInmue->fetch_assoc();
+        //BUSQUEDA DEL TERRENO
+            $terrSql = "SELECT * FROM terreno where id=".$inmueRes["fk_terreno"]."";
+            $resTerr = $link->query($terrSql);
+            $terrRes = $resTerr->fetch_assoc();
+        echo '
+        <table border="1px" class="taConst">
+            <tr>
+                <td colspan="3" class="tiConst">
+                    <p class="h1">Áreas del Terreno</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Área Total de Venta</p>
+                        <input type="text" value="'.$terrRes["area_total_venta"].'" id="arTotalVenta" >
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Área restante</p>
+                        <input type="text" value="'.$terrRes["area_restante"].'" id="arRestante" >
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Valor del terreno</p>
+                        <input type="text" value="'.$terrRes["valor_terreno"].'" id="valorTerreno" >
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Valor del Inmueble</p>
+                        <input type="text" value="'.$terrRes["valor_inmueble"].'" id="valorInmueble" >
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Valor de la Construcción</p>
+                        <input type="text" value="'.$terrRes["valor_construccion"].'" id="valorConstruc" >
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <input type="hidden" value="'.$terrRes["id"].'" id="idTerreno">
+        <div class="btnSig1">
+            <input type="button" value="Guardar" onclick="btnActArea()" class=" botones btn btn-primary" />
+        </div>';
+    }
+    function modifServi(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        //BUSQUEDA DEL EXPEDIENTE
+            $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
+            $resExp = $link->query($expSql);
+            $expRes = $resExp->fetch_assoc();
+        //BUSQUEDA DEL INMUEBLE
+            $inmuSql = "SELECT * FROM inmueble where id=".$expRes["id"]."";
+            $resInmue = $link->query($inmuSql);
+            $inmueRes = $resInmue->fetch_assoc();
+        //BUSQUEDA DE SERVICIOS
+            $servSql = "SELECT * FROM servicios_inmue where id=".$inmueRes["fk_servicios"]."";
+            $resServ = $link->query($servSql);
+            $servRes = $resServ->fetch_assoc();
+        echo'
+        <input type="hidden" value="'.$servRes["acued"].'" id="acued">
+        <input type="hidden" value="'.$servRes["acuedRural"].'" id="acuedRural">
+        <input type="hidden" value="'.$servRes["aguasSubter"].'" id="aguasSubter">
+        <input type="hidden" value="'.$servRes["aguasServ"].'" id="aguasServ">
+        <input type="hidden" value="'.$servRes["pavimentoFlex"].'" id="pavimentoFlex">
+        <input type="hidden" value="'.$servRes["pavimentoRig"].'" id="pavimentoRig">
+        <input type="hidden" value="'.$servRes["viaEngran"].'" id="viaEngranzo">
+        <input type="hidden" value="'.$servRes["acera"].'" id="Acera">
+        <input type="hidden" value="'.$servRes["alumbradoPub"].'" id="alumbradoPub">
+        <input type="hidden" value="'.$servRes["aseo"].'" id="Aseo">
+        <input type="hidden" value="'.$servRes["transportePublic"].'" id="transportePublic">
+        <input type="hidden" value="'.$servRes["pozoSept"].'" id="pozoSeptico">
+        <input type="hidden" value="'.$servRes["electriResi"].'" id="electriResi">
+        <input type="hidden" value="'.$servRes["electriIndus"].'" id="electriIndus">
+        <input type="hidden" value="'.$servRes["lineaTelf"].'" id="lineaTelf">
+        <input type="hidden" value="'.$servRes["id"].'" id="idServ">
+        <table border="1px" class="taConst">
+            <tr>
+                <td colspan="4" class="tiConst">
+                    <p class="h1">Servicios</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Acueducto:</p>
+                        <select class="codigo2" id="Acue">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Acueducto Rural:</p>
+                        <select class="codigo2" id="AcueRural">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Aguas Subterráneas:</p>
+                        <select class="codigo2" id="AguasSub">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Aguas Servidas:</p>
+                        <select class="codigo2" id="AguasServ">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Pavimento Flexible:</p>
+                        <select class="codigo2" id="PavFlex">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Pavimento Rígido:</p>
+                        <select class="codigo2" id="PavRig">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Vía Engranzonada:</p>
+                        <select class="codigo2" id="viaEngran">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Acera:</p>
+                        <select class="codigo2" id="acera">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Alumbrado Público:</p>
+                        <select class="codigo2" id="AlumPublico">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Aseo:</p>
+                        <select class="codigo2" id="aseo">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Transporte Público:</p>
+                        <select class="codigo2" id="transPublic">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Pozo Séptico:</p>
+                        <select class="codigo2" id="pozoSept">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Electricidad Residencial:</p>
+                        <select class="codigo2" id="ElectResidencial">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Electricidad Industrial:</p>
+                        <select class="codigo2" id="ElectriIndust">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Línea Telefónica:</p>
+                        <select class="codigo2" id="linTelf">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div class="btnSig1">
+            <input type="button" value="Guardar" onclick="btnActServ()" class=" botones btn btn-primary" />
+        </div>
+        ';
+    }
+    function modifFact(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        //BUSQUEDA DEL EXPEDIENTE
+            $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
+            $resExp = $link->query($expSql);
+            $expRes = $resExp->fetch_assoc();
+        //BUSQUEDA DE FACTURA
+            $expSql = "SELECT * FROM pagos where n_expediente=".$this->expBuscar."";
+            $resExp = $link->query($expSql);
+            $expRes = $resExp->fetch_assoc();
+        echo'
+    <table border="1px" class="taConst">
+        <tr>
+            <td class="tdConst">
+                <div class="campDat">
+                    <p class="negritas">Numero Expediente:</p>
+                    <input type="text" id="nuExp"/>
+                </div>
+            </td>
+            <td class="tdConst">
+                <div class="campDat">
+                    <p class="negritas">Monto:</p>
+                    <input type="text" id="montoFact"/>
+                </div>
+            </td>
+            <td>
+                <div class="campDat">
+                    <p class="negritas">Empadronamiento:</p>
+                    <select id="empadro"/>
+                        <option value="no"></option>
+                        <option value="si">Si</option>
+                        <option value="no">No</option>
+                    </select>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="tdConst">
+                <div class="campDat">
+                    <p class="negritas">Numero Factura:</p>
+                    <input type="number" id="numFact"/>
+                </div>
+            <td class="tdConst">
+                <div class="campDat">
+                    <p class="negritas">Fecha:</p>
+                    <input type="date" id="fechFact"/>
+                    <input type="hidden" id="idInmueble" value="'.$idInmueble.'">
+                    <input type="hidden" id="idProp" value="'.$idProp.'">
+                    <input type="hidden" id="operacion" value="Nueva Inscripción">
+                </div>
+            </td>
+        </tr>
+    </table>';
+    }
+
     function actProp(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
@@ -880,6 +1324,124 @@ class busquedas{
         $inmueSql = "UPDATE datos_protocolizacion SET documento='".$this->docDebConst."',direccion='".$this->direcProtConst."',numero='".$this->numProtConst."',tomo='".$this->tomoProtConst."',folio='".$this->folioProtConst."',protocolo='".$this->protoConst."',trimestre='".$this->trimProtConst."',fecha='".$this->dateProtConst."',valor_inmueble='".$this->valorProtConst."' WHERE id='".$this->idProto."' ";
         $link->query($inmueSql);
         echo 'ACTUALIZADO CON EXITO';
+    }
+    function guarActLind(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $SumLind= 0;
+        if($this->nortGen!="nada"){
+            $lindGenSql = "UPDATE linderos_general SET norte='".$this->nortGen."',sur='".$this->surGen."',este='".$this->esteGen."',oeste='".$this->oesteGen."',alind_n='".$this->alindNort."',alind_s='".$this->alindSur."',alind_e='".$this->alindEste."',alind_o='".$this->alindOeste."',areaTotal='".$this->arTotal."',nivelesConst='".$this->NivConstTotal."',areaConst='".$this->arConstTotal."',uniNorte='".$this->uniNorte."',uniSur='".$this->uniSur."',uniEste='".$this->uniEste."',uniOeste='".$this->uniOeste."' WHERE id='".$this->idlindGen."' ";
+            $link->query($lindGenSql);
+            $SumLind+=1;
+        }
+        if($this->nortPosVenta!="nada"){
+            $lindPosVentaSql = "UPDATE linderos_posible_venta SET norte='".$this->nortPosVenta."',sur='".$this->surPosVenta."',este='".$this->estePosVenta."',oeste='".$this->oestePosVenta."',alind_n='".$this->alindPosNort."',alind_s='".$this->alindPosSur."',alind_e='".$this->alindPosEste."',alind_o='".$this->alindPosOeste."',areaTotal='".$this->arTotal2."',nivelesConst='".$this->NivConstTotal2."',areaConst='".$this->arConstTotal2."',uniNorte='".$this->uniNorte2."',uniSur='".$this->uniSur2."',uniEste='".$this->uniEste2."',uniOeste='".$this->uniOeste2."' WHERE id='".$this->idlindPosVenta."' ";
+            $link->query($lindPosVentaSql);
+            $SumLind+=1;
+        }
+        if($this->nortSecDoc!="nada"){
+            $lindPosVentaSql = "UPDATE linderos_documento SET norte='".$this->nortSecDoc."',sur='".$this->surSecDoc."',este='".$this->esteSecDoc."',oeste='".$this->oesteSecDoc."',alind_n='".$this->alindSecNorte."',alind_s='".$this->alindSecSur."',alind_e='".$this->alindSecEste."',alind_o='".$this->alindSecOeste."',areaTotal='".$this->arTotal3."',nivelesConst='".$this->NivConstTotal3."',areaConst='".$this->arConstTotal3."',uniNorte='".$this->uniNorte3."',uniSur='".$this->uniSur3."',uniEste='".$this->uniEste3."',uniOeste='".$this->uniOeste3."' WHERE id='".$this->idlindDocumento."' ";
+            $link->query($lindPosVentaSql);
+            $SumLind+=1;
+        }
+        echo $SumLind;
+        if($SumLind!=0){
+            echo 'ACTUALIZADO CON EXITO';
+        }else{
+            echo 'NO EXISTEN DATOS PARA LA ACTUALIZACIÓN';
+        }
+        
+    }
+    function guarActArea(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $lindGenSql = "UPDATE linderos_general SET norte='".$this->nortGen."',sur='".$this->surGen."',este='".$this->esteGen."',oeste='".$this->oesteGen."',alind_n='".$this->alindNort."',alind_s='".$this->alindSur."',alind_e='".$this->alindEste."',alind_o='".$this->alindOeste."',areaTotal='".$this->arTotal."',nivelesConst='".$this->NivConstTotal."',areaConst='".$this->arConstTotal."',uniNorte='".$this->uniNorte."',uniSur='".$this->uniSur."',uniEste='".$this->uniEste."',uniOeste='".$this->uniOeste."' WHERE id='".$this->idlindGen."' ";
+        $link->query($lindGenSql);
+        echo 'ACTUALIZADO CON EXITO';
+    }
+    function guarActServ(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $lindGenSql = "UPDATE servicios_inmue SET acued='".$this->Acue."',acuedRural='".$this->AcueRural."',aguasSubter='".$this->AguasSub."',aguasServ='".$this->AguasServ."',pavimentoFlex='".$this->PavFlex."',pavimentoRig='".$this->PavRig."',viaEngran='".$this->viaEngran."',acera='".$this->acera."',alumbradoPub='".$this->AlumPublico."',aseo='".$this->aseo."',transportePublic='".$this->transPublic."',pozoSept='".$this->pozoSept."',electriResi='".$this->ElectResidencial."',electriIndus='".$this->ElectriIndust."',lineaTelef='".$this->linTelf."' WHERE id='".$this->idServ."' ";
+        $link->query($lindGenSql);
+        echo 'ACTUALIZADO CON EXITO';
+    }
+
+
+
+    function actGeneral(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $lindGenSql = "SELECT * FROM linderos_general where id=".$this->idlindGen."";
+        $resLindGen = $link->query($lindGenSql);
+        $lindGenRes= $resLindGen->fetch_assoc();
+        echo'
+        <input type="hidden" value="'.$lindGenRes["norte"].'" id="no_gen"/>
+        <input type="hidden" value="'.$lindGenRes["sur"].'" id="su_gen"/>
+        <input type="hidden" value="'.$lindGenRes["este"].'" id="es_gen"/>
+        <input type="hidden" value="'.$lindGenRes["oeste"].'" id="oe_gen"/>
+        <input type="hidden" value="'.$lindGenRes["alind_n"].'" id="alindN_gen"/>
+        <input type="hidden" value="'.$lindGenRes["alind_s"].'" id="alindS_gen"/>
+        <input type="hidden" value="'.$lindGenRes["alind_e"].'" id="alindE_gen"/>
+        <input type="hidden" value="'.$lindGenRes["alind_o"].'" id="alindO_gen"/>
+        <input type="hidden" value="'.$lindGenRes["areaTotal"].'" id="area_gen"/>
+        <input type="hidden" value="'.$lindGenRes["nivelesConst"].'" id="niveles_gen"/>
+        <input type="hidden" value="'.$lindGenRes["areaConst"].'" id="areaConst_gen"/>
+        <input type="hidden" value="'.$lindGenRes["uniNorte"].'" id="uniN_gen"/>
+        <input type="hidden" value="'.$lindGenRes["uniSur"].'" id="uniS_gen"/>
+        <input type="hidden" value="'.$lindGenRes["uniEste"].'" id="uniE_gen"/>
+        <input type="hidden" value="'.$lindGenRes["uniOeste"].'" id="uniO_gen"/>
+        <input type="hidden" value="'.$lindGenRes["id"].'" id="idGen"/>
+        ';
+    }
+    function actPosVenta(){
+            $link= new mysqli("127.0.0.1", "root","","siscast") 
+            or die(mysqli_error());
+            $lindPosVentaSql = "SELECT * FROM linderos_posible_venta where id=".$this->idlindPosVenta."";
+            $resPosVenta = $link->query($lindPosVentaSql);
+            $posVentaRes= $resPosVenta->fetch_assoc();
+            echo'
+            <input type="hidden" value="'.$posVentaRes["norte"].'" id="n_posVenta"/>
+            <input type="hidden" value="'.$posVentaRes["sur"].'" id="s_posVenta"/>
+            <input type="hidden" value="'.$posVentaRes["este"].'" id=e_posVenta""/>
+            <input type="hidden" value="'.$posVentaRes["oeste"].'" id="o_posVenta"/>
+            <input type="hidden" value="'.$posVentaRes["alind_n"].'" id="alindN_posVenta"/>
+            <input type="hidden" value="'.$posVentaRes["alind_s"].'" id="alindS_posVenta"/>
+            <input type="hidden" value="'.$posVentaRes["alind_e"].'" id=alindE_posVenta""/>
+            <input type="hidden" value="'.$posVentaRes["alind_o"].'" id="alindO_posVenta"/>
+            <input type="hidden" value="'.$posVentaRes["uniNorte"].'" id="uniN_posVenta"/>
+            <input type="hidden" value="'.$posVentaRes["uniSur"].'" id="uniS_posVenta"/>
+            <input type="hidden" value="'.$posVentaRes["uniEste"].'" id=uniE_posVenta""/>
+            <input type="hidden" value="'.$posVentaRes["uniOeste"].'" id="uniO_posVenta"/>
+            <input type="hidden" value="'.$posVentaRes["areaTotal"].'" id="area_posVenta"/>
+            <input type="hidden" value="'.$posVentaRes["nivelesConst"].'" id=niveles_posVenta""/>
+            <input type="hidden" value="'.$posVentaRes["areaConst"].'" id="areaConst_posVenta"/>
+            <input type="hidden" value="'.$posVentaRes["id"].'" id="idPosVenta"/>
+            ';
+    }
+    function actSecDoc(){
+            $link= new mysqli("127.0.0.1", "root","","siscast") 
+            or die(mysqli_error());
+            $lindDocumentoSql = "SELECT * FROM linderos_documento where id=".$this->idlindDocumento."";
+            $resDocumento = $link->query($lindDocumentoSql);
+            $documentoRes= $resDocumento->fetch_assoc();
+            echo'
+            <input type="hidden" value="'.$documentoRes["norte"].'" id="no_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["sur"].'" id="su_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["este"].'" id="es_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["oeste"].'" id="oe_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["alind_n"].'" id="alindN_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["alind_s"].'" id="alindS_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["alind_e"].'" id="alindE_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["alind_o"].'" id="alindO_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["uniNorte"].'" id="uniN_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["uniSur"].'" id="uniS_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["uniEste"].'" id="uniE_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["uniOeste"].'" id="uniO_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["areaTotal"].'" id="area_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["nivelesConst"].'" id="niveles_SecDoc"/>
+            <input type="hidden" value="'.$documentoRes["areaConst"].'" id="areaConst_SecDoc"/>
+            ';
     }
 }
 
