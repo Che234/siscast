@@ -1078,23 +1078,14 @@ function btnRevUsuario(){
 }
 function mostProp(){
     let cedula = document.getElementById("cedula").value
-    if(cedula!=null){
-        divCed= cedula.split('-')
-        if(divCed[0]=="V"){
-            document.getElementById("cedR").selectIndex=1
-        }
-        if(divCed[0]=="E"){
-            document.getElementById("cedR").selectIndex=2
-        }
-        document.getElementById("cedConst").value=divCed[1]
-
+    if(cedula!=0){
         rifBus = document.getElementById("rifBus").value
         divRif = rifBus.split("-")
         if(divRif[0]=="V"){
-            document.getElementById("rifR").selectIndex=1
+            document.getElementById("rifR").selectedIndex=1
         }
         if(divRif[0]=="J"){
-            document.getElementById("rifR").selectIndex=2
+            document.getElementById("rifR").selectedIndex=2
         }
         document.getElementById("rifN").value=divRif[1]
 
@@ -1108,6 +1099,15 @@ function mostProp(){
         document.getElementById("numTelf").value=divTelef[1]
         let dir_hab = document.getElementById("dir_hab").value
         document.getElementById("direcProp").value=dir_hab
+    }else{
+        document.getElementById("rifR").selectIndex=0
+        document.getElementById("rifN").value=""
+        document.getElementById("nomProp").value=""
+        document.getElementById("apelProp").value=""
+        document.getElementById("codTelf").value=""
+        document.getElementById("numTelf").value=""
+        document.getElementById("direcProp").value=""
+
     }
     
     

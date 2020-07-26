@@ -799,6 +799,11 @@ if(isset($_POST["fechFact"])){
 }else{
     $bus->fechFact = "nada";
 }
+if(isset($_POST["expBuscar"])){
+    $bus->expBuscar = $_POST["expBuscar"];
+}else{
+    $bus->expBuscar = "nada";
+}
 
 
 if($accion =="busExp"){
@@ -884,7 +889,9 @@ if($accion=="verPagos"){
 if($accion=="formPagosInmue"){
     $bus->formPagosInmue();
 }
-
+if($accion=="eliminarBus"){
+    $bus->eliminarBus();
+}
 
 if($_POST["parrInmue2"]=="Capital"){
     $bus->cambSecMod();

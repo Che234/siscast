@@ -496,6 +496,24 @@ class busquedas{
 			     }
 	       	}
     }
+    elimInmue(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`expBuscar=${this.expBuscar}&accion=eliminarBus`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
 }
 function btnConsultExp(){
     let busque = new busquedas;
@@ -514,6 +532,11 @@ function btnFormCambios(){
     busque.secciones = document.getElementById("secciones").value
     busque.expBuscar = document.getElementById("expBuscar").value
     busque.FormCambios();
+}
+function btnElimInmue(){
+    let busque = new busquedas
+    busque.expBuscar= document.getElementById("expBuscar").value
+    busque.elimInmue()
 }
 //PROPIETARIO
 function dividirCed(secciones="no"){

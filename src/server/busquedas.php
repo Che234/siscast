@@ -142,6 +142,7 @@ class busquedas{
         $ElectriIndust = "";
         $linTelf = "";
         $idServ = "";
+        $expBuscar = "";
     }
 
         
@@ -219,7 +220,7 @@ class busquedas{
                         <input type"button" value="Ver pagos" onclick="btnPagos()" class="botones btn btn-primary" />
                         <input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />
                         <input type"button" value="Modificar" class="botones btn btn-primary" onclick="mostTipModif()"/>
-                        <input type"button" value="Eliminar" class="botones btn btn-primary" />
+                        <input type"button" value="Eliminar" onclick="btnElimInmue()" class="botones btn btn-primary" />
                         <input type="hidden" value="'.$this->campBuscar.'" id="expBuscar">
                      </td>
                  </tr>
@@ -1371,7 +1372,68 @@ class busquedas{
         $link->query($lindGenSql);
         echo 'ACTUALIZADO CON EXITO';
     }
+    function eliminarBus(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        //BUSQUEDA DE EXPEDIENTE
+            $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
+            $resExp = $link->query($expSql);
+            $expRes = $resExp->fetch_assoc();
+        //BUSQUEDA DE INMUEBLE
+            $inmueSql = "SELECT * FROM inmueble where id=".$expRes["fk_inmueble"]."";
+            $resInmue = $link->query($inmueSql);
+            $inmueRes = $resInmue->fetch_assoc();
+        //BUSQUEDA DE PAGOS
+            $pagos = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]."";
+            $resPagos = $link->query($pagos);
+            $pagosRes = $resPagos->fetch_assoc();
+        //ELIMINAR DE PROPIETARIO
+            $propSql = "DELETE FROM propietarios where id=".$expRes["fk_propietario"]."";
+            $link->query($propSql);
+        //ELIMINAR DE CARACTERISTICAS DE LA CONSTRUCCIÓN
+            $caracSql = "DELETE FROM caracteristicas_construccion where id=".$inmueRes["fk_carac_construccion"]."";
+            $link->query($caracSql);
+        //ELIMINAR PROTOCOLIZACION
+            $protSql = "DELETE FROM datos_protocolizacion where id=".$inmueRes["fk_protocolizacion"]."";
+            $link->query($protSql);
+        //ELIMINAR CARACTERISTICAS DEL INMUEBLE
+            $caracInmueSql = "DELETE FROM carc_inmueble where id=".$inmueRes["fk_carac_inmuebles"]."";
+            $link->query($caracInmueSql);
+        //ELIMINAR LINDERO SEGUN DOCUMENTO
+            $lindDocSql = "DELETE FROM linderos_documento where id=".$inmueRes["fk_lind_documento"]."";
+            $link->query($lindDocSql);
+        //ELEMINAR LINDEROS GENERAL
+            $lindGeneralSql = "DELETE FROM linderos_general where id=".$inmueRes["fk_lind_general"]."";
+            $link->query($lindGeneralSql);
+        //ELIMINAR LINDEROS POSIBLE VENTA
+            $lindPosVentaSql = "DELETE FROM linderos_posible_venta where id=".$inmueRes["fk_lind_pos_venta"]."";
+            $link->query($lindPosVentaSql);
+        //ELIMINAR TERRENO
+            $terrSql = "DELETE FROM terreno where id=".$inmueRes["fk_terreno"]."";
+            $link->query($terrSql);
+        //ELIMINAR SERVICIOS
+            $servSql = "DELETE FROM servicios_inmue where id=".$inmueRes["fk_servicios"]."";
+            $link->query($servSql);
+        //ELIMINAR FACTURA
+            $factSql = "DELETE FROM factura where id=".$pagosRes["fk_factura"]."";
+            $link->query($factSql);
+        //ELIMINAR CONSTANCIAS
+            $constSql = "DELETE FROM constancias where id =".$expRes["id"]."";
+            $link->query($constSql);
+        //ELIMINAR PAGOS 
+            $pagSql = "DELETE FROM pagos where fk_expediente=".$expRes["id"]."";
+            $link->query($pagSql);
+        //ELIMINAR DE INMUEBLE
+            $elimInmueSql = "DELETE FROM inmueble where id=".$expRes["fk_inmueble"]."";
+            $link->query($elimInmueSql);
+        //ELIMINAR EXPEDIENTE
+            $elimSql = "DELETE FROM expediente where n_expediente=".$this->expBuscar."";
+            $link->query($elimSql);
 
+            echo '
+            <h2>EXPEDIENTE ELIMINADO CON EXITO</h2>
+            ';
+    }
 
 
     function actGeneral(){
