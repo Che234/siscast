@@ -607,11 +607,16 @@ if(isset($_POST["uniOeste3"])){
 }else{
     $nconst->uniOeste3= "nada";
 }
+if(isset($_POST["campBuscar"])){
+    $nconst->campBuscar = $_POST["campBuscar"];
+}else{
+    $nconst->campBuscar = "nada";
+}
+
 
 if($accion== "fProp"){
     $nconst->fPropietario();
 }
-
 if($accion== "fCarac"){
     $nconst->fCarac();
 }
@@ -632,6 +637,9 @@ if($accion == "guardConst"){
 }
 if($accion == "cambSect"){
     $nconst->cambSect();
+}
+if($accion== "revUsuario"){
+    $nconst->revUsuario();
 }
 if($accion == "imprConst2"){
     if(isset($_POST["idInmueble"])){
@@ -764,5 +772,11 @@ if($accion=="imprConst3"){
     }
     echo'<div id="enlacePdf"></div>';
     $f003->imprimir();
+}
+if($accion=="formImpri"){
+    $nconst->formImpri();
+}
+if($accion=="veriImpr"){
+    $nconst->veriImpr();
 }
 ?>

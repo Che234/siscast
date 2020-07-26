@@ -18,8 +18,8 @@
                     Constancias
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Imprimir</a>
-                    <a class="dropdown-item" onclick="btnFormConst()" href="#">Registrar</a>
+                    <a class="dropdown-item" href="#" onclick=btnFormImpri()>Imprimir</a>
+                    <a class="dropdown-item" onclick="btnFormConst()" href="#">Nueva Inscripción</a>
                     <a class="dropdown-item" href="#">Estadisticas</a>
                   </div>
                 </li>

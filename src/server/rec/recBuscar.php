@@ -784,7 +784,21 @@ if(isset($_POST["idServ"])){
 }else{
     $bus->idServ = "nada";
 }
-
+if(isset($_POST["montoFact"])){
+    $bus->montoFact = $_POST["montoFact"];
+}else{
+    $bus->montoFact = "nada";
+}
+if(isset($_POST["numFact"])){
+    $bus->numFact = $_POST["numFact"];
+}else{
+    $bus->numFact = "nada";
+}
+if(isset($_POST["fechFact"])){
+    $bus->fechFact = $_POST["fechFact"];
+}else{
+    $bus->fechFact = "nada";
+}
 
 
 if($accion =="busExp"){
@@ -860,6 +874,15 @@ if($accion=="guarActArea"){
 }
 if($accion=="guarActServ"){
     $bus->guarActServ();
+}
+if($accion=="pagarInmue"){
+    $bus->pagarInmue();
+}
+if($accion=="verPagos"){
+    $bus->verPagos();
+}
+if($accion=="formPagosInmue"){
+    $bus->formPagosInmue();
 }
 
 

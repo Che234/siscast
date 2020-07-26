@@ -2,124 +2,129 @@
 
 class constancias{
 
-        var $cedFul="";
-        var $rifConst="";
-        var $nomProp="";
-        var $apelProp="";
-        var $codTelf="";
-        var $numText="";
-        var $direcProp= "";
-        var $codTelf2 = "";
-        var $numTelf2= "";
-        var $parrInmue="";
-        var $secInmue= "";
-        var $direcInmue= "";
-        var $topoConst= "";
-        var $formaConst="";
-        var $servPublic="";
-        var $usoConst= "";
-        var $tenenConst= "";
-        var $ocupConst= "";
-        var $dimeConst="";
-        var $destConst = "";
-        var $estConst = "";
-        var $pareTipoInmue = "";
-        var $pareAcaInmue = "";
-        var $pintConst = "";
-        var $techoConst = "";
-        var $pisosConst = "";
-        var $piezConst = "";
-        var $ventConst = "";
-        var $puertConst = "";
-        var $instElect = "";
-        var $ambConst = "";
-        var $compConst = "";
-        var $estConserv ="";
-        var $obsConst = "";
-        var $docDebConst = "";
-        var $direcProtConst = "";
-        var $numProtConst = "";
-        var $tomoProtConst = "";
-        var $folioProtConst ="";
-        var $protoConst = "";
-        var $trimProtConst = "";
-        var $dateProtConst ="";
-        var $valorProtConst = "";
-        var $NivConstTotal = "";
-        var $arConstTotal = "";
-        var $arTotal = "";
-        var $arTotalVenta = "";
-        var $arRestante = "";
-        var $valorTerreno = "";
-        var $valorInmueble = "";
-        var $valorConstruc = "";
-        var $nortGen = "";
-        var $alindNort = "";
-        var $surGen = "";
-        var $alindSur = "";
-        var $esteGen = "";
-        var $alindEste = "";
-        var $oesteGen = "";
-        var $alindOeste = "";
-        var $nortPosVenta = "";
-        var $alindPosNort = "";
-        var $surPosVenta = "";
-        var $alindPosSur = "";
-        var $estePosVenta = "";
-        var $alindPosEste = "";
-        var $oestePosVenta = "";
-        var $alindPosOeste = "";
-        var $nortSecDoc = "";
-        var $alindSecNorte = "";
-        var $surSecDoc = "";
-        var $alindSecSur = "";
-        var $esteSecDoc = "";
-        var $alindSecEste = "";
-        var $oesteSecDoc = "";
-        var $alindSecOeste = "";
-        var $parte1 ;
-        var $telfFul2 = "";
-        var $telfFul = "";
-        var $regInmue = "";
-        var $Acue = "";
-        var $AcueRural = "";
-        var $AguasSub = "";
-        var $AguasServ = "";
-        var $PavFlex = "";
-        var $PavRig = "";
-        var $viaEngran ="";
-        var $acera = "";
-        var $AlumPublico = "";
-        var $aseo = "";
-        var $transPublic = "";
-        var $pozoSept = "";
-        var $ElectResidencial = "";
-        var $ElectriIndust = "";
-        var $linTelf = "";
-        var $multa = "";
-        var $empadro = "";
-        var $ambInmue = "";
-        var $arTotal3 = "";
-        var $NivConstTotal3= "";
-        var $arConstTotal3= "";
-        var $arTotal2 = "";
-        var $NivConstTotal2 ="";
-        var $arConstTotal2 = "";
-        var $uniNorte = "";
-        var $uniSur = "";
-        var $uniEste = "";
-        var $uniOeste = "";
-        var $uniNorte2 = "";
-        var $uniSur2 = "";
-        var $uniEste2 = "";
-        var $uniOeste2 = "";
-        var $uniNorte3 = "";
-        var $uniSur3 = "";
-        var $uniEste3 = "";
-        var $uniOeste3 = "";
+    function construct(){
+        $cedFul="";
+        $rifConst="";
+        $nomProp="";
+        $apelProp="";
+        $codTelf="";
+        $numText="";
+        $direcProp= "";
+        $codTelf2 = "";
+        $numTelf2= "";
+        $parrInmue="";
+        $secInmue= "";
+        $direcInmue= "";
+        $topoConst= "";
+        $formaConst="";
+        $servPublic="";
+        $usoConst= "";
+        $tenenConst= "";
+        $ocupConst= "";
+        $dimeConst="";
+        $destConst = "";
+        $estConst = "";
+        $pareTipoInmue = "";
+        $pareAcaInmue = "";
+        $pintConst = "";
+        $techoConst = "";
+        $pisosConst = "";
+        $piezConst = "";
+        $ventConst = "";
+        $puertConst = "";
+        $instElect = "";
+        $ambConst = "";
+        $compConst = "";
+        $estConserv ="";
+        $obsConst = "";
+        $docDebConst = "";
+        $direcProtConst = "";
+        $numProtConst = "";
+        $tomoProtConst = "";
+        $folioProtConst ="";
+        $protoConst = "";
+        $trimProtConst = "";
+        $dateProtConst ="";
+        $valorProtConst = "";
+        $NivConstTotal = "";
+        $arConstTotal = "";
+        $arTotal = "";
+        $arTotalVenta = "";
+        $arRestante = "";
+        $valorTerreno = "";
+        $valorInmueble = "";
+        $valorConstruc = "";
+        $nortGen = "";
+        $alindNort = "";
+        $surGen = "";
+        $alindSur = "";
+        $esteGen = "";
+        $alindEste = "";
+        $oesteGen = "";
+        $alindOeste = "";
+        $nortPosVenta = "";
+        $alindPosNort = "";
+        $surPosVenta = "";
+        $alindPosSur = "";
+        $estePosVenta = "";
+        $alindPosEste = "";
+        $oestePosVenta = "";
+        $alindPosOeste = "";
+        $nortSecDoc = "";
+        $alindSecNorte = "";
+        $surSecDoc = "";
+        $alindSecSur = "";
+        $esteSecDoc = "";
+        $alindSecEste = "";
+        $oesteSecDoc = "";
+        $alindSecOeste = "";
+        $parte1 ;
+        $telfFul2 = "";
+        $telfFul = "";
+        $regInmue = "";
+        $Acue = "";
+        $AcueRural = "";
+        $AguasSub = "";
+        $AguasServ = "";
+        $PavFlex = "";
+        $PavRig = "";
+        $viaEngran ="";
+        $acera = "";
+        $AlumPublico = "";
+        $aseo = "";
+        $transPublic = "";
+        $pozoSept = "";
+        $ElectResidencial = "";
+        $ElectriIndust = "";
+        $linTelf = "";
+        $multa = "";
+        $empadro = "";
+        $ambInmue = "";
+        $arTotal3 = "";
+        $NivConstTotal3= "";
+        $arConstTotal3= "";
+        $arTotal2 = "";
+        $NivConstTotal2 ="";
+        $arConstTotal2 = "";
+        $uniNorte = "";
+        $uniSur = "";
+        $uniEste = "";
+        $uniOeste = "";
+        $uniNorte2 = "";
+        $uniSur2 = "";
+        $uniEste2 = "";
+        $uniOeste2 = "";
+        $uniNorte3 = "";
+        $uniSur3 = "";
+        $uniEste3 = "";
+        $uniOeste3 = "";
+        $campBuscar = "";
+    }
+        
 
     function fPropietario(){
-        echo'<table border="1px" class="taConst">
+        echo'
+        <table border="1px" class="taConst">
             <tr>
                 <td colspan="4" class="tiConst">
                     <p class="h1">DATOS DEL PROPIETARIO</p>
@@ -134,7 +139,7 @@ class constancias{
                             <option value="V">V</option>
                             <option value="E">E</option>
                         </select>
-                        <input type="text" class="numText" id="cedConst" />
+                        <input type="text" class="numText" id="cedConst" onchange="btnRevUsuario()"/>
                     </div>
                     
                 </td>
@@ -337,7 +342,7 @@ class constancias{
         <div class="btnSig1">
             <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
         </div>
-        ';
+        <div id="campGeneral2"></div>';
     }
 
     function fCarac(){
@@ -1509,6 +1514,41 @@ class constancias{
         //             </div>
         //         ';
         //     }
+    }
+    function revUsuario(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $usuarioSql = "SELECT * FROM propietarios where cedula='".$this->cedFul."'";
+        $resUsuario = $link->query($usuarioSql);
+        $usuarioRes = $resUsuario->fetch_assoc();
+        echo'
+        <input type="hidden" value="'.$usuarioRes["cedula"].'" id="cedula"/>
+        <input type="hidden" value="'.$usuarioRes["rif"].'" id="rifBus" />
+        <input type="hidden" value="'.$usuarioRes["nombre"].'" id="nombreRes" />
+        <input type="hidden" value="'.$usuarioRes["apellido"].'" id="apellido" />
+        <input type="hidden" value="'.$usuarioRes["telef"].'" id="telef" />
+        <input type="hidden" value="'.$usuarioRes["dir_hab"].'" id="dir_hab" />
+        ';
+    }
+    function formImpri(){
+        echo'
+        <div id="campGeneral">
+            <div class="campBuscador">
+            <h2>Ingresa el número de expediente</h2>
+            <input type="text" id="campBuscar" />
+            <input type="button" value="Imprimir" onclick="btnVeriImpr()" class="botones btn btn-primary" />
+            </div>
+        </div>';
+    }
+    function veriImpr(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        //BUSQUEDA DE EXPEDIENTE
+            $expSql = "SELECT * FROM expediente where n_expediente=".$this->campBuscar."";
+            $resExp = $link->query($expSql);
+            $expRes = $resExp->fetch_assoc();
+        //BUSQUEDA DE PAGO
+            $pagSql = "SELECT * FROM pagos where ";
     }
 }
 

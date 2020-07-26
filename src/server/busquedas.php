@@ -2,145 +2,149 @@
 
 class busquedas{
 
-        var $campBuscar = "";
-        var $tipoBuscar = "";
-        var $expBuscar = "";
-        var $cedula = "";
-        var $rif = "";
-        var $nomProp = "";
-        var $apelProp = "";
-        var $telefono = "";
-        var $direcProp = "";
-        var $cedula2 = "";
-        var $telefono2 = "";
-        var $parrInmue = "";
-        var $secInmue = "";
-        var $direcInmue = "";
-        var $ambInmue = "";
-        var $idInmueble = "";
-        var $topoConst = "";
-        var $formaConst = "";
-        var $regInmue = "";
-        var $usoConst = "";
-        var $tenenConst = "";
-        var $ocupConst = "";
-        var $dimeConst = "";
-        var $idCarac = "";
-        var $destConst = "";
-        var $estConst = "";
-        var $pareTipoInmue = "";
-        var $pareAcaInmue = "";
-        var $pintConst = "";
-        var $estConserv = "";
-        var $techoConst ="";
-        var $pisosConst = "";
-        var $piezConst = "";
-        var $ventConst = "";
-        var $puertConst = "";
-        var $instElect = "";
-        var $ambConst = "";
-        var $compConst = "";
-        var $obsConst = "";
-        var $idCaracConst = "";
-        var $docDebConst = "";
-        var $direcProtConst = "";
-        var $numProtConst = "";
-        var $tomoProtConst = "";
-        var $folioProtConst = "";
-        var $protoConst = "";
-        var $trimProtConst = "";
-        var $dateProtConst = "";
-        var $valorProtConst = "";
-        var $idProto = "";
-        var $lindGen = "";
-        var $lindPosVenta = "";
-        var $lindDocumento = "";
-        var $idlindGen = "";
-        var $idlindPosVenta ="";
-        var $idlindDocumento = "";
-        var $n_gen = "";
-        var $s_gen = "";
-        var $e_gen = "";
-        var $o_gen = "";
-        var $alindN_gen = "";
-        var $alindS_gen = "";
-        var $alindE_gen = "";
-        var $alindO_gen = "";
-        var $area_gen = "";
-        var $niveles_gen = "";
-        var $areaConst_gen = "";
-        var $uniN_gen = "";
-        var $uniS_gen = "";
-        var $uniE_gen = "";
-        var $uniO_gen = "";
-        var $idGen = "";
-        var $nortGen = "";
-        var $uniNorte = "";
-        var $alindNort = "";
-        var $surGen = "";
-        var $uniSur = "";
-        var $alindSur = "";
-        var $esteGen = "";
-        var $uniEste = "";
-        var $alindEste = "";
-        var $oesteGen = "";
-        var $uniOeste = "";
-        var $alindOeste = "";
-        var $arTotal = "";
-        var $NivConstTotal = "";
-        var $arConstTotal = "";
-        var $nortPosVenta = "";
-        var $uniNorte2 = "";
-        var $alindPosNort = "";
-        var $surPosVenta = "";
-        var $uniSur2 = "";
-        var $alindPosSur = "";
-        var $estePosVenta = "";
-        var $uniEste2 = "";
-        var $alindPosEste = "";
-        var $oestePosVenta = "";
-        var $uniOeste2 = "";
-        var $alindPosOeste = "";
-        var $arTotal2 = "";
-        var $NivConstTotal2 = "";
-        var $arConstTotal2 = "";
-        var $nortSecDoc = "";
-        var $uniNorte3 = "";
-        var $alindSecNorte = "";
-        var $surSecDoc = "";
-        var $uniSur3 = "";
-        var $alindSecSur = "";
-        var $esteSecDoc = "";
-        var $uniEste3 = "";
-        var $alindSecEste = "";
-        var $oesteSecDoc = "";
-        var $uniOeste3 = "";
-        var $alindSecOeste = "";
-        var $arTotal3 = "";
-        var $NivConstTotal3 = "";
-        var $arConstTotal3 = "";
-        var $arTotalVenta = "";
-        var $arRestante = "";
-        var $valorTerreno = "";
-        var $valorInmueble = "";
-        var $valorConstruc = "";
-        var $idTerreno = "";
-        var $Acue = "";
-        var $AcueRural = "";
-        var $AguasSub = "";
-        var $AguasServ = "";
-        var $PavFlex = "";
-        var $PavRig = "";
-        var $viaEngran = "";
-        var $acera = "";
-        var $AlumPublico = "";
-        var $aseo ="";
-        var $transPublic = "";
-        var $pozoSept = "";
-        var $ElectResidencial = "";
-        var $ElectriIndust = "";
-        var $linTelf = "";
-        var $idServ = "";
+    function construct(){
+        $campBuscar = "";
+        $tipoBuscar = "";
+        $expBuscar = "";
+        $cedula = "";
+        $rif = "";
+        $nomProp = "";
+        $apelProp = "";
+        $telefono = "";
+        $direcProp = "";
+        $cedula2 = "";
+        $telefono2 = "";
+        $parrInmue = "";
+        $secInmue = "";
+        $direcInmue = "";
+        $ambInmue = "";
+        $idInmueble = "";
+        $topoConst = "";
+        $formaConst = "";
+        $regInmue = "";
+        $usoConst = "";
+        $tenenConst = "";
+        $ocupConst = "";
+        $dimeConst = "";
+        $idCarac = "";
+        $destConst = "";
+        $estConst = "";
+        $pareTipoInmue = "";
+        $pareAcaInmue = "";
+        $pintConst = "";
+        $estConserv = "";
+        $techoConst ="";
+        $pisosConst = "";
+        $piezConst = "";
+        $ventConst = "";
+        $puertConst = "";
+        $instElect = "";
+        $ambConst = "";
+        $compConst = "";
+        $obsConst = "";
+        $idCaracConst = "";
+        $docDebConst = "";
+        $direcProtConst = "";
+        $numProtConst = "";
+        $tomoProtConst = "";
+        $folioProtConst = "";
+        $protoConst = "";
+        $trimProtConst = "";
+        $dateProtConst = "";
+        $valorProtConst = "";
+        $idProto = "";
+        $lindGen = "";
+        $lindPosVenta = "";
+        $lindDocumento = "";
+        $idlindGen = "";
+        $idlindPosVenta ="";
+        $idlindDocumento = "";
+        $n_gen = "";
+        $s_gen = "";
+        $e_gen = "";
+        $o_gen = "";
+        $alindN_gen = "";
+        $alindS_gen = "";
+        $alindE_gen = "";
+        $alindO_gen = "";
+        $area_gen = "";
+        $niveles_gen = "";
+        $areaConst_gen = "";
+        $uniN_gen = "";
+        $uniS_gen = "";
+        $uniE_gen = "";
+        $uniO_gen = "";
+        $idGen = "";
+        $nortGen = "";
+        $uniNorte = "";
+        $alindNort = "";
+        $surGen = "";
+        $uniSur = "";
+        $alindSur = "";
+        $esteGen = "";
+        $uniEste = "";
+        $alindEste = "";
+        $oesteGen = "";
+        $uniOeste = "";
+        $alindOeste = "";
+        $arTotal = "";
+        $NivConstTotal = "";
+        $arConstTotal = "";
+        $nortPosVenta = "";
+        $uniNorte2 = "";
+        $alindPosNort = "";
+        $surPosVenta = "";
+        $uniSur2 = "";
+        $alindPosSur = "";
+        $estePosVenta = "";
+        $uniEste2 = "";
+        $alindPosEste = "";
+        $oestePosVenta = "";
+        $uniOeste2 = "";
+        $alindPosOeste = "";
+        $arTotal2 = "";
+        $NivConstTotal2 = "";
+        $arConstTotal2 = "";
+        $nortSecDoc = "";
+        $uniNorte3 = "";
+        $alindSecNorte = "";
+        $surSecDoc = "";
+        $uniSur3 = "";
+        $alindSecSur = "";
+        $esteSecDoc = "";
+        $uniEste3 = "";
+        $alindSecEste = "";
+        $oesteSecDoc = "";
+        $uniOeste3 = "";
+        $alindSecOeste = "";
+        $arTotal3 = "";
+        $NivConstTotal3 = "";
+        $arConstTotal3 = "";
+        $arTotalVenta = "";
+        $arRestante = "";
+        $valorTerreno = "";
+        $valorInmueble = "";
+        $valorConstruc = "";
+        $idTerreno = "";
+        $Acue = "";
+        $AcueRural = "";
+        $AguasSub = "";
+        $AguasServ = "";
+        $PavFlex = "";
+        $PavRig = "";
+        $viaEngran = "";
+        $acera = "";
+        $AlumPublico = "";
+        $aseo ="";
+        $transPublic = "";
+        $pozoSept = "";
+        $ElectResidencial = "";
+        $ElectriIndust = "";
+        $linTelf = "";
+        $idServ = "";
+    }
+
+        
 
     function mostBusqueda(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
@@ -212,7 +216,8 @@ class busquedas{
                         '.$inmueResCarac["uso"].'
                      </td>
                      <td>
-                        <input type"button" value="Ver pagos" class="botones btn btn-primary" />
+                        <input type"button" value="Ver pagos" onclick="btnPagos()" class="botones btn btn-primary" />
+                        <input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />
                         <input type"button" value="Modificar" class="botones btn btn-primary" onclick="mostTipModif()"/>
                         <input type"button" value="Eliminar" class="botones btn btn-primary" />
                         <input type="hidden" value="'.$this->campBuscar.'" id="expBuscar">
@@ -1246,48 +1251,48 @@ class busquedas{
             $resExp = $link->query($expSql);
             $expRes = $resExp->fetch_assoc();
         echo'
-    <table border="1px" class="taConst">
-        <tr>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Numero Expediente:</p>
-                    <input type="text" id="nuExp"/>
-                </div>
-            </td>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Monto:</p>
-                    <input type="text" id="montoFact"/>
-                </div>
-            </td>
-            <td>
-                <div class="campDat">
-                    <p class="negritas">Empadronamiento:</p>
-                    <select id="empadro"/>
-                        <option value="no"></option>
-                        <option value="si">Si</option>
-                        <option value="no">No</option>
-                    </select>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Numero Factura:</p>
-                    <input type="number" id="numFact"/>
-                </div>
-            <td class="tdConst">
-                <div class="campDat">
-                    <p class="negritas">Fecha:</p>
-                    <input type="date" id="fechFact"/>
-                    <input type="hidden" id="idInmueble" value="'.$idInmueble.'">
-                    <input type="hidden" id="idProp" value="'.$idProp.'">
-                    <input type="hidden" id="operacion" value="Nueva Inscripción">
-                </div>
-            </td>
-        </tr>
-    </table>';
+        <table border="1px" class="taConst">
+            <tr>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Numero Expediente:</p>
+                        <input type="text" id="nuExp"/>
+                    </div>
+                </td>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Monto:</p>
+                        <input type="text" id="montoFact"/>
+                    </div>
+                </td>
+                <td>
+                    <div class="campDat">
+                        <p class="negritas">Empadronamiento:</p>
+                        <select id="empadro"/>
+                            <option value="no"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Numero Factura:</p>
+                        <input type="number" id="numFact"/>
+                    </div>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Fecha:</p>
+                        <input type="date" id="fechFact"/>
+                        <input type="hidden" id="idInmueble" value="'.$idInmueble.'">
+                        <input type="hidden" id="idProp" value="'.$idProp.'">
+                        <input type="hidden" id="operacion" value="Nueva Inscripción">
+                    </div>
+                </td>
+            </tr>
+        </table>';
     }
 
     function actProp(){
@@ -1442,6 +1447,149 @@ class busquedas{
             <input type="hidden" value="'.$documentoRes["nivelesConst"].'" id="niveles_SecDoc"/>
             <input type="hidden" value="'.$documentoRes["areaConst"].'" id="areaConst_SecDoc"/>
             ';
+    }
+
+//PAGOS
+    function formPagosInmue(){
+        echo'
+        <table border="1">
+            <tr>
+                <td>
+                    <h2>Realiza el Pago</h2>
+                </td>
+            </tr>
+            <tr>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Monto:</p>
+                        <input type="text" id="montoFact"/>
+                    </div>
+                </td>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Numero Factura:</p>
+                        <input type="number" id="numFact"/>
+                    </div>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Fecha:</p>
+                        <input type="date" id="fechFact"/>
+                    </div>
+                </td>
+            </tr>
+        </table>      
+        <input type"button" value="Pagar" onclick="btnPagarInmue()" class="botones btn btn-primary" />
+        <input type="hidden" value="'.$this->expBuscar.'" id="expBuscar" />';
+    }
+    function pagarInmue(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        
+        //INSERT FACTURA
+            $factSql = "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."') ";
+            $factConex = $link->query($factSql);
+            $idFact = $link->insert_id;
+        //BUSCAR EXPEDIENTE
+            $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
+            $resExp = $link->query($expSql);
+            $expRes = $resExp->fetch_assoc();
+        //VERIFICAR PAGOS
+            $pagSql= "SELECT * FROM pagos where fk_expedient=".$expRes["id"]."";
+            $resPagos = $link->query($pagSql);
+            $pagoRes = $resPagos->fetch_assoc();
+        //INSERT PAGOS 
+            $pagoSql = "INSERT INTO pagos(fk_expedient,fk_factura,fecha)value(".$expRes["id"].",".$idFact.",'".date("Y-m-d")."')";
+            $link->query($pagoSql);
+        echo'PAGO REALIZADO CON EXITO';
+    }
+    function verPagos(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        //BUSQUEDA DEL EXPEDIENTE
+            $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
+            $resExp = $link->query($expSql);
+            $expRes = $resExp->fetch_assoc();
+        //BUSQUEDA DEL PROPIETARIO
+            $propSql = "SELECT * FROM propietarios where id=".$expRes["fk_propietario"]."";
+            $resProp = $link->query($propSql);
+            $propRes = $resProp->fetch_assoc();
+        //BUSQUEDA DE CANTIDAD DE PAGOS
+            $veriPagoSql = "SELECT COUNT(*) FROM pagos where fk_expedient=".$expRes["id"]." ORDER BY fecha";
+            $veriResPago = $link->query($veriPagoSql);
+            $veriPagoRes = $veriResPago->fetch_assoc();
+        
+        echo'
+        <table border="1">
+            <tr>
+                <td colspan="4">
+                    <h2>Datos del propietario</h2>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <b>Nombre:</b> '.$propRes["nombre"].'
+                </td>
+                <td>
+                    <b>Apellido</b> '.$porpRes["apellido"].'
+                </td>
+                <td>
+                    <b>Cedula</b> '.$propRes["cedula"].'
+                </td>
+                <td>
+                    <b>Dirección de Hab.</b> '.$propRes["dir_hab"].'
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <h2>Pagos realizados</h2>
+                </td>
+            </tr>';
+        
+            echo'<tr>
+                <td>
+                    <b>No.</b>
+                </td>
+                <td>
+                    <b>No. Factura:</b>
+                </td>
+                <td>
+                    <b>Monto:</b>
+                </td>
+                <td>
+                    <b>Fecha:</b>
+                </td>
+            </tr>';
+            //BUSQUEDA DE PAGOS
+                $pagoSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." ORDER BY id";
+                $resPago = $link->query($pagoSql);
+                $pagoRes = $resPago->fetch_assoc();
+            //BUSQUEDA DE FACTURA
+                $factSql = "SELECT * FROM factura where id=".$pagoRes["fk_factura"]."";
+                $resFact = $link->query($factSql);
+                $factRes = $resFact->fetch_assoc();
+            for($i=0; $i<$veriPagoRes["COUNT(*)"];$i++){
+                $no= $i+1;
+            
+                echo'
+                <tr>
+                    <td>
+                        '.$no.'
+                    </td>
+                    <td>
+                        '.$factRes["n_factura"].'
+                    </td>
+                    <td>
+                        '.$factRes["monto"].'
+                    </td>
+                    <td>
+                        '.$pagoRes["fecha"].'
+                    </td>
+                </tr>';
+            }
+            echo'
+        </table>';
     }
 }
 

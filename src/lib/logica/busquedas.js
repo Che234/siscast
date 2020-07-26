@@ -18,7 +18,7 @@ class busquedas{
         oesteSecDoc,uniOeste3,alindSecOeste,arTotal3,NivConstTotal3,arConstTotal3,idlindPosVenta,
         arTotalVenta,arRestante,valorTerreno,valorInmueble,valorConstruc,idTerreno,Acue,AcueRural,
         AguasSub,AguasServ,PavFlex,PavRig,viaEngran,acera,AlumPublico,aseo,transPublic,pozoSept,
-        ElectResidencial,ElectriIndust,linTelf,idServ){}
+        ElectResidencial,ElectriIndust,linTelf,idServ,montoFact,numFact,fechFact){}
     veriBuscar(){
         if(!ex_datcort.test(this.campBuscar)){
             alert("Campo de buscar no puede estar vacio");
@@ -434,6 +434,60 @@ class busquedas{
 		ajax.open("POST", "src/server/rec/recBuscar.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`Acue=${this.Acue}&AcueRural=${this.AcueRural}&AguasSub=${this.AguasSub}&AguasServ=${this.AguasServ}&PavFlex=${this.PavFlex}&PavRig=${this.PavRig}&viaEngran=${this.viaEngran}&acera=${this.acera}&AlumPublico=${this.AlumPublico}&aseo=${this.aseo}&transPublic=${this.transPublic}&pozoSept=${this.pozoSept}&ElectResidencial=${this.ElectResidencial}&ElectriIndust=${this.ElectriIndust}&linTelf=${this.linTelf}&idServ=${this.idServ}&accion=guarActServ`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    formPagosInmue(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`expBuscar=${this.expBuscar}&accion=formPagosInmue`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    pagarInmue(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`expBuscar=${this.expBuscar}&montoFact=${this.montoFact}&numFact=${this.numFact}&fechFact=${this.fechFact}&accion=pagarInmue`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    verPagos(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`expBuscar=${this.expBuscar}&accion=verPagos`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1294,4 +1348,23 @@ function btnActServ(){
     busque.linTelf = document.getElementById("linTelf").value
     busque.idServ = document.getElementById("idServ").value
     busque.guardActServ()
+}
+//VER PAGOS
+function btnPagar(){
+    let busque = new busquedas
+    busque.expBuscar = document.getElementById("expBuscar").value
+    busque.formPagosInmue()
+}
+function btnPagarInmue(){
+    let busque = new busquedas
+    busque.montoFact = document.getElementById("montoFact").value
+    busque.numFact = document.getElementById("numFact").value
+    busque.fechFact = document.getElementById("fechFact").value
+    busque.expBuscar = document.getElementById("expBuscar").value
+    busque.pagarInmue();
+}
+function btnPagos(){
+    let busque = new busquedas
+    busque.expBuscar = document.getElementById("expBuscar").value
+    busque.verPagos();
 }

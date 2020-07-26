@@ -15,7 +15,7 @@ class constancias{
         AguasServ,PavFlex,PavRig,viaEngran,acera,AlumPublico,aseo,transPublic,pozoSept,ElectResidencial,ElectriIndust,
         linTelf,empadro,multa,idProp,numFact,ambInmue,arTotal3,NivConstTotal3,arConstTotal3,arTotal2,NivConstTotal2,
         arConstTotal2,uniNorte,uniSur,uniEste,uniOeste,uniNorte2,uniSur2,uniEste2,uniOeste2,uniNorte3,
-        uniSur3,uniEste3,uniOeste3,operacion){
+        uniSur3,uniEste3,uniOeste3,operacion,campBuscar){
 
         this.cedR = cedR
         this.cedConst = cedConst
@@ -144,6 +144,7 @@ class constancias{
         this.uniEste3 = uniEste3
         this.uniOeste3 = uniOeste3
         this.operacion = operacion
+        this.campBuscar = campBuscar
     }
     test1(){
         if(!ex_nac.test(this.cedR)){
@@ -663,6 +664,64 @@ class constancias{
 			     }
 	       	}
     }
+    revUsuario(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral2');
+        var divsitiomaterial = document.getElementById('campGeneral2');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`cedFul=${this.cedFul}&accion=revUsuario`);
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                    setTimeout(()=>{
+                        mostProp()
+                    },500)
+                    
+			     }
+	       	}
+    }
+    formImpri(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send("accion=formImpri"); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    veriImpr(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campOculto');
+        var divsitiomaterial = document.getElementById('campOculto');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`campBuscar=${this.campBuscar}&accion=veriImpr`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
 }
 function btnFormConst(){
     let consta = new constancias();
@@ -1009,6 +1068,60 @@ function btnImprConst3(){
     if(consta.veriInmu() == true){
         consta.imprConst3()
     }
+}
+function btnRevUsuario(){
+    let consta = new constancias
+    let cedR = document.getElementById("cedR").value
+    let cedConst = document.getElementById("cedConst").value
+    consta.cedFul = cedR+"-"+cedConst
+    consta.revUsuario()
+}
+function mostProp(){
+    let cedula = document.getElementById("cedula").value
+    if(cedula!=null){
+        divCed= cedula.split('-')
+        if(divCed[0]=="V"){
+            document.getElementById("cedR").selectIndex=1
+        }
+        if(divCed[0]=="E"){
+            document.getElementById("cedR").selectIndex=2
+        }
+        document.getElementById("cedConst").value=divCed[1]
+
+        rifBus = document.getElementById("rifBus").value
+        divRif = rifBus.split("-")
+        if(divRif[0]=="V"){
+            document.getElementById("rifR").selectIndex=1
+        }
+        if(divRif[0]=="J"){
+            document.getElementById("rifR").selectIndex=2
+        }
+        document.getElementById("rifN").value=divRif[1]
+
+        let nombreRes = document.getElementById("nombreRes").value
+        document.getElementById("nomProp").value=nombreRes
+        let apellido = document.getElementById("apellido").value
+        document.getElementById("apelProp").value=apellido
+        let telef = document.getElementById("telef").value
+        divTelef = telef.split("-")
+        document.getElementById("codTelf").value=divTelef[0]
+        document.getElementById("numTelf").value=divTelef[1]
+        let dir_hab = document.getElementById("dir_hab").value
+        document.getElementById("direcProp").value=dir_hab
+    }
+    
+    
+}
+
+//IMPRIMIR
+function btnFormImpri(){
+    let consta = new constancias
+    consta.formImpri()
+}
+function btnVeriImpr(){
+    let consta = new constancias
+    consta.campBuscar = document.getElementById("campBuscar").value
+    consta.veriImpr()
 }
 /**EVENTOS */
 function btnCambSec(){
