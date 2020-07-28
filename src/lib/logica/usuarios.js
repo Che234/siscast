@@ -1,24 +1,31 @@
 
-function usuarios(mostReg,guardUsu,nombre,apellido,cedula,correo,direccion,
-	codTelef,numTelf,contrasena,verPass,verificacion,user,pass,telf){
+class usuarios{
 	
-		this.mostReg = mostReg;
-		this.guardUsu =guardUsu;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.cedula= cedula;
-		this.correo = correo;
-		this.direccion = direccion;
-		this.codTelef = codTelef;
-		this.numTelf = numTelf;
-		this.telf= telf;
-		this.user= user;
-		this.contrasena = contrasena;
-		this.verPass = verPass;
-		this.verificacion= verificacion;
-		this.pass = pass;
+		nombre;
+		apellido;
+		cedula;
+		correo;
+		direccion;
+		codTelef;
+		numTelf
+		telf;
+		user;
+		contrasena;
+		verPass;
+		verificacion;
+		pass;
+		nivUsu
+		cedUsu
+		nomUsu
+		apelUsu
+		cedUsu
+		dirUsu
+		telfUsu
+		corUsu
+		nivUsu
+		idUsu
 
-	function verificacion(){
+	verificacion(){
 		if(!er_areas.test(this.nombre)){
             alert("Error en el formato de Nombre");
             return false;
@@ -60,9 +67,13 @@ function usuarios(mostReg,guardUsu,nombre,apellido,cedula,correo,direccion,
 			alert("Las contraseñas no son iguales");
 			return false;
 		}
+		if(!ex_datcort.test(this.nivUsu)){
+			alert("Error en el formato del Nivel");
+			return false;
+		}
 		return true;
 	}
-	function guardUsu(){
+	guardUsu(){
 		var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
@@ -71,19 +82,18 @@ function usuarios(mostReg,guardUsu,nombre,apellido,cedula,correo,direccion,
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recUsuario.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		ajax.send("nombre="+this.nombre+"&apellido="+this.apellido+"&cedula="+this.cedula+"&correo="+this.correo+"&direccion="+this.direccion+"&telf="+this.telf+"&user="+this.user+"&pass="+this.pass+"&accion=guardUsu"); 
+		ajax.send(`nombre=${this.nombre}&apellido=${this.apellido}&cedula=${this.cedula}&correo=${this.correo}&direccion=${this.direccion}&telf=${this.telf}&user=${this.user}&pass=${this.pass}&nivUsu=${this.nivUsu}&accion=guardUsu`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
 				
 				divsitioform.innerHTML = ajax.responseText;
-				alert('Usuario guardado con exito');
 			     }
 	       	}
 	}
 	
-    function mostReg(){
+    mostReg(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
@@ -101,7 +111,66 @@ function usuarios(mostReg,guardUsu,nombre,apellido,cedula,correo,direccion,
 				
 			     }
 	       	}
-    }
+	}
+	ModUsu(){
+		var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recUsuario.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send("&accion=ModUsu"); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+				divsitioform.innerHTML = ajax.responseText;
+				
+			     }
+	       	}
+	}
+	encUsu(){
+		var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recUsuario.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send(`cedUsu=${this.cedUsu}&accion=encUsu`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+				divsitioform.innerHTML = ajax.responseText;
+				setTimeout(()=>{
+					btnPlasUsu()
+				},10)
+			     }
+	       	}
+	}
+	actUsu(){
+		var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recUsuario.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send(`nombre=${this.nombre}&apellido=${this.apellido}&ced=${this.ced}&direc=${this.direc}&correo=${this.correo}&telefono=${this.telefono}&user=${this.user}&contrasena=${this.contrasena}&verPass=${this.verPass}&nivUsu=${this.nivUsu}&accion=actUsu`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+				divsitioform.innerHTML = ajax.responseText;
+				
+			     }
+	       	}
+	}
 }
 function mostRegistro(){
 	let usu= new usuarios();
@@ -130,6 +199,13 @@ function btnGuardUsu(){
 	usu.correo = document.getElementById("correo").value;
 	usu.user = document.getElementById("user").value;
 	usu.contrasena = document.getElementById("contrasena").value;
+	nivUsu = document.getElementById("nivUsu").value
+	if(nivUsu=="Administrador"){
+		usu.nivUsu = "1";
+	}
+	if(nivUsu=="Redactor"){
+		usu.nivUsu = "2"
+	}
 	usu.verPass = document.getElementById("verPass").value;
 	if(usu.verificacion() == true){
 		if(usu.contrasena === usu.verPass){
@@ -142,4 +218,43 @@ function btnGuardUsu(){
 		
 	}
 	
+}
+function btnModUsu(){
+	let usu= new usuarios;
+	usu.ModUsu()
+}
+function btnEncUsu(){
+	let usu = new usuarios
+	usu.cedUsu = document.getElementById("cedUsu").value
+	usu.encUsu()
+}
+function btnPlasUsu(){
+	let usu = new usuarios
+	telefono = document.getElementById("telfUsu").value
+	divTelf = telefono.split("-")
+	document.getElementById("codTelef").value = divTelf[0]
+	document.getElementById("numTelf").value = divTelf[1]
+	nivelUsu = document.getElementById("nivelUsu").value
+	if(nivelUsu==1){
+		document.getElementById("nivUsu").selectedIndex=1
+	}
+	if(nivelUsu==2){
+		document.getElementById("nivUsu").selectedIndex=2
+	}
+}
+function btnActUsu(){
+	let usu = new usuarios
+	usu.nombre = document.getElementById("nombre").value
+	usu.apellido = document.getElementById("apellido").value
+	usu.ced = document.getElementById("ced").value
+	usu.direc = document.getElementById("direc").value
+	usu.correo = document.getElementById("correo").value
+	codTelef = document.getElementById("codTelef").value
+	numTelef = document.getElementById("numTelef").value
+	usu.telefono= `${codTelef}-${numTelef}`
+	usu.user = document.getElementById("user").value
+	usu.contrasena = document.getElementById("contrasena").value
+	usu.verPass = document.getElementById("verPass").value
+	usu.nivUsu = document.getElementById("nivUsu").value
+	usu.actUsu()
 }

@@ -18,6 +18,11 @@ if(isset($_POST['apellido'])){
 }else{
     $nusu->apellido= "nada";
 }
+if(isset($_POST["cedula"])){
+    $nusu->cedula = $_POST["cedula"];
+}else{
+    $nusu->cedula= "nada";
+}
 if(isset($_POST['correo'])){
     $nusu->correo= $_POST['correo'];
 }else{
@@ -43,6 +48,51 @@ if(isset($_POST['pass'])){
 }else{
     $nusu->pass= "nada";
 }
+if(isset($_POST["nivUsu"])){
+    $nusu->nivUsu = $_POST["nivUsu"];
+}else{
+    $nusu->nivUsu = "";
+}
+if(isset($_POST["cedUsu"])){
+    $nusu->cedUsu = $_POST["cedUsu"];
+}else{
+    $nusu->cedUsu = "";
+}
+if(isset($_POST["nomUsu"])){
+    $nusu->nomUsu = $_POST["nomUsu"];
+}else{
+    $nusu->nomUsu = "";
+}
+if(isset($_POST["apelUsu"])){
+    $nusu->apelUsu = $_POST["apelUsu"];
+}else{
+    $nusu->apelUsu = "";
+}
+if(isset($_POST["dirUsu"])){
+    $nusu->dirUsu = $_POST["dirUsu"];
+}else{
+    $nusu->dirUsu = "";
+}
+if(isset($_POST["telfUsu"])){
+    $nusu->telfUsu = $_POST["telfUsu"];
+}else{
+    $nusu->telfUsu = "";
+}
+if(isset($_POST["corUsu"])){
+    $nusu->corUsu = $_POST["corUsu"];
+}else{
+    $nusu->corUsu = "";
+}
+if(isset($_POST["nivUsu"])){
+    $nusu->nivUsu = $_POST["nivUsu"];
+}else{
+    $nusu->nivUsu = "";
+}
+if(isset($_POST["idUsu"])){
+    $nusu->idUsu = $_POST["idUsu"];
+}else{
+    $nusu->idUsu = "";
+}
 
 if ($accion == "mostReg"){
     $nusu->mostRegistro();
@@ -50,5 +100,10 @@ if ($accion == "mostReg"){
 if($accion == "guardUsu"){
     $nusu->guardUsu();
 }
-
+if($accion == "ModUsu"){
+    $nusu->ModUsu();
+}
+if($accion == "encUsu"){
+    $nusu->encUsu();
+}
 ?>

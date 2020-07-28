@@ -30,7 +30,7 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#" onclick="mostRegistro()">Registrar</a>
-                    <a class="dropdown-item" href="#">Buscar</a>
+                    <a class="dropdown-item" onclick="btnModUsu()" href="#">Modificar</a>
                     <a class="dropdown-item" href="#">Estadisticas</a>
                   </div>
                 </li>
@@ -61,6 +61,9 @@
             </div>
             <div id="campOculto"></div>
             ';
+        }
+        function header2(){
+
         }
     }
 ?>
