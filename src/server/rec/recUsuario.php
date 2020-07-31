@@ -130,4 +130,10 @@ if($accion == "encUsu"){
 if($accion=="actUsu"){
     $nusu->actUsu();
 }
+if($accion=="mostList"){
+    $nusu->mostList();
+}
+if($accion=="eliminarUsu"){
+    $nusu->eliminarUsu();
+}
 ?>

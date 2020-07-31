@@ -21,7 +21,7 @@
                     <a class="dropdown-item" href="#" onclick=btnFormImpri()>Imprimir</a>
                     <a class="dropdown-item" onclick="btnFormConst()" href="#">Nueva Inscripción</a>
                     <a class="dropdown-item" onclick="" href="#">Renovación</a>
-                    <a class="dropdown-item" href="#">Estadisticas</a>
+                    <a class="dropdown-item" href="#">Reportes</a>
                   </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -31,11 +31,8 @@
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#" onclick="mostRegistro()">Registrar</a>
                     <a class="dropdown-item" onclick="btnModUsu()" href="#">Modificar</a>
-                    <a class="dropdown-item" href="#">Estadisticas</a>
+                    <a class="dropdown-item" onclick="btnMostList()" href="#">Lista de usuarios</a>
                   </div>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#" >Buscar</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" onclick="btnSalir()" href="#" >Salir</a>

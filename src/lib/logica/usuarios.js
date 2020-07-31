@@ -1,7 +1,8 @@
 
 class usuarios{
 	
-		construct(){
+		construct(nombre,apellido,cedula,correo,direccion,codTelef,numTelef,telf,user,contrasena,
+			verPass,verificacion,pass,nivUsu,cedUsu,nomUsu,apelUsu,dirUsu,telfUsu,corUsu,idUsu,nivelUsu){
 
 		nombre;
 		apellido;
@@ -9,7 +10,7 @@ class usuarios{
 		correo;
 		direccion;
 		codTelef;
-		numTelf
+		numTelef;
 		telf;
 		user;
 		contrasena;
@@ -20,12 +21,11 @@ class usuarios{
 		cedUsu
 		nomUsu
 		apelUsu
-		cedUsu
 		dirUsu
 		telfUsu
 		corUsu
-		nivUsu
 		idUsu
+		nivelUsu
 		}
 		
 
@@ -86,7 +86,7 @@ class usuarios{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recUsuario.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		ajax.send(`nombre=${this.nombre}&apellido=${this.apellido}&cedula=${this.cedula}&correo=${this.correo}&direccion=${this.direccion}&telf=${this.telf}&user=${this.user}&pass=${this.pass}&nivUsu=${this.nivUsu}&accion=guardUsu`); 
+		ajax.send(`nombre=${this.nombre}&apellido=${this.apellido}&cedula=${this.cedula}&correo=${this.correo}&direccion=${this.direccion}&telf=${this.telf}&user=${this.user}&pass=${this.pass}&nivUsu=${this.nivelUsu}&accion=guardUsu`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -175,6 +175,44 @@ class usuarios{
 			     }
 	       	}
 	}
+	mostList(){
+		var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recUsuario.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send(`&accion=mostList`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+				divsitioform.innerHTML = ajax.responseText;
+				
+			     }
+	       	}
+	}
+	eliminarUsu(){
+		var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recUsuario.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send(`cedu=${this.cedu}&accion=eliminarUsu`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+				divsitioform.innerHTML = ajax.responseText;
+				
+			     }
+	       	}
+	}
 }
 function mostRegistro(){
 	let usu= new usuarios();
@@ -203,13 +241,7 @@ function btnGuardUsu(){
 	usu.correo = document.getElementById("correo").value;
 	usu.user = document.getElementById("user").value;
 	usu.contrasena = document.getElementById("contrasena").value;
-	nivUsu = document.getElementById("nivUsu").value
-	if(nivUsu=="Administrador"){
-		usu.nivUsu = "1";
-	}
-	if(nivUsu=="Redactor"){
-		usu.nivUsu = "2"
-	}
+	usu.nivelUsu = document.getElementById("nivUsu").value
 	usu.verPass = document.getElementById("verPass").value;
 	if(usu.verificacion() == true){
 		if(usu.contrasena === usu.verPass){
@@ -262,4 +294,13 @@ function btnActUsu(){
 	usu.nivUsu = document.getElementById("nivUsu").value
 	usu.idUsu = document.getElementById("idUsu").value
 	usu.actUsu()
+}
+function btnMostList(){
+	let usu = new usuarios
+	usu.mostList();
+}
+function btnEliminarUsu(cedula="nada"){
+	let usu = new usuarios
+	usu.cedu = cedula
+	usu.eliminarUsu();
 }

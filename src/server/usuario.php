@@ -19,7 +19,6 @@ class usuario{
         $dirUsu = "";
         $telfUsu = "";
         $corUsu = "";
-        $nivUsu = "";
         $idUsu = "";
 
     }
@@ -103,7 +102,7 @@ class usuario{
         if($busUsuRes["nick"]!=$this->user){
             if($busUsuRes["correo"]!=$this->correo){
                 if($busUsuRes["cedula"]!=$this->cedula){
-                    $usuSql="INSERT INTO usuarios(nick,pass,nombre,apellido,cedula,direccion,telef,correo,nivel)values('".$this->user."', '".$this->pass."','".$this->nombre."','".$this->apellido."','".$this->cedula."', '".$this->direccion."','".$this->telf."','".$this->correo."', ".$this->nivUsu.") ";
+                    $usuSql="INSERT INTO usuarios(nick,pass,nombre,apellido,cedula,direccion,telef,correo,nivel)values('".$this->user."', '".$this->pass."','".$this->nombre."','".$this->apellido."','".$this->cedula."', '".$this->direccion."','".$this->telf."','".$this->correo."', '".$this->nivUsu."') ";
                     $link->query($usuSql);
                     echo 'USUARIO REGISTRADO CON EXITO';
                 }else{
@@ -219,6 +218,92 @@ class usuario{
         $modUsuSql = "UPDATE usuarios SET nick='".$this->user."', pass='".$this->contrasena."', nombre='".$this->nombre."', apellido='".$this->apellido."', cedula='".$this->cedu."', direccion='".$this->direc."', telef='".$this->telefono."', correo='".$this->correo."', nivel='".$this->nivUsu."' where id=".$this->idUsu." ";
         $link->query($modUsuSql);
         echo'USUARIO MODIFICADO CON EXITO';
+    }
+    function mostList(){
+            $link=mysqli_connect("127.0.0.1", "root","","siscast") 
+            or die(mysqli_error());
+            //BUSQUEDAS DE USUARIOS PARA FOR
+                $listSql = "SELECT COUNT(*) FROM usuarios";
+                $resList = $link->query($listSql);
+                $listRes = $resList->fetch_assoc();
+            //BUSQUEDA DE USUARIOS
+                $usuSql = "SELECT * FROM usuarios";
+                $resUsu = $link->query($usuSql);      
+
+                echo'
+                    <table>
+                        <tr>
+                            <td colspan="6">
+                                <h2>LISTADO DE USUARIOS</h2>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Nombre </b>
+                            </td>
+                            <td>
+                                <b>Apellido</b>
+                            </td>
+                            <td>
+                                <b>Cedula</b>
+                            </td>
+                            <td>
+                                <b>Nivel</b>
+                            </td>
+                            <td>
+                                <b>Correo</b>
+                            </td>
+                            <td>
+                                <b>Acciones/b>
+                            </td>
+                         </tr>
+                ';
+            for($i=0; $i<$listRes["COUNT(*)"]; $i++){
+                
+                $usuRes = $resUsu->fetch_array();  
+                echo'
+                   
+                    <tr>
+                        <td>
+                            <b>'.$usuRes["nombre"].'</b>
+                        </td>
+                        <td>
+                            <b>'.$usuRes["apellido"].'</b>
+                        </td>
+                        <td>
+                            <b>'.$usuRes["cedula"].'</b>
+                        </td>
+                        <td>';
+                        if($usuRes["nivel"]=="1"){
+                            echo'<b>Administrador</b>';
+                        }
+                        if($usuRes["nivel"]=="2"){
+                            echo'<b>Redactor</b>';
+                        }
+                           
+                        echo'</td>
+                        <td>
+                            <b>'.$usuRes["correo"].'</b>
+                        </td>
+                        <td>
+                            <div class="btnSig1">
+                                <input type="button" value="Eliminar" onclick="btnEliminarUsu('.$usuRes["cedula"].')" class=" botones btn btn-primary" />
+                                <input type="button" value="Modificar" onclick="btnModUsu()" class=" botones btn btn-primary" />
+                            </div>
+                        </td>
+                    </tr>
+                ';
+            }
+            echo'</table>';
+    }
+    function eliminarUsu(){
+        $link=mysqli_connect("127.0.0.1", "root","","siscast") 
+            or die(mysqli_error());
+        //ELIMINAR USUARIO
+            $elimSql = "DELETE FROM usuarios where cedula='".$this->cedu."'";
+            $link->query($elimSql);
+            echo'USUARIO ELIMINADO CON ÉXITO';
+            $this->mostList();
     }
 }
 
