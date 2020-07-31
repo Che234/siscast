@@ -1548,7 +1548,23 @@ class constancias{
             $resExp = $link->query($expSql);
             $expRes = $resExp->fetch_assoc();
         //BUSQUEDA DE PAGO
-            $pagSql = "SELECT * FROM pagos where ";
+            $pagSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." ORDER BY fechaPagos DESC";
+            $resPagos = $link->query($pagSql);
+            $pagosRes = $resPagos->fetch_array();
+            $anoPago = explode("-",$pagosRes["fechaPagos"]);
+        if($anoPago[0]==date("Y")){
+            //BUSQUEDA DE EXPEDIENTE - CONSTANCIA
+            $constSql  ="SELECT * FROM constancias INNER JOIN expediente where fk_exped=".$pagosRes["fk_expedient"]."";
+            $resConst = $link->query($constSql);
+            $constRes = $resConst->fetch_array();
+            echo'
+            <div class="campDat"><embed id="embedPdf" src="http://localhost/SisCast/assets/constancias/'.$constRes["n_expediente"].'.pdf" type="application/pdf"></div>
+            ';
+        }
+        if($anoPago[0] < date("Y")){
+            $this->formImpri();
+            echo'<center><br/><b>EL NUMERO DE EXPEDIENTE QUE INGRESO NO HA PAGADO EL AÑO EN CURSO</b></center>';
+        }
     }
 }
 

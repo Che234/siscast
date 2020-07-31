@@ -1435,7 +1435,6 @@ class busquedas{
             ';
     }
 
-
     function actGeneral(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());

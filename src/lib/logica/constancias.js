@@ -1,6 +1,6 @@
 class constancias{
 
-    constructor(cedR,cedConst,cedFul,rifR,rifN,rifConst,nomProp,
+    construct(cedR,cedConst,cedFul,rifR,rifN,rifConst,nomProp,
         apelProp,codTelf,numText,direcProp,codTelf2,numTelf2,parrInmue,
         secInmue,direcInmue,topoConst,formaConst,servPublic,usoConst,tenenConst,
         ocupConst,dimeConst,destConst,estConst,pareTipoInmue,pareAcaInmue,pintConst,
@@ -706,8 +706,8 @@ class constancias{
     }
     veriImpr(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campOculto');
-        var divsitiomaterial = document.getElementById('campOculto');
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
 		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
 		ajax=objetoAjax();
