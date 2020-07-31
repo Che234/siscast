@@ -1,6 +1,8 @@
 
 class usuarios{
 	
+		construct(){
+
 		nombre;
 		apellido;
 		cedula;
@@ -24,6 +26,8 @@ class usuarios{
 		corUsu
 		nivUsu
 		idUsu
+		}
+		
 
 	verificacion(){
 		if(!er_areas.test(this.nombre)){
@@ -161,7 +165,7 @@ class usuarios{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recUsuario.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-		ajax.send(`nombre=${this.nombre}&apellido=${this.apellido}&ced=${this.ced}&direc=${this.direc}&correo=${this.correo}&telefono=${this.telefono}&user=${this.user}&contrasena=${this.contrasena}&verPass=${this.verPass}&nivUsu=${this.nivUsu}&accion=actUsu`); 
+		ajax.send(`nombre=${this.nombre}&apellido=${this.apellido}&cedu=${this.cedu}&direc=${this.direc}&correo=${this.correo}&telefono=${this.telefono}&user=${this.user}&contrasena=${this.contrasena}&verPass=${this.verPass}&nivUsu=${this.nivUsu}&idUsu=${this.idUsu}&accion=actUsu`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -232,13 +236,13 @@ function btnPlasUsu(){
 	let usu = new usuarios
 	telefono = document.getElementById("telfUsu").value
 	divTelf = telefono.split("-")
-	document.getElementById("codTelef").value = divTelf[0]
-	document.getElementById("numTelf").value = divTelf[1]
+	document.getElementById("codiTelef").value = divTelf[0]
+	document.getElementById("numeTelf").value = divTelf[1]
 	nivelUsu = document.getElementById("nivelUsu").value
-	if(nivelUsu==1){
+	if(nivelUsu=="1"){
 		document.getElementById("nivUsu").selectedIndex=1
 	}
-	if(nivelUsu==2){
+	if(nivelUsu=="2"){
 		document.getElementById("nivUsu").selectedIndex=2
 	}
 }
@@ -246,15 +250,16 @@ function btnActUsu(){
 	let usu = new usuarios
 	usu.nombre = document.getElementById("nombre").value
 	usu.apellido = document.getElementById("apellido").value
-	usu.ced = document.getElementById("ced").value
+	usu.cedu = document.getElementById("cedu").value
 	usu.direc = document.getElementById("direc").value
 	usu.correo = document.getElementById("correo").value
-	codTelef = document.getElementById("codTelef").value
-	numTelef = document.getElementById("numTelef").value
-	usu.telefono= `${codTelef}-${numTelef}`
+	codiTelef = document.getElementById("codiTelef").value
+	numeTelf = document.getElementById("numeTelf").value
+	usu.telefono= `${codiTelef}-${numeTelf}`
 	usu.user = document.getElementById("user").value
 	usu.contrasena = document.getElementById("contrasena").value
 	usu.verPass = document.getElementById("verPass").value
 	usu.nivUsu = document.getElementById("nivUsu").value
+	usu.idUsu = document.getElementById("idUsu").value
 	usu.actUsu()
 }

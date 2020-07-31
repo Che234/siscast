@@ -21,6 +21,7 @@ class usuario{
         $corUsu = "";
         $nivUsu = "";
         $idUsu = "";
+
     }
 
         
@@ -78,9 +79,9 @@ class usuario{
                     <div class="campos">
                         <p class="negritas text-left">Nivel:</p>
                         <select id="nivUsu">
-                            <option></option>
-                            <option value="Administrador">Administrador</option>
-                            <option value="Redactor">Redactor</option>
+                            <option value="0"></option>
+                            <option value="1">Administrador</option>
+                            <option value="2">Redactor</option>
                         </select>
                     </div>
                 </div>
@@ -136,6 +137,7 @@ class usuario{
         //BUSQUEDA DE USUARIO
         $link=mysqli_connect("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
+
         $usuSql = "SELECT * FROM usuarios where cedula='".$this->cedUsu."'";
         $resUsu= $link->query($usuSql);
         $usuRes = $resUsu->fetch_assoc();
@@ -161,7 +163,7 @@ class usuario{
                     </div>
                     <div class="campos" >
                         <p class="negritas text-left">Cedula:</p>
-                        <input type="text" value="'.$usuRes["cedula"].'" id="ced">
+                        <input type="text" value="'.$usuRes["cedula"].'" id="cedu">
                     </div>
                 </div>
                 <div class="row filasUser">
@@ -175,8 +177,8 @@ class usuario{
                     </div>
                     <div class="campos">
                         <p class="negritas text-left">Telefono:</p>
-                        <input class="codigo" type="text" id="codTelef">
-                        <input class="telf" type="text" id="numTelf">
+                        <input class="codigo" type="text" id="codiTelef">
+                        <input class="telf" type="text" id="numeTelf">
                     </div>
                 </div>
                 <div class="row filasUser">
@@ -210,6 +212,13 @@ class usuario{
             </div>
         
         ';
+    }
+    function actUsu(){
+        $link=mysqli_connect("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $modUsuSql = "UPDATE usuarios SET nick='".$this->user."', pass='".$this->contrasena."', nombre='".$this->nombre."', apellido='".$this->apellido."', cedula='".$this->cedu."', direccion='".$this->direc."', telef='".$this->telefono."', correo='".$this->correo."', nivel='".$this->nivUsu."' where id=".$this->idUsu." ";
+        $link->query($modUsuSql);
+        echo'USUARIO MODIFICADO CON EXITO';
     }
 }
 

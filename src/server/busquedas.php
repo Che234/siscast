@@ -1560,7 +1560,7 @@ class busquedas{
             $resPagos = $link->query($pagSql);
             $pagoRes = $resPagos->fetch_assoc();
         //INSERT PAGOS 
-            $pagoSql = "INSERT INTO pagos(fk_expedient,fk_factura,fecha)value(".$expRes["id"].",".$idFact.",'".date("Y-m-d")."')";
+            $pagoSql = "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$expRes["id"].",".$idFact.",'".date("Y-m-d")."')";
             $link->query($pagoSql);
         echo'PAGO REALIZADO CON EXITO';
     }
@@ -1576,7 +1576,7 @@ class busquedas{
             $resProp = $link->query($propSql);
             $propRes = $resProp->fetch_assoc();
         //BUSQUEDA DE CANTIDAD DE PAGOS
-            $veriPagoSql = "SELECT COUNT(*) FROM pagos where fk_expedient=".$expRes["id"]." ORDER BY fecha";
+            $veriPagoSql = "SELECT COUNT(*) FROM pagos where fk_expedient=".$expRes["id"]." ORDER BY fechaPagos";
             $veriResPago = $link->query($veriPagoSql);
             $veriPagoRes = $veriResPago->fetch_assoc();
         
@@ -1623,17 +1623,17 @@ class busquedas{
                     <b>Fecha:</b>
                 </td>
             </tr>';
-            //BUSQUEDA DE PAGOS
-                $pagoSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." ORDER BY id";
-                $resPago = $link->query($pagoSql);
-                $pagoRes = $resPago->fetch_assoc();
-            //BUSQUEDA DE FACTURA
-                $factSql = "SELECT * FROM factura where id=".$pagoRes["fk_factura"]."";
-                $resFact = $link->query($factSql);
-                $factRes = $resFact->fetch_assoc();
-            for($i=0; $i<$veriPagoRes["COUNT(*)"];$i++){
-                $no= $i+1;
-            
+                //BUSQUEDA DE PAGOS
+                    $pagoSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." ";
+                    $resPago = $link->query($pagoSql);
+                    $pagoRes = $resPago->fetch_assoc();
+                //BUSQUEDA DE FACTURA
+                    $factSql = "SELECT * FROM pagos INNER JOIN factura where fk_expedient=".$pagoRes["fk_expedient"]."";
+                    $resFact = $link->query($factSql);
+                    $no=0;
+        for($i = 0; $i<$veriPagoRes["COUNT(*)"]; $i++){
+            $factRes = $resFact->fetch_array();
+                $no= $no+1;
                 echo'
                 <tr>
                     <td>
@@ -1646,10 +1646,11 @@ class busquedas{
                         '.$factRes["monto"].'
                     </td>
                     <td>
-                        '.$pagoRes["fecha"].'
+                        '.$factRes["fechaPagos"].'
                     </td>
                 </tr>';
-            }
+        }
+            
             echo'
         </table>';
     }

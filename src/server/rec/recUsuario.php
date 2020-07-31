@@ -83,16 +83,37 @@ if(isset($_POST["corUsu"])){
 }else{
     $nusu->corUsu = "";
 }
-if(isset($_POST["nivUsu"])){
-    $nusu->nivUsu = $_POST["nivUsu"];
-}else{
-    $nusu->nivUsu = "";
-}
 if(isset($_POST["idUsu"])){
     $nusu->idUsu = $_POST["idUsu"];
 }else{
     $nusu->idUsu = "";
 }
+if(isset($_POST["cedu"])){
+    $nusu->cedu = $_POST["cedu"];
+}else{
+    $nusu->cedu = "";
+}
+if(isset($_POST["direc"])){
+    $nusu->direc = $_POST["direc"];
+}else{
+    $nusu->direc = "";
+}
+if(isset($_POST["telefono"])){
+    $nusu->telefono = $_POST["telefono"];
+}else{
+    $nusu->telefono = "";
+}
+if(isset($_POST["contrasena"])){
+    $nusu->contrasena = $_POST["contrasena"];
+}else{
+    $nusu->contrasena = "";
+}
+if(isset($_POST["verPass"])){
+    $nusu->verPass = $_POST["verPass"];
+}else{
+    $nusu->verPass = "";
+}
+
 
 if ($accion == "mostReg"){
     $nusu->mostRegistro();
@@ -105,5 +126,8 @@ if($accion == "ModUsu"){
 }
 if($accion == "encUsu"){
     $nusu->encUsu();
+}
+if($accion=="actUsu"){
+    $nusu->actUsu();
 }
 ?>
