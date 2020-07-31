@@ -46,6 +46,7 @@
     ?>
 <script src="./src/lib/logica/ajax.js"></script>
 <script src="./src/lib/logica/expresiones.js"></script>
+<script src="./src/lib/logica/renovacion.js"></script>
 <script src="./src/lib/logica/login.js"></script>
 <script src="./src/lib/logica/constancias.js"></script>
 <script src="./src/lib/logica/busquedas.js"></script>

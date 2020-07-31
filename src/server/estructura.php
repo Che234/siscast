@@ -20,7 +20,6 @@
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#" onclick=btnFormImpri()>Imprimir</a>
                     <a class="dropdown-item" onclick="btnFormConst()" href="#">Nueva Inscripción</a>
-                    <a class="dropdown-item" onclick="" href="#">Renovación</a>
                     <a class="dropdown-item" href="#">Reportes</a>
                   </div>
                 </li>
