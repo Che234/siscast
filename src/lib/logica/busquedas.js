@@ -191,7 +191,7 @@ class busquedas{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recBuscar.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`tipoBuscar=${this.tipoBuscar}&campBuscar=${this.campBuscar}&accion=busExp`); 
+        ajax.send(`campBuscar=${this.campBuscar}&tipoBuscar=${this.tipoBuscar}&accion=busExp`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -515,12 +515,24 @@ class busquedas{
 	       	}
     }
 }
-function btnConsultExp(){
+function btnConsultExp(nuExp="0",tipBus="0"){
     let busque = new busquedas;
-    busque.campBuscar = document.getElementById("campBuscar").value
-    busque.tipoBuscar = document.getElementById("tipoBuscar").value
-    if(busque.veriBuscar()==true){
-        busque.constExp();
+    numeExp = nuExp
+    tipoBus = tipBus
+    if(numeExp!="0"){
+        if(tipoBus!="0"){
+            busque.campBuscar = numeExp
+            busque.tipoBuscar = tipoBus
+            if(busque.veriBuscar()==true){
+                busque.constExp();
+            }
+        }
+    }else{
+        busque.campBuscar = document.getElementById("campBuscar").value
+        busque.tipoBuscar = document.getElementById("tipoBuscar").value
+        if(busque.veriBuscar()==true){
+            busque.constExp();
+        }
     }
 }
 function mostTipModif(){

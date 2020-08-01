@@ -219,10 +219,18 @@ class busquedas{
                      <td>
                         <input type"button" value="Ver pagos" onclick="btnPagos()" class="botones btn btn-primary" />
                         <input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />
-                        <input type"button" value="Modificar" class="botones btn btn-primary" onclick="mostTipModif()"/>
-                        <input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst()"/>
+                        <input type"button" value="Modificar" class="botones btn btn-primary" onclick="mostTipModif()"/>';
+                    $veriRenov = "SELECT * FROM constancias where fk_exped=".$expRes["id"]." ORDER BY fecha DESC";
+                    $resVeriRenov = $link->query($veriRenov);
+                    $veriRenovRes = $resVeriRenov->fetch_array();
+                    $fechaRenov = explode("-",$veriRenovRes["fecha"]);
+                    if($fechaRenov[0] !=date("Y")){
+                        echo'<input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst()"/>';
+                    }
+                        echo' 
                         <input type"button" value="Eliminar" onclick="btnElimInmue()" class="botones btn btn-primary" />
-                        <input type="hidden" value="'.$this->campBuscar.'" id="expBuscar">
+                        <input type="hidden" value="'.$this->campBuscar.'" id="expBuscar" />
+                        <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
                      </td>
                  </tr>
             </table>';

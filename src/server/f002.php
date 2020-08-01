@@ -1,5 +1,6 @@
 <?php
 require('../../lib/fpdf/fpdf.php');
+
 class PDF extends FPDF{
     // Cabecera de página
     function Header(){
@@ -1070,23 +1071,46 @@ class f001{
             $resultUser= $link->query($userSql);
             $idUser= $resultUser->fetch_assoc();
         //INSERT FACTURA
-            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->nuExp."','".$this->fechFact."')";
-            $link->query($expFactSql);
-            $idExpFact= $link->insert_id;
+            $veriExpFac = "SELECT * FROM factura where n_factura='".$this->numFact."'";
+            $resVeriExpFact = $link->query($veriExpFac);
+            $veriExpFactRes = $resVeriExpFact->fetch_array();
+            if($veriExpFactRes["n_factura"] !=$this->numFact){
+                $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."')";
+                $link->query($expFactSql);
+                $idExpFact= $link->insert_id;
+            }else{
+                $idExpFact = $veriExpFactRes["id"];
+            }
         //INSERT EXPEDIENTE
-            $fechaExp= date('Y-m-d');
-            $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",".$this->nuExp.",'".$fechaExp."')";
-            $link->query($expediSql);
-            $idExpediente = $link->insert_id;
+            $veriExpedient = "SELECT * FROM expediente where n_expediente=".$this->nuExp."";
+            $resVeriExpediente = $link->query($veriExpedient);
+            $veriExpedienteRes = $resVeriExpediente->fetch_array();
+            if($veriExpedienteRes["n_expediente"]!= $this->nuExp){
+                $fechaExp= date('Y-m-d');
+                $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",".$this->nuExp.",'".$fechaExp."')";
+                $link->query($expediSql);
+                $idExpediente = $link->insert_id;    
+            }else{
+                $idExpediente = $veriExpedienteRes["id"];
+            }
+            
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
             $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$idExpediente.")";
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
         //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fecha)value(".$idExpediente.",".$idExpFact.",'".$this->fechFact."')";
-            $link->query($pagoExpSql);
-            $idPagoExp= $link->insert_id;
+            $veriPagosSql = "SELECT * FROM pagos where fk_expedient=".$idExpediente." and fechaPagos='".$this->fechFact."' ";
+            $resVeriPagos = $link->query($veriPagosSql);
+            $veriPagosRes = $resVeriPagos->fetch_array();
+            $anoPagos = explode("-",$veriPagosRes["fk_expedient"]);
+            if($anoPagos < date("Y")){
+                $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$idExpediente.",".$idExpFact.",'".$this->fechFact."')";
+                $link->query($pagoExpSql);
+                $idPagoExp= $link->insert_id;
+            }else{
+                $idPagoExp= $veriPagosRes["id"];
+            }
         //BUSQUEDA DEL INMUEBLE
             $expSql= "SELECT telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
@@ -2132,8 +2156,8 @@ class f001{
                 $pdf->SetLineWidth(0.5);
                 $pdf->MultiCell(120,4,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
                 '),'T:1','C');
-            $pdf->Output('F','../../../assets/constancias/'.$this->nuExp.'.pdf');
-            echo'<input type="hidden" id="nuExp" value="'.$this->nuExp.'">';
+    $pdf->Output('F','../../../assets/constancias/'.$this->nuExp.'.pdf');
+    echo'<input type="hidden" id="nuExp" value="'.$this->nuExp.'">';
     }
 }
 class f003{
