@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema Catastral Automatizado</title>
+    <link rel="stylesheet" href="./src/stylus/busquedas.css">
     <link rel="stylesheet" href="./src/stylus/estructura.css">
     <link rel="stylesheet" href="./src/lib/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="./src/stylus/usuarios.css">

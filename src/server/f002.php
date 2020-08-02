@@ -1058,6 +1058,7 @@ class f001{
     var $fechFact = "";
     var $numFact= "";
     var $operacion = "";
+    
     function imprimir(){
         $pdf = new PDF('P','mm','A3');
         $pdf->SetMargins(20,0,22);
@@ -1067,50 +1068,26 @@ class f001{
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
         //BUSQUEDA DE USUARIO
-            $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
             $idUser= $resultUser->fetch_assoc();
         //INSERT FACTURA
-            $veriExpFac = "SELECT * FROM factura where n_factura='".$this->numFact."'";
-            $resVeriExpFact = $link->query($veriExpFac);
-            $veriExpFactRes = $resVeriExpFact->fetch_array();
-            if($veriExpFactRes["n_factura"] !=$this->numFact){
-                $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."')";
-                $link->query($expFactSql);
-                $idExpFact= $link->insert_id;
-            }else{
-                $idExpFact = $veriExpFactRes["id"];
-            }
-        //INSERT EXPEDIENTE
-            $veriExpedient = "SELECT * FROM expediente where n_expediente=".$this->nuExp."";
-            $resVeriExpediente = $link->query($veriExpedient);
-            $veriExpedienteRes = $resVeriExpediente->fetch_array();
-            if($veriExpedienteRes["n_expediente"]!= $this->nuExp){
-                $fechaExp= date('Y-m-d');
-                $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",".$this->nuExp.",'".$fechaExp."')";
-                $link->query($expediSql);
-                $idExpediente = $link->insert_id;    
-            }else{
-                $idExpediente = $veriExpedienteRes["id"];
-            }
-            
+            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."')";
+            $link->query($expFactSql);
+            $idExpFact= $link->insert_id; 
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
-            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$idExpediente.")";
+            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
         //INSERT PAGOS
-            $veriPagosSql = "SELECT * FROM pagos where fk_expedient=".$idExpediente." and fechaPagos='".$this->fechFact."' ";
-            $resVeriPagos = $link->query($veriPagosSql);
-            $veriPagosRes = $resVeriPagos->fetch_array();
-            $anoPagos = explode("-",$veriPagosRes["fk_expedient"]);
-            if($anoPagos < date("Y")){
-                $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$idExpediente.",".$idExpFact.",'".$this->fechFact."')";
-                $link->query($pagoExpSql);
-                $idPagoExp= $link->insert_id;
-            }else{
-                $idPagoExp= $veriPagosRes["id"];
-            }
+            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$this->nuExp.",".$idExpFact.",'".$this->fechFact."')";
+            $link->query($pagoExpSql);
+            $idPagoExp= $link->insert_id;
+        //BUSQUEDA DEL EXPEDIENTE
+            $busExpSql = "SELECT * FROM expediente where id=".$this->nuExp."";
+            $resBusExp = $link->query($busExpSql);
+            $busExpRes = $resBusExp->fetch_array();
         //BUSQUEDA DEL INMUEBLE
             $expSql= "SELECT telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
@@ -1188,7 +1165,7 @@ class f001{
             $pdf->cell(40,10,'No Civico: No Aplica');
             $pdf->SetY(70);
             $pdf->SetX(215);
-            $pdf->cell(40,10,'No Expediente: '.$this->nuExp.'');
+            $pdf->cell(40,10,'No Expediente: '.$busExpRes["n_expediente"].'');
             $pdf->SetY(74);
             $pdf->SetX(22);
             $pdf->cell(40,10,utf8_decode('Tipo de Operación: '.$this->operacion.''));

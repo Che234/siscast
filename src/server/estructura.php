@@ -45,17 +45,27 @@
             <div id="campGeneral">
               <div class="campBuscador">
                 <h2>CONSULTA</h2>
-                <select id="tipoBuscar">
+                <select id="tipoBuscar" onChange="btnCampCed()">
                   <option value="0"></option>
                   <option value="Expediente">Expediente</option>
-                  <option value="cedula">Cedula</option>
-                  <option value="rif">Rif</option>
+                  <option value="Cedula">Cedula</option>
+                  <option value="Rif">Rif</option>
+                </select>
+                <select id="tipoCed" >
+                  <option value="0"></option>
+                  <option value="V">V</option>
+                  <option value="E">E</option>
+                </select>
+                <select id="tipoRif" >
+                  <option value="0"></option>
+                  <option value="V">V</option>
+                  <option value="J">J</option>
                 </select>
                 <input type="text" id="campBuscar" />
-                <input type="button" value="Consultar" onclick="btnConsultExp()" class="botones btn btn-primary />
+                <input type="button" id="consultExp" value="Consultar" onclick="btnConsultExp()" class="botones btn btn-primary" />
+                <input type="button" id="consultCed" value="Consultar" onclick="btnConsultCed()" class="botones btn btn-primary" />
               </div>
             </div>
-            <div id="campOculto"></div>
             ';
         }
         function header2(){

@@ -18,7 +18,7 @@ class busquedas{
         oesteSecDoc,uniOeste3,alindSecOeste,arTotal3,NivConstTotal3,arConstTotal3,idlindPosVenta,
         arTotalVenta,arRestante,valorTerreno,valorInmueble,valorConstruc,idTerreno,Acue,AcueRural,
         AguasSub,AguasServ,PavFlex,PavRig,viaEngran,acera,AlumPublico,aseo,transPublic,pozoSept,
-        ElectResidencial,ElectriIndust,linTelf,idServ,montoFact,numFact,fechFact){}
+        ElectResidencial,ElectriIndust,linTelf,idServ,montoFact,numFact,fechFact,tipoCed){}
     veriBuscar(){
         if(!ex_datcort.test(this.campBuscar)){
             alert("Campo de buscar no puede estar vacio");
@@ -182,6 +182,21 @@ class busquedas{
         }
         return true
     }
+    veriCed(){
+        if(!ex_datcort.test(this.tipoBuscar)){
+            alert("Error en el formato de Documento ha Buscar");
+            return false;
+        }
+        if(!ex_datcort.test(this.tipoCed)){
+            alert("Error en el formato de tipo de Documento");
+            return false;
+        }
+        if(!ex_cedula.test(this.campBuscar)){
+            alert("Error en el formato de numero de Cedula");
+            return false;
+        }
+        return true
+    }
     constExp(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('campGeneral');
@@ -192,6 +207,24 @@ class busquedas{
 		ajax.open("POST", "src/server/rec/recBuscar.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`campBuscar=${this.campBuscar}&tipoBuscar=${this.tipoBuscar}&accion=busExp`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    consultCed(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`tipoBuscar=${this.tipoBuscar}&tipoCed=${this.tipoCed}&campBuscar=${this.campBuscar}&accion=busExp`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -487,7 +520,7 @@ class busquedas{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recBuscar.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`expBuscar=${this.expBuscar}&accion=verPagos`); 
+        ajax.send(`expBuscar=${this.expBuscar}&tipoBuscar=${this.tipoBuscar}&accion=verPagos`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -533,6 +566,36 @@ function btnConsultExp(nuExp="0",tipBus="0"){
         if(busque.veriBuscar()==true){
             busque.constExp();
         }
+    }
+}
+function btnConsultCed(){
+    let busque = new busquedas
+    busque.tipoBuscar = document.getElementById("tipoBuscar").value
+    busque.tipoCed = document.getElementById("tipoCed").value
+    busque.campBuscar = document.getElementById("campBuscar").value
+    if(busque.veriCed()==true){
+        busque.consultCed()
+    }
+}
+function btnCampCed(){
+    let tipoBuscar = document.getElementById("tipoBuscar").value
+    if(tipoBuscar == "Cedula"){
+        document.getElementById("tipoCed").hidden=false
+        document.getElementById("tipoRif").hidden=true
+        document.getElementById("consultExp").hidden=true
+        document.getElementById("consultCed").hidden=false
+    }
+    if(tipoBuscar == "Rif"){
+        document.getElementById("consultExp").hidden=true
+        document.getElementById("consultCed").hidden=false
+        document.getElementById("tipoRif").hidden=false
+        document.getElementById("tipoCed").hidden=true
+    }
+    if(tipoBuscar == "Expediente"){
+        document.getElementById("consultExp").hidden=false
+        document.getElementById("consultCed").hidden=true
+        document.getElementById("tipoRif").hidden=true
+        document.getElementById("tipoCed").hidden=true
     }
 }
 function mostTipModif(){
@@ -1401,5 +1464,11 @@ function btnPagarInmue(){
 function btnPagos(){
     let busque = new busquedas
     busque.expBuscar = document.getElementById("expBuscar").value
+    busque.tipoBuscar = document.getElementById("tipoBuscar").value
     busque.verPagos();
 }
+
+document.getElementById("tipoCed").hidden=true
+document.getElementById("tipoRif").hidden=true
+document.getElementById("consultExp").hidden=false
+document.getElementById("consultCed").hidden=true

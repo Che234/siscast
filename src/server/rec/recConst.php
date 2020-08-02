@@ -779,4 +779,7 @@ if($accion=="formImpri"){
 if($accion=="veriImpr"){
     $nconst->veriImpr();
 }
+if($accion=="busExpediente"){
+    $nconst->busExpediente();
+}
 ?>

@@ -962,6 +962,12 @@ class constancias{
                 </td>
             </tr>
             <tr>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Numero Expediente:</p>
+                        <input type="text" id="nuExp" onchange="veriExpediente()" />
+                    </div>
+                </td>
                 <td>
                     <div class="campDat">
                         <p class="negritas">Multa:</p>
@@ -974,6 +980,7 @@ class constancias{
                 </td>
             </tr>
         </table>
+        <div id="campOculto"></div>
             <input type="hidden" id="parte2" value="'.$parte2[0].'|'.$parte2[1].'|'.$parte2[2].'|'.$parte2[3].'|'.$parte2[4].'|'.$parte2[5].'|'.$parte2[6].'|'.$parte2[7].'|'.$parte2[8].'|'.$parte2[9].'|'.$parte2[10].'|'.$parte2[11].'|'.$parte2[12].'|'.$parte2[13].'|'.$parte2[14].'|'.$parte2[15].'|'.$parte2[16].'|'.$parte2[17].'|'.$parte2[18].'|'.$parte2[19].'|'.$parte2[20].'|'.$parte2[21].'|'.$parte2[22].'|'.$parte2[23].'" />
             <input type="hidden" id="parte1" value="'.$this->parte1.'"/>
         <div class="btnSig1">
@@ -1343,15 +1350,25 @@ class constancias{
 
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-
+        session_start();
 
         //LISTA DE INSERT SQL
             
-            
+            //BUSQUEDA DE USUARIO
+                $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
+                $resultUser= $link->query($userSql);
+                $idUser= $resultUser->fetch_assoc();
             //PROPIETARIOS (LISTO)
+                $busPropSql = "SELECT * FROM propietarios where cedula='".$this->cedFul."'";
+                $resBusProp = $link->query($busPropSql);
+                $busPropRes = $resBusProp->fetch_array();
+            if($busPropRes["id"]!=0){
+                $idProp = $busPropRes["id"];
+            }else{
                 $propSql = "INSERT INTO propietarios(cedula,rif,nombre,apellido,telef,dir_hab) value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFul."','".$this->direcProp."')";
                 $link->query($propSql);
                 $idProp = $link->insert_id;
+            }
 
             //CARACTERISTICAS DEL INMUEBLE (LISTO)
                 $carcSql = "INSERT INTO carc_inmueble(topografia,forma,uso,tenencia,ocupante,dimenciones,regimen)value('".$this->topoConst."','".$this->formaConst."','".$this->usoConst."','".$this->tenenConst."','".$this->ocupConst."','".$this->dimeConst."','".$this->regInmue."')";
@@ -1395,6 +1412,11 @@ class constancias{
                 $InmuebleSql= "INSERT INTO inmueble(telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios)value('".$this->telfFul2."','".$this->direcInmue."','".$this->parrInmue."','".$this->secInmue."','".$this->ambInmue."',".$idCarcConst.",".$idProt.",".$idCarc.",".$idLindDoc.",".$idLindGen.",".$idLindPosVenta.",".$idTerreno.",".$idServ.")";
                 $link->query($InmuebleSql);
                 $idInmueble= $link->insert_id;
+            //EXPEDIENTE
+                $fechaExp= date('Y-m-d');
+                $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$idInmueble.",".$idProp.",".$idUser["id"].",".$this->nuExp.",'".$fechaExp."')";
+                $link->query($expediSql);
+                $idExpediente = $link->insert_id;
               echo'<h1>PROCESO COMPLETADO CON EXITO</h1>
             <div id="iconGuard">
                 <img src="./assets/guard.png"/>
@@ -1402,12 +1424,7 @@ class constancias{
             <p>Para imprimir la constancia debe ingresar los datos de la Factura</p>
             <table border="1px" class="taConst">
                 <tr>
-                    <td class="tdConst">
-                        <div class="campDat">
-                            <p class="negritas">Numero Expediente:</p>
-                            <input type="text" id="nuExp"/>
-                        </div>
-                    </td>
+                    
                     <td class="tdConst">
                         <div class="campDat">
                             <p class="negritas">Monto:</p>
@@ -1437,6 +1454,7 @@ class constancias{
                             <input type="date" id="fechFact"/>
                             <input type="hidden" id="idInmueble" value="'.$idInmueble.'">
                             <input type="hidden" id="idProp" value="'.$idProp.'">
+                            <input type="hidden" id="nuExp" value="'.$idExpediente.'" />
                             <input type="hidden" id="operacion" value="Nueva Inscripción">
                         </div>
                     </td>
@@ -1565,6 +1583,16 @@ class constancias{
             $this->formImpri();
             echo'<center><br/><b>EL NUMERO DE EXPEDIENTE QUE INGRESO NO HA PAGADO EL AÑO EN CURSO</b></center>';
         }
+    }
+    function busExpediente(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+
+        $expBusSql= "SELECT * FROM expediente where n_expediente=".$this->nuExp." ";
+        $resExpBus = $link->query($expBusSql);
+        $expBusRes = $resExpBus->fetch_array();
+    
+        echo'<input type="hidden" value="'.$expBusRes["n_expediente"].'" id="expVerificado" />';
     }
 }
 

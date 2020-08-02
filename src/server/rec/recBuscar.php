@@ -799,12 +799,11 @@ if(isset($_POST["fechFact"])){
 }else{
     $bus->fechFact = "nada";
 }
-if(isset($_POST["expBuscar"])){
-    $bus->expBuscar = $_POST["expBuscar"];
+if(isset($_POST["tipoCed"])){
+    $bus->tipoCed = $_POST["tipoCed"];
 }else{
-    $bus->expBuscar = "nada";
+    $bus->tipoCed = "nada";
 }
-
 
 if($accion =="busExp"){
     $bus->mostBusqueda();

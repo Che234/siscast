@@ -1,10 +1,10 @@
 <?php
-
 class busquedas{
 
     function construct(){
         $campBuscar = "";
         $tipoBuscar = "";
+        $tipoCed = "";
         $expBuscar = "";
         $cedula = "";
         $rif = "";
@@ -156,86 +156,229 @@ class busquedas{
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->campBuscar."";
                 $resBus=$link->query($expSql);
                 $expRes = $resBus->fetch_assoc();
+            if($expRes["id"]!=0){
                 $numExp = $expRes["n_expediente"];
                 $idProp = $expRes["fk_propietario"];
                 $idInmue = $expRes["fk_inmueble"];
-            //BUSQUEDA PROPIETARIO
-                $propSql = "SELECT * FROM propietarios where id=".$idProp."";
-                $resProp = $link->query($propSql);
-                $propRes = $resProp->fetch_assoc();
-            //BUSQUEDA INMUEBLE
-                $inmueSql = "SELECT * FROM inmueble where id=".$idInmue."";
-                $resInmue = $link->query($inmueSql);
-                $inmueRes = $resInmue->fetch_assoc();
-            //BUSQUEDA CARACTERISTICAS DEL INMUEBLE
-                $caracInmueSql = "SELECT * FROM carc_inmueble where id=".$inmueRes["fk_carac_inmuebles"]."";
-                $rescaracInmue = $link->query($caracInmueSql);
-                $inmueResCarac = $rescaracInmue->fetch_assoc();
-            //BUSQUEDA PAGOS
+            
+                //BUSQUEDA PROPIETARIO
+                    $propSql = "SELECT * FROM propietarios where id=".$idProp."";
+                    $resProp = $link->query($propSql);
+                    $propRes = $resProp->fetch_assoc();
+                //BUSQUEDA INMUEBLE
+                    $inmueSql = "SELECT * FROM inmueble where id=".$idInmue."";
+                    $resInmue = $link->query($inmueSql);
+                    $inmueRes = $resInmue->fetch_assoc();
+                //BUSQUEDA CARACTERISTICAS DEL INMUEBLE
+                    $caracInmueSql = "SELECT * FROM carc_inmueble where id=".$inmueRes["fk_carac_inmuebles"]."";
+                    $rescaracInmue = $link->query($caracInmueSql);
+                    $inmueResCarac = $rescaracInmue->fetch_assoc();
+                //BUSQUEDA PAGOS
                 $pagosSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]."";
                 $resPago = $link->query($pagosSql);
                 $pagoRes = $resPago->fetch_assoc();
-            echo'
-            <table border="1">
-                 <tr>
-                     <td colspan="5">
-                         <h2>Resultado</h2>
-                     </td>
-                 </tr>
-                 <tr>
-                     <td>
-                         <b>Propietario</b>
-                     </td>
-                     <td>
-                         <b>Expediente</b>
-                     </td>
-                     <td>
-                         <b>Fecha Pago</b>
-                     </td>
-                     <td>
-                         <b>Uso del Inmueble</b>
-                     </td>
-                     <td>
-                        <b>Acción</b>
-                     </td>
-                 </tr>
-                 <tr>
-                     <td>
-                         '.$propRes["nombre"].' '.$propRes["apellido"].'
-                     </td>
-                     <td>
-                        '.$this->campBuscar.'
-                     </td>
-                     <td>';
-                    if($pagoRes!=0){
-                        echo 'Si ha pagado';
-                    }else{
-                        echo 'No ha realizado pago';
-                    }
-                     echo'</td>
-                     <td>
-                        '.$inmueResCarac["uso"].'
-                     </td>
-                     <td>
-                        <input type"button" value="Ver pagos" onclick="btnPagos()" class="botones btn btn-primary" />
-                        <input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />
-                        <input type"button" value="Modificar" class="botones btn btn-primary" onclick="mostTipModif()"/>';
-                    $veriRenov = "SELECT * FROM constancias where fk_exped=".$expRes["id"]." ORDER BY fecha DESC";
-                    $resVeriRenov = $link->query($veriRenov);
-                    $veriRenovRes = $resVeriRenov->fetch_array();
-                    $fechaRenov = explode("-",$veriRenovRes["fecha"]);
-                    if($fechaRenov[0] !=date("Y")){
+                $fechPagosDiv = explode("-",$pagoRes["fechaPagos"]);
+        echo'
+        <table border="1">
+             <tr>
+                 <td colspan="5">
+                     <h2>Resultado</h2>
+                 </td>
+             </tr>
+             <tr>
+                 <td>
+                     <b>Propietario</b>
+                 </td>
+                 <td>
+                     <b>Expediente</b>
+                 </td>
+                 <td>
+                     <b>Fecha Pago</b>
+                 </td>
+                 <td>
+                     <b>Uso del Inmueble</b>
+                 </td>
+                 <td>
+                    <b>Acción</b>
+                 </td>
+             </tr>
+             <tr>
+                 <td>
+                     '.$propRes["nombre"].' '.$propRes["apellido"].'
+                 </td>
+                 <td>
+                    '.$this->campBuscar.'
+                 </td>
+                 <td>';
+                if($$fechPagosDiv[0] == date("Y")){
+                    echo 'Si ha pagado';
+                }else{
+                    echo 'No ha realizado pago';
+                }
+                 echo'</td>
+                 <td>
+                    '.$inmueResCarac["uso"].'
+                 </td>
+                 <td>';
+                 if($pagoRes["id"] != 0){
+                    echo'<input type"button" value="Ver pagos" onclick="btnPagos()" class="botones btn btn-primary" />';
+                 }else{
+                    echo'<input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />';
+                 }
+                    echo'
+                    <input type"button" value="Modificar" class="botones btn btn-primary" onclick="mostTipModif()"/>';
+                $veriRenov = "SELECT * FROM constancias where fk_exped=".$expRes["id"]." ORDER BY fecha DESC";
+                $resVeriRenov = $link->query($veriRenov);
+                $veriRenovRes = $resVeriRenov->fetch_array();
+                $fechaRenov = explode("-",$veriRenovRes["fecha"]);
+                if($fechaConst[0] == date("Y")){
+                    if($veriConstRes["tipo_operacion"] == "Nueva Inscripción"){
                         echo'<input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst()"/>';
                     }
-                        echo' 
-                        <input type"button" value="Eliminar" onclick="btnElimInmue()" class="botones btn btn-primary" />
-                        <input type="hidden" value="'.$this->campBuscar.'" id="expBuscar" />
-                        <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
-                     </td>
-                 </tr>
-            </table>';
+                }
+                    echo' 
+                    <input type"button" value="Eliminar" onclick="btnElimInmue()" class="botones btn btn-primary" />
+                    <input type="hidden" value="'.$expRes["n_expediente"].'" id="expBuscar" />
+                    <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
+                 </td>
+             </tr>
+        </table>';
+        }else{
+            echo'
+            <a href="http://localhost/SisCast/"><input type="button" value="Regresar" class="botones btn btn-primary"/></a>
+            <b>EXPEDIENTE NO EXISTE</b>';
         }
-        echo'<div id="MostResult"></div>';
+    }
+        if($this->tipoBuscar=="Cedula"){
+            $cedulaFull = ''.$this->tipoCed.'-'.$this->campBuscar.'';
+            //BUSQUEDA PROPIETARIO
+                $propSql = "SELECT * FROM propietarios where cedula='".$cedulaFull."'";
+                $resProp = $link->query($propSql);
+                $propRes = $resProp->fetch_array();
+            //BUSQUEDA EXPEDIENTE
+                $expediSql = "SELECT * FROM expediente where fk_propietario=".$propRes["id"]." ORDER BY fecha ASC";
+                $resBusExp= $link->query($expediSql);
+                $expBusRes = $resBusExp->fetch_array();
+                $idPropie = $expBusRes["fk_propietario"];
+                $idInmuebles = $expBusRes["fk_inmueble"];
+            //CONTAR EXPEDIENTES
+                $expedienteSql = "SELECT COUNT(*) FROM expediente where fk_propietario=".$idPropie."";
+                $resExpediente= $link->query($expedienteSql);
+                $expedienteRes = $resExpediente->fetch_assoc();
+            //BUSQUEDA INMUEBLE
+                $inmueSql = "SELECT * FROM inmueble where id=".$idInmuebles."";
+                $resInmue = $link->query($inmueSql);
+                $inmueRes = $resInmue->fetch_array();
+            //BUSQUEDA CARACTERISTICAS DEL INMUEBLE
+                $caracInmueSql = "SELECT * FROM carc_inmueble where id=".$inmueRes["fk_carac_inmuebles"]."";
+                $rescaracInmue = $link->query($caracInmueSql);
+                $inmueResCarac = $rescaracInmue->fetch_array();
+            //BUSQUEDA PAGOS
+                $pagosSql = "SELECT * FROM pagos where fk_expedient=".$expBusRes["id"]."";
+                $resPago = $link->query($pagosSql);
+                $pagoRes = $resPago->fetch_array();
+                echo'
+                <table border="1">
+                     <tr>
+                         <td colspan="5">
+                             <h2>Resultado</h2>
+                         </td>
+                     </tr>
+                     <tr>
+                        <td>
+                             <b>Propietario</b>
+                         </td>
+                        <td>
+                            '.$propRes["nombre"].' '.$propRes["apellido"].'
+                        </td>
+                     </tr>
+                     <tr>
+                         <td>
+                             <b>Expediente</b>
+                         </td>
+                         <td>
+                             <b>Fecha Pago</b>
+                         </td>
+                         <td>
+                             <b>Uso del Inmueble</b>
+                         </td>
+                         <td>
+                            <b>Dirección</b>
+                         </td>
+                         <td>
+                            <b>Acción</b>
+                         </td>
+                    </tr>';
+                    $SqlExpediente = "SELECT * FROM expediente where expediente.fk_propietario=".$idPropie." ORDER BY fecha ASC";
+                    $resSqlExpe = $link->query($SqlExpediente);
+                    
+                   for($i=0; $i < $expedienteRes["COUNT(*)"]; $i++){
+
+                    $sqlExpeRes = $resSqlExpe->fetch_array();
+                    
+                    $SqlFechaPago = "SELECT * FROM pagos where fk_expedient=".$sqlExpeRes["id"]." ";
+                    $resSqlFechaPag = $link->query($SqlFechaPago);
+                    $SqlFechaPagRes = $resSqlFechaPag->fetch_array();
+                    $fechaPag= explode("-",$SqlFechaPagRes["fechaPagos"]);
+                    
+                    $sqlInmueBus = "SELECT * FROM inmueble where id=".$sqlExpeRes["fk_inmueble"]."";
+                    $resInmueBus = $link->query($sqlInmueBus);
+                    $inmueBusRes = $resInmueBus->fetch_array();
+                    
+                    $SqlCaracteInmue = "SELECT * FROM carc_inmueble where id=".$inmueBusRes["fk_carac_inmuebles"]."";
+                    $resCaracteInmue = $link->query($SqlCaracteInmue);
+                    $caracInmueRes = $resCaracteInmue->fetch_array();
+                    echo'
+                    <tr>
+                         <td>
+                            '.$sqlExpeRes[4].'
+                         </td>
+                         <td>';
+                        if($fechaPag[0] == date("Y")){          
+                            echo $SqlFechaPagRes["fechaPagos"];
+                        }else{
+                            echo 'No ha realizado pago';
+                        }
+                         echo'</td>
+                         <td>
+                            '.$caracInmueRes["uso"].'
+                         </td>
+                         <td>
+                             '.$inmueBusRes["direccion"].'
+                         </td>
+                         <td>';
+                           
+                            if($SqlFechaPagRes["id"]!=0){
+                                echo'<input type"button" value="Ver pagos" onclick="btnPagos()" class="botones btn btn-primary" />';
+                            }
+                            
+                            if($fechaPag[0] < date("Y")){
+                                echo '<input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />';
+                            }
+                            echo '<input type"button" value="Modificar" class="botones btn btn-primary" onclick="mostTipModif()"/>';
+                            $veriConstCed = "SELECT * FROM constancias where fk_exped=".$sqlExpeRes["id"]." ORDER BY fecha DESC";
+                            $resVeriConst = $link->query($veriConstCed);
+                            $veriConstRes = $resVeriConst->fetch_array();
+                            $fechaConst = explode("-",$veriConstRes["fecha"]);
+                            if($fechaConst[0] < date("Y")){
+                                    echo'<input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst()"/>';
+                            }
+                            if($fechaConst[0] == date("Y")){
+                                if($veriConstRes["tipo_operacion"] == "Nueva Inscripción"){
+                                    echo'<input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst()"/>';
+                                }
+                            }
+                            echo' 
+                            <input type"button" value="Eliminar" onclick="btnElimInmue()" class="botones btn btn-primary" />
+                            <input type="hidden" value="'.$sqlExpeRes["n_expediente"].'" id="expBuscar" />
+                            <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
+                         </td>
+                     </tr>';
+                   }
+                echo'   
+                </table>';
+        }
+       
     }
     function mostModif(){
         echo'
@@ -1396,11 +1539,11 @@ class busquedas{
             $pagos = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]."";
             $resPagos = $link->query($pagos);
             $pagosRes = $resPagos->fetch_assoc();
-        //ELIMINAR DE PROPIETARIO
-            $propSql = "DELETE FROM propietarios where id=".$expRes["fk_propietario"]."";
-            $link->query($propSql);
+        // //ELIMINAR DE PROPIETARIO
+        //     $propSql = "DELETE FROM propietarios where id=".$expRes["fk_propietario"]."";
+        //     $link->query($propSql);
         //ELIMINAR DE CARACTERISTICAS DE LA CONSTRUCCIÓN
-            $caracSql = "DELETE FROM caracteristicas_construccion where id=".$inmueRes["fk_carac_construccion"]."";
+            $caracSql = "DELETE FROM caracteristicas_construccion where id=".$inmueRes["fk_carac_construccion"]." ";
             $link->query($caracSql);
         //ELIMINAR PROTOCOLIZACION
             $protSql = "DELETE FROM datos_protocolizacion where id=".$inmueRes["fk_protocolizacion"]."";
