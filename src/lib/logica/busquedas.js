@@ -18,7 +18,7 @@ class busquedas{
         oesteSecDoc,uniOeste3,alindSecOeste,arTotal3,NivConstTotal3,arConstTotal3,idlindPosVenta,
         arTotalVenta,arRestante,valorTerreno,valorInmueble,valorConstruc,idTerreno,Acue,AcueRural,
         AguasSub,AguasServ,PavFlex,PavRig,viaEngran,acera,AlumPublico,aseo,transPublic,pozoSept,
-        ElectResidencial,ElectriIndust,linTelf,idServ,montoFact,numFact,fechFact,tipoCed,numFactura){
+        ElectResidencial,ElectriIndust,linTelf,idServ,montoFact,numFact,fechFact,tipoCed,numFactura,numFactHid){
 
             this.campBuscar= campBuscar
             this.tipoBuscar= tipoBuscar
@@ -177,7 +177,7 @@ class busquedas{
             this.fechFact = fechFact
             this.tipoCed = tipoCed
             this.numFactura = numFactura
-
+            this.numFactHid = numFactHid
             
         }
     veriBuscar(){
@@ -359,6 +359,25 @@ class busquedas{
         return true
     }
     veriPagar(){
+        if(!ex_money.test(this.montoFact)){
+            alert("Error en el formato del Monto de la factura");
+            return false;
+        }
+        if(!ex_num.test(this.numFact)){
+            alert("Error en el formato del numero de la factura");
+            return false;
+        }
+        if(!ex_date.test(this.fechFact)){
+            alert("Error en el formato de la fecha");
+            return false;
+        }
+        if(this.numFactura == this.numFact){
+            alert("Numero de factura ya se encuentra registrado");
+            return false
+        }
+        return true
+    }
+    veriActFact(){
         if(!ex_money.test(this.montoFact)){
             alert("Error en el formato del Monto de la factura");
             return false;
@@ -648,6 +667,24 @@ class busquedas{
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`Acue=${this.Acue}&AcueRural=${this.AcueRural}&AguasSub=${this.AguasSub}&AguasServ=${this.AguasServ}&PavFlex=${this.PavFlex}&PavRig=${this.PavRig}&viaEngran=${this.viaEngran}&acera=${this.acera}&AlumPublico=${this.AlumPublico}&aseo=${this.aseo}&transPublic=${this.transPublic}&pozoSept=${this.pozoSept}&ElectResidencial=${this.ElectResidencial}&ElectriIndust=${this.ElectriIndust}&linTelf=${this.linTelf}&idServ=${this.idServ}&accion=guarActServ`); 
 		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    guardActFact(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('modificaciones');
+        var divsitiomaterial = document.getElementById('modificaciones');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`montoFact=${this.montoFact}&fechFact=${this.fechFact}&numFact=${this.numFact}&numFactHid=${this.numFactHid}&accion=guarActFact`); 
+        ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
@@ -1332,6 +1369,17 @@ function btnActProtocol(){
     busque.idProto = document.getElementById("idProto").value
     if(busque.veriProto()==true){
         busque.actProtocol()
+    }
+}
+//FACTURA
+function btnActFact(){
+    let busque = new busquedas
+    busque.montoFact = document.getElementById("montoFact").value
+    busque.fechFact = document.getElementById("fechFact").value
+    busque.numFact = document.getElementById("numFact").value
+    busque.numFactHid = document.getElementById("numFactHid").value
+    if(busque.veriActFact()==true){
+        busque.guardActFact();
     }
 }
 //LINDEROS

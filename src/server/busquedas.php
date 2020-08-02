@@ -143,9 +143,9 @@ class busquedas{
         $linTelf = "";
         $idServ = "";
         $expBuscar = "";
+        $numFactHid = "";
+        $fechFact = "";
     }
-
-        
 
     function mostBusqueda(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
@@ -243,7 +243,8 @@ class busquedas{
                     <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
                  </td>
              </tr>
-        </table>';
+        </table>
+        <div id="MostResult"></div>';
         }else{
             echo'
             <a href="http://localhost/SisCast/"><input type="button" value="Regresar" class="botones btn btn-primary"/></a>
@@ -1530,52 +1531,51 @@ class busquedas{
             $resExp = $link->query($expSql);
             $expRes = $resExp->fetch_assoc();
         //BUSQUEDA DE FACTURA
-            $expSql = "SELECT * FROM pagos where n_expediente=".$this->expBuscar."";
+            $expSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]."";
             $resExp = $link->query($expSql);
             $expRes = $resExp->fetch_assoc();
-        echo'
-        <table border="1px" class="taConst">
-            <tr>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Numero Expediente:</p>
-                        <input type="text" id="nuExp"/>
-                    </div>
-                </td>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Monto:</p>
-                        <input type="text" id="montoFact"/>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Empadronamiento:</p>
-                        <select id="empadro"/>
-                            <option value="no"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Numero Factura:</p>
-                        <input type="number" id="numFact"/>
-                    </div>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Fecha:</p>
-                        <input type="date" id="fechFact"/>
-                        <input type="hidden" id="idInmueble" value="'.$idInmueble.'">
-                        <input type="hidden" id="idProp" value="'.$idProp.'">
-                        <input type="hidden" id="operacion" value="Nueva Inscripción">
-                    </div>
-                </td>
-            </tr>
-        </table>';
+            if($expRes["id"]!=0){
+                $factSql = "SELECT * FROM factura where id=".$expRes["fk_factura"]."";
+                $resFact = $link->query($factSql);
+                $factRes = $resFact->fetch_array();
+                echo'
+                <input type="hidden" value="'.$factRes["n_factura"].'" id="numFactHid" />
+                <table border="1px" class="taConst">
+                    <tr>
+                        <td class="tdConst">
+                            <div class="campDat">
+                                <p class="negritas">Monto:</p>
+                                <input type="text" value="'.$factRes["monto"].'" id="montoFact"/>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="campDat">
+                                <p class="negritas">Fecha:</p>
+                                <input type="date" value="'.$factRes["fecha"].'" id="fechFact"/>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tdConst">
+                            <div class="campDat">
+                                <p class="negritas">Numero Factura:</p>
+                                <input type="number" value="'.$factRes["n_factura"].'" id="numFact"/>
+                            </div>
+                    </tr>
+                </table>
+                <div class="btnSig1">
+                    <input type="button" value="Actualizar" onclick="btnActFact()" class=" botones btn btn-primary" />
+                </div>';
+            }else{
+                echo'<b>EXPEDIENTE SELECCIONADO NO POSEE PAGO, EN EL AÑO EN CURSO</b>';
+            }
+    }
+    function guarActFact(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $actFactSql = "UPDATE factura SET monto='".$this->montoFact."',n_factura=".$this->numFact.",fecha='".$this->fechFact."' where n_factura=".$this->numFactHid." ";
+        $link->query($actFactSql);
+        echo '<b>ACTUALIZADO CON EXITO</b>';
     }
 
     function actProp(){

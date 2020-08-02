@@ -804,6 +804,16 @@ if(isset($_POST["tipoCed"])){
 }else{
     $bus->tipoCed = "nada";
 }
+if(isset($_POST["numFactHid"])){
+    $bus->numFactHid = $_POST["numFactHid"];
+}else{
+    $bus->numFactHid = "nada";
+}
+if(isset($_POST["fechFact"])){
+    $bus->fechFact = $_POST["fechFact"];
+}else{
+    $bus->fechFact = "nada";
+}
 
 if($accion =="busExp"){
     $bus->mostBusqueda();
@@ -825,9 +835,6 @@ if($secciones == "Caract Construccion"){
 }
 if($secciones == "Protocolizacion"){
     $bus->modificarProtocol();
-}
-if($secciones == "Linderos"){
-    $bus->modifLinderos();
 }
 if($secciones == "Linderos"){
     $bus->modifLinderos();
@@ -878,6 +885,9 @@ if($accion=="guarActArea"){
 }
 if($accion=="guarActServ"){
     $bus->guarActServ();
+}
+if($accion=="guarActFact"){
+    $bus->guarActFact();
 }
 if($accion=="pagarInmue"){
     $bus->pagarInmue();
