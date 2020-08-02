@@ -65,23 +65,22 @@ class f002{
             $resultUser= $link->query($userSql);
             $idUser= $resultUser->fetch_assoc();
         //INSERT FACTURA
-            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->nuExp."','".$this->fechFact."')";
+            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."')";
             $link->query($expFactSql);
             $idExpFact= $link->insert_id;
-        //INSERT EXPEDIENTE
-            $fechaExp= date('Y-m-d');
-            $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",".$this->nuExp.",'".$fechaExp."')";
-            $link->query($expediSql);
-            $idExpediente = $link->insert_id;
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
-            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$idExpediente.")";
+            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
         //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$idExpediente.",".$idExpFact.",".$this->fechFact.")";
+            $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$this->nuExp.",".$idExpFact.",".$this->fechFact.")";
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
+        //BUSQUEDA DEL EXPEDIENTE
+            $busExpSql = "SELECT * FROM expediente where id=".$this->nuExp."";
+            $resBusExp = $link->query($busExpSql);
+            $busExpRes = $resBusExp->fetch_array();
         //BUSQUEDA DEL INMUEBLE
             $expSql= "SELECT telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
@@ -157,7 +156,7 @@ class f002{
             $pdf->cell(40,10,'No Civico: No Aplica');
             $pdf->SetY(84);
             $pdf->SetX(215);
-            $pdf->cell(40,10,'No Expediente: '.$this->nuExp.'');
+            $pdf->cell(40,10,'No Expediente: '.$busExpRes["n_expediente"].'');
             $pdf->SetY(90);
             $pdf->SetX(22);
             $pdf->cell(40,10,''.utf8_decode('Tipo de Operación: '.$this->operacion.'').'');
@@ -396,7 +395,12 @@ class f002{
             $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_n"].''),1,0,'C');
             $pdf->SetY(188);
             $pdf->SetX(229);
-            $pdf->cell(0,6,''.$resultLindDoc["norte"].''.$resultLindDoc["uniNorte"].'',1,0,'C');
+            if($resultLindDoc["uniNorte"] =="m"){
+                $pdf->cell(0,6,''.$resultLindDoc["norte"].'',1,0,'C');    
+            }
+            if($resultLindDoc["uniNorte"] =="Lq"){
+                $pdf->cell(0,6,''.$resultLindDoc["norte"].''.$resultLindDoc["uniNorte"].'',1,0,'C');
+            }
             $pdf->SetY(194);
             $pdf->SetX(19);
             $pdf->cell(60,6,'SUR',1,0,'C');
@@ -405,7 +409,12 @@ class f002{
             $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_s"].''),1,0,'C');
             $pdf->SetY(194);
             $pdf->SetX(229);
-            $pdf->cell(0,6,''.$resultLindDoc["sur"].''.$resultLindDoc["uniSur"].'',1,0,'C');
+            if($resultLindDoc["uniSur"] =="m"){
+                $pdf->cell(0,6,''.$resultLindDoc["sur"].'',1,0,'C');
+            }
+            if($resultLindDoc["uniSur"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindDoc["sur"].''.$resultLindDoc["uniSur"].'',1,0,'C');
+            }
             $pdf->SetY(200);
             $pdf->SetX(19);
             $pdf->cell(60,6,'ESTE',1,0,'C');
@@ -414,7 +423,12 @@ class f002{
             $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_e"].''),1,0,'C');
             $pdf->SetY(200);
             $pdf->SetX(229);
-            $pdf->cell(0,6,''.$resultLindDoc["este"].''.$resultLindDoc["uniEste"].'',1,0,'C');
+            if($resultLindDoc["uniEste"] =="m"){
+                $pdf->cell(0,6,''.$resultLindDoc["este"].'',1,0,'C');
+            }
+            if($resultLindDoc["uniEste"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindDoc["este"].''.$resultLindDoc["uniEste"].'',1,0,'C');
+            }
             $pdf->SetY(206);
             $pdf->SetX(19);
             $pdf->cell(60,6,'OESTE',1,0,'C');
@@ -423,7 +437,12 @@ class f002{
             $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_o"].''),1,0,'C');
             $pdf->SetY(206);
             $pdf->SetX(229);
-            $pdf->cell(0,6,''.$resultLindDoc["oeste"].''.$resultLindDoc["uniOeste"].'',1,0,'C');
+            if($resultLindDoc["uniOeste"] =="m"){
+                $pdf->cell(0,6,''.$resultLindDoc["oeste"].'',1,0,'C');
+            }
+            if($resultLindDoc["uniOeste"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindDoc["oeste"].''.$resultLindDoc["uniOeste"].'',1,0,'C');
+            }
         //PARTE 6
             $pdf->SetY(212);    
             $pdf->SetX(19);
@@ -1044,8 +1063,8 @@ class f002{
             $pdf->MultiCell(120,6,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
             '),'T:1','C');
         
-        $pdf->Output('F','../../../assets/constancias/'.$this->nuExp.'.pdf');
-        echo'<input type="hidden" id="nuExp" value="'.$this->nuExp.'">';
+        $pdf->Output('F','../../../assets/constancias/'.$busExpRes["n_expediente"].'.pdf');
+        echo'<input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
         
     }
 }
@@ -1402,7 +1421,13 @@ class f001{
             $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_n"].''),1,0,'C');
             $pdf->SetY(166);
             $pdf->SetX(229);
-            $pdf->cell(0,6,''.$resultLindDoc["norte"].''.$resultLindDoc["uniNorte"].'',1,0,'C');
+            if($resultLindDoc["uniNorte"] =="m"){
+                $pdf->cell(0,6,''.$resultLindDoc["norte"].'',1,0,'C');
+            }
+            if($resultLindDoc["uniNorte"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindDoc["norte"].''.$resultLindDoc["uniNorte"].'',1,0,'C');
+            }
+            $pdf->cell(0,6,''.$resultLindDoc["norte"].'',1,0,'C');
             $pdf->SetY(172);
             $pdf->SetX(19);
             $pdf->cell(60,6,'SUR',1,0,'C');
@@ -1411,7 +1436,12 @@ class f001{
             $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_s"].''),1,0,'C');
             $pdf->SetY(172);
             $pdf->SetX(229);
-            $pdf->cell(0,6,''.$resultLindDoc["sur"].''.$resultLindDoc["uniSur"].'',1,0,'C');
+            if($resultLindDoc["uniSur"] =="m"){
+                $pdf->cell(0,6,''.$resultLindDoc["sur"].'',1,0,'C');
+            }
+            if($resultLindDoc["uniSur"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindDoc["sur"].''.$resultLindDoc["uniSur"].'',1,0,'C');
+            }
             $pdf->SetY(178);
             $pdf->SetX(19);
             $pdf->cell(60,6,'ESTE',1,0,'C');
@@ -1420,7 +1450,12 @@ class f001{
             $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_e"].''),1,0,'C');
             $pdf->SetY(178);
             $pdf->SetX(229);
-            $pdf->cell(0,6,''.$resultLindDoc["este"].''.$resultLindDoc["uniEste"].'',1,0,'C');
+            if($resultLindDoc["uniEste"] =="m"){
+                $pdf->cell(0,6,''.$resultLindDoc["este"].'',1,0,'C');
+            }
+            if($resultLindDoc["uniEste"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindDoc["este"].''.$resultLindDoc["uniEste"].'',1,0,'C');
+            }
             $pdf->SetY(184);
             $pdf->SetX(19);
             $pdf->cell(60,6,'OESTE',1,0,'C');
@@ -1429,7 +1464,12 @@ class f001{
             $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_o"].''),1,0,'C');
             $pdf->SetY(184);
             $pdf->SetX(229);
-            $pdf->cell(0,6,''.$resultLindDoc["oeste"].''.$resultLindDoc["uniOeste"].'',1,0,'C');
+            if($resultLindDoc["uniOeste"] =="m"){
+                $pdf->cell(0,6,''.$resultLindDoc["oeste"].'',1,0,'C');
+            }
+            if($resultLindDoc["uniOeste"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindDoc["oeste"].''.$resultLindDoc["uniOeste"].'',1,0,'C');
+            }
             $pdf->SetY(190);    
             $pdf->SetX(19);
             $pdf->cell(40,6,'Area de Terreno',1,0,'C');
@@ -1469,7 +1509,12 @@ class f001{
             $pdf->cell(150,6,''.$resultLindGen["alind_n"].'',1,0,'C');
             $pdf->SetY(207);
             $pdf->SetX(229);
-            $pdf->cell(0,6,''.$resultLindGen["norte"].''.$resultLindGen["uniNorte"].'',1,0,'C');
+            if($resultLindGen["uniNorte"] =="m"){
+                $pdf->cell(0,6,''.$resultLindGen["norte"].'',1,0,'C');
+            }
+            if($resultLindGen["uniNorte"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindGen["norte"].''.$resultLindGen["uniNorte"].'',1,0,'C');
+            }
             $pdf->SetY(213);
             $pdf->SetX(19);
             $pdf->cell(60,6,'SUR',1,0,'C');
@@ -1478,7 +1523,12 @@ class f001{
             $pdf->cell(150,6,utf8_decode(''.$resultLindGen["alind_s"].''),1,0,'C');
             $pdf->SetY(213);
             $pdf->SetX(229);
-            $pdf->cell(0,6,''.$resultLindGen["sur"].''.$resultLindGen["uniSur"].'',1,0,'C');
+            if($resultLindGen["uniSur"] =="m"){
+                $pdf->cell(0,6,''.$resultLindGen["sur"].'',1,0,'C');
+            }
+            if($resultLindGen["uniNorte"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindGen["sur"].''.$resultLindGen["uniSur"].'',1,0,'C');
+            }
             $pdf->SetY(219);
             $pdf->SetX(19);
             $pdf->cell(60,6,'ESTE',1,0,'C');
@@ -1487,6 +1537,12 @@ class f001{
             $pdf->cell(150,6,utf8_decode(''.$resultLindGen["alind_e"].''),1,0,'C');
             $pdf->SetY(219);
             $pdf->SetX(229);
+            if($resultLindGen["uniEste"] =="m"){
+                $pdf->cell(0,6,''.$resultLindGen["este"].'',1,0,'C');
+            }
+            if($resultLindGen["uniEste"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindGen["este"].''.$resultLindGen["uniEste"].'',1,0,'C');
+            }
             $pdf->cell(0,6,''.$resultLindGen["este"].''.$resultLindGen["uniEste"].'',1,0,'C');
             $pdf->SetY(225);
             $pdf->SetX(19);
@@ -1496,7 +1552,12 @@ class f001{
             $pdf->cell(150,6,utf8_decode(''.$resultLindGen["alind_o"].''),1,0,'C');
             $pdf->SetY(225);
             $pdf->SetX(229);
-            $pdf->cell(0,6,''.$resultLindGen["oeste"].''.$resultLindGen["uniOeste"].'',1,0,'C');
+            if($resultLindGen["uniOeste"] =="m"){
+                $pdf->cell(0,6,''.$resultLindGen["oeste"].'',1,0,'C');
+            }
+            if($resultLindGen["uniOeste"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindGen["oeste"].''.$resultLindGen["uniOeste"].'',1,0,'C');
+            }
             $pdf->SetY(231);    
             $pdf->SetX(19);
             $pdf->cell(40,6,'Area de Terreno',1,0,'C');
@@ -2133,8 +2194,8 @@ class f001{
                 $pdf->SetLineWidth(0.5);
                 $pdf->MultiCell(120,4,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
                 '),'T:1','C');
-    $pdf->Output('F','../../../assets/constancias/'.$this->nuExp.'.pdf');
-    echo'<input type="hidden" id="nuExp" value="'.$this->nuExp.'">';
+    $pdf->Output('F','../../../assets/constancias/'.$busExpRes["n_expediente"].'.pdf');
+    echo'<input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
     }
 }
 class f003{
@@ -2159,23 +2220,22 @@ class f003{
             $resultUser= $link->query($userSql);
             $idUser= $resultUser->fetch_assoc();
         //INSERT FACTURA
-            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->nuExp."','".$this->fechFact."')";
+            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."')";
             $link->query($expFactSql);
             $idExpFact= $link->insert_id;
-        //INSERT EXPEDIENTE
-            $fechaExp= date('Y-m-d');
-            $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$this->idInmueble.",".$this->idProp.",".$idUser["id"].",".$this->nuExp.",'".$fechaExp."')";
-            $link->query($expediSql);
-            $idExpediente = $link->insert_id;
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
-            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$idExpediente.")";
+            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
         //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$idExpediente.",".$idExpFact.",".$this->fechFact.")";
+            $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$this->nuExp.",".$idExpFact.",".$this->fechFact.")";
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
+        //BUSQUEDA DEL EXPEDIENTE
+            $busExpSql = "SELECT * FROM expediente where id=".$this->nuExp."";
+            $resBusExp = $link->query($busExpSql);
+            $busExpRes = $resBusExp->fetch_array();
         //BUSQUEDA DEL INMUEBLE
             $expSql= "SELECT telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
@@ -2254,7 +2314,7 @@ class f003{
             $pdf->cell(40,10,'No Civico: No Aplica');
             $pdf->SetY(70);
             $pdf->SetX(215);
-            $pdf->cell(40,10,'No Expediente: '.$this->nuExp.'');
+            $pdf->cell(40,10,'No Expediente: '.$busExpRes["n_expediente"].'');
             $pdf->SetY(74);
             $pdf->SetX(22);
             $pdf->cell(40,10,'Tipo de Operación: '.$this->operacion.'');
@@ -3222,8 +3282,8 @@ class f003{
             $pdf->SetLineWidth(0.5);
             $pdf->MultiCell(120,4,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
             '),'T:1','C');
-        $pdf->Output('F','../../../assets/constancias/'.$this->nuExp.'.pdf');
-        echo'<input type="hidden" id="nuExp" value="'.$this->nuExp.'">';
+        $pdf->Output('F','../../../assets/constancias/'.$busExpRes["n_expediente"].'.pdf');
+        echo'<input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
     }
 }
 class f004{

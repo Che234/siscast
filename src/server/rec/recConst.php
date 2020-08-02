@@ -612,6 +612,11 @@ if(isset($_POST["campBuscar"])){
 }else{
     $nconst->campBuscar = "nada";
 }
+if(isset($_POST["numFact"])){
+    $nconst->numFact = $_POST["numFact"];
+}else{
+    $nconst->numFact = "nada";
+}
 
 
 if($accion== "fProp"){
@@ -781,5 +786,8 @@ if($accion=="veriImpr"){
 }
 if($accion=="busExpediente"){
     $nconst->busExpediente();
+}
+if($accion=="busFactura"){
+    $nconst->busFactura();
 }
 ?>

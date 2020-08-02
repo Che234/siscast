@@ -453,6 +453,11 @@ class constancias{
             alert("Error en el formato de la fecha ");
             return false;
         }
+        let numFactura = document.getElementById("numFactura").value
+        if(numFactura == this.numFact){
+            alert("Numero de factura ya se encuentra registrado");
+            return false
+        }
         return true
     }
     formConst(){
@@ -614,13 +619,13 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&accion=imprConst2`);
+        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst2`);
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
-                    let nuExp = document.getElementById("nuExp").value
+                    let nuExp = document.getElementById("numExp").value
                     document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="http://localhost/SisCast/assets/constancias/${nuExp}.pdf" type="application/pdf"></div>`;
 			     }
 	       	}
@@ -640,7 +645,7 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
-                    let nuExp = document.getElementById("nuExp").value
+                    let nuExp = document.getElementById("numExp").value
                     document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="http://localhost/SisCast/assets/constancias/${nuExp}.pdf" type="application/pdf"></div>`;
 			     }
 	       	}
@@ -654,13 +659,13 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&accion=imprConst3`);
+        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst3`);
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
-                    let nuExp = document.getElementById("nuExp").value
+                    let nuExp = document.getElementById("numExp").value
                     document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="http://localhost/SisCast/assets/constancias/${nuExp}.pdf" type="application/pdf"></div>`;
 			     }
 	       	}
@@ -733,6 +738,24 @@ class constancias{
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`nuExp=${this.nuExp}&accion=busExpediente`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    veriFact(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campOculto');
+        var divsitiomaterial = document.getElementById('campOculto');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`numFact=${this.numFact}&accion=busFactura`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1138,7 +1161,11 @@ function veriExpediente(){
     consta.nuExp = document.getElementById("nuExp").value
     consta.busExpediente();
 }
-
+function btnVeriFact(){
+    let consta = new constancias
+    consta.numFact = document.getElementById("numFact").value
+    consta.veriFact()
+}
 //IMPRIMIR
 function btnFormImpri(){
     let consta = new constancias

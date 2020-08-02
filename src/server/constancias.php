@@ -119,6 +119,7 @@ class constancias{
         $uniEste3 = "";
         $uniOeste3 = "";
         $campBuscar = "";
+        $numFact = "";
     }
         
 
@@ -718,7 +719,7 @@ class constancias{
             </tr>
             <tr>
                 <td>
-                    <p class="negritas">General:</p>
+                    <p class="negritas">Inspección:</p>
                     <select onchange="actGeneral()" id="lindGeneral">
                         <option value="0"></option>
                         <option value="si">Si</option>
@@ -1362,13 +1363,13 @@ class constancias{
                 $busPropSql = "SELECT * FROM propietarios where cedula='".$this->cedFul."'";
                 $resBusProp = $link->query($busPropSql);
                 $busPropRes = $resBusProp->fetch_array();
-            if($busPropRes["id"]!=0){
-                $idProp = $busPropRes["id"];
-            }else{
-                $propSql = "INSERT INTO propietarios(cedula,rif,nombre,apellido,telef,dir_hab) value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFul."','".$this->direcProp."')";
-                $link->query($propSql);
-                $idProp = $link->insert_id;
-            }
+                if($busPropRes["id"]!=0){
+                    $idProp = $busPropRes["id"];
+                }else{
+                    $propSql = "INSERT INTO propietarios(cedula,rif,nombre,apellido,telef,dir_hab) value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFul."','".$this->direcProp."')";
+                    $link->query($propSql);
+                    $idProp = $link->insert_id;
+                }
 
             //CARACTERISTICAS DEL INMUEBLE (LISTO)
                 $carcSql = "INSERT INTO carc_inmueble(topografia,forma,uso,tenencia,ocupante,dimenciones,regimen)value('".$this->topoConst."','".$this->formaConst."','".$this->usoConst."','".$this->tenenConst."','".$this->ocupConst."','".$this->dimeConst."','".$this->regInmue."')";
@@ -1446,7 +1447,7 @@ class constancias{
                     <td class="tdConst">
                         <div class="campDat">
                             <p class="negritas">Numero Factura:</p>
-                            <input type="number" id="numFact"/>
+                            <input type="number" id="numFact" onchange="btnVeriFact()"/>
                         </div>
                     <td class="tdConst">
                         <div class="campDat">
@@ -1492,7 +1493,8 @@ class constancias{
                     }
                 }
             }
-            echo'</table>';
+            echo'</table>
+            <div id="campOculto"></div>';
         //IF DEL F001
             if($norteGen['norte']!="nada"){
                 if($norteDoc['norte']!="nada"){
@@ -1593,6 +1595,16 @@ class constancias{
         $expBusRes = $resExpBus->fetch_array();
     
         echo'<input type="hidden" value="'.$expBusRes["n_expediente"].'" id="expVerificado" />';
+    }
+    function busFactura(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+
+        $veriFactSql = "SELECT * FROM factura where n_factura='".$this->numFact."'";
+        $resVeriFact = $link->query($veriFactSql);
+        $veriFactRes = $resVeriFact->fetch_array();
+
+            echo'<input type="hidden" value="'.$veriFactRes["n_factura"].'" id="numFactura" />';
     }
 }
 

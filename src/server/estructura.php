@@ -64,6 +64,7 @@
                 <input type="text" id="campBuscar" />
                 <input type="button" id="consultExp" value="Consultar" onclick="btnConsultExp()" class="botones btn btn-primary" />
                 <input type="button" id="consultCed" value="Consultar" onclick="btnConsultCed()" class="botones btn btn-primary" />
+                <input type="button" id="consultRif" value="Consultar" onclick="btnConsultRif()" class="botones btn btn-primary" />
               </div>
             </div>
             ';

@@ -1,8 +1,8 @@
 class busquedas{
 
-    constructor(campBuscar,tipoBuscar,secciones,expBuscar,cedula,rif,nomProp,apelProp,
+    construct(campBuscar,tipoBuscar,secciones,expBuscar,cedula,rif,nomProp,apelProp,
         telefono,direcProp,cedula2,parrInmue,secInmue,direcInmue,ambInmue,idInmueble,topoConst,formaConst,
-        regInmue,usoConst,tenenConst,ocupConst,dimeConst,idCarac,destConst,estConst,pareTipoInmue,
+        regInmue,usoConst,tenenConst,ocupConst,dimeConst,destConst,estConst,pareTipoInmue,
         pareAcaInmue,pintConst,estConserv,techoConst,pisosConst,piezConst,ventConst,puertConst,
         instElect,ambConst,compConst,obsConst,idCaracConst,docDebConst,direcProtConst,numProtConst,
         tomoProtConst,folioProtConst,protoConst,trimProtConst,dateProtConst,valorProtConst,idProto,
@@ -10,7 +10,7 @@ class busquedas{
         areaConst_gen,uniN_gen,uniS_gen,uniE_gen,uniO_gen,idGen,n_posventa,s_posVenta,e_posVenta,
         o_posVenta,alindN_posVenta,alindS_posVenta,alindE_posVenta,alindO_posVenta,area_posVenta,
         niveles_posVenta,areaConst_posVenta,uniN_posVenta,uniS_posVenta,uniE_posVenta,uniO_posVenta,
-        idPosVenta,idlindGen,idlindDocumento,nortGen,uniNorte,alindNort,surGen,uniSur,alindSurm,esteGen,
+        idPosVenta,idlindGen,idlindDocumento,nortGen,uniNorte,alindNort,surGen,uniSur,alindSur,esteGen,
         uniEste,alindEste,oesteGen,uniOeste,alindOeste,arTotal,NivConstTotal,arConstTotal,nortPosVenta,
         uniNorte2,alindPosNort,surPosVenta,uniSur2,alindPosSur,estePosVenta,uniEste2,alindPosEste,
         oestePosVenta,uniOeste2,alindPosOeste,arTotal2,NivConstTotal2,arConstTotal2,nortSecDoc,
@@ -18,7 +18,168 @@ class busquedas{
         oesteSecDoc,uniOeste3,alindSecOeste,arTotal3,NivConstTotal3,arConstTotal3,idlindPosVenta,
         arTotalVenta,arRestante,valorTerreno,valorInmueble,valorConstruc,idTerreno,Acue,AcueRural,
         AguasSub,AguasServ,PavFlex,PavRig,viaEngran,acera,AlumPublico,aseo,transPublic,pozoSept,
-        ElectResidencial,ElectriIndust,linTelf,idServ,montoFact,numFact,fechFact,tipoCed){}
+        ElectResidencial,ElectriIndust,linTelf,idServ,montoFact,numFact,fechFact,tipoCed,numFactura){
+
+            this.campBuscar= campBuscar
+            this.tipoBuscar= tipoBuscar
+            this.secciones = secciones
+            this.expBuscar = expBuscar
+            this.cedula = cedula
+            this.rif = rif
+            this.nomProp=nomProp
+            this.apelProp = apelProp
+            this.telefono = telefono
+            this.direcProp = direcProp
+            this.cedula2 = cedula2
+            this.parrInmue = parrInmue
+            this.secInmue = secInmue
+            this.direcInmue = direcInmue
+            this.ambInmue = ambInmue
+            this.idInmueble = idInmueble
+            this.topoConst = topoConst
+            this.formaConst = formaConst
+            this.regInmue = regInmue
+            this.usoConst = usoConst
+            this.tenenConst = tenenConst
+            this.ocupConst = ocupConst
+            this.dimeConst = dimeConst
+            this.destConst = destConst
+            this.estConst = estConst
+            this.pareTipoInmue= pareTipoInmue
+            this.pareAcaInmue = pareAcaInmue
+            this.pintConst = pintConst
+            this.estConserv = estConserv
+            this.techoConst = techoConst
+            this.pisosConst = pisosConst
+            this.piezConst = piezConst
+            this.ventConst = ventConst
+            this.puertConst = puertConst
+            this.instElect = instElect
+            this.ambConst = ambConst
+            this.compConst = compConst
+            this.obsConst = obsConst
+            this.idCaracConst = idCaracConst
+            this.docDebConst = docDebConst
+            this.direcProtConst = direcProtConst
+            this.numProtConst = numProtConst
+            this.tomoProtConst = tomoProtConst
+            this.folioProtConst = folioProtConst
+            this.protoConst = protoConst
+            this.trimProtConst = trimProtConst
+            this.dateProtConst = dateProtConst
+            this.valorProtConst = valorProtConst
+            this.idProto = idProto
+            this.n_gen = n_gen
+            this.s_gen = s_gen
+            this.e_gen = e_gen
+            this.o_gen = o_gen
+            this.alindN_gen = alindN_gen
+            this.alindS_gen = alindS_gen
+            this.alindE_gen = alindE_gen
+            this.alindO_gen = alindO_gen
+            this.area_gen = area_gen
+            this.niveles_gen = niveles_gen
+            this.areaConst_gen = areaConst_gen
+            this.uniN_gen = uniN_gen
+            this.uniS_gen = uniS_gen
+            this.uniE_gen = uniE_gen
+            this.uniO_gen = uniO_gen
+            this.idGen = idGen
+            this.n_posventa = n_posventa
+            this.s_posVenta = s_posVenta
+            this.e_posVenta = e_posVenta
+            this.o_posVenta = o_posVenta
+            this.alindN_posVenta = alindN_posVenta
+            this.alindS_posVenta = alindS_posVenta
+            this.alindE_posVenta = alindE_posVenta
+            this.alindO_posVenta = alindO_posVenta
+            this.area_posVenta = area_posVenta
+            this.niveles_posVenta = niveles_posVenta
+            this.areaConst_posVenta = areaConst_posVenta
+            this.uniN_posVenta = uniN_posVenta
+            this.uniE_posVenta = uniE_posVenta
+            this.uniS_posVenta = uniS_posVenta
+            this.uniO_posVenta = uniO_posVenta
+            this.idPosVenta = idPosVenta
+            this.idlindGen = idlindGen
+            this.idlindDocumento = idlindDocumento
+            this.nortGen = nortGen
+            this.nortGen = nortGen
+            this.uniNorte = uniNorte
+            this.alindNort = alindNort
+            this.surGen = surGen
+            this.uniSur = uniSur
+            this.alindSur = alindSur
+            this.esteGen = esteGen
+            this.uniEste = uniEste
+            this.alindEste = alindEste
+            this.oesteGen = oesteGen
+            this.uniOeste = uniOeste
+            this.alindOeste = alindOeste
+            this.arTotal = arTotal
+            this.NivConstTotal = NivConstTotal
+            this.arConstTotal = arConstTotal
+            this.nortPosVenta = nortPosVenta
+            this.uniNorte2 = uniNorte2
+            this.alindPosNort = alindPosNort
+            this.surPosVenta = surPosVenta
+            this.uniSur2 = uniSur2
+            this.alindPosSur = alindPosSur
+            this.estePosVenta = estePosVenta
+            this.uniEste2 = uniEste2
+            this.alindPosEste = alindPosEste
+            this.oestePosVenta = oestePosVenta
+            this.uniOeste2 = uniOeste2
+            this.alindPosOeste = alindPosOeste
+            this.arTotal2 = arTotal2
+            this.NivConstTotal2 = NivConstTotal2
+            this.arConstTotal2 = arConstTotal2
+            this.nortSecDoc = nortSecDoc
+            this.uniNorte3 = uniNorte3
+            this.alindSecNorte = alindSecNorte
+            this.surSecDoc = surSecDoc
+            this.uniSur3 = uniSur3
+            this.alindSecSur = alindSecSur
+            this.esteSecDoc = esteSecDoc
+            this.uniEste3 = uniEste3
+            this.alindSecEste = alindSecEste
+            this.oesteSecDoc = oesteSecDoc
+            this.uniOeste3 = uniOeste3
+            this.alindSecOeste = alindSecOeste
+            this.arTotal3 = arTotal3
+            this.NivConstTotal3 = NivConstTotal3
+            this.arConstTotal3 = arConstTotal3
+            this.idlindPosVenta = idlindPosVenta
+            this.arTotalVenta = arTotalVenta
+            this.arRestante = arRestante
+            this.valorTerreno = valorTerreno
+            this.valorInmueble = valorInmueble
+            this.valorConstruc = valorConstruc
+            this.idTerreno = idTerreno
+            this.Acue = Acue
+            this.AcueRural = AcueRural
+            this.AguasSub = AguasSub
+            this.AguasServ = AguasServ
+            this.PavFlex = PavFlex
+            this.PavRig = PavRig
+            this.viaEngran = viaEngran
+            this.acera = acera
+            this.AlumPublico = AlumPublico
+            this.aseo = aseo
+            this.transPublic = transPublic
+            this.pozoSept = pozoSept
+            this.ElectResidencial = ElectResidencial
+            this.ElectriIndust = ElectriIndust
+            this.linTelf = linTelf
+            this.idServ = idServ
+            this.montoFact = montoFact
+            this.numFact = numFact
+            this.fechFact = fechFact
+            this.tipoCed = tipoCed
+            this.numFactura = numFactura
+
+            
+        }
     veriBuscar(){
         if(!ex_datcort.test(this.campBuscar)){
             alert("Campo de buscar no puede estar vacio");
@@ -194,6 +355,25 @@ class busquedas{
         if(!ex_cedula.test(this.campBuscar)){
             alert("Error en el formato de numero de Cedula");
             return false;
+        }
+        return true
+    }
+    veriPagar(){
+        if(!ex_money.test(this.montoFact)){
+            alert("Error en el formato del Monto de la factura");
+            return false;
+        }
+        if(!ex_num.test(this.numFact)){
+            alert("Error en el formato del numero de la factura");
+            return false;
+        }
+        if(!ex_date.test(this.fechFact)){
+            alert("Error en el formato de la fecha");
+            return false;
+        }
+        if(this.numFactura == this.numFact){
+            alert("Numero de factura ya se encuentra registrado");
+            return false
         }
         return true
     }
@@ -577,6 +757,15 @@ function btnConsultCed(){
         busque.consultCed()
     }
 }
+function btnConsultRif(){
+    let busque = new busquedas
+    busque.tipoBuscar = document.getElementById("tipoBuscar").value
+    busque.tipoCed = document.getElementById("tipoRif").value
+    busque.campBuscar = document.getElementById("campBuscar").value
+    if(busque.veriCed()==true){
+        busque.consultCed()
+    }
+}
 function btnCampCed(){
     let tipoBuscar = document.getElementById("tipoBuscar").value
     if(tipoBuscar == "Cedula"){
@@ -584,14 +773,17 @@ function btnCampCed(){
         document.getElementById("tipoRif").hidden=true
         document.getElementById("consultExp").hidden=true
         document.getElementById("consultCed").hidden=false
+        document.getElementById("consultRif").hidden=true
     }
     if(tipoBuscar == "Rif"){
+        document.getElementById("consultRif").hidden=false
         document.getElementById("consultExp").hidden=true
-        document.getElementById("consultCed").hidden=false
+        document.getElementById("consultCed").hidden=true
         document.getElementById("tipoRif").hidden=false
         document.getElementById("tipoCed").hidden=true
     }
     if(tipoBuscar == "Expediente"){
+        document.getElementById("consultRif").hidden=true
         document.getElementById("consultExp").hidden=false
         document.getElementById("consultCed").hidden=true
         document.getElementById("tipoRif").hidden=true
@@ -1459,7 +1651,10 @@ function btnPagarInmue(){
     busque.numFact = document.getElementById("numFact").value
     busque.fechFact = document.getElementById("fechFact").value
     busque.expBuscar = document.getElementById("expBuscar").value
-    busque.pagarInmue();
+    busque.numFactura = document.getElementById("numFactura").value
+    if(busque.veriPagar()==true){
+        busque.pagarInmue();
+    }
 }
 function btnPagos(){
     let busque = new busquedas
@@ -1472,3 +1667,4 @@ document.getElementById("tipoCed").hidden=true
 document.getElementById("tipoRif").hidden=true
 document.getElementById("consultExp").hidden=false
 document.getElementById("consultCed").hidden=true
+document.getElementById("consultRif").hidden=true
