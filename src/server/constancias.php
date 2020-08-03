@@ -978,11 +978,11 @@ class constancias{
                 </td>
                 <td>
                     <div class="campDat">
-                        <p class="negritas">Multa:</p>
+                        <p class="negritas">Aplicar:</p>
                         <select id="multa"/>
                             <option value="no"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
+                            <option value="si">Multa</option>
+                            <option value="no">Empadronamiento</option>
                         </select>
                     </div>
                 </td>
@@ -1469,16 +1469,6 @@ class constancias{
                             <input type="text" id="montoFact"/>
                         </div>
                     </td>
-                    <td>
-                        <div class="campDat">
-                            <p class="negritas">Empadronamiento:</p>
-                            <select id="empadro"/>
-                                <option value="no"></option>
-                                <option value="si">Si</option>
-                                <option value="no">No</option>
-                            </select>
-                        </div>
-                    </td>
                 </tr>
                 <tr>
                     <td class="tdConst">
@@ -1561,6 +1551,10 @@ class constancias{
                         }
                     }       
                 }
+            }
+        //IF DEL F004 - EMPADRONAMIENTO
+            if($this->docDebConst ){
+
             }
                 
         // //if para caso Multas
