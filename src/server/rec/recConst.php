@@ -617,7 +617,36 @@ if(isset($_POST["numFact"])){
 }else{
     $nconst->numFact = "nada";
 }
-
+if(isset($_POST["uniAreaT3"])){
+    $nconst->uniAreaT3 = $_POST["uniAreaT3"];
+}else{
+    $nconst->uniAreaT3 = "nada";
+}
+if(isset($_POST["uniAreaT2"])){
+    $nconst->uniAreaT2 = $_POST["uniAreaT2"];
+}else{
+    $nconst->uniAreaT2 = "nada";
+}
+if(isset($_POST["uniAreaT"])){
+    $nconst->uniAreaT = $_POST["uniAreaT"];
+}else{
+    $nconst->uniAreaT = "nada";
+}
+if(isset($_POST["uniAreaConst3"])){
+    $nconst->uniAreaConst3 = $_POST["uniAreaConst3"];
+}else{
+    $nconst->uniAreaConst3 = "nada";
+}
+if(isset($_POST["uniAreaConst2"])){
+    $nconst->uniAreaConst2 = $_POST["uniAreaConst2"];
+}else{
+    $nconst->uniAreaConst2 = "nada";
+}
+if(isset($_POST["uniAreaConst"])){
+    $nconst->uniAreaConst = $_POST["uniAreaConst"];
+}else{
+    $nconst->uniAreaConst = "nada";
+}
 
 if($accion== "fProp"){
     $nconst->fPropietario();

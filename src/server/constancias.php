@@ -120,10 +120,17 @@ class constancias{
         $uniOeste3 = "";
         $campBuscar = "";
         $numFact = "";
+        $uniAreaConst3 = "";
+        $uniAreaConst2 = "";
+        $uniAreaConst = "";
+        $uniAreaT3 = "";
+        $uniAreaT2 = "";
+        $uniAreaT = "";
     }
         
 
     function fPropietario(){
+        
         echo'
         <table border="1px" class="taConst">
             <tr>
@@ -1110,7 +1117,7 @@ class constancias{
                 <tr>
                     <td class="tiConst">
                         <p class="negritas">Mts Norte</p>
-                        <input type="text" value="" id="nortGen" />
+                        <input type="number" value="" id="nortGen" />
                         <select id="uniNorte">
                             <option></option>
                             <option value="m">m</option>
@@ -1121,7 +1128,7 @@ class constancias{
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Sur</p>
-                        <input type="text" id="surGen" />
+                        <input type="number" id="surGen" />
                         <select id="uniSur">
                             <option></option>
                             <option value="m">m</option>
@@ -1132,7 +1139,7 @@ class constancias{
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Este</p>
-                        <input type="text" id="esteGen" />
+                        <input type="number" id="esteGen" />
                         <select id="uniEste">
                             <option></option>
                             <option value="m">m</option>
@@ -1143,7 +1150,7 @@ class constancias{
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Oeste</p>
-                        <input type="text" id="oesteGen" />
+                        <input type="number" id="oesteGen" />
                         <select id="uniOeste">
                             <option></option>
                             <option value="m">m</option>
@@ -1159,7 +1166,12 @@ class constancias{
                     <td >
                         <div class="campDat">
                             <p class="negritas">Área Total</p>
-                            <input type="text" id="arTotal" >
+                            <input type="number" id="arTotal" >
+                            <select id="uniAreaT">
+                                <option value="0"></option>
+                                <option value="m2">m2</option>
+                                <option value="Ha">Ha</option>
+                            </select>
                         </div>
                     </td>
                     <td >
@@ -1171,7 +1183,12 @@ class constancias{
                     <td >
                         <div class="campDat">
                             <p class="negritas">Área de Construcción</p>
-                            <input type="text" id="arConstTotal" >
+                            <input type="number" id="arConstTotal" >
+                            <select id="uniAreaConst">
+                                <option value="0"></option>
+                                <option value="m2">m2</option>
+                                <option value="Ha">Ha</option>
+                            </select>
                         </div>
                     </td>
                 </tr>
@@ -1191,7 +1208,7 @@ class constancias{
                 <tr>
                     <td class="tiConst">
                         <p class="negritas">Mts Norte</p>
-                        <input type="text" id="nortPosVenta" />
+                        <input type="number" id="nortPosVenta" />
                         <select id="uniNorte2">
                             <option></option>
                             <option value="m">m</option>
@@ -1202,7 +1219,7 @@ class constancias{
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Sur</p>
-                        <input type="text" id="surPosVenta" />
+                        <input type="number" id="surPosVenta" />
                         <select id="uniSur2">
                             <option></option>
                             <option value="m">m</option>
@@ -1213,7 +1230,7 @@ class constancias{
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Este</p>
-                        <input type="text" id="estePosVenta" />
+                        <input type="number" id="estePosVenta" />
                         <select id="uniEste2">
                             <option></option>
                             <option value="m">m</option>
@@ -1224,7 +1241,7 @@ class constancias{
                     </td>
                     <td class="tiConst">
                         <p class="negritas">Mts Oeste</p>
-                        <input type="text" id="oestePosVenta" />
+                        <input type="number" id="oestePosVenta" />
                         <select id="uniOeste2">
                             <option></option>
                             <option value="m">m</option>
@@ -1240,7 +1257,12 @@ class constancias{
                     <td >
                         <div class="campDat">
                             <p class="negritas">Área Total</p>
-                            <input type="disabled" id="arTotal2" >
+                            <input type="number" id="arTotal2" >
+                            <select id="uniAreaT2">
+                                <option value="0"></option>
+                                <option value="m2">m2</option>
+                                <option value="Ha">Ha</option>
+                            </select>
                         </div>
                     </td>
                     <td >
@@ -1252,7 +1274,12 @@ class constancias{
                     <td >
                         <div class="campDat">
                             <p class="negritas">Área de Construcción</p>
-                            <input type="text" id="arConstTotal2" >
+                            <input type="number" id="arConstTotal2" >
+                            <select id="uniAreaConst2">
+                                <option value="0"></option>
+                                <option value="m2">m2</option>
+                                <option value="Ha">Ha</option>
+                            </select>
                         </div>
                     </td>
                 </tr>
@@ -1321,7 +1348,12 @@ class constancias{
                     <td >
                         <div class="campDat">
                             <p class="negritas">Área Total</p>
-                            <input type="text" id="arTotal3" >
+                            <input type="number" id="arTotal3" >
+                            <select id="uniAreaT3">
+                                <option value="0"></option>
+                                <option value="m2">m2</option>
+                                <option value="Ha">Ha</option>
+                            </select>
                         </div>
                     </td>
                     <td >
@@ -1333,7 +1365,12 @@ class constancias{
                     <td >
                         <div class="campDat">
                             <p class="negritas">Área de Construcción</p>
-                            <input type="text" id="arConstTotal3" >
+                            <input type="number" id="arConstTotal3" >
+                            <select id="uniAreaConst3">
+                                <option value="0"></option>
+                                <option value="m2">m2</option>
+                                <option value="Ha">Ha</option>
+                            </select>
                         </div>
                     </td>
                 </tr>
@@ -1392,17 +1429,17 @@ class constancias{
                 $idTerreno= $link->insert_id;
 
             //LINDEROS DOCUMENTO(LISTO)
-                $lindDocSql = "INSERT INTO linderos_documento(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,nivelesConst,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$this->nortSecDoc."','".$this->surSecDoc."','".$this->esteSecDoc."','".$this->oesteSecDoc."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."','".$this->arTotal3."','".$this->NivConstTotal3."','".$this->arConstTotal3."','".$this->uniNorte3."','".$this->uniSur3."','".$this->uniEste3."','".$this->uniOeste3."')";
+                $lindDocSql = "INSERT INTO linderos_documento(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$this->nortSecDoc."','".$this->surSecDoc."','".$this->esteSecDoc."','".$this->oesteSecDoc."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."','".$this->arTotal3."','".$this->uniAreaT3."','".$this->NivConstTotal3."','".$this->uniAreaConst3."','".$this->arConstTotal3."','".$this->uniNorte3."','".$this->uniSur3."','".$this->uniEste3."','".$this->uniOeste3."')";
                 $link->query($lindDocSql);
                 $idLindDoc= $link->insert_id;
 
             //LINDEROS GENERAL (LISTO)
-                $lindGenSql = "INSERT INTO linderos_general(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,nivelesConst,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$this->nortGen."','".$this->surGen."','".$this->esteGen."','".$this->oesteGen."','".$this->alindNort."','".$this->alindSur."','".$this->alindEste."','".$this->alindOeste."','".$this->arTotal."','".$this->NivConstTotal."','".$this->arConstTotal."','".$this->uniNorte."','".$this->uniSur."','".$this->uniEste."','".$this->uniOeste."')";
+                $lindGenSql = "INSERT INTO linderos_general(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$this->nortGen."','".$this->surGen."','".$this->esteGen."','".$this->oesteGen."','".$this->alindNort."','".$this->alindSur."','".$this->alindEste."','".$this->alindOeste."','".$this->arTotal."','".$this->uniAreaT."','".$this->NivConstTotal."','".$this->uniAreaConst."','".$this->arConstTotal."','".$this->uniNorte."','".$this->uniSur."','".$this->uniEste."','".$this->uniOeste."')";
                 $link->query($lindGenSql);
                 $idLindGen = $link->insert_id;
                 
             //LINDEROS PARA VENTA (LISTO)
-                $lindPosVentaSql = "INSERT INTO linderos_posible_venta(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,nivelesConst,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$this->nortPosVenta."','".$this->surPosVenta."','".$this->estePosVenta."','".$this->oestePosVenta."','".$this->alindPosNort."','".$this->alindPosSur."','".$this->alindPosEste."','".$this->alindPosOeste."','".$this->arTotal2."','".$this->NivConstTotal2."','".$this->arConstTotal2."','".$this->uniNorte2."','".$this->uniSur."','".$this->uniEste."','".$this->uniOeste."')";
+                $lindPosVentaSql = "INSERT INTO linderos_posible_venta(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$this->nortPosVenta."','".$this->surPosVenta."','".$this->estePosVenta."','".$this->oestePosVenta."','".$this->alindPosNort."','".$this->alindPosSur."','".$this->alindPosEste."','".$this->alindPosOeste."','".$this->arTotal2."','".$this->uniAreaT2."','".$this->NivConstTotal2."','".$this->uniAreaConst2."','".$this->arConstTotal2."','".$this->uniNorte2."','".$this->uniSur2."','".$this->uniEste2."','".$this->uniOeste2."')";
                 $link->query($lindPosVentaSql);
                 $idLindPosVenta = $link->insert_id;
             //SERVICIOS(LISTO)

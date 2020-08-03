@@ -2,6 +2,9 @@
     width: 100%;
     border: 1px solid black;
 }
+#uniAreaT .subIndi{
+    font-variant-position: super ;
+}
 .campDat{
     display: flex;
     width: 100%;

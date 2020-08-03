@@ -82,7 +82,7 @@ class f002{
             $resBusExp = $link->query($busExpSql);
             $busExpRes = $resBusExp->fetch_array();
         //BUSQUEDA DEL INMUEBLE
-            $expSql= "SELECT telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios from inmueble where id=".$this->idInmueble."";
+            $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
             $resultInmue = $resInmue->fetch_assoc();
             $idProt= $resultInmue["fk_protocolizacion"];
@@ -98,15 +98,15 @@ class f002{
             $resultPropie = $resProp->fetch_assoc();
             $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
-            $protSql = "SELECT documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble from datos_protocolizacion where id=".$idProt."";
+            $protSql = "SELECT * from datos_protocolizacion where id=".$idProt."";
             $resProt = $link->query($protSql);
             $resultProp = $resProt->fetch_assoc();
         //BUSQUEDA DE LINDEROS SEGUN DOCUMENTO
-            $lindDocSql= "SELECT norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,nivelesConst,areaConst,uniNorte,uniSur,uniEste,uniOeste FROM linderos_documento where id=".$idLindDoc."";
+            $lindDocSql= "SELECT * FROM linderos_documento where id=".$idLindDoc."";
             $resLindDoc = $link->query($lindDocSql);
             $resultLindDoc= $resLindDoc->fetch_assoc();
         //BUSQUEDA DE DATOS TERRENO
-            $terrSql= "SELECT area_total_venta,area_restante,valor_terreno,valor_inmueble,valor_construccion FROM terreno where id=".$idTerreno."";
+            $terrSql= "SELECT * FROM terreno where id=".$idTerreno."";
             $resTerr= $link->query($terrSql);
             $resultTerr= $resTerr->fetch_assoc();
         //BUSQUEDA DE DATOS CONSTRUCCION
@@ -122,7 +122,7 @@ class f002{
             $rescarastInmue= $link->query($carastInmue);
             $mostcarastInmue= $rescarastInmue->fetch_assoc();
         //BUSQUEDA DE CARACTERISTICAS DE LA CONSTRUCCION
-            $carcConstSql= "SELECT destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,piezas_sanitarias,ventanas,puertas,insta_electricas,complementos,estado_conservacion,ambientes,observ FROM caracteristicas_construccion where id=".$idcaracConstruccion."";
+            $carcConstSql= "SELECT * FROM caracteristicas_construccion where id=".$idcaracConstruccion."";
             $resCaracConst= $link->query($carcConstSql);
             $resulCaracInmue= $resCaracConst->fetch_assoc();
         // Creación del objeto de la clase heredada
@@ -449,7 +449,7 @@ class f002{
             $pdf->cell(40,6,'Area de Terreno',1,0,'C');
             $pdf->SetY(212);    
             $pdf->SetX(59);
-            $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].' m2',1,0,'C');
+            $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].' '.$resultLindDoc["uniAreaT"].'',1,0,'C');
             $pdf->SetY(212);    
             $pdf->SetX(99);
             $pdf->cell(60,6,utf8_decode('Niveles de Construcción'),1,0,'C');
@@ -461,7 +461,7 @@ class f002{
             $pdf->cell(50,6,utf8_decode('Area de Construcción'),1,0,'C');
             $pdf->SetY(212);    
             $pdf->SetX(239);
-            $pdf->cell(36,6,''.$resultLindDoc["areaConst"].' m2',1,0,'C');
+            $pdf->cell(36,6,''.$resultLindDoc["areaConst"].' '.$resultLindDoc["uniAreaC"].'',1,0,'C');
             $pdf->SetY(218);    
             $pdf->SetX(19);
             $pdf->cell(60,6,utf8_decode('Dirección del Inmueble:'),1,0,'L');
@@ -1108,7 +1108,7 @@ class f001{
             $resBusExp = $link->query($busExpSql);
             $busExpRes = $resBusExp->fetch_array();
         //BUSQUEDA DEL INMUEBLE
-            $expSql= "SELECT telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios from inmueble where id=".$this->idInmueble."";
+            $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
             $resultInmue = $resInmue->fetch_assoc();
             $idProt= $resultInmue["fk_protocolizacion"];
@@ -1125,23 +1125,23 @@ class f001{
             $resultPropie = $resProp->fetch_assoc();
             $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
-            $protSql = "SELECT documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble from datos_protocolizacion where id=".$idProt."";
+            $protSql = "SELECT * from datos_protocolizacion where id=".$idProt."";
             $resProt = $link->query($protSql);
             $resultProp = $resProt->fetch_assoc();
         //BUSQUEDA DE LINDEROS SEGUN DOCUMENTO
-            $lindDocSql= "SELECT norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,nivelesConst,areaConst,uniNorte,uniSur,uniEste,uniOeste FROM linderos_documento where id=".$idLindDoc."";
+            $lindDocSql= "SELECT * FROM linderos_documento where id=".$idLindDoc."";
             $resLindDoc = $link->query($lindDocSql);
             $resultLindDoc= $resLindDoc->fetch_assoc();
         //BUSQUEDA DE LINDEROS GENERAL
-            $lindGenSql= "SELECT norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,nivelesConst,areaConst,uniNorte,uniSur,uniEste,uniOeste FROM linderos_general where id=".$idLindGen."";
+            $lindGenSql= "SELECT * FROM linderos_general where id=".$idLindGen."";
             $resLindGen = $link->query($lindGenSql);
             $resultLindGen= $resLindGen->fetch_assoc();
         //BUSQUEDA DE DATOS TERRENO
-            $terrSql= "SELECT area_total_venta,area_restante,valor_terreno,valor_inmueble,valor_construccion FROM terreno where id=".$idTerreno."";
+            $terrSql= "SELECT * FROM terreno where id=".$idTerreno."";
             $resTerr= $link->query($terrSql);
             $resultTerr= $resTerr->fetch_assoc();
         //BUSQUEDA DE DATOS CONSTRUCCION
-            $constSql= "SELECT destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,piezas_sanitarias,ventanas,puertas,insta_electricas,complementos,estado_conservacion,ambientes,observ from caracteristicas_construccion where id=".$idConst."";
+            $constSql= "SELECT * from caracteristicas_construccion where id=".$idConst."";
             $resConst= $link->query($constSql);
             $resultConst= $resConst->fetch_assoc();
         //BUSQUEDA DE SERVICIOS
@@ -1262,7 +1262,7 @@ class f001{
             $pdf->cell(8.6,4,'0',1,0,'C');
             $pdf->SetY(94);
             $pdf->SetX(123);
-            $pdf->cell(8.6,4,'4',1,0,'C');
+            $pdf->cell(8.6,4,'0',1,0,'C');
             $pdf->SetY(94);
             $pdf->SetX(131.6);
             $pdf->cell(8.6,4,'0',1,0,'C');
@@ -1271,7 +1271,7 @@ class f001{
             $pdf->cell(8.9,4,'0',1,0,'C');
             $pdf->SetY(94);
             $pdf->SetX(149);
-            $pdf->cell(8.6,4,'5',1,0,'C');
+            $pdf->cell(8.6,4,'0',1,0,'C');
             $pdf->SetY(94);
             $pdf->SetX(157.5);
             $pdf->cell(8.6,4,'0',1,0,'C');
@@ -1298,7 +1298,7 @@ class f001{
             $pdf->cell(8.6,4,'0',1,0,'C');
             $pdf->SetY(94);
             $pdf->SetX(226);
-            $pdf->cell(8.6,4,'3',1,0,'C');
+            $pdf->cell(8.6,4,'0',1,0,'C');
             $pdf->SetY(94);
             $pdf->SetX(234.6);
             $pdf->cell(8.6,4,'0',1,0,'C');
@@ -1474,7 +1474,7 @@ class f001{
             $pdf->cell(40,6,'Area de Terreno',1,0,'C');
             $pdf->SetY(190);    
             $pdf->SetX(59);
-            $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].'',1,0,'C');
+            $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].' '.$resultLindDoc["uniAreaT"].'',1,0,'C');
             $pdf->SetY(190);    
             $pdf->SetX(99);
             $pdf->cell(60,6,utf8_decode('Niveles de Construcción'),1,0,'C');
@@ -1486,7 +1486,7 @@ class f001{
             $pdf->cell(50,6,utf8_decode('Area de Construcción'),1,0,'C');
             $pdf->SetY(190);    
             $pdf->SetX(239);
-            $pdf->cell(36,6,''.$resultLindDoc["areaConst"].'',1,0,'C');
+            $pdf->cell(36,6,''.$resultLindDoc["areaConst"].' '.$resultLindDoc["uniAreaC"].'',1,0,'C');
         //DATOS DE COLINDANTES SEGUN INSPECCION
             $pdf->SetY(196);
             $pdf->SetX(19);
@@ -1561,7 +1561,7 @@ class f001{
             $pdf->cell(40,6,'Area de Terreno',1,0,'C');
             $pdf->SetY(231);    
             $pdf->SetX(59);
-            $pdf->cell(40,6,''.$resultLindGen["areaTotal"].'',1,0,'C');
+            $pdf->cell(40,6,''.$resultLindGen["areaTotal"].' '.$resultLindGen["uniAreaT"].'',1,0,'C');
             $pdf->SetY(231);    
             $pdf->SetX(99);
             $pdf->cell(60,6,utf8_decode('Niveles de Construcción'),1,0,'C');
@@ -1573,7 +1573,7 @@ class f001{
             $pdf->cell(50,6,utf8_decode('Area de Construcción'),1,0,'C');
             $pdf->SetY(231);    
             $pdf->SetX(239);
-            $pdf->cell(36,6,''.$resultLindGen["areaConst"].'',1,0,'C');
+            $pdf->cell(36,6,''.$resultLindGen["areaConst"].' '.$resultLindGen["uniAreaC"].'',1,0,'C');
         //PARTE 6
             $pdf->SetY(237);    
             $pdf->SetX(19);
@@ -2235,7 +2235,7 @@ class f003{
             $resBusExp = $link->query($busExpSql);
             $busExpRes = $resBusExp->fetch_array();
         //BUSQUEDA DEL INMUEBLE
-            $expSql= "SELECT telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios from inmueble where id=".$this->idInmueble."";
+            $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
             $resultInmue = $resInmue->fetch_assoc();
             $idProt= $resultInmue["fk_protocolizacion"];
@@ -2253,23 +2253,23 @@ class f003{
             $resultPropie = $resProp->fetch_assoc();
             $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
-            $protSql = "SELECT documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble from datos_protocolizacion where id=".$idProt."";
+            $protSql = "SELECT * from datos_protocolizacion where id=".$idProt."";
             $resProt = $link->query($protSql);
             $resultProp = $resProt->fetch_assoc();
         //BUSQUEDA DE LINDEROS SEGUN DOCUMENTO
-            $lindDocSql= "SELECT norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,nivelesConst,areaConst,uniNorte,uniSur,uniEste,uniOeste FROM linderos_documento where id=".$idLindDoc."";
+            $lindDocSql= "SELECT * FROM linderos_documento where id=".$idLindDoc."";
             $resLindDoc = $link->query($lindDocSql);
             $resultLindDoc= $resLindDoc->fetch_assoc();
         //BUSQUEDA DE LINDEROS (POSIBLE VENTA)
-            $lindPosVentaSQL= "SELECT norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,nivelesConst,areaConst,uniNorte,uniSur,uniEste,uniOeste FROM linderos_posible_venta where id=".$idLindPosVenta."";
+            $lindPosVentaSQL= "SELECT * FROM linderos_posible_venta where id=".$idLindPosVenta."";
             $resLindPosVenta = $link->query($lindPosVentaSQL);
             $resultPosVenta= $resLindPosVenta->fetch_assoc();
         //BUSQUEDA DE DATOS TERRENO
-            $terrSql= "SELECT area_total_venta,area_restante,valor_terreno,valor_inmueble,valor_construccion FROM terreno where id=".$idTerreno."";
+            $terrSql= "SELECT * FROM terreno where id=".$idTerreno."";
             $resTerr= $link->query($terrSql);
             $resultTerr= $resTerr->fetch_assoc();
         //BUSQUEDA DE DATOS CONSTRUCCION
-            $constSql= "SELECT destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,piezas_sanitarias,ventanas,puertas,insta_electricas,complementos,estado_conservacion,ambientes,observ from caracteristicas_construccion where id=".$idConst."";
+            $constSql= "SELECT * from caracteristicas_construccion where id=".$idConst."";
             $resConst= $link->query($constSql);
             $resultConst= $resConst->fetch_assoc();
         //BUSQUEDA DE SERVICIOS
@@ -2390,7 +2390,7 @@ class f003{
             $pdf->cell(8.6,4,'0',1,0,'C');
             $pdf->SetY(94);
             $pdf->SetX(123);
-            $pdf->cell(8.6,4,'4',1,0,'C');
+            $pdf->cell(8.6,4,'0',1,0,'C');
             $pdf->SetY(94);
             $pdf->SetX(131.6);
             $pdf->cell(8.6,4,'0',1,0,'C');
@@ -2426,7 +2426,7 @@ class f003{
             $pdf->cell(8.6,4,'0',1,0,'C');
             $pdf->SetY(94);
             $pdf->SetX(226);
-            $pdf->cell(8.6,4,'3',1,0,'C');
+            $pdf->cell(8.6,4,'0',1,0,'C');
             $pdf->SetY(94);
             $pdf->SetX(234.6);
             $pdf->cell(8.6,4,'0',1,0,'C');
@@ -2602,7 +2602,7 @@ class f003{
             $pdf->cell(40,6,'Area de Terreno',1,0,'C');
             $pdf->SetY(190);    
             $pdf->SetX(59);
-            $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].'',1,0,'C');
+            $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].' '.$resultLindDoc["uniAreaT"].'',1,0,'C');
             $pdf->SetY(190);    
             $pdf->SetX(99);
             $pdf->cell(60,6,utf8_decode('Niveles de Construcción'),1,0,'C');
@@ -2614,7 +2614,7 @@ class f003{
             $pdf->cell(50,6,utf8_decode('Area de Construcción'),1,0,'C');
             $pdf->SetY(190);    
             $pdf->SetX(239);
-            $pdf->cell(36,6,''.$resultLindDoc["areaConst"].'',1,0,'C');
+            $pdf->cell(36,6,''.$resultLindDoc["areaConst"].' '.$resultLindDoc["uniAreaC"].'',1,0,'C');
         //DATOS DE COLINDANTES (POSIBLE VENTA)
             $pdf->SetY(196);
             $pdf->SetX(19);
@@ -2689,7 +2689,7 @@ class f003{
             $pdf->cell(40,6,'Area de Terreno',1,0,'C');
             $pdf->SetY(231);    
             $pdf->SetX(59);
-            $pdf->cell(40,6,''.$resultPosVenta["areaTotal"].'',1,0,'C');
+            $pdf->cell(40,6,''.$resultPosVenta["areaTotal"].' '.$resultPosVenta["uniAreaT"].'',1,0,'C');
             $pdf->SetY(231);    
             $pdf->SetX(99);
             $pdf->cell(60,6,utf8_decode('Niveles de Construcción'),1,0,'C');
@@ -2701,7 +2701,7 @@ class f003{
             $pdf->cell(50,6,utf8_decode('Area de Construcción'),1,0,'C');
             $pdf->SetY(231);    
             $pdf->SetX(239);
-            $pdf->cell(36,6,''.$resultPosVenta["areaConst"].'',1,0,'C');
+            $pdf->cell(36,6,''.$resultPosVenta["areaConst"].' '.$resultPosVenta["uniAreaC"].'',1,0,'C');
         //PARTE 6
             $pdf->SetY(237);    
             $pdf->SetX(19);
