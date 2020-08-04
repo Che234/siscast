@@ -5,9 +5,9 @@ class PDF extends FPDF{
     // Cabecera de página
     function Header(){
         // Logos
-        $this->Image('../../assets/logo.jpg',25,5,34);
-        $this->Image('../../assets/escudo.jpg',240,5,34);
-        $this->Image('../../assets/fondoCabecera.jpg',63,5,172,30);
+        $this->Image('../../../assets/logo.jpg',25,5,34);
+        $this->Image('../../../assets/escudo.jpg',240,5,34);
+        $this->Image('../../../assets/fondoCabecera.jpg',63,5,172,30);
         // Arial bold 15
         $this->SetFont('Times','B',10);
         // Título
@@ -33,7 +33,7 @@ class PDF extends FPDF{
     // Pie de página
     function Footer(){
         // Posición: a 1,5 cm del final
-        $this->Image('../../assets/fondoFooter.jpg',19,395,260,20);
+        $this->Image('../../../assets/fondoFooter.jpg',19,395,260,20);
         $this->SetY(395);    
         $this->SetX(100);
         $this->Cell(100,10,utf8_decode('PIÑAL, CALLE 3 ENTRE CARRERAS 3 Y 4,'),0,0,'C',false);
@@ -4353,11 +4353,549 @@ class f004{
             $pdf->MultiCell(120,6,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
             '),'T:1','C');
         
-        $pdf->Output();
+        $pdf->Output('F','../../../assets/constancias/'.$busExpRes["n_expediente"].'.pdf');
         echo'<input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
         
     }
 }
-$f004 = new f004;
-$f004->imprimir();
+class fMulta{
+    var $empadro = "";
+    var $idInmueble = "";
+    var $idProp = "";
+    var $nuExp = "";
+    var $montoFact = "";
+    var $fechFact = "";
+    var $numFact= "";
+    var $operacion= "";
+
+    function imprimir(){
+    
+        session_start();
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        //BUSQUEDA DE USUARIO
+            // $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            // $resultUser= $link->query($userSql);
+            // $idUser= $resultUser->fetch_assoc();
+        //INSERT FACTURA
+            // $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."')";
+            // $link->query($expFactSql);
+            // $idExpFact= $link->insert_id;
+        //INSERT CONSTANCIA
+            // $fechaConst= date('Y-m-d');
+            // $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
+            // $link->query($constansSql);
+            // $idConstancias = $link->insert_id;
+        //INSERT PAGOS
+            // $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$this->nuExp.",".$idExpFact.",".$this->fechFact.")";
+            // $link->query($pagoExpSql);
+            // $idPagoExp= $link->insert_id;
+        //BUSQUEDA DEL EXPEDIENTE
+            // $busExpSql = "SELECT * FROM expediente where id=".$this->nuExp."";
+            // $resBusExp = $link->query($busExpSql);
+            // $busExpRes = $resBusExp->fetch_array();
+        //BUSQUEDA DEL INMUEBLE
+            // $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
+            // $resInmue= $link->query($expSql);
+            // $resultInmue = $resInmue->fetch_assoc();
+            // $idProt= $resultInmue["fk_protocolizacion"];
+            // $idLindDoc= $resultInmue["fk_lind_documento"];
+            // $idTerreno = $resultInmue["fk_terreno"];
+            // $idConst= $resultInmue["fk_carac_construccion"];
+            // $idServicios= $resultInmue["fk_servicios"];
+            // $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
+            // $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
+        //BUSQUEDA DEL PROPIETARIO
+            // $expSql= "SELECT * from propietarios where id=".$this->idProp."";
+            // $resProp= $link->query($expSql);
+            // $resultPropie = $resProp->fetch_assoc();
+            // $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
+        //BUSQUEDA DE PROTOCOLIZACION
+            // $protSql = "SELECT * from datos_protocolizacion where id=".$idProt."";
+            // $resProt = $link->query($protSql);
+            // $resultProp = $resProt->fetch_assoc();
+        //BUSQUEDA DE LINDEROS SEGUN DOCUMENTO
+            // $lindDocSql= "SELECT * FROM linderos_documento where id=".$idLindDoc."";
+            // $resLindDoc = $link->query($lindDocSql);
+            // $resultLindDoc= $resLindDoc->fetch_assoc();
+        //BUSQUEDA DE DATOS TERRENO
+            // $terrSql= "SELECT * FROM terreno where id=".$idTerreno."";
+            // $resTerr= $link->query($terrSql);
+            // $resultTerr= $resTerr->fetch_assoc();
+        //BUSQUEDA DE DATOS CONSTRUCCION
+            // $constSql= "SELECT * from caracteristicas_construccion where id=".$idConst."";
+            // $resConst= $link->query($constSql);
+            // $resultConst= $resConst->fetch_assoc();
+        //BUSQUEDA DE SERVICIOS
+            // $servSql= "SELECT * FROM servicios_inmue where id=".$idServicios."";
+            // $resServ= $link->query($servSql);
+            // $resultServ= $resServ->fetch_assoc();
+        //BUSQUEDA DE CARACTERISTICAS DEL INMUEBLE
+            // $carastInmue= "SELECT * FROM carc_inmueble where id=".$idCaracInmue."";
+            // $rescarastInmue= $link->query($carastInmue);
+            // $mostcarastInmue= $rescarastInmue->fetch_assoc();
+        //BUSQUEDA DE CARACTERISTICAS DE LA CONSTRUCCION
+            // $carcConstSql= "SELECT * FROM caracteristicas_construccion where id=".$idcaracConstruccion."";
+            // $resCaracConst= $link->query($carcConstSql);
+            // $resulCaracInmue= $resCaracConst->fetch_assoc();
+        // Creación del objeto de la clase heredada
+            $pdf = new PDF('P','mm','A3');
+            $pdf->SetMargins(20,0,22);
+            $pdf->AliasNbPages();
+            $pdf->AddPage();
+        //CONTINUACION HEADER
+            $pdf->SetFont('Times','B',12);
+            $pdf->SetX(38);
+            $pdf->SetY(44);
+            $pdf->MultiCell(0,6,''.utf8_decode('Quien suscribe, Presidente del Instituto Autónomo Municipal de
+            Ordenamiento Territorial  del Municipio Fernández Feo 
+            (I.A.M.O.T.F.F)').'',0,'C');
+            $pdf->SetY(65);
+            $pdf->SetX(125);
+            $pdf->SetFont('Times','B',11);
+            $pdf->SetDrawColor(0,0,0,0);
+            $pdf->SetLineWidth(0.5);
+            $pdf->Cell(53,10,utf8_decode('NOTIFICACIÓN DE MULTA:'),'0,0,0,B:1',0,'C');
+            $pdf->SetY(78);
+            $pdf->SetX(215);
+            $pdf->cell(40,10,'Fecha: '.date('d-m-Y').'');
+            $pdf->SetY(84);
+            $pdf->SetX(215);
+            $pdf->cell(40,10,'IAMOTFF/P.A.M-xx/xx/xxxx-nº');
+            $pdf->SetY(90);
+            $pdf->SetX(215);
+            $pdf->cell(40,10,'No Expediente: '.$busExpRes["n_expediente"].'');
+        //CODIGO CATASTRAL
+            $pdf->SetY(100);
+            $pdf->SetX(19);
+            $pdf->SetFont('Times','B',10);
+            $pdf->cell(0,5,'CODIGO CATASTRAL:',1,0,'C');
+            $pdf->SetY(105);
+            $pdf->SetX(19);
+            $pdf->cell(26,5,'Efed',1,0,'C');
+            $pdf->SetY(105);
+            $pdf->SetX(45);
+            $pdf->cell(26,5,'Mun',1,0,'C');
+            $pdf->SetY(105);
+            $pdf->SetX(71);
+            $pdf->cell(26,5,'Prr',1,0,'C');
+            $pdf->SetY(105);
+            $pdf->SetX(97);
+            $pdf->cell(26,5,'Amb',1,0,'C');
+            $pdf->SetY(105);
+            $pdf->SetX(123);
+            $pdf->cell(26,5,'Sec',1,0,'C');
+            $pdf->SetY(105);
+            $pdf->SetX(149);
+            $pdf->cell(26,5,'Ssec',1,0,'C');
+            $pdf->SetY(105);
+            $pdf->SetX(175);
+            $pdf->cell(26,5,'Man',1,0,'C');
+            $pdf->SetY(105);
+            $pdf->SetX(201);
+            $pdf->cell(25,5,'Par',1,0,'C');
+            $pdf->SetY(105);
+            $pdf->SetX(226);
+            $pdf->cell(25,5,'Niv',1,0,'C');
+            $pdf->SetY(105);
+            $pdf->SetX(251);
+            $pdf->cell(24,5,'Und',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(19);
+            $pdf->cell(13,7,'2',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(32);
+            $pdf->cell(13,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(45);
+            $pdf->cell(13,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(58);
+            $pdf->cell(13,7,'7',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(71);
+            $pdf->cell(13,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(84);
+            if($resultInmue["parroquia"]=="Capital"){
+                $pdf->cell(13,7,'1',1,0,'C');
+            }elseif($resultInmue["parroquia"]=="Dr. Alberto Adriani"){
+                $pdf->cell(13,7,'2',1,0,'C');
+            }elseif($resultInmue["parroquia"]=="Santo Domingo"){
+                $pdf->cell(13,7,'3',1,0,'C');
+            }else{
+                $pdf->cell(13,7,'0',1,0,'C');
+            }
+            $pdf->SetY(110);
+            $pdf->SetX(97.2);
+            if($resultInmue["ambito"]=="Urbano"){
+                $pdf->cell(8.6,7,'U',1,0,'C');
+            }elseif($resultInmue["ambito"]=="Rural"){
+                $pdf->cell(8.6,7,'R',1,0,'C');
+            }else{
+                $pdf->cell(8.6,7,'0',1,0,'C');
+            }
+            $pdf->SetY(110);
+            $pdf->SetX(106);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(114.6);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(123);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(131.6);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(140);
+            $pdf->cell(8.9,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(149);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(157.5);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(166);
+            $pdf->cell(8.9,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(174.8);
+            $pdf->cell(8.9,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(184);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(192.4);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(200.7);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(209);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(217.4);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(226);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(234.6);
+            $pdf->cell(8.6,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(243.2);
+            $pdf->cell(7.8,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(251.2);
+            $pdf->cell(8,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(259);
+            $pdf->cell(8,7,'0',1,0,'C');
+            $pdf->SetY(110);
+            $pdf->SetX(267);
+            $pdf->cell(8,7,'0',1,0,'C');
+        //DATOS DEL PROPIETARIO
+            $pdf->SetY(117);
+            $pdf->SetX(19);
+            $pdf->cell(0,5,'DATOS DEL PROPIETARIO:',1,0,'C');
+            $pdf->SetY(122);
+            $pdf->SetX(19);
+            $pdf->cell(50,6,'No de Cedula:',1,0,'L');
+            $pdf->SetY(122);
+            $pdf->SetX(69);
+            $pdf->cell(0,6,''.$resultPropie["cedula"].'',1,0,'L');
+            $pdf->SetY(128);
+            $pdf->SetX(19);
+            $pdf->cell(50,6,'Rif:',1,0,'L');
+            $pdf->SetY(128);
+            $pdf->SetX(69);
+            $pdf->cell(0,6,''.$resultPropie["rif"].'',1,0,'L');
+            $pdf->SetY(134);
+            $pdf->SetX(19);
+            $pdf->cell(50,6,'Apellidos Y Nombres: ',1,0,'L');
+            $pdf->SetY(134);
+            $pdf->SetX(69);
+            $pdf->Cell(0,6,''.utf8_decode($nombreProp).'',1,0,'L');
+            $pdf->SetX(88);
+            $pdf->Cell(0,6,'' ,0,0,'L');
+            $pdf->SetY(140);
+            $pdf->SetX(19);
+            $pdf->cell(50,6,utf8_decode('No de Teléfono: '),1,0,'L');
+            $pdf->SetY(140);
+            $pdf->SetX(69);
+            $pdf->cell(0,6,''.$resultPropie["telef"].'',1,0,'L');
+            $pdf->SetY(146);
+            $pdf->SetX(19);
+            $pdf->cell(50,6,utf8_decode('Dirección Del Propietario:'),1,0,'L');
+            $pdf->SetY(146);
+            $pdf->SetX(69);
+            $pdf->cell(0,6,''.utf8_decode($resultPropie["dir_hab"]).'',1,0,'L');
+        //DATOS DE PROTOCOLIZACION
+            $pdf->SetY(152);
+            $pdf->SetX(19);
+            $pdf->cell(0,6,''.utf8_decode("DATOS DE PROTOCOLIZACIÓN:").'',1,0,'C');
+            $pdf->SetY(158);
+            $pdf->SetX(19);
+            $pdf->cell(110,6,'Documento Debidamente: '.$resultProp["documento"].'',1,0,'L');
+            $pdf->SetY(158);
+            $pdf->SetX(129);
+            $pdf->cell(0,6,utf8_decode('Dirección: '.$resultProp["direccion"].''),1,0,'L');
+            $pdf->SetY(164);
+            $pdf->SetX(19);
+            $pdf->cell(25,6,utf8_decode('Número:'),1,0,'C');
+            $pdf->SetY(170);
+            $pdf->SetX(19);
+            $pdf->cell(25,6,''.$resultProp["numero"].'',1,0,'C');
+            $pdf->SetY(164);
+            $pdf->SetX(44);
+            $pdf->cell(25,6,'Tomo:',1,0,'C');
+            $pdf->SetY(170);
+            $pdf->SetX(44);
+            $pdf->cell(25,6,''.$resultProp["tomo"].'',1,0,'C');
+            $pdf->SetY(164);
+            $pdf->SetX(69);
+            $pdf->cell(25,6,'Folio:',1,0,'C');
+            $pdf->SetY(170);
+            $pdf->SetX(69);
+            $pdf->cell(25,6,''.$resultProp["folio"].'',1,0,'C');
+            $pdf->SetY(164);
+            $pdf->SetX(94);
+            $pdf->cell(25,6,'Protocolo:',1,0,'C');
+            $pdf->SetY(170);
+            $pdf->SetX(94);
+            $pdf->cell(25,6,''.$resultProp["protocolo"].'',1,0,'C');
+            $pdf->SetY(164);
+            $pdf->SetX(119);
+            $pdf->cell(25,6,'Trimestre:',1,0,'C');
+            $pdf->SetY(170);
+            $pdf->SetX(119);
+            $pdf->cell(25,6,''.$resultProp["trimestre"].'',1,0,'C');
+            $pdf->SetY(164);
+            $pdf->SetX(144);
+            $pdf->cell(25,6,'Fecha:',1,0,'C');
+            $pdf->SetY(170);
+            $pdf->SetX(144);
+            $pdf->cell(25,6,''.$resultProp["fecha"].'',1,0,'C');
+            $pdf->SetY(164);
+            $pdf->SetX(169);
+            $pdf->cell(0,6,'Valor de Inmueble:',1,0,'C');
+            $pdf->SetY(170);
+            $pdf->SetX(169);
+            $pdf->cell(0,6,''.$resultProp["valor_inmueble"].'',1,0,'C');
+        //DATOS DE COLINDANTES SEGUN DOCUMENTO
+            $pdf->SetY(176);
+            $pdf->SetX(19);
+            $pdf->cell(0,6,utf8_decode('DATOS DE COLINDANTES SEGÚN DOCUMENTO :'),1,0,'C');
+            $pdf->SetY(182);
+            $pdf->SetX(19);
+            $pdf->cell(60,6,'Puntos Cardinales:',1,0,'C');
+            $pdf->SetY(182);
+            $pdf->SetX(79);
+            $pdf->cell(150,6,'Alinderado:',1,0,'C');
+            $pdf->SetY(182);
+            $pdf->SetX(229);
+            $pdf->cell(0,6,'Medida (m):',1,0,'C');
+            $pdf->SetY(188);
+            $pdf->SetX(19);
+            $pdf->cell(60,6,'NORTE',1,0,'C');
+            $pdf->SetY(188);
+            $pdf->SetX(79);
+            $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_n"].''),1,0,'C');
+            $pdf->SetY(188);
+            $pdf->SetX(229);
+            if($resultLindDoc["uniNorte"] =="m"){
+                $pdf->cell(0,6,''.$resultLindDoc["norte"].'',1,0,'C');    
+            }elseif($resultLindDoc["uniNorte"] =="Lq"){
+                $pdf->cell(0,6,''.$resultLindDoc["norte"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+            }else{
+                $pdf->cell(0,6,'',1,0,'C');
+            }
+            $pdf->SetY(194);
+            $pdf->SetX(19);
+            $pdf->cell(60,6,'SUR',1,0,'C');
+            $pdf->SetY(194);
+            $pdf->SetX(79);
+            $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_s"].''),1,0,'C');
+            $pdf->SetY(194);
+            $pdf->SetX(229);
+            if($resultLindDoc["uniSur"] =="m"){
+                $pdf->cell(0,6,''.$resultLindDoc["sur"].'',1,0,'C');
+            }elseif($resultLindDoc["uniSur"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindDoc["sur"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+            }else{
+                $pdf->cell(0,6,'',1,0,'C');
+            }
+            $pdf->SetY(200);
+            $pdf->SetX(19);
+            $pdf->cell(60,6,'ESTE',1,0,'C');
+            $pdf->SetY(200);
+            $pdf->SetX(79);
+            $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_e"].''),1,0,'C');
+            $pdf->SetY(200);
+            $pdf->SetX(229);
+            if($resultLindDoc["uniEste"] =="m"){
+                $pdf->cell(0,6,''.$resultLindDoc["este"].'',1,0,'C');
+            }elseif($resultLindDoc["uniEste"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindDoc["este"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+            }else{
+                $pdf->cell(0,6,'',1,0,'C');
+            }
+            $pdf->SetY(206);
+            $pdf->SetX(19);
+            $pdf->cell(60,6,'OESTE',1,0,'C');
+            $pdf->SetY(206);
+            $pdf->SetX(79);
+            $pdf->cell(150,6,utf8_decode(''.$resultLindDoc["alind_o"].''),1,0,'C');
+            $pdf->SetY(206);
+            $pdf->SetX(229);
+            if($resultLindDoc["uniOeste"] =="m"){
+                $pdf->cell(0,6,''.$resultLindDoc["oeste"].'',1,0,'C');
+            }elseif($resultLindDoc["uniOeste"] == "Lq"){
+                $pdf->cell(0,6,''.$resultLindDoc["oeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+            }else{
+                $pdf->cell(0,6,''.$resultLindDoc["oeste"].'',1,0,'C');
+            }
+        //GACETA 
+            $pdf->SetFont('Times','B',12);
+            $pdf->SetY(212);    
+            $pdf->SetX(19);
+            $pdf->Multicell(0,6,utf8_decode('Según Gaceta Municipal N° 249, Publicada El 10 De Diciembre Del Año 2.018, En Su CAPÍTULO X: De Las Notificaciones, Sanciones, Recursos Administrativos Catastrales En El (I.A.M.O.T.F.F.). En La SECCIÓN SEGUNDA: De Las Sanciones. En Concordancia Con La Reforma Parcial De La Ordenanza Del Instituto Según Gaceta Municipal N° 225, Publicada El 10 De Diciembre Del Año 2.019'),1,'C');
+        //SANCION 1
+            $pdf->SetFont('Times','',11);
+            $pdf->SetY(230);    
+            $pdf->SetX(19);
+            $pdf->cell(243,6,utf8_decode('Sanción Por Incumplimiento A La Obligación De Inscripción Del Inmueble En El Instituto, Art. 127.'),1,0,'L');
+            $pdf->SetY(230);    
+            $pdf->SetX(-35);
+            $pdf->cell(13,6,utf8_decode(''),1,0,'L');
+        //SANCION 2
+            $pdf->SetY(236);    
+            $pdf->SetX(19);
+            $pdf->Multicell(243,6,utf8_decode('Sanción Por Incumplimiento A La Obligación De Mantenimiento, Conservación Y Actualización Del Inmueble Ante El Instituto (Mas De Un Año), Art. 127 Parágrafo Primero.'),1,'L');
+            $pdf->SetY(236);    
+            $pdf->SetX(-35);
+            $pdf->cell(13,12,utf8_decode(''),1,0,'L');
+        //SANCION 3
+            $pdf->SetY(248);    
+            $pdf->SetX(19);
+            $pdf->Multicell(243,6,utf8_decode('Sanción Por Incumplimiento A La Obligación De Mantenimiento, Conservación Y Actualización Del Inmueble Ante El Instituto (Por Cada Dos Año), Art. 127 Parágrafo Segundo.'),1,'L');
+            $pdf->SetY(248);    
+            $pdf->SetX(-35);
+            $pdf->cell(13,12,utf8_decode(''),1,0,'L');
+        //SANCION 4
+            $pdf->SetY(260);    
+            $pdf->SetX(19);
+            $pdf->Multicell(243,6,utf8_decode('Sanción Por Presentar Datos Falsos, Erróneos, Alterados O Insuficientes Ante El Instituto, Art. 128.'),1,'L');
+            $pdf->SetY(260);    
+            $pdf->SetX(-35);
+            $pdf->cell(13,6,utf8_decode(''),1,0,'L');
+        //SANCION 5
+            $pdf->SetY(266);    
+            $pdf->SetX(19);
+            $pdf->Multicell(243,6,utf8_decode('Sanción Por Impedir Labores Catastrales Al Personal Autorizado Por El Instituto, Art. 129.'),1,'L');
+            $pdf->SetY(266);    
+            $pdf->SetX(-35);
+            $pdf->cell(13,6,utf8_decode(''),1,0,'L');
+        //SANCION 6
+            $pdf->SetY(272);    
+            $pdf->SetX(19);
+            $pdf->Multicell(243,6,utf8_decode('Sanción Por Incumplimiento De Inscripción E Desarrollos Urbanísticos O Parcelarios En La Oficina Del Instituto, Art. 130.'),1,'L');
+            $pdf->SetY(272);    
+            $pdf->SetX(-35);
+            $pdf->cell(13,6,utf8_decode(''),1,0,'L');
+        //VALOR DE LA MULTA
+            $pdf->SetFont('Times','B',13);
+            $pdf->SetY(278);    
+            $pdf->SetX(19);
+            $pdf->cell(200,6,utf8_decode('El Valor De La Multa Pecuniaria Es'),1,0,'L');
+            $pdf->SetY(278);    
+            $pdf->SetX(-78);
+            $pdf->cell(0,6,utf8_decode(''),1,0,'L');
+        //SECCION TERCER
+            $pdf->SetY(284);    
+            $pdf->SetX(19);
+            $pdf->cell(0,6,utf8_decode('SECCIÓN TERCERA: DE LOS RECURSOS ADMINISTRATIVOS'),1,0,'L');
+        //ARTICULO
+            $pdf->SetY(290);    
+            $pdf->SetX(19);
+            $pdf->Multicell(0,18,utf8_decode(''),1,'L');
+            $pdf->SetY(290);    
+            $pdf->SetX(20);
+            $pdf->SetFont('Times','B',11);
+            $pdf->Multicell(0,6,utf8_decode('Articulo 134.-'),0,'L');
+            $pdf->SetFont('Times','',11);
+            $pdf->SetY(290);    
+            $pdf->SetX(44);
+            $pdf->Multicell(0,6,utf8_decode('el interesado (a) podrá intentar el'),0,'L');
+            $pdf->SetFont('Times','B',12);
+            $pdf->SetY(290);    
+            $pdf->SetX(97);
+            $pdf->Multicell(0,6,utf8_decode('Recurso De Reconsideración'),0,'L');
+            $pdf->SetFont('Times','',11);
+            $pdf->SetY(290);    
+            $pdf->SetX(150);
+            $pdf->Multicell(0,6,utf8_decode('por ante el presidente (a) del (I.A.M.O.T.F.F.), este deberá ser ejercido dentro'),0,'L');
+            $pdf->SetFont('Times','',11);
+            $pdf->SetY(296);    
+            $pdf->SetX(20);
+            $pdf->Multicell(0,6,utf8_decode('de un lapso de quince (15) días hábiles, contados a partir de la fecha de su notificación; de la misma forma, podrá ejercer el'),0,'L');
+            $pdf->SetFont('Times','B',12);
+            $pdf->SetY(296);    
+            $pdf->SetX(213);
+            $pdf->Multicell(0,6,utf8_decode('Recurso De Apelación O'),0,'L');
+            $pdf->SetY(302);    
+            $pdf->SetX(20);
+            $pdf->Multicell(0,6,utf8_decode('Jerárquico'),0,'L');
+            $pdf->SetFont('Times','',11);
+            $pdf->SetY(302);    
+            $pdf->SetX(42);
+            $pdf->Multicell(0,6,utf8_decode('por ante el alcalde (sa) del Municipio de conformidad con lo dispuesto en el'),0,'L');
+            $pdf->SetFont('Times','B',12);
+            $pdf->SetY(302);    
+            $pdf->SetX(161);
+            $pdf->Multicell(0,6,utf8_decode('Art. 135'),0,'L');
+            $pdf->SetFont('Times','',11);
+            $pdf->SetY(302);    
+            $pdf->SetX(177);
+            $pdf->Multicell(0,6,utf8_decode('de la (O.C.I.A.M.O.T.F.F.).'),0,'L');
+        //NOTA
+            $pdf->SetFont('Times','B',12);
+            $pdf->SetY(310);    
+            $pdf->SetX(20);
+            $pdf->Multicell(0,6,utf8_decode('NOTA: La presenta multa, deberá ser cancelada en un lapso de quince (15) días hábiles'),0,'L');
+        //REDACCION
+            $pdf->SetFont('Times','B',11);
+            $pdf->SetY(323);    
+            $pdf->SetX(35);
+            $pdf->cell(50,6,utf8_decode('Fecha:'),0,'C');
+            $pdf->SetY(330);    
+            $pdf->SetX(35);
+            $pdf->cell(50,6,utf8_decode('Recibido Por:'),0,'C');
+            $pdf->SetY(338);    
+            $pdf->SetX(35);
+            $pdf->cell(50,6,utf8_decode('C.I.V:'),0,'C');
+            $pdf->SetY(345);    
+            $pdf->SetX(35);
+            $pdf->cell(50,6,utf8_decode('Horas:'),0,'C');
+            $pdf->SetY(353);    
+            $pdf->SetX(35);
+            $pdf->cell(50,6,utf8_decode('NºTLF:'),0,'C');
+            $pdf->SetY(361);    
+            $pdf->SetX(35);
+            $pdf->cell(50,6,utf8_decode('Firma:'),0,'C');
+        //FIRMA
+            $pdf->SetY(360);    
+            $pdf->SetX(160);
+            $pdf->SetDrawColor(0,0,0,0);
+            $pdf->SetFont('Times','B',9);
+            $pdf->SetLineWidth(0.5);
+            $pdf->MultiCell(120,6,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
+            '),'T:1','C');
+        
+        $pdf->Output('I','../../assets/constancias/'.$busExpRes["n_expediente"].'.pdf');
+        echo'<input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
+        
+    }
+}
 ?>

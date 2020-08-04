@@ -981,8 +981,8 @@ class constancias{
                         <p class="negritas">Aplicar:</p>
                         <select id="multa"/>
                             <option value="no"></option>
-                            <option value="si">Multa</option>
-                            <option value="no">Empadronamiento</option>
+                            <option value="Multa">Multa</option>
+                            <option value="Empadronamiento">Empadronamiento</option>
                         </select>
                     </div>
                 </td>

@@ -46,10 +46,12 @@ class login{
         $sql= "SELECT * from usuarios where nick='".$this->usuario."' and pass='".$this->pass."' ";
         $respuesta = $link->query($sql);
         $resFilas= $respuesta->num_rows;
+        $filasRes = $respuesta->fetch_array();
         if($resFilas != 0){
             session_start();
             $_SESSION["usuario"]=$this->usuario;
             $_SESSION["pass"]=$this->pass;
+            $_SESSION["nivel"]=$filasRes["nivel"];
             header("http://localhost/SisCast/index.php");
         }
     }

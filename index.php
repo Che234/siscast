@@ -22,21 +22,31 @@
         if(!isset($_SESSION["pass"])){
             $_SESSION["pass"]="";
         }
-
+        if(!isset($_SESSION["nivel"])){
+            $_SESSION["nivel"]="";
+        }
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
 
     $busqueda="SELECT * from usuarios where nick='".$_SESSION["usuario"]."' and pass='".$_SESSION["pass"]."' ";
     $rest = $link->query($busqueda);
     $filas = $rest->num_rows;
+    $resUser= $rest->fetch_array();
     if($filas != 0){
-        $estructura = new estructura();
-        $estructura->header();
-        echo'<div id="campGeneral">';
-        $estructura->body();
-        echo'</div>';
-        
-        
+        if($resUser["nivel"]=="1"){
+            $estructura = new estructura();
+            $estructura->header();
+            echo'<div id="campGeneral">';
+            $estructura->body();
+            echo'</div>';   
+        }
+        if($resUser["nivel"]=="2"){
+            $estructura = new estructura();
+            $estructura->header2();
+            echo'<div id="campGeneral">';
+            $estructura->body();
+            echo'</div>';   
+        }
     }else{
         echo'<div id="campGeneral">';
         $nlog= new login();
