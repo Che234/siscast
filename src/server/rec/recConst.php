@@ -7,6 +7,7 @@ $nconst = new constancias;
 $f002 = new f002;
 $f001 = new f001;
 $f003 = new f003;
+$f004 = new f004;
 
 
 if(isset($_POST["accion"])){
@@ -806,6 +807,50 @@ if($accion=="imprConst3"){
     }
     echo'<div id="enlacePdf"></div>';
     $f003->imprimir();
+}
+if($accion=="imprConstEmpa"){
+    if(isset($_POST["idInmueble"])){
+        $f004->idInmueble=$_POST["idInmueble"];
+    }else{
+        $f004->idInmueble= "nada";
+    }
+    if(isset($_POST["operacion"])){
+        $f004->operacion=$_POST["operacion"];
+    }else{
+        $f004->operacion= "nada";
+    }
+    if(isset($_POST["nuExp"])){
+        $f004->nuExp=$_POST["nuExp"];
+    }else{
+        $f004->nuExp= "nada";
+    }
+    if(isset($_POST["montoFact"])){
+        $f004->montoFact=$_POST["montoFact"];
+    }else{
+        $f004->montoFact= "nada";
+    }
+    if(isset($_POST["fechFact"])){
+        $f004->fechFact=$_POST["fechFact"];
+    }else{
+        $f004->fechFact= "nada";
+    }
+    if(isset($_POST["empadro"])){
+        $f004->empadro=$_POST["empadro"];
+    }else{
+        $f004->empadro= "nada";
+    }
+    if(isset($_POST["idProp"])){
+        $f004->idProp=$_POST["idProp"];
+    }else{
+        $f004->idProp= "nada";
+    }
+    if(isset($_POST["numFact"])){
+        $f004->numFact=$_POST["numFact"];
+    }else{
+        $f004->numFact= "nada";
+    }
+    echo'<div id="enlacePdf"></div>';
+    $f004->imprimir();
 }
 if($accion=="formImpri"){
     $nconst->formImpri();

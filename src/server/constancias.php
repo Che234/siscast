@@ -980,7 +980,7 @@ class constancias{
                     <div class="campDat">
                         <p class="negritas">Aplicar:</p>
                         <select id="multa"/>
-                            <option value="no"></option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Multa">Multa</option>
                             <option value="Empadronamiento">Empadronamiento</option>
                         </select>
@@ -1452,7 +1452,7 @@ class constancias{
                 $idInmueble= $link->insert_id;
             //EXPEDIENTE
                 $fechaExp= date('Y-m-d');
-                $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha)value(".$idInmueble.",".$idProp.",".$idUser["id"].",".$this->nuExp.",'".$fechaExp."')";
+                $expediSql= "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion)value(".$idInmueble.",".$idProp.",".$idUser["id"].",".$this->nuExp.",'".$fechaExp."','".$this->multa."')";
                 $link->query($expediSql);
                 $idExpediente = $link->insert_id;
               echo'<h1>PROCESO COMPLETADO CON EXITO</h1>
@@ -1505,7 +1505,7 @@ class constancias{
             if($norteGen['norte']=="nada"){
                 if($norteDoc['norte']!="nada"){
                     if($nortePosVenta['norte']=="nada"){
-                        if($this->multa =="no"){
+                        if($this->multa =="No Aplica"){
                             echo'
                             <tr>
                                 <td class="tdConst">
@@ -1526,7 +1526,7 @@ class constancias{
             if($norteGen['norte']!="nada"){
                 if($norteDoc['norte']!="nada"){
                     if($nortePosVenta['norte']=="nada"){
-                        if($this->multa =="no"){
+                        if($this->multa =="No Aplica"){
                             echo'
                                 <div class="btnSig1">
                                     <input type="button" value="Imprimir" onclick="btnImprConst1()" class=" botones btn btn-primary" />
@@ -1542,7 +1542,7 @@ class constancias{
             if($norteGen['norte']=="nada"){
                 if($norteDoc['norte']!="nada"){
                     if($nortePosVenta['norte']!="nada"){
-                        if($this->multa=="no"){
+                        if($this->multa=="No Aplica"){
                             echo'
                                 <div class="btnSig1">
                                     <input type="button" value="Imprimir" onclick="btnImprConst3()" class=" botones btn btn-primary" />
@@ -1553,8 +1553,12 @@ class constancias{
                 }
             }
         //IF DEL F004 - EMPADRONAMIENTO
-            if($this->docDebConst ){
-
+            if($this->multa=="Empadronamiento" ){
+                echo'
+                    <div class="btnSig1">
+                        <input type="button" value="Imprimir" onclick="btnImprEmpa()" class=" botones btn btn-primary" />
+                    </div>
+                            ';
             }
                 
         // //if para caso Multas

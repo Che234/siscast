@@ -626,7 +626,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst2`);
+        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst2`);
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -646,7 +646,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst1`);
+        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst1`);
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -666,7 +666,27 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&empadro=${this.empadro}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst3`);
+        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst3`);
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                    let nuExp = document.getElementById("numExp").value
+                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="http://localhost/SisCast/assets/constancias/${nuExp}.pdf" type="application/pdf"></div>`;
+			     }
+	       	}
+    }
+    imprConstEmpa(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConstEmpa`);
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1095,7 +1115,6 @@ function btnImprConst(){
     consta.montoFact = document.getElementById("montoFact").value
     consta.fechFact = document.getElementById("fechFact").value
     consta.idInmueble = document.getElementById("idInmueble").value
-    consta.empadro = document.getElementById("empadro").value
     consta.idProp =document.getElementById("idProp").value
     consta.numFact= document.getElementById("numFact").value
     consta.operacion = document.getElementById("operacion").value
@@ -1109,7 +1128,6 @@ function btnImprConst1(){
     consta.montoFact = document.getElementById("montoFact").value
     consta.fechFact = document.getElementById("fechFact").value
     consta.idInmueble = document.getElementById("idInmueble").value
-    consta.empadro = document.getElementById("empadro").value
     consta.idProp =document.getElementById("idProp").value
     consta.numFact= document.getElementById("numFact").value
     consta.operacion = document.getElementById("operacion").value
@@ -1123,13 +1141,25 @@ function btnImprConst3(){
     consta.montoFact = document.getElementById("montoFact").value
     consta.fechFact = document.getElementById("fechFact").value
     consta.idInmueble = document.getElementById("idInmueble").value
-    consta.empadro = document.getElementById("empadro").value
     consta.idProp =document.getElementById("idProp").value
     consta.numFact= document.getElementById("numFact").value
     consta.operacion = document.getElementById("operacion").value
     consta.nuExp = document.getElementById("nuExp").value
     if(consta.veriInmu() == true){
         consta.imprConst3()
+    }
+}
+function btnImprEmpa(){
+    let consta = new constancias
+    consta.montoFact = document.getElementById("montoFact").value
+    consta.fechFact = document.getElementById("fechFact").value
+    consta.idInmueble = document.getElementById("idInmueble").value
+    consta.idProp =document.getElementById("idProp").value
+    consta.numFact= document.getElementById("numFact").value
+    consta.operacion = document.getElementById("operacion").value
+    consta.nuExp = document.getElementById("nuExp").value
+    if(consta.veriInmu() == true){
+        consta.imprConstEmpa()
     }
 }
 function btnRevUsuario(){

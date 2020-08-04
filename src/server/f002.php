@@ -1,5 +1,5 @@
 <?php
-require('../lib/fpdf/fpdf.php');
+require('../../lib/fpdf/fpdf.php');
 
 class PDF extends FPDF{
     // Cabecera de página
@@ -3335,73 +3335,73 @@ class f004{
     var $operacion= "";
     function imprimir(){
         session_start();
-        // $link= new mysqli("127.0.0.1", "root","","siscast") 
-        // or die(mysqli_error());
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
         //BUSQUEDA DE USUARIO
-            // $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
-            // $resultUser= $link->query($userSql);
-            // $idUser= $resultUser->fetch_assoc();
+            $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resultUser= $link->query($userSql);
+            $idUser= $resultUser->fetch_assoc();
         //INSERT FACTURA
-            // $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."')";
-            // $link->query($expFactSql);
-            // $idExpFact= $link->insert_id;
+            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."')";
+            $link->query($expFactSql);
+            $idExpFact= $link->insert_id;
         //INSERT CONSTANCIA
-            // $fechaConst= date('Y-m-d');
-            // $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
-            // $link->query($constansSql);
-            // $idConstancias = $link->insert_id;
+            $fechaConst= date('Y-m-d');
+            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
+            $link->query($constansSql);
+            $idConstancias = $link->insert_id;
         //INSERT PAGOS
-            // $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$this->nuExp.",".$idExpFact.",".$this->fechFact.")";
-            // $link->query($pagoExpSql);
-            // $idPagoExp= $link->insert_id;
+            $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$this->nuExp.",".$idExpFact.",".$this->fechFact.")";
+            $link->query($pagoExpSql);
+            $idPagoExp= $link->insert_id;
         //BUSQUEDA DEL EXPEDIENTE
-            // $busExpSql = "SELECT * FROM expediente where id=".$this->nuExp."";
-            // $resBusExp = $link->query($busExpSql);
-            // $busExpRes = $resBusExp->fetch_array();
+            $busExpSql = "SELECT * FROM expediente where id=".$this->nuExp."";
+            $resBusExp = $link->query($busExpSql);
+            $busExpRes = $resBusExp->fetch_array();
         //BUSQUEDA DEL INMUEBLE
-            // $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
-            // $resInmue= $link->query($expSql);
-            // $resultInmue = $resInmue->fetch_assoc();
-            // $idProt= $resultInmue["fk_protocolizacion"];
-            // $idLindDoc= $resultInmue["fk_lind_documento"];
-            // $idTerreno = $resultInmue["fk_terreno"];
-            // $idConst= $resultInmue["fk_carac_construccion"];
-            // $idServicios= $resultInmue["fk_servicios"];
-            // $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
-            // $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
+            $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
+            $resInmue= $link->query($expSql);
+            $resultInmue = $resInmue->fetch_assoc();
+            $idProt= $resultInmue["fk_protocolizacion"];
+            $idLindDoc= $resultInmue["fk_lind_documento"];
+            $idTerreno = $resultInmue["fk_terreno"];
+            $idConst= $resultInmue["fk_carac_construccion"];
+            $idServicios= $resultInmue["fk_servicios"];
+            $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
+            $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
-            // $expSql= "SELECT * from propietarios where id=".$this->idProp."";
-            // $resProp= $link->query($expSql);
-            // $resultPropie = $resProp->fetch_assoc();
-            // $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
+            $expSql= "SELECT * from propietarios where id=".$this->idProp."";
+            $resProp= $link->query($expSql);
+            $resultPropie = $resProp->fetch_assoc();
+            $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
-            // $protSql = "SELECT * from datos_protocolizacion where id=".$idProt."";
-            // $resProt = $link->query($protSql);
-            // $resultProp = $resProt->fetch_assoc();
+            $protSql = "SELECT * from datos_protocolizacion where id=".$idProt."";
+            $resProt = $link->query($protSql);
+            $resultProp = $resProt->fetch_assoc();
         //BUSQUEDA DE LINDEROS SEGUN DOCUMENTO
-            // $lindDocSql= "SELECT * FROM linderos_documento where id=".$idLindDoc."";
-            // $resLindDoc = $link->query($lindDocSql);
-            // $resultLindDoc= $resLindDoc->fetch_assoc();
+            $lindDocSql= "SELECT * FROM linderos_documento where id=".$idLindDoc."";
+            $resLindDoc = $link->query($lindDocSql);
+            $resultLindDoc= $resLindDoc->fetch_assoc();
         //BUSQUEDA DE DATOS TERRENO
-            // $terrSql= "SELECT * FROM terreno where id=".$idTerreno."";
-            // $resTerr= $link->query($terrSql);
-            // $resultTerr= $resTerr->fetch_assoc();
+            $terrSql= "SELECT * FROM terreno where id=".$idTerreno."";
+            $resTerr= $link->query($terrSql);
+            $resultTerr= $resTerr->fetch_assoc();
         //BUSQUEDA DE DATOS CONSTRUCCION
-            // $constSql= "SELECT * from caracteristicas_construccion where id=".$idConst."";
-            // $resConst= $link->query($constSql);
-            // $resultConst= $resConst->fetch_assoc();
+            $constSql= "SELECT * from caracteristicas_construccion where id=".$idConst."";
+            $resConst= $link->query($constSql);
+            $resultConst= $resConst->fetch_assoc();
         //BUSQUEDA DE SERVICIOS
-            // $servSql= "SELECT * FROM servicios_inmue where id=".$idServicios."";
-            // $resServ= $link->query($servSql);
-            // $resultServ= $resServ->fetch_assoc();
+            $servSql= "SELECT * FROM servicios_inmue where id=".$idServicios."";
+            $resServ= $link->query($servSql);
+            $resultServ= $resServ->fetch_assoc();
         //BUSQUEDA DE CARACTERISTICAS DEL INMUEBLE
-            // $carastInmue= "SELECT * FROM carc_inmueble where id=".$idCaracInmue."";
-            // $rescarastInmue= $link->query($carastInmue);
-            // $mostcarastInmue= $rescarastInmue->fetch_assoc();
+            $carastInmue= "SELECT * FROM carc_inmueble where id=".$idCaracInmue."";
+            $rescarastInmue= $link->query($carastInmue);
+            $mostcarastInmue= $rescarastInmue->fetch_assoc();
         //BUSQUEDA DE CARACTERISTICAS DE LA CONSTRUCCION
-            // $carcConstSql= "SELECT * FROM caracteristicas_construccion where id=".$idcaracConstruccion."";
-            // $resCaracConst= $link->query($carcConstSql);
-            // $resulCaracInmue= $resCaracConst->fetch_assoc();
+            $carcConstSql= "SELECT * FROM caracteristicas_construccion where id=".$idcaracConstruccion."";
+            $resCaracConst= $link->query($carcConstSql);
+            $resulCaracInmue= $resCaracConst->fetch_assoc();
         // Creación del objeto de la clase heredada
             $pdf = new PDF('P','mm','A3');
             $pdf->SetMargins(20,0,22);
@@ -3923,7 +3923,7 @@ class f004{
             $pdf->Cell(30,6,'Observaciones:',0,0,'L');
             $pdf->SetY(296);    
             $pdf->SetX(20);
-            $pdf->Cell(30,6,$resultConst["observ"],0,0,'L');
+            $pdf->Cell(30,6,utf8_decode($resultConst["observ"]),0,0,'L');
             //TOPOGRAFIA
                 $pdf->SetY(245);    
                 $pdf->SetX(19);
@@ -4313,7 +4313,7 @@ class f004{
             $pdf->SetX(19);
             $pdf->SetFont('Times','B',10);
             $pdf->cell(50,6,utf8_decode('REDACCIÓN:'),0,'C');
-            $pdf->SetY(321);    
+            $pdf->SetY(322);    
             $pdf->SetX(47);
             $pdf->SetFont('Times','',11);
             $pdf->cell(50,6,utf8_decode(''.$idUser["nombre"].' '.$idUser["apellido"].''),0,'C');
