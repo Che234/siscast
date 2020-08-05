@@ -24,8 +24,6 @@ class busquedas{
         $regInmue = "";
         $usoConst = "";
         $tenenConst = "";
-        $ocupConst = "";
-        $dimeConst = "";
         $idCarac = "";
         $destConst = "";
         $estConst = "";
@@ -644,8 +642,6 @@ class busquedas{
         <input type="hidden" id="forma" value="'.$caracInmu["forma"].'"/>
         <input type="hidden" id="uso" value="'.$caracInmu["uso"].'"/>
         <input type="hidden" id="tenencia" value="'.$caracInmu["tenencia"].'"/>
-        <input type="hidden" id="ocupante" value="'.$caracInmu["ocupante"].'"/>
-        <input type="hidden" id="dimenciones" value="'.$caracInmu["dimenciones"].'"/>
         <input type="hidden" id="regimen" value="'.$caracInmu["regimen"].'"/>
         <input type="hidden" id="idCarac" value="'.$caracInmu["id"].'"/>
         <table border="1px" class="taConst">
@@ -717,35 +713,6 @@ class busquedas{
                             <option value="Otros">Otros</option>
                         </select>
                     </div>
-                </td>
-                <td >
-                    <div class="campDat">
-                        <p class="negritas">Ocupante</p>
-                        <select id="ocupConst">
-                            <option value="0"></option>
-                            <option value="Hab. por Prop.">Hab. por Prop.</option>
-                            <option value="Hab. por Inquilino">Hab. por Inquilino</option>
-                            <option value="Renta Mensual">Renta Mensual</option>
-                            <option value="Fecha de Contrato">Fecha de Contrato</option>
-                            <option value="Habitantes No">Habitantes No</option>
-                            <option value="Ingreso Familiar">Ingreso Familiar</option>
-                        </select>
-                    </div>
-                </td>
-                <td >
-                    <div class="campDat">
-                        <p class="negritas">Dimensiones</p>
-                        <select id="dimeConst">
-                            <option value="0"></option>
-                            <option value="Frente">Frente</option>
-                            <option value="Profundidad">Profundidad</option>
-                            <option value="Área">Área</option>
-                            <option value="Frente tipo">Frente tipo</option>
-                            <option value="Prof tipo">Prof tipo</option>
-                        </select>
-                    </div>
-                </td>
-                <td >
                 </td>
             </tr>
         </table>
@@ -1688,7 +1655,7 @@ class busquedas{
     function actCaracInmue(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $inmueSql = "UPDATE carc_inmueble SET topografia='".$this->topoConst."',forma='".$this->formaConst."',uso='".$this->usoConst."',tenencia='".$this->tenenConst."',ocupante='".$this->ocupConst."',dimenciones='".$this->dimeConst."',regimen='".$this->regInmue."' WHERE id='".$this->idCarac."' ";
+        $inmueSql = "UPDATE carc_inmueble SET topografia='".$this->topoConst."',forma='".$this->formaConst."',uso='".$this->usoConst."',tenencia='".$this->tenenConst."',regimen='".$this->regInmue."' WHERE id='".$this->idCarac."' ";
         $link->query($inmueSql);
         echo 'ACTUALIZADO CON EXITO';
     }

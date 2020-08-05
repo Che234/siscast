@@ -119,16 +119,6 @@ if(isset($_POST["tenenConst"])){
 }else{
     $bus->tenenConst = "nada";
 }
-if(isset($_POST["ocupConst"])){
-    $bus->ocupConst = $_POST["ocupConst"];
-}else{
-    $bus->ocupConst = "nada";
-}
-if(isset($_POST["dimeConst"])){
-    $bus->dimeConst = $_POST["dimeConst"];
-}else{
-    $bus->dimeConst = "nada";
-}
 if(isset($_POST["idCarac"])){
     $bus->idCarac = $_POST["idCarac"];
 }else{

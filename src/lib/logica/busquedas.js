@@ -3,7 +3,7 @@ class busquedas{
 
     construct(campBuscar,tipoBuscar,secciones,expBuscar,cedula,rif,nomProp,apelProp,
         telefono,direcProp,cedula2,parrInmue,secInmue,direcInmue,ambInmue,idInmueble,topoConst,formaConst,
-        regInmue,usoConst,tenenConst,ocupConst,dimeConst,destConst,estConst,pareTipoInmue,
+        regInmue,usoConst,tenenConst,dimeConst,destConst,estConst,pareTipoInmue,
         pareAcaInmue,pintConst,estConserv,techoConst,pisosConst,piezConst,ventConst,puertConst,
         instElect,ambConst,compConst,obsConst,idCaracConst,docDebConst,direcProtConst,numProtConst,
         tomoProtConst,folioProtConst,protoConst,trimProtConst,dateProtConst,valorProtConst,idProto,
@@ -44,7 +44,6 @@ class busquedas{
             this.regInmue = regInmue
             this.usoConst = usoConst
             this.tenenConst = tenenConst
-            this.ocupConst = ocupConst
             this.dimeConst = dimeConst
             this.destConst = destConst
             this.estConst = estConst
@@ -536,7 +535,7 @@ class busquedas{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recBuscar.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`topoConst=${this.topoConst}&formaConst=${this.formaConst}&regInmue=${this.regInmue}&usoConst=${this.usoConst}&tenenConst=${this.tenenConst}&ocupConst=${this.ocupConst}&dimeConst=${this.dimeConst}&idCarac=${this.idCarac}&accion=actCaracInmue`); 
+        ajax.send(`topoConst=${this.topoConst}&formaConst=${this.formaConst}&regInmue=${this.regInmue}&usoConst=${this.usoConst}&tenenConst=${this.tenenConst}&idCarac=${this.idCarac}&accion=actCaracInmue`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -925,7 +924,6 @@ function dividirCed(secciones="no"){
         let formaConst = document.getElementById("forma").value
         let regimen = document.getElementById("regimen").value
         let tenencia = document.getElementById("tenencia").value
-        let ocupante = document.getElementById("ocupante").value
         if(topografia=="Terreno Llano"){
             document.getElementById("topoConst").selectedIndex=1
         }
@@ -952,12 +950,6 @@ function dividirCed(secciones="no"){
         },100)
         setTimeout(function(){
             tenenciaCarac()
-        },100)
-        setTimeout(function(){
-            ocupConst()
-        },100)
-        setTimeout(function(){
-            dimesionConst()
         },100)
     }
     if(secciones=="Caract Construccion"){
@@ -1232,24 +1224,6 @@ function tenenciaCarac(){
         k++
     }
 }
-function ocupConst(){
-    let ocupante = document.getElementById("ocupante").value
-    let ocupConst = document.getElementById("ocupConst")
-    let k=0
-    while(ocupante !=ocupConst.value){
-        document.getElementById("ocupConst").selectedIndex=k
-        k++
-    }
-}
-function dimesionConst(){
-    let dimenciones = document.getElementById("dimenciones").value
-    let dimeConst = document.getElementById("dimeConst")
-    let k=0
-    while(dimenciones !=dimeConst.value){
-        document.getElementById("dimeConst").selectedIndex=k
-        k++
-    }
-}
 function btnActCaracInmue(){
     let busque = new busquedas
     busque.topoConst = document.getElementById("topoConst").value
@@ -1257,8 +1231,6 @@ function btnActCaracInmue(){
     busque.regInmue = document.getElementById("regInmue").value
     busque.usoConst = document.getElementById("usoConst").value
     busque.tenenConst = document.getElementById("tenenConst").value
-    busque.ocupConst = document.getElementById("ocupConst").value
-    busque.dimeConst = document.getElementById("dimeConst").value
     busque.idCarac = document.getElementById("idCarac").value
     busque.actCaracInmue()
 }

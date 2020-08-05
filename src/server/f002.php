@@ -2391,16 +2391,16 @@ class f001{
                 $pdf->SetLineWidth(0.5);
                 $pdf->MultiCell(120,4,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
                 '),'T:1','C');
-                $carpeta ='../../../assets/constancias/'.date("Y").'';
-            if(!file_exists($carpeta)){
-                mkdir($carpeta,0777,true);
-                $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
-            }else{
-                $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
-            }
-            echo'
-            <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf" />
-            <input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
+        $carpeta ='../../../assets/constancias/'.date("Y").'';
+        if(!file_exists($carpeta)){
+            mkdir($carpeta,0777,true);
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+        }else{
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+        }
+        echo'
+        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf" />
+        <input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
     }
 }
 class f003{
@@ -2522,7 +2522,7 @@ class f003{
             $pdf->cell(40,10,'No Expediente: '.$busExpRes["n_expediente"].'');
             $pdf->SetY(74);
             $pdf->SetX(22);
-            $pdf->cell(40,10,'Tipo de Operación: '.$this->operacion.'');
+            $pdf->cell(40,10,utf8_decode('Tipo de Operación: '.$this->operacion.''));
         //CODIGO CATASTRAL
             $pdf->SetY(84);
             $pdf->SetX(19);
@@ -2957,12 +2957,6 @@ class f003{
                 if($resultPosVenta["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["sureste"].' '.$resultPosVenta["uniSur"].'',1,0,'C');
                 }
-            }
-            if($resultPosVenta["uniSur"] =="m"){
-                $pdf->cell(0,6,''.$resultPosVenta["sur"].'',1,0,'C');
-            }
-            if($resultPosVenta["uniSur"] == "Lq"){
-                $pdf->cell(0,6,''.$resultPosVenta["sur"].' '.$resultPosVenta["uniSur"].'',1,0,'C');
             }
             $pdf->SetY(219);
             $pdf->SetX(19);

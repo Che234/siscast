@@ -20,7 +20,6 @@ class constancias{
         $servPublic="";
         $usoConst= "";
         $tenenConst= "";
-        $ocupConst= "";
         $dimeConst="";
         $destConst = "";
         $estConst = "";
@@ -155,7 +154,7 @@ class constancias{
                     <div class="campDat">
                     <p class="negritas">Cedula:</p>
                         <select class="codigo2" id="cedR">
-                            <option value="0"></option>
+                            <option value="NA">NA</option>
                             <option value="V">V</option>
                             <option value="E">E</option>
                         </select>
@@ -167,9 +166,13 @@ class constancias{
                     <div class="campDat">
                         <p class="negritas">Rif:</p>
                         <select class="codigo2" id="rifR">
-                            <option value="0"></option>
+                            <option value="NA">NA</option>
                             <option value="V">V</option>
                             <option value="J">J</option>
+                            <option value="G">G</option>
+                            <option value="E">E</option>
+                            <option value="P">P</option>
+                            <option value="C">C</option>
                         </select>
                         <input type="text" class="numText" id="rifN" />
                     </div>
@@ -191,9 +194,16 @@ class constancias{
             <tr>
                 <td>
                     <div class="campDat">
-                        <p class="negritas">Telefono</p>
+                        <p class="negritas">Telef. Casa</p>
                         <input type="text" class="codigo2" id="codTelf"/>
                         <input type="text" class="numText" id="numTelf"/>
+                    </div>
+                </td>
+                <td class="tdConst">
+                    <div class="campDat">
+                        <p class="negritas">Telef. Celular</p>
+                        <input type="text" class="codigo2" id="codTelf2"/>
+                        <input type="text" class="numText" id="numTelf2"/>
                     </div>
                 </td>
                 <td colspan="3">
@@ -212,13 +222,6 @@ class constancias{
                 </td>
             </tr>
             <tr>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Telefono</p>
-                        <input type="text" class="codigo2" id="codTelf2"/>
-                        <input type="text" class="numText" id="numTelf2"/>
-                    </div>
-                </td>
                 <td >
                     <div class="campDat">
                         <p class="negritas">Parroquia</p>
@@ -328,35 +331,6 @@ class constancias{
                         </select>
                     </div>
                 </td>
-                <td >
-                    <div class="campDat">
-                        <p class="negritas">Ocupante</p>
-                        <select id="ocupConst">
-                            <option value="0"></option>
-                            <option value="Hab. por Prop.">Hab. por Prop.</option>
-                            <option value="Hab. por Inquilino">Hab. por Inquilino</option>
-                            <option value="Renta Mensual">Renta Mensual</option>
-                            <option value="Fecha de Contrato">Fecha de Contrato</option>
-                            <option value="Habitantes No">Habitantes No</option>
-                            <option value="Ingreso Familiar">Ingreso Familiar</option>
-                        </select>
-                    </div>
-                </td>
-                <td >
-                    <div class="campDat">
-                        <p class="negritas">Dimensiones</p>
-                        <select id="dimeConst">
-                            <option value="0"></option>
-                            <option value="Frente">Frente</option>
-                            <option value="Profundidad">Profundidad</option>
-                            <option value="Área">Área</option>
-                            <option value="Frente tipo">Frente tipo</option>
-                            <option value="Prof tipo">Prof tipo</option>
-                        </select>
-                    </div>
-                </td>
-                <td >
-                </td>
             </tr>
         </table>
         <div class="btnSig1">
@@ -384,10 +358,8 @@ class constancias{
             13 => $this->formaConst,
             14 => $this->usoConst,
             15 => $this->tenenConst,
-            16 => $this->ocupConst,
-            17 => $this->dimeConst,
-            18 => $this->regInmue,
-            19 => $this->ambInmue
+            16 => $this->regInmue,
+            17 => $this->ambInmue
         );
         echo'
         <table border="1px" class="taConst">
@@ -671,13 +643,24 @@ class constancias{
                 <td class="tdConst">
                     <div class="campDat">
                         <p class="negritas">Protocolo:</p>
-                        <input type="text" id="protoConst"/>
+                        <select id="protoConst">
+                            <option value="No Aplica">No Aplica</option>
+                            <option value="Primero">Primero</option>
+                            <option value="Segundo">Segundo</option>
+                            <option value="Tercero">Tercero</option>
+                        </select>
                     </div>
                 </td>
                 <td class="tdConst">
                     <div class="campDat">
                         <p class="negritas">Trimestre:</p>
-                        <input type="text" id="trimProtConst"/>
+                        <select id="trimProtConst">
+                            <option value="No Aplica">No Aplica</option>
+                            <option value="Primero">Primero</option>
+                            <option value="Segundo">Segundo</option>
+                            <option value="Tercero">Tercero</option>
+                            <option value="Tercero">No Aplica</option>
+                        </select>
                     </div>
                 </td>
                 <td class="tdConst">
@@ -699,7 +682,7 @@ class constancias{
         <div class="btnSig1">
             <input type="button" value="Siguiente" onclick="btnfLind()" class=" botones btn btn-primary" />
         </div>
-        <input type="hidden" id="parte1" value="'.$parte1[0].'|'.$parte1[1].'|'.$parte1[2].'|'.$parte1[3].'|'.$parte1[4].'|'.$parte1[5].'|'.$parte1[6].'|'.$parte1[7].'|'.$parte1[8].'|'.$parte1[9].'|'.$parte1[10].'|'.$parte1[11].'|'.$parte1[12].'|'.$parte1[13].'|'.$parte1[14].'|'.$parte1[15].'|'.$parte1[16].'|'.$parte1[17].'|'.$parte1[18].'|'.$parte1[19].'">
+        <input type="hidden" id="parte1" value="'.$parte1[0].'|'.$parte1[1].'|'.$parte1[2].'|'.$parte1[3].'|'.$parte1[4].'|'.$parte1[5].'|'.$parte1[6].'|'.$parte1[7].'|'.$parte1[8].'|'.$parte1[9].'|'.$parte1[10].'|'.$parte1[11].'|'.$parte1[12].'|'.$parte1[13].'|'.$parte1[14].'|'.$parte1[15].'|'.$parte1[16].'|'.$parte1[17].'">
         ';
         }
     function fProtConst(){
@@ -773,47 +756,6 @@ class constancias{
                 </td>
                 <td>
                     <div id="lindSecDoc"></div>
-                </td>
-            </tr>
-        </table>
-        <table border="1px" class="taConst">
-            <tr>
-                <td colspan="3" class="tiConst">
-                    <p class="h1">Áreas del Terreno</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Área Total de Venta</p>
-                        <input type="text" id="arTotalVenta" >
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Área restante</p>
-                        <input type="text" id="arRestante" >
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Valor del terreno</p>
-                        <input type="text" id="valorTerreno" >
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Valor del Inmueble</p>
-                        <input type="text" value="" id="valorInmueble" >
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Valor de la Construcción</p>
-                        <input type="text" value="" id="valorConstruc" >
-                    </div>
                 </td>
             </tr>
         </table>
@@ -1137,6 +1079,8 @@ class constancias{
                             <option></option>
                             <option value="m">m</option>
                             <option value="Lq">Lq</option>
+                            <option value="Ld">Ld</option>
+                            <option value="otros">otros</option>
                         </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindNort" />
@@ -1151,6 +1095,8 @@ class constancias{
                             <option></option>
                             <option value="m">m</option>
                             <option value="Lq">Lq</option>
+                            <option value="Ld">Ld</option>
+                            <option value="otros">otros</option>
                         </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindSur" />
@@ -1165,6 +1111,8 @@ class constancias{
                             <option></option>
                             <option value="m">m</option>
                             <option value="Lq">Lq</option>
+                            <option value="Ld">Ld</option>
+                            <option value="otros">otros</option>
                         </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindEste" />
@@ -1179,6 +1127,8 @@ class constancias{
                             <option></option>
                             <option value="m">m</option>
                             <option value="Lq">Lq</option>
+                            <option value="Ld">Ld</option>
+                            <option value="otros">otros</option>
                         </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindOeste" />
@@ -1192,7 +1142,7 @@ class constancias{
                             <p class="negritas">Área Total</p>
                             <input type="number" id="arTotal" >
                             <select id="uniAreaT">
-                                <option value="0"></option>
+                                <option value="No Aplica">No Aplica</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
@@ -1209,7 +1159,7 @@ class constancias{
                             <p class="negritas">Área de Construcción</p>
                             <input type="number" id="arConstTotal" >
                             <select id="uniAreaConst">
-                                <option value="0"></option>
+                                <option value="No Aplica">No Aplica</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
@@ -1240,6 +1190,8 @@ class constancias{
                             <option></option>
                             <option value="m">m</option>
                             <option value="Lq">Lq</option>
+                            <option value="Ld">Ld</option>
+                            <option value="otros">otros</option>
                         </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindPosNort" />
@@ -1254,6 +1206,8 @@ class constancias{
                             <option></option>
                             <option value="m">m</option>
                             <option value="Lq">Lq</option>
+                            <option value="Ld">Ld</option>
+                            <option value="otros">otros</option>
                         </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindPosSur" />
@@ -1268,6 +1222,8 @@ class constancias{
                             <option></option>
                             <option value="m">m</option>
                             <option value="Lq">Lq</option>
+                            <option value="Ld">Ld</option>
+                            <option value="otros">otros</option>
                         </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindPosEste" />
@@ -1282,6 +1238,8 @@ class constancias{
                             <option></option>
                             <option value="m">m</option>
                             <option value="Lq">Lq</option>
+                            <option value="Ld">Ld</option>
+                            <option value="otros">otros</option>
                         </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindPosOeste" />
@@ -1295,7 +1253,7 @@ class constancias{
                             <p class="negritas">Área Total</p>
                             <input type="number" id="arTotal2" >
                             <select id="uniAreaT2">
-                                <option value="0"></option>
+                                <option value="No Aplica">No Aplica</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
@@ -1312,7 +1270,7 @@ class constancias{
                             <p class="negritas">Área de Construcción</p>
                             <input type="number" id="arConstTotal2" >
                             <select id="uniAreaConst2">
-                                <option value="0"></option>
+                                <option value="No Aplica">No Aplica</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
@@ -1343,6 +1301,8 @@ class constancias{
                             <option></option>
                             <option value="m">m</option>
                             <option value="Lq">Lq</option>
+                            <option value="Ld">Ld</option>
+                            <option value="otros">otros</option>
                         </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindSecNorte" />
@@ -1357,6 +1317,8 @@ class constancias{
                             <option></option>
                             <option value="m">m</option>
                             <option value="Lq">Lq</option>
+                            <option value="Ld">Ld</option>
+                            <option value="otros">otros</option>
                         </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindSecSur" />
@@ -1371,6 +1333,8 @@ class constancias{
                             <option></option>
                             <option value="m">m</option>
                             <option value="Lq">Lq</option>
+                            <option value="Ld">Ld</option>
+                            <option value="otros">otros</option>
                         </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindSecEste" />
@@ -1385,6 +1349,8 @@ class constancias{
                             <option></option>
                             <option value="m">m</option>
                             <option value="Lq">Lq</option>
+                            <option value="Ld">Ld</option>
+                            <option value="otros">otros</option>
                         </select>
                         <p class="negritas">Alinderado</p>
                         <input type="text" id="alindSecOeste" />
@@ -1398,7 +1364,7 @@ class constancias{
                             <p class="negritas">Área Total</p>
                             <input type="number" id="arTotal3" >
                             <select id="uniAreaT3">
-                                <option value="0"></option>
+                                <option value="No Aplica">No Aplica</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
@@ -1415,7 +1381,7 @@ class constancias{
                             <p class="negritas">Área de Construcción</p>
                             <input type="number" id="arConstTotal3" >
                             <select id="uniAreaConst3">
-                                <option value="0"></option>
+                                <option value="No Aplica">No Aplica</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
@@ -1457,7 +1423,7 @@ class constancias{
                 }
 
             //CARACTERISTICAS DEL INMUEBLE (LISTO)
-                $carcSql = "INSERT INTO carc_inmueble(topografia,forma,uso,tenencia,ocupante,dimenciones,regimen)value('".$this->topoConst."','".$this->formaConst."','".$this->usoConst."','".$this->tenenConst."','".$this->ocupConst."','".$this->dimeConst."','".$this->regInmue."')";
+                $carcSql = "INSERT INTO carc_inmueble(topografia,forma,uso,tenencia,regimen)value('".$this->topoConst."','".$this->formaConst."','".$this->usoConst."','".$this->tenenConst."','".$this->regInmue."')";
                 $link->query($carcSql);
                 $idCarc= $link->insert_id;
 
@@ -1624,19 +1590,19 @@ class constancias{
             $resGen=$link->query($sqlIdGen);
             $norteGen = $resGen->fetch_assoc();
         //SEGUN DOCUMENTO
-            $sqlIdDoc = "SELECT norte from linderos_documento where id=".$idLindDoc."";
+            $sqlIdDoc = "SELECT * from linderos_documento where id=".$idLindDoc."";
             $resDoc=$link->query($sqlIdDoc);
             $norteDoc = $resDoc->fetch_assoc();
         //POSIBLE VENTA
-            $sqlIdPosVenta = "SELECT norte from linderos_posible_venta where id=".$idLindPosVenta."";
+            $sqlIdPosVenta = "SELECT * from linderos_posible_venta where id=".$idLindPosVenta."";
             $resPosVenta=$link->query($sqlIdPosVenta);
             $nortePosVenta = $resPosVenta->fetch_assoc();
 
 
         //IF DEL F002
-            if(($norteGen['norte']=="nada") && ($norteGen['noreste'] =="nada")){
-                if($norteDoc['norte']!="nada" || ($norteDoc['noreste'] =="nada")){
-                    if(($nortePosVenta['norte']=="nada") && ($nortePosVenta['noreste']=="nada") ){
+            if($norteGen['norte']=="nada" && $norteGen['noreste'] =="nada"){
+                if($norteDoc['norte']!="nada" || $norteDoc['noreste'] =="nada"){
+                    if($nortePosVenta['norte']=="nada" && $nortePosVenta['noreste']=="nada" ){
                         if($this->multa =="No Aplica"){
                             echo'
                             <tr>
@@ -1655,9 +1621,9 @@ class constancias{
             echo'</table>
             <div id="campOculto"></div>';
         //IF DEL F001
-            if($norteGen['norte']!="nada"){
-                if($norteDoc['norte']!="nada"){
-                    if($nortePosVenta['norte']=="nada"){
+            if($norteGen['norte']!="nada" || $norteGen['noreste']!="nada" ){
+                if($norteDoc['norte']!="nada" || $norteGen['noreste']!="nada"){
+                    if($nortePosVenta['norte']=="nada" && $nortePosVenta['norte']=="nada"){
                         if($this->multa =="No Aplica"){
                             echo'
                                 <div class="btnSig1">
@@ -1671,9 +1637,9 @@ class constancias{
         
             
         //IF DEL F003
-            if($norteGen['norte']=="nada"){
-                if($norteDoc['norte']!="nada"){
-                    if($nortePosVenta['norte']!="nada"){
+            if($norteGen['norte']=="nada" && $norteGen['norte']=="nada"){
+                if($norteDoc['norte']!="nada" || $norteDoc['noreste']!="nada"){
+                    if($nortePosVenta['norte']!="nada" || $nortePosVenta['noreste']!="nada"){
                         if($this->multa=="No Aplica"){
                             echo'
                                 <div class="btnSig1">
