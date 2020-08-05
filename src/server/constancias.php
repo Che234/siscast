@@ -1634,9 +1634,9 @@ class constancias{
 
 
         //IF DEL F002
-            if($norteGen['norte']=="nada"){
-                if($norteDoc['norte']!="nada"){
-                    if($nortePosVenta['norte']=="nada"){
+            if(($norteGen['norte']=="nada") && ($norteGen['noreste'] =="nada")){
+                if($norteDoc['norte']!="nada" || ($norteDoc['noreste'] =="nada")){
+                    if(($nortePosVenta['norte']=="nada") && ($nortePosVenta['noreste']=="nada") ){
                         if($this->multa =="No Aplica"){
                             echo'
                             <tr>

@@ -1801,7 +1801,6 @@ class busquedas{
                 $NortOeste3 = $this->oesteSecDoc;
             }
             $lindSecDocSql = "UPDATE linderos_documento SET norte='".$Norte3."',noreste='".$norEste3."',sur='".$Sur3."',sureste='".$SurEste3."',este='".$Este3."',suroeste='".$SurOeste3."',oeste='".$Oeste3."',noroeste='".$NortOeste3."',alind_n='".$this->alindSecNorte."',alind_s='".$this->alindSecSur."',alind_e='".$this->alindSecEste."',alind_o='".$this->alindSecOeste."',areaTotal='".$this->arTotal3."',uniAreaT='".$this->uniAreaT3."',nivelesConst='".$this->NivConstTotal3."',uniAreaC='".$this->uniAreaConst3."',areaConst='".$this->arConstTotal3."',uniNorte='".$this->uniNorte3."',uniSur='".$this->uniSur3."',uniEste='".$this->uniEste3."',uniOeste='".$this->uniOeste3."' WHERE id='".$this->idlindDocumento."' ";
-            echo $lindSecDocSql;
             $link->query($lindSecDocSql);
 
 
