@@ -8,8 +8,10 @@
         var $prefijoBD="";
 
         function conectar(){
-            mysqli_connect($this->serv, $this->user,$this->pass,$this->bd) 
-            or die("error al conectar con la bd");
+            $link= new mysqli($this->serv, $this->user,$this->pass,$this->bd) 
+        or die(mysqli_error());
+            return $link;
+
         }
         
     }

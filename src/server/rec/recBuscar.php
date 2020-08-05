@@ -814,6 +814,96 @@ if(isset($_POST["fechFact"])){
 }else{
     $bus->fechFact = "nada";
 }
+if(isset($_POST["puntNorte"])){
+    $bus->puntNorte = $_POST["puntNorte"];
+}else{
+    $bus->puntNorte = "nada";
+}
+if(isset($_POST["puntSur"])){
+    $bus->puntSur = $_POST["puntSur"];
+}else{
+    $bus->puntSur = "nada";
+}
+if(isset($_POST["puntEste"])){
+    $bus->puntEste = $_POST["puntEste"];
+}else{
+    $bus->puntEste = "nada";
+}
+if(isset($_POST["puntOeste"])){
+    $bus->puntOeste = $_POST["puntOeste"];
+}else{
+    $bus->puntOeste = "nada";
+}
+if(isset($_POST["uniAreaT"])){
+    $bus->uniAreaT = $_POST["uniAreaT"];
+}else{
+    $bus->uniAreaT = "nada";
+}
+if(isset($_POST["uniAreaConst"])){
+    $bus->uniAreaConst = $_POST["uniAreaConst"];
+}else{
+    $bus->uniAreaConst = "nada";
+}
+if(isset($_POST["puntNorte2"])){
+    $bus->puntNorte2 = $_POST["puntNorte2"];
+}else{
+    $bus->puntNorte2 = "nada";
+}
+if(isset($_POST["puntSur2"])){
+    $bus->puntSur2 = $_POST["puntSur2"];
+}else{
+    $bus->puntSur2 = "nada";
+}
+if(isset($_POST["puntEste2"])){
+    $bus->puntEste2 = $_POST["puntEste2"];
+}else{
+    $bus->puntEste2 = "nada";
+}
+if(isset($_POST["puntOeste2"])){
+    $bus->puntOeste2 = $_POST["puntOeste2"];
+}else{
+    $bus->puntOeste2 = "nada";
+}
+if(isset($_POST["uniAreaT2"])){
+    $bus->uniAreaT2 = $_POST["uniAreaT2"];
+}else{
+    $bus->uniAreaT2 = "nada";
+}
+if(isset($_POST["uniAreaConst2"])){
+    $bus->uniAreaConst2 = $_POST["uniAreaConst2"];
+}else{
+    $bus->uniAreaConst2 = "nada";
+}
+if(isset($_POST["puntNorte3"])){
+    $bus->puntNorte3 = $_POST["puntNorte3"];
+}else{
+    $bus->puntNorte3 = "nada";
+}
+if(isset($_POST["puntSur3"])){
+    $bus->puntSur3 = $_POST["puntSur3"];
+}else{
+    $bus->puntSur3 = "nada";
+}
+if(isset($_POST["puntEste3"])){
+    $bus->puntEste3 = $_POST["puntEste3"];
+}else{
+    $bus->puntEste3 = "nada";
+}
+if(isset($_POST["puntOeste3"])){
+    $bus->puntOeste3 = $_POST["puntOeste3"];
+}else{
+    $bus->puntOeste3 = "nada";
+}
+if(isset($_POST["uniAreaT3"])){
+    $bus->uniAreaT3 = $_POST["uniAreaT3"];
+}else{
+    $bus->uniAreaT3 = "nada";
+}
+if(isset($_POST["uniAreaConst3"])){
+    $bus->uniAreaConst3 = $_POST["uniAreaConst3"];
+}else{
+    $bus->uniAreaConst3 = "nada";
+}
 
 if($accion =="busExp"){
     $bus->mostBusqueda();

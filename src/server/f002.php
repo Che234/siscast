@@ -1063,8 +1063,16 @@ class f002{
             $pdf->MultiCell(120,6,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
             '),'T:1','C');
         
-        $pdf->Output('F','../../../assets/constancias/'.$busExpRes["n_expediente"].'.pdf');
-        echo'<input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
+        $carpeta ='../../../assets/constancias/'.date("Y").'';
+        if(!file_exists($carpeta)){
+            mkdir($carpeta,0777,true);
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+        }else{
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+        }
+        echo'
+        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf" />
+        <input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
         
     }
 }
@@ -2192,8 +2200,16 @@ class f001{
                 $pdf->SetLineWidth(0.5);
                 $pdf->MultiCell(120,4,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
                 '),'T:1','C');
-    $pdf->Output('F','../../../assets/constancias/'.$busExpRes["n_expediente"].'.pdf');
-    echo'<input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
+                $carpeta ='../../../assets/constancias/'.date("Y").'';
+            if(!file_exists($carpeta)){
+                mkdir($carpeta,0777,true);
+                $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+            }else{
+                $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+            }
+            echo'
+            <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf" />
+            <input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
     }
 }
 class f003{
@@ -3320,8 +3336,16 @@ class f003{
             $pdf->SetLineWidth(0.5);
             $pdf->MultiCell(120,4,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
             '),'T:1','C');
-        $pdf->Output('F','../../../assets/constancias/'.$busExpRes["n_expediente"].'.pdf');
-        echo'<input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
+        $carpeta ='../../../assets/constancias/'.date("Y").'';
+        if(!file_exists($carpeta)){
+            mkdir($carpeta,0777,true);
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+        }else{
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+        }
+        echo'
+        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf" />
+        <input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
     }
 }
 class f004{
@@ -4353,8 +4377,16 @@ class f004{
             $pdf->MultiCell(120,6,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
             '),'T:1','C');
         
-        $pdf->Output('F','../../../assets/constancias/'.$busExpRes["n_expediente"].'.pdf');
-        echo'<input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
+        $carpeta ='../../../assets/constancias/'.date("Y").'';
+        if(!file_exists($carpeta)){
+            mkdir($carpeta,0777,true);
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+        }else{
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+        }
+        echo'
+        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf" />
+        <input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
         
     }
 }

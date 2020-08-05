@@ -1,3 +1,4 @@
+
 class busquedas{
 
     construct(campBuscar,tipoBuscar,secciones,expBuscar,cedula,rif,nomProp,apelProp,
@@ -18,7 +19,9 @@ class busquedas{
         oesteSecDoc,uniOeste3,alindSecOeste,arTotal3,NivConstTotal3,arConstTotal3,idlindPosVenta,
         arTotalVenta,arRestante,valorTerreno,valorInmueble,valorConstruc,idTerreno,Acue,AcueRural,
         AguasSub,AguasServ,PavFlex,PavRig,viaEngran,acera,AlumPublico,aseo,transPublic,pozoSept,
-        ElectResidencial,ElectriIndust,linTelf,idServ,montoFact,numFact,fechFact,tipoCed,numFactura,numFactHid){
+        ElectResidencial,ElectriIndust,linTelf,idServ,montoFact,numFact,fechFact,tipoCed,numFactura,numFactHid,
+        puntNorte,puntSur,puntEste,puntOeste,uniAreaT,uniAreaConst,puntNorte2,puntSur2,puntEste2,puntOeste2,
+        uniAreaT2,uniAreaConst2,puntNorte3,puntSur3,puntEste3,puntOeste3,uniAreaT3,uniAreaConst3){
 
             this.campBuscar= campBuscar
             this.tipoBuscar= tipoBuscar
@@ -178,7 +181,24 @@ class busquedas{
             this.tipoCed = tipoCed
             this.numFactura = numFactura
             this.numFactHid = numFactHid
-            
+            this.puntNorte = puntNorte
+            this.puntSur = puntSur
+            this.puntEste = puntEste
+            this.puntOeste = puntOeste
+            this.uniAreaT = uniAreaT
+            this.uniAreaConst = uniAreaConst
+            this.puntNorte2 = puntNorte2
+            this.puntSur2 = puntSur2
+            this.puntEste2 = puntEste2
+            this.puntOeste2 = puntOeste2
+            this.uniAreaT2 = uniAreaT2
+            this.uniAreaConst2 = uniAreaConst2
+            this.puntNorte3 = puntNorte3
+            this.puntSur3 = puntSur3
+            this.puntEste3 = puntEste3
+            this.puntOeste3 = puntOeste3
+            this.uniAreaT3 = uniAreaT3
+            this.uniAreaConst3 = uniAreaConst3
         }
     veriBuscar(){
         if(!ex_datcort.test(this.campBuscar)){
@@ -575,8 +595,11 @@ class busquedas{
             {
 			if (ajax.readyState==4) 
                 {
-                    divsitioform.innerHTML = ajax.responseText; 
-                    btnAplicGen()
+                    divsitioform.innerHTML = ajax.responseText;
+                    setTimeout(()=>{
+                        btnAplicGen()
+                    },300)
+                    
 			     }
 	       	}
     }
@@ -595,7 +618,10 @@ class busquedas{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-                    btnAplicPosVenta()
+                    actPosVenta()
+                    setTimeout(()=>{
+                        btnAplicPosVenta()
+                    },300)
 			     }
 	       	}
     }
@@ -614,7 +640,11 @@ class busquedas{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-                    btnAplicSecDoc()
+                    actSecDoc()
+                    setTimeout(()=>{
+                        btnAplicSecDoc()
+                    },300)
+                    
 			     }
 	       	}
     }
@@ -629,7 +659,7 @@ class busquedas{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recBuscar.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`nortGen=${this.nortGen}&uniNorte=${this.uniNorte}&alindNort=${this.alindNort}&surGen=${this.surGen}&uniSur=${this.uniSur}&alindSur=${this.alindSur}&esteGen=${this.esteGen}&uniEste=${this.uniEste}&alindEste=${this.alindEste}&oesteGen=${this.oesteGen}&uniOeste=${this.uniOeste}&alindOeste=${this.alindOeste}&arTotal=${this.arTotal}&NivConstTotal=${this.NivConstTotal}&arConstTotal=${this.arConstTotal}&nortPosVenta=${this.nortPosVenta}&uniNorte2=${this.uniNorte2}&alindPosNort=${this.alindPosNort}&surPosVenta=${this.surPosVenta}&uniSur2=${this.uniSur2}&alindPosSur=${this.alindPosSur}&estePosVenta=${this.estePosVenta}&uniEste2=${this.uniEste2}&alindPosEste=${this.alindPosEste}&oestePosVenta=${this.oestePosVenta}&uniOeste2=${this.uniOeste2}&alindPosOeste=${this.alindPosOeste}&arTotal2=${this.arTotal2}&NivConstTotal2=${this.NivConstTotal2}&arConstTotal2=${this.arConstTotal2}&nortSecDoc=${this.nortSecDoc}&uniNorte3=${this.uniNorte3}&alindSecNorte=${this.alindSecNorte}&surSecDoc=${this.surSecDoc}&uniSur3=${this.uniSur3}&alindSecSur=${this.alindSecSur}&esteSecDoc=${this.esteSecDoc}&uniEste3=${this.uniEste3}&alindSecEste=${this.alindSecEste}&oesteSecDoc=${this.oesteSecDoc}&uniOeste3=${this.uniOeste3}&alindSecOeste=${this.alindSecOeste}&arTotal3=${this.arTotal3}&NivConstTotal3=${this.NivConstTotal3}&arConstTotal3=${this.arConstTotal3}&idlindDocumento=${this.idlindDocumento}&idlindPosVenta=${this.idlindPosVenta}&idlindGen=${this.idlindGen}&accion=guarActLind`); 
+        ajax.send(`nortGen=${this.nortGen}&uniNorte=${this.uniNorte}&alindNort=${this.alindNort}&surGen=${this.surGen}&uniSur=${this.uniSur}&alindSur=${this.alindSur}&esteGen=${this.esteGen}&uniEste=${this.uniEste}&alindEste=${this.alindEste}&oesteGen=${this.oesteGen}&uniOeste=${this.uniOeste}&alindOeste=${this.alindOeste}&arTotal=${this.arTotal}&NivConstTotal=${this.NivConstTotal}&arConstTotal=${this.arConstTotal}&nortPosVenta=${this.nortPosVenta}&uniNorte2=${this.uniNorte2}&alindPosNort=${this.alindPosNort}&surPosVenta=${this.surPosVenta}&uniSur2=${this.uniSur2}&alindPosSur=${this.alindPosSur}&estePosVenta=${this.estePosVenta}&uniEste2=${this.uniEste2}&alindPosEste=${this.alindPosEste}&oestePosVenta=${this.oestePosVenta}&uniOeste2=${this.uniOeste2}&alindPosOeste=${this.alindPosOeste}&arTotal2=${this.arTotal2}&NivConstTotal2=${this.NivConstTotal2}&arConstTotal2=${this.arConstTotal2}&nortSecDoc=${this.nortSecDoc}&uniNorte3=${this.uniNorte3}&alindSecNorte=${this.alindSecNorte}&surSecDoc=${this.surSecDoc}&uniSur3=${this.uniSur3}&alindSecSur=${this.alindSecSur}&esteSecDoc=${this.esteSecDoc}&uniEste3=${this.uniEste3}&alindSecEste=${this.alindSecEste}&oesteSecDoc=${this.oesteSecDoc}&uniOeste3=${this.uniOeste3}&alindSecOeste=${this.alindSecOeste}&arTotal3=${this.arTotal3}&NivConstTotal3=${this.NivConstTotal3}&arConstTotal3=${this.arConstTotal3}&idlindDocumento=${this.idlindDocumento}&idlindPosVenta=${this.idlindPosVenta}&idlindGen=${this.idlindGen}&puntNorte=${this.puntNorte}&puntSur=${this.puntSur}&puntEste=${this.puntEste}&puntOeste=${this.puntOeste}&uniAreaT=${this.uniAreaT}&uniAreaConst=${this.uniAreaConst}&puntNorte2=${this.puntNorte2}&puntSur2=${this.puntSur2}&puntEste2=${this.puntEste2}&puntOeste2=${this.puntOeste2}&uniAreaT2=${this.uniAreaT2}&uniAreaConst2=${this.uniAreaConst2}&puntNorte3=${this.puntNorte3}&puntSur3=${this.puntSur3}&puntEste3=${this.puntEste3}&puntOeste3=${this.puntOeste3}&uniAreaT3=${this.uniAreaT3}&uniAreaConst3=${this.uniAreaConst3}&accion=guarActLind`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -978,6 +1008,9 @@ function dividirCed(secciones="no"){
         let lindGen = document.getElementById("lindGen").value
         let lindPosVenta = document.getElementById("lindPosVenta").value
         let lindDocumento = document.getElementById("lindDocumento").value
+        let lindGen2 = document.getElementById("lindGen2").value
+        let lindPosVenta2 = document.getElementById("lindPosVenta2").value
+        let lindDocumento2 = document.getElementById("lindDocumento2").value
         let busque= new busquedas
         
         if(lindGen!="nada"){
@@ -986,10 +1019,20 @@ function dividirCed(secciones="no"){
             actGeneral()
             setTimeout(function(){
                 busque.accioGeneral()
-            },300)
+            },100)
         }else{
-            document.getElementById("lindGeneral").selectedIndex=0
-            busque.idlindGen = "nada"
+            if(lindGen2!="nada"){
+                document.getElementById("lindGeneral").selectedIndex=1
+                busque.idlindGen = document.getElementById("idlindGen").value
+                actGeneral()
+                setTimeout(function(){
+                    busque.accioGeneral()
+                },100)
+            }else{
+                document.getElementById("lindGeneral").selectedIndex=0
+                busque.idlindGen = "nada"
+            }
+            
         }
         if(lindPosVenta!="nada"){
             document.getElementById("posVenta").selectedIndex=1
@@ -997,11 +1040,20 @@ function dividirCed(secciones="no"){
             actPosVenta()
             setTimeout(function(){
                 busque.accioPosVenta()
-            },300)
-            
+            },100)
         }else{
-            document.getElementById("posVenta").selectedIndex=0
-            busque.idlindPosVenta = "nada"
+            if(lindPosVenta2!="nada"){
+                document.getElementById("posVenta").selectedIndex=1
+                busque.idlindPosVenta = document.getElementById("idlindPosVenta").value
+                actPosVenta()
+                setTimeout(function(){
+                    busque.accioPosVenta()
+                },100)
+            }else{
+                document.getElementById("posVenta").selectedIndex=0
+                busque.idlindPosVenta = "nada"
+            }
+            
         }
         if(lindDocumento!="nada"){
             document.getElementById("secDoc").selectedIndex=1
@@ -1009,11 +1061,19 @@ function dividirCed(secciones="no"){
             actSecDoc()
             setTimeout(function (){
                 busque.accioSecDoc()
-            },300)
-            
+            },100)
         }else{
-            document.getElementById("secDoc").selectedIndex=0
-            busque.idlindDocumento = "nada"
+            if(lindDocumento2!="nada"){
+                document.getElementById("secDoc").selectedIndex=1
+                busque.idlindDocumento = document.getElementById("idlindDocumento").value
+                actSecDoc()
+                setTimeout(function (){
+                    busque.accioSecDoc()
+                },100)
+            }else{
+                document.getElementById("secDoc").selectedIndex=0
+                busque.idlindDocumento = "nada"
+            }
         }
     }
     if(secciones=="Servicios"){
@@ -1435,6 +1495,46 @@ function btnAplicGen(){
     if(uniO_gen=="Lq"){
         document.getElementById("uniOeste").selectedIndex=2
     }
+
+    lindGeneral = document.getElementById("lindGeneral").value
+    if(lindGeneral=="si"){
+        nortePunt = document.getElementById("nortePunt").value
+        if(nortePunt== "Norte"){
+            document.getElementById("puntNorte").selectedIndex=0
+        }else{
+            document.getElementById("puntNorte").selectedIndex=1
+        }
+        surPunt = document.getElementById("surPunt").value
+        if(surPunt== "Sur"){
+            document.getElementById("puntSur").selectedIndex=0
+        }else{
+            document.getElementById("puntSur").selectedIndex=1
+        }
+        estePunt = document.getElementById("estePunt").value
+        if(estePunt== "Sur"){
+            document.getElementById("puntEste").selectedIndex=0
+        }else{
+            document.getElementById("puntEste").selectedIndex=1
+        }
+        oestePunt = document.getElementById("oestePunt").value
+        if(oestePunt== "Oeste"){
+            document.getElementById("puntOeste").selectedIndex=0
+        }else{
+            document.getElementById("puntOeste").selectedIndex=1
+        }
+    }
+    uniAreaTotal = document.getElementById("uniAreaTotal").value
+    if(uniAreaTotal=="m2"){
+        document.getElementById("uniAreaT").selectedIndex=1
+    }else{
+        document.getElementById("uniAreaT").selectedIndex=2
+    }
+    uniAreaC = document.getElementById("uniAreaC").value
+    if(uniAreaC=="m2"){
+        document.getElementById("uniAreaConst").selectedIndex=1
+    }else{
+        document.getElementById("uniAreaConst").selectedIndex=2
+    }
     idGen = document.getElementById("idGen").value
 }
 function btnAplicPosVenta(){
@@ -1489,6 +1589,45 @@ function btnAplicPosVenta(){
     if(uniO_posVenta=="Lq"){
         document.getElementById("uniOeste2").selectedIndex=2
     }
+    posVenta = document.getElementById("posVenta").value
+    if(posVenta =="si"){
+        nortePunt2 = document.getElementById("nortePunt2").value
+        if(nortePunt2== "Norte"){
+            document.getElementById("puntNorte2").selectedIndex=0
+        }else{
+            document.getElementById("puntNorte2").selectedIndex=1
+        }
+        surPunt2 = document.getElementById("surPunt2").value
+        if(surPunt2== "Sur"){
+            document.getElementById("puntSur2").selectedIndex=0
+        }else{
+            document.getElementById("puntSur2").selectedIndex=1
+        }
+        estePunt2 = document.getElementById("estePunt2").value
+        if(estePunt2== "Sur"){
+            document.getElementById("puntEste2").selectedIndex=0
+        }else{
+            document.getElementById("puntEste2").selectedIndex=1
+        }
+        oestePunt2 = document.getElementById("oestePunt2").value
+        if(oestePunt2== "Oeste"){
+            document.getElementById("puntOeste2").selectedIndex=0
+        }else{
+            document.getElementById("puntOeste2").selectedIndex=1
+        }
+    }
+    uniAreaTotal2 = document.getElementById("uniAreaTotal2").value
+    if(uniAreaTotal2=="m2"){
+        document.getElementById("uniAreaT2").selectedIndex=1
+    }else{
+        document.getElementById("uniAreaT2").selectedIndex=2
+    }
+    uniAreaC2 = document.getElementById("uniAreaC2").value
+    if(uniAreaC2=="m2"){
+        document.getElementById("uniAreaConst2").selectedIndex=1
+    }else{
+        document.getElementById("uniAreaConst2").selectedIndex=2
+    }
     idPosVenta = document.getElementById("idPosVenta").value
 }
 function btnAplicSecDoc(){
@@ -1542,13 +1681,58 @@ function btnAplicSecDoc(){
     if(uniO_SecDoc=="Lq"){
         document.getElementById("uniOeste3").selectedIndex=2
     }
+    secDoc = document.getElementById("secDoc").value
+    if(secDoc =="si"){
+        nortePunt3 = document.getElementById("nortePunt3").value
+        if(nortePunt3== "Norte"){
+            document.getElementById("puntNorte3").selectedIndex=0
+        }else{
+            document.getElementById("puntNorte3").selectedIndex=1
+        }
+        surPunt3 = document.getElementById("surPunt3").value
+        if(surPunt3== "Sur"){
+            document.getElementById("puntSur3").selectedIndex=0
+        }else{
+            document.getElementById("puntSur3").selectedIndex=1
+        }
+        estePunt3 = document.getElementById("estePunt3").value
+        if(estePunt3== "Sur"){
+            document.getElementById("puntEste3").selectedIndex=0
+        }else{
+            document.getElementById("puntEste3").selectedIndex=1
+        }
+        oestePunt3 = document.getElementById("oestePunt3").value
+        if(oestePunt3== "Oeste"){
+            document.getElementById("puntOeste3").selectedIndex=0
+        }else{
+            document.getElementById("puntOeste3").selectedIndex=1
+        }
+    }
+    uniAreaTotal3 = document.getElementById("uniAreaTotal3").value
+    if(uniAreaTotal3=="m2"){
+        document.getElementById("uniAreaT3").selectedIndex=1
+    }else{
+        document.getElementById("uniAreaT3").selectedIndex=2
+    }
+    uniAreaC3 = document.getElementById("uniAreaC3").value
+    if(uniAreaC3=="m2"){
+        document.getElementById("uniAreaConst3").selectedIndex=1
+    }else{
+        document.getElementById("uniAreaConst3").selectedIndex=2
+    }
 }
 function btnActLinderos(){
     let busque = new busquedas
-    let lindGen = document.getElementById("lindGen").value
-    let lindPosVenta = document.getElementById("lindPosVenta").value
-    let lindDocumento = document.getElementById("lindDocumento").value
-    if(lindGen!="nada"){
+    let lindGeneral = document.getElementById("lindGeneral").value
+    let posVenta = document.getElementById("posVenta").value
+    let secDoc = document.getElementById("secDoc").value
+    if(lindGeneral!="no"){
+        busque.puntNorte = document.getElementById("puntNorte").value
+        busque.puntSur = document.getElementById("puntSur").value
+        busque.puntEste = document.getElementById("puntEste").value
+        busque.puntOeste = document.getElementById("puntOeste").value
+        busque.uniAreaT = document.getElementById("uniAreaT").value
+        busque.uniAreaConst = document.getElementById("uniAreaConst").value
         busque.nortGen = document.getElementById("nortGen").value
         busque.uniNorte = document.getElementById("uniNorte").value
         busque.alindNort = document.getElementById("alindNort").value
@@ -1564,8 +1748,13 @@ function btnActLinderos(){
         busque.arTotal = document.getElementById("arTotal").value
         busque.NivConstTotal = document.getElementById("NivConstTotal").value
         busque.arConstTotal = document.getElementById("arConstTotal").value
-        busque.idlindGen = document.getElementById("idlindGen").value
     }else{
+        busque.puntNorte = "nada"
+        busque.puntSur = "nada"
+        busque.puntEste = "nada"
+        busque.puntOeste = "nada"
+        busque.uniAreaT = "nada"
+        busque.uniAreaConst = "nada"
         busque.nortGen = "nada"
         busque.uniNorte = "nada"
         busque.alindNort = "nada"
@@ -1581,9 +1770,14 @@ function btnActLinderos(){
         busque.arTotal = "nada"
         busque.NivConstTotal = "nada"
         busque.arConstTotal = "nada"
-        busque.idlindGen = "nada"
     }
-    if(lindPosVenta!="nada"){
+    if(posVenta!="no"){
+        busque.puntNorte2 = document.getElementById("puntNorte2").value
+        busque.puntSur2 = document.getElementById("puntSur2").value
+        busque.puntEste2 = document.getElementById("puntEste2").value
+        busque.puntOeste2 = document.getElementById("puntOeste2").value
+        busque.uniAreaT2 = document.getElementById("uniAreaT2").value
+        busque.uniAreaConst2 = document.getElementById("uniAreaConst2").value
         busque.nortPosVenta = document.getElementById("nortPosVenta").value
         busque.uniNorte2 = document.getElementById("uniNorte2").value
         busque.alindPosNort = document.getElementById("alindPosNort").value
@@ -1599,8 +1793,13 @@ function btnActLinderos(){
         busque.arTotal2 = document.getElementById("arTotal2").value
         busque.NivConstTotal2 = document.getElementById("NivConstTotal2").value
         busque.arConstTotal2 = document.getElementById("arConstTotal2").value
-        busque.idlindPosVenta = document.getElementById("idlindPosVenta").value
     }else{
+        busque.puntNorte2 = "nada"
+        busque.puntSur2 = "nada"
+        busque.puntEste2 = "nada"
+        busque.puntOeste2 = "nada"
+        busque.uniAreaT2 = "nada"
+        busque.uniAreaConst2 = "nada"
         busque.nortPosVenta = "nada"
         busque.uniNorte2 = "nada"
         busque.alindPosNort = "nada"
@@ -1616,9 +1815,14 @@ function btnActLinderos(){
         busque.arTotal2 = "nada"
         busque.NivConstTotal2 = "nada"
         busque.arConstTotal2 = "nada"
-        busque.idlindPosVenta = "nada"
     }
-    if(lindDocumento!="nada"){
+    if(secDoc!="no"){
+        busque.puntNorte3 = document.getElementById("puntNorte3").value
+        busque.puntSur3 = document.getElementById("puntSur3").value
+        busque.puntEste3 = document.getElementById("puntEste3").value
+        busque.puntOeste3 = document.getElementById("puntOeste3").value
+        busque.uniAreaT3 = document.getElementById("uniAreaT3").value
+        busque.uniAreaConst3 = document.getElementById("uniAreaConst3").value
         busque.nortSecDoc = document.getElementById("nortSecDoc").value
         busque.uniNorte3 = document.getElementById("uniNorte3").value
         busque.alindSecNorte = document.getElementById("alindSecNorte").value
@@ -1634,8 +1838,13 @@ function btnActLinderos(){
         busque.arTotal3 = document.getElementById("arTotal3").value
         busque.NivConstTotal3 = document.getElementById("NivConstTotal3").value
         busque.arConstTotal3 = document.getElementById("arConstTotal3").value
-        busque.idlindDocumento = document.getElementById("idlindDocumento").value
     }else{
+        busque.puntNorte3 = "nada"
+        busque.puntSur3 = "nada"
+        busque.puntEste3 = "nada"
+        busque.puntOeste3 = "nada"
+        busque.uniAreaT3 = "nada"
+        busque.uniAreaConst3 = "nada"
         busque.nortSecDoc = "nada"
         busque.uniNorte3 = "nada"
         busque.alindSecNorte = "nada"
@@ -1651,8 +1860,11 @@ function btnActLinderos(){
         busque.arTotal3 = "nada"
         busque.NivConstTotal3 = "nada"
         busque.arConstTotal3 = "nada"
-        busque.idlindDocumento = "nada"
     }
+    
+    busque.idlindDocumento = document.getElementById("idlindDocumento").value
+    busque.idlindPosVenta = document.getElementById("idlindPosVenta").value
+    busque.idlindGen = document.getElementById("idlindGen").value
     busque.guarActLind()
 }
 //AREA TERRENO

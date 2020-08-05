@@ -126,6 +126,18 @@ class constancias{
         $uniAreaT3 = "";
         $uniAreaT2 = "";
         $uniAreaT = "";
+        $puntNorte = "";
+        $puntSur = "";
+        $puntEste = "";
+        $puntOeste= "";
+        $puntNorte2 = "";
+        $puntSur2 = "";
+        $puntEste2 = "";
+        $puntOeste2 = "";
+        $puntNorte3 = "";
+        $puntSur3 = "";
+        $puntEste3 = "";
+        $puntOeste3 = "";
     }
         
 
@@ -1116,8 +1128,11 @@ class constancias{
             <table border="1px" class="taConst">
                 <tr>
                     <td class="tiConst">
-                        <p class="negritas">Mts Norte</p>
-                        <input type="number" value="" id="nortGen" />
+                        <select id="puntNorte">
+                            <option value="Norte">Norte</option>
+                            <option value="NorteEste">NortEste</option>
+                        </select>
+                        <input type="number" class="numero" value="" id="nortGen" />
                         <select id="uniNorte">
                             <option></option>
                             <option value="m">m</option>
@@ -1127,8 +1142,11 @@ class constancias{
                         <input type="text" id="alindNort" />
                     </td>
                     <td class="tiConst">
-                        <p class="negritas">Mts Sur</p>
-                        <input type="number" id="surGen" />
+                        <select id="puntSur">
+                            <option value="Sur">Sur</option>
+                            <option value="SurEste">SurEste</option>
+                        </select>
+                        <input type="number" class="numero" id="surGen" />
                         <select id="uniSur">
                             <option></option>
                             <option value="m">m</option>
@@ -1138,8 +1156,11 @@ class constancias{
                         <input type="text" id="alindSur" />
                     </td>
                     <td class="tiConst">
-                        <p class="negritas">Mts Este</p>
-                        <input type="number" id="esteGen" />
+                        <select id="puntEste">
+                            <option value="Este">Este</option>
+                            <option value="SurOeste">SurOeste</option>
+                        </select>
+                        <input type="number" class="numero" id="esteGen" />
                         <select id="uniEste">
                             <option></option>
                             <option value="m">m</option>
@@ -1149,8 +1170,11 @@ class constancias{
                         <input type="text" id="alindEste" />
                     </td>
                     <td class="tiConst">
-                        <p class="negritas">Mts Oeste</p>
-                        <input type="number" id="oesteGen" />
+                        <select id="puntOeste">
+                            <option value="Oeste">Oeste</option>
+                            <option value="NortOeste">NortOeste</option>
+                        </select>
+                        <input type="number" class="numero" id="oesteGen" />
                         <select id="uniOeste">
                             <option></option>
                             <option value="m">m</option>
@@ -1207,7 +1231,10 @@ class constancias{
             <table border="1px" class="taConst">
                 <tr>
                     <td class="tiConst">
-                        <p class="negritas">Mts Norte</p>
+                        <select id="puntNorte2">
+                            <option value="Norte">Norte</option>
+                            <option value="NorteEste">NortEste</option>
+                        </select>
                         <input type="number" id="nortPosVenta" />
                         <select id="uniNorte2">
                             <option></option>
@@ -1218,7 +1245,10 @@ class constancias{
                         <input type="text" id="alindPosNort" />
                     </td>
                     <td class="tiConst">
-                        <p class="negritas">Mts Sur</p>
+                        <select id="puntSur2">
+                            <option value="Sur">Sur</option>
+                            <option value="SurEste">SurEste</option>
+                        </select>
                         <input type="number" id="surPosVenta" />
                         <select id="uniSur2">
                             <option></option>
@@ -1229,7 +1259,10 @@ class constancias{
                         <input type="text" id="alindPosSur" />
                     </td>
                     <td class="tiConst">
-                        <p class="negritas">Mts Este</p>
+                        <select id="puntEste2">
+                            <option value="Este">Este</option>
+                            <option value="SurOeste">SurOeste</option>
+                        </select>
                         <input type="number" id="estePosVenta" />
                         <select id="uniEste2">
                             <option></option>
@@ -1240,7 +1273,10 @@ class constancias{
                         <input type="text" id="alindPosEste" />
                     </td>
                     <td class="tiConst">
-                        <p class="negritas">Mts Oeste</p>
+                        <select id="puntOeste2">
+                            <option value="Oeste">Oeste</option>
+                            <option value="NortOeste">NortOeste</option>
+                        </select>
                         <input type="number" id="oestePosVenta" />
                         <select id="uniOeste2">
                             <option></option>
@@ -1298,7 +1334,10 @@ class constancias{
             <table border="1px" class="taConst">
                 <tr>
                     <td class="tiConst">
-                        <p class="negritas">Mts Norte</p>
+                        <select id="puntNorte3">
+                            <option value="Norte">Norte</option>
+                            <option value="NorteEste">NortEste</option>
+                        </select>
                         <input type="number" id="nortSecDoc" />
                         <select id="uniNorte3">
                             <option></option>
@@ -1309,7 +1348,10 @@ class constancias{
                         <input type="text" id="alindSecNorte" />
                     </td>
                     <td class="tiConst">
-                        <p class="negritas">Mts Sur</p>
+                        <select id="puntSur3">
+                            <option value="Sur">Sur</option>
+                            <option value="SurEste">SurEste</option>
+                        </select>
                         <input type="number" id="surSecDoc" />
                         <select id="uniSur3">
                             <option></option>
@@ -1320,7 +1362,10 @@ class constancias{
                         <input type="text" id="alindSecSur" />
                     </td>
                     <td class="tiConst">
-                        <p class="negritas">Mts Este</p>
+                        <select id="puntEste3">
+                            <option value="Este">Este</option>
+                            <option value="SurOeste">SurOeste</option>
+                        </select>
                         <input type="number" id="esteSecDoc" />
                         <select id="uniEste3">
                             <option></option>
@@ -1331,7 +1376,10 @@ class constancias{
                         <input type="text" id="alindSecEste" />
                     </td>
                     <td class="tiConst">
-                        <p class="negritas">Mts Oeste</p>
+                        <select id="puntOeste3">
+                            <option value="Oeste">Oeste</option>
+                            <option value="NortOeste">NortOeste</option>
+                        </select>
                         <input type="number" id="oesteSecDoc" />
                         <select id="uniOeste3">
                             <option></option>
@@ -1429,17 +1477,101 @@ class constancias{
                 $idTerreno= $link->insert_id;
 
             //LINDEROS DOCUMENTO(LISTO)
-                $lindDocSql = "INSERT INTO linderos_documento(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$this->nortSecDoc."','".$this->surSecDoc."','".$this->esteSecDoc."','".$this->oesteSecDoc."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."','".$this->arTotal3."','".$this->uniAreaT3."','".$this->NivConstTotal3."','".$this->uniAreaConst3."','".$this->arConstTotal3."','".$this->uniNorte3."','".$this->uniSur3."','".$this->uniEste3."','".$this->uniOeste3."')";
+                if($this->puntNorte3=="Norte"){
+                    $Norte3 = $this->nortSecDoc;
+                    $norEste3 = "nada";
+                }else{
+                    $Norte3 = "nada";
+                    $norEste3 = $this->nortSecDoc;
+                }
+                if($this->puntSur3=="Sur"){
+                    $Sur3 = $this->surSecDoc;
+                    $SurEste3 = "nada";
+                }else{
+                    $Sur3 = "nada";
+                    $SurEste3 = $this->surSecDoc;
+                }
+                if($this->puntEste3=="Este"){
+                    $Este3 = $this->esteSecDoc;
+                    $SurOeste3 = "nada";
+                }else{
+                    $Este3 = "nada";
+                    $SurOeste3 = $this->esteSecDoc;
+                }
+                if($this->puntOeste3=="Oeste"){
+                    $Oeste3 = $this->oesteSecDoc;
+                    $NortOeste3 = "nada";
+                }else{
+                    $Oeste3 = "nada";
+                    $NortOeste3 = $this->oesteSecDoc;
+                }
+                $lindDocSql = "INSERT INTO linderos_documento(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte3."','".$norEste3."','".$Sur3."','".$SurEste3."','".$Este3."','".$SurOeste3."','".$Oeste3."','".$NortOeste3."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."','".$this->arTotal3."','".$this->uniAreaT3."','".$this->NivConstTotal3."','".$this->uniAreaConst3."','".$this->arConstTotal3."','".$this->uniNorte3."','".$this->uniSur3."','".$this->uniEste3."','".$this->uniOeste3."')";
                 $link->query($lindDocSql);
                 $idLindDoc= $link->insert_id;
 
             //LINDEROS GENERAL (LISTO)
-                $lindGenSql = "INSERT INTO linderos_general(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$this->nortGen."','".$this->surGen."','".$this->esteGen."','".$this->oesteGen."','".$this->alindNort."','".$this->alindSur."','".$this->alindEste."','".$this->alindOeste."','".$this->arTotal."','".$this->uniAreaT."','".$this->NivConstTotal."','".$this->uniAreaConst."','".$this->arConstTotal."','".$this->uniNorte."','".$this->uniSur."','".$this->uniEste."','".$this->uniOeste."')";
+                if($this->puntNorte=="Norte"){
+                    $Norte = $this->nortGen;
+                    $norEste = "nada";
+                }else{
+                    $Norte = "nada";
+                    $norEste = $this->nortGen;
+                }
+                if($this->puntSur=="Sur"){
+                    $Sur = $this->surGen;
+                    $SurEste = "nada";
+                }else{
+                    $Sur = "nada";
+                    $SurEste = $this->surGen;
+                }
+                if($this->puntEste=="Este"){
+                    $Este = $this->esteGen;
+                    $SurOeste = "nada";
+                }else{
+                    $Este = "nada";
+                    $SurOeste = $this->esteGen;
+                }
+                if($this->puntOeste=="Oeste"){
+                    $Oeste = $this->oesteGen;
+                    $NortOeste = "nada";
+                }else{
+                    $Oeste = "nada";
+                    $NortOeste = $this->oesteGen;
+                }
+                $lindGenSql = "INSERT INTO linderos_general(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte."','".$norEste."','".$Sur."','".$SurEste."','".$Este."','".$SurOeste."','".$Oeste."','".$NortOeste."','".$this->alindNort."','".$this->alindSur."','".$this->alindEste."','".$this->alindOeste."','".$this->arTotal."','".$this->uniAreaT."','".$this->NivConstTotal."','".$this->uniAreaConst."','".$this->arConstTotal."','".$this->uniNorte."','".$this->uniSur."','".$this->uniEste."','".$this->uniOeste."')";
                 $link->query($lindGenSql);
                 $idLindGen = $link->insert_id;
                 
             //LINDEROS PARA VENTA (LISTO)
-                $lindPosVentaSql = "INSERT INTO linderos_posible_venta(norte,sur,este,oeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$this->nortPosVenta."','".$this->surPosVenta."','".$this->estePosVenta."','".$this->oestePosVenta."','".$this->alindPosNort."','".$this->alindPosSur."','".$this->alindPosEste."','".$this->alindPosOeste."','".$this->arTotal2."','".$this->uniAreaT2."','".$this->NivConstTotal2."','".$this->uniAreaConst2."','".$this->arConstTotal2."','".$this->uniNorte2."','".$this->uniSur2."','".$this->uniEste2."','".$this->uniOeste2."')";
+                if($this->puntNorte2=="Norte"){
+                    $Norte2 = $this->nortPosVenta;
+                    $norEste2 = "nada";
+                }else{
+                    $Norte2 = "nada";
+                    $norEste2 = $this->nortPosVenta;
+                }
+                if($this->puntSur2=="Sur"){
+                    $Sur2 = $this->surPosVenta;
+                    $SurEste2 = "nada";
+                }else{
+                    $Sur2 = "nada";
+                    $SurEste2 = $this->surPosVenta;
+                }
+                if($this->puntEste2=="Este"){
+                    $Este2 = $this->estePosVenta;
+                    $SurOeste2 = "nada";
+                }else{
+                    $Este2 = "nada";
+                    $SurOeste2 = $this->estePosVenta;
+                }
+                if($this->puntOeste2=="Oeste"){
+                    $Oeste2 = $this->oestePosVenta;
+                    $NortOeste2 = "nada";
+                }else{
+                    $Oeste2 = "nada";
+                    $NortOeste2 = $this->oestePosVenta;
+                }
+                $lindPosVentaSql = "INSERT INTO linderos_posible_venta(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte2."','".$norEste2."','".$Sur2."','".$SurEste2."','".$Este2."','".$SurOeste2."','".$Oeste2."','".$NortOeste2."','".$this->alindPosNort."','".$this->alindPosSur."','".$this->alindPosEste."','".$this->oestePosVenta."','".$this->arTotal2."','".$this->uniAreaT2."','".$this->NivConstTotal2."','".$this->uniAreaConst2."','".$this->arConstTotal2."','".$this->uniNorte2."','".$this->uniSur2."','".$this->uniEste2."','".$this->uniOeste2."')";
                 $link->query($lindPosVentaSql);
                 $idLindPosVenta = $link->insert_id;
             //SERVICIOS(LISTO)
