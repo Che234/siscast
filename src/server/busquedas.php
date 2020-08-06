@@ -537,7 +537,6 @@ class busquedas{
                 <option value="Caract Construccion">Caracteristicas de la Construcción</option>
                 <option value="Protocolizacion">Datos de Protocolizacion</option>
                 <option value="Linderos">Linderos</option>
-                <option value="Areas Terreno">Areas del Terreno</option>
                 <option value="Servicios">Servicios</option>
                 <option value="Factura">Datos de la Factura</option>
             </select>
@@ -1319,68 +1318,6 @@ class busquedas{
         <input type="hidden" value="'.$documentoRes["id"].'" id="idlindDocumento" />
         ';
     }
-    function modifAreaTerreno(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
-        //BUSQUEDA DEL EXPEDIENTE
-            $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
-            $resExp = $link->query($expSql);
-            $expRes = $resExp->fetch_assoc();
-        //BUSQUEDA DEL INMUEBLE
-            $inmuSql = "SELECT * FROM inmueble where id=".$expRes["id"]."";
-            $resInmue = $link->query($inmuSql);
-            $inmueRes = $resInmue->fetch_assoc();
-        //BUSQUEDA DEL TERRENO
-            $terrSql = "SELECT * FROM terreno where id=".$inmueRes["fk_terreno"]."";
-            $resTerr = $link->query($terrSql);
-            $terrRes = $resTerr->fetch_assoc();
-        echo '
-        <table border="1px" class="taConst">
-            <tr>
-                <td colspan="3" class="tiConst">
-                    <p class="h1">Áreas del Terreno</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Área Total de Venta</p>
-                        <input type="text" value="'.$terrRes["area_total_venta"].'" id="arTotalVenta" >
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Área restante</p>
-                        <input type="text" value="'.$terrRes["area_restante"].'" id="arRestante" >
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Valor del terreno</p>
-                        <input type="text" value="'.$terrRes["valor_terreno"].'" id="valorTerreno" >
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Valor del Inmueble</p>
-                        <input type="text" value="'.$terrRes["valor_inmueble"].'" id="valorInmueble" >
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Valor de la Construcción</p>
-                        <input type="text" value="'.$terrRes["valor_construccion"].'" id="valorConstruc" >
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <input type="hidden" value="'.$terrRes["id"].'" id="idTerreno">
-        <div class="btnSig1">
-            <input type="button" value="Guardar" onclick="btnActArea()" class=" botones btn btn-primary" />
-        </div>';
-    }
     function modifServi(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
@@ -1774,13 +1711,6 @@ class busquedas{
 
             echo 'ACTUALIZADO CON EXITO';
         
-    }
-    function guarActArea(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
-        $lindGenSql = "UPDATE linderos_general SET norte='".$this->nortGen."',sur='".$this->surGen."',este='".$this->esteGen."',oeste='".$this->oesteGen."',alind_n='".$this->alindNort."',alind_s='".$this->alindSur."',alind_e='".$this->alindEste."',alind_o='".$this->alindOeste."',areaTotal='".$this->arTotal."',nivelesConst='".$this->NivConstTotal."',areaConst='".$this->arConstTotal."',uniNorte='".$this->uniNorte."',uniSur='".$this->uniSur."',uniEste='".$this->uniEste."',uniOeste='".$this->uniOeste."' WHERE id='".$this->idlindGen."' ";
-        $link->query($lindGenSql);
-        echo 'ACTUALIZADO CON EXITO';
     }
     function guarActServ(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 

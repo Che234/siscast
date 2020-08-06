@@ -669,31 +669,6 @@ if(isset($_POST["idlindDocumento"])){
 }else{
     $bus->idlindDocumento = "nada";
 }
-if(isset($_POST["arTotalVenta"])){
-    $bus->arTotalVenta = $_POST["arTotalVenta"];
-}else{
-    $bus->arTotalVenta = "nada";
-}
-if(isset($_POST["arRestante"])){
-    $bus->arRestante = $_POST["arRestante"];
-}else{
-    $bus->arRestante = "nada";
-}
-if(isset($_POST["valorTerreno"])){
-    $bus->valorTerreno = $_POST["valorTerreno"];
-}else{
-    $bus->valorTerreno = "nada";
-}
-if(isset($_POST["valorInmueble"])){
-    $bus->valorInmueble = $_POST["valorInmueble"];
-}else{
-    $bus->valorInmueble = "nada";
-}
-if(isset($_POST["valorConstruc"])){
-    $bus->valorConstruc = $_POST["valorConstruc"];
-}else{
-    $bus->valorConstruc = "nada";
-}
 if(isset($_POST["idTerreno"])){
     $bus->idTerreno = $_POST["idTerreno"];
 }else{
@@ -959,9 +934,6 @@ if($accion=="actSecDoc"){
 }
 if($accion=="guarActLind"){
     $bus->guarActLind();
-}
-if($accion=="guarActArea"){
-    $bus->guarActArea();
 }
 if($accion=="guarActServ"){
     $bus->guarActServ();

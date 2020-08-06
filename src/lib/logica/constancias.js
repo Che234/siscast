@@ -1,22 +1,6 @@
 class constancias{
 
-    construct(cedR,cedConst,cedFul,rifR,rifN,rifConst,nomProp,
-        apelProp,codTelf,numText,direcProp,codTelf2,numTelf2,parrInmue,
-        secInmue,direcInmue,topoConst,formaConst,servPublic,usoConst,tenenConst,
-        destConst,estConst,pareTipoInmue,pareAcaInmue,pintConst,
-        techoConst,pisosConst,piezConst,ventConst,puertConst,instElect,
-        ambConst,compConst,estConserv,obsConst,docDebConst,direcProtConst,numProtConst,
-        tomoProtConst,folioProtConst,protoConst,trimProtConst,dateProtConst,valorProtConst,
-        nortGen,alindNort,surGen,alindSur,esteGen,alindEste,oesteGen,alindOeste,nortPosVenta,
-        alindPosNort,surPosVenta,alindPosSur,estePosVenta,alindPosEste,oestePosVenta,alindPosOeste,
-        nortSecDoc,alindSecNorte,surSecDoc,alindSecSur,esteSecDoc,alindSecEste,oesteSecDoc,alindSecOeste,
-        arTotal,NivConstTotal,arConstTotal,parte2,parte1,arTotalVenta,arRestante,valorTerreno,valorInmueble,
-        valorConstruc,nuExp,montoFact,fechFact,idInmueble,telfFul,telfFul2,regInmue,Acue,AcueRural,AguasSub,
-        AguasServ,PavFlex,PavRig,viaEngran,acera,AlumPublico,aseo,transPublic,pozoSept,ElectResidencial,ElectriIndust,
-        linTelf,empadro,multa,idProp,numFact,ambInmue,arTotal3,NivConstTotal3,arConstTotal3,arTotal2,NivConstTotal2,
-        arConstTotal2,uniNorte,uniSur,uniEste,uniOeste,uniNorte2,uniSur2,uniEste2,uniOeste2,uniNorte3,
-        uniSur3,uniEste3,uniOeste3,operacion,campBuscar,expVerificado,uniAreaT,uniAreaT2,uniAreaT3,uniAreaConst3,uniAreaConst2,uniAreaConst,
-        puntoNorte,puntoSur,puntoEste,puntoOeste,puntoNorte2,puntoSur2,puntoEste2,puntoOeste2,puntoNorte3,puntoSur3,puntoEste3,puntoOeste3){
+    construct(){
 
         this.cedR = cedR
         this.cedConst = cedConst
@@ -191,11 +175,19 @@ class constancias{
             return false;
         }
         if(!ex_Telefono.test(this.codTelf)){
-            alert("Error en el formato de codigo de Telefono");
+            alert("Error en el formato de codigo de Telefono de Hab.");
             return false;
         }
         if(!ex_Telefono.test(this.numText)){
-            alert("Error en el formato de numero de Telefono");
+            alert("Error en el formato de numero de Telefono de Hab.");
+            return false;
+        }
+        if(!ex_Telefono.test(this.codTelf2)){
+            alert("Error en el formato de codigo de Telefono Celular");
+            return false;
+        }
+        if(!ex_Telef.test(this.numTelf2)){
+            alert("Error en el formato de numero de Telefono Celular");
             return false;
         }
         if(!er_areas.test(this.direcProp)){
@@ -266,6 +258,10 @@ class constancias{
             return false;
         }
         if(!ex_datcort.test(this.pisosConst)){
+            alert("Error en el formato de Piso");
+            return false;
+        }
+        if(!ex_datcort.test(this.regInmue)){
             alert("Error en el formato de Piso");
             return false;
         }
@@ -448,6 +444,10 @@ class constancias{
             alert("Error en el formato de Área de Construcción");
             return false;
         }
+        if(!expediente.test(this.nuExp)){
+            alert("Error en el formato de Expediente");
+            return false;
+        }
         if(this.nuExp == this.expVerificado){
             alert("Numero de Expediente ya se encuentra registrado");
             return false;
@@ -515,7 +515,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send("cedFul="+this.cedFul+"&rifConst="+this.rifConst+"&nomProp="+this.nomProp+"&apelProp="+this.apelProp+"&codTelf="+this.codTelf+"&numText="+this.numText+"&direcProp="+this.direcProp+"&codTelf2="+this.codTelf2+"&numTelf2="+this.numTelf2+"&parrInmue="+this.parrInmue+"&secInmue="+this.secInmue+"&direcInmue="+this.direcInmue+"&topoConst="+this.topoConst+"&formaConst="+this.formaConst+"&usoConst="+this.usoConst+"&tenenConst="+this.tenenConst+"&regInmue="+this.regInmue+"&ambInmue="+this.ambInmue+"&accion=fCarac"); 
+        ajax.send("cedFul="+this.cedFul+"&rifConst="+this.rifConst+"&nomProp="+this.nomProp+"&apelProp="+this.apelProp+"&codTelf="+this.codTelf+"&numText="+this.numText+"&direcProp="+this.direcProp+"&codTelf2="+this.codTelf2+"&numTelf2="+this.numTelf2+"&parrInmue="+this.parrInmue+"&secInmue="+this.secInmue+"&direcInmue="+this.direcInmue+"&topoConst="+this.topoConst+"&formaConst="+this.formaConst+"&usoConst="+this.usoConst+"&tenenConst="+this.tenenConst+"&ambInmue="+this.ambInmue+"&accion=fCarac"); 
         ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -591,7 +591,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`destConst=${this.destConst}&estConst=${this.estConst}&pareTipoInmue=${this.pareTipoInmue}&pareAcaInmue=${this.pareAcaInmue}&pintConst=${this.pintConst}&techoConst=${this.techoConst}&pisosConst=${this.pisosConst}&piezConst=${this.piezConst}&ventConst=${this.ventConst}&puertConst=${this.puertConst}&instElect=${this.instElect}&ambConst=${this.ambConst}&compConst=${this.compConst}&estConserv=${this.estConserv}&obsConst=${this.obsConst}&docDebConst=${this.docDebConst}&direcProtConst=${this.direcProtConst}&numProtConst=${this.numProtConst}&tomoProtConst=${this.tomoProtConst}&folioProtConst=${this.folioProtConst}&protoConst=${this.protoConst}&trimProtConst=${this.trimProtConst}&dateProtConst=${this.dateProtConst}&valorProtConst=${this.valorProtConst}&parte1=${this.parte1}&accion=fLid`); 
+        ajax.send(`destConst=${this.destConst}&estConst=${this.estConst}&pareTipoInmue=${this.pareTipoInmue}&pareAcaInmue=${this.pareAcaInmue}&pintConst=${this.pintConst}&techoConst=${this.techoConst}&pisosConst=${this.pisosConst}&piezConst=${this.piezConst}&ventConst=${this.ventConst}&puertConst=${this.puertConst}&instElect=${this.instElect}&ambConst=${this.ambConst}&compConst=${this.compConst}&estConserv=${this.estConserv}&obsConst=${this.obsConst}&docDebConst=${this.docDebConst}&direcProtConst=${this.direcProtConst}&numProtConst=${this.numProtConst}&tomoProtConst=${this.tomoProtConst}&folioProtConst=${this.folioProtConst}&protoConst=${this.protoConst}&trimProtConst=${this.trimProtConst}&dateProtConst=${this.dateProtConst}&valorProtConst=${this.valorProtConst}&regInmue=${this.regInmue}&parte1=${this.parte1}&accion=fLid`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -635,7 +635,6 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
-                    let nuExp = document.getElementById("numExp").value
                     let rutaPdf = document.getElementById("rutaPdf").value
                     document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="${rutaPdf}" type="application/pdf"></div>`;
 			     }
@@ -825,7 +824,6 @@ function btnfCarac(){
     consta.formaConst= document.getElementById("formaConst").value;
     consta.usoConst= document.getElementById("usoConst").value;
     consta.tenenConst= document.getElementById("tenenConst").value;
-    consta.regInmue = document.getElementById("regInmue").value;
     consta.ambInmue = document.getElementById("ambInmue").value;
     if(consta.test1()==true){
         consta.fCarac();
@@ -879,6 +877,7 @@ function btnfLind(){
     consta.compConst = document.getElementById("compConst").value
     consta.estConserv= document.getElementById("estConserv").value
     consta.obsConst = document.getElementById("obsConst").value
+    consta.regInmue = document.getElementById("regInmue").value;
     consta.docDebConst = document.getElementById("docDebConst").value
     consta.direcProtConst = document.getElementById("direcProtConst").value
     consta.numProtConst = document.getElementById("numProtConst").value
@@ -1079,13 +1078,12 @@ function btnGuardConst(){
     consta.telfFul2 = `(${datos1[7]})-${datos1[8]}`
     consta.parrInmue = datos1[9]
     consta.secInmue = datos1[10]
-    consta.topoConst = datos1[11]
-    consta.formaConst = datos1[12]
-    consta.usoConst = datos1[13]
-    consta.tenenConst = datos1[14]
-    consta.dimeConst = datos1[15]
-    consta.regInmue = datos1[16]
-    consta.ambInmue = datos1[17]
+    consta.direcInmue= datos1[11]
+    consta.topoConst = datos1[12]
+    consta.formaConst = datos1[13]
+    consta.usoConst = datos1[14]
+    consta.tenenConst = datos1[15]
+    consta.ambInmue = datos1[16]
     consta.destConst = datos2[0]
     consta.estConst = datos2[1]
     consta.pareAcaInmue = datos2[3]
@@ -1110,6 +1108,7 @@ function btnGuardConst(){
     consta.trimProtConst = datos2[21]
     consta.dateProtConst = datos2[22]
     consta.valorProtConst = datos2[23]
+    consta.regInmue = datos2[24]
     consta.Acue = document.getElementById("Acue").value
     consta.AcueRural = document.getElementById("AcueRural").value
     consta.AguasSub = document.getElementById("AguasSub").value
@@ -1212,6 +1211,10 @@ function mostProp(){
         divTelef = telef.split("-")
         document.getElementById("codTelf").value=divTelef[0]
         document.getElementById("numTelf").value=divTelef[1]
+        let telef2 = document.getElementById("telf_hab").value
+        divTelef2 = telef2.split("-")
+        document.getElementById("codTelf2").value = divTelef2[0]
+        document.getElementById("numTelf2").value = divTelef2[1]
         let dir_hab = document.getElementById("dir_hab").value
         document.getElementById("direcProp").value=dir_hab
     }else{

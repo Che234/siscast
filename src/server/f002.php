@@ -105,10 +105,6 @@ class f002{
             $lindDocSql= "SELECT * FROM linderos_documento where id=".$idLindDoc."";
             $resLindDoc = $link->query($lindDocSql);
             $resultLindDoc= $resLindDoc->fetch_assoc();
-        //BUSQUEDA DE DATOS TERRENO
-            $terrSql= "SELECT * FROM terreno where id=".$idTerreno."";
-            $resTerr= $link->query($terrSql);
-            $resultTerr= $resTerr->fetch_assoc();
         //BUSQUEDA DE DATOS CONSTRUCCION
             $constSql= "SELECT * from caracteristicas_construccion where id=".$idConst."";
             $resConst= $link->query($constSql);
@@ -1185,7 +1181,6 @@ class f001{
             $idProt= $resultInmue["fk_protocolizacion"];
             $idLindDoc= $resultInmue["fk_lind_documento"];
             $idLindGen= $resultInmue["fk_lind_general"];
-            $idTerreno = $resultInmue["fk_terreno"];
             $idConst= $resultInmue["fk_carac_construccion"];
             $idServicios= $resultInmue["fk_servicios"];
             $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
@@ -1207,10 +1202,6 @@ class f001{
             $lindGenSql= "SELECT * FROM linderos_general where id=".$idLindGen."";
             $resLindGen = $link->query($lindGenSql);
             $resultLindGen= $resLindGen->fetch_assoc();
-        //BUSQUEDA DE DATOS TERRENO
-            $terrSql= "SELECT * FROM terreno where id=".$idTerreno."";
-            $resTerr= $link->query($terrSql);
-            $resultTerr= $resTerr->fetch_assoc();
         //BUSQUEDA DE DATOS CONSTRUCCION
             $constSql= "SELECT * from caracteristicas_construccion where id=".$idConst."";
             $resConst= $link->query($constSql);
@@ -1785,7 +1776,7 @@ class f001{
             $pdf->cell(60,6,utf8_decode('Régimen de la Propiedad:'),1,0,'C');
             $pdf->SetY(243);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$mostcarastInmue["regimen"].'',1,0,'C');
+            $pdf->cell(0,6,''.$resultConst["Regimen"].'',1,0,'C');
             $pdf->SetY(249);    
             $pdf->SetX(19);
             $pdf->cell(60,6,'Uso del Inmueble:',1,0,'C');
@@ -2449,7 +2440,6 @@ class f003{
             $idLindGen= $resultInmue["fk_lind_general"];
             $idLindPosVenta= $resultInmue["fk_lind_pos_venta"];
             $idLindDoc = $resultInmue["fk_lind_documento"];
-            $idTerreno = $resultInmue["fk_terreno"];
             $idConst= $resultInmue["fk_carac_construccion"];
             $idServicios= $resultInmue["fk_servicios"];
             $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
@@ -2471,10 +2461,6 @@ class f003{
             $lindPosVentaSQL= "SELECT * FROM linderos_posible_venta where id=".$idLindPosVenta."";
             $resLindPosVenta = $link->query($lindPosVentaSQL);
             $resultPosVenta= $resLindPosVenta->fetch_assoc();
-        //BUSQUEDA DE DATOS TERRENO
-            $terrSql= "SELECT * FROM terreno where id=".$idTerreno."";
-            $resTerr= $link->query($terrSql);
-            $resultTerr= $resTerr->fetch_assoc();
         //BUSQUEDA DE DATOS CONSTRUCCION
             $constSql= "SELECT * from caracteristicas_construccion where id=".$idConst."";
             $resConst= $link->query($constSql);
@@ -2658,25 +2644,25 @@ class f003{
             $pdf->cell(50,6,'No de Cedula:',1,0,'L');
             $pdf->SetY(103);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["cedula"].'',1,0,'C');
+            $pdf->cell(0,6,''.$resultPropie["cedula"].'',1,0,'L');
             $pdf->SetY(109);
             $pdf->SetX(19);
             $pdf->cell(50,6,'Rif:',1,0,'L');
             $pdf->SetY(109);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["rif"].'',1,0,'C');
+            $pdf->cell(0,6,''.$resultPropie["rif"].'',1,0,'L');
             $pdf->SetY(115);
             $pdf->SetX(19);
             $pdf->cell(50,6,'Apellidos Y Nombres:',1,0,'L');
             $pdf->SetY(115);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.utf8_decode($nombreProp).'',1,0,'C');
+            $pdf->cell(0,6,''.utf8_decode($nombreProp).'',1,0,'L');
             $pdf->SetY(121);
             $pdf->SetX(19);
             $pdf->cell(50,6,utf8_decode('No de Teléfono:'),1,0,'L');
             $pdf->SetY(121);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["telef"].'',1,0,'C');
+            $pdf->cell(0,6,''.$resultPropie["telef"].'',1,0,'L');
             $pdf->SetY(127);
             $pdf->SetX(19);
             $pdf->cell(50,6,utf8_decode('Dirección Del Propietario:'),1,0,'L');
@@ -3048,7 +3034,7 @@ class f003{
             $pdf->cell(60,6,utf8_decode('Régimen de la Propiedad:'),1,0,'C');
             $pdf->SetY(243);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$mostcarastInmue["regimen"].'',1,0,'C');
+            $pdf->cell(0,6,''.$resultConst["Regimen"].'',1,0,'C');
             $pdf->SetY(249);    
             $pdf->SetX(19);
             $pdf->cell(60,6,'Uso del Inmueble:',1,0,'C');
@@ -3706,7 +3692,6 @@ class f004{
             $resultInmue = $resInmue->fetch_assoc();
             $idProt= $resultInmue["fk_protocolizacion"];
             $idLindDoc= $resultInmue["fk_lind_documento"];
-            $idTerreno = $resultInmue["fk_terreno"];
             $idConst= $resultInmue["fk_carac_construccion"];
             $idServicios= $resultInmue["fk_servicios"];
             $idCaracInmue= $resultInmue["fk_carac_inmuebles"];

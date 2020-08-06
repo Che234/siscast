@@ -47,12 +47,6 @@ class constancias{
         $valorProtConst = "";
         $NivConstTotal = "";
         $arConstTotal = "";
-        $arTotal = "";
-        $arTotalVenta = "";
-        $arRestante = "";
-        $valorTerreno = "";
-        $valorInmueble = "";
-        $valorConstruc = "";
         $nortGen = "";
         $alindNort = "";
         $surGen = "";
@@ -194,7 +188,7 @@ class constancias{
             <tr>
                 <td>
                     <div class="campDat">
-                        <p class="negritas">Telef. Casa</p>
+                        <p class="negritas">Telef. Hab.</p>
                         <input type="text" class="codigo2" id="codTelf"/>
                         <input type="text" class="numText" id="numTelf"/>
                     </div>
@@ -290,17 +284,6 @@ class constancias{
                 </td>
                 <td >
                     <div class="campDat">
-                        <p class="negritas">Regimen</p>
-                        <select id="regInmue">
-                            <option value="0"></option>
-                            <option value="Propiedad Horizontal">Propiedad Horizontal</option>
-                            <option value="Condominio">Condominio</option>
-                            <option value="Sucesion">Sucesion</option>
-                        </select>
-                    </div>
-                </td>
-                <td >
-                    <div class="campDat">
                         <p class="negritas">Uso</p>
                         <select id="usoConst">
                             <option value="0"></option>
@@ -358,8 +341,7 @@ class constancias{
             13 => $this->formaConst,
             14 => $this->usoConst,
             15 => $this->tenenConst,
-            16 => $this->regInmue,
-            17 => $this->ambInmue
+            16 => $this->ambInmue
         );
         echo'
         <table border="1px" class="taConst">
@@ -588,13 +570,19 @@ class constancias{
                 </td>
                 <td>
                     <div class="campDat">
-                        <p class="negritas">Observaciones</p>
-                        <textarea id="obsConst"></textarea>
+                        <p class="negritas">Regimen</p>
+                        <select id="regInmue">
+                            <option value="0"></option>
+                            <option value="Propiedad Horizontal">Propiedad Horizontal</option>
+                            <option value="Condominio">Condominio</option>
+                            <option value="Sucesion">Sucesion</option>
+                        </select>
                     </div>
                 </td>
                 <td>
                     <div class="campDat">
-                        
+                        <p class="negritas">Observaciones</p>
+                        <textarea id="obsConst"></textarea>
                     </div>
                 </td>
             </tr>
@@ -682,7 +670,7 @@ class constancias{
         <div class="btnSig1">
             <input type="button" value="Siguiente" onclick="btnfLind()" class=" botones btn btn-primary" />
         </div>
-        <input type="hidden" id="parte1" value="'.$parte1[0].'|'.$parte1[1].'|'.$parte1[2].'|'.$parte1[3].'|'.$parte1[4].'|'.$parte1[5].'|'.$parte1[6].'|'.$parte1[7].'|'.$parte1[8].'|'.$parte1[9].'|'.$parte1[10].'|'.$parte1[11].'|'.$parte1[12].'|'.$parte1[13].'|'.$parte1[14].'|'.$parte1[15].'|'.$parte1[16].'|'.$parte1[17].'">
+        <input type="hidden" id="parte1" value="'.$parte1[0].'|'.$parte1[1].'|'.$parte1[2].'|'.$parte1[3].'|'.$parte1[4].'|'.$parte1[5].'|'.$parte1[6].'|'.$parte1[7].'|'.$parte1[8].'|'.$parte1[9].'|'.$parte1[10].'|'.$parte1[11].'|'.$parte1[12].'|'.$parte1[13].'|'.$parte1[14].'|'.$parte1[15].'|'.$parte1[16].'">
         ';
         }
     function fProtConst(){
@@ -710,7 +698,8 @@ class constancias{
             20 => $this->protoConst,
             21 => $this->trimProtConst,
             22 => $this->dateProtConst,
-            23 => $this->valorProtConst
+            23 => $this->valorProtConst,
+            24 => $this->regInmue
         );
         echo'
         <table border="1px" class="taConst">
@@ -943,7 +932,7 @@ class constancias{
             </tr>
         </table>
         <div id="campOculto"></div>
-            <input type="hidden" id="parte2" value="'.$parte2[0].'|'.$parte2[1].'|'.$parte2[2].'|'.$parte2[3].'|'.$parte2[4].'|'.$parte2[5].'|'.$parte2[6].'|'.$parte2[7].'|'.$parte2[8].'|'.$parte2[9].'|'.$parte2[10].'|'.$parte2[11].'|'.$parte2[12].'|'.$parte2[13].'|'.$parte2[14].'|'.$parte2[15].'|'.$parte2[16].'|'.$parte2[17].'|'.$parte2[18].'|'.$parte2[19].'|'.$parte2[20].'|'.$parte2[21].'|'.$parte2[22].'|'.$parte2[23].'" />
+            <input type="hidden" id="parte2" value="'.$parte2[0].'|'.$parte2[1].'|'.$parte2[2].'|'.$parte2[3].'|'.$parte2[4].'|'.$parte2[5].'|'.$parte2[6].'|'.$parte2[7].'|'.$parte2[8].'|'.$parte2[9].'|'.$parte2[10].'|'.$parte2[11].'|'.$parte2[12].'|'.$parte2[13].'|'.$parte2[14].'|'.$parte2[15].'|'.$parte2[16].'|'.$parte2[17].'|'.$parte2[18].'|'.$parte2[19].'|'.$parte2[20].'|'.$parte2[21].'|'.$parte2[22].'|'.$parte2[23].'|'.$parte2[24].'" />
             <input type="hidden" id="parte1" value="'.$this->parte1.'"/>
         <div class="btnSig1">
             <input type="button" value="Guardar" onclick="btnGuardConst()" class=" botones btn btn-primary" />
@@ -1417,13 +1406,13 @@ class constancias{
                 if($busPropRes["id"]!=0){
                     $idProp = $busPropRes["id"];
                 }else{
-                    $propSql = "INSERT INTO propietarios(cedula,rif,nombre,apellido,telef,dir_hab) value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFul."','".$this->direcProp."')";
+                    $propSql = "INSERT INTO propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab) value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFul."','".$this->direcProp."','".$this->telfFul2."')";
                     $link->query($propSql);
                     $idProp = $link->insert_id;
                 }
 
             //CARACTERISTICAS DEL INMUEBLE (LISTO)
-                $carcSql = "INSERT INTO carc_inmueble(topografia,forma,uso,tenencia,regimen)value('".$this->topoConst."','".$this->formaConst."','".$this->usoConst."','".$this->tenenConst."','".$this->regInmue."')";
+                $carcSql = "INSERT INTO carc_inmueble(topografia,forma,uso,tenencia)value('".$this->topoConst."','".$this->formaConst."','".$this->usoConst."','".$this->tenenConst."')";
                 $link->query($carcSql);
                 $idCarc= $link->insert_id;
 
@@ -1433,15 +1422,9 @@ class constancias{
                 $idProt= $link->insert_id;
 
             //CARACTERISTICAS DE LA CONSTRUCCION (LISTO)
-                $carcConstSql= "INSERT INTO caracteristicas_construccion(destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,piezas_sanitarias,ventanas,puertas,insta_electricas,complementos,estado_conservacion,ambientes,observ)value('".$this->destConst."','".$this->estConst."','".$this->pareTipoInmue."','".$this->pareAcaInmue."','".$this->pintConst."','".$this->techoConst."','".$this->pisosConst."','".$this->piezConst."','".$this->ventConst."','".$this->puertConst."','".$this->instElect."','".$this->compConst."','".$this->estConserv."','".$this->ambConst."','".$this->obsConst."')";
+                $carcConstSql= "INSERT INTO caracteristicas_construccion(destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,piezas_sanitarias,ventanas,puertas,insta_electricas,complementos,estado_conservacion,ambientes,observ,Regimen)value('".$this->destConst."','".$this->estConst."','".$this->pareTipoInmue."','".$this->pareAcaInmue."','".$this->pintConst."','".$this->techoConst."','".$this->pisosConst."','".$this->piezConst."','".$this->ventConst."','".$this->puertConst."','".$this->instElect."','".$this->compConst."','".$this->estConserv."','".$this->ambConst."','".$this->obsConst."','".$this->regInmue."')";
                 $link->query($carcConstSql);
                 $idCarcConst = $link->insert_id;
-
-            //TERRENO(LISTO)
-                $terrSql= "INSERT INTO terreno(area_total_venta,area_restante,valor_terreno,valor_inmueble,valor_construccion)value('".$this->arTotalVenta."','".$this->arRestante."','".$this->valorTerreno."','".$this->valorInmueble."','".$this->valorConstruc."')";
-                $link->query($terrSql);
-                $idTerreno= $link->insert_id;
-
             //LINDEROS DOCUMENTO(LISTO)
                 if($this->puntNorte3=="Norte"){
                     $Norte3 = $this->nortSecDoc;
@@ -1545,7 +1528,7 @@ class constancias{
                 $link->query($servSql);
                 $idServ= $link->insert_id;
             //INMUEBLE(LISTO)
-                $InmuebleSql= "INSERT INTO inmueble(telef,direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_terreno,fk_servicios)value('".$this->telfFul2."','".$this->direcInmue."','".$this->parrInmue."','".$this->secInmue."','".$this->ambInmue."',".$idCarcConst.",".$idProt.",".$idCarc.",".$idLindDoc.",".$idLindGen.",".$idLindPosVenta.",".$idTerreno.",".$idServ.")";
+                $InmuebleSql= "INSERT INTO inmueble(direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_servicios)value('".$this->direcInmue."','".$this->parrInmue."','".$this->secInmue."','".$this->ambInmue."',".$idCarcConst.",".$idProt.",".$idCarc.",".$idLindDoc.",".$idLindGen.",".$idLindPosVenta.",".$idServ.")";
                 $link->query($InmuebleSql);
                 $idInmueble= $link->insert_id;
             //EXPEDIENTE
@@ -1681,6 +1664,7 @@ class constancias{
         <input type="hidden" value="'.$usuarioRes["apellido"].'" id="apellido" />
         <input type="hidden" value="'.$usuarioRes["telef"].'" id="telef" />
         <input type="hidden" value="'.$usuarioRes["dir_hab"].'" id="dir_hab" />
+        <input type="hidden" value="'.$usuarioRes["telef_hab"].'" id="telf_hab" />
         ';
     }
     function formImpri(){

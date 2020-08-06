@@ -667,24 +667,6 @@ class busquedas{
 			     }
 	       	}
     }
-    guarActArea(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('modificaciones');
-        var divsitiomaterial = document.getElementById('modificaciones');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`arTotalVenta=${this.arTotalVenta}&arRestante=${this.arRestante}&valorTerreno=${this.valorTerreno}&valorInmueble=${this.valorInmueble}&valorConstruc=${this.valorConstruc}&idTerreno=${this.idTerreno}&accion=guarActArea`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
     guardActServ(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('modificaciones');
@@ -1838,17 +1820,6 @@ function btnActLinderos(){
     busque.idlindPosVenta = document.getElementById("idlindPosVenta").value
     busque.idlindGen = document.getElementById("idlindGen").value
     busque.guarActLind()
-}
-//AREA TERRENO
-function btnActArea(){
-    var busque = new busquedas
-    busque.arTotalVenta = document.getElementById("arTotalVenta").value
-    busque.arRestante = document.getElementById("arRestante").value
-    busque.valorTerreno = document.getElementById("valorTerreno").value
-    busque.valorInmueble = document.getElementById("valorInmueble").value
-    busque.valorConstruc = document.getElementById("valorConstruc").value
-    busque.idTerreno = document.getElementById("idTerreno").value
-    busque.guarActArea()
 }
 //SERVICIOS
 function btnActServ(){
