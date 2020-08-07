@@ -436,7 +436,7 @@ class constancias{
             alert("Error en el formato de Área Total");
             return false;
         }
-        if(!ex_datcort.test(this.NivConstTotal)){
+        if(!niveles.test(this.NivConstTotal)){
             alert("Error en el formato de Niveles de Construcción");
             return false;
         }
@@ -527,8 +527,8 @@ class constancias{
     }
     fActGeneral(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('lindActGen');
-        var divsitiomaterial = document.getElementById('lindActGen');
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
 		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
 		ajax=objetoAjax();
@@ -546,8 +546,8 @@ class constancias{
     }
     factPosVenta(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('lindPosVenta');
-        var divsitiomaterial = document.getElementById('lindPosVenta');
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
 		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
 		ajax=objetoAjax();
@@ -565,8 +565,8 @@ class constancias{
     }
     factSecDoc(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('lindSecDoc');
-        var divsitiomaterial = document.getElementById('lindSecDoc');
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
 		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
 		ajax=objetoAjax();
@@ -797,10 +797,296 @@ class constancias{
 			     }
 	       	}
     }
+    formProp(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=formProp`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    formInmue(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=formInmue`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    formCarTerr(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=formCarTerr`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    fcaracConst(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=fcaracConst`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    fprotInmue(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=fprotInmue`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    fConserv(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=fConserv`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    fPiezSant(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=fPiezSant`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    fPuertas(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=fpuertas`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    fAmbi(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=fAmbi`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    fComple(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=fComple`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    fServicios(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=fServicios`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    fExpedient(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=fExpedient`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    fFactura(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=fFactura`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
 }
 function btnFormConst(){
     let consta = new constancias();
     consta.formConst();
+}
+function btnFormProp(){
+    let consta = new constancias
+    consta.formProp()
+}
+function btnFormInmue(){
+    let consta = new constancias
+    consta.formInmue()
+}
+function btnfCarTerreno(){
+    let consta = new constancias
+    consta.formCarTerr()
+}
+function btnfcaracConst(){
+    let consta = new constancias
+    consta.fcaracConst()
+}
+function btnfprotInmue(){
+    let consta = new constancias
+    consta.fprotInmue()
+}
+function btnfConserv(){
+    let consta = new constancias
+    consta.fConserv();
+}
+function btnfPiezSant(){
+    let consta = new constancias
+    consta.fPiezSant();
+}
+function btnfpuertas(){
+    let consta = new constancias
+    consta.fPuertas()
+}
+function btnfAmbi(){
+    let consta = new constancias
+    consta.fAmbi();
+}
+function btnfComple(){
+    let consta = new constancias
+    consta.fComple();
+}
+function btnfServicios(){
+    let consta = new constancias
+    consta.fServicios()
+}
+function btnfexpedient(){
+    let consta = new constancias 
+    consta.fExpedient();
+}
+function btnfFactura(){
+    let consta = new constancias
+    consta.fFactura()
 }
 function btnfCarac(){
     let consta = new constancias();
@@ -832,33 +1118,15 @@ function btnfCarac(){
 }
 function actGeneral(){
     let consta = new constancias();
-    lindGeneral= document.getElementById("lindGeneral").value
-    if(lindGeneral=="si"){
-        consta.fActGeneral();
-    }else{
-        espaGeneral= document.getElementById("lindActGen")
-        espaGeneral.innerHTML=""
-    }
+    consta.fActGeneral();
 }
 function actPosVenta(){
     let consta = new constancias()
-    posVenta= document.getElementById("posVenta").value
-    if(posVenta=="si"){
-        consta.factPosVenta();
-    }else{
-        espaVenta= document.getElementById("lindPosVenta")
-        espaVenta.innerHTML=""
-    }
+    consta.factPosVenta();
 }
 function actSecDoc(){
     let consta = new constancias()
-    secDoc= document.getElementById("secDoc").value
-    if(secDoc=="si"){
-        consta.factSecDoc();
-    }else{
-        espaSecDoc= document.getElementById("lindSecDoc")
-        espaSecDoc.innerHTML=""
-    }
+    consta.factSecDoc();
 }
 function btnfLind(){
     let consta = new constancias()

@@ -675,8 +675,50 @@ if(isset($_POST["accion"])){
     }
 
 //ACCIONES
-    if($accion== "fProp"){
+    if($accion=="formProp"){
         $nconst->fPropietario();
+    }
+    if($accion=="formInmue"){
+        $nconst->fInmueble();
+    }
+    if($accion=="formCarTerr"){
+        $nconst->fCarTerreno();
+    }
+    if($accion=="fConserv"){
+        $nconst->fConserv();
+    }
+    if($accion=="fPiezSant"){
+        $nconst->fPiezSant();
+    }
+    if($accion=="fpuertas"){
+        $nconst->fpuertas();
+    }
+    if($accion=="fAmbi"){
+        $nconst->fambien();
+    }
+    if($accion=="fComple"){
+        $nconst->fConple();
+    }
+    if($accion=="fExpedient"){
+        $nconst->fExpedient();
+    }
+    if($accion=="fServicios"){
+        $nconst->fServicios();
+    }
+    if($accion=="fFactura"){
+        $nconst->fFactura();
+    }
+    if($accion=="fcaracConst"){
+        $nconst->fcaracConst();
+    }
+    if($accion=="fprotInmue"){
+        $nconst->fprotInmue();
+    }
+    if($accion=="flinDoc"){
+        $nconst->SecDoc();
+    }
+    if($accion== "fProp"){
+        $nconst->secNuvIns();
     }
     if($accion== "fCarac"){
         $nconst->fCarac();

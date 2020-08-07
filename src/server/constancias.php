@@ -133,90 +133,186 @@ class constancias{
         $puntOeste3 = "";
     }
         
-
+    function secNuvIns(){
+        echo'
+            <div class="container-fluid forms">
+                <div class="row">
+                    <div class="col-lg-4">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnFormProp()" class="btn btn-info" >DATOS DEL PROPIETARIO</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnFormInmue()" class="btn btn-info" >DATOS DEL INMUEBLE</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnfCarTerreno()" class="btn btn-info" >CARACTERISTICAS DEL TERRENO</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnfcaracConst()" class="btn btn-info" >CARACTERISTICAS DE LAS CONSTRUCCIÓN</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnfprotInmue()" class="btn btn-info" >PROTOCOLIZACION DEL INMUEBLE</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="actGeneral()" class="btn btn-info" >LINDEROS SEGUN INSPECCIÓN</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="actSecDoc()" class="btn btn-info" >LINDEROS SEGUN DOCUMENTO</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="actPosVenta()" class="btn btn-info" >LINDEROS POSIBLE VENTA</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnfServicios()" class="btn btn-info" >SERVICIOS</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnfConserv()" class="btn btn-info" >ESTADO DE CONSERVACIÓN</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnfPiezSant()" class="btn btn-info" >PIEZAS SANITARIAS</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnfAmbi()" class="btn btn-info" >AMBIENTES</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnfpuertas()" class="btn btn-info" >PUERTAS</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnfComple()" class="btn btn-info" >COMPLEMENTOS</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnfFactura()" class="btn btn-info" >FACTURA</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button type="button" onclick="btnfexpedient()" class="btn btn-info" >EXPEDIENTE</button>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-lg-8" id="formsInscrip">
+                        
+                    </div>
+                </div>
+            </div>
+        ';
+    }
     function fPropietario(){
         
         echo'
-        <table border="1px" class="taConst">
-            <tr>
-                <td colspan="4" class="tiConst">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
                     <p class="h1">DATOS DEL PROPIETARIO</p>
-                </td>
-            </tr>
-            <tr>
-                <td class="tdConst">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
                     <div class="campDat">
-                    <p class="negritas">Cedula:</p>
-                        <select class="codigo2" id="cedR">
-                            <option value="NA">NA</option>
-                            <option value="V">V</option>
-                            <option value="E">E</option>
-                        </select>
-                        <input type="text" class="numText" id="cedConst" onchange="btnRevUsuario()"/>
+                        <p class="negritas">Cedula:</p>
+                            <select class="codigo2" id="cedR">
+                                <option value="NA">NA</option>
+                                <option value="V">V</option>
+                                <option value="E">E</option>
+                            </select>
+                            <input type="text" class="numText" id="cedConst" onchange="btnRevUsuario()"/>
                     </div>
-                    
-                </td>
-                <td>
+                </div>
+                <div class="col">
                     <div class="campDat">
                         <p class="negritas">Rif:</p>
-                        <select class="codigo2" id="rifR">
-                            <option value="NA">NA</option>
-                            <option value="V">V</option>
-                            <option value="J">J</option>
-                            <option value="G">G</option>
-                            <option value="E">E</option>
-                            <option value="P">P</option>
-                            <option value="C">C</option>
-                        </select>
+                            <select class="codigo2" id="rifR">
+                                <option value="NA">NA</option>
+                                <option value="V">V</option>
+                                <option value="J">J</option>
+                                <option value="G">G</option>
+                                <option value="E">E</option>
+                                <option value="P">P</option>
+                                <option value="C">C</option>
+                            </select>
                         <input type="text" class="numText" id="rifN" />
                     </div>
-                </td>
-                <td >
+                </div>
+                <div class="col">
                     <div class="campDat">
                         <p class="negritas">Nombres</p>
                         <input type="text" id="nomProp" /> 
                     </div>
-                </td>
-                <td >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
                     <div class="campDat">
                         <p class="negritas">Apellido</p>
                         <input type="text" id="apelProp" />
                     </div>
-                    
-                </td>
-            </tr>
-            <tr>
-                <td>
+                </div>
+                <div class="col">
                     <div class="campDat">
                         <p class="negritas">Telef. Hab.</p>
                         <input type="text" class="codigo2" id="codTelf"/>
                         <input type="text" class="numText" id="numTelf"/>
                     </div>
-                </td>
-                <td class="tdConst">
+                </div>
+                <div class="col">
                     <div class="campDat">
                         <p class="negritas">Telef. Celular</p>
                         <input type="text" class="codigo2" id="codTelf2"/>
                         <input type="text" class="numText" id="numTelf2"/>
                     </div>
-                </td>
-                <td colspan="3">
-                    <div class="campDat">
-                        <p class="negritas">Dirección del propietario</p>
-                        <input type="text" class="direc2" id="direcProp" />
-                    </div>
-                </td>
-            </tr>
-        </table>
-        
-        <table border="1px" class="taConst">
-            <tr>
-                <td colspan="4" class="tiConst">
+                </div>
+            </div>
+            <div class="row">
+                <div class="campDat">
+                    <p class="negritas">Dirección del propietario</p>
+                    <input type="text" class="direc2" id="direcProp" />
+                </div>
+            </div>
+        </div>
+        <div class="btnSig1">
+            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+        </div>
+        <div id="campGeneral2"></div>';
+    }
+    function fInmueble(){
+        echo'
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
                     <p class="h1">DATOS DEL INMUEBLE</p>
-                </td>
-            </tr>
-            <tr>
-                <td >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
                     <div class="campDat">
                         <p class="negritas">Parroquia</p>
                         <select onchange="btnCambSec()" id="parrInmue">
@@ -226,24 +322,16 @@ class constancias{
                             <option value="Santo Domingo">Santo Domingo</option>
                         </select>
                     </div>
-                </td>
-                <td >
+                </div>
+                <div class="col">
                     <div class="campDat">
                         <p class="negritas">Sector</p>
                         <select id="secInmue">
                             <option value="0"></option>
                         </select>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2">
-                    <div class="campDat">
-                        <p class="negritas">Dirección del inmueble</p>
-                        <input type="text" class="direc1" id="direcInmue" />
-                    </div>
-                </td>
-                <td>
+                </div>
+                <div class="col">
                     <div class="campDat">
                         <p class="negritas">Ambito inmueble</p>
                         <select id="ambInmue">
@@ -252,17 +340,30 @@ class constancias{
                             <option value="Rural">Rural</option>
                         </select>
                     </div>
-                </td>
-            </tr>
-        </table>
-        <table border="1px" class="taConst">
-            <tr>
-                <td colspan="4" class="tiConst">
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Dirección del inmueble</p>
+                        <input type="text" class="direc1" id="direcInmue" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btnSig1">
+            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+        </div>
+        ';
+    }
+    function fCarTerreno(){
+        echo'
+        <div class="container-flud">
+            <div class="row">
+                <div class="col">
                     <p class="h1">CARACTERISTICAS DEL TERRENO</p>
-                </td>
-            </tr>
-            <tr>
-                <td class="tdConst">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
                     <div class="campDat">
                         <p class="negritas">Topografía</p>
                         <select id="topoConst">
@@ -271,8 +372,8 @@ class constancias{
                             <option value="Terreno Quebrado">Terreno Quebrado</option>
                         </select>
                     </div>
-                </td>
-                <td >
+                </div>   
+                <div class="col">
                     <div class="campDat">
                         <p class="negritas">Forma</p>
                         <select id="formaConst">
@@ -281,8 +382,8 @@ class constancias{
                             <option value="Irregular">Irregular</option>
                         </select>
                     </div>
-                </td>
-                <td >
+                </div>  
+                <div class="col">
                     <div class="campDat">
                         <p class="negritas">Uso</p>
                         <select id="usoConst">
@@ -295,10 +396,10 @@ class constancias{
                             <option value="Rural">Rural</option>
                         </select>
                     </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
+                </div>       
+            </div>
+            <div class="row">
+                <div class="col">
                     <div class="campDat">
                         <p class="negritas">Tenencia</p>
                         <select id="tenenConst">
@@ -313,15 +414,796 @@ class constancias{
                             <option value="Otros">Otros</option>
                         </select>
                     </div>
-                </td>
-            </tr>
-        </table>
+                </div>
+            </div>
+        </div>
+        <div class="btnSig1">
+            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+        </div>';
+    }
+    function fcaracConst(){
+        echo'
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <p class="h1">CARACTERISTICAS DE LAS CONSTRUCCIÓN</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Destino</p>
+                        <select id="destConst">
+                            <option value="0"></option>
+                            <option value="Unifamiliar">Unifamiliar</option>
+                            <option value="Bifamiliar">Bifamiliar</option>
+                            <option value="Multifamiliar">Multifamiliar</option>
+                            <option value="Comercial">Comercial</option>
+                            <option value="Industrial">Industrial</option>
+                            <option value="Hotel-Posada">Hotel-Posada</option>
+                            <option value="Institución Pública">Institución Pública</option>
+                            <option value="Espacios Públicos">Espacios Públicos</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Estructura</p>
+                        <select id="estConst">
+                            <option value="0"></option>
+                            <option value="Concreto">Concreto</option>
+                            <option value="Acero ">Acero</option>
+                            <option value="Concreto-Acero">Concreto-Acero</option>
+                            <option value="Paredes-Portantes">Paredes Portantes</option>
+                            <option value="Madera">Madera</option>
+                            <option value="Prefabricado">Prefabricado</option>
+                            <option value="Otros">Otros</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Paredes</p>
+                        <select id="pareTipoInmue">
+                            <option value="">Tipo</option>
+                            <option value="Concreto">Ladrillo</option>
+                            <option value="Metalica">Bloque</option>
+                            <option value="Madera">Adobe Tapia</option>
+                            <option value="Concreto">Bahareque</option>
+                            <option value="Metalica">Madera</option>
+                            <option value="Madera">Prefabricado</option>
+                        </select>
+                        <select id="pareAcaInmue">
+                            <option value="0">Acabado</option>
+                            <option value="Concreto">Lujoso</option>
+                            <option value="Metalica">Friso liso</option>
+                            <option value="Madera">Friso rustico</option>
+                            <option value="Concreto">Obra limpia</option>
+                            <option value="Metalica">Sin friso</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Pintura</p>
+                        <select id="pintConst">
+                            <option value="0"></option>
+                            <option disabled>Pintura C</option>
+                            <option value="Caucho">Caucho</option>
+                            <option value="Óleo">Óleo</option>
+                            <option value="Pasta">Pasta</option>
+                            <option value="Abestina">Abestina</option>
+                            <option value="Luchada">Luchada</option>
+                            <option value="Texturación">Texturación</option>
+                            <option disabled>Pintura A</option>
+                            <option value="Concreto">Concreto</option>
+                            <option value="Metálica">Metálica</option>
+                            <option value="Madera">Madera</option>
+                            <option value="Varas">Varas</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Techo</p>
+                        <select id="techoConst">
+                            <option value="0"></option>
+                            <option value="Madera-teja">Madera-teja</option>
+                            <option value="Placa-teja">Placa-teja</option>
+                            <option value="Platabanda">Platabanda</option>
+                            <option value="Tejas-riple">Tejas-riple</option>
+                            <option value="Aluminio">Aluminio</option>
+                            <option value="Acerolit-Asbesto">Acerolit-Asbesto</option>
+                            <option value="Paca Tabelon">Paca Tabelon</option>
+                            <option value="Placa nevada">Placa nevada</option>
+                            <option value="Losacero">Losacero</option>
+                            <option value="Zinc">Zinc</option>
+                            <option value="Cana teja">Cana teja</option>
+                            <option value="Cielo raso">Cielo raso</option>
+                            <option value="Raso laminas">Raso laminas</option>
+                            <option value="Machimbre">Machimbre</option>
+                            <option value="Policarbonato">Policarbonato</option>P
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Pisos</p>
+                        <select id="pisosConst">
+                            <option value="0"></option>
+                            <option value="Lujoso">Lujoso</option>
+                            <option value="Baldosas/Terracota">Baldosas/Terracota</option>
+                            <option value="Cerámica">Cerámica</option>
+                            <option value="Granito">Granito</option>
+                            <option value="Mosaico">Mosaico</option>
+                            <option value="Cemento olor">Cemento olor</option>
+                            <option value="Cemento rustico">Cemento rustico</option>
+                            <option value="Vinil">Vinil</option>
+                            <option value="Porcelanato">Porcelanato</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Ventanas</p>
+                        <select id="ventConst">
+                            <option value="0"></option>
+                            <option value="Vetanal">Vetanal</option>
+                            <option value="Celosial">Celosial</option>
+                            <option value="Corredora">Corredora</option>
+                            <option value="Basculante">Basculante</option>
+                            <option value="Batiente">Batiente</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Instal. Electricas</p>
+                        <select id="instElect">
+                            <option value="0"></option>
+                            <option value="Embutidas">Embutidas</option>
+                            <option value="Externa">Externa</option>
+                            <option value="Industrial">Industrial</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Regimen</p>
+                        <select id="regInmue">
+                            <option value="0"></option>
+                            <option value="Propiedad Horizontal">Propiedad Horizontal</option>
+                            <option value="Condominio">Condominio</option>
+                            <option value="Sucesion">Sucesion</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Observaciones</p>
+                        <textarea id="obsConst"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="btnSig1">
             <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
         </div>
-        <div id="campGeneral2"></div>';
+        ';
     }
-
+    function fprotInmue(){
+        echo'
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <p class="h1">DATOS DE PROTOCOLIZACION DEL INMUEBLE</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Documento Debidamente:</p>
+                        <input type="text" id="docDebConst"/>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Dirección:</p>
+                        <input type="text" id="direcProtConst"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Numero:</p>
+                        <input type="text" id="numProtConst"/>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Tomo:</p>
+                        <input type="text" id="tomoProtConst"/>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Folio:</p>
+                        <input type="text" id="folioProtConst"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Protocolo:</p>
+                        <select id="protoConst">
+                            <option value="No Aplica">No Aplica</option>
+                            <option value="Primero">Primero</option>
+                            <option value="Segundo">Segundo</option>
+                            <option value="Tercero">Tercero</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Trimestre:</p>
+                        <select id="trimProtConst">
+                            <option value="No Aplica">No Aplica</option>
+                            <option value="Primero">Primero</option>
+                            <option value="Segundo">Segundo</option>
+                            <option value="Tercero">Tercero</option>
+                            <option value="Tercero">No Aplica</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Fecha:</p>
+                        <input type="date" id="dateProtConst"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <p class="negritas">Valor del Inmueble:</p>
+                        <input type="text" id="valorProtConst"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btnSig1">
+            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+        </div>';
+    }
+    function fConserv(){
+        echo'
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <p class="h1">Estado de Conservación</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <b>Año de Construcción</b>
+                    <input type="text" id="ano_construc">
+                </div>
+                <div class="col">
+                    <b>Año de Refacción</b>
+                    <input type="text" id="ano_refac">
+                </div>
+                <div class="col">
+                    <b>Edad Efectiva</b>
+                    <input type="text" id="edadEfec"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <b>Nº de planta</b>
+                    <input type="text" id="numPlata" />
+                </div>
+                <div class="col">
+                    <b>Nº de Vivienda</b>
+                    <input type="text" id="numVivienda" />
+                </div>
+            </div>
+        </div>
+        <div class="btnSig1">
+            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+        </div';
+    }
+    function fPiezSant(){
+        echo'
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <p class="h1">Piezas Sanitarias</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>Porcelana Fina</b>
+                        <select id="porFina">
+                            <option value="No"></option>
+                            <option value="No">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Porcelana Econ.</b>
+                        <select id="porceEcon">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Bañera</b>
+                        <select id="banera">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No"></option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Calentador</b>
+                        <select id="calentador">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No"></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>W.C.</b>
+                        <select id="wc">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No"></option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Bidet</b>
+                        <select id="bidet">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Lavamanos</b>
+                        <select id="lavamanos">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Ducha</b>
+                        <select id="ducha">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No"></option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Urinario</b>
+                        <select id="urinario">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No"></option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="btnSig1">
+                <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            </div>
+        ';
+    }
+    function fpuertas(){
+        echo '
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <p class="h1">Puertas</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>Entamborada Fina</b>
+                        <select id="entamFina">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Ent. Economica</b>
+                        <select id="entamEcon">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Madera cepillada</b>
+                        <select id="madeCepil">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Hierro</b>
+                        <select id="hierro">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="btnSig1">
+                <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            </div>
+        ';
+    }
+    function fambien(){
+        echo'
+        <div class="contaniner-fluid">
+            <div class="row">
+                <div class="col">
+                    <p class="h1">Ambientes</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <b>Dormitorio</b>
+                    <input type="text" class="text" id="dormit">
+                </div>
+                <div class="col">
+                    <b>Comedor</b>
+                    <input type="text" class="text" id="comedor">
+                </div>
+                <div class="col">
+                    <b>Sala</b>
+                    <input type="text" class="text" id="sala">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <b>Baños</b>
+                    <input type="text" class="text" id="baños" />
+                </div>
+                <div class="col">
+                    <b>Cocina</b>
+                    <input type="text" class="text" id="Cocina" />
+                </div>
+                <div class="col">
+                    <b>Servicio</b>
+                    <input type="text" class="text" id="Servicio" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <b>Oficina</b>
+                    <input type="text" class="text" id="oficina" />
+                </div>
+                <div class="col">
+                    <b>Garaje</b>
+                    <input type="text" class="text" id="garaje" />
+                </div>
+                <div class="col">
+                    <b>Estacionamiento</b>
+                    <input type="text" class="text" id="estac" />
+                </div>
+            </div>
+        </div>
+        <div class="btnSig1">
+            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+        </div>
+        ';
+    }
+    function fConple(){
+        echo'
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <p class="h1">Complementos</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>Ascensor</b>
+                        <select id="ascensor">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Aire Acond.</b>
+                        <select id="aireAcond">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Rejas</b>
+                        <select id="rejas">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Closets</b>
+                        <select id="closets">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Porcelana</b>
+                        <select id="porcelana">
+                            <option value="No"></option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="btnSig1">
+                <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            </div>
+        ';
+    }
+    function fServicios(){
+        echo'
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <p class="h1">Servicios</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <b>Acueducto:</b>
+                        <select class="codigo2" id="Acue">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Acueducto Rural:</b>
+                        <select class="codigo2" id="AcueRural">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Aguas Subterráneas:</b>
+                        <select class="codigo2" id="AguasSub">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <b>Pavimento Flexible:</b>
+                        <select class="codigo2" id="PavFlex">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Pavimento Rígido:</b>
+                        <select class="codigo2" id="PavRig">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Vía Engranzonada:</b>
+                        <select class="codigo2" id="viaEngran">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <b>Alumbrado Público:</b>
+                        <select class="codigo2" id="AlumPublico">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Electricidad Residencial:</b>
+                        <select class="codigo2" id="ElectResidencial">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Transporte Público:</b>
+                        <select class="codigo2" id="transPublic">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <b>Electricidad Industrial:</b>
+                        <select class="codigo2" id="ElectriIndust">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Línea Telefónica:</b>
+                        <select class="codigo2" id="linTelf">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Aseo:</b>
+                        <select class="codigo2" id="aseo">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <b>Pozo Séptico:</b>
+                        <select class="codigo2" id="pozoSept">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Aguas Servidas:</b>
+                        <select class="codigo2" id="AguasServ">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Acera:</b>
+                        <select class="codigo2" id="acera">
+                            <option value="0"></option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btnSig1">
+            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+        </div>';
+    }
+    function fExpedient(){
+        echo'
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <b class="h1">EXPEDIENTE</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="campDat">
+                            <b>Numero Expediente:</b>
+                            <input type="text" id="nuExp" onchange="veriExpediente()" />
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="campDat">
+                            <p class="negritas">Aplicar:</p>
+                            <select id="multa"/>
+                                <option value="No Aplica">No Aplica</option>
+                                <option value="Multa">Multa</option>
+                                <option value="Empadronamiento">Empadronamiento</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ';
+    }
+    function fFactura(){
+        echo'
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <b class="h1">FACTURA</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <b>Monto:</b>
+                        <input type="text" id="montoFact"/>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Número Factura:</b>
+                        <input type="number" id="numFact" onchange="btnVeriFact()"/>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Fecha:</b>
+                        <input type="date" id="fechFact"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btnSig1">
+            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+        </div>
+        ';
+    }
     function fCarac(){
 
         $parte1 = array(
@@ -344,329 +1226,8 @@ class constancias{
             16 => $this->ambInmue
         );
         echo'
-        <table border="1px" class="taConst">
-            <tr>
-                <td colspan="4" class="tiConst">
-                    <p class="h1">CARACTERISTICAS DE LAS CONSTRUCCIÓN</p>
-                </td>
-            </tr>
-            <tr>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Destino</p>
-                        <select id="destConst">
-                            <option value="0"></option>
-                            <option value="Unifamiliar">Unifamiliar</option>
-                            <option value="Bifamiliar">Bifamiliar</option>
-                            <option value="Multifamiliar">Multifamiliar</option>
-                            <option value="Comercial">Comercial</option>
-                            <option value="Industrial">Industrial</option>
-                            <option value="Hotel-Posada">Hotel-Posada</option>
-                            <option value="Institución Pública">Institución Pública</option>
-                            <option value="Espacios Públicos">Espacios Públicos</option>
-                        </select>
-                    </div>
-                </td>
-                <td >
-                    <div class="campDat">
-                        <p class="negritas">Estructura</p>
-                        <select id="estConst">
-                            <option value="0"></option>
-                            <option value="Concreto">Concreto</option>
-                            <option value="Acero ">Acero</option>
-                            <option value="Concreto-Acero">Concreto-Acero</option>
-                            <option value="Paredes-Portantes">Paredes Portantes</option>
-                            <option value="Madera">Madera</option>
-                            <option value="Prefabricado">Prefabricado</option>
-                            <option value="Otros">Otros</option>
-                        </select>
-                    </div>
-                </td>
-                <td >
-                    <div class="campDat">
-                        <p class="negritas">Paredes</p>
-                        <select id="pareTipoInmue">
-                            <option value="">Tipo</option>
-                            <option value="Concreto">Ladrillo</option>
-                            <option value="Metalica">Bloque</option>
-                            <option value="Madera">Adobe Tapia</option>
-                            <option value="Concreto">Bahareque</option>
-                            <option value="Metalica">Madera</option>
-                            <option value="Madera">Prefabricado</option>
-                        </select>
-                        <select id="pareAcaInmue">
-                            <option value="0">Acabado</option>
-                            <option value="Concreto">Lujoso</option>
-                            <option value="Metalica">Friso liso</option>
-                            <option value="Madera">Friso rustico</option>
-                            <option value="Concreto">Obra limpia</option>
-                            <option value="Metalica">Sin friso</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Pintura</p>
-                        <select id="pintConst">
-                            <option value="0"></option>
-                            <option disabled>Pintura C</option>
-                            <option value="Caucho">Caucho</option>
-                            <option value="Óleo">Óleo</option>
-                            <option value="Pasta">Pasta</option>
-                            <option value="Abestina">Abestina</option>
-                            <option value="Luchada">Luchada</option>
-                            <option value="Texturación">Texturación</option>
-                            <option disabled>Pintura A</option>
-                            <option value="Concreto">Concreto</option>
-                            <option value="Metálica">Metálica</option>
-                            <option value="Madera">Madera</option>
-                            <option value="Varas">Varas</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Estado Conservación</p>
-                        <select id="estConserv">
-                            <option value="0"></option>
-                            <option value="Año de Construcción">Año de Construcción</option>
-                            <option value="Año de refacción">Año de refacción</option>
-                            <option value="Edad Efectiva">Edad Efectiva</option>
-                            <option value="Nro de Planta">Nro de Planta</option>
-                            <option value="Nro de Vivienda">Nro de Vivienda</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Techo</p>
-                        <select id="techoConst">
-                            <option value="0"></option>
-                            <option value="Madera-teja">Madera-teja</option>
-                            <option value="Placa-teja">Placa-teja</option>
-                            <option value="Platabanda">Platabanda</option>
-                            <option value="Tejas-riple">Tejas-riple</option>
-                            <option value="Aluminio">Aluminio</option>
-                            <option value="Acerolit-Asbesto">Acerolit-Asbesto</option>
-                            <option value="Paca Tabelon">Paca Tabelon</option>
-                            <option value="Placa nevada">Placa nevada</option>
-                            <option value="Losacero">Losacero</option>
-                            <option value="Zinc">Zinc</option>
-                            <option value="Cana teja">Cana teja</option>
-                            <option value="Cielo raso">Cielo raso</option>
-                            <option value="Raso laminas">Raso laminas</option>
-                            <option value="Machimbre">Machimbre</option>
-                            <option value="Policarbonato">Policarbonato</option>P
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Pisos</p>
-                        <select id="pisosConst">
-                            <option value="0"></option>
-                            <option value="Lujoso">Lujoso</option>
-                            <option value="Baldosas/Terracota">Baldosas/Terracota</option>
-                            <option value="Cerámica">Cerámica</option>
-                            <option value="Granito">Granito</option>
-                            <option value="Mosaico">Mosaico</option>
-                            <option value="Cemento olor">Cemento olor</option>
-                            <option value="Cemento rustico">Cemento rustico</option>
-                            <option value="Vinil">Vinil</option>
-                            <option value="Porcelanato">Porcelanato</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Piezas sanitarias</p>
-                        <select id="piezConst">
-                            <option value="0"></option>
-                            <option value="Porcelana Fina">Porcelana Fina</option>
-                            <option value="Porcelana Econ">Porcelana Econ</option>
-                            <option value="Bañera">Bañera</option>
-                            <option value="Calentador">Calentador</option>
-                            <option value="W.C.">W.C.</option>
-                            <option value="Bidet">Bidet</option>
-                            <option value="Lavamanos">Lavamanos</option>
-                            <option value="Ducha">Ducha</option>
-                            <option value="Urinario">Urinario</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Ventanas</p>
-                        <select id="ventConst">
-                            <option value="0"></option>
-                            <option value="Vetanal">Vetanal</option>
-                            <option value="Celosial">Celosial</option>
-                            <option value="Corredora">Corredora</option>
-                            <option value="Basculante">Basculante</option>
-                            <option value="Batiente">Batiente</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Puertas</p>
-                        <select id="puertConst">
-                            <option value="0"></option>
-                            <option value="Entamborada Fina">Entamborada Fina</option>
-                            <option value="Ent. Economica">Ent. Economica</option>
-                            <option value="Madera cepillada">Madera cepillada</option>
-                            <option value="Hierro">Hierro</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Instal. Electricas</p>
-                        <select id="instElect">
-                            <option value="0"></option>
-                            <option value="Embutidas">Embutidas</option>
-                            <option value="Externa">Externa</option>
-                            <option value="Industrial">Industrial</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Ambientes</p>
-                        <select id="ambConst">
-                            <option value="0"></option>
-                            <option value="Dormitorio">Dormitorio</option>
-                            <option value="Comedor">Comedor</option>
-                            <option value="Sala">Sala</option>
-                            <option value="Baños">Baños</option>
-                            <option value="Cocina">Cocina</option>
-                            <option value="Servicio">Servicio</option>
-                            <option value="Oficina">Oficina</option>
-                            <option value="Garaje">Garaje</option>
-                            <option value="Estacionamiento">Estacionamiento</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Complementos</p>
-                        <select id="compConst">
-                            <option value="0"></option>
-                            <option value="Ascensor">Ascensor</option>
-                            <option value="Aire Acondici.">Aire Acondici.</option>
-                            <option value="Rejas">Rejas</option>
-                            <option value="Closets">Closets</option>
-                            <option value="Porcelana">Porcelana</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Regimen</p>
-                        <select id="regInmue">
-                            <option value="0"></option>
-                            <option value="Propiedad Horizontal">Propiedad Horizontal</option>
-                            <option value="Condominio">Condominio</option>
-                            <option value="Sucesion">Sucesion</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Observaciones</p>
-                        <textarea id="obsConst"></textarea>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <table border="1px" class="taConst">
-            <tr>
-                <td colspan="3">
-                    <p class="h1">DATOS DE PROTOCOLIZACION DEL INMUEBLE</p>
-                </td>
-            </tr>
-            <tr>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Documento Debidamente:</p>
-                        <input type="text" id="docDebConst"/>
-                    </div>
-                </td>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Dirección:</p>
-                        <input type="text" id="direcProtConst"/>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Numero:</p>
-                        <input type="text" id="numProtConst"/>
-                    </div>
-                </td>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Tomo:</p>
-                        <input type="text" id="tomoProtConst"/>
-                    </div>
-                </td>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Folio:</p>
-                        <input type="text" id="folioProtConst"/>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Protocolo:</p>
-                        <select id="protoConst">
-                            <option value="No Aplica">No Aplica</option>
-                            <option value="Primero">Primero</option>
-                            <option value="Segundo">Segundo</option>
-                            <option value="Tercero">Tercero</option>
-                        </select>
-                    </div>
-                </td>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Trimestre:</p>
-                        <select id="trimProtConst">
-                            <option value="No Aplica">No Aplica</option>
-                            <option value="Primero">Primero</option>
-                            <option value="Segundo">Segundo</option>
-                            <option value="Tercero">Tercero</option>
-                            <option value="Tercero">No Aplica</option>
-                        </select>
-                    </div>
-                </td>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Fecha:</p>
-                        <input type="date" id="dateProtConst"/>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Valor del Inmueble:</p>
-                        <input type="text" id="valorProtConst"/>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        
+        
         <div class="btnSig1">
             <input type="button" value="Siguiente" onclick="btnfLind()" class=" botones btn btn-primary" />
         </div>
@@ -748,189 +1309,7 @@ class constancias{
                 </td>
             </tr>
         </table>
-        <table border="1px" class="taConst">
-            <tr>
-                <td colspan="3" class="tiConst">
-                    <p class="h1">Servicios</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Acueducto:</p>
-                        <select class="codigo2" id="Acue">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Acueducto Rural:</p>
-                        <select class="codigo2" id="AcueRural">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Aguas Subterráneas:</p>
-                        <select class="codigo2" id="AguasSub">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Aguas Servidas:</p>
-                        <select class="codigo2" id="AguasServ">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Pavimento Flexible:</p>
-                        <select class="codigo2" id="PavFlex">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Pavimento Rígido:</p>
-                        <select class="codigo2" id="PavRig">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Vía Engranzonada:</p>
-                        <select class="codigo2" id="viaEngran">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Acera:</p>
-                        <select class="codigo2" id="acera">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Alumbrado Público:</p>
-                        <select class="codigo2" id="AlumPublico">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Aseo:</p>
-                        <select class="codigo2" id="aseo">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Transporte Público:</p>
-                        <select class="codigo2" id="transPublic">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Pozo Séptico:</p>
-                        <select class="codigo2" id="pozoSept">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Electricidad Residencial:</p>
-                        <select class="codigo2" id="ElectResidencial">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Electricidad Industrial:</p>
-                        <select class="codigo2" id="ElectriIndust">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Línea Telefónica:</p>
-                        <select class="codigo2" id="linTelf">
-                            <option value="0"></option>
-                            <option value="si">Si</option>
-                            <option value="no">No</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td class="tdConst">
-                    <div class="campDat">
-                        <p class="negritas">Numero Expediente:</p>
-                        <input type="text" id="nuExp" onchange="veriExpediente()" />
-                    </div>
-                </td>
-                <td>
-                    <div class="campDat">
-                        <p class="negritas">Aplicar:</p>
-                        <select id="multa"/>
-                            <option value="No Aplica">No Aplica</option>
-                            <option value="Multa">Multa</option>
-                            <option value="Empadronamiento">Empadronamiento</option>
-                        </select>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        
         <div id="campOculto"></div>
             <input type="hidden" id="parte2" value="'.$parte2[0].'|'.$parte2[1].'|'.$parte2[2].'|'.$parte2[3].'|'.$parte2[4].'|'.$parte2[5].'|'.$parte2[6].'|'.$parte2[7].'|'.$parte2[8].'|'.$parte2[9].'|'.$parte2[10].'|'.$parte2[11].'|'.$parte2[12].'|'.$parte2[13].'|'.$parte2[14].'|'.$parte2[15].'|'.$parte2[16].'|'.$parte2[17].'|'.$parte2[18].'|'.$parte2[19].'|'.$parte2[20].'|'.$parte2[21].'|'.$parte2[22].'|'.$parte2[23].'|'.$parte2[24].'" />
             <input type="hidden" id="parte1" value="'.$this->parte1.'"/>
@@ -1056,335 +1435,461 @@ class constancias{
     }
     function actGeneral(){
         echo'
-            <table border="1px" class="taConst">
-                <tr>
-                    <td class="tiConst">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <b class="h1">LINDEROS SEGÚN INSPECCIÓN</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
                         <select id="puntNorte">
                             <option value="Norte">Norte</option>
                             <option value="NorteEste">NortEste</option>
                         </select>
-                        <input type="number" class="numero" value="" id="nortGen" />
-                        <select id="uniNorte">
-                            <option></option>
-                            <option value="m">m</option>
-                            <option value="Lq">Lq</option>
-                            <option value="Ld">Ld</option>
-                            <option value="otros">otros</option>
-                        </select>
-                        <p class="negritas">Alinderado</p>
-                        <input type="text" id="alindNort" />
-                    </td>
-                    <td class="tiConst">
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="number" class="text" value="" id="nortGen" />
+                                <select id="uniNorte">
+                                    <option></option>
+                                    <option value="m">m</option>
+                                    <option value="Lq">Lq</option>
+                                    <option value="Ld">Ld</option>
+                                    <option value="otros">otros</option>
+                                </select>
+                            </div>
+                            <div class="col-8">
+                                <b>Alinderado</b>
+                                <input type="text" class="text" id="alindNort" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
                         <select id="puntSur">
                             <option value="Sur">Sur</option>
                             <option value="SurEste">SurEste</option>
                         </select>
-                        <input type="number" class="numero" id="surGen" />
-                        <select id="uniSur">
-                            <option></option>
-                            <option value="m">m</option>
-                            <option value="Lq">Lq</option>
-                            <option value="Ld">Ld</option>
-                            <option value="otros">otros</option>
-                        </select>
-                        <p class="negritas">Alinderado</p>
-                        <input type="text" id="alindSur" />
-                    </td>
-                    <td class="tiConst">
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="number" class="text" id="surGen" />
+                                <select id="uniSur">
+                                    <option></option>
+                                    <option value="m">m</option>
+                                    <option value="Lq">Lq</option>
+                                    <option value="Ld">Ld</option>
+                                    <option value="otros">otros</option>
+                                </select>
+                            </div>
+                            <div class="col-8">
+                                <b>Alinderado</b>
+                                <input type="text" class="text" id="alindSur" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
                         <select id="puntEste">
                             <option value="Este">Este</option>
                             <option value="SurOeste">SurOeste</option>
                         </select>
-                        <input type="number" class="numero" id="esteGen" />
-                        <select id="uniEste">
-                            <option></option>
-                            <option value="m">m</option>
-                            <option value="Lq">Lq</option>
-                            <option value="Ld">Ld</option>
-                            <option value="otros">otros</option>
-                        </select>
-                        <p class="negritas">Alinderado</p>
-                        <input type="text" id="alindEste" />
-                    </td>
-                    <td class="tiConst">
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="number" class="text" id="esteGen" />
+                                <select id="uniEste">
+                                    <option></option>
+                                    <option value="m">m</option>
+                                    <option value="Lq">Lq</option>
+                                    <option value="Ld">Ld</option>
+                                    <option value="otros">otros</option>
+                                </select>
+                            </div>
+                            <div class="col-8">
+                                <b>Alinderado</b>
+                                <input type="text" class="text" id="alindEste" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
                         <select id="puntOeste">
                             <option value="Oeste">Oeste</option>
                             <option value="NortOeste">NortOeste</option>
                         </select>
-                        <input type="number" class="numero" id="oesteGen" />
-                        <select id="uniOeste">
-                            <option></option>
-                            <option value="m">m</option>
-                            <option value="Lq">Lq</option>
-                            <option value="Ld">Ld</option>
-                            <option value="otros">otros</option>
-                        </select>
-                        <p class="negritas">Alinderado</p>
-                        <input type="text" id="alindOeste" />
-                    </td>
-                </tr>
-            </table>
-            <table border="1px" class="taConst">
-                <tr>
-                    <td >
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="number" class="text" id="oesteGen" />
+                                <select id="uniOeste">
+                                    <option></option>
+                                    <option value="m">m</option>
+                                    <option value="Lq">Lq</option>
+                                    <option value="Ld">Ld</option>
+                                    <option value="otros">otros</option>
+                                </select>
+                            </div>
+                            <div class="col-8">
+                                <b>Alinderado</b>
+                                <input type="text" class="text" id="alindOeste" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
                         <div class="campDat">
-                            <p class="negritas">Área Total</p>
-                            <input type="number" id="arTotal" >
+                            <b>Área Total</b>
+                            <input type="text" class="text" id="arTotal" >
                             <select id="uniAreaT">
                                 <option value="No Aplica">No Aplica</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
                         </div>
-                    </td>
-                    <td >
+                    </div>
+                    <div class="col">
                         <div class="campDat">
-                            <p class="negritas">Niveles de Construcción</p>
-                            <input type="text" id="NivConstTotal" >
+                            <b>Niveles de Construcción</b>
+                            <input type="text" class="text" id="NivConstTotal" >
                         </div>
-                    </td>
-                    <td >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
                         <div class="campDat">
-                            <p class="negritas">Área de Construcción</p>
-                            <input type="number" id="arConstTotal" >
+                            <b>Área de Construcción</b>
+                            <input type="text" class="text" id="arConstTotal" >
                             <select id="uniAreaConst">
                                 <option value="No Aplica">No Aplica</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
                         </div>
-                    </td>
-                </tr>
-            </table>
-            <table border="1px" class="taConst">
-                <tr>
-                    <td>
+                    </div>
+                    <div class="col">
                         <input type="button" class="btn btn-success" onclick="calLind()" value="Calcular">
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
         ';
     }
     function actPosVenta(){
         echo'
-            <table border="1px" class="taConst">
-                <tr>
-                    <td class="tiConst">
-                        <select id="puntNorte2">
-                            <option value="Norte">Norte</option>
-                            <option value="NorteEste">NortEste</option>
-                        </select>
-                        <input type="number" id="nortPosVenta" />
-                        <select id="uniNorte2">
-                            <option></option>
-                            <option value="m">m</option>
-                            <option value="Lq">Lq</option>
-                            <option value="Ld">Ld</option>
-                            <option value="otros">otros</option>
-                        </select>
-                        <p class="negritas">Alinderado</p>
-                        <input type="text" id="alindPosNort" />
-                    </td>
-                    <td class="tiConst">
-                        <select id="puntSur2">
-                            <option value="Sur">Sur</option>
-                            <option value="SurEste">SurEste</option>
-                        </select>
-                        <input type="number" id="surPosVenta" />
-                        <select id="uniSur2">
-                            <option></option>
-                            <option value="m">m</option>
-                            <option value="Lq">Lq</option>
-                            <option value="Ld">Ld</option>
-                            <option value="otros">otros</option>
-                        </select>
-                        <p class="negritas">Alinderado</p>
-                        <input type="text" id="alindPosSur" />
-                    </td>
-                    <td class="tiConst">
-                        <select id="puntEste2">
-                            <option value="Este">Este</option>
-                            <option value="SurOeste">SurOeste</option>
-                        </select>
-                        <input type="number" id="estePosVenta" />
-                        <select id="uniEste2">
-                            <option></option>
-                            <option value="m">m</option>
-                            <option value="Lq">Lq</option>
-                            <option value="Ld">Ld</option>
-                            <option value="otros">otros</option>
-                        </select>
-                        <p class="negritas">Alinderado</p>
-                        <input type="text" id="alindPosEste" />
-                    </td>
-                    <td class="tiConst">
-                        <select id="puntOeste2">
-                            <option value="Oeste">Oeste</option>
-                            <option value="NortOeste">NortOeste</option>
-                        </select>
-                        <input type="number" id="oestePosVenta" />
-                        <select id="uniOeste2">
-                            <option></option>
-                            <option value="m">m</option>
-                            <option value="Lq">Lq</option>
-                            <option value="Ld">Ld</option>
-                            <option value="otros">otros</option>
-                        </select>
-                        <p class="negritas">Alinderado</p>
-                        <input type="text" id="alindPosOeste" />
-                    </td>
-                </tr>
-            </table>
-            <table border="1px" class="taConst">
-                <tr>
-                    <td >
-                        <div class="campDat">
-                            <p class="negritas">Área Total</p>
-                            <input type="number" id="arTotal2" >
-                            <select id="uniAreaT2">
-                                <option value="No Aplica">No Aplica</option>
-                                <option value="m2">m2</option>
-                                <option value="Ha">Ha</option>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <b class="h1">LINDEROS POSIBLE VENTA</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <select id="puntNorte2">
+                        <option value="Norte">Norte</option>
+                        <option value="NorteEste">NortEste</option>
+                    </select>
+                </div>
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" class="text" id="nortPosVenta" />
+                            <select id="uniNorte2">
+                                <option></option>
+                                <option value="m">m</option>
+                                <option value="Lq">Lq</option>
+                                <option value="Ld">Ld</option>
+                                <option value="otros">otros</option>
                             </select>
                         </div>
-                    </td>
-                    <td >
-                        <div class="campDat">
-                            <p class="negritas">Niveles de Construcción</p>
-                            <input type="text" id="NivConstTotal2" >
+                        <div class="col-8">
+                            <b>Alinderado</b>
+                            <input type="text" class="text" id="alindPosNort" />
                         </div>
-                    </td>
-                    <td >
-                        <div class="campDat">
-                            <p class="negritas">Área de Construcción</p>
-                            <input type="number" id="arConstTotal2" >
-                            <select id="uniAreaConst2">
-                                <option value="No Aplica">No Aplica</option>
-                                <option value="m2">m2</option>
-                                <option value="Ha">Ha</option>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <select id="puntSur2">
+                        <option value="Sur">Sur</option>
+                        <option value="SurEste">SurEste</option>
+                    </select>
+                </div>
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" class="text" id="surPosVenta" />
+                            <select id="uniSur2">
+                                <option></option>
+                                <option value="m">m</option>
+                                <option value="Lq">Lq</option>
+                                <option value="Ld">Ld</option>
+                                <option value="otros">otros</option>
                             </select>
                         </div>
-                    </td>
-                </tr>
-            </table>
-            <table border="1px" class="taConst">
-                <tr>
-                    <td>
-                        <input type="button" class="btn btn-success" onclick="calLindVenta()" value="Calcular">
-                    </td>
-                </tr>
-            </table>
+                        <div class="col-8">
+                            <b>Alinderado</b>
+                            <input type="text" class="text" id="alindPosSur" />
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <select id="puntEste2">
+                        <option value="Este">Este</option>
+                        <option value="SurOeste">SurOeste</option>
+                    </select>
+                </div>
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" class="text" id="estePosVenta" />
+                            <select id="uniEste2">
+                                <option></option>
+                                <option value="m">m</option>
+                                <option value="Lq">Lq</option>
+                                <option value="Ld">Ld</option>
+                                <option value="otros">otros</option>
+                            </select>
+                        </div>
+                        <div class="col-8">
+                            <b>Alinderado</b>
+                            <input type="text" class="text" id="alindPosEste" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <select id="puntOeste2">
+                        <option value="Oeste">Oeste</option>
+                        <option value="NortOeste">NortOeste</option>
+                    </select>
+                </div>
+                <div class="col-10">
+                    <div class="row">
+                        <div class="col-4">
+                            <input type="text" class="text" id="oestePosVenta" />
+                            <select id="uniOeste2">
+                                <option></option>
+                                <option value="m">m</option>
+                                <option value="Lq">Lq</option>
+                                <option value="Ld">Ld</option>
+                                <option value="otros">otros</option>
+                            </select>
+                        </div>
+                        <div class="col-8">
+                            <b>Alinderado</b>
+                            <input type="text" class="text"id="alindPosOeste" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row" > 
+                <div class="col">
+                    <div class="campDat">
+                        <b>Área Total</b>
+                        <input type="text" class="text" id="arTotal2" >
+                        <select id="uniAreaT2">
+                            <option value="No Aplica">No Aplica</option>
+                            <option value="m2">m2</option>
+                            <option value="Ha">Ha</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="campDat">
+                        <b>Niveles de Construcción</b>
+                        <input type="text" class="text" id="NivConstTotal2" >
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="campDat">
+                        <b>Área de Construcción</b>
+                        <input type="text" class="text" id="arConstTotal2" >
+                        <select id="uniAreaConst2">
+                            <option value="No Aplica">No Aplica</option>
+                            <option value="m2">m2</option>
+                            <option value="Ha">Ha</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <input type="button" class="btn btn-success" onclick="calLindVenta()" value="Calcular">
+                </div>
+            </div>
+        </div>
+            
         ';
     }
     function SecDoc(){
         echo'
-            <table border="1px" class="taConst">
-                <tr>
-                    <td class="tiConst">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <p class="h1">LINDEROS SEGUN DOCUMENTO</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
                         <select id="puntNorte3">
                             <option value="Norte">Norte</option>
                             <option value="NorteEste">NortEste</option>
                         </select>
-                        <input type="number" id="nortSecDoc" />
-                        <select id="uniNorte3">
-                            <option></option>
-                            <option value="m">m</option>
-                            <option value="Lq">Lq</option>
-                            <option value="Ld">Ld</option>
-                            <option value="otros">otros</option>
-                        </select>
-                        <p class="negritas">Alinderado</p>
-                        <input type="text" id="alindSecNorte" />
-                    </td>
-                    <td class="tiConst">
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input type="number" class="text" id="nortSecDoc" />
+                                <select id="uniNorte3">
+                                    <option></option>
+                                    <option value="m">m</option>
+                                    <option value="Lq">Lq</option>
+                                    <option value="Ld">Ld</option>
+                                    <option value="otros">otros</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-8">
+                                <b>Alinderado</b>
+                                <input type="text" class="text" id="alindSecNorte" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
                         <select id="puntSur3">
                             <option value="Sur">Sur</option>
                             <option value="SurEste">SurEste</option>
                         </select>
-                        <input type="number" id="surSecDoc" />
-                        <select id="uniSur3">
-                            <option></option>
-                            <option value="m">m</option>
-                            <option value="Lq">Lq</option>
-                            <option value="Ld">Ld</option>
-                            <option value="otros">otros</option>
-                        </select>
-                        <p class="negritas">Alinderado</p>
-                        <input type="text" id="alindSecSur" />
-                    </td>
-                    <td class="tiConst">
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input type="number" class="text" id="surSecDoc" />
+                                <select id="uniSur3">
+                                    <option></option>
+                                    <option value="m">m</option>
+                                    <option value="Lq">Lq</option>
+                                    <option value="Ld">Ld</option>
+                                    <option value="otros">otros</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-8">
+                                <b >Alinderado</b>
+                                <input type="text" class="text" id="alindSecSur" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
                         <select id="puntEste3">
                             <option value="Este">Este</option>
                             <option value="SurOeste">SurOeste</option>
                         </select>
-                        <input type="number" id="esteSecDoc" />
-                        <select id="uniEste3">
-                            <option></option>
-                            <option value="m">m</option>
-                            <option value="Lq">Lq</option>
-                            <option value="Ld">Ld</option>
-                            <option value="otros">otros</option>
-                        </select>
-                        <p class="negritas">Alinderado</p>
-                        <input type="text" id="alindSecEste" />
-                    </td>
-                    <td class="tiConst">
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input type="number" class="text" id="esteSecDoc" />
+                                <select id="uniEste3">
+                                    <option></option>
+                                    <option value="m">m</option>
+                                    <option value="Lq">Lq</option>
+                                    <option value="Ld">Ld</option>
+                                    <option value="otros">otros</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-8">
+                                <b>Alinderado</b>
+                                <input type="text" class="text" id="alindSecEste" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2">
                         <select id="puntOeste3">
                             <option value="Oeste">Oeste</option>
                             <option value="NortOeste">NortOeste</option>
                         </select>
-                        <input type="number" id="oesteSecDoc" />
-                        <select id="uniOeste3">
-                            <option></option>
-                            <option value="m">m</option>
-                            <option value="Lq">Lq</option>
-                            <option value="Ld">Ld</option>
-                            <option value="otros">otros</option>
-                        </select>
-                        <p class="negritas">Alinderado</p>
-                        <input type="text" id="alindSecOeste" />
-                    </td>
-                </tr>
-            </table>
-            <table border="1px" class="taConst">
-                <tr>
-                    <td >
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input type="number" class="text" id="oesteSecDoc" />
+                                <select id="uniOeste3">
+                                    <option></option>
+                                    <option value="m">m</option>
+                                    <option value="Lq">Lq</option>
+                                    <option value="Ld">Ld</option>
+                                    <option value="otros">otros</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-8">
+                                <b>Alinderado</b>
+                                <input type="text" class="text" id="alindSecOeste" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
                         <div class="campDat">
-                            <p class="negritas">Área Total</p>
-                            <input type="number" id="arTotal3" >
+                            <b>Área Total</b>
+                            <input type="text" class="text" id="arTotal3" >
                             <select id="uniAreaT3">
                                 <option value="No Aplica">No Aplica</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
                         </div>
-                    </td>
-                    <td >
+                    </div>
+                    <div class="col">
                         <div class="campDat">
-                            <p class="negritas">Niveles de Construcción</p>
-                            <input type="text" id="NivConstTotal3" >
+                            <b>Niveles de Construcción</b>
+                            <input type="text" class="text" id="NivConstTotal3" >
                         </div>
-                    </td>
-                    <td >
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-7">
                         <div class="campDat">
-                            <p class="negritas">Área de Construcción</p>
-                            <input type="number" id="arConstTotal3" >
+                            <b>Área de Construcción</b>
+                            <input type="text" id="arConstTotal3" >
                             <select id="uniAreaConst3">
                                 <option value="No Aplica">No Aplica</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
                         </div>
-                    </td>
-                </tr>
-            </table>
-            <table border="1px" class="taConst">
-                <tr>
-                    <td>
+                    </div>
+                    <div class="col-5">
                         <input type="button" class="btn btn-success" onclick="calLindDoc()" value="Calcular">
-                    </td>
-                </tr>
-            </table>
+                    </div>
+                </div>
+            </div>
         ';
     }
     function guardConst(){
@@ -1541,33 +2046,7 @@ class constancias{
                 <img src="./assets/guard.png"/>
             </div>
             <p>Para imprimir la constancia debe ingresar los datos de la Factura</p>
-            <table border="1px" class="taConst">
-                <tr>
-                    
-                    <td class="tdConst">
-                        <div class="campDat">
-                            <p class="negritas">Monto:</p>
-                            <input type="text" id="montoFact"/>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="tdConst">
-                        <div class="campDat">
-                            <p class="negritas">Numero Factura:</p>
-                            <input type="number" id="numFact" onchange="btnVeriFact()"/>
-                        </div>
-                    <td class="tdConst">
-                        <div class="campDat">
-                            <p class="negritas">Fecha:</p>
-                            <input type="date" id="fechFact"/>
-                            <input type="hidden" id="idInmueble" value="'.$idInmueble.'">
-                            <input type="hidden" id="idProp" value="'.$idProp.'">
-                            <input type="hidden" id="nuExp" value="'.$idExpediente.'" />
-                            <input type="hidden" id="operacion" value="Nueva Inscripción">
-                        </div>
-                    </td>
-                </tr>';
+            ';
         //GENERAL
             $sqlIdGen = "SELECT * from linderos_general where id=".$idLindGen."";
             $resGen=$link->query($sqlIdGen);

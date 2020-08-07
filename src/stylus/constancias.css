@@ -52,3 +52,12 @@
 .tiConst .numero{
     width: 95px;
 }
+.forms{
+    margin-top: 2%;
+}
+.forms .row{
+    margin-bottom: 2%;
+}
+.row .text{
+    width: 150px;
+}
