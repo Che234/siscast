@@ -57,6 +57,12 @@ if(isset($_POST["accion"])){
     }else{
         $nconst->codTelf2= "nada";
     }
+    if(isset($_POST["telfFull2"])){
+        $nconst->telfFull2= $_POST["telfFull2"];
+    }
+    if(isset($_POST["telfFull"])){
+        $nconst->telfFull = $_POST["telfFull"];
+    }
     if(isset($_POST["numTelf2"])){
         $nconst->numTelf2= $_POST["numTelf2"];
     }else{
@@ -675,14 +681,46 @@ if(isset($_POST["accion"])){
     }
 
 //ACCIONES
+    //PROPIETARIO
     if($accion=="formProp"){
         $nconst->fPropietario();
     }
+    if($accion=="guardProp"){
+        $nconst->guardProp();
+    }
+    //INMUEBLE
     if($accion=="formInmue"){
         $nconst->fInmueble();
     }
+    if($accion=="guarInmue"){
+        $nconst->guarInmue();
+    }
+    //CARACTERISTICAS DEL TERRENO
     if($accion=="formCarTerr"){
         $nconst->fCarTerreno();
+    }
+    if($accion=="guarCarTerr"){
+        $nconst->guarCarTerr();
+    }
+    //CARACTERISTICAS DE LA CONSTRUCCION
+    if($accion=="guarCaracConst"){
+        $nconst->guarCaracConst();
+    }
+    //PROTOCOLIZACION DEL INMUEBLE
+    if($accion=="guarProtInmue"){
+        $nconst->guarProtInmue();
+    }
+    //LINDEROS SEGUN INSPECCION
+    if($accion=="guarGeneral"){
+        $nconst->guarGeneral();
+    }
+    //LINDEROS SEGUN DOCUMENTO
+    if($accion=="guarSecDoc"){
+        $nconst->guarSecDoc();
+    }
+    //LINDEROS POSIBLE VENTA
+    if($accion=="guarPosVenta"){
+        $nconst->guarPosVenta();
     }
     if($accion=="fConserv"){
         $nconst->fConserv();

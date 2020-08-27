@@ -131,6 +131,8 @@ class constancias{
         $puntSur3 = "";
         $puntEste3 = "";
         $puntOeste3 = "";
+        $telfFull = "";
+        $telfFull2 = "";
     }
         
     function secNuvIns(){
@@ -226,6 +228,7 @@ class constancias{
             </div>
         ';
     }
+    //PROPIETARIOS
     function fPropietario(){
         
         echo'
@@ -299,10 +302,18 @@ class constancias{
             </div>
         </div>
         <div class="btnSig1">
-            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            <input type="button" value="Guardar" onclick="btnGuarProp()" class="botones btn btn-primary" />
         </div>
         <div id="campGeneral2"></div>';
     }
+    function guardProp(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $propSql = "INSERT INTO temp_propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab)value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFull."','".$this->direcProp."','".$this->telfFull2."')";
+        $link->query($propSql);
+        echo'PROCESO COMPLETADO CON EXITO';
+    }
+    //INMUEBLE
     function fInmueble(){
         echo'
         <div class="container-fluid">
@@ -343,17 +354,25 @@ class constancias{
                 </div>
                 <div class="col">
                     <div class="campDat">
-                        <p class="negritas">Dirección del inmueble</p>
+                        <b>Dirección del inmueble</b>
                         <input type="text" class="direc1" id="direcInmue" />
                     </div>
                 </div>
             </div>
         </div>
         <div class="btnSig1">
-            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            <input type="button" value="Guardar" onclick="btnGuarInmue()" class="botones btn btn-primary" />
         </div>
         ';
     }
+    function guarInmue(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $inmueSql = "INSERT INTO temp_inmueble(direccion,parroquia,sector,ambito)value('".$this->direcInmue."','".$this->parrInmue."','".$this->secInmue."','".$this->ambInmue."')";
+        $link->query($inmueSql);
+        echo'PROCESO COMPLETADO CON EXITO';
+    }
+    //CARACTERISTICAS DEL TERRENO
     function fCarTerreno(){
         echo'
         <div class="container-flud">
@@ -418,9 +437,17 @@ class constancias{
             </div>
         </div>
         <div class="btnSig1">
-            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            <input type="button" value="Guardar" onclick="btnGuarCarTerr()" class="botones btn btn-primary" />
         </div>';
     }
+    function guarCarTerr(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $carcTerrSql = "INSERT INTO temp_carainmue(topografia,forma,uso,tenencia)value('".$this->topoConst."','".$this->formaConst."','".$this->usoConst."','".$this->tenenConst."')";
+        $link->query($carcTerrSql);
+        echo'PROCESO COMPLETADO CON EXITO';
+    }
+    //CARACTERISTICAS DE LA CONSTRUCCION
     function fcaracConst(){
         echo'
         <div class="container-fluid">
@@ -432,7 +459,7 @@ class constancias{
             <div class="row">
                 <div class="col">
                     <div class="campDat">
-                        <p class="negritas">Destino</p>
+                        <b>Destino</b>
                         <select id="destConst">
                             <option value="0"></option>
                             <option value="Unifamiliar">Unifamiliar</option>
@@ -448,7 +475,7 @@ class constancias{
                 </div>
                 <div class="col">
                     <div class="campDat">
-                        <p class="negritas">Estructura</p>
+                        <b>Estructura</b>
                         <select id="estConst">
                             <option value="0"></option>
                             <option value="Concreto">Concreto</option>
@@ -463,7 +490,7 @@ class constancias{
                 </div>
                 <div class="col">
                     <div class="campDat">
-                        <p class="negritas">Paredes</p>
+                        <b>Paredes</b>
                         <select id="pareTipoInmue">
                             <option value="">Tipo</option>
                             <option value="Concreto">Ladrillo</option>
@@ -487,7 +514,7 @@ class constancias{
             <div class="row">
                 <div class="col">
                     <div class="campDat">
-                        <p class="negritas">Pintura</p>
+                        <b>Pintura</b>
                         <select id="pintConst">
                             <option value="0"></option>
                             <option disabled>Pintura C</option>
@@ -507,7 +534,7 @@ class constancias{
                 </div>
                 <div class="col">
                     <div class="campDat">
-                        <p class="negritas">Techo</p>
+                        <b>Techo</b>
                         <select id="techoConst">
                             <option value="0"></option>
                             <option value="Madera-teja">Madera-teja</option>
@@ -530,7 +557,7 @@ class constancias{
                 </div>
                 <div class="col">
                     <div class="campDat">
-                        <p class="negritas">Pisos</p>
+                        <b>Pisos</b>
                         <select id="pisosConst">
                             <option value="0"></option>
                             <option value="Lujoso">Lujoso</option>
@@ -547,7 +574,7 @@ class constancias{
                 </div>
                 <div class="col">
                     <div class="campDat">
-                        <p class="negritas">Ventanas</p>
+                        <b>Ventanas</b>
                         <select id="ventConst">
                             <option value="0"></option>
                             <option value="Vetanal">Vetanal</option>
@@ -562,7 +589,7 @@ class constancias{
             <div class="row">
                 <div class="col">
                     <div class="campDat">
-                        <p class="negritas">Instal. Electricas</p>
+                        <b>Instal. Electricas</b>
                         <select id="instElect">
                             <option value="0"></option>
                             <option value="Embutidas">Embutidas</option>
@@ -573,7 +600,7 @@ class constancias{
                 </div>
                 <div class="col">
                     <div class="campDat">
-                        <p class="negritas">Regimen</p>
+                        <b>Regimen</b>
                         <select id="regInmue">
                             <option value="0"></option>
                             <option value="Propiedad Horizontal">Propiedad Horizontal</option>
@@ -584,17 +611,24 @@ class constancias{
                 </div>
                 <div class="col">
                     <div class="campDat">
-                        <p class="negritas">Observaciones</p>
+                        <b>Observaciones</b>
                         <textarea id="obsConst"></textarea>
                     </div>
                 </div>
             </div>
         </div>
         <div class="btnSig1">
-            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            <input type="button" value="Guardar" onclick="btnGuarCaracConst()" class="botones btn btn-primary" />
         </div>
         ';
     }
+    function guarCaracConst(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $caracConstSql= "INSERT INTO temp_caraconst(destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,ventanas,insta_electricas,observ,Regimen)value('".$this->destConst."','".$this->estConst."','".$this->pareTipoInmue."','".$this->pareAcaInmue."','".$this->pintConst."','".$this->techoConst."','".$this->pisosConst."','".$this->ventConst."','".$this->instElect."','".$this->obsConst."','".$this->regInmue."')";
+        $link->query($caracConstSql);
+    }
+    //PROTOCOLIZACION DEL INMUEBLE
     function fprotInmue(){
         echo'
         <div class="container-fluid">
@@ -606,7 +640,7 @@ class constancias{
             <div class="row">
                 <div class="col">
                     <div class="campDat">
-                        <p class="negritas">Documento Debidamente:</p>
+                        <b>Documento Debidamente:</p>
                         <input type="text" id="docDebConst"/>
                     </div>
                 </div>
@@ -678,8 +712,15 @@ class constancias{
             </div>
         </div>
         <div class="btnSig1">
-            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            <input type="button" value="Guardar" onclick="btnGuarProt()" class="botones btn btn-primary" />
         </div>';
+    }
+    function guarProtInmue(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $protInmueSql ="INSERT INTO temp_datos_protocolizacion(documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble)value('".$this->docDebConst."','".$this->direcProtConst."','".$this->numProtConst."','".$this->tomoProtConst."','".$this->folioProtConst."','".$this->protoConst."','".$this->trimProtConst."','".$this->dateProtConst."','".$this->valorProtConst."')";
+        $link->query($protInmueSql);
+        echo 'PROCESO COMPLETADO CON EXITO';
     }
     function fConserv(){
         echo'
@@ -968,6 +1009,7 @@ class constancias{
             </div>
         ';
     }
+    //SERVICIOS
     function fServicios(){
         echo'
         <div class="container-fluid">
@@ -1138,8 +1180,11 @@ class constancias{
             </div>
         </div>
         <div class="btnSig1">
-            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            <input type="button" value="Siguiente" onclick="btnGuarServicios()" class="botones btn btn-primary" />
         </div>';
+    }
+    function gServicios(){
+
     }
     function fExpedient(){
         echo'
@@ -1433,6 +1478,7 @@ class constancias{
         }
 
     }
+    //LINDERO SEGUN INSPECCIÓN
     function actGeneral(){
         echo'
             <div class="container-fluid">
@@ -1583,8 +1629,47 @@ class constancias{
                     </div>
                 </div>
             </div>
+            <div class="btnSig1">
+                <input type="button" value="Guardar" onclick="btnGuarGeneral()" class="botones btn btn-primary" />
+            </div>
         ';
     }
+    function guarGeneral(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        if($this->puntNorte=="Norte"){
+            $Norte = $this->nortGen;
+            $norEste = "nada";
+        }else{
+            $Norte = "nada";
+            $norEste = $this->nortGen;
+        }
+        if($this->puntSur=="Sur"){
+            $Sur = $this->surGen;
+            $SurEste = "nada";
+        }else{
+            $Sur = "nada";
+            $SurEste = $this->surGen;
+        }
+        if($this->puntEste=="Este"){
+            $Este = $this->esteGen;
+            $SurOeste = "nada";
+        }else{
+            $Este = "nada";
+            $SurOeste = $this->esteGen;
+        }
+        if($this->puntOeste=="Oeste"){
+            $Oeste = $this->oesteGen;
+            $NortOeste = "nada";
+        }else{
+            $Oeste = "nada";
+            $NortOeste = $this->oesteGen;
+        }
+        $lindGen = "INSERT INTO linderos_general(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte."','".$norEste."','".$Sur."','".$SurEste."','".$Este."','".$SurOeste."','".$Oeste."','".$NortOeste."','".$this->alindNort."','".$this->alindSur."','".$this->alindEste."','".$this->alindOeste."','".$this->arTotal."','".$this->uniAreaT."','".$this->NivConstTotal."','".$this->uniAreaConst."','".$this->arConstTotal."','".$this->uniNorte."','".$this->uniSur."','".$this->uniEste."','".$this->uniOeste."')";
+        $link->query($lindGen);
+        echo'PROCESO COMPLETADO CON EXITO';
+    }
+    //LINDEROS POSIBLE VENTA
     function actPosVenta(){
         echo'
 
@@ -1737,9 +1822,48 @@ class constancias{
                 </div>
             </div>
         </div>
-            
+        <div class="btnSig1">
+            <input type="button" value="Guardar" onclick="btnGuarPosVenta()" class="botones btn btn-primary" />
+        </div>
         ';
     }
+    function guarPosVenta(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        if($this->puntNorte2=="Norte"){
+            $Norte2 = $this->nortPosVenta;
+            $norEste2 = "nada";
+        }else{
+            $Norte2 = "nada";
+            $norEste2 = $this->nortPosVenta;
+        }
+        if($this->puntSur2=="Sur"){
+            $Sur2 = $this->surPosVenta;
+            $SurEste2 = "nada";
+        }else{
+            $Sur2 = "nada";
+            $SurEste2 = $this->surPosVenta;
+        }
+        if($this->puntEste2=="Este"){
+            $Este2 = $this->estePosVenta;
+            $SurOeste2 = "nada";
+        }else{
+            $Este2 = "nada";
+            $SurOeste2 = $this->estePosVenta;
+        }
+        if($this->puntOeste2=="Oeste"){
+            $Oeste2 = $this->oestePosVenta;
+            $NortOeste2 = "nada";
+        }else{
+            $Oeste2 = "nada";
+            $NortOeste2 = $this->oestePosVenta;
+        }
+        $lindPosVentaSql = "INSERT INTO temp_linderos_posible_venta(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte2."','".$norEste2."','".$Sur2."','".$SurEste2."','".$Este2."','".$SurOeste2."','".$Oeste2."','".$NortOeste2."','".$this->alindPosNort."','".$this->alindPosSur."','".$this->alindPosEste."','".$this->oestePosVenta."','".$this->arTotal2."','".$this->uniAreaT2."','".$this->NivConstTotal2."','".$this->uniAreaConst2."','".$this->arConstTotal2."','".$this->uniNorte2."','".$this->uniSur2."','".$this->uniEste2."','".$this->uniOeste2."')";
+        $link->query($lindPosVentaSql);
+        $idLindPosVenta = $link->insert_id;
+        echo'PROCESO COMPLETADO CON EXITO';
+    }
+    //LINDEROS SEGUN DOCUMENTO
     function SecDoc(){
         echo'
             <div class="container-fluid">
@@ -1890,7 +2014,46 @@ class constancias{
                     </div>
                 </div>
             </div>
+            <div class="btnSig1">
+                <input type="button" value="Guardar" onclick="btnGuarSecDoc()" class="botones btn btn-primary" />
+            </div>
         ';
+    }
+    function guarSecDoc(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        if($this->puntNorte3=="Norte"){
+            $Norte3 = $this->nortSecDoc;
+            $norEste3 = "nada";
+        }else{
+            $Norte3 = "nada";
+            $norEste3 = $this->nortSecDoc;
+        }
+        if($this->puntSur3=="Sur"){
+            $Sur3 = $this->surSecDoc;
+            $SurEste3 = "nada";
+        }else{
+            $Sur3 = "nada";
+            $SurEste3 = $this->surSecDoc;
+        }
+        if($this->puntEste3=="Este"){
+            $Este3 = $this->esteSecDoc;
+            $SurOeste3 = "nada";
+        }else{
+            $Este3 = "nada";
+            $SurOeste3 = $this->esteSecDoc;
+        }
+        if($this->puntOeste3=="Oeste"){
+            $Oeste3 = $this->oesteSecDoc;
+            $NortOeste3 = "nada";
+        }else{
+            $Oeste3 = "nada";
+            $NortOeste3 = $this->oesteSecDoc;
+        }
+        $lindDocSql = "INSERT INTO temp_linderos_documento(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte3."','".$norEste3."','".$Sur3."','".$SurEste3."','".$Este3."','".$SurOeste3."','".$Oeste3."','".$NortOeste3."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."','".$this->arTotal3."','".$this->uniAreaT3."','".$this->NivConstTotal3."','".$this->uniAreaConst3."','".$this->arConstTotal3."','".$this->uniNorte3."','".$this->uniSur3."','".$this->uniEste3."','".$this->uniOeste3."')";
+        $link->query($lindDocSql);
+        $idLindDoc= $link->insert_id;
+        echo'PROCESO COMPLETADO CON EXITO';
     }
     function guardConst(){
 
