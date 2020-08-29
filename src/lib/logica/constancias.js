@@ -1,7 +1,26 @@
 class constancias{
 
     construct(){
-
+        this.fechaExp = fechaExp
+        this.ascensor = ascensor
+        this.aireAcond = aireAcond
+        this.rejas = rejas
+        this.closets = closets
+        this.porcelana = porcelana
+        this.dormit = dormit
+        this.comedor = comedor
+        this.sala = sala
+        this.banos = banos
+        this.Cocina = Cocina
+        this.Servicio = Servicio
+        this.oficina = oficina
+        this.garaje = garaje
+        this.estac = estac
+        this.ano_construc= ano_construc
+        this.ano_refac = ano_refac
+        this.edadEfec = edadEfec
+        this.numPlata = numPlata
+        this.numVivienda = numVivienda
         this.cedR = cedR
         this.cedConst = cedConst
         this.cedFul = cedFul
@@ -149,7 +168,10 @@ class constancias{
         this.puntoOeste3 = puntoOeste3
         this.telfFull = telfFull
         this.telfFull2 = telfFull2
-
+        this.entamFina = entamFina
+        this.entamEcon = entamEcon
+        this.madeCepil = madeCepil
+        this.hierro = hierro
     }
     testProp(){
         if(!ex_nac.test(this.cedR)){
@@ -576,13 +598,219 @@ class constancias{
         }
         return true
     }
-    test3(){
-        
-        
-        
-        
+    veriServ(){
+        if(!ex_datcort.test(this.Acue)){
+            alert("Error en el formato de Acueducto");
+            return false;
+        }
+        if(!ex_datcort.test(this.AcueRural)){
+            alert("Error en el formato de Acueducto Rural");
+            return false;
+        }
+        if(!ex_datcort.test(this.AguasSub)){
+            alert("Error en el formato de Aguas Subterraneas");
+            return false;
+        }
+        if(!ex_datcort.test(this.PavFlex)){
+            alert("Error en el formato de Pavimento Flexible");
+            return false;
+        }
+        if(!ex_datcort.test(this.PavRig)){
+            alert("Error en el formato de Pavimento Rigido");
+            return false;
+        }
+        if(!ex_datcort.test(this.viaEngran)){
+            alert("Error en el formato de Via Engranzonada");
+            return false;
+        }
+        if(!ex_datcort.test(this.AlumPublico)){
+            alert("Error en el formato de Alumbrado Publico");
+            return false;
+        }
+        if(!ex_datcort.test(this.ElectResidencial)){
+            alert("Error en el formato de Electricidad Residencial");
+            return false;
+        }
+        if(!ex_datcort.test(this.transPublic)){
+            alert("Error en el formato de Transporte Público");
+            return false;
+        }
+        if(!ex_datcort.test(this.ElectriIndust)){
+            alert("Error en el formato de Electricidad Industrial");
+            return false;
+        }
+        if(!ex_datcort.test(this.linTelf)){
+            alert("Error en el formato de Linea de Telefono");
+            return false;
+        }
+        if(!ex_datcort.test(this.aseo)){
+            alert("Error en el formato de Aseo");
+            return false;
+        }
+        if(!ex_datcort.test(this.pozoSept)){
+            alert("Error en el formato de Pozo Septico");
+            return false;
+        }
+        if(!ex_datcort.test(this.AguasServ)){
+            alert("Error en el formato de Aguas Servidas");
+            return false;
+        }
+        if(!ex_datcort.test(this.acera)){
+            alert("Error en el formato de Acera");
+            return false;
+        }
+        return true
+    }
+    veriConserv(){
+        if(!ex_num.test(this.ano_construc)){
+            alert("Error en el formato de Año de Construcción");
+            return false;
+        }
+        if(!ex_num.test(this.ano_refac)){
+            alert("Error en el formato de Año de Refacción");
+            return false;
+        }
+        if(!ex_num.test(this.edadEfec)){
+            alert("Error en el formato de Edad Efectiva");
+            return false;
+        }
+        if(!ex_num.test(this.numPlata)){
+            alert("Error en el formato de Numero de Planta");
+            return false;
+        }
+        if(!ex_num.test(this.numVivienda)){
+            alert("Error en el formato de Numero de Vivienda");
+            return false;
+        }
+        return true
+    }
+    veriPiezSant(){
+        if(!ex_datcort.test(this.porFina)){
+            alert("Error en el formato de Porcelana Fina");
+            return false;
+        }
+        if(!ex_datcort.test(this.porceEcon)){
+            alert("Error en el formato de Porcelana Econ.");
+            return false;
+        }
+        if(!ex_datcort.test(this.banera)){
+            alert("Error en el formato de Bañera");
+            return false;
+        }
+        if(!ex_datcort.test(this.calentador)){
+            alert("Error en el formato de calentador");
+            return false;
+        }
+        if(!ex_datcort.test(this.wc)){
+            alert("Error en el formato de W.C.");
+            return false;
+        }
+        if(!ex_datcort.test(this.bidet)){
+            alert("Error en el formato de Bidet");
+            return false;
+        }
+        if(!ex_datcort.test(this.lavamanos)){
+            alert("Error en el formato de lavamanos");
+            return false;
+        }
+        if(!ex_datcort.test(this.ducha)){
+            alert("Error en el formato de Ducha");
+            return false;
+        }
+        if(!ex_datcort.test(this.urinario)){
+            alert("Error en el formato de Urinario");
+            return false;
+        }
+        return true
+    }
+    veriPuertas(){
+        if(!ex_datcort.test(this.entamFina)){
+            alert("Error en el formato de Entamborada Fina");
+            return false;
+        }
+        if(!ex_datcort.test(this.entamEcon)){
+            alert("Error en el formato de Entamborada Economica");
+            return false;
+        }
+        if(!ex_datcort.test(this.madeCepil)){
+            alert("Error en el formato de Madera Cepillada");
+            return false;
+        }
+        if(!ex_datcort.test(this.hierro)){
+            alert("Error en el formato de Hierro");
+            return false;
+        }
+        return true
+    }
+    veriAmbien(){
+        if(!ex_num.test(this.dormit)){
+            alert("Error en el formato de Dormitorio");
+            return false;
+        }
+        if(!ex_num.test(this.comedor)){
+            alert("Error en el formato de Comedor");
+            return false;
+        }
+        if(!ex_num.test(this.sala)){
+            alert("Error en el formato de Sala");
+            return false;
+        }
+        if(!ex_num.test(this.banos)){
+            alert("Error en el formato de Baños");
+            return false;
+        }
+        if(!ex_num.test(this.Cocina)){
+            alert("Error en el formato de Cocina");
+            return false;
+        }
+        if(!ex_num.test(this.Servicio)){
+            alert("Error en el formato de Servicio");
+            return false;
+        }
+        if(!ex_num.test(this.oficina)){
+            alert("Error en el formato de Oficina");
+            return false;
+        }
+        if(!ex_num.test(this.garaje)){
+            alert("Error en el formato de Garaje");
+            return false;
+        }
+        if(!ex_num.test(this.estac)){
+            alert("Error en el formato de Estacionamiento");
+            return false;
+        }
+        return true
+    }
+    veriComple(){
+        if(!ex_datcort.test(this.ascensor)){
+            alert("Error en el formato de Ascensor");
+            return false;
+        }
+        if(!ex_datcort.test(this.aireAcond)){
+            alert("Error en el formato de Aire Acondicionado");
+            return false;
+        }
+        if(!ex_datcort.test(this.rejas)){
+            alert("Error en el formato de Rejas");
+            return false;
+        }
+        if(!ex_datcort.test(this.closets)){
+            alert("Error en el formato de Closets");
+            return false;
+        }
+        if(!ex_datcort.test(this.porcelana)){
+            alert("Error en el formato de Porcelana");
+            return false;
+        }
+        return true
+    }
+    veriExp(){
         if(!expediente.test(this.nuExp)){
             alert("Error en el formato de Expediente");
+            return false;
+        }
+        if(!ex_fecha.test(this.fechaExp)){
+            alert("Error en el formato de Fecha");
             return false;
         }
         if(this.nuExp == this.expVerificado){
@@ -591,7 +819,7 @@ class constancias{
         }
         return true
     }
-    veriInmu(){
+    veriFactura(){
         if(!ex_money.test(this.montoFact)){
             alert("Error en el formato de Monto de factura");
             return false;
@@ -1176,6 +1404,7 @@ class constancias{
 			     }
 	       	}
     }
+    //ESTADO DE CONSERVACIÓN
     fConserv(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('formsInscrip');
@@ -1194,6 +1423,25 @@ class constancias{
 			     }
 	       	}
     }
+    guarConserv(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`ano_construc=${this.ano_construc}&ano_refac=${this.ano_refac}&edadEfec=${this.edadEfec}&numPlata=${this.numPlata}&numVivienda=${this.numVivienda}&accion=guarConserv`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    //PIEZAS SANITARIAS
     fPiezSant(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('formsInscrip');
@@ -1212,6 +1460,25 @@ class constancias{
 			     }
 	       	}
     }
+    guarPiezSant(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`porFina=${this.porFina}&porceEcon=${this.porceEcon}&banera=${this.banera}&calentador=${this.calentador}&wc=${this.wc}&bidet=${this.bidet}&lavamanos=${this.lavamanos}&ducha=${this.ducha}&urinario=${this.urinario}&accion=guarPiezSant`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    //PUERTAS
     fPuertas(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('formsInscrip');
@@ -1230,6 +1497,25 @@ class constancias{
 			     }
 	       	}
     }
+    guarPuertas(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`entamFina=${this.entamFina}&entamEcon=${this.entamEcon}&madeCepil=${this.madeCepil}&hierro=${this.hierro}&accion=guarPuertas`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    //AMBIENTES
     fAmbi(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('formsInscrip');
@@ -1248,6 +1534,25 @@ class constancias{
 			     }
 	       	}
     }
+    guarAmbien(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`dormit=${this.dormit}&comedor=${this.comedor}&sala=${this.sala}&banos=${this.banos}&Cocina=${this.Cocina}&Servicio=${this.Servicio}&oficina=${this.oficina}&garaje=${this.garaje}&estac=${this.estac}&accion=guarAmbien`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    //COMPLEMENTOS
     fComple(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('formsInscrip');
@@ -1266,6 +1571,25 @@ class constancias{
 			     }
 	       	}
     }
+    guarComple(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`ascensor=${this.ascensor}&aireAcond=${this.aireAcond}&rejas=${this.rejas}&closets=${this.closets}&porcelana=${this.porcelana}&accion=guarComple`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    //SERVICIOS
     fServicios(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('formsInscrip');
@@ -1284,6 +1608,25 @@ class constancias{
 			     }
 	       	}
     }
+    guarServicios(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`Acue=${this.Acue}&AcueRural=${this.AcueRural}&AguasSub=${this.AguasSub}&PavFlex=${this.PavFlex}&PavRig=${this.PavRig}&viaEngran=${this.viaEngran}&AlumPublico=${this.AlumPublico}&ElectResidencial=${this.ElectResidencial}&transPublic=${this.transPublic}&ElectriIndust=${this.ElectriIndust}&linTelf=${this.linTelf}&aseo=${this.aseo}&pozoSept=${this.pozoSept}&AguasServ=${this.AguasServ}&acera=${this.acera}&accion=guarServicios`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    //EXPEDIENTE
     fExpedient(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('formsInscrip');
@@ -1302,6 +1645,25 @@ class constancias{
 			     }
 	       	}
     }
+    guarExpe(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`nuExp=${this.nuExp}&expVerificado=${this.expVerificado}&multa=${this.multa}&fechaExp=${this.fechaExp}&accion=guarExpe`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    //FACTURA
     fFactura(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('formsInscrip');
@@ -1312,6 +1674,24 @@ class constancias{
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`accion=fFactura`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+			     }
+	       	}
+    }
+    guarFact(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`montoFact=${this.montoFact}&numFact=${this.numFact}&fechFact=${this.fechFact}&accion=guarFact`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1423,37 +1803,148 @@ function btnGuarProt(){
         consta.guarProt()
     }
 }
+//ESTADO DE CONSERVACION
 function btnfConserv(){
     let consta = new constancias
     consta.fConserv();
 }
+function btnGuarConserv(){
+    let consta = new constancias
+    consta.ano_construc = document.getElementById("ano_construc").value
+    consta.ano_refac = document.getElementById("ano_refac").value
+    consta.edadEfec = document.getElementById("edadEfec").value
+    consta.numPlata = document.getElementById("numPlata").value
+    consta.numVivienda = document.getElementById("numVivienda").value
+    if(consta.veriConserv()==true){
+        consta.guarConserv()
+    }
+}
+//PIEZAS SANITRIAS
 function btnfPiezSant(){
     let consta = new constancias
     consta.fPiezSant();
 }
+function btnGuarPizSanit(){
+    let consta = new constancias
+    consta.porFina = document.getElementById("porFina").value
+    consta.porceEcon = document.getElementById("porceEcon").value
+    consta.banera = document.getElementById("banera").value
+    consta.calentador = document.getElementById("calentador").value
+    consta.wc = document.getElementById("wc").value
+    consta.bidet = document.getElementById("bidet").value
+    consta.lavamanos = document.getElementById("lavamanos").value
+    consta.ducha = document.getElementById("ducha").value
+    consta.urinario = document.getElementById("urinario").value
+    if(consta.veriPiezSant()==true){
+        consta.guarPiezSant();
+    }
+}
+//PUERTAS
 function btnfpuertas(){
     let consta = new constancias
     consta.fPuertas()
 }
+function btnGuarPuertas(){
+    let consta = new constancias
+    consta.entamFina = document.getElementById("entamFina").value
+    consta.entamEcon = document.getElementById("entamEcon").value
+    consta.madeCepil = document.getElementById("madeCepil").value
+    consta.hierro = document.getElementById("hierro").value
+    if(consta.veriPuertas()==true){
+        consta.guarPuertas();
+    }
+}
+//AMBIENTES
 function btnfAmbi(){
     let consta = new constancias
     consta.fAmbi();
 }
+function btnguarAmbien(){
+    let consta = new constancias
+    consta.dormit = document.getElementById("dormit").value
+    consta.comedor= document.getElementById("comedor").value
+    consta.sala = document.getElementById("sala").value
+    consta.banos = document.getElementById("banos").value
+    consta.Cocina = document.getElementById("Cocina").value
+    consta.Servicio = document.getElementById("Servicio").value
+    consta.oficina = document.getElementById("oficina").value
+    consta.garaje = document.getElementById("garaje").value
+    consta.estac = document.getElementById("estac").value
+    if(consta.veriAmbien()==true){
+        consta.guarAmbien();
+    }
+}
+//COMPLEMENTOS
 function btnfComple(){
     let consta = new constancias
     consta.fComple();
 }
+function btnGuarComple(){
+    let consta = new constancias
+    consta.ascensor = document.getElementById("ascensor").value
+    consta.aireAcond = document.getElementById("aireAcond").value
+    consta.rejas = document.getElementById("rejas").value
+    consta.closets = document.getElementById("closets").value
+    consta.porcelana = document.getElementById("porcelana").value
+    if(consta.veriComple()==true){
+        consta.guarComple()
+    }
+}
+//SERVICIOS
 function btnfServicios(){
     let consta = new constancias
     consta.fServicios()
 }
+function btnGuarServicios(){
+    let consta = new constancias
+    consta.Acue = document.getElementById("Acue").value
+    consta.AcueRural = document.getElementById("AcueRural").value
+    consta.AguasSub = document.getElementById("AguasSub").value
+    consta.PavFlex = document.getElementById("PavFlex").value
+    consta.PavRig = document.getElementById("PavRig").value
+    consta.viaEngran = document.getElementById("viaEngran").value
+    consta.AlumPublico = document.getElementById("AlumPublico").value
+    consta.ElectResidencial = document.getElementById("ElectResidencial").value
+    consta.transPublic = document.getElementById("transPublic").value
+    consta.ElectriIndust = document.getElementById("ElectriIndust").value
+    consta.linTelf = document.getElementById("linTelf").value
+    consta.aseo = document.getElementById("aseo").value
+    consta.pozoSept = document.getElementById("pozoSept").value
+    consta.AguasServ = document.getElementById("AguasServ").value
+    consta.acera = document.getElementById("acera").value
+    if(consta.veriServ()==true){
+        consta.guarServicios()
+    }
+}
+//EXEPEDIENTE
 function btnfexpedient(){
     let consta = new constancias 
     consta.fExpedient();
 }
+function btnGuarExpe(){
+    let consta = new constancias
+    consta.nuExp = document.getElementById("nuExp").value
+    consta.expVerificado = document.getElementById("expVerificado").value
+    consta.multa = document.getElementById("multa").value
+    consta.fechaExp = document.getElementById("fechaExp").value
+    if(consta.veriExp()==true){
+        consta.guarExpe()
+    }
+}
+//FACTURA
 function btnfFactura(){
     let consta = new constancias
     consta.fFactura()
+}
+function btnGuarFact(){
+    let consta = new constancias
+    consta.montoFact = document.getElementById("montoFact").value
+    consta.numFact = document.getElementById("numFact").value
+    consta.fechFact = document.getElementById("fechFact").value
+    consta.numFactura = document.getElementById("numFactura").value
+    if(consta.veriFactura()==true){
+        consta.guarFact()
+    }
 }
 function btnfCarac(){
     

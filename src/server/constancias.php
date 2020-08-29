@@ -3,6 +3,25 @@
 class constancias{
 
     function construct(){
+        $fechaExp = "";
+        $ascensor = "";
+        $aireAcond = "";
+        $rejas = "";
+        $closets = "";
+        $porcelana = "";
+        $entamFina = "";
+        $entamEcon = "";
+        $madeCepil = "";
+        $hierro = "";
+        $porFina = "";
+        $porceEcon="";
+        $banera= "";
+        $calentador="";
+        $wc="";
+        $bidet="";
+        $lavamanos="";
+        $ducha="";
+        $urinario="";
         $cedFul="";
         $rifConst="";
         $nomProp="";
@@ -136,6 +155,26 @@ class constancias{
     }
         
     function secNuvIns(){
+        session_start();
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $busUser = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+        $resUser = $link->query($busUser);
+        $userRes = $resUser->fetch_array();
+        
+        $tempUser = "SELECT * FROM user_temp where id=".$userRes["id"]."";
+        $resUser = $link->query($tempUser);
+        $filaUser = $link->num_rows;
+        $userRes = $resUser->fetch_array();
+        echo $filaUser;
+        if($filaUser==""){
+            $tempUser = "INSERT INTO user_temp(userId,temp_ambientes,temp_caraconst,temp_carainmue,temp_complementos,temp_datos_protocolizacion,temp_expediente,temp_factura,temp_inmueble,temp_linderos_documento,temp_linderos_general,temp_linderos_posible_venta,temp_piezas_sanitarias,temp_propietarios,temp_puertas,temp_servicios_inmue,temp_estado_conservacion)value(".$userRes["id"].",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)";
+            $link->query($tempUser);
+            $userId = $link->insert_id;
+        }else{
+            $userId = $userRes["id"];
+        }
+
         echo'
             <div class="container-fluid forms">
                 <div class="row">
@@ -311,6 +350,7 @@ class constancias{
         or die(mysqli_error());
         $propSql = "INSERT INTO temp_propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab)value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFull."','".$this->direcProp."','".$this->telfFull2."')";
         $link->query($propSql);
+        $idProp= $link->insert_id;
         echo'PROCESO COMPLETADO CON EXITO';
     }
     //INMUEBLE
@@ -722,6 +762,7 @@ class constancias{
         $link->query($protInmueSql);
         echo 'PROCESO COMPLETADO CON EXITO';
     }
+    //ESTADO DE CONSERVACION
     function fConserv(){
         echo'
         <div class="container-fluid">
@@ -756,9 +797,17 @@ class constancias{
             </div>
         </div>
         <div class="btnSig1">
-            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            <input type="button" value="Siguiente" onclick="btnGuarConserv()" class="botones btn btn-primary" />
         </div';
     }
+    function guarConserv(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $conservSql = "INSERT INTO temp_estado_conservacion(ano_construccion,ano_refaccion,edad_efectiva,nro_planta,nro_vivienda)value(".$this->ano_construc.",".$this->ano_refac.",".$this->edadEfec.",".$this->numPlata.",".$this->numVivienda.")";
+        $link->query($conservSql);
+        echo'PROCESO COMPLETADO CON EXITO';
+    }
+    //PIEZAS SANITARIAS 
     function fPiezSant(){
         echo'
             <div class="container-fluid">
@@ -772,7 +821,7 @@ class constancias{
                         <b>Porcelana Fina</b>
                         <select id="porFina">
                             <option value="No"></option>
-                            <option value="No">Si</option>
+                            <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
                     </div>
@@ -789,7 +838,7 @@ class constancias{
                         <select id="banera">
                             <option value="No"></option>
                             <option value="Si">Si</option>
-                            <option value="No"></option>
+                            <option value="No">No</option>
                         </select>
                     </div>
                     <div class="col">
@@ -797,7 +846,7 @@ class constancias{
                         <select id="calentador">
                             <option value="No"></option>
                             <option value="Si">Si</option>
-                            <option value="No"></option>
+                            <option value="No">No</option>
                         </select>
                     </div>
                 </div>
@@ -807,7 +856,7 @@ class constancias{
                         <select id="wc">
                             <option value="No"></option>
                             <option value="Si">Si</option>
-                            <option value="No"></option>
+                            <option value="No">No</option>
                         </select>
                     </div>
                     <div class="col">
@@ -831,7 +880,7 @@ class constancias{
                         <select id="ducha">
                             <option value="No"></option>
                             <option value="Si">Si</option>
-                            <option value="No"></option>
+                            <option value="No">No</option>
                         </select>
                     </div>
                     <div class="col">
@@ -839,16 +888,24 @@ class constancias{
                         <select id="urinario">
                             <option value="No"></option>
                             <option value="Si">Si</option>
-                            <option value="No"></option>
+                            <option value="No">No</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div class="btnSig1">
-                <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+                <input type="button" value="Guardar" onclick="btnGuarPizSanit()" class="botones btn btn-primary" />
             </div>
         ';
     }
+    function guarPiezSant(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $piezSant="INSERT INTO temp_piezas_sanitarias(porcelana_fina,porcelana_econ,banera,calentador,wc,bidet,lavamanos,ducha,urinario)value('".$this->porFina."','".$this->porceEcon."','".$this->banera."','".$this->calentador."','".$this->wc."','".$this->bidet."','".$this->lavamanos."','".$this->ducha."','".$this->urinario."')";
+        $link->query($piezSant);
+        echo'PROCESO COMPLETADO CON EXITO';
+    }
+    //PUERTAS
     function fpuertas(){
         echo '
             <div class="container-fluid">
@@ -893,10 +950,18 @@ class constancias{
                 </div>
             </div>
             <div class="btnSig1">
-                <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+                <input type="button" value="Guardar" onclick="btnGuarPuertas()" class="botones btn btn-primary" />
             </div>
         ';
     }
+    function guarPuertas(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $puertaSql = "INSERT INTO temp_puertas(entamborada_fina,ent_econo,madera_cepi,hierro)value('".$this->entamFina."','".$this->entamEcon."','".$this->madeCepil."','".$this->hierro."')";
+        $link->query($puertaSql);
+        echo'PROCESO COMPLETADO CON EXITO';
+    }
+    //AMBIENTES
     function fambien(){
         echo'
         <div class="contaniner-fluid">
@@ -922,7 +987,7 @@ class constancias{
             <div class="row">
                 <div class="col">
                     <b>Baños</b>
-                    <input type="text" class="text" id="baños" />
+                    <input type="text" class="text" id="banos" />
                 </div>
                 <div class="col">
                     <b>Cocina</b>
@@ -949,10 +1014,18 @@ class constancias{
             </div>
         </div>
         <div class="btnSig1">
-            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            <input type="button" value="Guardar" onclick="btnguarAmbien()" class="botones btn btn-primary" />
         </div>
         ';
     }
+    function guarAmbien(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $ambSql = "INSERT INTO temp_ambientes(dormitorio,comedor,sala,banos,cocina,servicio,oficina,garaje,estacionamiento)value('".$this->dormit."','".$this->comedor."','".$this->sala."','".$this->banos."','".$this->Cocina."','".$this->Servicio."','".$this->oficina."','".$this->garaje."','".$this->estac."')";
+        $link->query($ambSql);
+        echo'PROCESO COMPLETADO CON EXITO';
+    }
+    //COMPLEMENTOS
     function fConple(){
         echo'
             <div class="container-fluid">
@@ -1005,9 +1078,16 @@ class constancias{
                 </div>
             </div>
             <div class="btnSig1">
-                <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+                <input type="button" value="Guardar" onclick="btnGuarComple()" class="botones btn btn-primary" />
             </div>
         ';
+    }
+    function guarComple(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $compleSql = "INSERT INTO temp_complementos(ascensor,aire_acond,rejas,closets,porcelana)value('".$this->ascensor."','".$this->aireAcond."','".$this->rejas."','".$this->closets."','".$this->porcelana."')";
+        $link->query($compleSql);
+        echo'PROCESO COMPLETADO CON EXITO';
     }
     //SERVICIOS
     function fServicios(){
@@ -1180,12 +1260,17 @@ class constancias{
             </div>
         </div>
         <div class="btnSig1">
-            <input type="button" value="Siguiente" onclick="btnGuarServicios()" class="botones btn btn-primary" />
+            <input type="button" value="Guardar" onclick="btnGuarServicios()" class="botones btn btn-primary" />
         </div>';
     }
-    function gServicios(){
-
+    function guarServicios(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $servSql = "INSERT INTO temp_servicios_inmue(acued,acuedRural,aguasSubter,aguasServ,pavimentoFlex,pavimentoRig,viaEngran,acera,alumbradoPub,aseo,transportePublic,pozoSept,electriResi,electriIndus,lineaTelef)value('".$this->Acue."','".$this->AcueRural."','".$this->AguasSub."','".$this->AguasServ."','".$this->PavFlex."','".$this->PavRig."','".$this->viaEngran."','".$this->acera."','".$this->AlumPublico."','".$this->aseo."','".$this->transPublic."','".$this->pozoSept."','".$this->ElectResidencial."','".$this->ElectriIndust."','".$this->linTelf."')";
+        $link->query($servSql);
+        echo'PROCESO COMPLETADO CON EXITO';
     }
+    //EXPEDIENTE
     function fExpedient(){
         echo'
             <div class="container-fluid">
@@ -1203,7 +1288,7 @@ class constancias{
                     </div>
                     <div class="col">
                         <div class="campDat">
-                            <p class="negritas">Aplicar:</p>
+                            <b>Aplicar:</b>
                             <select id="multa"/>
                                 <option value="No Aplica">No Aplica</option>
                                 <option value="Multa">Multa</option>
@@ -1212,9 +1297,31 @@ class constancias{
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="campDat">
+                            <b>Fecha:</b>
+                            <input type="date" id="fechaExp" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="campOculto">
+            
+            </div>
+            <div class="btnSig1">
+                <input type="button" value="Guardar" onclick="btnGuarExpe()" class="botones btn btn-primary" />
             </div>
         ';
     }
+    function guarExpe(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $expeSql = "INSERT INTO temp_expediente(no_expediente,condicion,fecha)value('".$this->nuExp."','".$this->multa."','".$this->fechaExp."')";
+        $link->query($expeSql);
+        echo'PROCESO COMPLETADO CON EXITO';
+    }
+    //FACTURA
     function fFactura(){
         echo'
         <div class="container-fluid">
@@ -1244,10 +1351,20 @@ class constancias{
                 </div>
             </div>
         </div>
+        <div id="campOculto">
+            
+            </div>
         <div class="btnSig1">
-            <input type="button" value="Siguiente" onclick="btnfCarac()" class="botones btn btn-primary" />
+            <input type="button" value="Guardar" onclick="btnGuarFact()" class="botones btn btn-primary" />
         </div>
         ';
+    }
+    function guarFact(){
+        $link= new mysqli("127.0.0.1", "root","","siscast") 
+        or die(mysqli_error());
+        $factSql = "INSERT INTO temp_factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechaFact."')";
+        $link->query($factSql);
+        echo'PROCESO COMPLETADO CON EXITO';
     }
     function fCarac(){
 

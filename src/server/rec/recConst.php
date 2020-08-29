@@ -240,9 +240,98 @@ if(isset($_POST["accion"])){
     }else{
         $nconst->valorProtConst= "nada";
     }
+    if(isset($_POST["ano_construc"])){
+        $nconst->ano_construc= $_POST["ano_construc"];
+    }else{
+        $nconst->ano_construc= "nada";
+    }
+    if(isset($_POST["ano_refac"])){
+        $nconst->ano_refac= $_POST["ano_refac"];
+    }else{
+        $nconst->ano_refac= "nada";
+    }
+    if(isset($_POST["edadEfec"])){
+        $nconst->edadEfec= $_POST["edadEfec"];
+    }else{
+        $nconst->edadEfec= "nada";
+    }
+    if(isset($_POST["numPlata"])){
+        $nconst->numPlata= $_POST["numPlata"];
+    }else{
+        $nconst->numPlata= "nada";
+    }
+    if(isset($_POST["numVivienda"])){
+        $nconst->numVivienda= $_POST["numVivienda"];
+    }else{
+        $nconst->numVivienda= "nada";
+    }
+    if(isset($_POST["porFina"])){
+        $nconst->porFina= $_POST["porFina"];
+    }else{
+        $nconst->porFina= "nada";
+    }
+    if(isset($_POST["porceEcon"])){
+        $nconst->porceEcon= $_POST["porceEcon"];
+    }else{
+        $nconst->porceEcon= "nada";
+    }
+    if(isset($_POST["banera"])){
+        $nconst->banera= $_POST["banera"];
+    }else{
+        $nconst->banera= "nada";
+    }
+    if(isset($_POST["calentador"])){
+        $nconst->calentador= $_POST["calentador"];
+    }else{
+        $nconst->calentador= "nada";
+    }
+    if(isset($_POST["wc"])){
+        $nconst->wc= $_POST["wc"];
+    }else{
+        $nconst->wc= "nada";
+    }
+    if(isset($_POST["bidet"])){
+        $nconst->bidet= $_POST["bidet"];
+    }else{
+        $nconst->bidet= "nada";
+    }
+    if(isset($_POST["lavamanos"])){
+        $nconst->lavamanos= $_POST["lavamanos"];
+    }else{
+        $nconst->lavamanos= "nada";
+    }
+    if(isset($_POST["ducha"])){
+        $nconst->ducha= $_POST["ducha"];
+    }else{
+        $nconst->ducha= "nada";
+    }
+    if(isset($_POST["urinario"])){
+        $nconst->urinario= $_POST["urinario"];
+    }else{
+        $nconst->urinario= "nada";
+    }
 
 //PARTE 3 GUARDAR
-    
+    if(isset($_POST["entamFina"])){
+        $nconst->entamFina=$_POST["entamFina"];
+    }else{
+        $nconst->entamFina= "nada";
+    }
+    if(isset($_POST["entamEcon"])){
+        $nconst->entamEcon=$_POST["entamEcon"];
+    }else{
+        $nconst->entamEcon= "nada";
+    }
+    if(isset($_POST["madeCepil"])){
+        $nconst->madeCepil=$_POST["madeCepil"];
+    }else{
+        $nconst->madeCepil= "nada";
+    }
+    if(isset($_POST["hierro"])){
+        $nconst->hierro=$_POST["hierro"];
+    }else{
+        $nconst->hierro= "nada";
+    }
     if(isset($_POST["puntNorte"])){
         $nconst->puntNorte=$_POST["puntNorte"];
     }else{
@@ -679,6 +768,81 @@ if(isset($_POST["accion"])){
     }else{
         $nconst->uniAreaConst = "nada";
     }
+    if(isset($_POST["dormit"])){
+        $nconst->dormit = $_POST["dormit"];
+    }else{
+        $nconst->dormit = "nada";
+    }
+    if(isset($_POST["comedor"])){
+        $nconst->comedor = $_POST["comedor"];
+    }else{
+        $nconst->comedor = "nada";
+    }
+    if(isset($_POST["sala"])){
+        $nconst->sala = $_POST["sala"];
+    }else{
+        $nconst->sala = "nada";
+    }
+    if(isset($_POST["banos"])){
+        $nconst->banos = $_POST["banos"];
+    }else{
+        $nconst->banos = "nada";
+    }
+    if(isset($_POST["Cocina"])){
+        $nconst->Cocina = $_POST["Cocina"];
+    }else{
+        $nconst->Cocina = "nada";
+    }
+    if(isset($_POST["Servicio"])){
+        $nconst->Servicio = $_POST["Servicio"];
+    }else{
+        $nconst->Servicio = "nada";
+    }
+    if(isset($_POST["oficina"])){
+        $nconst->oficina = $_POST["oficina"];
+    }else{
+        $nconst->oficina = "nada";
+    }
+    if(isset($_POST["garaje"])){
+        $nconst->garaje = $_POST["garaje"];
+    }else{
+        $nconst->garaje = "nada";
+    }
+    if(isset($_POST["estac"])){
+        $nconst->estac = $_POST["estac"];
+    }else{
+        $nconst->estac = "nada";
+    }
+    if(isset($_POST["ascensor"])){
+        $nconst->ascensor = $_POST["ascensor"];
+    }else{
+        $nconst->ascensor = "nada";
+    }
+    if(isset($_POST["aireAcond"])){
+        $nconst->aireAcond = $_POST["aireAcond"];
+    }else{
+        $nconst->aireAcond = "nada";
+    }
+    if(isset($_POST["rejas"])){
+        $nconst->rejas = $_POST["rejas"];
+    }else{
+        $nconst->rejas = "nada";
+    }
+    if(isset($_POST["closets"])){
+        $nconst->closets = $_POST["closets"];
+    }else{
+        $nconst->closets = "nada";
+    }
+    if(isset($_POST["porcelana"])){
+        $nconst->porcelana = $_POST["porcelana"];
+    }else{
+        $nconst->porcelana = "nada";
+    }
+    if(isset($_POST["fechaExp"])){
+        $nconst->fechaExp = $_POST["fechaExp"];
+    }else{
+        $nconst->fechaExp = "nada";
+    }
 
 //ACCIONES
     //PROPIETARIO
@@ -722,29 +886,61 @@ if(isset($_POST["accion"])){
     if($accion=="guarPosVenta"){
         $nconst->guarPosVenta();
     }
+    //ESTADDO DE CONSERVACIÓN
     if($accion=="fConserv"){
         $nconst->fConserv();
     }
+    if($accion=="guarConserv"){
+        $nconst->guarConserv();
+    }
+    //PIEZAS SANITARIAS
     if($accion=="fPiezSant"){
         $nconst->fPiezSant();
     }
+    if($accion=="guarPiezSant"){
+        $nconst->guarPiezSant();
+    }
+    //PUERTAS
     if($accion=="fpuertas"){
         $nconst->fpuertas();
     }
+    if($accion=="guarPuertas"){
+        $nconst->guarPuertas();
+    }
+    //AMBIENTES
     if($accion=="fAmbi"){
         $nconst->fambien();
     }
+    if($accion=="guarAmbien"){
+        $nconst->guarAmbien();
+    }
+    //COMPLEMENTOS
     if($accion=="fComple"){
         $nconst->fConple();
     }
+    if($accion=="guarComple"){
+        $nconst->guarComple();
+    }
+    //EXPEDIENTE
     if($accion=="fExpedient"){
         $nconst->fExpedient();
     }
+    if($accion=="guarExpe"){
+        $nconst->guarExpe();
+    }
+    //SERVICIOS
     if($accion=="fServicios"){
         $nconst->fServicios();
     }
+    if($accion=="guarServicios"){
+        $nconst->guarServicios();
+    }
+    //FACTURA
     if($accion=="fFactura"){
         $nconst->fFactura();
+    }
+    if($accion=="guarFact"){
+        $nconst->guarFact();
     }
     if($accion=="fcaracConst"){
         $nconst->fcaracConst();
