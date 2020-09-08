@@ -653,6 +653,16 @@ if(isset($_POST["accion"])){
     }else{
         $nconst->arConstTotal3= "nada";
     }
+    if(isset($_POST["arConstTotal2"])){
+        $nconst->arConstTotal2=$_POST["arConstTotal2"];
+    }else{
+        $nconst->arConstTotal2= "nada";
+    }
+    if(isset($_POST["arConstTotal"])){
+        $nconst->arConstTotal=$_POST["arConstTotal"];
+    }else{
+        $nconst->arConstTotal= "nada";
+    }
     if(isset($_POST["arTotal2"])){
         $nconst->arTotal2=$_POST["arTotal2"];
     }else{
@@ -843,6 +853,91 @@ if(isset($_POST["accion"])){
     }else{
         $nconst->fechaExp = "nada";
     }
+    if(isset($_POST["idProp"])){
+        $nconst->idProp = $_POST["idProp"];
+    }else{
+        $nconst->idProp = "nada";
+    }
+    if(isset($_POST["idInmue"])){
+        $nconst->idInmue = $_POST["idInmue"];
+    }else{
+        $nconst->idInmue = "nada";
+    }
+    if(isset($_POST["idCaraInmue"])){
+        $nconst->idCaraInmue = $_POST["idCaraInmue"];
+    }else{
+        $nconst->idCaraInmue = "nada";
+    }
+    if(isset($_POST["idCaraConst"])){
+        $nconst->idCaraConst = $_POST["idCaraConst"];
+    }else{
+        $nconst->idCaraConst = "nada";
+    }
+    if(isset($_POST["idProto"])){
+        $nconst->idProto = $_POST["idProto"];
+    }else{
+        $nconst->idProto = "nada";
+    }
+    if(isset($_POST["idLindGen"])){
+        $nconst->idLindGen = $_POST["idLindGen"];
+    }else{
+        $nconst->idLindGen = "nada";
+    }
+    if(isset($_POST["idLindDoc"])){
+        $nconst->idLindDoc = $_POST["idLindDoc"];
+    }else{
+        $nconst->idLindDoc = "nada";
+    }
+    if(isset($_POST["idPosVenta"])){
+        $nconst->idPosVenta = $_POST["idPosVenta"];
+    }else{
+        $nconst->idPosVenta = "nada";
+    }
+    if(isset($_POST["idServInmue"])){
+        $nconst->idServInmue = $_POST["idServInmue"];
+    }else{
+        $nconst->idServInmue = "nada";
+    }
+    if(isset($_POST["idEstConserv"])){
+        $nconst->idEstConserv = $_POST["idEstConserv"];
+    }else{
+        $nconst->idEstConserv = "nada";
+    }
+    if(isset($_POST["idPiezSant"])){
+        $nconst->idPiezSant = $_POST["idPiezSant"];
+    }else{
+        $nconst->idPiezSant = "nada";
+    }
+    if(isset($_POST["idAmbientes"])){
+        $nconst->idAmbientes = $_POST["idAmbientes"];
+    }else{
+        $nconst->idAmbientes = "nada";
+    }
+    if(isset($_POST["idPuertas"])){
+        $nconst->idPuertas = $_POST["idPuertas"];
+    }else{
+        $nconst->idPuertas = "nada";
+    }
+    if(isset($_POST["idComple"])){
+        $nconst->idComple = $_POST["idComple"];
+    }else{
+        $nconst->idComple = "nada";
+    }
+    if(isset($_POST["idFactura"])){
+        $nconst->idFactura = $_POST["idFactura"];
+    }else{
+        $nconst->idFactura = "nada";
+    }
+    if(isset($_POST["idExp"])){
+        $nconst->idExp = $_POST["idExp"];
+    }else{
+        $nconst->idExp = "nada";
+    }
+    if(isset($_POST["valorInmue"])){
+        $nconst->valorInmue = $_POST["valorInmue"];
+    }else{
+        $nconst->valorInmue = "nada";
+    }
 
 //ACCIONES
     //PROPIETARIO
@@ -941,6 +1036,16 @@ if(isset($_POST["accion"])){
     }
     if($accion=="guarFact"){
         $nconst->guarFact();
+    }
+    //VERIFICACION
+    if($accion=="veriF3"){
+        $nconst->veriF3();
+    }
+    if($accion=="veriF2"){
+        $nconst->veriF2();
+    }
+    if($accion=="veriF1"){
+        $nconst->veriF1();
     }
     if($accion=="fcaracConst"){
         $nconst->fcaracConst();

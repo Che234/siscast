@@ -1,6 +1,22 @@
 class constancias{
 
     construct(){
+        this.valorInmue = valorInmue
+        this.idInmueble = idInmueble
+        this.idExp = idExp
+        this.idFactura = idFactura
+        this.idComple = idComple
+        this.idPuertas = idPuertas
+        this.idAmbientes = idAmbientes
+        this.idPiezSant = idPiezSant
+        this.idEstConserv = idEstConserv
+        this.idServInmue = idServInmue
+        this.idPosVenta = idPosVenta
+        this.idLindDoc = idLindDoc
+        this.idProto = idProto
+        this.idLindGen = idLindGen
+        this.idCaraConst = idCaraConst
+        this.idCaraInmue = idCaraInmue
         this.fechaExp = fechaExp
         this.ascensor = ascensor
         this.aireAcond = aireAcond
@@ -103,7 +119,6 @@ class constancias{
         this.nuExp = nuExp
         this.montoFact = montoFact
         this.fechFact = fechFact
-        this.idInmueble = idInmueble
         this.telfFul = telfFul
         this.telfFul2 = telfFul2
         this.regInmue = regInmue
@@ -172,6 +187,7 @@ class constancias{
         this.entamEcon = entamEcon
         this.madeCepil = madeCepil
         this.hierro = hierro
+        this.idInmue = idInmue
     }
     testProp(){
         if(!ex_nac.test(this.cedR)){
@@ -307,7 +323,7 @@ class constancias{
             alert("Error en el formato de Tomo");
             return false;
         }
-        if(!ex_fecha.test(this.folioProtConst)){
+        if(!ex_num.test(this.folioProtConst)){
             alert("Error en el formato de Folio");
             return false;
         }
@@ -317,10 +333,6 @@ class constancias{
         }
         if(!ex_trayec.test(this.trimProtConst)){
             alert("Error en el formato de Trimestre");
-            return false;
-        }
-        if(!ex_fecha.test(this.dateProtConst)){
-            alert("Error en el formato de Fecha");
             return false;
         }
         if(!ex_money.test(this.valorProtConst)){
@@ -809,7 +821,7 @@ class constancias{
             alert("Error en el formato de Expediente");
             return false;
         }
-        if(!ex_fecha.test(this.fechaExp)){
+        if(!ex_date.test(this.fechaExp)){
             alert("Error en el formato de Fecha");
             return false;
         }
@@ -822,10 +834,6 @@ class constancias{
     veriFactura(){
         if(!ex_money.test(this.montoFact)){
             alert("Error en el formato de Monto de factura");
-            return false;
-        }
-        if(!ex_fecha.test(this.fechFact)){
-            alert("Error en el formato de la fecha ");
             return false;
         }
         let numFactura = document.getElementById("numFactura").value
@@ -882,63 +890,6 @@ class constancias{
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send("cedFul="+this.cedFul+"&rifConst="+this.rifConst+"&nomProp="+this.nomProp+"&apelProp="+this.apelProp+"&codTelf="+this.codTelf+"&numText="+this.numText+"&direcProp="+this.direcProp+"&codTelf2="+this.codTelf2+"&numTelf2="+this.numTelf2+"&parrInmue="+this.parrInmue+"&secInmue="+this.secInmue+"&direcInmue="+this.direcInmue+"&topoConst="+this.topoConst+"&formaConst="+this.formaConst+"&usoConst="+this.usoConst+"&tenenConst="+this.tenenConst+"&ambInmue="+this.ambInmue+"&accion=fCarac"); 
         ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-                    
-			     }
-	       	}
-    }
-    fActGeneral(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
-        var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send("&accion=fActGeneral"); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-                    
-			     }
-	       	}
-    }
-    factPosVenta(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
-        var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send("&accion=factPosVenta"); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-                    
-			     }
-	       	}
-    }
-    factSecDoc(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
-        var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send("&accion=factSecDoc"); 
-		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
@@ -1015,7 +966,7 @@ class constancias{
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst1`);
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
@@ -1172,7 +1123,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=formProp`); 
+        ajax.send(`idProp=${this.idProp}&accion=formProp`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1196,6 +1147,10 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
@@ -1209,12 +1164,15 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=formInmue`); 
+        ajax.send(`idInmue=${this.idInmue}&accion=formInmue`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        cambioTempParr()
+                    },100)
 			     }
 	       	}
     }
@@ -1233,6 +1191,10 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
@@ -1246,7 +1208,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=formCarTerr`); 
+        ajax.send(`idCaraInmue=${this.idCaraInmue}&accion=formCarTerr`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1270,6 +1232,10 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
@@ -1283,7 +1249,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=fcaracConst`); 
+        ajax.send(`idCaraConst=${this.idCaraConst}&accion=fcaracConst`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1307,6 +1273,10 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
@@ -1320,7 +1290,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=fprotInmue`); 
+        ajax.send(`idProto=${this.idProto}&accion=fprotInmue`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1338,16 +1308,39 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`docDebConst=${this.docDebConst}&direcProtConst=${this.direcProtConst}&numProtConst=${this.numProtConst}&tomoProtConst=${this.tomoProtConst}&folioProtConst=${this.tomoProtConst}&protoConst=${this.protoConst}&trimProtConst=${this.trimProtConst}&dateProtConst=${this.dateProtConst}&valorProtConst=${this.valorProtConst}&accion=guarProtInmue`); 
+        ajax.send(`docDebConst=${this.docDebConst}&direcProtConst=${this.direcProtConst}&numProtConst=${this.numProtConst}&tomoProtConst=${this.tomoProtConst}&folioProtConst=${this.folioProtConst}&protoConst=${this.protoConst}&trimProtConst=${this.trimProtConst}&dateProtConst=${this.dateProtConst}&valorProtConst=${this.valorProtConst}&accion=guarProtInmue`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
     //LINDEROS SEGUN INSPECCION
+    fActGeneral(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`idLindGen=${this.idLindGen}&accion=fActGeneral`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+                    
+			     }
+	       	}
+    }
     guarGeneral(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('formsInscrip');
@@ -1363,10 +1356,33 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
     //LINDEROS SEGUN DOCUMENTO
+    factSecDoc(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`idLindDoc=${this.idLindDoc}&accion=factSecDoc`) 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+                    
+			     }
+	       	}
+    }
     guarSecDoc(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('formsInscrip');
@@ -1382,10 +1398,33 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
     //LINDEROS POSIBLE VENTA
+    factPosVenta(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`idPosVenta=${this.idPosVenta}&accion=factPosVenta`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+                    
+			     }
+	       	}
+    }
     guarPosVenta(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('formsInscrip');
@@ -1401,6 +1440,10 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
@@ -1414,7 +1457,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=fConserv`); 
+        ajax.send(`idEstConserv=${this.idEstConserv}&accion=fConserv`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1438,6 +1481,10 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
@@ -1451,7 +1498,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=fPiezSant`); 
+        ajax.send(`idPiezSant=${this.idPiezSant}&accion=fPiezSant`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1475,6 +1522,10 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
@@ -1488,7 +1539,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=fpuertas`); 
+        ajax.send(`idPuertas=${this.idPuertas}&accion=fpuertas`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1512,6 +1563,10 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
@@ -1525,7 +1580,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=fAmbi`); 
+        ajax.send(`idAmbientes=${this.idAmbientes}&accion=fAmbi`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1549,6 +1604,10 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
@@ -1562,7 +1621,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=fComple`); 
+        ajax.send(`idComple=${this.idComple}&accion=fComple`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1586,6 +1645,10 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
@@ -1599,7 +1662,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=fServicios`); 
+        ajax.send(`idServInmue=${this.idServInmue}&accion=fServicios`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1623,6 +1686,10 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
@@ -1636,7 +1703,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=fExpedient`); 
+        ajax.send(`idExp=${this.idExp}&accion=fExpedient`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1654,12 +1721,16 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`nuExp=${this.nuExp}&expVerificado=${this.expVerificado}&multa=${this.multa}&fechaExp=${this.fechaExp}&accion=guarExpe`); 
+        ajax.send(`valorInmue=${this.valorInmue}&nuExp=${this.nuExp}&expVerificado=${this.expVerificado}&multa=${this.multa}&fechaExp=${this.fechaExp}&accion=guarExpe`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
     }
@@ -1673,12 +1744,16 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=fFactura`); 
+        ajax.send(`idFactura=${this.idFactura}&accion=fFactura`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnVeriFact()
+                    },200)
+                    
 			     }
 	       	}
     }
@@ -1697,6 +1772,73 @@ class constancias{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    setTimeout(()=>{
+                        btnFormConst();
+                    },200)
+                    alert("PROCESO COMPLETADO CON EXITO")
+			     }
+	       	}
+    }
+    veriF3(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idPosVenta=${this.idPosVenta}&idServInmue=${this.idServInmue}&accion=veriF3`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                    setTimeout(()=>{
+                        btnImprConst3();
+                    },200)
+			     }
+	       	}
+    }
+    veriF2(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idServInmue=${this.idServInmue}&accion=veriF2`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                    setTimeout(()=>{
+                        btnImprConst();
+                    },200)
+			     }
+	       	}
+    }
+    veriF1(){
+        var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recConst.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idServInmue=${this.idServInmue}&accion=veriF1`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                    setTimeout(()=>{
+                        btnImprConst1();
+                    },200)
 			     }
 	       	}
     }
@@ -1708,6 +1850,7 @@ function btnFormConst(){
 //PROPIETARIO
 function btnFormProp(){
     let consta = new constancias
+    consta.idProp = document.getElementById("idProp").value
     consta.formProp()
 }
 function btnGuarProp(){
@@ -1734,6 +1877,7 @@ function btnGuarProp(){
 //INMUEBLE
 function btnFormInmue(){
     let consta = new constancias
+    consta.idInmue = document.getElementById("idInmue").value
     consta.formInmue()
 }
 function btnGuarInmue(){
@@ -1746,9 +1890,34 @@ function btnGuarInmue(){
         consta.guarInmue()
     }
 }
+function cambioTempParr(){
+    parrInmueble = document.getElementById("parrInmuebles").value
+    if(parrInmueble =="Capital"){
+        document.getElementById("parrInmue").selectedIndex=1
+    }
+    if(parrInmueble == "Dr. Alberto Adriani"){
+        document.getElementById("parrInmue").selectedIndex=2
+    }
+    if(parrInmueble == "Santo Domingo"){
+        document.getElementById("parrInmue").selectedIndex=3
+    }
+    btnCambSec()
+    setTimeout(()=>{
+        sectorInmue = document.getElementById("sectorInmue").value
+        secInmue = document.getElementById("secInmue")
+        k = 0
+        while(sectorInmue !=secInmue.value){
+            document.getElementById("secInmue").selectedIndex=k
+            k++
+        }
+    },500)
+    
+}
+
 //CARACTERISTICAS DEL TERRENO
 function btnfCarTerreno(){
     let consta = new constancias
+    consta.idCaraInmue = document.getElementById("idCaraInmue").value
     consta.formCarTerr()
 }
 function btnGuarCarTerr(){
@@ -1764,6 +1933,7 @@ function btnGuarCarTerr(){
 //CARACTERISTICAS DE LA CONSTRUCCIÓN
 function btnfcaracConst(){
     let consta = new constancias
+    consta.idCaraConst = document.getElementById("idCaraConst").value
     consta.fcaracConst()
 }
 function btnGuarCaracConst(){
@@ -1786,6 +1956,7 @@ function btnGuarCaracConst(){
 //PROTOCOLIZACION DEL INMUEBLE
 function btnfprotInmue(){
     let consta = new constancias
+    consta.idProto = document.getElementById("idProto").value
     consta.fprotInmue()
 }
 function btnGuarProt(){
@@ -1806,6 +1977,7 @@ function btnGuarProt(){
 //ESTADO DE CONSERVACION
 function btnfConserv(){
     let consta = new constancias
+    consta.idEstConserv = document.getElementById("idEstConserv").value
     consta.fConserv();
 }
 function btnGuarConserv(){
@@ -1822,6 +1994,7 @@ function btnGuarConserv(){
 //PIEZAS SANITRIAS
 function btnfPiezSant(){
     let consta = new constancias
+    consta.idPiezSant = document.getElementById("idPiezSant").value
     consta.fPiezSant();
 }
 function btnGuarPizSanit(){
@@ -1842,6 +2015,7 @@ function btnGuarPizSanit(){
 //PUERTAS
 function btnfpuertas(){
     let consta = new constancias
+    consta.idPuertas = document.getElementById("idPuertas").value
     consta.fPuertas()
 }
 function btnGuarPuertas(){
@@ -1857,6 +2031,7 @@ function btnGuarPuertas(){
 //AMBIENTES
 function btnfAmbi(){
     let consta = new constancias
+    consta.idAmbientes= document.getElementById("idAmbientes").value
     consta.fAmbi();
 }
 function btnguarAmbien(){
@@ -1877,6 +2052,7 @@ function btnguarAmbien(){
 //COMPLEMENTOS
 function btnfComple(){
     let consta = new constancias
+    consta.idComple = document.getElementById("idComple").value
     consta.fComple();
 }
 function btnGuarComple(){
@@ -1893,6 +2069,7 @@ function btnGuarComple(){
 //SERVICIOS
 function btnfServicios(){
     let consta = new constancias
+    consta.idServInmue = document.getElementById("idServInmue").value
     consta.fServicios()
 }
 function btnGuarServicios(){
@@ -1919,6 +2096,7 @@ function btnGuarServicios(){
 //EXEPEDIENTE
 function btnfexpedient(){
     let consta = new constancias 
+    consta.idExp = document.getElementById("idExp").value
     consta.fExpedient();
 }
 function btnGuarExpe(){
@@ -1927,6 +2105,7 @@ function btnGuarExpe(){
     consta.expVerificado = document.getElementById("expVerificado").value
     consta.multa = document.getElementById("multa").value
     consta.fechaExp = document.getElementById("fechaExp").value
+    consta.valorInmue = document.getElementById("valorInmue").value
     if(consta.veriExp()==true){
         consta.guarExpe()
     }
@@ -1934,6 +2113,7 @@ function btnGuarExpe(){
 //FACTURA
 function btnfFactura(){
     let consta = new constancias
+    consta.idFactura = document.getElementById("idFactura").value
     consta.fFactura()
 }
 function btnGuarFact(){
@@ -1944,6 +2124,152 @@ function btnGuarFact(){
     consta.numFactura = document.getElementById("numFactura").value
     if(consta.veriFactura()==true){
         consta.guarFact()
+    }
+}
+//IMPRIMIR
+function btnVeriImpri(){
+    let consta = new constancias
+    idPropie = document.getElementById("idProp").value
+    idInmue = document.getElementById("idInmue").value
+    idCaraInmue = document.getElementById("idCaraInmue").value
+    idCaraConst = document.getElementById("idCaraConst").value
+    idProto = document.getElementById("idProto").value
+    idLindGen = document.getElementById("idLindGen").value
+    idLindDoc = document.getElementById("idLindDoc").value
+    idPosVenta = document.getElementById("idPosVenta").value
+    idServInmue = document.getElementById("idServInmue").value
+    idEstConserv = document.getElementById("idEstConserv").value
+    idPiezSant = document.getElementById("idPiezSant").value
+    idAmbientes = document.getElementById("idAmbientes").value
+    idPuertas = document.getElementById("idPuertas").value
+    idComple = document.getElementById("idComple").value
+    idFactura = document.getElementById("idFactura").value
+    idExp = document.getElementById("idExp").value
+    cont=0;
+    if(idProp!=0){
+        cont++ 
+    }
+    if(idInmue!=0){
+        cont++
+    }
+    if(idCaraInmue!=0){
+        cont++
+    }
+    if(idCaraConst!=0){
+        cont++
+    }
+    if(idProto!=0){
+        cont++
+    }
+    if(idServInmue!=0){
+        cont++
+    }
+    if(idEstConserv!=0){
+        cont++
+    }
+    if(idPiezSant!=0){
+        cont++
+    }
+    if(idAmbientes!=0){
+        cont++
+    }
+    if(idPuertas!=0){
+        cont++
+    }
+    if(idComple!=0){
+        cont++
+    }
+    if(idFactura!=0){
+        cont++
+    }
+    if(idExp!=0){
+        cont++
+    }
+
+    if(cont==13){
+        if(idLindDoc!=0 && idPosVenta!=0 && idLindGen!=0){
+            consta.idProp = idProp
+            consta.idInmue = idInmue
+            consta.idCaraInmue = idCaraInmue
+            consta.idCaraConst = idCaraConst
+            consta.idProto = idProto
+            consta.idServInmue = idServInmue
+            consta.idEstConserv = idEstConserv
+            consta.idPiezSant = idPiezSant
+            consta.idAmbientes = idAmbientes
+            consta.idPuertas = idPuertas
+            consta.idComple = idComple
+            consta.idFactura = idFactura
+            consta.idExp = idExp
+            consta.idLindDoc = idLindDoc
+            consta.idPosVenta = idPosVenta
+            consta.idLindGen = idLindGen
+            consta.veriF3();
+        }else{
+            if(idLindDoc!=0){
+                if(idPosVenta!=0){
+                     //F003
+                    consta.idProp = idPropie
+                    consta.idInmue = idInmue
+                    consta.idCaraInmue = idCaraInmue
+                    consta.idCaraConst = idCaraConst
+                    consta.idProto = idProto
+                    consta.idServInmue = idServInmue
+                    consta.idEstConserv = idEstConserv
+                    consta.idPiezSant = idPiezSant
+                    consta.idAmbientes = idAmbientes
+                    consta.idPuertas = idPuertas
+                    consta.idComple = idComple
+                    consta.idFactura = idFactura
+                    consta.idExp = idExp
+                    consta.idLindDoc = idLindDoc
+                    consta.idPosVenta = idPosVenta
+                    consta.idLindGen = idLindGen
+                    consta.veriF3();
+                }else if(idLindGen!=0){
+                    //F001
+                        consta.idProp = idPropie
+                        consta.idInmue = idInmue
+                        consta.idCaraInmue = idCaraInmue
+                        consta.idCaraConst = idCaraConst
+                        consta.idProto = idProto
+                        consta.idServInmue = idServInmue
+                        consta.idEstConserv = idEstConserv
+                        consta.idPiezSant = idPiezSant
+                        consta.idAmbientes = idAmbientes
+                        consta.idPuertas = idPuertas
+                        consta.idComple = idComple
+                        consta.idFactura = idFactura
+                        consta.idExp = idExp
+                        consta.idLindDoc = idLindDoc
+                        consta.idLindGen = idLindGen
+                        consta.veriF1();
+                }else{
+                     //F002
+                        consta.idProp = idPropie
+                        consta.idInmue = idInmue
+                        consta.idCaraInmue = idCaraInmue
+                        consta.idCaraConst = idCaraConst
+                        consta.idProto = idProto
+                        consta.idServInmue = idServInmue
+                        consta.idEstConserv = idEstConserv
+                        consta.idPiezSant = idPiezSant
+                        consta.idAmbientes = idAmbientes
+                        consta.idPuertas = idPuertas
+                        consta.idComple = idComple
+                        consta.idFactura = idFactura
+                        consta.idExp = idExp
+                        consta.idLindDoc = idLindDoc
+                        consta.veriF2();
+                }
+                
+            }else{
+                alert("ERROR EN ELECCION DE LINDEROS");
+            }
+        }
+        
+    }else{
+        alert("FALTAN CAMPOS POR GUARDAR")
     }
 }
 function btnfCarac(){
@@ -1963,7 +2289,8 @@ function btnfCarac(){
 }
 //LINDEROS SEGUN INSPECCIÓN
 function actGeneral(){
-    let consta = new constancias();
+    let consta = new constancias;
+    consta.idLindGen = document.getElementById("idLindGen").value
     consta.fActGeneral();
 }
 function btnGuarGeneral(){
@@ -1995,6 +2322,7 @@ function btnGuarGeneral(){
 //LINDEROS POSIBLE VENTA
 function actPosVenta(){
     let consta = new constancias
+    consta.idPosVenta = document.getElementById("idPosVenta").value
     consta.factPosVenta();
 }
 function btnGuarPosVenta(){
@@ -2028,6 +2356,7 @@ function btnGuarPosVenta(){
 //LINDEROS SEGUN DOCUMENTO
 function actSecDoc(){
     let consta = new constancias()
+    consta.idLindDoc = document.getElementById("idLindDoc").value
     consta.factSecDoc();
 }
 function btnGuarSecDoc(){
@@ -2337,9 +2666,7 @@ function btnImprConst(){
     consta.numFact= document.getElementById("numFact").value
     consta.operacion = document.getElementById("operacion").value
     consta.nuExp = document.getElementById("nuExp").value
-    if(consta.veriInmu() == true){
-        consta.imprConst()
-    }
+    consta.imprConst()
 }
 function btnImprConst1(){
     let consta = new constancias
@@ -2350,9 +2677,7 @@ function btnImprConst1(){
     consta.numFact= document.getElementById("numFact").value
     consta.operacion = document.getElementById("operacion").value
     consta.nuExp = document.getElementById("nuExp").value
-    if(consta.veriInmu() == true){
-        consta.imprConst1()
-    }
+    consta.imprConst1()
 }
 function btnImprConst3(){
     let consta = new constancias
@@ -2363,9 +2688,7 @@ function btnImprConst3(){
     consta.numFact= document.getElementById("numFact").value
     consta.operacion = document.getElementById("operacion").value
     consta.nuExp = document.getElementById("nuExp").value
-    if(consta.veriInmu() == true){
-        consta.imprConst3()
-    }
+    consta.imprConst3()
 }
 function btnImprEmpa(){
     let consta = new constancias

@@ -61,64 +61,64 @@ class f002{
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
         //BUSQUEDA DE USUARIO
-            $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
             $idUser= $resultUser->fetch_assoc();
-        //INSERT FACTURA
-            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."')";
-            $link->query($expFactSql);
-            $idExpFact= $link->insert_id;
+        //BUSQUEDA FACTURA
+            $expFactSql= "SELECT * FROM factura where n_factura=".$this->numFact."";
+            $resExpFact= $link->query($expFactSql);
+            $idExpFact= $resExpFact->fetch_array();
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
             $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
         //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$this->nuExp.",".$idExpFact.",".$this->fechFact.")";
+            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$this->nuExp.",".$idExpFact.",'".$this->fechFact."')";
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
         //BUSQUEDA DEL EXPEDIENTE
-            $busExpSql = "SELECT * FROM expediente where id=".$this->nuExp."";
-            $resBusExp = $link->query($busExpSql);
-            $busExpRes = $resBusExp->fetch_array();
+            $busExpSQL = "SELECT * FROM expediente where id=".$this->nuExp."";
+            $resBusEXP = $link->query($busExpSQL);
+            $busExpedienteRes = $resBusEXP->fetch_array();
         //BUSQUEDA DEL INMUEBLE
             $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
             $resultInmue = $resInmue->fetch_assoc();
             $idProt= $resultInmue["fk_protocolizacion"];
             $idLindDoc= $resultInmue["fk_lind_documento"];
-            $idTerreno = $resultInmue["fk_terreno"];
+            $idLindGen= $resultInmue["fk_lind_general"];
             $idConst= $resultInmue["fk_carac_construccion"];
             $idServicios= $resultInmue["fk_servicios"];
             $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
             $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
-            $expSql= "SELECT * from propietarios where id=".$this->idProp."";
+            $expSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
             $resProp= $link->query($expSql);
             $resultPropie = $resProp->fetch_assoc();
             $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
-            $protSql = "SELECT * from datos_protocolizacion where id=".$idProt."";
+            $protSql = "SELECT * from datos_protocolizacion where id='".$idProt."' ";
             $resProt = $link->query($protSql);
             $resultProp = $resProt->fetch_assoc();
         //BUSQUEDA DE LINDEROS SEGUN DOCUMENTO
-            $lindDocSql= "SELECT * FROM linderos_documento where id=".$idLindDoc."";
+            $lindDocSql= "SELECT * FROM linderos_documento where id='".$idLindDoc."'";
             $resLindDoc = $link->query($lindDocSql);
             $resultLindDoc= $resLindDoc->fetch_assoc();
         //BUSQUEDA DE DATOS CONSTRUCCION
-            $constSql= "SELECT * from caracteristicas_construccion where id=".$idConst."";
+            $constSql= "SELECT * from caracteristicas_construccion where id='".$idConst."'";
             $resConst= $link->query($constSql);
             $resultConst= $resConst->fetch_assoc();
         //BUSQUEDA DE SERVICIOS
-            $servSql= "SELECT * FROM servicios_inmue where id=".$idServicios."";
+            $servSql= "SELECT * FROM servicios_inmue where id='".$idServicios."'";
             $resServ= $link->query($servSql);
             $resultServ= $resServ->fetch_assoc();
         //BUSQUEDA DE CARACTERISTICAS DEL INMUEBLE
-            $carastInmue= "SELECT * FROM carc_inmueble where id=".$idCaracInmue."";
+            $carastInmue= "SELECT * FROM carc_inmueble where id='".$idCaracInmue."'";
             $rescarastInmue= $link->query($carastInmue);
             $mostcarastInmue= $rescarastInmue->fetch_assoc();
         //BUSQUEDA DE CARACTERISTICAS DE LA CONSTRUCCION
-            $carcConstSql= "SELECT * FROM caracteristicas_construccion where id=".$idcaracConstruccion."";
+            $carcConstSql= "SELECT * FROM caracteristicas_construccion where id='".$idcaracConstruccion."'";
             $resCaracConst= $link->query($carcConstSql);
             $resulCaracInmue= $resCaracConst->fetch_assoc();
         // Creación del objeto de la clase heredada
@@ -152,7 +152,7 @@ class f002{
             $pdf->cell(40,10,'No Civico: No Aplica');
             $pdf->SetY(84);
             $pdf->SetX(215);
-            $pdf->cell(40,10,'No Expediente: '.$busExpRes["n_expediente"].'');
+            $pdf->cell(40,10,'No Expediente: '.$busExpedienteRes["n_expediente"].'');
             $pdf->SetY(90);
             $pdf->SetX(22);
             $pdf->cell(40,10,''.utf8_decode('Tipo de Operación: '.$this->operacion.'').'');
@@ -403,6 +403,12 @@ class f002{
                 if($resultLindDoc["uniNorte"] =="Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["norte"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
                 }
+                if($resultLindDoc["uniNorte"] =="Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["norte"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniNorte"] =="otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["norte"].'',1,0,'C');
+                }
             }
             if($resultLindDoc["norte"]=="nada"){
                 if($resultLindDoc["uniNorte"] =="m"){
@@ -410,6 +416,12 @@ class f002{
                 }
                 if($resultLindDoc["uniNorte"] =="Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["noreste"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniNorte"] =="Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noreste"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniNorte"] =="otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noreste"].'',1,0,'C');
                 }
             }
             $pdf->SetY(194);
@@ -432,6 +444,12 @@ class f002{
                 if($resultLindDoc["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["sur"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
                 }
+                if($resultLindDoc["uniSur"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sur"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniSur"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sur"].'',1,0,'C');
+                }
             }
             if($resultLindDoc["sur"]=="nada"){
                 if($resultLindDoc["uniSur"] =="m"){
@@ -439,6 +457,12 @@ class f002{
                 }
                 if($resultLindDoc["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["sureste"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniSur"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sureste"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniSur"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sureste"].'',1,0,'C');
                 }
             }
             
@@ -462,6 +486,12 @@ class f002{
                 if($resultLindDoc["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["este"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
                 }
+                if($resultLindDoc["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["este"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["este"].'',1,0,'C');
+                }
             }
             if($resultLindDoc["este"]=="nada"){
                 if($resultLindDoc["uniEste"] =="m"){
@@ -469,6 +499,12 @@ class f002{
                 }
                 if($resultLindDoc["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["suroeste"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["suroeste"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["suroeste"].'',1,0,'C');
                 }
             }
             
@@ -492,6 +528,12 @@ class f002{
                 if($resultLindDoc["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["oeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
                 }
+                if($resultLindDoc["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["oeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["oeste"].'',1,0,'C');
+                }
             }
             if($resultLindDoc["oeste"]=="nada"){
                 if($resultLindDoc["uniOeste"] =="m"){
@@ -499,6 +541,12 @@ class f002{
                 }
                 if($resultLindDoc["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["noroeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniOeste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noroeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniOeste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noroeste"].'',1,0,'C');
                 }
             }
             
@@ -526,7 +574,7 @@ class f002{
             $pdf->cell(60,6,utf8_decode('Dirección del Inmueble:'),1,0,'L');
             $pdf->SetY(218);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$resultInmue["direccion"].'',1,0,'C');
+            $pdf->cell(0,6,''.$resultInmue["direccion"].'',1,0,'L');
         //SERVICIOS 1
             $pdf->SetY(224);    
             $pdf->SetX(19);
@@ -1125,13 +1173,13 @@ class f002{
         $carpeta ='../../../assets/constancias/'.date("Y").'';
         if(!file_exists($carpeta)){
             mkdir($carpeta,0777,true);
-            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }else{
-            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }
         echo'
-        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf" />
-        <input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
+        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf" />
+        <input type="hidden" id="numExp" value="'.$busExpedienteRes["n_expediente"].'">';
         
     }
 }
@@ -1157,10 +1205,10 @@ class f001{
             $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
             $idUser= $resultUser->fetch_assoc();
-        //INSERT FACTURA
-            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."')";
-            $link->query($expFactSql);
-            $idExpFact= $link->insert_id; 
+        //BUSQUEDA FACTURA
+            $expFactSql= "SELECT * FROM factura where n_factura=".$this->numFact."";
+            $resExpFact= $link->query($expFactSql);
+            $idExpFact= $resExpFact->fetch_array();
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
             $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
@@ -1171,9 +1219,9 @@ class f001{
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
         //BUSQUEDA DEL EXPEDIENTE
-            $busExpSql = "SELECT * FROM expediente where id=".$this->nuExp."";
-            $resBusExp = $link->query($busExpSql);
-            $busExpRes = $resBusExp->fetch_array();
+            $busExpSQL = "SELECT * FROM expediente where id=".$this->nuExp."";
+            $resBusEXP = $link->query($busExpSQL);
+            $busExpedienteRes = $resBusEXP->fetch_array();
         //BUSQUEDA DEL INMUEBLE
             $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
@@ -1186,36 +1234,36 @@ class f001{
             $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
             $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
-            $expSql= "SELECT * from propietarios where id=".$this->idProp."";
+            $expSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
             $resProp= $link->query($expSql);
             $resultPropie = $resProp->fetch_assoc();
             $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
-            $protSql = "SELECT * from datos_protocolizacion where id=".$idProt."";
+            $protSql = "SELECT * from datos_protocolizacion where id='".$idProt."' ";
             $resProt = $link->query($protSql);
             $resultProp = $resProt->fetch_assoc();
         //BUSQUEDA DE LINDEROS SEGUN DOCUMENTO
-            $lindDocSql= "SELECT * FROM linderos_documento where id=".$idLindDoc."";
+            $lindDocSql= "SELECT * FROM linderos_documento where id='".$idLindDoc."'";
             $resLindDoc = $link->query($lindDocSql);
             $resultLindDoc= $resLindDoc->fetch_assoc();
         //BUSQUEDA DE LINDEROS GENERAL
-            $lindGenSql= "SELECT * FROM linderos_general where id=".$idLindGen."";
+            $lindGenSql= "SELECT * FROM linderos_general where id='".$idLindGen."'";
             $resLindGen = $link->query($lindGenSql);
             $resultLindGen= $resLindGen->fetch_assoc();
         //BUSQUEDA DE DATOS CONSTRUCCION
-            $constSql= "SELECT * from caracteristicas_construccion where id=".$idConst."";
+            $constSql= "SELECT * from caracteristicas_construccion where id='".$idConst."'";
             $resConst= $link->query($constSql);
             $resultConst= $resConst->fetch_assoc();
         //BUSQUEDA DE SERVICIOS
-            $servSql= "SELECT * FROM servicios_inmue where id=".$idServicios."";
+            $servSql= "SELECT * FROM servicios_inmue where id='".$idServicios."'";
             $resServ= $link->query($servSql);
             $resultServ= $resServ->fetch_assoc();
         //BUSQUEDA DE CARACTERISTICAS DEL INMUEBLE
-            $carastInmue= "SELECT * FROM carc_inmueble where id=".$idCaracInmue."";
+            $carastInmue= "SELECT * FROM carc_inmueble where id='".$idCaracInmue."'";
             $rescarastInmue= $link->query($carastInmue);
             $mostcarastInmue= $rescarastInmue->fetch_assoc();
         //BUSQUEDA DE CARACTERISTICAS DE LA CONSTRUCCION
-            $carcConstSql= "SELECT * FROM caracteristicas_construccion where id=".$idcaracConstruccion."";
+            $carcConstSql= "SELECT * FROM caracteristicas_construccion where id='".$idcaracConstruccion."'";
             $resCaracConst= $link->query($carcConstSql);
             $resulCaracInmue= $resCaracConst->fetch_assoc();
         //CONTINUACION HEADER
@@ -1246,7 +1294,7 @@ class f001{
             $pdf->cell(40,10,'No Civico: No Aplica');
             $pdf->SetY(70);
             $pdf->SetX(215);
-            $pdf->cell(40,10,'No Expediente: '.$busExpRes["n_expediente"].'');
+            $pdf->cell(40,10,'No Expediente: '.$busExpedienteRes["n_expediente"].'');
             $pdf->SetY(74);
             $pdf->SetX(22);
             $pdf->cell(40,10,utf8_decode('Tipo de Operación: '.$this->operacion.''));
@@ -1495,6 +1543,12 @@ class f001{
                 if($resultLindDoc["uniNorte"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["norte"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
                 }
+                if($resultLindDoc["uniNorte"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["norte"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniNorte"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["norte"].'',1,0,'C');
+                }
             }
             if($resultLindDoc["norte"]=="nada"){
                 if($resultLindDoc["uniNorte"] =="m"){
@@ -1502,6 +1556,12 @@ class f001{
                 }
                 if($resultLindDoc["uniNorte"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["noreste"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniNorte"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noreste"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniNorte"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noreste"].'',1,0,'C');
                 }
             }
             
@@ -1525,6 +1585,12 @@ class f001{
                 if($resultLindDoc["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["sur"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
                 }
+                if($resultLindDoc["uniSur"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sur"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniSur"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sur"].'',1,0,'C');
+                }
             }
             if($resultLindDoc["sur"]=="nada"){
                 if($resultLindDoc["uniSur"] =="m"){
@@ -1532,6 +1598,12 @@ class f001{
                 }
                 if($resultLindDoc["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["sureste"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniSur"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sureste"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniSur"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sureste"].'',1,0,'C');
                 }
             }
            
@@ -1555,6 +1627,12 @@ class f001{
                 if($resultLindDoc["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["este"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
                 }
+                if($resultLindDoc["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["este"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["este"].'',1,0,'C');
+                }
             }
             if($resultLindDoc["este"]=="nada"){
                 if($resultLindDoc["uniEste"] =="m"){
@@ -1562,6 +1640,12 @@ class f001{
                 }
                 if($resultLindDoc["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["suroeste"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["suroeste"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["suroeste"].'',1,0,'C');
                 }
             }
             
@@ -1585,6 +1669,12 @@ class f001{
                 if($resultLindDoc["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["oeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
                 }
+                if($resultLindDoc["uniOeste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["oeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniOeste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["oeste"].'',1,0,'C');
+                }
             }
             if($resultLindDoc["oeste"]=="nada"){
                 if($resultLindDoc["uniOeste"] =="m"){
@@ -1592,6 +1682,12 @@ class f001{
                 }
                 if($resultLindDoc["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["noroeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniOeste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noroeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniOeste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noroeste"].'',1,0,'C');
                 }
             }
             
@@ -1646,6 +1742,12 @@ class f001{
                 if($resultLindGen["uniNorte"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindGen["norte"].' '.$resultLindGen["uniNorte"].'',1,0,'C');
                 }
+                if($resultLindGen["uniNorte"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindGen["norte"].' '.$resultLindGen["uniNorte"].'',1,0,'C');
+                }
+                if($resultLindGen["uniNorte"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindGen["norte"].'',1,0,'C');
+                }
             }
             if($resultLindGen["norte"]=="nada"){
                 if($resultLindGen["uniNorte"] =="m"){
@@ -1653,6 +1755,12 @@ class f001{
                 }
                 if($resultLindGen["uniNorte"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindGen["noreste"].' '.$resultLindGen["uniNorte"].'',1,0,'C');
+                }
+                if($resultLindGen["uniNorte"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindGen["noreste"].' '.$resultLindGen["uniNorte"].'',1,0,'C');
+                }
+                if($resultLindGen["uniNorte"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindGen["noreste"].'',1,0,'C');
                 }
             }
             
@@ -1674,6 +1782,12 @@ class f001{
                     $pdf->cell(0,6,''.$resultLindGen["sur"].'',1,0,'C');
                 }
                 if($resultLindGen["uniSur"] == "Lq"){
+                    $pdf->cell(0,6,''.$resultLindGen["sur"].' '.$resultLindGen["uniSur"].'',1,0,'C');
+                }
+                if($resultLindGen["uniSur"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindGen["sur"].' '.$resultLindGen["uniSur"].'',1,0,'C');
+                }
+                if($resultLindGen["uniSur"] == "otros"){
                     $pdf->cell(0,6,''.$resultLindGen["sur"].' '.$resultLindGen["uniSur"].'',1,0,'C');
                 }
             }
@@ -1706,12 +1820,24 @@ class f001{
                 if($resultLindGen["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindGen["este"].' '.$resultLindGen["uniEste"].'',1,0,'C');
                 }
+                if($resultLindGen["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindGen["este"].' '.$resultLindGen["uniEste"].'',1,0,'C');
+                }
+                if($resultLindGen["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindGen["este"].'',1,0,'C');
+                }
             }
             if($resultLindGen["este"]=="nada"){
                 if($resultLindGen["uniEste"] =="m"){
                     $pdf->cell(0,6,''.$resultLindGen["suroeste"].'',1,0,'C');
                 }
                 if($resultLindGen["uniEste"] == "Lq"){
+                    $pdf->cell(0,6,''.$resultLindGen["suroeste"].' '.$resultLindGen["uniEste"].'',1,0,'C');
+                }
+                if($resultLindGen["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindGen["suroeste"].' '.$resultLindGen["uniEste"].'',1,0,'C');
+                }
+                if($resultLindGen["uniEste"] == "otros"){
                     $pdf->cell(0,6,''.$resultLindGen["suroeste"].' '.$resultLindGen["uniEste"].'',1,0,'C');
                 }
             }
@@ -1736,6 +1862,12 @@ class f001{
                 if($resultLindGen["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindGen["oeste"].' '.$resultLindGen["uniOeste"].'',1,0,'C');
                 }
+                if($resultLindGen["uniOeste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindGen["oeste"].' '.$resultLindGen["uniOeste"].'',1,0,'C');
+                }
+                if($resultLindGen["uniOeste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindGen["oeste"].'',1,0,'C');
+                }
             }
             if($resultLindGen["oeste"]=="nada"){
                 if($resultLindGen["uniOeste"] =="m"){
@@ -1743,6 +1875,12 @@ class f001{
                 }
                 if($resultLindGen["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindGen["noroeste"].' '.$resultLindGen["uniOeste"].'',1,0,'C');
+                }
+                if($resultLindGen["uniOeste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindGen["noroeste"].' '.$resultLindGen["uniOeste"].'',1,0,'C');
+                }
+                if($resultLindGen["uniOeste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindGen["noroeste"].'',1,0,'C');
                 }
             }
             
@@ -1788,7 +1926,7 @@ class f001{
             $pdf->cell(60,6,'Valor Estimado del Inmueble:',1,0,'C');
             $pdf->SetY(255);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$resultTerr["valor_inmueble"].'',1,0,'C');
+            $pdf->cell(0,6,''.$busExpedienteRes["valorInmue"].'',1,0,'C');
         //SERVICIOS 1
             $pdf->SetY(261);    
             $pdf->SetX(19);
@@ -2385,13 +2523,13 @@ class f001{
         $carpeta ='../../../assets/constancias/'.date("Y").'';
         if(!file_exists($carpeta)){
             mkdir($carpeta,0777,true);
-            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }else{
-            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }
         echo'
-        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf" />
-        <input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
+        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf" />
+        <input type="hidden" id="numExp" value="'.$busExpedienteRes["n_expediente"].'">';
     }
 }
 class f003{
@@ -2415,23 +2553,24 @@ class f003{
             $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
             $idUser= $resultUser->fetch_assoc();
-        //INSERT FACTURA
-            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."')";
-            $link->query($expFactSql);
-            $idExpFact= $link->insert_id;
+        //BUSQUEDA FACTURA
+            $expFactSql= "SELECT * FROM factura where n_factura=".$this->numFact."";
+            $resExpFact= $link->query($expFactSql);
+            $idExpFact= $resExpFact->fetch_array();
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
             $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
+        //BUSQUEDA DEL EXPEDIENTE
+            $busExpSQL = "SELECT * FROM expediente where id='".$this->nuExp."'";
+            $resBusEXP = $link->query($busExpSQL);
+            $busExpedienteRes = $resBusEXP->fetch_array();
         //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$this->nuExp.",".$idExpFact.",".$this->fechFact.")";
+            $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$busExpedienteRes["id"].",".$idExpFact["id"].",".$this->fechFact.")";
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
-        //BUSQUEDA DEL EXPEDIENTE
-            $busExpSql = "SELECT * FROM expediente where id=".$this->nuExp."";
-            $resBusExp = $link->query($busExpSql);
-            $busExpRes = $resBusExp->fetch_array();
+        
         //BUSQUEDA DEL INMUEBLE
             $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
@@ -2445,7 +2584,7 @@ class f003{
             $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
             $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
-            $expSql= "SELECT * from propietarios where id=".$this->idProp."";
+            $expSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
             $resProp= $link->query($expSql);
             $resultPropie = $resProp->fetch_assoc();
             $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
@@ -2505,7 +2644,7 @@ class f003{
             $pdf->cell(40,10,'No Civico: No Aplica');
             $pdf->SetY(70);
             $pdf->SetX(215);
-            $pdf->cell(40,10,'No Expediente: '.$busExpRes["n_expediente"].'');
+            $pdf->cell(40,10,'No Expediente: '.$busExpedienteRes["n_expediente"].'');
             $pdf->SetY(74);
             $pdf->SetX(22);
             $pdf->cell(40,10,utf8_decode('Tipo de Operación: '.$this->operacion.''));
@@ -2754,6 +2893,12 @@ class f003{
                 if($resultLindDoc["uniNorte"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["norte"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
                 }
+                if($resultLindDoc["uniNorte"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["norte"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniNorte"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["norte"].'',1,0,'C');
+                }
             }
             if($resultLindDoc["norte"]=="nada"){
                 if($resultLindDoc["uniNorte"] =="m"){
@@ -2761,6 +2906,12 @@ class f003{
                 }
                 if($resultLindDoc["uniNorte"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["noreste"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniNorte"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noreste"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniNorte"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noreste"].'',1,0,'C');
                 }
             }
             
@@ -2784,6 +2935,12 @@ class f003{
                 if($resultLindDoc["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["sur"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
                 }
+                if($resultLindDoc["uniSur"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sur"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniSur"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sur"].'',1,0,'C');
+                }
             }
             if($resultLindDoc["sur"]=="nada"){
                 if($resultLindDoc["uniSur"] =="m"){
@@ -2791,6 +2948,12 @@ class f003{
                 }
                 if($resultLindDoc["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["sureste"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniSur"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sureste"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniSur"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sureste"].'',1,0,'C');
                 }
             }
             
@@ -2814,6 +2977,12 @@ class f003{
                 if($resultLindDoc["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["este"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
                 }
+                if($resultLindDoc["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["este"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["este"].'',1,0,'C');
+                }
             }
             if($resultLindDoc["este"]=="nada"){
                 if($resultLindDoc["uniEste"] =="m"){
@@ -2821,6 +2990,12 @@ class f003{
                 }
                 if($resultLindDoc["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["suroeste"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["suroeste"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["suroeste"].'',1,0,'C');
                 }
             }
             
@@ -2844,6 +3019,12 @@ class f003{
                 if($resultLindDoc["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["oeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
                 }
+                if($resultLindDoc["uniOeste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["oeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniOeste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["oeste"].'',1,0,'C');
+                }
             }
             if($resultLindDoc["oeste"]=="nada"){
                 if($resultLindDoc["uniOeste"] =="m"){
@@ -2851,6 +3032,12 @@ class f003{
                 }
                 if($resultLindDoc["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["noroeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniOeste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noroeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }
+                if($resultLindDoc["uniOeste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noroeste"].'',1,0,'C');
                 }
             }
            
@@ -2905,6 +3092,12 @@ class f003{
                 if($resultPosVenta["uniNorte"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["norte"].' '.$resultPosVenta["uniNorte"].'',1,0,'C');
                 }
+                if($resultPosVenta["uniNorte"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultPosVenta["norte"].' '.$resultPosVenta["uniNorte"].'',1,0,'C');
+                }
+                if($resultPosVenta["uniNorte"] == "otros"){
+                    $pdf->cell(0,6,''.$resultPosVenta["norte"].'',1,0,'C');
+                }
             }
             if($resultPosVenta["norte"]=="nada"){
                 if($resultPosVenta["uniNorte"] =="m"){
@@ -2912,6 +3105,12 @@ class f003{
                 }
                 if($resultPosVenta["uniNorte"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["noreste"].' '.$resultPosVenta["uniNorte"].'',1,0,'C');
+                }
+                if($resultPosVenta["uniNorte"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultPosVenta["noreste"].' '.$resultPosVenta["uniNorte"].'',1,0,'C');
+                }
+                if($resultPosVenta["uniNorte"] == "otros"){
+                    $pdf->cell(0,6,''.$resultPosVenta["noreste"].'',1,0,'C');
                 }
             }
             
@@ -2935,6 +3134,12 @@ class f003{
                 if($resultPosVenta["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["sur"].' '.$resultPosVenta["uniSur"].'',1,0,'C');
                 }
+                if($resultPosVenta["uniSur"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultPosVenta["sur"].' '.$resultPosVenta["uniSur"].'',1,0,'C');
+                }
+                if($resultPosVenta["uniSur"] == "otros"){
+                    $pdf->cell(0,6,''.$resultPosVenta["sur"].'',1,0,'C');
+                }
             }
             if($resultPosVenta["sur"]=="nada"){
                 if($resultPosVenta["uniSur"] =="m"){
@@ -2943,13 +3148,19 @@ class f003{
                 if($resultPosVenta["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["sureste"].' '.$resultPosVenta["uniSur"].'',1,0,'C');
                 }
+                if($resultPosVenta["uniSur"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultPosVenta["sureste"].' '.$resultPosVenta["uniSur"].'',1,0,'C');
+                }
+                if($resultPosVenta["uniSur"] == "otros"){
+                    $pdf->cell(0,6,''.$resultPosVenta["sureste"].'',1,0,'C');
+                }
             }
             $pdf->SetY(219);
             $pdf->SetX(19);
             if($resultPosVenta["este"]!="nada"){
                 $pdf->cell(60,6,'ESTE',1,0,'C');
             }
-            if($resultPosVenta["sur"]=="nada"){
+            if($resultPosVenta["este"]=="nada"){
                 $pdf->cell(60,6,'SUROESTE',1,0,'C');
             }
             $pdf->SetY(219);
@@ -2964,13 +3175,25 @@ class f003{
                 if($resultPosVenta["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["este"].' '.$resultPosVenta["uniEste"].'',1,0,'C');
                 }
+                if($resultPosVenta["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultPosVenta["este"].' '.$resultPosVenta["uniEste"].'',1,0,'C');
+                }
+                if($resultPosVenta["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultPosVenta["este"].'',1,0,'C');
+                }
             }
-            if($resultPosVenta["sur"]=="nada"){
+            if($resultPosVenta["este"]=="nada"){
                 if($resultPosVenta["uniEste"] =="m"){
                     $pdf->cell(0,6,''.$resultPosVenta["suroeste"].'',1,0,'C');
                 }
                 if($resultPosVenta["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["suroeste"].' '.$resultPosVenta["uniEste"].'',1,0,'C');
+                }
+                if($resultPosVenta["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultPosVenta["suroeste"].' '.$resultPosVenta["uniEste"].'',1,0,'C');
+                }
+                if($resultPosVenta["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultPosVenta["suroeste"].'',1,0,'C');
                 }
             }
             
@@ -2994,6 +3217,12 @@ class f003{
                 if($resultPosVenta["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["oeste"].' '.$resultPosVenta["uniOeste"].'',1,0,'C');
                 }
+                if($resultPosVenta["uniOeste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultPosVenta["oeste"].' '.$resultPosVenta["uniOeste"].'',1,0,'C');
+                }
+                if($resultPosVenta["uniOeste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultPosVenta["oeste"].'',1,0,'C');
+                }
             }
             if($resultPosVenta["oeste"]=="nada"){
                 if($resultPosVenta["uniOeste"] =="m"){
@@ -3001,6 +3230,12 @@ class f003{
                 }
                 if($resultPosVenta["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["noroeste"].' '.$resultPosVenta["uniOeste"].'',1,0,'C');
+                }
+                if($resultPosVenta["uniOeste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultPosVenta["noroeste"].' '.$resultPosVenta["uniOeste"].'',1,0,'C');
+                }
+                if($resultPosVenta["uniOeste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultPosVenta["noroeste"].'',1,0,'C');
                 }
             }
             
@@ -3046,7 +3281,7 @@ class f003{
             $pdf->cell(60,6,'Valor Estimado del Inmueble:',1,0,'C');
             $pdf->SetY(255);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$resultTerr["valor_inmueble"].'',1,0,'C');
+            $pdf->cell(0,6,''.$busExpedienteRes["valorInmue"].'',1,0,'C');
         //SERVICIOS 1
             $pdf->SetY(261);    
             $pdf->SetX(19);
@@ -3643,13 +3878,13 @@ class f003{
         $carpeta ='../../../assets/constancias/'.date("Y").'';
         if(!file_exists($carpeta)){
             mkdir($carpeta,0777,true);
-            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }else{
-            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }
         echo'
-        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf" />
-        <input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
+        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf" />
+        <input type="hidden" id="numExp" value="'.$busExpedienteRes["n_expediente"].'">';
     }
 }
 class f004{
