@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-08-2020 a las 14:06:14
+-- Tiempo de generación: 11-09-2020 a las 08:40:35
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.1
 
@@ -27,6 +27,25 @@ USE `siscast`;
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `ambientes`
+--
+
+CREATE TABLE `ambientes` (
+  `id` int(11) NOT NULL,
+  `dormitorio` varchar(255) DEFAULT NULL,
+  `comedor` varchar(255) DEFAULT NULL,
+  `sala` varchar(255) DEFAULT NULL,
+  `banos` varchar(255) DEFAULT NULL,
+  `cocina` varchar(255) DEFAULT NULL,
+  `servicio` varchar(255) DEFAULT NULL,
+  `oficina` varchar(255) DEFAULT NULL,
+  `garaje` varchar(255) DEFAULT NULL,
+  `estacionamiento` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `caracteristicas_construccion`
 --
 
@@ -39,14 +58,16 @@ CREATE TABLE `caracteristicas_construccion` (
   `pintura` text DEFAULT NULL,
   `techo` text DEFAULT NULL,
   `pisos` text DEFAULT NULL,
-  `piezas_sanitarias` text DEFAULT NULL,
   `ventanas` text DEFAULT NULL,
-  `puertas` text DEFAULT NULL,
   `insta_electricas` text DEFAULT NULL,
-  `complementos` text DEFAULT NULL,
-  `estado_conservacion` text DEFAULT NULL,
-  `ambientes` text DEFAULT NULL,
-  `observ` text DEFAULT NULL
+  `observ` text DEFAULT NULL,
+  `Regimen` varchar(255) DEFAULT NULL,
+  `fk_puertas` varchar(255) DEFAULT NULL,
+  `fk_estadoConserv` varchar(255) DEFAULT NULL,
+  `fk_piezasSanitarias` varchar(255) DEFAULT NULL,
+  `fk_complementos` varchar(255) DEFAULT NULL,
+  `fk_ambientes` varchar(255) DEFAULT NULL,
+  `fk_estadoCons` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -60,10 +81,7 @@ CREATE TABLE `carc_inmueble` (
   `topografia` text DEFAULT NULL,
   `forma` text DEFAULT NULL,
   `uso` text DEFAULT NULL,
-  `tenencia` text DEFAULT NULL,
-  `ocupante` text DEFAULT NULL,
-  `dimenciones` varchar(255) DEFAULT NULL,
-  `regimen` varchar(255) DEFAULT NULL
+  `tenencia` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -90,6 +108,21 @@ CREATE TABLE `cod_catastral` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `complementos`
+--
+
+CREATE TABLE `complementos` (
+  `id` int(11) DEFAULT NULL,
+  `ascensor` varchar(255) DEFAULT NULL,
+  `aire_acond` varchar(255) DEFAULT NULL,
+  `rejas` varchar(255) DEFAULT NULL,
+  `closets` varchar(255) DEFAULT NULL,
+  `porcelana` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `constancias`
 --
 
@@ -98,7 +131,7 @@ CREATE TABLE `constancias` (
   `tipo_operacion` text DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `fk_redactor` int(11) DEFAULT NULL,
-  `fk_exped` int(11) DEFAULT NULL
+  `fk_expedi` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -123,6 +156,21 @@ CREATE TABLE `datos_protocolizacion` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `estado_conservacion`
+--
+
+CREATE TABLE `estado_conservacion` (
+  `id` int(11) NOT NULL,
+  `ano_construccion` varchar(255) DEFAULT NULL,
+  `ano_refaccion` varchar(255) DEFAULT NULL,
+  `edad_efectiva` varchar(255) DEFAULT NULL,
+  `nro_planta` varchar(255) DEFAULT NULL,
+  `nro_vivienda` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `expediente`
 --
 
@@ -131,10 +179,28 @@ CREATE TABLE `expediente` (
   `fk_inmueble` int(11) DEFAULT NULL,
   `fk_propietario` int(11) DEFAULT NULL,
   `fk_usuario` int(11) DEFAULT NULL,
-  `n_expediente` int(11) DEFAULT NULL,
+  `n_expediente` varchar(11) DEFAULT NULL,
   `fecha` date DEFAULT NULL,
-  `condicion` varchar(255) DEFAULT NULL
+  `condicion` varchar(255) DEFAULT NULL,
+  `valorInmue` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `expempadro`
+--
+
+CREATE TABLE `expempadro` (
+  `id` int(11) NOT NULL,
+  `fk_inmueble` int(11) DEFAULT NULL,
+  `fk_propietario` int(11) DEFAULT NULL,
+  `fk_usuario` int(11) DEFAULT NULL,
+  `n_expediente` varchar(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `condicion` varchar(255) DEFAULT NULL,
+  `valorInmue` varchar(255) NOT NULL
+) ENGINE=InnoDB AVG_ROW_LENGTH=2730 DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -146,7 +212,8 @@ CREATE TABLE `factura` (
   `id` int(11) NOT NULL,
   `monto` varchar(255) DEFAULT NULL,
   `n_factura` varchar(255) DEFAULT NULL,
-  `fecha` date DEFAULT NULL
+  `fecha` date DEFAULT NULL,
+  `n_recibo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -170,7 +237,6 @@ CREATE TABLE `historial_user` (
 
 CREATE TABLE `inmueble` (
   `id` int(11) NOT NULL,
-  `telef` varchar(255) DEFAULT NULL,
   `direccion` varchar(255) DEFAULT NULL,
   `parroquia` text DEFAULT NULL,
   `sector` varchar(255) DEFAULT NULL,
@@ -181,7 +247,6 @@ CREATE TABLE `inmueble` (
   `fk_lind_documento` int(11) DEFAULT NULL,
   `fk_lind_general` int(11) DEFAULT NULL,
   `fk_lind_pos_venta` int(11) DEFAULT NULL,
-  `fk_terreno` int(11) DEFAULT NULL,
   `fk_servicios` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -304,6 +369,25 @@ CREATE TABLE `pagos` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `piezas_sanitarias`
+--
+
+CREATE TABLE `piezas_sanitarias` (
+  `id` int(11) NOT NULL,
+  `porcelana_fina` text DEFAULT NULL,
+  `porcelana_econ` text DEFAULT NULL,
+  `banera` text DEFAULT NULL,
+  `calentador` text DEFAULT NULL,
+  `wc` text DEFAULT NULL,
+  `bidet` text DEFAULT NULL,
+  `lavamanos` text DEFAULT NULL,
+  `ducha` text DEFAULT NULL,
+  `urinario` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `propietarios`
 --
 
@@ -314,7 +398,22 @@ CREATE TABLE `propietarios` (
   `nombre` text DEFAULT NULL,
   `apellido` text DEFAULT NULL,
   `telef` varchar(255) DEFAULT NULL,
-  `dir_hab` varchar(255) DEFAULT NULL
+  `dir_hab` varchar(255) DEFAULT NULL,
+  `telef_hab` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `puertas`
+--
+
+CREATE TABLE `puertas` (
+  `id` int(11) NOT NULL,
+  `entamborada_fina` text DEFAULT NULL,
+  `ent_econo` text DEFAULT NULL,
+  `madera_cepi` text DEFAULT NULL,
+  `hierro` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -357,16 +456,341 @@ CREATE TABLE `servicios_inmue` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `terreno`
+-- Estructura de tabla para la tabla `temp_ambientes`
 --
 
-CREATE TABLE `terreno` (
+CREATE TABLE `temp_ambientes` (
   `id` int(11) NOT NULL,
-  `area_total_venta` varchar(255) DEFAULT NULL,
-  `area_restante` varchar(255) DEFAULT NULL,
-  `valor_terreno` varchar(255) DEFAULT NULL,
-  `valor_inmueble` varchar(255) DEFAULT NULL,
-  `valor_construccion` varchar(255) DEFAULT NULL
+  `dormitorio` varchar(255) DEFAULT NULL,
+  `comedor` varchar(255) DEFAULT NULL,
+  `sala` varchar(255) DEFAULT NULL,
+  `banos` varchar(255) DEFAULT NULL,
+  `cocina` varchar(255) DEFAULT NULL,
+  `servicio` varchar(255) DEFAULT NULL,
+  `oficina` varchar(255) DEFAULT NULL,
+  `garaje` varchar(255) DEFAULT NULL,
+  `estacionamiento` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_caraconst`
+--
+
+CREATE TABLE `temp_caraconst` (
+  `id` int(11) NOT NULL,
+  `destino` text DEFAULT NULL,
+  `estructura` text DEFAULT NULL,
+  `paredes_tipo` text DEFAULT NULL,
+  `paredes_acabado` text DEFAULT NULL,
+  `pintura` text DEFAULT NULL,
+  `techo` text DEFAULT NULL,
+  `pisos` text DEFAULT NULL,
+  `ventanas` text DEFAULT NULL,
+  `insta_electricas` text DEFAULT NULL,
+  `observ` text DEFAULT NULL,
+  `Regimen` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_carainmue`
+--
+
+CREATE TABLE `temp_carainmue` (
+  `id` int(11) NOT NULL,
+  `topografia` text DEFAULT NULL,
+  `forma` text DEFAULT NULL,
+  `uso` text DEFAULT NULL,
+  `tenencia` text DEFAULT NULL
+) ENGINE=InnoDB AVG_ROW_LENGTH=2048 DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_complementos`
+--
+
+CREATE TABLE `temp_complementos` (
+  `id` int(11) NOT NULL,
+  `ascensor` varchar(255) DEFAULT NULL,
+  `aire_acond` varchar(255) DEFAULT NULL,
+  `rejas` varchar(255) DEFAULT NULL,
+  `closets` varchar(255) DEFAULT NULL,
+  `porcelana` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_datos_protocolizacion`
+--
+
+CREATE TABLE `temp_datos_protocolizacion` (
+  `id` int(11) NOT NULL,
+  `documento` varchar(255) DEFAULT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `numero` varchar(255) DEFAULT NULL,
+  `tomo` varchar(255) DEFAULT NULL,
+  `folio` varchar(255) DEFAULT NULL,
+  `protocolo` varchar(255) DEFAULT NULL,
+  `trimestre` varchar(255) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `valor_inmueble` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AVG_ROW_LENGTH=2048 DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_estado_conservacion`
+--
+
+CREATE TABLE `temp_estado_conservacion` (
+  `id` int(11) NOT NULL,
+  `ano_construccion` varchar(255) DEFAULT NULL,
+  `ano_refaccion` varchar(255) DEFAULT NULL,
+  `edad_efectiva` varchar(255) DEFAULT NULL,
+  `nro_planta` varchar(255) DEFAULT NULL,
+  `nro_vivienda` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_expediente`
+--
+
+CREATE TABLE `temp_expediente` (
+  `id` int(11) NOT NULL,
+  `no_expediente` varchar(255) DEFAULT NULL,
+  `condicion` varchar(255) DEFAULT NULL,
+  `fecha` varbinary(255) DEFAULT NULL,
+  `valorInmue` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_factura`
+--
+
+CREATE TABLE `temp_factura` (
+  `id` int(11) NOT NULL,
+  `monto` varchar(255) DEFAULT NULL,
+  `n_factura` varchar(255) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `n_recibo` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB AVG_ROW_LENGTH=2048 DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_inmueble`
+--
+
+CREATE TABLE `temp_inmueble` (
+  `id` int(11) NOT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `parroquia` text DEFAULT NULL,
+  `sector` varchar(255) DEFAULT NULL,
+  `ambito` text DEFAULT NULL
+) ENGINE=InnoDB AVG_ROW_LENGTH=2048 DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_linderos_documento`
+--
+
+CREATE TABLE `temp_linderos_documento` (
+  `id` int(11) NOT NULL,
+  `norte` varchar(255) DEFAULT NULL,
+  `noreste` varchar(255) DEFAULT NULL,
+  `sur` varchar(255) DEFAULT NULL,
+  `sureste` varchar(255) DEFAULT NULL,
+  `este` varchar(255) DEFAULT NULL,
+  `suroeste` varchar(255) DEFAULT NULL,
+  `oeste` varchar(255) DEFAULT NULL,
+  `noroeste` varchar(255) DEFAULT NULL,
+  `alind_n` varchar(255) DEFAULT NULL,
+  `alind_s` varchar(255) DEFAULT NULL,
+  `alind_e` varchar(255) DEFAULT NULL,
+  `alind_o` varchar(255) DEFAULT NULL,
+  `areaTotal` varchar(255) DEFAULT NULL,
+  `uniAreaT` varchar(255) DEFAULT NULL,
+  `nivelesConst` varchar(255) DEFAULT NULL,
+  `uniAreaC` varchar(255) DEFAULT NULL,
+  `areaConst` varchar(255) DEFAULT NULL,
+  `uniNorte` text DEFAULT NULL,
+  `uniSur` text DEFAULT NULL,
+  `uniEste` text DEFAULT NULL,
+  `uniOeste` text DEFAULT NULL
+) ENGINE=InnoDB AVG_ROW_LENGTH=2048 DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_linderos_general`
+--
+
+CREATE TABLE `temp_linderos_general` (
+  `id` int(11) NOT NULL,
+  `norte` varchar(255) DEFAULT NULL,
+  `noreste` varchar(255) DEFAULT NULL,
+  `sur` varchar(255) DEFAULT NULL,
+  `sureste` varchar(255) DEFAULT NULL,
+  `este` varchar(255) DEFAULT NULL,
+  `suroeste` varchar(255) DEFAULT NULL,
+  `oeste` varchar(255) DEFAULT NULL,
+  `noroeste` varchar(255) DEFAULT NULL,
+  `alind_n` varchar(255) DEFAULT NULL,
+  `alind_s` varchar(255) DEFAULT NULL,
+  `alind_e` varchar(255) DEFAULT NULL,
+  `alind_o` varchar(255) DEFAULT NULL,
+  `areaTotal` varchar(255) DEFAULT NULL,
+  `uniAreaT` varchar(255) DEFAULT NULL,
+  `nivelesConst` varchar(255) DEFAULT NULL,
+  `uniAreaC` varchar(255) DEFAULT NULL,
+  `areaConst` varchar(255) DEFAULT NULL,
+  `uniNorte` text DEFAULT NULL,
+  `uniSur` text DEFAULT NULL,
+  `uniEste` text DEFAULT NULL,
+  `uniOeste` text DEFAULT NULL
+) ENGINE=InnoDB AVG_ROW_LENGTH=2048 DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_linderos_posible_venta`
+--
+
+CREATE TABLE `temp_linderos_posible_venta` (
+  `id` int(11) NOT NULL,
+  `norte` varchar(255) DEFAULT NULL,
+  `noreste` varchar(255) DEFAULT NULL,
+  `sur` varchar(255) DEFAULT NULL,
+  `sureste` varchar(255) DEFAULT NULL,
+  `este` varchar(255) DEFAULT NULL,
+  `suroeste` varchar(255) DEFAULT NULL,
+  `oeste` varchar(255) DEFAULT NULL,
+  `noroeste` varchar(255) DEFAULT NULL,
+  `alind_n` varchar(255) DEFAULT NULL,
+  `alind_s` varchar(255) DEFAULT NULL,
+  `alind_o` varchar(255) DEFAULT NULL,
+  `alind_e` varchar(255) DEFAULT NULL,
+  `areaTotal` varchar(255) DEFAULT NULL,
+  `uniAreaT` varchar(255) DEFAULT NULL,
+  `nivelesConst` varchar(255) DEFAULT NULL,
+  `uniAreaC` varchar(255) DEFAULT NULL,
+  `areaConst` varchar(255) DEFAULT NULL,
+  `uniNorte` text DEFAULT NULL,
+  `uniSur` text DEFAULT NULL,
+  `uniEste` text DEFAULT NULL,
+  `uniOeste` text DEFAULT NULL
+) ENGINE=InnoDB AVG_ROW_LENGTH=2048 DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_piezas_sanitarias`
+--
+
+CREATE TABLE `temp_piezas_sanitarias` (
+  `id` int(11) NOT NULL,
+  `porcelana_fina` text DEFAULT NULL,
+  `porcelana_econ` text DEFAULT NULL,
+  `banera` text DEFAULT NULL,
+  `calentador` text DEFAULT NULL,
+  `wc` text DEFAULT NULL,
+  `bidet` text DEFAULT NULL,
+  `lavamanos` text DEFAULT NULL,
+  `ducha` text DEFAULT NULL,
+  `urinario` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_propietarios`
+--
+
+CREATE TABLE `temp_propietarios` (
+  `id` int(11) NOT NULL,
+  `cedula` varchar(255) DEFAULT NULL,
+  `rif` varchar(255) DEFAULT NULL,
+  `nombre` text DEFAULT NULL,
+  `apellido` text DEFAULT NULL,
+  `telef` varchar(255) DEFAULT NULL,
+  `dir_hab` varchar(255) DEFAULT NULL,
+  `telef_hab` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_puertas`
+--
+
+CREATE TABLE `temp_puertas` (
+  `id` int(11) NOT NULL,
+  `entamborada_fina` text DEFAULT NULL,
+  `ent_econo` text DEFAULT NULL,
+  `madera_cepi` text DEFAULT NULL,
+  `hierro` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `temp_servicios_inmue`
+--
+
+CREATE TABLE `temp_servicios_inmue` (
+  `id` int(11) NOT NULL,
+  `acued` text DEFAULT NULL,
+  `acuedRural` text DEFAULT NULL,
+  `aguasSubter` text DEFAULT NULL,
+  `aguasServ` text DEFAULT NULL,
+  `pavimentoFlex` text DEFAULT NULL,
+  `pavimentoRig` text DEFAULT NULL,
+  `viaEngran` text DEFAULT NULL,
+  `acera` text DEFAULT NULL,
+  `alumbradoPub` text DEFAULT NULL,
+  `aseo` text DEFAULT NULL,
+  `transportePublic` text DEFAULT NULL,
+  `pozoSept` text DEFAULT NULL,
+  `electriResi` text DEFAULT NULL,
+  `electriIndus` text DEFAULT NULL,
+  `lineaTelef` text DEFAULT NULL
+) ENGINE=InnoDB AVG_ROW_LENGTH=2048 DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user_temp`
+--
+
+CREATE TABLE `user_temp` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `temp_ambientes` int(11) DEFAULT NULL,
+  `temp_caraconst` int(11) DEFAULT NULL,
+  `temp_carainmue` int(11) DEFAULT NULL,
+  `temp_complementos` int(11) DEFAULT NULL,
+  `temp_datos_protocolizacion` int(11) DEFAULT NULL,
+  `temp_expediente` int(11) DEFAULT NULL,
+  `temp_factura` int(11) DEFAULT NULL,
+  `temp_inmueble` int(11) DEFAULT NULL,
+  `temp_linderos_documento` int(11) DEFAULT NULL,
+  `temp_linderos_general` int(11) DEFAULT NULL,
+  `temp_linderos_posible_venta` int(11) DEFAULT NULL,
+  `temp_piezas_sanitarias` int(11) DEFAULT NULL,
+  `temp_propietarios` int(11) DEFAULT NULL,
+  `temp_puertas` int(11) DEFAULT NULL,
+  `temp_servicios_inmue` int(11) DEFAULT NULL,
+  `temp_estado_conservacion` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -393,6 +817,12 @@ CREATE TABLE `usuarios` (
 --
 
 --
+-- Indices de la tabla `ambientes`
+--
+ALTER TABLE `ambientes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `caracteristicas_construccion`
 --
 ALTER TABLE `caracteristicas_construccion`
@@ -415,13 +845,18 @@ ALTER TABLE `cod_catastral`
 --
 ALTER TABLE `constancias`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `FK_expedi` (`fk_exped`),
   ADD KEY `FK_redactor` (`fk_redactor`);
 
 --
 -- Indices de la tabla `datos_protocolizacion`
 --
 ALTER TABLE `datos_protocolizacion`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `estado_conservacion`
+--
+ALTER TABLE `estado_conservacion`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -432,6 +867,12 @@ ALTER TABLE `expediente`
   ADD KEY `FK_inmueble` (`fk_inmueble`),
   ADD KEY `FK_usuario` (`fk_usuario`),
   ADD KEY `FK_prop` (`fk_propietario`);
+
+--
+-- Indices de la tabla `expempadro`
+--
+ALTER TABLE `expempadro`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `factura`
@@ -457,7 +898,6 @@ ALTER TABLE `inmueble`
   ADD KEY `FK_lindpos_venta` (`fk_lind_pos_venta`),
   ADD KEY `FK_protocolizacion` (`fk_protocolizacion`),
   ADD KEY `FK_servicios_inmue` (`fk_servicios`),
-  ADD KEY `FK_terreno` (`fk_terreno`),
   ADD KEY `FK_carac_construc` (`fk_carac_construccion`);
 
 --
@@ -491,9 +931,21 @@ ALTER TABLE `pagos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `piezas_sanitarias`
+--
+ALTER TABLE `piezas_sanitarias`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `propietarios`
 --
 ALTER TABLE `propietarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `puertas`
+--
+ALTER TABLE `puertas`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -509,9 +961,105 @@ ALTER TABLE `servicios_inmue`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `terreno`
+-- Indices de la tabla `temp_ambientes`
 --
-ALTER TABLE `terreno`
+ALTER TABLE `temp_ambientes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_caraconst`
+--
+ALTER TABLE `temp_caraconst`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_carainmue`
+--
+ALTER TABLE `temp_carainmue`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_complementos`
+--
+ALTER TABLE `temp_complementos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_datos_protocolizacion`
+--
+ALTER TABLE `temp_datos_protocolizacion`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_estado_conservacion`
+--
+ALTER TABLE `temp_estado_conservacion`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_expediente`
+--
+ALTER TABLE `temp_expediente`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_factura`
+--
+ALTER TABLE `temp_factura`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_inmueble`
+--
+ALTER TABLE `temp_inmueble`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_linderos_documento`
+--
+ALTER TABLE `temp_linderos_documento`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_linderos_general`
+--
+ALTER TABLE `temp_linderos_general`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_linderos_posible_venta`
+--
+ALTER TABLE `temp_linderos_posible_venta`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_piezas_sanitarias`
+--
+ALTER TABLE `temp_piezas_sanitarias`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_propietarios`
+--
+ALTER TABLE `temp_propietarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_puertas`
+--
+ALTER TABLE `temp_puertas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `temp_servicios_inmue`
+--
+ALTER TABLE `temp_servicios_inmue`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `user_temp`
+--
+ALTER TABLE `user_temp`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -523,6 +1071,12 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `ambientes`
+--
+ALTER TABLE `ambientes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `caracteristicas_construccion`
@@ -555,9 +1109,21 @@ ALTER TABLE `datos_protocolizacion`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `estado_conservacion`
+--
+ALTER TABLE `estado_conservacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `expediente`
 --
 ALTER TABLE `expediente`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `expempadro`
+--
+ALTER TABLE `expempadro`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -609,9 +1175,21 @@ ALTER TABLE `pagos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `piezas_sanitarias`
+--
+ALTER TABLE `piezas_sanitarias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `propietarios`
 --
 ALTER TABLE `propietarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `puertas`
+--
+ALTER TABLE `puertas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -627,9 +1205,105 @@ ALTER TABLE `servicios_inmue`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `terreno`
+-- AUTO_INCREMENT de la tabla `temp_ambientes`
 --
-ALTER TABLE `terreno`
+ALTER TABLE `temp_ambientes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_caraconst`
+--
+ALTER TABLE `temp_caraconst`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_carainmue`
+--
+ALTER TABLE `temp_carainmue`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_complementos`
+--
+ALTER TABLE `temp_complementos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_datos_protocolizacion`
+--
+ALTER TABLE `temp_datos_protocolizacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_estado_conservacion`
+--
+ALTER TABLE `temp_estado_conservacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_expediente`
+--
+ALTER TABLE `temp_expediente`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_factura`
+--
+ALTER TABLE `temp_factura`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_inmueble`
+--
+ALTER TABLE `temp_inmueble`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_linderos_documento`
+--
+ALTER TABLE `temp_linderos_documento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_linderos_general`
+--
+ALTER TABLE `temp_linderos_general`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_linderos_posible_venta`
+--
+ALTER TABLE `temp_linderos_posible_venta`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_piezas_sanitarias`
+--
+ALTER TABLE `temp_piezas_sanitarias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_propietarios`
+--
+ALTER TABLE `temp_propietarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_puertas`
+--
+ALTER TABLE `temp_puertas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `temp_servicios_inmue`
+--
+ALTER TABLE `temp_servicios_inmue`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `user_temp`
+--
+ALTER TABLE `user_temp`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -646,7 +1320,6 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `constancias`
 --
 ALTER TABLE `constancias`
-  ADD CONSTRAINT `FK_expedi` FOREIGN KEY (`fk_exped`) REFERENCES `expediente` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_redactor` FOREIGN KEY (`fk_redactor`) REFERENCES `usuarios` (`id`) ON DELETE NO ACTION;
 
 --
@@ -673,8 +1346,7 @@ ALTER TABLE `inmueble`
   ADD CONSTRAINT `FK_lind_general` FOREIGN KEY (`fk_lind_general`) REFERENCES `linderos_general` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_lindpos_venta` FOREIGN KEY (`fk_lind_pos_venta`) REFERENCES `linderos_posible_venta` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_protocolizacion` FOREIGN KEY (`fk_protocolizacion`) REFERENCES `datos_protocolizacion` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_servicios_inmue` FOREIGN KEY (`fk_servicios`) REFERENCES `servicios_inmue` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `FK_terreno` FOREIGN KEY (`fk_terreno`) REFERENCES `terreno` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `FK_servicios_inmue` FOREIGN KEY (`fk_servicios`) REFERENCES `servicios_inmue` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

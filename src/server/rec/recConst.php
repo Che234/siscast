@@ -16,7 +16,11 @@ if(isset($_POST["accion"])){
     $accion= "nada";
 }
 //PRIMERA PARTE
-
+    if(isset($_POST["recFact"])){
+        $nconst->recFact= $_POST["recFact"];
+    }else{
+        $nconst->recFact= "nada";
+    }
     if(isset($_POST["cedFul"])){
         $nconst->cedFul= $_POST["cedFul"];
     }else{
@@ -940,6 +944,9 @@ if(isset($_POST["accion"])){
     }
 
 //ACCIONES
+    if($accion=="elimReg"){
+        $nconst->elimReg();
+    }
     //PROPIETARIO
     if($accion=="formProp"){
         $nconst->fPropietario();
@@ -1046,6 +1053,9 @@ if(isset($_POST["accion"])){
     }
     if($accion=="veriF1"){
         $nconst->veriF1();
+    }
+    if($accion=="veriFEmpadro"){
+        $nconst->veriFEmpadro();
     }
     if($accion=="fcaracConst"){
         $nconst->fcaracConst();
@@ -1215,7 +1225,7 @@ if(isset($_POST["accion"])){
         echo'<div id="enlacePdf"></div>';
         $f003->imprimir();
     }
-    if($accion=="imprConstEmpa"){
+    if($accion=="imprConst4"){
         if(isset($_POST["idInmueble"])){
             $f004->idInmueble=$_POST["idInmueble"];
         }else{

@@ -70,17 +70,17 @@ class f002{
             $idExpFact= $resExpFact->fetch_array();
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
-            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
+            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_expedi)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
-        //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$this->nuExp.",".$idExpFact.",'".$this->fechFact."')";
-            $link->query($pagoExpSql);
-            $idPagoExp= $link->insert_id;
         //BUSQUEDA DEL EXPEDIENTE
             $busExpSQL = "SELECT * FROM expediente where id=".$this->nuExp."";
             $resBusEXP = $link->query($busExpSQL);
             $busExpedienteRes = $resBusEXP->fetch_array();
+        //INSERT PAGOS
+            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$this->nuExp.",".$idExpFact["id"].",'".$this->fechFact."')";
+            $link->query($pagoExpSql);
+            $idPagoExp= $link->insert_id;
         //BUSQUEDA DEL INMUEBLE
             $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
@@ -1211,11 +1211,11 @@ class f001{
             $idExpFact= $resExpFact->fetch_array();
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
-            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
+            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_expedi)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
         //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$this->nuExp.",".$idExpFact.",'".$this->fechFact."')";
+            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$this->nuExp.",".$idExpFact["id"].",'".$this->fechFact."')";
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
         //BUSQUEDA DEL EXPEDIENTE
@@ -2559,7 +2559,7 @@ class f003{
             $idExpFact= $resExpFact->fetch_array();
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
-            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
+            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_expedi)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
         //BUSQUEDA DEL EXPEDIENTE
@@ -2567,10 +2567,9 @@ class f003{
             $resBusEXP = $link->query($busExpSQL);
             $busExpedienteRes = $resBusEXP->fetch_array();
         //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$busExpedienteRes["id"].",".$idExpFact["id"].",".$this->fechFact.")";
+            $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fechaPagos)value(".$busExpedienteRes["id"].",".$idExpFact["id"].",".$this->fechFact.")";
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
-        
         //BUSQUEDA DEL INMUEBLE
             $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
             $resInmue= $link->query($expSql);
@@ -3901,69 +3900,67 @@ class f004{
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
         //BUSQUEDA DE USUARIO
-            $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
             $idUser= $resultUser->fetch_assoc();
-        //INSERT FACTURA
-            $expFactSql= "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."')";
-            $link->query($expFactSql);
-            $idExpFact= $link->insert_id;
-        //INSERT CONSTANCIA
-            $fechaConst= date('Y-m-d');
-            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_exped)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
-            $link->query($constansSql);
-            $idConstancias = $link->insert_id;
+        //BUSQUEDA FACTURA
+            $expFactSql= "SELECT * FROM factura where n_factura=".$this->numFact."";
+            $resExpFact= $link->query($expFactSql);
+            $idExpFact= $resExpFact->fetch_array();
+        //BUSQUEDA DEL EXPEDIENTE
+            $busExpSQL = "SELECT * FROM expempadro where id=".$this->nuExp."";
+            $resBusEXP = $link->query($busExpSQL);
+            $busExpedienteRes = $resBusEXP->fetch_array();
         //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expediente,fk_factura,fecha)value(".$this->nuExp.",".$idExpFact.",".$this->fechFact.")";
+            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$this->nuExp.",".$idExpFact["id"].",'".$this->fechFact."')";
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
-        //BUSQUEDA DEL EXPEDIENTE
-            $busExpSql = "SELECT * FROM expediente where id=".$this->nuExp."";
-            $resBusExp = $link->query($busExpSql);
-            $busExpRes = $resBusExp->fetch_array();
         //BUSQUEDA DEL INMUEBLE
-            $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
+            $expSql= "SELECT * from inmueble where id=".$busExpedienteRes["fk_inmueble"]."";
             $resInmue= $link->query($expSql);
             $resultInmue = $resInmue->fetch_assoc();
             $idProt= $resultInmue["fk_protocolizacion"];
             $idLindDoc= $resultInmue["fk_lind_documento"];
+            $idLindGen= $resultInmue["fk_lind_general"];
             $idConst= $resultInmue["fk_carac_construccion"];
             $idServicios= $resultInmue["fk_servicios"];
             $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
             $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
-            $expSql= "SELECT * from propietarios where id=".$this->idProp."";
+            $expSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
             $resProp= $link->query($expSql);
             $resultPropie = $resProp->fetch_assoc();
             $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
-            $protSql = "SELECT * from datos_protocolizacion where id=".$idProt."";
+            $protSql = "SELECT * from datos_protocolizacion where id='".$idProt."' ";
             $resProt = $link->query($protSql);
             $resultProp = $resProt->fetch_assoc();
         //BUSQUEDA DE LINDEROS SEGUN DOCUMENTO
-            $lindDocSql= "SELECT * FROM linderos_documento where id=".$idLindDoc."";
+            $lindDocSql= "SELECT * FROM linderos_documento where id='".$idLindDoc."'";
             $resLindDoc = $link->query($lindDocSql);
             $resultLindDoc= $resLindDoc->fetch_assoc();
-        //BUSQUEDA DE DATOS TERRENO
-            $terrSql= "SELECT * FROM terreno where id=".$idTerreno."";
-            $resTerr= $link->query($terrSql);
-            $resultTerr= $resTerr->fetch_assoc();
         //BUSQUEDA DE DATOS CONSTRUCCION
-            $constSql= "SELECT * from caracteristicas_construccion where id=".$idConst."";
+            $constSql= "SELECT * from caracteristicas_construccion where id='".$idConst."'";
             $resConst= $link->query($constSql);
             $resultConst= $resConst->fetch_assoc();
         //BUSQUEDA DE SERVICIOS
-            $servSql= "SELECT * FROM servicios_inmue where id=".$idServicios."";
+            $servSql= "SELECT * FROM servicios_inmue where id='".$idServicios."'";
             $resServ= $link->query($servSql);
             $resultServ= $resServ->fetch_assoc();
         //BUSQUEDA DE CARACTERISTICAS DEL INMUEBLE
-            $carastInmue= "SELECT * FROM carc_inmueble where id=".$idCaracInmue."";
+            $carastInmue= "SELECT * FROM carc_inmueble where id='".$idCaracInmue."'";
             $rescarastInmue= $link->query($carastInmue);
             $mostcarastInmue= $rescarastInmue->fetch_assoc();
         //BUSQUEDA DE CARACTERISTICAS DE LA CONSTRUCCION
-            $carcConstSql= "SELECT * FROM caracteristicas_construccion where id=".$idcaracConstruccion."";
+            $carcConstSql= "SELECT * FROM caracteristicas_construccion where id='".$idcaracConstruccion."'";
             $resCaracConst= $link->query($carcConstSql);
             $resulCaracInmue= $resCaracConst->fetch_assoc();
+        //INSERT CONSTANCIA
+            $fechaConst= date('Y-m-d');
+            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_expedi)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$busExpedienteRes["id"].")";
+            echo $constansSql;
+            $link->query($constansSql);
+            $idConstancias = $link->insert_id;
         // Creación del objeto de la clase heredada
             $pdf = new PDF('P','mm','A3');
             $pdf->SetMargins(20,0,22);
@@ -3987,13 +3984,13 @@ class f004{
             $pdf->cell(40,10,'Fecha: '.date('d-m-Y').'');
             $pdf->SetY(70);
             $pdf->SetX(215);
-            $pdf->cell(40,10,'No de Factura: '.$this->numFact.'');
+            $pdf->cell(40,10,'No de Factura: '.$idExpFact["n_factura"].'');
             $pdf->SetY(76);
             $pdf->SetX(22);
             $pdf->cell(40,10,'No Civico: No Aplica');
             $pdf->SetY(76);
             $pdf->SetX(215);
-            $pdf->cell(40,10,'No Expediente: '.$busExpRes["n_expediente"].'');
+            $pdf->cell(40,10,'No Expediente: '.$busExpedienteRes["n_expediente"].'');
             $pdf->SetY(81);
             $pdf->SetX(22);
             $pdf->cell(40,10,''.utf8_decode('Tipo de Operación: '.$this->operacion.'').'');
@@ -4985,13 +4982,13 @@ class f004{
         $carpeta ='../../../assets/constancias/'.date("Y").'';
         if(!file_exists($carpeta)){
             mkdir($carpeta,0777,true);
-            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }else{
-            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf');
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }
         echo'
-        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpRes["n_expediente"].'.pdf" />
-        <input type="hidden" id="numExp" value="'.$busExpRes["n_expediente"].'">';
+        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf" />
+        <input type="hidden" id="numExp" value="'.$busExpedienteRes["n_expediente"].'">';
         
     }
 }

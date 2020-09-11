@@ -1,6 +1,7 @@
 class constancias{
 
     construct(){
+        this.recFact = recFact
         this.valorInmue = valorInmue
         this.idInmueble = idInmueble
         this.idExp = idExp
@@ -189,6 +190,7 @@ class constancias{
         this.hierro = hierro
         this.idInmue = idInmue
     }
+    //TEST
     testProp(){
         if(!ex_nac.test(this.cedR)){
             alert("Error en el formato de Nacionalidad");
@@ -342,7 +344,7 @@ class constancias{
         return true
     }
     veriGen(){
-        if(!ex_datcort.test(this.nortGen)){
+        if(!ex_money.test(this.nortGen)){
             alert("Error en el formato de Mts Norte general");
             return false;
         }
@@ -350,7 +352,7 @@ class constancias{
             alert("Error en el formato de Alinderado Norte");
             return false;
         }
-        if(!ex_datcort.test(this.surGen)){
+        if(!ex_money.test(this.surGen)){
             alert("Error en el formato de Mts Sur");
             return false;
         }
@@ -358,7 +360,7 @@ class constancias{
             alert("Error en el formato de Alinderado Sur");
             return false;
         }
-        if(!ex_datcort.test(this.esteGen)){
+        if(!ex_money.test(this.esteGen)){
             alert("Error en el formato de Mts Este");
             return false;
         }
@@ -366,7 +368,7 @@ class constancias{
             alert("Error en el formato de Alinderado Este");
             return false;
         }
-        if(!ex_datcort.test(this.oesteGen)){
+        if(!ex_money.test(this.oesteGen)){
             alert("Error en el formato de Mts Oeste");
             return false;
         }
@@ -430,14 +432,14 @@ class constancias{
             alert("Error en el formato de Nivel de construcción");
             return false;
         }
-        if(!ex_datcort.test(this.arConstTotal)){
+        if(!ex_money.test(this.arConstTotal)){
             alert("Error en el formato de Nivel de construcción");
             return false;
         }
         return true
     }
     veriSecDoc(){
-        if(!ex_datcort.test(this.nortSecDoc)){
+        if(!ex_money.test(this.nortSecDoc)){
             alert("Error en el formato de Mts Norte Segun Documento");
             return false;
         }
@@ -445,7 +447,7 @@ class constancias{
             alert("Error en el formato de Alinderado Norte Segun Documento");
             return false;
         }
-        if(!ex_datcort.test(this.surSecDoc)){
+        if(!ex_money.test(this.surSecDoc)){
             alert("Error en el formato de Mts Sur Segun Documento");
             return false;
         }
@@ -453,7 +455,7 @@ class constancias{
             alert("Error en el formato de Alinderado Sur Segun Documento");
             return false;
         }
-        if(!ex_datcort.test(this.esteSecDoc)){
+        if(!ex_money.test(this.esteSecDoc)){
             alert("Error en el formato de Mts Este Segun Documento");
             return false;
         }
@@ -461,7 +463,7 @@ class constancias{
             alert("Error en el formato de Alinderado Este Segun Documento");
             return false;
         }
-        if(!ex_datcort.test(this.oesteSecDoc)){
+        if(!ex_money.test(this.oesteSecDoc)){
             alert("Error en el formato de Mts Oeste Segun Documento");
             return false;
         }
@@ -501,7 +503,7 @@ class constancias{
             alert("Error en el formato de Unidad de Oeste");
             return false;
         }
-        if(!ex_datcort.test(this.arTotal3)){
+        if(!ex_money.test(this.arTotal3)){
             alert("Error en el formato de Area Total");
             return false;
         }
@@ -513,18 +515,18 @@ class constancias{
             alert("Error en el formato de Niveles de Construcción");
             return false;
         }
-        if(!ex_datcort.test(this.arConstTotal3)){
+        if(!ex_money.test(this.arConstTotal3)){
             alert("Error en el formato de Area de Construcción");
             return false;
         }
         if(!ex_datcort.test(this.uniAreaConst3)){
-            alert("Error en el formato de Area de Construcción");
+            alert("Error en el formato de Unidad Area de Construcción");
             return false;
         }
         return true
     }
     veriPosVenta(){
-        if(!ex_datcort.test(this.nortPosVenta)){
+        if(!ex_money.test(this.nortPosVenta)){
             alert("Error en el formato de Mts Norte posible Venta");
             return false;
         }
@@ -532,7 +534,7 @@ class constancias{
             alert("Error en el formato de Alinderado Norte posible Venta");
             return false;
         }
-        if(!ex_datcort.test(this.surPosVenta)){
+        if(!ex_money.test(this.surPosVenta)){
             alert("Error en el formato de Mts Sur posible Venta");
             return false;
         }
@@ -540,7 +542,7 @@ class constancias{
             alert("Error en el formato de Alinderado Sur posible Venta");
             return false;
         }
-        if(!ex_datcort.test(this.estePosVenta)){
+        if(!ex_money.test(this.estePosVenta)){
             alert("Error en el formato de Mts Este posible Venta");
             return false;
         }
@@ -548,7 +550,7 @@ class constancias{
             alert("Error en el formato de Alinderado Este posible Venta");
             return false;
         }
-        if(!ex_datcort.test(this.oestePosVenta)){
+        if(!ex_money.test(this.oestePosVenta)){
             alert("Error en el formato de Mts Oeste posible Venta");
             return false;
         }
@@ -588,7 +590,7 @@ class constancias{
             alert("Error en el formato de Unidad de Oeste");
             return false;
         }
-        if(!ex_datcort.test(this.arTotal2)){
+        if(!ex_money.test(this.arTotal2)){
             alert("Error en el formato de Area Total");
             return false;
         }
@@ -600,7 +602,7 @@ class constancias{
             alert("Error en el formato de Niveles de Construcción");
             return false;
         }
-        if(!ex_datcort.test(this.arConstTotal2)){
+        if(!ex_money.test(this.arConstTotal2)){
             alert("Error en el formato de Area de Construcción");
             return false;
         }
@@ -936,6 +938,7 @@ class constancias{
 			     }
 	       	}
     }
+    //IMPRIMIR
     imprConst(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('campGeneral');
@@ -998,7 +1001,7 @@ class constancias{
 			     }
 	       	}
     }
-    imprConstEmpa(){
+    imprConst4(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
@@ -1007,7 +1010,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConstEmpa`);
+        ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst4`);
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1069,24 +1072,6 @@ class constancias{
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`campBuscar=${this.campBuscar}&accion=veriImpr`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
-    busExpediente(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campOculto');
-        var divsitiomaterial = document.getElementById('campOculto');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`nuExp=${this.nuExp}&accion=busExpediente`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1734,6 +1719,24 @@ class constancias{
 			     }
 	       	}
     }
+    busExpediente(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('campOculto');
+        var divsitiomaterial = document.getElementById('campOculto');
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`nuExp=${this.nuExp}&accion=busExpediente`); 
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+                 }
+            }
+    }
     //FACTURA
     fFactura(){
         var ajax = new objetoAjax();
@@ -1766,7 +1769,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`montoFact=${this.montoFact}&numFact=${this.numFact}&fechFact=${this.fechFact}&accion=guarFact`); 
+        ajax.send(`montoFact=${this.montoFact}&numFact=${this.numFact}&fechFact=${this.fechFact}&recFact=${this.recFact}&accion=guarFact`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1779,6 +1782,7 @@ class constancias{
 			     }
 	       	}
     }
+    //VERIFICACION
     veriF3(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('formsInscrip');
@@ -1842,10 +1846,53 @@ class constancias{
 			     }
 	       	}
     }
+    veriFEmpadro(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idServInmue=${this.idServInmue}&accion=veriFEmpadro`); 
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                    setTimeout(()=>{
+                        btnImprConst4();
+                    },200)
+                 }
+            }
+    }
+    elimReg(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`&accion=elimReg`); 
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+                 }
+            }
+    }
 }
 function btnFormConst(){
     let consta = new constancias();
     consta.formConst();
+}
+function btnElimReg(){
+    consta = new constancias
+    consta.elimReg();
 }
 //PROPIETARIO
 function btnFormProp(){
@@ -1865,11 +1912,11 @@ function btnGuarProp(){
     consta.apelProp = document.getElementById("apelProp").value;
     codTelf= document.getElementById("codTelf").value;
     numTelf= document.getElementById("numTelf").value;
-    consta.telfFull= `(${codTelf})-${numTelf}`
+    consta.telfFull= `${codTelf}-${numTelf}`
     consta.direcProp= document.getElementById("direcProp").value;
     codTelf2 = document.getElementById("codTelf2").value;
     numTelf2 = document.getElementById("numTelf2").value;
-    consta.telfFull2= `(${codTelf2})-${numTelf2}`
+    consta.telfFull2= `${codTelf2}-${numTelf2}`
     if(consta.testProp()==true){
         consta.guardProp();
     }
@@ -2110,6 +2157,11 @@ function btnGuarExpe(){
         consta.guarExpe()
     }
 }
+function veriExpediente(){
+    let consta = new constancias
+    consta.nuExp = document.getElementById("nuExp").value
+    consta.busExpediente();
+}
 //FACTURA
 function btnfFactura(){
     let consta = new constancias
@@ -2122,6 +2174,7 @@ function btnGuarFact(){
     consta.numFact = document.getElementById("numFact").value
     consta.fechFact = document.getElementById("fechFact").value
     consta.numFactura = document.getElementById("numFactura").value
+    consta.recFact = document.getElementById("recFact").value
     if(consta.veriFactura()==true){
         consta.guarFact()
     }
@@ -2145,6 +2198,7 @@ function btnVeriImpri(){
     idComple = document.getElementById("idComple").value
     idFactura = document.getElementById("idFactura").value
     idExp = document.getElementById("idExp").value
+    multa = document.getElementById("multa").value
     cont=0;
     if(idProp!=0){
         cont++ 
@@ -2187,25 +2241,26 @@ function btnVeriImpri(){
     }
 
     if(cont==13){
-        if(idLindDoc!=0 && idPosVenta!=0 && idLindGen!=0){
-            consta.idProp = idProp
-            consta.idInmue = idInmue
-            consta.idCaraInmue = idCaraInmue
-            consta.idCaraConst = idCaraConst
-            consta.idProto = idProto
-            consta.idServInmue = idServInmue
-            consta.idEstConserv = idEstConserv
-            consta.idPiezSant = idPiezSant
-            consta.idAmbientes = idAmbientes
-            consta.idPuertas = idPuertas
-            consta.idComple = idComple
-            consta.idFactura = idFactura
-            consta.idExp = idExp
-            consta.idLindDoc = idLindDoc
-            consta.idPosVenta = idPosVenta
-            consta.idLindGen = idLindGen
-            consta.veriF3();
-        }else{
+        if(multa=="No Aplica"){
+            if(idLindDoc!=0 && idPosVenta!=0 && idLindGen!=0){
+                consta.idProp = idProp
+                consta.idInmue = idInmue
+                consta.idCaraInmue = idCaraInmue
+                consta.idCaraConst = idCaraConst
+                consta.idProto = idProto
+                consta.idServInmue = idServInmue
+                consta.idEstConserv = idEstConserv
+                consta.idPiezSant = idPiezSant
+                consta.idAmbientes = idAmbientes
+                consta.idPuertas = idPuertas
+                consta.idComple = idComple
+                consta.idFactura = idFactura
+                consta.idExp = idExp
+                consta.idLindDoc = idLindDoc
+                consta.idPosVenta = idPosVenta
+                consta.idLindGen = idLindGen
+                consta.veriF3();
+            }else{
             if(idLindDoc!=0){
                 if(idPosVenta!=0){
                      //F003
@@ -2263,14 +2318,37 @@ function btnVeriImpri(){
                         consta.veriF2();
                 }
                 
-            }else{
-                alert("ERROR EN ELECCION DE LINDEROS");
+                }else{
+                    alert("ERROR EN ELECCION DE LINDEROS");
+                }
             }
         }
+        if(multa=="Empadronamiento"){
+            consta.idProp = idProp
+                consta.idInmue = idInmue
+                consta.idCaraInmue = idCaraInmue
+                consta.idCaraConst = idCaraConst
+                consta.idProto = idProto
+                consta.idServInmue = idServInmue
+                consta.idEstConserv = idEstConserv
+                consta.idPiezSant = idPiezSant
+                consta.idAmbientes = idAmbientes
+                consta.idPuertas = idPuertas
+                consta.idComple = idComple
+                consta.idFactura = idFactura
+                consta.idExp = idExp
+                consta.idLindDoc = idLindDoc
+                consta.idPosVenta = idPosVenta
+                consta.idLindGen = idLindGen
+                consta.veriFEmpadro();
+        }
+        if(multa=="Multa"){
+            alert("Error en el Formato Aplicar");
+        }
         
-    }else{
-        alert("FALTAN CAMPOS POR GUARDAR")
-    }
+        }else{
+            alert("FALTAN CAMPOS POR GUARDAR")
+        }
 }
 function btnfCarac(){
     
@@ -2690,6 +2768,17 @@ function btnImprConst3(){
     consta.nuExp = document.getElementById("nuExp").value
     consta.imprConst3()
 }
+function btnImprConst4(){
+    let consta = new constancias
+    consta.montoFact = document.getElementById("montoFact").value
+    consta.fechFact = document.getElementById("fechFact").value
+    consta.idInmueble = document.getElementById("idInmueble").value
+    consta.idProp =document.getElementById("idProp").value
+    consta.numFact= document.getElementById("numFact").value
+    consta.operacion = document.getElementById("operacion").value
+    consta.nuExp = document.getElementById("nuExp").value
+    consta.imprConst4()
+}
 function btnImprEmpa(){
     let consta = new constancias
     consta.montoFact = document.getElementById("montoFact").value
@@ -2750,11 +2839,7 @@ function mostProp(){
     
     
 }
-function veriExpediente(){
-    let consta = new constancias
-    consta.nuExp = document.getElementById("nuExp").value
-    consta.busExpediente();
-}
+
 function btnVeriFact(){
     let consta = new constancias
     consta.numFact = document.getElementById("numFact").value
