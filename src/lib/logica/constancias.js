@@ -220,7 +220,7 @@ class constancias{
             alert("Error en el formato de direccion del propietario");
             return false;
         }
-        return true
+        return true//VERIFICADO//VERIFICADO
     }
     veriInmue(){
         if(!ex_datcort.test(this.parrInmue)){
@@ -239,9 +239,9 @@ class constancias{
             alert("Error en el formato de Dirección del Inmueble");
             return false;
         }
-        return true
+        return true//VERIFICADO//VERIFICADO
     }
-    veriguarCarTerr(){
+    veriguarCarTerr(){ //VERIFICADO
         if(!ex_datcort.test(this.topoConst)){
             alert("Error en el formato de Topografia");
             return false;
@@ -301,14 +301,13 @@ class constancias{
             alert("Error en el formato de Instalaciones electricas");
             return false;
         }
-        if(!ex_datcort.test(this.obsConst)){
+        if(!er_areas.test(this.obsConst)){
             alert("Error en el formato de Observación");
             return false;
         }
-        return true
+        return true//VERIFICADO// VERIFICADO
     }
     veriProt(){
-        
         if(!ex_datcort.test(this.docDebConst)){
             alert("Error en el formato de Documento debidamente");
             return false;
@@ -325,7 +324,7 @@ class constancias{
             alert("Error en el formato de Tomo");
             return false;
         }
-        if(!ex_num.test(this.folioProtConst)){
+        if(!ex_trayec.test(this.folioProtConst)){
             alert("Error en el formato de Folio");
             return false;
         }
@@ -337,14 +336,14 @@ class constancias{
             alert("Error en el formato de Trimestre");
             return false;
         }
-        if(!ex_money.test(this.valorProtConst)){
+        if(!ex_trayec.test(this.valorProtConst)){
             alert("Error en el formato de Valor del inmueble");
             return false;
         }
-        return true
+        return true//VERIFICADO//VERIFICADO
     }
     veriGen(){
-        if(!ex_money.test(this.nortGen)){
+        if(!ex_trayec.test(this.nortGen)){
             alert("Error en el formato de Mts Norte general");
             return false;
         }
@@ -352,7 +351,7 @@ class constancias{
             alert("Error en el formato de Alinderado Norte");
             return false;
         }
-        if(!ex_money.test(this.surGen)){
+        if(!ex_trayec.test(this.surGen)){
             alert("Error en el formato de Mts Sur");
             return false;
         }
@@ -360,7 +359,7 @@ class constancias{
             alert("Error en el formato de Alinderado Sur");
             return false;
         }
-        if(!ex_money.test(this.esteGen)){
+        if(!ex_trayec.test(this.esteGen)){
             alert("Error en el formato de Mts Este");
             return false;
         }
@@ -368,7 +367,7 @@ class constancias{
             alert("Error en el formato de Alinderado Este");
             return false;
         }
-        if(!ex_money.test(this.oesteGen)){
+        if(!ex_trayec.test(this.oesteGen)){
             alert("Error en el formato de Mts Oeste");
             return false;
         }
@@ -420,7 +419,7 @@ class constancias{
             alert("Error en el formato de Unidad de Oeste");
             return false;
         }
-        if(!ex_money.test(this.arTotal)){
+        if(!ex_trayec.test(this.arTotal)){
             alert("Error en el formato de Area Total");
             return false;
         }
@@ -432,14 +431,14 @@ class constancias{
             alert("Error en el formato de Nivel de construcción");
             return false;
         }
-        if(!ex_money.test(this.arConstTotal)){
+        if(!ex_trayec.test(this.arConstTotal)){
             alert("Error en el formato de Nivel de construcción");
             return false;
         }
-        return true
+        return true//VERIFICADO
     }
     veriSecDoc(){
-        if(!ex_money.test(this.nortSecDoc)){
+        if(!ex_trayec.test(this.nortSecDoc)){
             alert("Error en el formato de Mts Norte Segun Documento");
             return false;
         }
@@ -447,7 +446,7 @@ class constancias{
             alert("Error en el formato de Alinderado Norte Segun Documento");
             return false;
         }
-        if(!ex_money.test(this.surSecDoc)){
+        if(!ex_trayec.test(this.surSecDoc)){
             alert("Error en el formato de Mts Sur Segun Documento");
             return false;
         }
@@ -455,7 +454,7 @@ class constancias{
             alert("Error en el formato de Alinderado Sur Segun Documento");
             return false;
         }
-        if(!ex_money.test(this.esteSecDoc)){
+        if(!ex_trayec.test(this.esteSecDoc)){
             alert("Error en el formato de Mts Este Segun Documento");
             return false;
         }
@@ -463,7 +462,7 @@ class constancias{
             alert("Error en el formato de Alinderado Este Segun Documento");
             return false;
         }
-        if(!ex_money.test(this.oesteSecDoc)){
+        if(!ex_trayec.test(this.oesteSecDoc)){
             alert("Error en el formato de Mts Oeste Segun Documento");
             return false;
         }
@@ -503,7 +502,7 @@ class constancias{
             alert("Error en el formato de Unidad de Oeste");
             return false;
         }
-        if(!ex_money.test(this.arTotal3)){
+        if(!ex_trayec.test(this.arTotal3)){
             alert("Error en el formato de Area Total");
             return false;
         }
@@ -515,7 +514,7 @@ class constancias{
             alert("Error en el formato de Niveles de Construcción");
             return false;
         }
-        if(!ex_money.test(this.arConstTotal3)){
+        if(!ex_trayec.test(this.arConstTotal3)){
             alert("Error en el formato de Area de Construcción");
             return false;
         }
@@ -523,10 +522,10 @@ class constancias{
             alert("Error en el formato de Unidad Area de Construcción");
             return false;
         }
-        return true
+        return true////VERIFICADO
     }
     veriPosVenta(){
-        if(!ex_money.test(this.nortPosVenta)){
+        if(!ex_trayec.test(this.nortPosVenta)){
             alert("Error en el formato de Mts Norte posible Venta");
             return false;
         }
@@ -534,7 +533,7 @@ class constancias{
             alert("Error en el formato de Alinderado Norte posible Venta");
             return false;
         }
-        if(!ex_money.test(this.surPosVenta)){
+        if(!ex_trayec.test(this.surPosVenta)){
             alert("Error en el formato de Mts Sur posible Venta");
             return false;
         }
@@ -542,7 +541,7 @@ class constancias{
             alert("Error en el formato de Alinderado Sur posible Venta");
             return false;
         }
-        if(!ex_money.test(this.estePosVenta)){
+        if(!ex_trayec.test(this.estePosVenta)){
             alert("Error en el formato de Mts Este posible Venta");
             return false;
         }
@@ -550,7 +549,7 @@ class constancias{
             alert("Error en el formato de Alinderado Este posible Venta");
             return false;
         }
-        if(!ex_money.test(this.oestePosVenta)){
+        if(!ex_trayec.test(this.oestePosVenta)){
             alert("Error en el formato de Mts Oeste posible Venta");
             return false;
         }
@@ -590,7 +589,7 @@ class constancias{
             alert("Error en el formato de Unidad de Oeste");
             return false;
         }
-        if(!ex_money.test(this.arTotal2)){
+        if(!ex_trayec.test(this.arTotal2)){
             alert("Error en el formato de Area Total");
             return false;
         }
@@ -602,7 +601,7 @@ class constancias{
             alert("Error en el formato de Niveles de Construcción");
             return false;
         }
-        if(!ex_money.test(this.arConstTotal2)){
+        if(!ex_trayec.test(this.arConstTotal2)){
             alert("Error en el formato de Area de Construcción");
             return false;
         }
@@ -610,7 +609,7 @@ class constancias{
             alert("Error en el formato de Unidad de Area de Construcción");
             return false;
         }
-        return true
+        return true//VERIFICADO
     }
     veriServ(){
         if(!ex_datcort.test(this.Acue)){
@@ -673,30 +672,30 @@ class constancias{
             alert("Error en el formato de Acera");
             return false;
         }
-        return true
+        return true//VERIFICADO
     }
     veriConserv(){
-        if(!ex_num.test(this.ano_construc)){
+        if(!ex_trayec.test(this.ano_construc)){
             alert("Error en el formato de Año de Construcción");
             return false;
         }
-        if(!ex_num.test(this.ano_refac)){
+        if(!ex_trayec.test(this.ano_refac)){
             alert("Error en el formato de Año de Refacción");
             return false;
         }
-        if(!ex_num.test(this.edadEfec)){
+        if(!ex_trayec.test(this.edadEfec)){
             alert("Error en el formato de Edad Efectiva");
             return false;
         }
-        if(!ex_num.test(this.numPlata)){
+        if(!ex_trayec.test(this.numPlata)){
             alert("Error en el formato de Numero de Planta");
             return false;
         }
-        if(!ex_num.test(this.numVivienda)){
+        if(!ex_trayec.test(this.numVivienda)){
             alert("Error en el formato de Numero de Vivienda");
             return false;
         }
-        return true
+        return true//VERIFICADO
     }
     veriPiezSant(){
         if(!ex_datcort.test(this.porFina)){
@@ -735,9 +734,9 @@ class constancias{
             alert("Error en el formato de Urinario");
             return false;
         }
-        return true
+        return true//VERIFICADO//VERIFICADO
     }
-    veriPuertas(){
+    veriPuertas(){//VERIFICADO
         if(!ex_datcort.test(this.entamFina)){
             alert("Error en el formato de Entamborada Fina");
             return false;
@@ -757,43 +756,43 @@ class constancias{
         return true
     }
     veriAmbien(){
-        if(!ex_num.test(this.dormit)){
+        if(!ex_trayec.test(this.dormit)){
             alert("Error en el formato de Dormitorio");
             return false;
         }
-        if(!ex_num.test(this.comedor)){
+        if(!ex_trayec.test(this.comedor)){
             alert("Error en el formato de Comedor");
             return false;
         }
-        if(!ex_num.test(this.sala)){
+        if(!ex_trayec.test(this.sala)){
             alert("Error en el formato de Sala");
             return false;
         }
-        if(!ex_num.test(this.banos)){
+        if(!ex_trayec.test(this.banos)){
             alert("Error en el formato de Baños");
             return false;
         }
-        if(!ex_num.test(this.Cocina)){
+        if(!ex_trayec.test(this.Cocina)){
             alert("Error en el formato de Cocina");
             return false;
         }
-        if(!ex_num.test(this.Servicio)){
+        if(!ex_trayec.test(this.Servicio)){
             alert("Error en el formato de Servicio");
             return false;
         }
-        if(!ex_num.test(this.oficina)){
+        if(!ex_trayec.test(this.oficina)){
             alert("Error en el formato de Oficina");
             return false;
         }
-        if(!ex_num.test(this.garaje)){
+        if(!ex_trayec.test(this.garaje)){
             alert("Error en el formato de Garaje");
             return false;
         }
-        if(!ex_num.test(this.estac)){
+        if(!ex_trayec.test(this.estac)){
             alert("Error en el formato de Estacionamiento");
             return false;
         }
-        return true
+        return true//VERIFICADO
     }
     veriComple(){
         if(!ex_datcort.test(this.ascensor)){
@@ -816,7 +815,7 @@ class constancias{
             alert("Error en el formato de Porcelana");
             return false;
         }
-        return true
+        return true//VERIFICADO
     }
     veriExp(){
         if(!expediente.test(this.nuExp)){
@@ -831,10 +830,10 @@ class constancias{
             alert("Numero de Expediente ya se encuentra registrado");
             return false;
         }
-        return true
+        return true//VERIFICADO//VERIFICADO
     }
     veriFactura(){
-        if(!ex_money.test(this.montoFact)){
+        if(!ex_trayec.test(this.montoFact)){
             alert("Error en el formato de Monto de factura");
             return false;
         }
@@ -843,7 +842,11 @@ class constancias{
             alert("Numero de factura ya se encuentra registrado");
             return false
         }
-        return true
+        if(!ex_datcort.test(this.recFact)){
+            alert("Error en el formato de Recibo");
+            return false;
+        }
+        return true//VERIFICADO
     }
     formConst(){
         var ajax = new objetoAjax();
@@ -1706,7 +1709,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`valorInmue=${this.valorInmue}&nuExp=${this.nuExp}&expVerificado=${this.expVerificado}&multa=${this.multa}&fechaExp=${this.fechaExp}&accion=guarExpe`); 
+        ajax.send(`valorInmue=${this.valorInmue}&nuExp=${this.nuExp}&expVerificado=${this.expVerificado}&fechaExp=${this.fechaExp}&accion=guarExpe`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1882,6 +1885,7 @@ class constancias{
             if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
+                    btnFormConst();
                  }
             }
     }
@@ -2149,8 +2153,13 @@ function btnfexpedient(){
 function btnGuarExpe(){
     let consta = new constancias
     consta.nuExp = document.getElementById("nuExp").value
-    consta.expVerificado = document.getElementById("expVerificado").value
-    consta.multa = document.getElementById("multa").value
+    expediVer = document.getElementById("expVerificado")
+    if(expediVer){
+        consta.expVerificado = expediVer.value
+    }else{
+        consta.expVerificado = 0
+    }
+    
     consta.fechaExp = document.getElementById("fechaExp").value
     consta.valorInmue = document.getElementById("valorInmue").value
     if(consta.veriExp()==true){

@@ -196,58 +196,58 @@ class constancias{
                 <div class="row">
                     <div class="col-lg-4">
                             <div class="row">';
-                        if($userRes["temp_propietarios"]!=0){
+                        if($userRes["temp_propietarios"]!=0){//LISTO
                             echo'
                                 <div class="col-lg-12">
                                     <input type="hidden" value="'.$userRes["temp_propietarios"].'" id="idProp">
-                                    <button type="button" disabled onclick="btnFormProp()" class="btn btn-secondary" >DATOS DEL PROPIETARIO</button>
+                                    <button type="button" onclick="btnFormProp()" class="btn btn-secondary" >DATOS DEL PROPIETARIO</button>
                                 </div>
                             ';
                         }else{
                             echo'<input type="hidden" value="0" id="idProp">
                                 <div class="col-lg-12">
-                                    <button type="button"  onclick="btnFormProp()" class="btn btn-info" >DATOS DEL PROPIETARIO</button>
+                                    <button type="button" onclick="btnFormProp()" class="btn btn-info" >DATOS DEL PROPIETARIO</button>
                                 </div>
                             ';
                         }
                             echo'
                             </div>
                             <div class="row">';
-                        if($userRes["temp_inmueble"]!=0){
+                        if($userRes["temp_inmueble"]!=0){//LISTO
                             echo'
                             <input type="hidden" value="'.$userRes["temp_inmueble"].'" id="idInmue">
                             <div class="col-lg-12">
-                                <button type="button" disabled onclick="btnFormInmue()" class="btn btn-secondary" >DATOS DEL INMUEBLE</button>
+                                <button type="button" onclick="btnFormInmue()" class="btn btn-secondary" >DATOS DEL INMUEBLE</button>
                             </div>';
                         }else{
                             echo'<input type="hidden" value="0" id="idInmue">
                             <div class="col-lg-12">
-                                <button type="button"  onclick="btnFormInmue()" class="btn btn-info" >DATOS DEL INMUEBLE</button>
+                                <button type="button" onclick="btnFormInmue()" class="btn btn-info" >DATOS DEL INMUEBLE</button>
                             </div>';
                         }
                             
                         echo'</div>
                             <div class="row">';
-                        if($userRes["temp_carainmue"]!=0){
+                        if($userRes["temp_carainmue"]!=0){//LISTO
                             echo' <input type="hidden" value="'.$userRes["temp_carainmue"].'" id="idCaraInmue" />
                             <div class="col-lg-12">
-                                <button type="button" disabled onclick="btnfCarTerreno()" class="btn btn-secondary" >CARACTERISTICAS DEL TERRENO</button>
+                                <button type="button" onclick="btnfCarTerreno()" class="btn btn-secondary" >CARACTERISTICAS DEL TERRENO</button>
                             </div>';
                         }else{
                             echo'<input type="hidden" value="0" id="idCaraInmue" />
                             <div class="col-lg-12">
-                                <button type="button"  onclick="btnfCarTerreno()" class="btn btn-info" >CARACTERISTICAS DEL TERRENO</button>
+                                <button type="button" onclick="btnfCarTerreno()" class="btn btn-info" >CARACTERISTICAS DEL TERRENO</button>
                             </div>';
                         }
                             
                         echo'
                             </div>
                             <div class="row">';
-                        if($userRes["temp_caraconst"]!=0){
+                        if($userRes["temp_caraconst"]!=0){//LISTO
                             echo'    
                             <input type="hidden" value="'.$userRes["temp_caraconst"].'" id="idCaraConst" />
                             <div class="col-lg-12">
-                                <button type="button" disabled onclick="btnfcaracConst()" class="btn btn-secondary" >CARACTERISTICAS DE LAS CONSTRUCCIÓN</button>
+                                <button type="button" onclick="btnfcaracConst()" class="btn btn-secondary" >CARACTERISTICAS DE LAS CONSTRUCCIÓN</button>
                             </div>';
                         }else{
                             echo'   
@@ -263,8 +263,8 @@ class constancias{
                             echo'
                             <input type="hidden" value="'.$userRes["temp_datos_protocolizacion"].'" id="idProto" />
                             <div class="col-lg-12">
-                                <button type="button" disabled onclick="btnfprotInmue()" class="btn btn-secondary" >PROTOCOLIZACION DEL INMUEBLE</button>
-                            </div>';
+                                <button type="button" onclick="btnfprotInmue()" class="btn btn-secondary" >PROTOCOLIZACION DEL INMUEBLE</button>
+                            </div>';//LISTO
                         }else{
                             echo'
                             <input type="hidden" value="0" id="idProto" />
@@ -279,7 +279,7 @@ class constancias{
                             echo'
                             <input type="hidden" value="'.$userRes["temp_linderos_general"].'" id="idLindGen">
                                 <div class="col-lg-12">
-                                    <button type="button" disabled onclick="actGeneral()" class="btn btn-secondary" >LINDEROS SEGUN INSPECCIÓN</button>
+                                    <button type="button" onclick="actGeneral()" class="btn btn-secondary" >LINDEROS SEGUN INSPECCIÓN</button>
                                 </div>';
                         }else{
                             echo'
@@ -296,7 +296,7 @@ class constancias{
                             echo'
                             <input type="hidden" value="'.$userRes["temp_linderos_documento"].'" id="idLindDoc"/>
                             <div class="col-lg-12">
-                                <button type="button" disabled onclick="actSecDoc()" class="btn btn-secondary" >LINDEROS SEGUN DOCUMENTO</button>
+                                <button type="button" onclick="actSecDoc()" class="btn btn-secondary" >LINDEROS SEGUN DOCUMENTO</button>
                             </div>';
                         }else{
                             echo'
@@ -312,7 +312,7 @@ class constancias{
                             echo'
                             <input type="hidden" value="'.$userRes["temp_linderos_posible_venta"].'" id="idPosVenta"/>
                             <div class="col-lg-12">
-                                <button type="button" disabled onclick="actPosVenta()" class="btn btn-secondary" >LINDEROS POSIBLE VENTA</button>
+                                <button type="button" onclick="actPosVenta()" class="btn btn-secondary" >LINDEROS POSIBLE VENTA</button>
                             </div>';
                         }else{
                             echo'
@@ -328,7 +328,7 @@ class constancias{
                                 echo'
                                 <input type="hidden" value="'.$userRes["temp_servicios_inmue"].'" id="idServInmue"/>
                                 <div class="col-lg-12">
-                                    <button type="button" disabled onclick="btnfServicios()" class="btn btn-secondary" >SERVICIOS</button>
+                                    <button type="button" onclick="btnfServicios()" class="btn btn-secondary" >SERVICIOS</button>
                                 </div>';
                             }else{
                                 echo'
@@ -341,11 +341,11 @@ class constancias{
                             echo'
                             </div>
                             <div class="row">';
-                            if($userRes["temp_estado_conservacion"]!=0){
+                            if($userRes["temp_estado_conservacion"]!=0){//LISTO
                                 echo'
                                 <input type="hidden" value="'.$userRes["temp_estado_conservacion"].'" id="idEstConserv" />
                                 <div class="col-lg-12">
-                                    <button type="button" disabled onclick="btnfConserv()" class="btn btn-secondary" >ESTADO DE CONSERVACIÓN</button>
+                                    <button type="button" onclick="btnfConserv()" class="btn btn-secondary" >ESTADO DE CONSERVACIÓN</button>
                                 </div>';
                             }else{
                                 echo'
@@ -357,11 +357,11 @@ class constancias{
                                
                             echo'</div>
                             <div class="row">';
-                            if($userRes["temp_piezas_sanitarias"]!=0){
+                            if($userRes["temp_piezas_sanitarias"]!=0){//LISTO
                                 echo'
                                 <input type="hidden" value="'.$userRes["temp_piezas_sanitarias"].'" id="idPiezSant"/>
                                 <div class="col-lg-12">
-                                    <button type="button" disabled onclick="btnfPiezSant()" class="btn btn-secondary" >PIEZAS SANITARIAS</button>
+                                    <button type="button" onclick="btnfPiezSant()" class="btn btn-secondary" >PIEZAS SANITARIAS</button>
                                 </div>';
                             }else{
                                 echo'
@@ -373,11 +373,11 @@ class constancias{
                                 
                             echo'</div>
                             <div class="row">';
-                            if($userRes["temp_ambientes"]!=0){
+                            if($userRes["temp_ambientes"]!=0){//LISTO
                                 echo'
                                 <input type="hidden" value="'.$userRes["temp_ambientes"].'" id="idAmbientes"/>
                                 <div class="col-lg-12">
-                                    <button type="button" disabled onclick="btnfAmbi()" class="btn btn-secondary" >AMBIENTES</button>
+                                    <button type="button" onclick="btnfAmbi()" class="btn btn-secondary" >AMBIENTES</button>
                                 </div>';
                             }else{
                                 echo'
@@ -390,11 +390,11 @@ class constancias{
                             echo'
                             </div>
                             <div class="row">';
-                            if($userRes["temp_puertas"]!=0){
+                            if($userRes["temp_puertas"]!=0){//LISTO
                                 echo'
                                 <input type="hidden" value="'.$userRes["temp_puertas"].'" id="idPuertas"/>
                                 <div class="col-lg-12">
-                                    <button type="button" disabled onclick="btnfpuertas()" class="btn btn-secondary" >PUERTAS</button>
+                                    <button type="button" onclick="btnfpuertas()" class="btn btn-secondary" >PUERTAS</button>
                             </div>';
                             }else{
                                 echo'
@@ -406,11 +406,11 @@ class constancias{
                                 
                             echo'</div>
                             <div class="row">';
-                            if($userRes["temp_complementos"]!=0){
+                            if($userRes["temp_complementos"]!=0){//LISTO
                                 echo'
                                 <input type="hidden" value="'.$userRes["temp_complementos"].'" id="idComple" />
                                 <div class="col-lg-12">
-                                    <button type="button" disabled onclick="btnfComple()" class="btn btn-secondary" >COMPLEMENTOS</button>
+                                    <button type="button" onclick="btnfComple()" class="btn btn-secondary" >COMPLEMENTOS</button>
                                 </div>';
                             }else{
                                 echo'
@@ -426,7 +426,7 @@ class constancias{
                                 echo'
                                 <input type="hidden" value="'.$userRes["temp_factura"].'" id="idFactura"/>
                                 <div class="col-lg-12">
-                                    <button type="button" disabled onclick="btnfFactura()" class="btn btn-secondary" >FACTURA</button>
+                                    <button type="button" onclick="btnfFactura()" class="btn btn-secondary" >FACTURA</button>
                                 </div>';
                             }else{
                                 echo'
@@ -442,7 +442,7 @@ class constancias{
                                 echo'
                                 <input type="hidden" value="'.$userRes["temp_expediente"].'" id="idExp">
                                 <div class="col-lg-12">
-                                    <button type="button"disabled  onclick="btnfexpedient()" class="btn btn-secondary" >EXPEDIENTE</button>
+                                    <button type="button" onclick="btnfexpedient()" class="btn btn-secondary" >EXPEDIENTE</button>
                                 </div>';
                             }else{
                                 echo'
@@ -461,7 +461,7 @@ class constancias{
                 </div>
             </div>
             <div class="row">
-                    <div class="col-1">
+                    <div class="col-3">
                         <div class="campDat">
                             <b>Aplicar:</b>
                             <select id="multa"/>
@@ -487,7 +487,7 @@ class constancias{
     function fPropietario(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $busPropSql ="SELECT * FROM temp_propietarios where id=".$this->idProp."";
+        $busPropSql ="SELECT * FROM temp_propietarios where id='".$this->idProp."'";
         $resProp = $link->query($busPropSql);
         $propRes = $resProp->fetch_array();
         $divCed = explode('-',$propRes["cedula"]);
@@ -507,8 +507,10 @@ class constancias{
                         <p class="negritas">Cedula:</p>
                             <select class="codigo2" id="cedR">
                                 <option value="'.$divCed[0].'">'.$divCed[0].'</option>
+                                <option value="NA">NA</option>
                                 <option value="V">V</option>
                                 <option value="E">E</option>
+                                <option value="P">P</option>
                             </select>
                             <input type="text" class="numText" value="'.$divCed[1].'" id="cedConst" onchange="btnRevUsuario()"/>
                     </div>
@@ -517,7 +519,8 @@ class constancias{
                     <div class="campDat">
                         <p class="negritas">Rif:</p>
                             <select class="codigo2" id="rifR">
-                                <option value="'.$divCed[0].'">'.$divCed[0].'</option>
+                                <option value="'.$divRif[0].'">'.$divRif[0].'</option>
+                                <option value="NA">NA</option>
                                 <option value="V">V</option>
                                 <option value="J">J</option>
                                 <option value="G">G</option>
@@ -567,16 +570,37 @@ class constancias{
         <div class="btnSig1">
             <input type="button" value="Guardar" onclick="btnGuarProp()" class="botones btn btn-primary" />
         </div>
-        <div id="campGeneral2"></div>';
+        <div id="campGeneral2"></div>';//VERIFICADO
     }
     function guardProp(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $propSql = "INSERT INTO temp_propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab)value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFull."','".$this->direcProp."','".$this->telfFull2."')";
-        $link->query($propSql);
-        $idProp= $link->insert_id;
-        $userTemp = "UPDATE user_temp SET temp_propietarios='".$idProp."'";
-        $link->query($userTemp);
+        //USUARIOS
+        $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+        $resUserTemp = $link->query($userTempSql);
+        $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+        $userTempSql = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+        $resUserTemp = $link->query($userTempSql);
+        $userTempRes = $resUserTemp->fetch_array();
+        //BUSQUEDA VERIFICACION
+        $propVerSQL ="SELECT * FROM temp_propietarios where cedula='".$this->cedFul."'";
+        $resPropVer = $link->query($propVerSQL);
+        $propVerRes = $resPropVer->fetch_array();
+        if($userTempRes["temp_propietarios"]==""){
+            $propSql = "INSERT INTO temp_propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab)value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFull."','".$this->direcProp."','".$this->telfFull2."')";
+            $link->query($propSql);
+            $idProp= $link->insert_id;
+            $userTemp = "UPDATE user_temp SET temp_propietarios='".$idProp."'";
+            $link->query($userTemp);
+        }else{
+            $propSql = "UPDATE temp_propietarios set cedula='".$this->cedFul."', rif='".$this->rifConst."', nombre='".$this->nomProp."',apellido='".$this->apelProp."',telef='".$this->telfFull."',dir_hab='".$this->direcProp."',telef_hab='".$this->telfFull2."' where cedula='".$this->cedFul."' ";
+            $link->query($propSql);
+            $userTemp = "UPDATE user_temp SET temp_propietarios='".$propVerRes["id"]."' where temp_propietarios='".$propVerRes["id"]."'";
+            $link->query($propSql);
+            $idProp = $propVerRes["id"];
+        }//LISTO//LISTO
+        
     }
     //INMUEBLE
     function fInmueble(){
@@ -635,16 +659,32 @@ class constancias{
         <div class="btnSig1">
             <input type="button" value="Guardar" onclick="btnGuarInmue()" class="botones btn btn-primary" />
         </div>
-        ';
+        ';//VERIFICADO
     }
     function guarInmue(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $inmueSql = "INSERT INTO temp_inmueble(direccion,parroquia,sector,ambito)value('".$this->direcInmue."','".$this->parrInmue."','".$this->secInmue."','".$this->ambInmue."')";
-        $link->query($inmueSql);
-        $idInmue= $link->insert_id;
-        $inmueTemp = "UPDATE user_temp SET temp_inmueble='".$idInmue."'";
-        $link->query($inmueTemp);
+        session_start();
+        //USUARIOS
+        $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+        $resUserTemp = $link->query($userTempSql);
+        $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+        $userTempSql = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+        $resUserTemp = $link->query($userTempSql);
+        $userTempRes = $resUserTemp->fetch_array();
+        if($userTempRes["temp_inmueble"]!=0){
+            $upInmueSql = "UPDATE temp_inmueble SET direccion='".$this->direcInmue."',parroquia='".$this->parrInmue."',sector='".$this->secInmue."',ambito='".$this->ambInmue."' where id=".$userTempRes["temp_inmueble"]." ";
+            $link->query($upInmueSql);
+        }else{
+            $inmueSql = "INSERT INTO temp_inmueble(direccion,parroquia,sector,ambito)value('".$this->direcInmue."','".$this->parrInmue."','".$this->secInmue."','".$this->ambInmue."')";
+            echo $inmueSql;
+            $link->query($inmueSql);
+            $idInmue= $link->insert_id;
+            $inmueTemp = "UPDATE user_temp SET temp_inmueble='".$idInmue."'";
+            $link->query($inmueTemp);
+        }//LISTO//LISTO
+        
     }
     //CARACTERISTICAS DEL TERRENO
     function fCarTerreno(){
@@ -666,6 +706,7 @@ class constancias{
                         <p class="negritas">Topografía</p>
                         <select id="topoConst">
                             <option value="'.$caraTerRes["topografia"].'">'.$caraTerRes["topografia"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Terreno Llano">Terreno Llano</option>
                             <option value="Terreno Quebrado">Terreno Quebrado</option>
                         </select>
@@ -676,6 +717,7 @@ class constancias{
                         <p class="negritas">Forma</p>
                         <select id="formaConst">
                             <option value="'.$caraTerRes["forma"].'">'.$caraTerRes["forma"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Regular">Regular</option>
                             <option value="Irregular">Irregular</option>
                         </select>
@@ -686,6 +728,7 @@ class constancias{
                         <p class="negritas">Uso</p>
                         <select id="usoConst">
                             <option value="'.$caraTerRes["uso"].'">'.$caraTerRes["uso"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Comercial">Comercial</option>
                             <option value="Residencial">Residencial</option>
                             <option value="Residencial-Comercial">Residencial-Comercial</option>
@@ -702,6 +745,7 @@ class constancias{
                         <p class="negritas">Tenencia</p>
                         <select id="tenenConst">
                             <option value="tenencia">'.$caraTerRes["tenencia"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Municipio">Municipio</option>
                             <option value="Comunidad">Comunidad</option>
                             <option value="INTU">INTU</option>
@@ -717,16 +761,32 @@ class constancias{
         </div>
         <div class="btnSig1">
             <input type="button" value="Guardar" onclick="btnGuarCarTerr()" class="botones btn btn-primary" />
-        </div>';
+        </div>'; //VERIFICADO
     }
     function guarCarTerr(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $carcTerrSql = "INSERT INTO temp_carainmue(topografia,forma,uso,tenencia)value('".$this->topoConst."','".$this->formaConst."','".$this->usoConst."','".$this->tenenConst."')";
-        $link->query($carcTerrSql);
-        $idCarInmue= $link->insert_id;
-        $CarInmueTemp = "UPDATE user_temp SET temp_carainmue='".$idCarInmue."'";
-        $link->query($CarInmueTemp);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes = $resUserTemp->fetch_array();
+        if($userTempRes["temp_carainmue"]!=0){
+            $caraInmuSql = "UPDATE temp_carainmue set topografia='".$this->topoConst."', forma='".$this->formaConst."', uso='".$this->usoConst."', tenencia='".$this->tenenConst."' where id=".$userTempRes["temp_carainmue"]."";
+            $link->query($caraInmuSql);
+        }else{
+            $carcTerrSql = "INSERT INTO temp_carainmue(topografia,forma,uso,tenencia)value('".$this->topoConst."','".$this->formaConst."','".$this->usoConst."','".$this->tenenConst."')";
+            echo $carcTerrSql;
+            $link->query($carcTerrSql);
+            $idCarInmue= $link->insert_id;
+            $CarInmueTemp = "UPDATE user_temp SET temp_carainmue='".$idCarInmue."'";
+            $link->query($CarInmueTemp);
+        }//LISTO//LISTO
+        
     }
     //CARACTERISTICAS DE LA CONSTRUCCION
     function fcaracConst(){
@@ -748,6 +808,7 @@ class constancias{
                         <b>Destino</b>
                         <select id="destConst">
                             <option value="'.$constRes["destino"].'">'.$constRes["destino"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Unifamiliar">Unifamiliar</option>
                             <option value="Bifamiliar">Bifamiliar</option>
                             <option value="Multifamiliar">Multifamiliar</option>
@@ -764,6 +825,7 @@ class constancias{
                         <b>Estructura</b>
                         <select id="estConst">
                             <option value="'.$constRes["estructura"].'">'.$constRes["estructura"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Concreto">Concreto</option>
                             <option value="Acero ">Acero</option>
                             <option value="Concreto-Acero">Concreto-Acero</option>
@@ -779,6 +841,7 @@ class constancias{
                         <b>Paredes</b>
                         <select id="pareTipoInmue">
                             <option value="'.$constRes["paredes_tipo"].'">'.$constRes["paredes_tipo"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Concreto">Ladrillo</option>
                             <option value="Metalica">Bloque</option>
                             <option value="Madera">Adobe Tapia</option>
@@ -788,6 +851,7 @@ class constancias{
                         </select>
                         <select id="pareAcaInmue">
                             <option value="'.$constRes["paredes_acabado"].'">'.$constRes["paredes_acabado"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Concreto">Lujoso</option>
                             <option value="Metalica">Friso liso</option>
                             <option value="Madera">Friso rustico</option>
@@ -803,6 +867,7 @@ class constancias{
                         <b>Pintura</b>
                         <select id="pintConst">
                             <option value="'.$constRes["pintura"].'">'.$constRes["pintura"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option disabled>Pintura C</option>
                             <option value="Caucho">Caucho</option>
                             <option value="Óleo">Óleo</option>
@@ -823,6 +888,7 @@ class constancias{
                         <b>Techo</b>
                         <select id="techoConst">
                             <option value="'.$constRes["techo"].'">'.$constRes["techo"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Madera-teja">Madera-teja</option>
                             <option value="Placa-teja">Placa-teja</option>
                             <option value="Platabanda">Platabanda</option>
@@ -846,6 +912,7 @@ class constancias{
                         <b>Pisos</b>
                         <select id="pisosConst">
                             <option value="'.$constRes["pisos"].'">'.$constRes["pisos"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Lujoso">Lujoso</option>
                             <option value="Baldosas/Terracota">Baldosas/Terracota</option>
                             <option value="Cerámica">Cerámica</option>
@@ -863,6 +930,7 @@ class constancias{
                         <b>Ventanas</b>
                         <select id="ventConst">
                             <option value="'.$constRes["ventanas"].'">'.$constRes["ventanas"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Vetanal">Vetanal</option>
                             <option value="Celosial">Celosial</option>
                             <option value="Corredora">Corredora</option>
@@ -878,6 +946,7 @@ class constancias{
                         <b>Instal. Electricas</b>
                         <select id="instElect">
                             <option value="'.$constRes["insta_electricas"].'">'.$constRes["insta_electricas"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Embutidas">Embutidas</option>
                             <option value="Externa">Externa</option>
                             <option value="Industrial">Industrial</option>
@@ -889,6 +958,7 @@ class constancias{
                         <b>Regimen</b>
                         <select id="regInmue">
                             <option value="'.$constRes["Regimen"].'">'.$constRes["Regimen"].'</option>
+                            <option value="No Aplica">No Aplica</option>
                             <option value="Propiedad Horizontal">Propiedad Horizontal</option>
                             <option value="Condominio">Condominio</option>
                             <option value="Sucesion">Sucesion</option>
@@ -906,24 +976,39 @@ class constancias{
         <div class="btnSig1">
             <input type="button" value="Guardar" onclick="btnGuarCaracConst()" class="botones btn btn-primary" />
         </div>
-        ';
+        ';//VERIFICADO
     }
     function guarCaracConst(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $caracConstSql= "INSERT INTO temp_caraconst(destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,ventanas,insta_electricas,observ,Regimen)value('".$this->destConst."','".$this->estConst."','".$this->pareTipoInmue."','".$this->pareAcaInmue."','".$this->pintConst."','".$this->techoConst."','".$this->pisosConst."','".$this->ventConst."','".$this->instElect."','".$this->obsConst."','".$this->regInmue."')";
-        $link->query($caracConstSql);
-        $idCarConst= $link->insert_id;
-        $CarConstTemp = "UPDATE user_temp SET temp_caraconst='".$idCarConst."'";
-        $link->query($CarConstTemp);
-    }
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes = $resUserTemp->fetch_array();
+            if($userTempRes["temp_caraconst"] !=0){
+                $tempUserAct = "UPDATE temp_caraconst SET destino='".$this->destConst."', estructura='".$this->estConst."', paredes_tipo='".$this->pareTipoInmue."', paredes_acabado='".$this->pareAcaInmue."',pintura='".$this->pintConst."',techo='".$this->techoConst."' where id=".$userTempRes["temp_caraconst"]."";
+                $link->query($tempUserAct);
+            }else{
+                $caracConstSql= "INSERT INTO temp_caraconst(destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,ventanas,insta_electricas,observ,Regimen)value('".$this->destConst."','".$this->estConst."','".$this->pareTipoInmue."','".$this->pareAcaInmue."','".$this->pintConst."','".$this->techoConst."','".$this->pisosConst."','".$this->ventConst."','".$this->instElect."','".$this->obsConst."','".$this->regInmue."')";
+                $link->query($caracConstSql);
+                $idCarConst= $link->insert_id;
+                $CarConstTemp = "UPDATE user_temp SET temp_caraconst='".$idCarConst."'";
+                $link->query($CarConstTemp);
+            }
+        }//LISTO//LISTO
     //PROTOCOLIZACION DEL INMUEBLE
     function fprotInmue(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $protoSql = "SELECT * FROM temp_datos_protocolizacion where id=".$this->idProto."";
-        $resProto = $link->query($protoSql);
-        $protoRes = $resProto->fetch_array();
+        
+                $protoSql = "SELECT * FROM temp_datos_protocolizacion where id=".$this->idProto."";
+                $resProto = $link->query($protoSql);
+                $protoRes = $resProto->fetch_array();
         echo'
         <div class="container-fluid">
             <div class="row">
@@ -1007,16 +1092,31 @@ class constancias{
         </div>
         <div class="btnSig1">
             <input type="button" value="Guardar" onclick="btnGuarProt()" class="botones btn btn-primary" />
-        </div>';
+        </div>';//VERIFICADO
     }
     function guarProtInmue(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $protInmueSql ="INSERT INTO temp_datos_protocolizacion(documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble)value('".$this->docDebConst."','".$this->direcProtConst."','".$this->numProtConst."','".$this->tomoProtConst."','".$this->folioProtConst."','".$this->protoConst."','".$this->trimProtConst."','".$this->dateProtConst."','".$this->valorProtConst."')";
-        $link->query($protInmueSql);
-        $idProt= $link->insert_id;
-        $protTemp = "UPDATE user_temp SET temp_datos_protocolizacion='".$idProt."'";
-        $link->query($protTemp);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql1 = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp1 = $link->query($userTempSql1);
+            $userTempRes = $resUserTemp1->fetch_array();
+
+            if($userTempRes["temp_datos_protocolizacion"] ==0){
+                $protInmueSql ="INSERT INTO temp_datos_protocolizacion(documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble)value('".$this->docDebConst."','".$this->direcProtConst."','".$this->numProtConst."','".$this->tomoProtConst."','".$this->folioProtConst."','".$this->protoConst."','".$this->trimProtConst."','".$this->dateProtConst."','".$this->valorProtConst."')";
+                $link->query($protInmueSql);
+                $idProt= $link->insert_id;
+                $protTemp = "UPDATE user_temp SET temp_datos_protocolizacion='".$idProt."'";
+                $link->query($protTemp);
+            }else{
+                $upProtSql = "UPDATE temp_datos_protocolizacion SET documento='".$this->docDebConst."',direccion='".$this->direcProtConst."',numero='".$this->numProtConst."',tomo='".$this->tomoProtConst."',folio='".$this->folioProtConst."',protocolo='".$this->protoConst."',trimestre='".$this->trimProtConst."',fecha='".$this->dateProtConst."',valor_inmueble='".$this->valorProtConst."' where id=".$userTempRes["temp_datos_protocolizacion"]."";
+                $link->query($upProtSql);
+            }//LISTO//LISTO//LISTO
     }
     //ESTADO DE CONSERVACION
     function fConserv(){
@@ -1059,16 +1159,31 @@ class constancias{
         </div>
         <div class="btnSig1">
             <input type="button" value="Siguiente" onclick="btnGuarConserv()" class="botones btn btn-primary" />
-        </div';
+        </div'; //VERIFICADO
     }
     function guarConserv(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $conservSql = "INSERT INTO temp_estado_conservacion(ano_construccion,ano_refaccion,edad_efectiva,nro_planta,nro_vivienda)value(".$this->ano_construc.",".$this->ano_refac.",".$this->edadEfec.",".$this->numPlata.",".$this->numVivienda.")";
-        $link->query($conservSql);
-        $idConserv= $link->insert_id;
-        $conservTemp = "UPDATE user_temp SET temp_estado_conservacion='".$idConserv."'";
-        $link->query($conservTemp);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql1 = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp1 = $link->query($userTempSql1);
+            $userTempRes = $resUserTemp1->fetch_array();
+
+            if($userTempRes["temp_estado_conservacion"] ==0){
+                $conservSql = "INSERT INTO temp_estado_conservacion(ano_construccion,ano_refaccion,edad_efectiva,nro_planta,nro_vivienda)value(".$this->ano_construc.",".$this->ano_refac.",".$this->edadEfec.",".$this->numPlata.",".$this->numVivienda.")";
+                $link->query($conservSql);
+                $idConserv= $link->insert_id;
+                $conservTemp = "UPDATE user_temp SET temp_estado_conservacion='".$idConserv."'";
+                $link->query($conservTemp);
+            }else{
+                $upConservSql = "UPDATE temp_estado_conservacion SET ano_construccion='".$this->ano_construc."',ano_refaccion='".$this->ano_refac."',edad_efectiva='".$this->edadEfec."',nro_planta='".$this->numPlata."',nro_vivienda='".$this->numVivienda."' where id=".$userTempRes["temp_estado_conservacion"]."";
+                $link->query($upConservSql);
+            }//LISTO//LISTO
     }
     //PIEZAS SANITARIAS 
     function fPiezSant(){
@@ -1089,6 +1204,7 @@ class constancias{
                         <b>Porcelana Fina</b>
                         <select id="porFina">
                             <option value="'.$piezSanRes["porcelana_fina"].'">'.$piezSanRes["porcelana_fina"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1097,6 +1213,7 @@ class constancias{
                         <b>Porcelana Econ.</b>
                         <select id="porceEcon">
                             <option value="'.$piezSanRes["porcelana_econ"].'">'.$piezSanRes["porcelana_econ"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1105,6 +1222,7 @@ class constancias{
                         <b>Bañera</b>
                         <select id="banera">
                             <option value="'.$piezSanRes["banera"].'">'.$piezSanRes["banera"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1113,6 +1231,7 @@ class constancias{
                         <b>Calentador</b>
                         <select id="calentador">
                             <option value="'.$piezSanRes["calentador"].'">'.$piezSanRes["calentador"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1123,6 +1242,7 @@ class constancias{
                         <b>W.C.</b>
                         <select id="wc">
                             <option value="'.$piezSanRes["wc"].'">'.$piezSanRes["wc"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1131,6 +1251,7 @@ class constancias{
                         <b>Bidet</b>
                         <select id="bidet">
                             <option value="'.$piezSanRes["bidet"].'">'.$piezSanRes["bidet"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1139,6 +1260,7 @@ class constancias{
                         <b>Lavamanos</b>
                         <select id="lavamanos">
                             <option value="'.$piezSanRes["lavamanos"].'">'.$piezSanRes["lavamanos"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1147,6 +1269,7 @@ class constancias{
                         <b>Ducha</b>
                         <select id="ducha">
                             <option value="'.$piezSanRes["ducha"].'">'.$piezSanRes["ducha"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1155,6 +1278,7 @@ class constancias{
                         <b>Urinario</b>
                         <select id="urinario">
                             <option value="'.$piezSanRes["urinario"].'">'.$piezSanRes["urinario"].'</option>
+                            <option value="NA">NA</option>s
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1164,16 +1288,31 @@ class constancias{
             <div class="btnSig1">
                 <input type="button" value="Guardar" onclick="btnGuarPizSanit()" class="botones btn btn-primary" />
             </div>
-        ';
+        ';//VERIFICADO
     }
     function guarPiezSant(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $piezSant="INSERT INTO temp_piezas_sanitarias(porcelana_fina,porcelana_econ,banera,calentador,wc,bidet,lavamanos,ducha,urinario)value('".$this->porFina."','".$this->porceEcon."','".$this->banera."','".$this->calentador."','".$this->wc."','".$this->bidet."','".$this->lavamanos."','".$this->ducha."','".$this->urinario."')";
-        $link->query($piezSant);
-        $idpiezSant= $link->insert_id;
-        $piezSantTemp = "UPDATE user_temp SET temp_piezas_sanitarias='".$idpiezSant."'";
-        $link->query($piezSantTemp);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql1 = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp1 = $link->query($userTempSql1);
+            $userTempRes = $resUserTemp1->fetch_array();
+
+            if($userTempRes["temp_piezas_sanitarias"] ==0){
+                $piezSant="INSERT INTO temp_piezas_sanitarias(porcelana_fina,porcelana_econ,banera,calentador,wc,bidet,lavamanos,ducha,urinario)value('".$this->porFina."','".$this->porceEcon."','".$this->banera."','".$this->calentador."','".$this->wc."','".$this->bidet."','".$this->lavamanos."','".$this->ducha."','".$this->urinario."')";
+                $link->query($piezSant);
+                $idpiezSant= $link->insert_id;
+                $piezSantTemp = "UPDATE user_temp SET temp_piezas_sanitarias='".$idpiezSant."'";
+                $link->query($piezSantTemp);
+            }else{
+                $upPiezSantSql = "UPDATE temp_piezas_sanitarias SET porcelana_fina='".$this->porFina."',porcelana_econ='".$this->porceEcon."',banera='".$this->banera."',calentador='".$this->calentador."',wc='".$this->wc."',bidet='".$this->bidet."',lavamanos='".$this->lavamanos."',ducha='".$this->ducha."',urinario='".$this->urinario."' where id=".$userTempRes["temp_piezas_sanitarias"]."";
+                $link->query($upPiezSantSql);
+            }//LISTO//LISTO
     }
     //PUERTAS
     function fpuertas(){
@@ -1194,6 +1333,7 @@ class constancias{
                         <b>Entamborada Fina</b>
                         <select id="entamFina">
                             <option value="'.$puertasRes["entamborada_fina"].'">'.$puertasRes["entamborada_fina"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1202,6 +1342,7 @@ class constancias{
                         <b>Ent. Economica</b>
                         <select id="entamEcon">
                             <option value="'.$puertasRes["ent_econo"].'">'.$puertasRes["ent_econo"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1210,6 +1351,7 @@ class constancias{
                         <b>Madera cepillada</b>
                         <select id="madeCepil">
                             <option value="'.$puertasRes["madera_cepi"].'">'.$puertasRes["madera_cepi"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1218,6 +1360,7 @@ class constancias{
                         <b>Hierro</b>
                         <select id="hierro">
                             <option value="'.$puertasRes["hierro"].'">'.$puertasRes["hierro"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1227,16 +1370,31 @@ class constancias{
             <div class="btnSig1">
                 <input type="button" value="Guardar" onclick="btnGuarPuertas()" class="botones btn btn-primary" />
             </div>
-        ';
+        ';//VERIFICADO
     }
     function guarPuertas(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $puertaSql = "INSERT INTO temp_puertas(entamborada_fina,ent_econo,madera_cepi,hierro)value('".$this->entamFina."','".$this->entamEcon."','".$this->madeCepil."','".$this->hierro."')";
-        $link->query($puertaSql);
-        $idPuertas= $link->insert_id;
-        $puertasTemp = "UPDATE user_temp SET temp_puertas='".$idPuertas."'";
-        $link->query($puertasTemp);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql1 = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp1 = $link->query($userTempSql1);
+            $userTempRes = $resUserTemp1->fetch_array();
+
+            if($userTempRes["temp_puertas"] ==0){
+                $puertaSql = "INSERT INTO temp_puertas(entamborada_fina,ent_econo,madera_cepi,hierro)value('".$this->entamFina."','".$this->entamEcon."','".$this->madeCepil."','".$this->hierro."')";
+                $link->query($puertaSql);
+                $idPuertas= $link->insert_id;
+                $puertasTemp = "UPDATE user_temp SET temp_puertas='".$idPuertas."'";
+                $link->query($puertasTemp);
+            }else{
+                $upPuerSql= "UPDATE temp_puertas SET entamborada_fina='".$this->entamFina."', ent_econo='".$this->entamEcon."', madera_cepi='".$this->madeCepil."',hierro='".$this->hierro."' where id=".$userTempRes["temp_puertas"]."";
+                $link->query($upPuerSql);
+            }//LISTO//LISTO
     }
     //AMBIENTES
     function fambien(){
@@ -1298,16 +1456,31 @@ class constancias{
         <div class="btnSig1">
             <input type="button" value="Guardar" onclick="btnguarAmbien()" class="botones btn btn-primary" />
         </div>
-        ';
+        ';//VERIFICADO//VERIFICADO
     }
     function guarAmbien(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $ambSql = "INSERT INTO temp_ambientes(dormitorio,comedor,sala,banos,cocina,servicio,oficina,garaje,estacionamiento)value('".$this->dormit."','".$this->comedor."','".$this->sala."','".$this->banos."','".$this->Cocina."','".$this->Servicio."','".$this->oficina."','".$this->garaje."','".$this->estac."')";
-        $link->query($ambSql);
-        $idAmbient= $link->insert_id;
-        $ambientTemp = "UPDATE user_temp SET temp_ambientes='".$idAmbient."'";
-        $link->query($ambientTemp);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql1 = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp1 = $link->query($userTempSql1);
+            $userTempRes = $resUserTemp1->fetch_array();
+
+            if($userTempRes["temp_ambientes"] ==0){
+                $ambSql = "INSERT INTO temp_ambientes(dormitorio,comedor,sala,banos,cocina,servicio,oficina,garaje,estacionamiento)value('".$this->dormit."','".$this->comedor."','".$this->sala."','".$this->banos."','".$this->Cocina."','".$this->Servicio."','".$this->oficina."','".$this->garaje."','".$this->estac."')";
+                $link->query($ambSql);
+                $idAmbient= $link->insert_id;
+                $ambientTemp = "UPDATE user_temp SET temp_ambientes='".$idAmbient."'";
+                $link->query($ambientTemp);
+            }else{
+                $upAmbSql = "UPDATE temp_ambientes SET dormitorio='".$this->dormit."', comedor='".$this->comedor."', sala='".$this->sala."', banos='".$this->banos."', cocina='".$this->Cocina."', servicio='".$this->Servicio."',oficina='".$this->oficina."', garaje='".$this->garaje."', estacionamiento='".$this->estac."' where id= ".$userTempRes["temp_ambientes"]."";
+                $link->query($upAmbSql);
+            }//LISTO//LISTO
     }
     //COMPLEMENTOS
     function fConple(){
@@ -1328,6 +1501,7 @@ class constancias{
                         <b>Ascensor</b>
                         <select id="ascensor">
                             <option value="'.$compleRes["ascensor"].'">'.$compleRes["ascensor"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1336,6 +1510,7 @@ class constancias{
                         <b>Aire Acond.</b>
                         <select id="aireAcond">
                             <option value="'.$compleRes["aire_acond"].'">'.$compleRes["aire_acond"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1344,6 +1519,7 @@ class constancias{
                         <b>Rejas</b>
                         <select id="rejas">
                             <option value="'.$compleRes["rejas"].'">'.$compleRes["rejas"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1352,6 +1528,7 @@ class constancias{
                         <b>Closets</b>
                         <select id="closets">
                             <option value="'.$compleRes["closets"].'">'.$compleRes["closets"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1360,6 +1537,7 @@ class constancias{
                         <b>Porcelana</b>
                         <select id="porcelana">
                             <option value="'.$compleRes["porcelana"].'">'.$compleRes["porcelana"].'</option>
+                            <option value="NA">NA</option>
                             <option value="Si">Si</option>
                             <option value="No">No</option>
                         </select>
@@ -1369,16 +1547,31 @@ class constancias{
             <div class="btnSig1">
                 <input type="button" value="Guardar" onclick="btnGuarComple()" class="botones btn btn-primary" />
             </div>
-        ';
+        ';//VERIFICADO
     }
     function guarComple(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $compleSql = "INSERT INTO temp_complementos(ascensor,aire_acond,rejas,closets,porcelana)value('".$this->ascensor."','".$this->aireAcond."','".$this->rejas."','".$this->closets."','".$this->porcelana."')";
-        $link->query($compleSql);
-        $idcomple= $link->insert_id;
-        $compleTemp = "UPDATE user_temp SET temp_complementos='".$idcomple."'";
-        $link->query($compleTemp);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql1 = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp1 = $link->query($userTempSql1);
+            $userTempRes = $resUserTemp1->fetch_array();
+
+            if($userTempRes["temp_complementos"] ==0){
+                $compleSql = "INSERT INTO temp_complementos(ascensor,aire_acond,rejas,closets,porcelana)value('".$this->ascensor."','".$this->aireAcond."','".$this->rejas."','".$this->closets."','".$this->porcelana."')";
+                $link->query($compleSql);
+                $idcomple= $link->insert_id;
+                $compleTemp = "UPDATE user_temp SET temp_complementos='".$idcomple."'";
+                $link->query($compleTemp);
+            }else{
+                $upCompleSQL = "UPDATE temp_complementos SET ascensor='".$this->ascensor."', aire_acond='".$this->aireAcond."', rejas='".$this->rejas."', closets='".$this->closets."', porcelana='".$this->porcelana."' where id=".$userTempRes["temp_complementos"]."";
+                $link->query($upCompleSQL);
+            }//LISTO//LISTO
     }
     //SERVICIOS
     function fServicios(){
@@ -1400,6 +1593,7 @@ class constancias{
                         <b>Acueducto:</b>
                         <select class="codigo2" id="Acue">
                             <option value="'.$servRes["acued"].'">'.$servRes["acued"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1410,6 +1604,7 @@ class constancias{
                         <b>Acueducto Rural:</b>
                         <select class="codigo2" id="AcueRural">
                             <option value="'.$servRes["acuedRural"].'">'.$servRes["acuedRural"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1420,6 +1615,7 @@ class constancias{
                         <b>Aguas Subterráneas:</b>
                         <select class="codigo2" id="AguasSub">
                             <option value="'.$servRes["aguasSubter"].'">'.$servRes["aguasSubter"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1432,6 +1628,7 @@ class constancias{
                         <b>Pavimento Flexible:</b>
                         <select class="codigo2" id="PavFlex">
                             <option value="'.$servRes["pavimentoFlex"].'">'.$servRes["pavimentoFlex"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1442,6 +1639,7 @@ class constancias{
                         <b>Pavimento Rígido:</b>
                         <select class="codigo2" id="PavRig">
                             <option value="'.$servRes["pavimentoRig"].'">'.$servRes["pavimentoRig"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1452,6 +1650,7 @@ class constancias{
                         <b>Vía Engranzonada:</b>
                         <select class="codigo2" id="viaEngran">
                             <option value="'.$servRes["viaEngran"].'">'.$servRes["viaEngran"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1464,6 +1663,7 @@ class constancias{
                         <b>Alumbrado Público:</b>
                         <select class="codigo2" id="AlumPublico">
                             <option value="'.$servRes["alumbradoPub"].'">'.$servRes["alumbradoPub"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1474,6 +1674,7 @@ class constancias{
                         <b>Electricidad Residencial:</b>
                         <select class="codigo2" id="ElectResidencial">
                             <option value="'.$servRes["electriResi"].'">'.$servRes["electriResi"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1484,6 +1685,7 @@ class constancias{
                         <b>Transporte Público:</b>
                         <select class="codigo2" id="transPublic">
                             <option value="'.$servRes["transportePublic"].'">'.$servRes["transportePublic"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1496,6 +1698,7 @@ class constancias{
                         <b>Electricidad Industrial:</b>
                         <select class="codigo2" id="ElectriIndust">
                             <option value="'.$servRes["electriIndus"].'">'.$servRes["electriIndus"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1506,6 +1709,7 @@ class constancias{
                         <b>Línea Telefónica:</b>
                         <select class="codigo2" id="linTelf">
                             <option value="'.$servRes["lineaTelef"].'">'.$servRes["lineaTelef"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1516,6 +1720,7 @@ class constancias{
                         <b>Aseo:</b>
                         <select class="codigo2" id="aseo">
                             <option value="'.$servRes["aseo"].'">'.$servRes["aseo"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1528,6 +1733,7 @@ class constancias{
                         <b>Pozo Séptico:</b>
                         <select class="codigo2" id="pozoSept">
                             <option value="'.$servRes["pozoSept"].'">'.$servRes["pozoSept"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1538,6 +1744,7 @@ class constancias{
                         <b>Aguas Servidas:</b>
                         <select class="codigo2" id="AguasServ">
                             <option value="'.$servRes["aguasServ"].'">'.$servRes["aguasServ"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1548,6 +1755,7 @@ class constancias{
                         <b>Acera:</b>
                         <select class="codigo2" id="acera">
                             <option value="'.$servRes["acera"].'">'.$servRes["acera"].'</option>
+                            <option value="NA">NA</option>
                             <option value="si">Si</option>
                             <option value="no">No</option>
                         </select>
@@ -1557,16 +1765,31 @@ class constancias{
         </div>
         <div class="btnSig1">
             <input type="button" value="Guardar" onclick="btnGuarServicios()" class="botones btn btn-primary" />
-        </div>';
+        </div>';//VERIFICADO
     }
     function guarServicios(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $servSql = "INSERT INTO temp_servicios_inmue(acued,acuedRural,aguasSubter,aguasServ,pavimentoFlex,pavimentoRig,viaEngran,acera,alumbradoPub,aseo,transportePublic,pozoSept,electriResi,electriIndus,lineaTelef)value('".$this->Acue."','".$this->AcueRural."','".$this->AguasSub."','".$this->AguasServ."','".$this->PavFlex."','".$this->PavRig."','".$this->viaEngran."','".$this->acera."','".$this->AlumPublico."','".$this->aseo."','".$this->transPublic."','".$this->pozoSept."','".$this->ElectResidencial."','".$this->ElectriIndust."','".$this->linTelf."')";
-        $link->query($servSql);
-        $idServic= $link->insert_id;
-        $servicTemp = "UPDATE user_temp SET temp_servicios_inmue='".$idServic."'";
-        $link->query($servicTemp);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql1 = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp1 = $link->query($userTempSql1);
+            $userTempRes = $resUserTemp1->fetch_array();
+
+            if($userTempRes["temp_servicios_inmue"] ==0){
+                $servSql = "INSERT INTO temp_servicios_inmue(acued,acuedRural,aguasSubter,aguasServ,pavimentoFlex,pavimentoRig,viaEngran,acera,alumbradoPub,aseo,transportePublic,pozoSept,electriResi,electriIndus,lineaTelef)value('".$this->Acue."','".$this->AcueRural."','".$this->AguasSub."','".$this->AguasServ."','".$this->PavFlex."','".$this->PavRig."','".$this->viaEngran."','".$this->acera."','".$this->AlumPublico."','".$this->aseo."','".$this->transPublic."','".$this->pozoSept."','".$this->ElectResidencial."','".$this->ElectriIndust."','".$this->linTelf."')";
+                $link->query($servSql);
+                $idServic= $link->insert_id;
+                $servicTemp = "UPDATE user_temp SET temp_servicios_inmue='".$idServic."'";
+                $link->query($servicTemp);
+            }else{
+                $upServiSql = "UPDATE temp_servicios_inmue SET acued='".$this->Acue."', acuedRural='".$this->AcueRural."', aguasSubter='".$this->AguasServ."', pavimentoFlex='".$this->PavFlex."', pavimentoRig='".$this->PavRig."', viaEngran='".$this->viaEngran."', acera='".$this->acera."', alumbradoPub='".$this->AlumPublico."', aseo='".$this->aseo."', transportePublic='".$this->transPublic."', pozoSept='".$this->pozoSept."', electriResi='".$this->ElectResidencial."', electriIndus='".$this->ElectriIndust."', lineaTelef='".$this->linTelf."' where id=".$userTempRes["temp_complementos"]."";
+                $link->query($upServiSql);
+            }//LISTO//LISTO
     }
     //EXPEDIENTE
     function fExpedient(){
@@ -1611,16 +1834,30 @@ class constancias{
             <div class="btnSig1">
                 <input type="button" value="Guardar" onclick="btnGuarExpe()" class="botones btn btn-primary" />
             </div>
-        ';
+        ';//VERIFICADO
     }
     function guarExpe(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $expeSql = "INSERT INTO temp_expediente(no_expediente,condicion,fecha,valorInmue)value('".$this->nuExp."','".$this->multa."','".$this->fechaExp."','".$this->valorInmue."')";
-        $link->query($expeSql);
-        $idExpediente= $link->insert_id;
-        $expedienteTemp = "UPDATE user_temp SET temp_expediente='".$idExpediente."'";
-        $link->query($expedienteTemp);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql1 = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp1 = $link->query($userTempSql1);
+            $userTempRes = $resUserTemp1->fetch_array();
+            if($userTempRes["temp_expediente"] ==0){
+                $expeSql = "INSERT INTO temp_expediente(no_expediente,condicion,fecha,valorInmue)value('".$this->nuExp."','nada','".$this->fechaExp."','".$this->valorInmue."')";
+                $link->query($expeSql);
+                $idExpediente= $link->insert_id;
+                $expedienteTemp = "UPDATE user_temp SET temp_expediente='".$idExpediente."'";
+                $link->query($expedienteTemp);
+            }else{
+                $upExpeSql = "UPDATE temp_expediente SET no_expediente='".$this->nuExp."', condicion='nada', fecha='".$this->fechaExp."', valorInmue='".$this->valorInmue."' where id=".$userTempRes["temp_expediente"]."";
+                $link->query($upExpeSql);
+            }//LISTO
     }
     function busExpediente(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
@@ -1637,8 +1874,7 @@ class constancias{
         }else{
             echo'<input type="hidden" value="'.$expBusRes["n_expediente"].'" id="expVerificado" />';
         }
-    }
-        
+    } 
     //FACTURA
     function fFactura(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
@@ -1663,7 +1899,7 @@ class constancias{
                 <div class="col">
                     <div class="campDat">
                         <b>Número Factura:</b>
-                        <input type="number" value="'.$factRes["n_factura"].'" id="numFact" onchange="btnVeriFact()"/>
+                        <input type="text" value="'.$factRes["n_factura"].'" id="numFact" onchange="btnVeriFact()"/>
                     </div>
                 </div>
                 <div class="col">
@@ -1686,16 +1922,30 @@ class constancias{
         <div class="btnSig1">
             <input type="button" value="Guardar" onclick="btnGuarFact()" class="botones btn btn-primary" />
         </div>
-        ';
+        ';//VERIFICADO
     }
     function guarFact(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
-        $factSql = "INSERT INTO temp_factura(monto,n_factura,fecha,n_recibo)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."','".$this->recFact."')";
-        $link->query($factSql);
-        $idFact= $link->insert_id;
-        $factTemp = "UPDATE user_temp SET temp_factura='".$idFact."'";
-        $link->query($factTemp);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql1 = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp1 = $link->query($userTempSql1);
+            $userTempRes = $resUserTemp1->fetch_array();
+            if($userTempRes["temp_factura"] ==0){
+                $factSql = "INSERT INTO temp_factura(monto,n_factura,fecha,n_recibo)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."','".$this->recFact."')";
+                $link->query($factSql);
+                $idFact= $link->insert_id;
+                $factTemp = "UPDATE user_temp SET temp_factura='".$idFact."'";
+                $link->query($factTemp);
+            }else{
+                $upFactSql = "UPDATE temp_factura SET monto='".$this->montoFact."', n_factura='".$this->numFact."', fecha='".$this->fechFact."', n_recibo='".$this->recFact."' where id='".$userTempRes["temp_factura"]."' ";
+                $link->query($upFactSql);
+            }//LISTO//LISTO
     }
     function fCarac(){
 
@@ -2098,6 +2348,7 @@ class constancias{
                             <input type="text" value="'.$lindGenRes["areaTotal"].'" class="text" id="arTotal" >
                             <select id="uniAreaT">
                                 <option value="'.$lindGenRes["areaTotal"].'">'.$lindGenRes["uniAreaT"].'</option>
+                                <option value="NA">NA</option>///**//////
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
@@ -2117,6 +2368,7 @@ class constancias{
                             <input type="text" value="'.$lindGenRes["areaConst"].'" class="text" id="arConstTotal" >
                             <select id="uniAreaConst">
                                 <option value="'.$lindGenRes["uniAreaC"].'">'.$lindGenRes["uniAreaC"].'</option>
+                                <option value="NA">NA</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
@@ -2130,7 +2382,7 @@ class constancias{
             <div class="btnSig1">
                 <input type="button" value="Guardar" onclick="btnGuarGeneral()" class="botones btn btn-primary" />
             </div>
-        ';
+        ';//VERIFICADO
     }
     function guarGeneral(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
@@ -2163,11 +2415,25 @@ class constancias{
             $Oeste = "nada";
             $NortOeste = $this->oesteGen;
         }
-        $lindGen = "INSERT INTO temp_linderos_general(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte."','".$norEste."','".$Sur."','".$SurEste."','".$Este."','".$SurOeste."','".$Oeste."','".$NortOeste."','".$this->alindNort."','".$this->alindSur."','".$this->alindEste."','".$this->alindOeste."','".$this->arTotal."','".$this->uniAreaT."','".$this->NivConstTotal."','".$this->uniAreaConst."','".$this->arConstTotal."','".$this->uniNorte."','".$this->uniSur."','".$this->uniEste."','".$this->uniOeste."')";
-        $link->query($lindGen);
-        $idlindGen= $link->insert_id;
-        $lindGenTemp = "UPDATE user_temp SET temp_linderos_general='".$idlindGen."'";
-        $link->query($lindGenTemp);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql1 = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp1 = $link->query($userTempSql1);
+            $userTempRes = $resUserTemp1->fetch_array();
+            if($userTempRes["temp_linderos_general"] ==0){
+                $lindGen = "INSERT INTO temp_linderos_general(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte."','".$norEste."','".$Sur."','".$SurEste."','".$Este."','".$SurOeste."','".$Oeste."','".$NortOeste."','".$this->alindNort."','".$this->alindSur."','".$this->alindEste."','".$this->alindOeste."','".$this->arTotal."','".$this->uniAreaT."','".$this->NivConstTotal."','".$this->uniAreaConst."','".$this->arConstTotal."','".$this->uniNorte."','".$this->uniSur."','".$this->uniEste."','".$this->uniOeste."')";
+                $link->query($lindGen);
+                $idlindGen= $link->insert_id;
+                $lindGenTemp = "UPDATE user_temp SET temp_linderos_general='".$idlindGen."'";
+                $link->query($lindGenTemp);
+            }else{
+                $upLindGenSql ="UPDATE temp_linderos_general SET norte='".$Norte."', noreste='".$norEste."', sur='".$Sur."', sureste='".$SurEste."', este='".$Este."', suroeste='".$SurOeste."', oeste='".$Oeste."', noroeste='".$NortOeste."', alind_n='".$this->alindNort."', alind_s='".$this->alindSur."', alind_e='".$this->alindEste."', alind_o='".$this->alindOeste."', areaTotal='".$this->arTotal."', uniAreaT='".$this->uniAreaT."', nivelesConst='".$this->NivConstTotal."', uniAreaC='".$this->uniAreaConst."', areaConst='".$this->arConstTotal."', uniNorte='".$this->uniNorte."', uniSur='".$this->uniSur."', uniEste='".$this->uniEste."', uniOeste='".$this->uniOeste."' where id=".$userTempRes["temp_linderos_general"]."";
+                $link->query($upLindGenSql);
+            }//LISTO
     }
     //LINDEROS POSIBLE VENTA
     function actPosVenta(){
@@ -2342,7 +2608,7 @@ class constancias{
                         <input type="text" value="'.$lindPosRes["areaTotal"].'"class="text" id="arTotal2" >
                         <select id="uniAreaT2">
                             <option value="'.$lindPosRes["uniAreaT"].'">'.$lindPosRes["uniAreaT"].'</option>
-                            <option value="No Aplica">No Aplica</option>
+                            <option value="NA">NA</option>
                             <option value="m2">m2</option>
                             <option value="Ha">Ha</option>
                         </select>
@@ -2362,7 +2628,7 @@ class constancias{
                         <input type="text" value="'.$lindPosRes["areaConst"].'"class="text" id="arConstTotal2" >
                         <select id="uniAreaConst2">
                             <option value="'.$lindPosRes["uniAreaC"].'">'.$lindPosRes["uniAreaC"].'</option>
-                            <option value="No Aplica">No Aplica</option>
+                            <option value="NA">NA</option>//
                             <option value="m2">m2</option>
                             <option value="Ha">Ha</option>
                         </select>
@@ -2376,7 +2642,7 @@ class constancias{
         <div class="btnSig1">
             <input type="button" value="Guardar" onclick="btnGuarPosVenta()" class="botones btn btn-primary" />
         </div>
-        ';
+        ';//VERIFCADO
     }
     function guarPosVenta(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
@@ -2409,11 +2675,25 @@ class constancias{
             $Oeste2 = "nada";
             $NortOeste2 = $this->oestePosVenta;
         }
-        $lindPosVentaSql = "INSERT INTO temp_linderos_posible_venta(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte2."','".$norEste2."','".$Sur2."','".$SurEste2."','".$Este2."','".$SurOeste2."','".$Oeste2."','".$NortOeste2."','".$this->alindPosNort."','".$this->alindPosSur."','".$this->alindPosEste."','".$this->oestePosVenta."','".$this->arTotal2."','".$this->uniAreaT2."','".$this->NivConstTotal2."','".$this->uniAreaConst2."','".$this->arConstTotal2."','".$this->uniNorte2."','".$this->uniSur2."','".$this->uniEste2."','".$this->uniOeste2."')";
-        $link->query($lindPosVentaSql);
-        $idLindPosVenta = $link->insert_id;
-        $lindPosVentTemp = "UPDATE user_temp SET temp_linderos_posible_venta='".$idLindPosVenta."'";
-        $link->query($lindPosVentTemp);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql1 = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp1 = $link->query($userTempSql1);
+            $userTempRes = $resUserTemp1->fetch_array();
+            if($userTempRes["temp_linderos_posible_venta"] ==0){
+                $lindPosVentaSql = "INSERT INTO temp_linderos_posible_venta(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte2."','".$norEste2."','".$Sur2."','".$SurEste2."','".$Este2."','".$SurOeste2."','".$Oeste2."','".$NortOeste2."','".$this->alindPosNort."','".$this->alindPosSur."','".$this->alindPosEste."','".$this->alindOeste."','".$this->arTotal2."','".$this->uniAreaT2."','".$this->NivConstTotal2."','".$this->uniAreaConst2."','".$this->arConstTotal2."','".$this->uniNorte2."','".$this->uniSur2."','".$this->uniEste2."','".$this->uniOeste2."')";
+                $link->query($lindPosVentaSql);
+                $idLindPosVenta = $link->insert_id;
+                $lindPosVentTemp = "UPDATE user_temp SET temp_linderos_posible_venta='".$idLindPosVenta."'";
+                $link->query($lindPosVentTemp);
+            }else{
+                $upLindGenSql ="UPDATE temp_linderos_posible_venta SET norte='".$Norte2."', noreste='".$norEste2."', sur='".$Sur2."', sureste='".$SurEste2."', este='".$Este2."', suroeste='".$SurOeste2."', oeste='".$Oeste2."', noroeste='".$NortOeste2."', alind_n='".$this->alindPosNort."', alind_s='".$this->alindPosSur."', alind_e='".$this->alindPosEste."', alind_o='".$this->alindOeste."', areaTotal='".$this->arTotal2."', uniAreaT='".$this->uniAreaT2."', nivelesConst='".$this->NivConstTotal2."', uniAreaC='".$this->uniAreaConst2."', areaConst='".$this->arConstTotal2."', uniNorte='".$this->uniNorte2."', uniSur='".$this->uniSur2."', uniEste='".$this->uniEste2."', uniOeste='".$this->uniOeste2."' where id=".$userTempRes["temp_linderos_posible_venta"]."";
+                $link->query($upLindGenSql);
+            }//LISTO
     }
     //LINDEROS SEGUN DOCUMENTO
     function SecDoc(){
@@ -2586,7 +2866,7 @@ class constancias{
                             <input type="text" value="'.$secDocRes["areaTotal"].'" class="text" id="arTotal3" >
                             <select id="uniAreaT3">
                                 <option value="'.$secDocRes["uniAreaT"].'">'.$secDocRes["uniAreaT"].'</option>
-                                <option value="No Aplica">No Aplica</option>
+                                <option value="NA">NA</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
@@ -2606,7 +2886,7 @@ class constancias{
                             <input type="text" value="'.$secDocRes["areaConst"].'" id="arConstTotal3" >
                             <select id="uniAreaConst3">
                                 <option value="'.$secDocRes["uniAreaC"].'">'.$secDocRes["uniAreaC"].'</option>
-                                <option value="No Aplica">No Aplica</option>
+                                <option value="NA">NA</option>
                                 <option value="m2">m2</option>
                                 <option value="Ha">Ha</option>
                             </select>
@@ -2620,7 +2900,7 @@ class constancias{
             <div class="btnSig1">
                 <input type="button" value="Guardar" onclick="btnGuarSecDoc()" class="botones btn btn-primary" />
             </div>
-        ';
+        ';//VERIFICADO
     }
     function guarSecDoc(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
@@ -2653,11 +2933,25 @@ class constancias{
             $Oeste3 = "nada";
             $NortOeste3 = $this->oesteSecDoc;
         }
-        $lindDocSql = "INSERT INTO temp_linderos_documento(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte3."','".$norEste3."','".$Sur3."','".$SurEste3."','".$Este3."','".$SurOeste3."','".$Oeste3."','".$NortOeste3."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."','".$this->arTotal3."','".$this->uniAreaT3."','".$this->NivConstTotal3."','".$this->uniAreaConst3."','".$this->arConstTotal3."','".$this->uniNorte3."','".$this->uniSur3."','".$this->uniEste3."','".$this->uniOeste3."')";
-        $link->query($lindDocSql);
-        $idLindDoc= $link->insert_id;
-        $lindDocSQL = "UPDATE user_temp SET temp_linderos_documento='".$idLindDoc."'";
-        $link->query($lindDocSQL);
+        session_start();
+        //USUARIOS
+            $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $resUserTemp = $link->query($userTempSql);
+            $userTempRes1 = $resUserTemp->fetch_array();
+        //TEMP USER
+            $userTempSql1 = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
+            $resUserTemp1 = $link->query($userTempSql1);
+            $userTempRes = $resUserTemp1->fetch_array();
+            if($userTempRes["temp_linderos_documento"] ==0){
+                $lindDocSql = "INSERT INTO temp_linderos_documento(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte3."','".$norEste3."','".$Sur3."','".$SurEste3."','".$Este3."','".$SurOeste3."','".$Oeste3."','".$NortOeste3."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."','".$this->arTotal3."','".$this->uniAreaT3."','".$this->NivConstTotal3."','".$this->uniAreaConst3."','".$this->arConstTotal3."','".$this->uniNorte3."','".$this->uniSur3."','".$this->uniEste3."','".$this->uniOeste3."')";
+                $link->query($lindDocSql);
+                $idLindDoc= $link->insert_id;
+                $lindDocSQL = "UPDATE user_temp SET temp_linderos_documento='".$idLindDoc."'";
+                $link->query($lindDocSQL);
+            }else{
+                $upLindGenSql ="UPDATE temp_linderos_documento SET norte='".$Norte3."', noreste='".$norEste3."', sur='".$Sur3."', sureste='".$SurEste3."', este='".$Este3."', suroeste='".$SurOeste3."', oeste='".$Oeste3."', noroeste='".$NortOeste3."', alind_n='".$this->alindSecNorte."', alind_s='".$this->alindSecSur."', alind_e='".$this->alindSecEste."', alind_o='".$this->alindSecOeste."', areaTotal='".$this->arTotal3."', uniAreaT='".$this->uniAreaT3."', nivelesConst='".$this->NivConstTotal3."', uniAreaC='".$this->uniAreaConst3."', areaConst='".$this->arConstTotal3."', uniNorte='".$this->uniNorte3."', uniSur='".$this->uniSur3."', uniEste='".$this->uniEste3."', uniOeste='".$this->uniOeste3."' where id=".$userTempRes["temp_linderos_documento"]."";
+                $link->query($upLindGenSql);
+            }//LISTO
     }
     //VERIFICAR F003
     function veriF3(){
