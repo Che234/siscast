@@ -192,22 +192,7 @@ class constancias{
     }
     //TEST
     testProp(){
-        if(!ex_nac.test(this.cedR)){
-            alert("Error en el formato de Nacionalidad");
-            return false;
-        }
-        if(!ex_cedula.test(this.cedConst)){
-            alert("Error en el formato de numero de Cedula");
-            return false;
-        }
-        if(!ex_nac.test(this.rifR)){
-            alert("Error en el formato de tipo de Rif");
-            return false;
-        }
-        if(!ex_cedula.test(this.rifN)){
-            alert("Error en el formato de numero de Rif");
-            return false;
-        }
+        
         if(!er_areas.test(this.nomProp)){
             alert("Error en el formato de Nombre");
             return false;
@@ -820,10 +805,6 @@ class constancias{
     veriExp(){
         if(!expediente.test(this.nuExp)){
             alert("Error en el formato de Expediente");
-            return false;
-        }
-        if(!ex_date.test(this.fechaExp)){
-            alert("Error en el formato de Fecha");
             return false;
         }
         if(this.nuExp == this.expVerificado){
@@ -1906,12 +1887,21 @@ function btnFormProp(){
 }
 function btnGuarProp(){
     let consta = new constancias();
-    consta.cedR= document.getElementById("cedR").value;
-    consta.cedConst= document.getElementById("cedConst").value;
-    consta.rifR= document.getElementById("rifR").value;
-    consta.rifN= document.getElementById("rifN").value;
-    consta.rifConst= consta.rifR+"-"+consta.rifN;
-    consta.cedFul= consta.cedR+"-"+consta.cedConst;
+    cedR= document.getElementById("cedR").value;
+    cedConst= document.getElementById("cedConst").value;
+    rifR= document.getElementById("rifR").value;
+    rifN= document.getElementById("rifN").value;
+    if(rifR=="NA"){
+        consta.rifConst= "NO APLICA";
+    }else{
+        consta.rifConst= rifR+"-"+rifN;
+    }
+    if(cedR=="NA"){
+        consta.cedFul= "NO APLICA";
+    }else{
+        consta.cedFul= cedR+"-"+cedConst;
+    }
+    
     consta.nomProp= document.getElementById("nomProp").value;
     consta.apelProp = document.getElementById("apelProp").value;
     codTelf= document.getElementById("codTelf").value;

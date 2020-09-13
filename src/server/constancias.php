@@ -678,7 +678,6 @@ class constancias{
             $link->query($upInmueSql);
         }else{
             $inmueSql = "INSERT INTO temp_inmueble(direccion,parroquia,sector,ambito)value('".$this->direcInmue."','".$this->parrInmue."','".$this->secInmue."','".$this->ambInmue."')";
-            echo $inmueSql;
             $link->query($inmueSql);
             $idInmue= $link->insert_id;
             $inmueTemp = "UPDATE user_temp SET temp_inmueble='".$idInmue."'";
@@ -780,7 +779,6 @@ class constancias{
             $link->query($caraInmuSql);
         }else{
             $carcTerrSql = "INSERT INTO temp_carainmue(topografia,forma,uso,tenencia)value('".$this->topoConst."','".$this->formaConst."','".$this->usoConst."','".$this->tenenConst."')";
-            echo $carcTerrSql;
             $link->query($carcTerrSql);
             $idCarInmue= $link->insert_id;
             $CarInmueTemp = "UPDATE user_temp SET temp_carainmue='".$idCarInmue."'";
