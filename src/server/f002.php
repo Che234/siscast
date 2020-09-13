@@ -1489,7 +1489,6 @@ class f001{
              }else{
                  $pdf->cell(0,6,utf8_decode('Dirección: '.$resultProp["direccion"].''),1,0,'L');
              }
-           
             $pdf->SetY(144);
             $pdf->SetX(19);
             $pdf->cell(28,5,utf8_decode('Número:'),1,0,'C');
@@ -1500,7 +1499,6 @@ class f001{
             }else{
                 $pdf->cell(28,6,''.$resultProp["numero"].'',1,0,'C');
             }
-            
             $pdf->SetY(144);
             $pdf->SetX(47);
             $pdf->cell(28,5,'Tomo:',1,0,'C');
@@ -1511,7 +1509,6 @@ class f001{
             }else{
                 $pdf->cell(28,6,''.$resultProp["tomo"].'',1,0,'C');
             }
-            
             $pdf->SetY(144);
             $pdf->SetX(75);
             $pdf->cell(28,5,'Folio:',1,0,'C');
@@ -1522,7 +1519,6 @@ class f001{
             }else{
                 $pdf->cell(28,6,''.$resultProp["folio"].'',1,0,'C');
             }
-            
             $pdf->SetY(144);
             $pdf->SetX(103);
             $pdf->cell(28,5,'Protocolo:',1,0,'C');
@@ -2873,7 +2869,11 @@ class f003{
             $pdf->cell(50,6,'Rif:',1,0,'L');
             $pdf->SetY(109);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["rif"].'',1,0,'L');
+            if($resultPropie["rif"]=="NA"){
+                $pdf->cell(0,6,'',1,0,'L');
+            }else{
+                $pdf->cell(0,6,''.$resultPropie["rif"].'',1,0,'L');
+            }
             $pdf->SetY(115);
             $pdf->SetX(19);
             $pdf->cell(50,6,'Apellidos Y Nombres:',1,0,'L');
@@ -2901,49 +2901,81 @@ class f003{
             $pdf->cell(110,6,'Documento Debidamente: '.$resultProp["documento"].'',1,0,'L');
             $pdf->SetY(138);
             $pdf->SetX(129);
-            $pdf->cell(0,6,utf8_decode('Dirección: '.$resultProp["direccion"].''),1,0,'L');
+            if($resultProp["direccion"]=="NO APLICA"){
+                $pdf->cell(0,6,utf8_decode('Dirección: '),1,0,'L');
+            }else{
+                $pdf->cell(0,6,utf8_decode('Dirección: '.$resultProp["direccion"].''),1,0,'L');
+            }
             $pdf->SetY(144);
             $pdf->SetX(19);
-            $pdf->cell(25,5,utf8_decode('Número:'),1,0,'C');
+            $pdf->cell(28,5,utf8_decode('Número:'),1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(19);
-            $pdf->cell(25,6,''.$resultProp["numero"].'',1,0,'C');
+            if($resultProp["numero"]=="NO APLICA"){
+                $pdf->cell(28,6,'',1,0,'C');
+            }else{
+                $pdf->cell(28,6,''.$resultProp["numero"].'',1,0,'C');
+            }
             $pdf->SetY(144);
-            $pdf->SetX(44);
-            $pdf->cell(25,5,'Tomo:',1,0,'C');
+            $pdf->SetX(47);
+            $pdf->cell(28,5,'Tomo:',1,0,'C');
             $pdf->SetY(149);
-            $pdf->SetX(44);
-            $pdf->cell(25,6,''.$resultProp["tomo"].'',1,0,'C');
+            $pdf->SetX(47);
+            if($resultProp["tomo"]=="NO APLICA"){
+                $pdf->cell(28,6,'',1,0,'C');    
+            }else{
+                $pdf->cell(28,6,''.$resultProp["tomo"].'',1,0,'C');
+            }
             $pdf->SetY(144);
-            $pdf->SetX(69);
-            $pdf->cell(25,5,'Folio:',1,0,'C');
+            $pdf->SetX(75);
+            $pdf->cell(28,5,'Folio:',1,0,'C');
             $pdf->SetY(149);
-            $pdf->SetX(69);
-            $pdf->cell(25,6,''.$resultProp["folio"].'',1,0,'C');
+            $pdf->SetX(75);
+            if($resultProp["folio"]=="NO APLICA"){
+                $pdf->cell(28,6,'',1,0,'C');
+            }else{
+                $pdf->cell(28,6,''.$resultProp["folio"].'',1,0,'C');
+            }
             $pdf->SetY(144);
-            $pdf->SetX(94);
-            $pdf->cell(25,5,'Protocolo:',1,0,'C');
+            $pdf->SetX(103);
+            $pdf->cell(28,5,'Protocolo:',1,0,'C');
             $pdf->SetY(149);
-            $pdf->SetX(94);
-            $pdf->cell(25,6,''.$resultProp["protocolo"].'',1,0,'C');
+            $pdf->SetX(103);
+            if($resultProp["protocolo"]=="NO APLICA"){
+                $pdf->cell(28,6,'',1,0,'C');
+            }else{
+                $pdf->cell(28,6,''.$resultProp["protocolo"].'',1,0,'C');
+            }
             $pdf->SetY(144);
-            $pdf->SetX(119);
-            $pdf->cell(25,5,'Trimestre:',1,0,'C');
+            $pdf->SetX(131);
+            $pdf->cell(28,5,'Trimestre:',1,0,'C');
             $pdf->SetY(149);
-            $pdf->SetX(119);
-            $pdf->cell(25,6,''.$resultProp["trimestre"].'',1,0,'C');
+            $pdf->SetX(131);
+            if($resultProp["trimestre"]=="NO APLICA"){
+                $pdf->cell(28,6,'',1,0,'C');
+            }else{
+                $pdf->cell(28,6,''.$resultProp["trimestre"].'',1,0,'C');
+            }
             $pdf->SetY(144);
-            $pdf->SetX(144);
-            $pdf->cell(25,5,'Fecha:',1,0,'C');
+            $pdf->SetX(159);
+            $pdf->cell(28,5,'Fecha:',1,0,'C');
             $pdf->SetY(149);
-            $pdf->SetX(144);
-            $pdf->cell(25,6,''.$resultProp["fecha"].'',1,0,'C');
+            $pdf->SetX(159);
+            if($resultProp["fecha"]=="NO APLICA"){
+                $pdf->cell(28,6,'',1,0,'C');
+            }else{
+                $pdf->cell(28,6,''.$resultProp["fecha"].'',1,0,'C');
+            }
             $pdf->SetY(144);
-            $pdf->SetX(169);
+            $pdf->SetX(187);
             $pdf->cell(0,5,'Valor de Inmueble:',1,0,'C');
             $pdf->SetY(149);
-            $pdf->SetX(169);
-            $pdf->cell(0,6,''.$resultProp["valor_inmueble"].'',1,0,'C');
+            $pdf->SetX(187);
+            if($resultProp["valor_inmueble"]=="NO APLICA"){
+                $pdf->cell(0,6,'',1,0,'C');
+            }else{
+                $pdf->cell(0,6,''.$resultProp["valor_inmueble"].'',1,0,'C');
+            }
         //DATOS DE COLINDANTES SEGUN DOCUMENTO
             $pdf->SetY(155);
             $pdf->SetX(19);
@@ -2973,29 +3005,27 @@ class f003{
             if($resultLindDoc["norte"]!="nada"){
                 if($resultLindDoc["uniNorte"] =="m"){
                     $pdf->cell(0,6,''.$resultLindDoc["norte"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniNorte"] == "Lq"){
+                }elseif($resultLindDoc["uniNorte"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["norte"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniNorte"] == "Ld"){
+                }elseif($resultLindDoc["uniNorte"] == "Ld"){
                     $pdf->cell(0,6,''.$resultLindDoc["norte"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniNorte"] == "otros"){
+                }elseif($resultLindDoc["uniNorte"] == "otros"){
                     $pdf->cell(0,6,''.$resultLindDoc["norte"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             if($resultLindDoc["norte"]=="nada"){
                 if($resultLindDoc["uniNorte"] =="m"){
                     $pdf->cell(0,6,''.$resultLindDoc["noreste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniNorte"] == "Lq"){
+                }elseif($resultLindDoc["uniNorte"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["noreste"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniNorte"] == "Ld"){
+                }elseif($resultLindDoc["uniNorte"] == "Ld"){
                     $pdf->cell(0,6,''.$resultLindDoc["noreste"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniNorte"] == "otros"){
+                }elseif($resultLindDoc["uniNorte"] == "otros"){
                     $pdf->cell(0,6,''.$resultLindDoc["noreste"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             
@@ -3015,29 +3045,27 @@ class f003{
             if($resultLindDoc["sur"]!="nada"){
                 if($resultLindDoc["uniSur"] =="m"){
                     $pdf->cell(0,6,''.$resultLindDoc["sur"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniSur"] == "Lq"){
+                }elseif($resultLindDoc["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["sur"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniSur"] == "Ld"){
+                }elseif($resultLindDoc["uniSur"] == "Ld"){
                     $pdf->cell(0,6,''.$resultLindDoc["sur"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniSur"] == "otros"){
+                }elseif($resultLindDoc["uniSur"] == "otros"){
                     $pdf->cell(0,6,''.$resultLindDoc["sur"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             if($resultLindDoc["sur"]=="nada"){
                 if($resultLindDoc["uniSur"] =="m"){
                     $pdf->cell(0,6,''.$resultLindDoc["sureste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniSur"] == "Lq"){
+                }elseif($resultLindDoc["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["sureste"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniSur"] == "Ld"){
+                }elseif($resultLindDoc["uniSur"] == "Ld"){
                     $pdf->cell(0,6,''.$resultLindDoc["sureste"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniSur"] == "otros"){
+                }elseif($resultLindDoc["uniSur"] == "otros"){
                     $pdf->cell(0,6,''.$resultLindDoc["sureste"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             
@@ -3057,29 +3085,27 @@ class f003{
             if($resultLindDoc["este"]!="nada"){
                 if($resultLindDoc["uniEste"] =="m"){
                     $pdf->cell(0,6,''.$resultLindDoc["este"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniEste"] == "Lq"){
+                }elseif($resultLindDoc["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["este"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniEste"] == "Ld"){
+                }elseif($resultLindDoc["uniEste"] == "Ld"){
                     $pdf->cell(0,6,''.$resultLindDoc["este"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniEste"] == "otros"){
+                }elseif($resultLindDoc["uniEste"] == "otros"){
                     $pdf->cell(0,6,''.$resultLindDoc["este"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             if($resultLindDoc["este"]=="nada"){
                 if($resultLindDoc["uniEste"] =="m"){
                     $pdf->cell(0,6,''.$resultLindDoc["suroeste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniEste"] == "Lq"){
+                }elseif($resultLindDoc["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["suroeste"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniEste"] == "Ld"){
+                }elseif($resultLindDoc["uniEste"] == "Ld"){
                     $pdf->cell(0,6,''.$resultLindDoc["suroeste"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniEste"] == "otros"){
+                }elseif($resultLindDoc["uniEste"] == "otros"){
                     $pdf->cell(0,6,''.$resultLindDoc["suroeste"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             
@@ -3099,29 +3125,27 @@ class f003{
             if($resultLindDoc["oeste"]!="nada"){
                 if($resultLindDoc["uniOeste"] =="m"){
                     $pdf->cell(0,6,''.$resultLindDoc["oeste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniOeste"] == "Lq"){
+                }elseif($resultLindDoc["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["oeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniOeste"] == "Ld"){
+                }elseif($resultLindDoc["uniOeste"] == "Ld"){
                     $pdf->cell(0,6,''.$resultLindDoc["oeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniOeste"] == "otros"){
+                }elseif($resultLindDoc["uniOeste"] == "otros"){
                     $pdf->cell(0,6,''.$resultLindDoc["oeste"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             if($resultLindDoc["oeste"]=="nada"){
                 if($resultLindDoc["uniOeste"] =="m"){
                     $pdf->cell(0,6,''.$resultLindDoc["noroeste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniOeste"] == "Lq"){
+                }elseif($resultLindDoc["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["noroeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniOeste"] == "Ld"){
+                }elseif($resultLindDoc["uniOeste"] == "Ld"){
                     $pdf->cell(0,6,''.$resultLindDoc["noroeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
-                }
-                if($resultLindDoc["uniOeste"] == "otros"){
+                }elseif($resultLindDoc["uniOeste"] == "otros"){
                     $pdf->cell(0,6,''.$resultLindDoc["noroeste"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
            
@@ -3130,19 +3154,41 @@ class f003{
             $pdf->cell(40,6,'Area de Terreno',1,0,'C');
             $pdf->SetY(190);    
             $pdf->SetX(59);
-            $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].' '.$resultLindDoc["uniAreaT"].'',1,0,'C');
+            if($resultLindDoc["areaTotal"]=="NO APLICA"){
+                $pdf->cell(40,6,'',1,0,'C');
+            }else{
+                if($resultLindDoc["uniAreaT"]=="NA"){
+                    $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].'',1,0,'C');
+                }else{
+                    $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].' '.$resultLindDoc["uniAreaT"].'',1,0,'C');
+                }
+                
+            }
             $pdf->SetY(190);    
             $pdf->SetX(99);
             $pdf->cell(60,6,utf8_decode('Niveles de Construcción'),1,0,'C');
             $pdf->SetY(190);    
             $pdf->SetX(159);
-            $pdf->cell(30,6,''.$resultLindDoc["nivelesConst"].'',1,0,'C');
+            if($resultLindDoc["nivelesConst"]=="NO APLICA"){
+                $pdf->cell(30,6,'',1,0,'C');
+            }else{
+                $pdf->cell(30,6,''.$resultLindDoc["nivelesConst"].'',1,0,'C');
+            }
             $pdf->SetY(190);    
             $pdf->SetX(189);
             $pdf->cell(50,6,utf8_decode('Area de Construcción'),1,0,'C');
             $pdf->SetY(190);    
             $pdf->SetX(239);
-            $pdf->cell(36,6,''.$resultLindDoc["areaConst"].' '.$resultLindDoc["uniAreaC"].'',1,0,'C');
+            if($resultLindDoc["areaConst"]=="NO APLICA"){
+                $pdf->cell(36,6,'',1,0,'C');
+            }else{
+                if($resultLindDoc["uniAreaC"]=="NA"){
+                    $pdf->cell(36,6,''.$resultLindDoc["areaConst"].'',1,0,'C');
+                }else{
+                    $pdf->cell(36,6,''.$resultLindDoc["areaConst"].' '.$resultLindDoc["uniAreaC"].'',1,0,'C');
+                }
+                
+            }
         //DATOS DE COLINDANTES (POSIBLE VENTA)
             $pdf->SetY(196);
             $pdf->SetX(19);
@@ -3172,29 +3218,27 @@ class f003{
             if($resultPosVenta["norte"]!="nada"){
                 if($resultPosVenta["uniNorte"] =="m"){
                     $pdf->cell(0,6,''.$resultPosVenta["norte"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniNorte"] == "Lq"){
+                }elseif($resultPosVenta["uniNorte"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["norte"].' '.$resultPosVenta["uniNorte"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniNorte"] == "Ld"){
+                }elseif($resultPosVenta["uniNorte"] == "Ld"){
                     $pdf->cell(0,6,''.$resultPosVenta["norte"].' '.$resultPosVenta["uniNorte"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniNorte"] == "otros"){
+                }elseif($resultPosVenta["uniNorte"] == "otros"){
                     $pdf->cell(0,6,''.$resultPosVenta["norte"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             if($resultPosVenta["norte"]=="nada"){
                 if($resultPosVenta["uniNorte"] =="m"){
                     $pdf->cell(0,6,''.$resultPosVenta["noreste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniNorte"] == "Lq"){
+                }elseif($resultPosVenta["uniNorte"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["noreste"].' '.$resultPosVenta["uniNorte"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniNorte"] == "Ld"){
+                }elseif($resultPosVenta["uniNorte"] == "Ld"){
                     $pdf->cell(0,6,''.$resultPosVenta["noreste"].' '.$resultPosVenta["uniNorte"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniNorte"] == "otros"){
+                }elseif($resultPosVenta["uniNorte"] == "otros"){
                     $pdf->cell(0,6,''.$resultPosVenta["noreste"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             
@@ -3214,29 +3258,27 @@ class f003{
             if($resultPosVenta["sur"]!="nada"){
                 if($resultPosVenta["uniSur"] =="m"){
                     $pdf->cell(0,6,''.$resultPosVenta["sur"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniSur"] == "Lq"){
+                }elseif($resultPosVenta["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["sur"].' '.$resultPosVenta["uniSur"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniSur"] == "Ld"){
+                }elseif($resultPosVenta["uniSur"] == "Ld"){
                     $pdf->cell(0,6,''.$resultPosVenta["sur"].' '.$resultPosVenta["uniSur"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniSur"] == "otros"){
+                }elseif($resultPosVenta["uniSur"] == "otros"){
                     $pdf->cell(0,6,''.$resultPosVenta["sur"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             if($resultPosVenta["sur"]=="nada"){
                 if($resultPosVenta["uniSur"] =="m"){
                     $pdf->cell(0,6,''.$resultPosVenta["sureste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniSur"] == "Lq"){
+                }elseif($resultPosVenta["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["sureste"].' '.$resultPosVenta["uniSur"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniSur"] == "Ld"){
+                }elseif($resultPosVenta["uniSur"] == "Ld"){
                     $pdf->cell(0,6,''.$resultPosVenta["sureste"].' '.$resultPosVenta["uniSur"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniSur"] == "otros"){
+                }elseif($resultPosVenta["uniSur"] == "otros"){
                     $pdf->cell(0,6,''.$resultPosVenta["sureste"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             $pdf->SetY(219);
@@ -3255,29 +3297,27 @@ class f003{
             if($resultPosVenta["este"]!="nada"){
                 if($resultPosVenta["uniEste"] =="m"){
                     $pdf->cell(0,6,''.$resultPosVenta["este"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniEste"] == "Lq"){
+                }elseif($resultPosVenta["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["este"].' '.$resultPosVenta["uniEste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniEste"] == "Ld"){
+                }elseif($resultPosVenta["uniEste"] == "Ld"){
                     $pdf->cell(0,6,''.$resultPosVenta["este"].' '.$resultPosVenta["uniEste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniEste"] == "otros"){
+                }elseif($resultPosVenta["uniEste"] == "otros"){
                     $pdf->cell(0,6,''.$resultPosVenta["este"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             if($resultPosVenta["este"]=="nada"){
                 if($resultPosVenta["uniEste"] =="m"){
                     $pdf->cell(0,6,''.$resultPosVenta["suroeste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniEste"] == "Lq"){
+                }elseif($resultPosVenta["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["suroeste"].' '.$resultPosVenta["uniEste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniEste"] == "Ld"){
+                }elseif($resultPosVenta["uniEste"] == "Ld"){
                     $pdf->cell(0,6,''.$resultPosVenta["suroeste"].' '.$resultPosVenta["uniEste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniEste"] == "otros"){
-                    $pdf->cell(0,6,''.$resultPosVenta["suroeste"].'',1,0,'C');
+                }elseif($resultPosVenta["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultPosVenta["suroeste"].' '.$resultPosVenta["uniEste"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             
@@ -3297,29 +3337,27 @@ class f003{
             if($resultPosVenta["oeste"]!="nada"){
                 if($resultPosVenta["uniOeste"] =="m"){
                     $pdf->cell(0,6,''.$resultPosVenta["oeste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniOeste"] == "Lq"){
+                }elseif($resultPosVenta["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["oeste"].' '.$resultPosVenta["uniOeste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniOeste"] == "Ld"){
+                }elseif($resultPosVenta["uniOeste"] == "Ld"){
                     $pdf->cell(0,6,''.$resultPosVenta["oeste"].' '.$resultPosVenta["uniOeste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniOeste"] == "otros"){
+                }elseif($resultPosVenta["uniOeste"] == "otros"){
                     $pdf->cell(0,6,''.$resultPosVenta["oeste"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             if($resultPosVenta["oeste"]=="nada"){
                 if($resultPosVenta["uniOeste"] =="m"){
                     $pdf->cell(0,6,''.$resultPosVenta["noroeste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniOeste"] == "Lq"){
+                }elseif($resultPosVenta["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultPosVenta["noroeste"].' '.$resultPosVenta["uniOeste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniOeste"] == "Ld"){
+                }elseif($resultPosVenta["uniOeste"] == "Ld"){
                     $pdf->cell(0,6,''.$resultPosVenta["noroeste"].' '.$resultPosVenta["uniOeste"].'',1,0,'C');
-                }
-                if($resultPosVenta["uniOeste"] == "otros"){
+                }elseif($resultPosVenta["uniOeste"] == "otros"){
                     $pdf->cell(0,6,''.$resultPosVenta["noroeste"].'',1,0,'C');
+                }else{
+                    $pdf->cell(0,6,'',1,0,'C');
                 }
             }
             
@@ -3328,19 +3366,39 @@ class f003{
             $pdf->cell(40,6,'Area de Terreno',1,0,'C');
             $pdf->SetY(231);    
             $pdf->SetX(59);
-            $pdf->cell(40,6,''.$resultPosVenta["areaTotal"].' '.$resultPosVenta["uniAreaT"].'',1,0,'C');
+            if($resultPosVenta["areaTotal"]=="NO APLICA"){
+                $pdf->cell(40,6,'',1,0,'C');
+            }else{
+                if($resultPosVenta["uniAreaT"]=="NA"){
+                    $pdf->cell(40,6,''.$resultPosVenta["areaTotal"].'',1,0,'C');
+                }else{
+                    $pdf->cell(40,6,''.$resultPosVenta["areaTotal"].' '.$resultPosVenta["uniAreaT"].'',1,0,'C');
+                }
+            }
             $pdf->SetY(231);    
             $pdf->SetX(99);
             $pdf->cell(60,6,utf8_decode('Niveles de Construcción'),1,0,'C');
             $pdf->SetY(231);    
             $pdf->SetX(159);
-            $pdf->cell(30,6,''.$resultPosVenta["nivelesConst"].'',1,0,'C');
+            if($resultPosVenta["nivelesConst"]=="NO APLICA"){
+                $pdf->cell(30,6,''.$resultPosVenta["nivelesConst"].'',1,0,'C');
+            }else{
+                $pdf->cell(30,6,''.$resultPosVenta["nivelesConst"].'',1,0,'C');
+            }
             $pdf->SetY(231);    
             $pdf->SetX(189);
             $pdf->cell(50,6,utf8_decode('Area de Construcción'),1,0,'C');
             $pdf->SetY(231);    
             $pdf->SetX(239);
-            $pdf->cell(36,6,''.$resultPosVenta["areaConst"].' '.$resultPosVenta["uniAreaC"].'',1,0,'C');
+            if($resultPosVenta["areaConst"]=="NO APLICA"){
+                $pdf->cell(36,6,'',1,0,'C');
+            }else{
+                if($resultPosVenta["uniAreaC"]=="NA"){
+                    $pdf->cell(36,6,''.$resultPosVenta["areaConst"].'',1,0,'C');
+                }else{
+                    $pdf->cell(36,6,''.$resultPosVenta["areaConst"].' '.$resultPosVenta["uniAreaC"].'',1,0,'C');
+                }
+            }
         //PARTE 6
             $pdf->SetY(237);    
             $pdf->SetX(19);
@@ -3962,9 +4020,9 @@ class f003{
         $carpeta ='../../../assets/constancias/'.date("Y").'';
         if(!file_exists($carpeta)){
             mkdir($carpeta,0777,true);
-            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
+            $pdf->Output('F','../../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }else{
-            $pdf->Output('I','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
+            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }
         echo'
         <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf" />
