@@ -494,6 +494,15 @@ class constancias{
         $divRif = explode('-',$propRes["rif"]);
         $divTelfHab = explode('-',$propRes["telef_hab"]);
         $divTelef = explode('-',$propRes["telef"]);
+        if($propRes["cedula"]=="NO APLICA"){
+            $divCed[0] ="NA";
+            $divCed[1] = "NO APLICA";
+        }
+        if($propRes["rif"]=="NO APLICA"){
+            $divRif[0] = "NA";
+            $divRif[1] = "NO APLICA";
+        }
+        
         echo'
         <div class="container-fluid">
             <div class="row">
@@ -575,6 +584,7 @@ class constancias{
     function guardProp(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
+        session_start();
         //USUARIOS
         $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
         $resUserTemp = $link->query($userTempSql);
@@ -583,22 +593,16 @@ class constancias{
         $userTempSql = "SELECT * FROM user_temp where userId='".$userTempRes1["id"]."'";
         $resUserTemp = $link->query($userTempSql);
         $userTempRes = $resUserTemp->fetch_array();
-        //BUSQUEDA VERIFICACION
-        $propVerSQL ="SELECT * FROM temp_propietarios where cedula='".$this->cedFul."'";
-        $resPropVer = $link->query($propVerSQL);
-        $propVerRes = $resPropVer->fetch_array();
-        if($userTempRes["temp_propietarios"]==""){
+        
+        if($userTempRes["temp_propietarios"]==0){
             $propSql = "INSERT INTO temp_propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab)value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFull."','".$this->direcProp."','".$this->telfFull2."')";
             $link->query($propSql);
             $idProp= $link->insert_id;
             $userTemp = "UPDATE user_temp SET temp_propietarios='".$idProp."'";
             $link->query($userTemp);
         }else{
-            $propSql = "UPDATE temp_propietarios set cedula='".$this->cedFul."', rif='".$this->rifConst."', nombre='".$this->nomProp."',apellido='".$this->apelProp."',telef='".$this->telfFull."',dir_hab='".$this->direcProp."',telef_hab='".$this->telfFull2."' where cedula='".$this->cedFul."' ";
+            $propSql = "UPDATE temp_propietarios set cedula='".$this->cedFul."', rif='".$this->rifConst."', nombre='".$this->nomProp."',apellido='".$this->apelProp."',telef='".$this->telfFull."',dir_hab='".$this->direcProp."',telef_hab='".$this->telfFull2."' where id=".$userTempRes["temp_propietarios"]." ";
             $link->query($propSql);
-            $userTemp = "UPDATE user_temp SET temp_propietarios='".$propVerRes["id"]."' where temp_propietarios='".$propVerRes["id"]."'";
-            $link->query($propSql);
-            $idProp = $propVerRes["id"];
         }//LISTO//LISTO
         
     }
