@@ -944,6 +944,18 @@ if(isset($_POST["accion"])){
     }
 
 //ACCIONES
+    if($accion=="guardarRepConst"){
+        $nconst->guardarRepConst();
+    }
+    if($accion=="guardarRepConst3"){
+        $nconst->guardarRepConst3();
+    }
+    if($accion=="guardarRepConst1"){
+        $nconst->guardarRepConst1();
+    }
+    if($accion=="guardarRepEmpa"){
+        $nconst->guardarRepEmpa();
+    }
     if($accion=="elimReg"){
         $nconst->elimReg();
     }

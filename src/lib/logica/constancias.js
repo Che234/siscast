@@ -985,7 +985,7 @@ class constancias{
 			     }
 	       	}
     }
-    imprConst4(){
+    imprConstEmpa(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
@@ -1006,28 +1006,7 @@ class constancias{
 			     }
 	       	}
     }
-    revUsuario(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral2');
-        var divsitiomaterial = document.getElementById('campGeneral2');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`cedFul=${this.cedFul}&accion=revUsuario`);
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText;
-                    setTimeout(()=>{
-                        mostProp()
-                    },500)
-                    
-			     }
-	       	}
-    }
+    
     formImpri(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('campGeneral');
@@ -1122,6 +1101,28 @@ class constancias{
                     alert("PROCESO COMPLETADO CON EXITO")
 			     }
 	       	}
+    }
+    revUsuario(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('campGeneral2');
+        var divsitiomaterial = document.getElementById('campGeneral2');
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`cedFul=${this.cedFul}&accion=revUsuario`);
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                    setTimeout(()=>{
+                        mostProp()
+                    },500)
+                    
+                 }
+               }
     }
     //INMUEBLE
     formInmue(){
@@ -1783,10 +1784,39 @@ class constancias{
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     setTimeout(()=>{
-                        btnImprConst3();
+                        let verInmV= document.getElementById("verInmV").value
+                        if(verInmV=="false"){
+                            btnImprConst3();
+                        }else{
+                            let ver=confirm("Inmueble ya registrado. ¿Deseas continuar?");
+                            if(ver==true){
+                                btnguardarRepConst3();
+                            }else{
+                                btnFormConst();
+                            }
+                        }
                     },200)
 			     }
 	       	}
+    }
+    guardarRepConst3(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=guardarRepConst3`); 
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+                    btnImprConst3()
+                 }
+               }
     }
     veriF2(){
         var ajax = new objetoAjax();
@@ -1804,10 +1834,39 @@ class constancias{
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     setTimeout(()=>{
-                        btnImprConst();
+                        let verInmV= document.getElementById("verInmV").value
+                        if(verInmV=="false"){
+                            btnImprConst();
+                        }else{
+                            let ver= confirm("Inmueble ya registrado. ¿Deseas continuar?");
+                            if(ver==true){
+                                btnguardarRepConst();
+                            }else{
+                                btnFormConst();
+                            }
+                        }
                     },200)
 			     }
 	       	}
+    }
+    guardarRepConst2(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=guardarRepConst`); 
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                    btnImprConst(); 
+                 }
+               }
     }
     veriF1(){
         var ajax = new objetoAjax();
@@ -1825,10 +1884,39 @@ class constancias{
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     setTimeout(()=>{
-                        btnImprConst1();
-                    },200)
+                        let verInmV= document.getElementById("verInmV").value
+                        if(verInmV=="false"){
+                            btnImprConst1();
+                        }else{
+                            let ver = confirm("Inmueble ya registrado. ¿Deseas continuar?");
+                            if(ver ==true){
+                                btnguardarRepConst1();
+                            }else{
+                                btnFormConst()
+                            }
+                        }
+                    },100)
 			     }
 	       	}
+    }
+    guardarRepConst1(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=guardarRepConst1`); 
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+                    btnImprConst1();
+                 }
+               }
     }
     veriFEmpadro(){
         var ajax = new objetoAjax();
@@ -1846,10 +1934,40 @@ class constancias{
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     setTimeout(()=>{
-                        btnImprConst4();
+                        let verInmV= document.getElementById("verInmV").value
+                        if(verInmV=="false"){
+                            btnImprConst4();
+                        }else{
+                            let ver = confirm("Inmueble ya registrado. ¿Deseas continuar?");
+                            if(ver ==true){
+                                btnguardarRepEmpa();
+                            }else{
+                                btnFormConst()
+                            }
+                        }
+                        
                     },200)
                  }
             }
+    }
+    guardarRepEmpa(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('formsInscrip');
+        var divsitiomaterial = document.getElementById('formsInscrip');
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`accion=guardarRepEmpa`); 
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+                    btnImprEmpa();
+                 }
+               }
     }
     elimReg(){
         var ajax = new objetoAjax();
@@ -1870,6 +1988,22 @@ class constancias{
                  }
             }
     }
+}
+function btnguardarRepConst(){
+    let consta = new constancias();
+    consta.guardarRepConst2();
+}
+function btnguardarRepConst3(){
+    let consta = new constancias();
+    consta.guardarRepConst3();
+}
+function btnguardarRepConst1(){
+    let consta = new constancias();
+    consta.guardarRepConst1();
+}
+function btnguardarRepEmpa(){
+    let consta = new constancias();
+    consta.guardarRepEmpa();
 }
 function btnFormConst(){
     let consta = new constancias();
@@ -1901,7 +2035,7 @@ function btnGuarProp(){
     }else{
         consta.cedFul= cedR+"-"+cedConst;
     }
-    
+   
     consta.nomProp= document.getElementById("nomProp").value;
     consta.apelProp = document.getElementById("apelProp").value;
     codTelf= document.getElementById("codTelf").value;
@@ -1914,6 +2048,13 @@ function btnGuarProp(){
     if(consta.testProp()==true){
         consta.guardProp();
     }
+}
+function btnRevUsuario(){
+    let consta = new constancias
+    let cedR = document.getElementById("cedR").value
+    let cedConst = document.getElementById("cedConst").value
+    consta.cedFul = cedR+"-"+cedConst
+    consta.revUsuario()
 }
 //INMUEBLE
 function btnFormInmue(){
@@ -2776,7 +2917,7 @@ function btnImprConst4(){
     consta.numFact= document.getElementById("numFact").value
     consta.operacion = document.getElementById("operacion").value
     consta.nuExp = document.getElementById("nuExp").value
-    consta.imprConst4()
+    consta.imprConstEmpa()
 }
 function btnImprEmpa(){
     let consta = new constancias
@@ -2787,29 +2928,38 @@ function btnImprEmpa(){
     consta.numFact= document.getElementById("numFact").value
     consta.operacion = document.getElementById("operacion").value
     consta.nuExp = document.getElementById("nuExp").value
-    if(consta.veriInmu() == true){
-        consta.imprConstEmpa()
-    }
-}
-function btnRevUsuario(){
-    let consta = new constancias
-    let cedR = document.getElementById("cedR").value
-    let cedConst = document.getElementById("cedConst").value
-    consta.cedFul = cedR+"-"+cedConst
-    consta.revUsuario()
+    consta.imprConstEmpa()
 }
 function mostProp(){
     let cedula = document.getElementById("cedula").value
     if(cedula!=0){
         rifBus = document.getElementById("rifBus").value
         divRif = rifBus.split("-")
-        if(divRif[0]=="V"){
+        if(rifBus=="NO APLICA"){
             document.getElementById("rifR").selectedIndex=1
+            document.getElementById("rifN").value="NO APLICA"
+        }else{
+            document.getElementById("rifN").value=divRif[1]
         }
-        if(divRif[0]=="J"){
+        if(divRif[0]=="V"){
             document.getElementById("rifR").selectedIndex=2
         }
-        document.getElementById("rifN").value=divRif[1]
+        if(divRif[0]=="J"){
+            document.getElementById("rifR").selectedIndex=3
+        }
+        if(divRif[0]=="G"){
+            document.getElementById("rifR").selectedIndex=4
+        }
+        if(divRif[0]=="E"){
+            document.getElementById("rifR").selectedIndex=5
+        }
+        if(divRif[0]=="P"){
+            document.getElementById("rifR").selectedIndex=6
+        }
+        if(divRif[0]=="C"){
+            document.getElementById("rifR").selectedIndex=7
+        }
+        
 
         let nombreRes = document.getElementById("nombreRes").value
         document.getElementById("nomProp").value=nombreRes

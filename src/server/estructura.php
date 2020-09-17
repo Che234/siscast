@@ -43,29 +43,45 @@
         }
         function body(){
             echo'
-            <div id="campGeneral">
-              <div class="campBuscador">
-                <h2>CONSULTA</h2>
-                <select id="tipoBuscar" onChange="btnCampCed()">
-                  <option value="0"></option>
-                  <option value="Expediente">Expediente</option>
-                  <option value="Cedula">Cedula</option>
-                  <option value="Rif">Rif</option>
-                </select>
-                <select id="tipoCed" >
-                  <option value="0"></option>
-                  <option value="V">V</option>
-                  <option value="E">E</option>
-                </select>
-                <select id="tipoRif" >
-                  <option value="0"></option>
-                  <option value="V">V</option>
-                  <option value="J">J</option>
-                </select>
-                <input type="text" id="campBuscar" />
-                <input type="button" id="consultExp" value="Consultar" onclick="btnConsultExp()" class="botones btn btn-primary" />
-                <input type="button" id="consultCed" value="Consultar" onclick="btnConsultCed()" class="botones btn btn-primary" />
-                <input type="button" id="consultRif" value="Consultar" onclick="btnConsultRif()" class="botones btn btn-primary" />
+            <div class="container" >
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <h2>CONSULTA</h2>
+                </div>
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-4 ">
+                  <div class="row">
+                    <div class="col-3 formHome">
+                      <select class="form-control" id="tipoBuscar" onChange="btnCampCed()">
+                      <option value="0"></option>
+                      <option value="Expediente">Expediente</option>
+                      <option value="Cedula">Cedula</option>
+                      <option value="Rif">Rif</option>
+                      </select>
+                      <select class="form-control" id="tipoCed" >
+                        <option value="0"></option>
+                        <option value="V">V</option>
+                        <option value="E">E</option>
+                      </select>
+                      <select class="form-control" id="tipoRif" >
+                        <option value="0"></option>
+                        <option value="V">V</option>
+                        <option value="J">J</option>
+                      </select>
+                    </div>
+                    <div class="col-6 formHome">
+                      <input type="text" class="form-control" id="campBuscar" />
+                    </div>
+                    <div class="col-3">
+                      <input type="button" id="consultExp" value="Consultar" onclick="btnConsultExp()" class="botones btn btn-primary" />
+                      <input type="button" id="consultCed" value="Consultar" onclick="btnConsultCed()" class="botones btn btn-primary" />
+                      <input type="button" id="consultRif" value="Consultar" onclick="btnConsultRif()" class="botones btn btn-primary" />
+                    </div>
+                  </div>
+                <div class="col-2">
+                  
+                </div>
               </div>
             </div>
             ';

@@ -82,21 +82,21 @@ class f002{
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
         //BUSQUEDA DEL INMUEBLE
-            $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
-            $resInmue= $link->query($expSql);
-            $resultInmue = $resInmue->fetch_assoc();
-            $idProt= $resultInmue["fk_protocolizacion"];
-            $idLindDoc= $resultInmue["fk_lind_documento"];
-            $idLindGen= $resultInmue["fk_lind_general"];
-            $idConst= $resultInmue["fk_carac_construccion"];
-            $idServicios= $resultInmue["fk_servicios"];
-            $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
-            $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
+            $inmueDeSql= "SELECT * from inmueble where id=".$this->idInmueble."";
+            $resInmueDe= $link->query($inmueDeSql);
+            $resultInmueDe = $resInmueDe->fetch_assoc();
+            $idProt= $resultInmueDe["fk_protocolizacion"];
+            $idLindDoc= $resultInmueDe["fk_lind_documento"];
+            $idLindGen= $resultInmueDe["fk_lind_general"];
+            $idConst= $resultInmueDe["fk_carac_construccion"];
+            $idServicios= $resultInmueDe["fk_servicios"];
+            $idCaracInmue= $resultInmueDe["fk_carac_inmuebles"];
+            $idcaracConstruccion= $resultInmueDe["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
-            $expSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
-            $resProp= $link->query($expSql);
-            $resultPropie = $resProp->fetch_assoc();
-            $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
+            $propDeSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
+            $resPropDe= $link->query($propDeSql);
+            $resultPropieDe = $resPropDe->fetch_assoc();
+            $nombreProp= ''.$resultPropieDe["nombre"].' '.$resultPropieDe["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
             $protSql = "SELECT * from datos_protocolizacion where id='".$idProt."' ";
             $resProt = $link->query($protSql);
@@ -160,7 +160,7 @@ class f002{
             $pdf->SetY(100);
             $pdf->SetX(19);
             $pdf->SetFont('Times','B',10);
-            $pdf->cell(0,5,'CODIGO CATASTRAL:',1,0,'C');
+            $pdf->cell(0,5,'CODIGO CATASTRAL',1,0,'C');
             $pdf->SetY(105);
             $pdf->SetX(19);
             $pdf->cell(26,5,'Efed',1,0,'C');
@@ -208,20 +208,20 @@ class f002{
             $pdf->cell(13,7,'0',1,0,'C');
             $pdf->SetY(110);
             $pdf->SetX(84);
-            if($resultInmue["parroquia"]=="Capital"){
+            if($resultInmueDe["parroquia"]=="Capital"){
                 $pdf->cell(13,7,'1',1,0,'C');
-            }elseif($resultInmue["parroquia"]=="Dr. Alberto Adriani"){
+            }elseif($resultInmueDe["parroquia"]=="Dr. Alberto Adriani"){
                 $pdf->cell(13,7,'2',1,0,'C');
-            }elseif($resultInmue["parroquia"]=="Santo Domingo"){
+            }elseif($resultInmueDe["parroquia"]=="Santo Domingo"){
                 $pdf->cell(13,7,'3',1,0,'C');
             }else{
                 $pdf->cell(13,7,'0',1,0,'C');
             }
             $pdf->SetY(110);
             $pdf->SetX(97.2);
-            if($resultInmue["ambito"]=="Urbano"){
+            if($resultInmueDe["ambito"]=="Urbano"){
                 $pdf->cell(8.6,7,'U',1,0,'C');
-            }elseif($resultInmue["ambito"]=="Rural"){
+            }elseif($resultInmueDe["ambito"]=="Rural"){
                 $pdf->cell(8.6,7,'R',1,0,'C');
             }else{
                 $pdf->cell(8.6,7,'0',1,0,'C');
@@ -289,26 +289,26 @@ class f002{
         //DATOS DEL PROPIETARIO
             $pdf->SetY(117);
             $pdf->SetX(19);
-            $pdf->cell(0,5,'DATOS DEL PROPIETARIO:',1,0,'C');
+            $pdf->cell(0,5,'DATOS DEL PROPIETARIO',1,0,'C');
             $pdf->SetY(122);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'No de Cedula:',1,0,'L');
+            $pdf->cell(50,6,'No de Cedula',1,0,'L');
             $pdf->SetY(122);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["cedula"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropieDe["cedula"].'',1,0,'L');
             $pdf->SetY(128);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'Rif:',1,0,'L');
+            $pdf->cell(50,6,'Rif',1,0,'L');
             $pdf->SetY(128);
             $pdf->SetX(69);
-            if($resultPropie["rif"]=="NA"){
+            if($resultPropieDe["rif"]=="NA"){
                 $pdf->cell(0,6,'',1,0,'L');
             }else{
-                $pdf->cell(0,6,''.$resultPropie["rif"].'',1,0,'L');
+                $pdf->cell(0,6,''.$resultPropieDe["rif"].'',1,0,'L');
             }
             $pdf->SetY(134);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'Apellidos Y Nombres: ',1,0,'L');
+            $pdf->cell(50,6,'Apellidos Y Nombres ',1,0,'L');
             $pdf->SetY(134);
             $pdf->SetX(69);
             $pdf->Cell(0,6,''.utf8_decode($nombreProp).'',1,0,'L');
@@ -316,20 +316,20 @@ class f002{
             $pdf->Cell(0,6,'' ,0,0,'L');
             $pdf->SetY(140);
             $pdf->SetX(19);
-            $pdf->cell(50,6,utf8_decode('No de Teléfono: '),1,0,'L');
+            $pdf->cell(50,6,utf8_decode('No de Teléfono '),1,0,'L');
             $pdf->SetY(140);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["telef"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
             $pdf->SetY(146);
             $pdf->SetX(19);
-            $pdf->cell(50,6,utf8_decode('Dirección Del Propietario:'),1,0,'L');
+            $pdf->cell(50,6,utf8_decode('Dirección Del Propietario'),1,0,'L');
             $pdf->SetY(146);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.utf8_decode($resultPropie["dir_hab"]).'',1,0,'L');
+            $pdf->cell(0,6,''.utf8_decode($resultPropieDe["dir_hab"]).'',1,0,'L');
         //DATOS DE PROTOCOLIZACION
             $pdf->SetY(152);
             $pdf->SetX(19);
-            $pdf->cell(0,6,''.utf8_decode("DATOS DE PROTOCOLIZACIÓN:").'',1,0,'C');
+            $pdf->cell(0,6,''.utf8_decode("DATOS DE PROTOCOLIZACIÓN").'',1,0,'C');
             $pdf->SetY(158);
             $pdf->SetX(19);
             $pdf->cell(110,6,'Documento Debidamente: '.$resultProp["documento"].'',1,0,'L');
@@ -344,53 +344,53 @@ class f002{
             $pdf->cell(28,6,''.$resultProp["numero"].'',1,0,'C');
             $pdf->SetY(164);
             $pdf->SetX(47);
-            $pdf->cell(28,6,'Tomo:',1,0,'C');
+            $pdf->cell(28,6,'Tomo',1,0,'C');
             $pdf->SetY(170);
             $pdf->SetX(47);
             $pdf->cell(28,6,''.$resultProp["tomo"].'',1,0,'C');
             $pdf->SetY(164);
             $pdf->SetX(75);
-            $pdf->cell(28,6,'Folio:',1,0,'C');
+            $pdf->cell(28,6,'Folios',1,0,'C');
             $pdf->SetY(170);
             $pdf->SetX(75);
             $pdf->cell(28,6,''.$resultProp["folio"].'',1,0,'C');
             $pdf->SetY(164);
             $pdf->SetX(103);
-            $pdf->cell(28,6,'Protocolo:',1,0,'C');
+            $pdf->cell(28,6,'Protocolo',1,0,'C');
             $pdf->SetY(170);
             $pdf->SetX(103);
             $pdf->cell(28,6,''.$resultProp["protocolo"].'',1,0,'C');
             $pdf->SetY(164);
             $pdf->SetX(131);
-            $pdf->cell(28,6,'Trimestre:',1,0,'C');
+            $pdf->cell(28,6,'Trimestre',1,0,'C');
             $pdf->SetY(170);
             $pdf->SetX(131);
             $pdf->cell(28,6,''.$resultProp["trimestre"].'',1,0,'C');
             $pdf->SetY(164);
             $pdf->SetX(159);
-            $pdf->cell(28,6,'Fecha:',1,0,'C');
+            $pdf->cell(28,6,'Fecha',1,0,'C');
             $pdf->SetY(170);
             $pdf->SetX(159);
             $pdf->cell(28,6,''.$resultProp["fecha"].'',1,0,'C');
             $pdf->SetY(164);
             $pdf->SetX(187);
-            $pdf->cell(0,6,'Valor de Inmueble:',1,0,'C');
+            $pdf->cell(0,6,'Valor de Inmueble',1,0,'C');
             $pdf->SetY(170);
             $pdf->SetX(187);
             $pdf->cell(0,6,''.$resultProp["valor_inmueble"].'',1,0,'C');
         //DATOS DE COLINDANTES SEGUN DOCUMENTO
             $pdf->SetY(176);
             $pdf->SetX(19);
-            $pdf->cell(0,6,utf8_decode('DATOS DE COLINDANTES SEGÚN DOCUMENTO :'),1,0,'C');
+            $pdf->cell(0,6,utf8_decode('DATOS DE COLINDANTES SEGÚN DOCUMENTO'),1,0,'C');
             $pdf->SetY(182);
             $pdf->SetX(19);
-            $pdf->cell(60,6,'Puntos Cardinales:',1,0,'C');
+            $pdf->cell(60,6,'Puntos Cardinales',1,0,'C');
             $pdf->SetY(182);
             $pdf->SetX(79);
-            $pdf->cell(150,6,'Alinderado:',1,0,'C');
+            $pdf->cell(150,6,'Alinderado',1,0,'C');
             $pdf->SetY(182);
             $pdf->SetX(229);
-            $pdf->cell(0,6,'Medida (m):',1,0,'C');
+            $pdf->cell(0,6,'Medida (m)',1,0,'C');
             $pdf->SetY(188);
             $pdf->SetX(19);
             if($resultLindDoc["norte"]!="nada"){
@@ -584,10 +584,10 @@ class f002{
             
             $pdf->SetY(218);    
             $pdf->SetX(19);
-            $pdf->cell(60,6,utf8_decode('Dirección del Inmueble:'),1,0,'L');
+            $pdf->cell(60,6,utf8_decode('Dirección del Inmueble'),1,0,'L');
             $pdf->SetY(218);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$resultInmue["direccion"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultInmueDe["direccion"].'',1,0,'L');
         //SERVICIOS 1
             $pdf->SetY(224);    
             $pdf->SetX(19);
@@ -1236,21 +1236,21 @@ class f001{
             $resBusEXP = $link->query($busExpSQL);
             $busExpedienteRes = $resBusEXP->fetch_array();
         //BUSQUEDA DEL INMUEBLE
-            $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
-            $resInmue= $link->query($expSql);
-            $resultInmue = $resInmue->fetch_assoc();
-            $idProt= $resultInmue["fk_protocolizacion"];
-            $idLindDoc= $resultInmue["fk_lind_documento"];
-            $idLindGen= $resultInmue["fk_lind_general"];
-            $idConst= $resultInmue["fk_carac_construccion"];
-            $idServicios= $resultInmue["fk_servicios"];
-            $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
-            $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
+            $inmueDeSql= "SELECT * from inmueble where id=".$this->idInmueble."";
+            $resInmueDe= $link->query($inmueDeSql);
+            $resultInmueDe = $resInmueDe->fetch_assoc();
+            $idProt= $resultInmueDe["fk_protocolizacion"];
+            $idLindDoc= $resultInmueDe["fk_lind_documento"];
+            $idLindGen= $resultInmueDe["fk_lind_general"];
+            $idConst= $resultInmueDe["fk_carac_construccion"];
+            $idServicios= $resultInmueDe["fk_servicios"];
+            $idCaracInmue= $resultInmueDe["fk_carac_inmuebles"];
+            $idcaracConstruccion= $resultInmueDe["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
-            $expSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
-            $resProp= $link->query($expSql);
-            $resultPropie = $resProp->fetch_assoc();
-            $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
+            $propDeSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
+            $resPropDe= $link->query($propDeSql);
+            $resultPropieDe = $resPropDe->fetch_assoc();
+            $nombreProp= ''.$resultPropieDe["nombre"].' '.$resultPropieDe["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
             $protSql = "SELECT * from datos_protocolizacion where id='".$idProt."' ";
             $resProt = $link->query($protSql);
@@ -1315,7 +1315,7 @@ class f001{
             $pdf->SetY(84);
             $pdf->SetX(19);
             $pdf->SetFont('Times','B',10);
-            $pdf->cell(0,5,'CODIGO CATASTRAL:',1,0,'C');
+            $pdf->cell(0,5,'CODIGO CATASTRAL',1,0,'C');
             $pdf->SetY(89);
             $pdf->SetX(19);
             $pdf->cell(26,5,'Efed',1,0,'C');
@@ -1363,20 +1363,20 @@ class f001{
             $pdf->cell(13,4,'0',1,0,'C');
             $pdf->SetY(94);
             $pdf->SetX(84);
-            if($resultInmue["parroquia"]=="Capital"){
+            if($resultInmueDe["parroquia"]=="Capital"){
                 $pdf->cell(13,4,'1',1,0,'C');
-            }elseif($resultInmue["parroquia"]=="Dr. Alberto Adriani"){
+            }elseif($resultInmueDe["parroquia"]=="Dr. Alberto Adriani"){
                 $pdf->cell(13,4,'2',1,0,'C');
-            }elseif($resultInmue["parroquia"]=="Santo Domingo"){
+            }elseif($resultInmueDe["parroquia"]=="Santo Domingo"){
                 $pdf->cell(13,4,'3',1,0,'C');
             }else{
                 $pdf->cell(13,4,'0',1,0,'C');
             }
             $pdf->SetY(94);
             $pdf->SetX(97.2);
-            if($resultInmue["ambito"]=="Urbano"){
+            if($resultInmueDe["ambito"]=="Urbano"){
                 $pdf->cell(8.6,4,'U',1,0,'C');
-            }elseif($resultInmue["ambito"]=="Rural"){
+            }elseif($resultInmueDe["ambito"]=="Rural"){
                 $pdf->cell(8.6,4,'R',1,0,'C');
             }else{
                 $pdf->cell(8.6,4,'0',1,0,'C');
@@ -1444,41 +1444,41 @@ class f001{
         //DATOS DEL PROPIETARIO
             $pdf->SetY(98);
             $pdf->SetX(19);
-            $pdf->cell(0,5,'DATOS DEL PROPIETARIO:',1,0,'C');
+            $pdf->cell(0,5,'DATOS DEL PROPIETARIO',1,0,'C');
             $pdf->SetY(103);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'No de Cedula:',1,0,'L');
+            $pdf->cell(50,6,'No de Cedula',1,0,'L');
             $pdf->SetY(103);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["cedula"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropieDe["cedula"].'',1,0,'L');
             $pdf->SetY(109);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'Rif:',1,0,'L');
+            $pdf->cell(50,6,'Rif',1,0,'L');
             $pdf->SetY(109);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["rif"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropieDe["rif"].'',1,0,'L');
             $pdf->SetY(115);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'Apellidos Y Nombres:',1,0,'L');
+            $pdf->cell(50,6,'Apellidos Y Nombres',1,0,'L');
             $pdf->SetY(115);
             $pdf->SetX(69);
             $pdf->cell(0,6,''.utf8_decode($nombreProp).'',1,0,'L');
             $pdf->SetY(121);
             $pdf->SetX(19);
-            $pdf->cell(50,6,utf8_decode('No de Teléfono:'),1,0,'L');
+            $pdf->cell(50,6,utf8_decode('No de Teléfono'),1,0,'L');
             $pdf->SetY(121);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["telef"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
             $pdf->SetY(127);
             $pdf->SetX(19);
-            $pdf->cell(50,6,utf8_decode('Dirección Del Propietario:'),1,0,'L');
+            $pdf->cell(50,6,utf8_decode('Dirección Del Propietario'),1,0,'L');
             $pdf->SetY(127);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.utf8_decode($resultPropie["dir_hab"]).'',1,0,'L');
+            $pdf->cell(0,6,''.utf8_decode($resultPropieDe["dir_hab"]).'',1,0,'L');
         //DATOS DE PROTOCOLIZACION
             $pdf->SetY(133);
             $pdf->SetX(19);
-            $pdf->cell(0,5,utf8_decode('DATOS DE PROTOCOLIZACIÓN:'),1,0,'C');
+            $pdf->cell(0,5,utf8_decode('DATOS DE PROTOCOLIZACIÓN'),1,0,'C');
             $pdf->SetY(138);
             $pdf->SetX(19);
             $pdf->cell(110,6,'Documento Debidamente: '.$resultProp["documento"].'',1,0,'L');
@@ -1491,7 +1491,7 @@ class f001{
              }
             $pdf->SetY(144);
             $pdf->SetX(19);
-            $pdf->cell(28,5,utf8_decode('Número:'),1,0,'C');
+            $pdf->cell(28,5,utf8_decode('Número'),1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(19);
             if($resultProp["numero"]=="NO APLICA"){
@@ -1501,7 +1501,7 @@ class f001{
             }
             $pdf->SetY(144);
             $pdf->SetX(47);
-            $pdf->cell(28,5,'Tomo:',1,0,'C');
+            $pdf->cell(28,5,'Tomo',1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(47);
             if($resultProp["tomo"]=="NO APLICA"){
@@ -1511,7 +1511,7 @@ class f001{
             }
             $pdf->SetY(144);
             $pdf->SetX(75);
-            $pdf->cell(28,5,'Folio:',1,0,'C');
+            $pdf->cell(28,5,'Folios',1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(75);
             if($resultProp["folio"]=="NO APLICA"){
@@ -1521,7 +1521,7 @@ class f001{
             }
             $pdf->SetY(144);
             $pdf->SetX(103);
-            $pdf->cell(28,5,'Protocolo:',1,0,'C');
+            $pdf->cell(28,5,'Protocolo',1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(103);
             if($resultProp["protocolo"]=="NO APLICA"){
@@ -1531,7 +1531,7 @@ class f001{
             }
             $pdf->SetY(144);
             $pdf->SetX(131);
-            $pdf->cell(28,5,'Trimestre:',1,0,'C');
+            $pdf->cell(28,5,'Trimestre',1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(131);
             if($resultProp["trimestre"]=="NO APLICA"){
@@ -1541,7 +1541,7 @@ class f001{
             }
             $pdf->SetY(144);
             $pdf->SetX(159);
-            $pdf->cell(28,5,'Fecha:',1,0,'C');
+            $pdf->cell(28,5,'Fecha',1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(159);
             if($resultProp["fecha"]=="NO APLICA"){
@@ -1551,7 +1551,7 @@ class f001{
             }
             $pdf->SetY(144);
             $pdf->SetX(187);
-            $pdf->cell(0,5,'Valor de Inmueble:',1,0,'C');
+            $pdf->cell(0,5,'Valor de Inmueble',1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(187);
             if($resultProp["valor_inmueble"]=="NO APLICA"){
@@ -1562,16 +1562,16 @@ class f001{
         //DATOS DE COLINDANTES SEGUN DOCUMENTO
             $pdf->SetY(155);
             $pdf->SetX(19);
-            $pdf->cell(0,5,utf8_decode('DATOS DE COLINDANTES SEGÚN DOCUMENTO :'),1,0,'C');
+            $pdf->cell(0,5,utf8_decode('DATOS DE COLINDANTES SEGÚN DOCUMENTO'),1,0,'C');
             $pdf->SetY(160);
             $pdf->SetX(19);
-            $pdf->cell(60,6,'Puntos Cardinales:',1,0,'C');
+            $pdf->cell(60,6,'Puntos Cardinales',1,0,'C');
             $pdf->SetY(160);
             $pdf->SetX(79);
-            $pdf->cell(150,6,'Alinderado:',1,0,'C');
+            $pdf->cell(150,6,'Alinderado',1,0,'C');
             $pdf->SetY(160);
             $pdf->SetX(229);
-            $pdf->cell(0,6,'Medida (Mts):',1,0,'C');
+            $pdf->cell(0,6,'Medida (Mts)',1,0,'C');
             $pdf->SetY(166);
             $pdf->SetX(19);
             if($resultLindDoc["norte"]!="nada"){
@@ -1775,16 +1775,16 @@ class f001{
         //DATOS DE COLINDANTES SEGUN INSPECCION
             $pdf->SetY(196);
             $pdf->SetX(19);
-            $pdf->cell(0,5,utf8_decode('DATOS DE COLINDANTES SEGÚN INSPECCIÓN :'),1,0,'C');
+            $pdf->cell(0,5,utf8_decode('DATOS DE COLINDANTES SEGÚN INSPECCIÓN'),1,0,'C');
             $pdf->SetY(201);
             $pdf->SetX(19);
-            $pdf->cell(60,6,'Puntos Cardinales:',1,0,'C');
+            $pdf->cell(60,6,'Puntos Cardinales',1,0,'C');
             $pdf->SetY(201);
             $pdf->SetX(79);
-            $pdf->cell(150,6,'Alinderado:',1,0,'C');
+            $pdf->cell(150,6,'Alinderado',1,0,'C');
             $pdf->SetY(201);
             $pdf->SetX(229);
-            $pdf->cell(0,6,'Medida (Mts):',1,0,'C');
+            $pdf->cell(0,6,'Medida (Mts)',1,0,'C');
             $pdf->SetY(207);
             $pdf->SetX(19);
             if($resultLindGen["norte"]!="nada"){
@@ -1986,25 +1986,25 @@ class f001{
         //PARTE 6
             $pdf->SetY(237);    
             $pdf->SetX(19);
-            $pdf->cell(60,6,utf8_decode('Dirección del Inmueble:'),1,0,'C');
+            $pdf->cell(60,6,utf8_decode('Dirección del Inmueble'),1,0,'C');
             $pdf->SetY(237);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$resultInmue["direccion"].'',1,0,'C');
+            $pdf->cell(0,6,''.$resultInmueDe["direccion"].'',1,0,'C');
             $pdf->SetY(243);    
             $pdf->SetX(19);
-            $pdf->cell(60,6,utf8_decode('Régimen de la Propiedad:'),1,0,'C');
+            $pdf->cell(60,6,utf8_decode('Régimen de la Propiedad'),1,0,'C');
             $pdf->SetY(243);    
             $pdf->SetX(79);
             $pdf->cell(0,6,''.$resultConst["Regimen"].'',1,0,'C');
             $pdf->SetY(249);    
             $pdf->SetX(19);
-            $pdf->cell(60,6,'Uso del Inmueble:',1,0,'C');
+            $pdf->cell(60,6,'Uso del Inmueble',1,0,'C');
             $pdf->SetY(249);    
             $pdf->SetX(79);
             $pdf->cell(0,6,''.$mostcarastInmue["uso"].'',1,0,'C');
             $pdf->SetY(255);    
             $pdf->SetX(19);
-            $pdf->cell(60,6,'Valor Estimado del Inmueble:',1,0,'C');
+            $pdf->cell(60,6,'Valor Estimado del Inmueble',1,0,'C');
             $pdf->SetY(255);    
             $pdf->SetX(79);
             $pdf->cell(0,6,''.$busExpedienteRes["valorInmue"].'',1,0,'C');
@@ -2631,7 +2631,7 @@ class f003{
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
         //BUSQUEDA DE USUARIO
-            $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
+            $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
             $idUser= $resultUser->fetch_assoc();
         //BUSQUEDA FACTURA
@@ -2652,22 +2652,22 @@ class f003{
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
         //BUSQUEDA DEL INMUEBLE
-            $expSql= "SELECT * from inmueble where id=".$this->idInmueble."";
-            $resInmue= $link->query($expSql);
-            $resultInmue = $resInmue->fetch_assoc();
-            $idProt= $resultInmue["fk_protocolizacion"];
-            $idLindGen= $resultInmue["fk_lind_general"];
-            $idLindPosVenta= $resultInmue["fk_lind_pos_venta"];
-            $idLindDoc = $resultInmue["fk_lind_documento"];
-            $idConst= $resultInmue["fk_carac_construccion"];
-            $idServicios= $resultInmue["fk_servicios"];
-            $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
-            $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
+            $inmueDeSql= "SELECT * from inmueble where id=".$this->idInmueble."";
+            $resInmueDe= $link->query($inmueDeSql);
+            $resultInmueDe = $resInmueDe->fetch_assoc();
+            $idProt= $resultInmueDe["fk_protocolizacion"];
+            $idLindGen= $resultInmueDe["fk_lind_general"];
+            $idLindPosVenta= $resultInmueDe["fk_lind_pos_venta"];
+            $idLindDoc = $resultInmueDe["fk_lind_documento"];
+            $idConst= $resultInmueDe["fk_carac_construccion"];
+            $idServicios= $resultInmueDe["fk_servicios"];
+            $idCaracInmue= $resultInmueDe["fk_carac_inmuebles"];
+            $idcaracConstruccion= $resultInmueDe["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
-            $expSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
-            $resProp= $link->query($expSql);
-            $resultPropie = $resProp->fetch_assoc();
-            $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
+            $propDeSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
+            $resPropDe= $link->query($propDeSql);
+            $resultPropieDe = $resPropDe->fetch_assoc();
+            $nombreProp= ''.$resultPropieDe["nombre"].' '.$resultPropieDe["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
             $protSql = "SELECT * from datos_protocolizacion where id=".$idProt."";
             $resProt = $link->query($protSql);
@@ -2732,7 +2732,7 @@ class f003{
             $pdf->SetY(84);
             $pdf->SetX(19);
             $pdf->SetFont('Times','B',10);
-            $pdf->cell(0,5,'CODIGO CATASTRAL:',1,0,'C');
+            $pdf->cell(0,5,'CODIGO CATASTRAL',1,0,'C');
             $pdf->SetY(89);
             $pdf->SetX(19);
             $pdf->cell(26,5,'Efed',1,0,'C');
@@ -2780,18 +2780,18 @@ class f003{
             $pdf->cell(13,4,'0',1,0,'C');
             $pdf->SetY(94);
             $pdf->SetX(84);
-            if($resultInmue["parroquia"]=="Capital"){
+            if($resultInmueDe["parroquia"]=="Capital"){
                 $pdf->cell(13,4,'1',1,0,'C');
-            }elseif($resultInmue["parroquia"]=="Dr. Alberto Adriani"){
+            }elseif($resultInmueDe["parroquia"]=="Dr. Alberto Adriani"){
                 $pdf->cell(13,4,'2',1,0,'C');
-            }elseif($resultInmue["parroquia"]=="Santo Domingo"){
+            }elseif($resultInmueDe["parroquia"]=="Santo Domingo"){
                 $pdf->cell(13,4,'3',1,0,'C');
             }
             $pdf->SetY(94);
             $pdf->SetX(97.2);
-            if($resultInmue["ambito"]=="Urbano"){
+            if($resultInmueDe["ambito"]=="Urbano"){
                 $pdf->cell(8.6,4,'U',1,0,'C');
-            }elseif($resultInmue["ambito"]=="Rural"){
+            }elseif($resultInmueDe["ambito"]=="Rural"){
                 $pdf->cell(8.6,4,'R',1,0,'C');
             }
             $pdf->SetY(94);
@@ -2857,45 +2857,45 @@ class f003{
         //DATOS DEL PROPIETARIO
             $pdf->SetY(98);
             $pdf->SetX(19);
-            $pdf->cell(0,5,'DATOS DEL PROPIETARIO:',1,0,'C');
+            $pdf->cell(0,5,'DATOS DEL PROPIETARIO',1,0,'C');
             $pdf->SetY(103);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'No de Cedula:',1,0,'L');
+            $pdf->cell(50,6,'No de Cedula',1,0,'L');
             $pdf->SetY(103);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["cedula"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropieDe["cedula"].'',1,0,'L');
             $pdf->SetY(109);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'Rif:',1,0,'L');
+            $pdf->cell(50,6,'Rif',1,0,'L');
             $pdf->SetY(109);
             $pdf->SetX(69);
-            if($resultPropie["rif"]=="NA"){
+            if($resultPropieDe["rif"]=="NA"){
                 $pdf->cell(0,6,'',1,0,'L');
             }else{
-                $pdf->cell(0,6,''.$resultPropie["rif"].'',1,0,'L');
+                $pdf->cell(0,6,''.$resultPropieDe["rif"].'',1,0,'L');
             }
             $pdf->SetY(115);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'Apellidos Y Nombres:',1,0,'L');
+            $pdf->cell(50,6,'Apellidos Y Nombres',1,0,'L');
             $pdf->SetY(115);
             $pdf->SetX(69);
             $pdf->cell(0,6,''.utf8_decode($nombreProp).'',1,0,'L');
             $pdf->SetY(121);
             $pdf->SetX(19);
-            $pdf->cell(50,6,utf8_decode('No de Teléfono:'),1,0,'L');
+            $pdf->cell(50,6,utf8_decode('No de Teléfono'),1,0,'L');
             $pdf->SetY(121);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["telef"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
             $pdf->SetY(127);
             $pdf->SetX(19);
-            $pdf->cell(50,6,utf8_decode('Dirección Del Propietario:'),1,0,'L');
+            $pdf->cell(50,6,utf8_decode('Dirección Del Propietario'),1,0,'L');
             $pdf->SetY(127);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.utf8_decode($resultPropie["dir_hab"]).'',1,0,'L');
+            $pdf->cell(0,6,''.utf8_decode($resultPropieDe["dir_hab"]).'',1,0,'L');
         //DATOS DE PROTOCOLIZACION
             $pdf->SetY(133);
             $pdf->SetX(19);
-            $pdf->cell(0,5,utf8_decode('DATOS DE PROTOCOLIZACIÓN:'),1,0,'C');
+            $pdf->cell(0,5,utf8_decode('DATOS DE PROTOCOLIZACIÓN'),1,0,'C');
             $pdf->SetY(138);
             $pdf->SetX(19);
             $pdf->cell(110,6,'Documento Debidamente: '.$resultProp["documento"].'',1,0,'L');
@@ -2908,7 +2908,7 @@ class f003{
             }
             $pdf->SetY(144);
             $pdf->SetX(19);
-            $pdf->cell(28,5,utf8_decode('Número:'),1,0,'C');
+            $pdf->cell(28,5,utf8_decode('Número'),1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(19);
             if($resultProp["numero"]=="NO APLICA"){
@@ -2918,7 +2918,7 @@ class f003{
             }
             $pdf->SetY(144);
             $pdf->SetX(47);
-            $pdf->cell(28,5,'Tomo:',1,0,'C');
+            $pdf->cell(28,5,'Tomo',1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(47);
             if($resultProp["tomo"]=="NO APLICA"){
@@ -2928,7 +2928,7 @@ class f003{
             }
             $pdf->SetY(144);
             $pdf->SetX(75);
-            $pdf->cell(28,5,'Folio:',1,0,'C');
+            $pdf->cell(28,5,'Folios',1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(75);
             if($resultProp["folio"]=="NO APLICA"){
@@ -2938,7 +2938,7 @@ class f003{
             }
             $pdf->SetY(144);
             $pdf->SetX(103);
-            $pdf->cell(28,5,'Protocolo:',1,0,'C');
+            $pdf->cell(28,5,'Protocolo',1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(103);
             if($resultProp["protocolo"]=="NO APLICA"){
@@ -2948,7 +2948,7 @@ class f003{
             }
             $pdf->SetY(144);
             $pdf->SetX(131);
-            $pdf->cell(28,5,'Trimestre:',1,0,'C');
+            $pdf->cell(28,5,'Trimestre',1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(131);
             if($resultProp["trimestre"]=="NO APLICA"){
@@ -2958,7 +2958,7 @@ class f003{
             }
             $pdf->SetY(144);
             $pdf->SetX(159);
-            $pdf->cell(28,5,'Fecha:',1,0,'C');
+            $pdf->cell(28,5,'Fecha',1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(159);
             if($resultProp["fecha"]=="NO APLICA"){
@@ -2968,7 +2968,7 @@ class f003{
             }
             $pdf->SetY(144);
             $pdf->SetX(187);
-            $pdf->cell(0,5,'Valor de Inmueble:',1,0,'C');
+            $pdf->cell(0,5,'Valor de Inmueble',1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(187);
             if($resultProp["valor_inmueble"]=="NO APLICA"){
@@ -2979,16 +2979,16 @@ class f003{
         //DATOS DE COLINDANTES SEGUN DOCUMENTO
             $pdf->SetY(155);
             $pdf->SetX(19);
-            $pdf->cell(0,5,utf8_decode('DATOS DE COLINDANTES SEGÚN DOCUMENTO :'),1,0,'C');
+            $pdf->cell(0,5,utf8_decode('DATOS DE COLINDANTES SEGÚN DOCUMENTO'),1,0,'C');
             $pdf->SetY(160);
             $pdf->SetX(19);
-            $pdf->cell(60,6,'Puntos Cardinales:',1,0,'C');
+            $pdf->cell(60,6,'Puntos Cardinales',1,0,'C');
             $pdf->SetY(160);
             $pdf->SetX(79);
-            $pdf->cell(150,6,'Alinderado:',1,0,'C');
+            $pdf->cell(150,6,'Alinderado',1,0,'C');
             $pdf->SetY(160);
             $pdf->SetX(229);
-            $pdf->cell(0,6,'Medida (Mts):',1,0,'C');
+            $pdf->cell(0,6,'Medida (Mts)',1,0,'C');
             $pdf->SetY(166);
             $pdf->SetX(19);
             if($resultLindDoc["norte"]!="nada"){
@@ -3192,16 +3192,16 @@ class f003{
         //DATOS DE COLINDANTES (POSIBLE VENTA)
             $pdf->SetY(196);
             $pdf->SetX(19);
-            $pdf->cell(0,5,utf8_decode('DATOS DE COLINDANTES (POSIBLE VENTA) :'),1,0,'C');
+            $pdf->cell(0,5,utf8_decode('DATOS DE COLINDANTES (POSIBLE VENTA)'),1,0,'C');
             $pdf->SetY(201);
             $pdf->SetX(19);
-            $pdf->cell(60,6,'Puntos Cardinales:',1,0,'C');
+            $pdf->cell(60,6,'Puntos Cardinales',1,0,'C');
             $pdf->SetY(201);
             $pdf->SetX(79);
-            $pdf->cell(150,6,'Alinderado:',1,0,'C');
+            $pdf->cell(150,6,'Alinderado',1,0,'C');
             $pdf->SetY(201);
             $pdf->SetX(229);
-            $pdf->cell(0,6,'Medida (Mts):',1,0,'C');
+            $pdf->cell(0,6,'Medida (Mts)',1,0,'C');
             $pdf->SetY(207);
             $pdf->SetX(19);
             if($resultPosVenta["norte"]!="nada"){
@@ -3402,25 +3402,25 @@ class f003{
         //PARTE 6
             $pdf->SetY(237);    
             $pdf->SetX(19);
-            $pdf->cell(60,6,utf8_decode('Dirección del Inmueble:'),1,0,'C');
+            $pdf->cell(60,6,utf8_decode('Dirección del Inmueble'),1,0,'C');
             $pdf->SetY(237);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$resultInmue["direccion"].'',1,0,'C');
+            $pdf->cell(0,6,''.$resultInmueDe["direccion"].'',1,0,'C');
             $pdf->SetY(243);    
             $pdf->SetX(19);
-            $pdf->cell(60,6,utf8_decode('Régimen de la Propiedad:'),1,0,'C');
+            $pdf->cell(60,6,utf8_decode('Régimen de la Propiedad'),1,0,'C');
             $pdf->SetY(243);    
             $pdf->SetX(79);
             $pdf->cell(0,6,''.$resultConst["Regimen"].'',1,0,'C');
             $pdf->SetY(249);    
             $pdf->SetX(19);
-            $pdf->cell(60,6,'Uso del Inmueble:',1,0,'C');
+            $pdf->cell(60,6,'Uso del Inmueble',1,0,'C');
             $pdf->SetY(249);    
             $pdf->SetX(79);
             $pdf->cell(0,6,''.$mostcarastInmue["uso"].'',1,0,'C');
             $pdf->SetY(255);    
             $pdf->SetX(19);
-            $pdf->cell(60,6,'Valor Estimado del Inmueble:',1,0,'C');
+            $pdf->cell(60,6,'Valor Estimado del Inmueble',1,0,'C');
             $pdf->SetY(255);    
             $pdf->SetX(79);
             $pdf->cell(0,6,''.$busExpedienteRes["valorInmue"].'',1,0,'C');
@@ -4059,21 +4059,21 @@ class f004{
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
         //BUSQUEDA DEL INMUEBLE
-            $expSql= "SELECT * from inmueble where id=".$busExpedienteRes["fk_inmueble"]."";
-            $resInmue= $link->query($expSql);
-            $resultInmue = $resInmue->fetch_assoc();
-            $idProt= $resultInmue["fk_protocolizacion"];
-            $idLindDoc= $resultInmue["fk_lind_documento"];
-            $idLindGen= $resultInmue["fk_lind_general"];
-            $idConst= $resultInmue["fk_carac_construccion"];
-            $idServicios= $resultInmue["fk_servicios"];
-            $idCaracInmue= $resultInmue["fk_carac_inmuebles"];
-            $idcaracConstruccion= $resultInmue["fk_carac_construccion"];
+            $inmueDeSql= "SELECT * from inmueble where id=".$busExpedienteRes["fk_inmueble"]."";
+            $resInmueDe= $link->query($inmueDeSql);
+            $resultInmueDe = $resInmueDe->fetch_assoc();
+            $idProt= $resultInmueDe["fk_protocolizacion"];
+            $idLindDoc= $resultInmueDe["fk_lind_documento"];
+            $idLindGen= $resultInmueDe["fk_lind_general"];
+            $idConst= $resultInmueDe["fk_carac_construccion"];
+            $idServicios= $resultInmueDe["fk_servicios"];
+            $idCaracInmue= $resultInmueDe["fk_carac_inmuebles"];
+            $idcaracConstruccion= $resultInmueDe["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
-            $expSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
-            $resProp= $link->query($expSql);
-            $resultPropie = $resProp->fetch_assoc();
-            $nombreProp= ''.$resultPropie["nombre"].' '.$resultPropie["apellido"].'';
+            $propDeSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
+            $resPropDe= $link->query($propDeSql);
+            $resultPropieDe = $resPropDe->fetch_assoc();
+            $nombreProp= ''.$resultPropieDe["nombre"].' '.$resultPropieDe["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
             $protSql = "SELECT * from datos_protocolizacion where id='".$idProt."' ";
             $resProt = $link->query($protSql);
@@ -4189,20 +4189,20 @@ class f004{
             $pdf->cell(13,5,'0',1,0,'C');
             $pdf->SetY(102);
             $pdf->SetX(84);
-            if($resultInmue["parroquia"]=="Capital"){
+            if($resultInmueDe["parroquia"]=="Capital"){
                 $pdf->cell(13,5,'1',1,0,'C');
-            }elseif($resultInmue["parroquia"]=="Dr. Alberto Adriani"){
+            }elseif($resultInmueDe["parroquia"]=="Dr. Alberto Adriani"){
                 $pdf->cell(13,5,'2',1,0,'C');
-            }elseif($resultInmue["parroquia"]=="Santo Domingo"){
+            }elseif($resultInmueDe["parroquia"]=="Santo Domingo"){
                 $pdf->cell(13,5,'3',1,0,'C');
             }else{
                 $pdf->cell(13,5,'',1,0,'C');
             }
             $pdf->SetY(102);
             $pdf->SetX(97.2);
-            if($resultInmue["ambito"]=="Urbano"){
+            if($resultInmueDe["ambito"]=="Urbano"){
                 $pdf->cell(8.6,5,'U',1,0,'C');
-            }elseif($resultInmue["ambito"]=="Rural"){
+            }elseif($resultInmueDe["ambito"]=="Rural"){
                 $pdf->cell(8.6,5,'R',1,0,'C');
             }else{
                 $pdf->cell(8.6,5,'',1,0,'C');
@@ -4273,19 +4273,19 @@ class f004{
             $pdf->cell(0,5,'DATOS DEL PROPIETARIO:',1,0,'C');
             $pdf->SetY(112);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'No de Cedula:',1,0,'L');
+            $pdf->cell(50,6,'No de Cedula',1,0,'L');
             $pdf->SetY(112);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["cedula"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropieDe["cedula"].'',1,0,'L');
             $pdf->SetY(118);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'Rif:',1,0,'L');
+            $pdf->cell(50,6,'Rif',1,0,'L');
             $pdf->SetY(118);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["rif"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropieDe["rif"].'',1,0,'L');
             $pdf->SetY(124);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'Apellidos Y Nombres: ',1,0,'L');
+            $pdf->cell(50,6,'Apellidos Y Nombres ',1,0,'L');
             $pdf->SetY(124);
             $pdf->SetX(69);
             $pdf->Cell(0,6,''.utf8_decode($nombreProp).'',1,0,'L');
@@ -4293,16 +4293,16 @@ class f004{
             $pdf->Cell(0,6,'' ,0,0,'L');
             $pdf->SetY(130);
             $pdf->SetX(19);
-            $pdf->cell(50,6,utf8_decode('No de Teléfono: '),1,0,'L');
+            $pdf->cell(50,6,utf8_decode('No de Teléfono '),1,0,'L');
             $pdf->SetY(130);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropie["telef"].'',1,0,'L');
+            $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
             $pdf->SetY(136);
             $pdf->SetX(19);
-            $pdf->cell(50,6,utf8_decode('Dirección Del Propietario:'),1,0,'L');
+            $pdf->cell(50,6,utf8_decode('Dirección Del Propietario'),1,0,'L');
             $pdf->SetY(136);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.utf8_decode($resultPropie["dir_hab"]).'',1,0,'L');
+            $pdf->cell(0,6,''.utf8_decode($resultPropieDe["dir_hab"]).'',1,0,'L');
         //DATOS DE PROTOCOLIZACION
             $pdf->SetY(142);
             $pdf->SetX(19);
@@ -4315,43 +4315,43 @@ class f004{
             $pdf->cell(0,6,utf8_decode('Dirección: '.$resultProp["direccion"].''),1,0,'L');
             $pdf->SetY(154);
             $pdf->SetX(19);
-            $pdf->cell(25,5,utf8_decode('Número:'),1,0,'C');
+            $pdf->cell(25,5,utf8_decode('Número'),1,0,'C');
             $pdf->SetY(159);
             $pdf->SetX(19);
             $pdf->cell(25,5,''.$resultProp["numero"].'',1,0,'C');
             $pdf->SetY(154);
             $pdf->SetX(44);
-            $pdf->cell(25,5,'Tomo:',1,0,'C');
+            $pdf->cell(25,5,'Tomo',1,0,'C');
             $pdf->SetY(159);
             $pdf->SetX(44);
             $pdf->cell(25,5,''.$resultProp["tomo"].'',1,0,'C');
             $pdf->SetY(154);
             $pdf->SetX(69);
-            $pdf->cell(25,5,'Folio:',1,0,'C');
+            $pdf->cell(25,5,'Folios',1,0,'C');
             $pdf->SetY(159);
             $pdf->SetX(69);
             $pdf->cell(25,5,''.$resultProp["folio"].'',1,0,'C');
             $pdf->SetY(154);
             $pdf->SetX(94);
-            $pdf->cell(25,5,'Protocolo:',1,0,'C');
+            $pdf->cell(25,5,'Protocolo',1,0,'C');
             $pdf->SetY(159);
             $pdf->SetX(94);
             $pdf->cell(25,5,''.$resultProp["protocolo"].'',1,0,'C');
             $pdf->SetY(154);
             $pdf->SetX(119);
-            $pdf->cell(25,5,'Trimestre:',1,0,'C');
+            $pdf->cell(25,5,'Trimestre',1,0,'C');
             $pdf->SetY(159);
             $pdf->SetX(119);
             $pdf->cell(25,5,''.$resultProp["trimestre"].'',1,0,'C');
             $pdf->SetY(154);
             $pdf->SetX(144);
-            $pdf->cell(25,5,'Fecha:',1,0,'C');
+            $pdf->cell(25,5,'Fecha',1,0,'C');
             $pdf->SetY(159);
             $pdf->SetX(144);
             $pdf->cell(25,5,''.$resultProp["fecha"].'',1,0,'C');
             $pdf->SetY(154);
             $pdf->SetX(169);
-            $pdf->cell(0,5,'Valor de Inmueble:',1,0,'C');
+            $pdf->cell(0,5,'Valor de Inmueble',1,0,'C');
             $pdf->SetY(159);
             $pdf->SetX(169);
             $pdf->cell(0,5,''.$resultProp["valor_inmueble"].'',1,0,'C');
@@ -4361,13 +4361,13 @@ class f004{
             $pdf->cell(0,6,utf8_decode('DATOS DE COLINDANTES SEGÚN DOCUMENTO :'),1,0,'C');
             $pdf->SetY(170);
             $pdf->SetX(19);
-            $pdf->cell(60,6,'Puntos Cardinales:',1,0,'C');
+            $pdf->cell(60,6,'Puntos Cardinales',1,0,'C');
             $pdf->SetY(170);
             $pdf->SetX(79);
-            $pdf->cell(150,6,'Alinderado:',1,0,'C');
+            $pdf->cell(150,6,'Alinderado',1,0,'C');
             $pdf->SetY(170);
             $pdf->SetX(229);
-            $pdf->cell(0,6,'Medida (m):',1,0,'C');
+            $pdf->cell(0,6,'Medida (m)',1,0,'C');
             $pdf->SetY(176);
             $pdf->SetX(19);
             if($resultLindDoc["norte"]!="nada"){
@@ -4386,6 +4386,10 @@ class f004{
                     $pdf->cell(0,6,''.$resultLindDoc["norte"].'',1,0,'C');    
                 }elseif($resultLindDoc["uniNorte"] =="Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["norte"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }elseif($resultLindDoc["uniNorte"] =="Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["norte"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }elseif($resultLindDoc["uniNorte"] =="otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["norte"].'',1,0,'C');
                 }else{
                     $pdf->cell(0,6,'',1,0,'C');
                 }
@@ -4395,6 +4399,10 @@ class f004{
                     $pdf->cell(0,6,''.$resultLindDoc["noreste"].'',1,0,'C');    
                 }elseif($resultLindDoc["uniNorte"] =="Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["noreste"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }elseif($resultLindDoc["uniNorte"] =="Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noreste"].' '.$resultLindDoc["uniNorte"].'',1,0,'C');
+                }elseif($resultLindDoc["uniNorte"] =="otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noreste"].'',1,0,'C');
                 }else{
                     $pdf->cell(0,6,'',1,0,'C');
                 }
@@ -4418,6 +4426,10 @@ class f004{
                     $pdf->cell(0,6,''.$resultLindDoc["sur"].'',1,0,'C');
                 }elseif($resultLindDoc["uniSur"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["sur"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }elseif($resultLindDoc["uniSur"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sur"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }elseif($resultLindDoc["uniSur"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sur"].'',1,0,'C');
                 }else{
                     $pdf->cell(0,6,'',1,0,'C');
                 }
@@ -4426,6 +4438,10 @@ class f004{
                 if($resultLindDoc["uniSur"] =="m"){
                     $pdf->cell(0,6,''.$resultLindDoc["sureste"].'',1,0,'C');
                 }elseif($resultLindDoc["uniSur"] == "Lq"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sureste"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }elseif($resultLindDoc["uniSur"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["sureste"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
+                }elseif($resultLindDoc["uniSur"] == "otros"){
                     $pdf->cell(0,6,''.$resultLindDoc["sureste"].' '.$resultLindDoc["uniSur"].'',1,0,'C');
                 }else{
                     $pdf->cell(0,6,'',1,0,'C');
@@ -4450,6 +4466,10 @@ class f004{
                     $pdf->cell(0,6,''.$resultLindDoc["este"].'',1,0,'C');
                 }elseif($resultLindDoc["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["este"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }elseif($resultLindDoc["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["este"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }elseif($resultLindDoc["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["este"].'',1,0,'C');
                 }else{
                     $pdf->cell(0,6,'',1,0,'C');
                 }
@@ -4459,6 +4479,10 @@ class f004{
                     $pdf->cell(0,6,''.$resultLindDoc["Suroeste"].'',1,0,'C');
                 }elseif($resultLindDoc["uniEste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["Suroeste"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }elseif($resultLindDoc["uniEste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["Suroeste"].' '.$resultLindDoc["uniEste"].'',1,0,'C');
+                }elseif($resultLindDoc["uniEste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["Suroeste"].'',1,0,'C');
                 }else{
                     $pdf->cell(0,6,'',1,0,'C');
                 }
@@ -4482,6 +4506,10 @@ class f004{
                     $pdf->cell(0,6,''.$resultLindDoc["oeste"].'',1,0,'C');
                 }elseif($resultLindDoc["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["oeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }elseif($resultLindDoc["uniOeste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["oeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }elseif($resultLindDoc["uniOeste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["oeste"].' ',1,0,'C');
                 }else{
                     $pdf->cell(0,6,'',1,0,'C');
                 }
@@ -4491,6 +4519,10 @@ class f004{
                     $pdf->cell(0,6,''.$resultLindDoc["noroeste"].'',1,0,'C');
                 }elseif($resultLindDoc["uniOeste"] == "Lq"){
                     $pdf->cell(0,6,''.$resultLindDoc["noroeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }elseif($resultLindDoc["uniOeste"] == "Ld"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noroeste"].' '.$resultLindDoc["uniOeste"].'',1,0,'C');
+                }elseif($resultLindDoc["uniOeste"] == "otros"){
+                    $pdf->cell(0,6,''.$resultLindDoc["noroeste"].'',1,0,'C');
                 }else{
                     $pdf->cell(0,6,'',1,0,'C');
                 }
@@ -4516,10 +4548,10 @@ class f004{
             $pdf->cell(36,6,''.$resultLindDoc["areaConst"].' '.$resultLindDoc["uniAreaC"].'',1,0,'C');
             $pdf->SetY(206);    
             $pdf->SetX(19);
-            $pdf->cell(60,6,utf8_decode('Dirección del Inmueble:'),1,0,'L');
+            $pdf->cell(60,6,utf8_decode('Dirección del Inmueble'),1,0,'L');
             $pdf->SetY(206);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$resultInmue["direccion"].'',1,0,'C');
+            $pdf->cell(0,6,''.$resultInmueDe["direccion"].'',1,0,'C');
         //SERVICIOS 1
             $pdf->SetY(212);    
             $pdf->SetX(19);

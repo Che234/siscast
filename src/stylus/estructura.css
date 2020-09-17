@@ -10,6 +10,15 @@ body{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe', GradientType=0 );
     background-repeat: no-repeat;
 }
+.justify-content-center{
+    text-align: center !important;
+}
+.formHome{
+    margin-right: -6%;
+}
+.formHome input, .formHome select{
+    border: 2px solid #ada10e !important;
+}
 .navbar-brand{
     width: 10%;
 }
