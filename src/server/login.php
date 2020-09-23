@@ -5,39 +5,27 @@ class login{
     var $pass= "";
 
     function fLogin(){
+
         echo'
-        <div class="fLogin">
-        <div class="">
-                <div >
-                    <img class="imgLogo" src="./assets/logo.jpg">
-                </div>
+        <link rel="stylesheet" href="./src/stylus/login.css">
+        <div class="wrapper fadeInDown">
+          <div id="formContent">
+            <!-- Tabs Titles -->
+
+            <!-- Icon -->
+            <div class="fadeIn first">
+              <img src="./assets/logo.jpg" id="icon" alt="User Icon" />
             </div>
-            <div >
-                <div >
-                    <p class="negritas">Usuario</p>
-                </div>
-            </div>
-            <div class="">
-                <div >
-                    <input type="text" id="fUser" />
-                </div>
-            </div>
-            <div class="">
-                <div>
-                    <p class="negritas">Contraseña</p>
-                </div>
-            </div>
-            <div class="">
-                <div >
-                    <input type="password" id="fPass" />
-                </div>
-            </div>
-            <div class="">
-                <div >
-                    <input type="buttom" onclick="btnEntrar()" value="Entrar" class="btnLogin botones btn btn-primary" />
-                </div>
-            </div>
-            </div>';
+
+            <!-- Login Form -->
+            <form>
+              <input type="text" id="fUser" class="fadeIn second" name="login" placeholder="login">
+              <input type="password" id="fPass" class="fadeIn third" name="login" placeholder="password">
+              <input type="submit" onclick="btnEntrar()" class="fadeIn fourth" value="Entrar">
+            </form>
+
+          </div>
+        </div> ';
     }
     function fEntrar(){
         $link= new mysqli("127.0.0.1", "root","","siscast") 

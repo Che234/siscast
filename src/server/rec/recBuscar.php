@@ -14,6 +14,11 @@ if(isset($_POST['tipoBuscar'])){
 }else{
     $bus->tipoBuscar= "nada";
 }
+if(isset($_POST['idInmue'])){
+    $bus->idInmue= $_POST['idInmue'];
+}else{
+    $bus->idInmue= "nada";
+}
 if(isset($_POST['campBuscar'])){
     $bus->campBuscar= $_POST['campBuscar'];
 }else{

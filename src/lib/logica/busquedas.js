@@ -21,8 +21,8 @@ class busquedas{
         AguasSub,AguasServ,PavFlex,PavRig,viaEngran,acera,AlumPublico,aseo,transPublic,pozoSept,
         ElectResidencial,ElectriIndust,linTelf,idServ,montoFact,numFact,fechFact,tipoCed,numFactura,numFactHid,
         puntNorte,puntSur,puntEste,puntOeste,uniAreaT,uniAreaConst,puntNorte2,puntSur2,puntEste2,puntOeste2,
-        uniAreaT2,uniAreaConst2,puntNorte3,puntSur3,puntEste3,puntOeste3,uniAreaT3,uniAreaConst3){
-
+        uniAreaT2,uniAreaConst2,puntNorte3,puntSur3,puntEste3,puntOeste3,uniAreaT3,uniAreaConst3,telefono2){
+            this.telefono2=telefono2
             this.campBuscar= campBuscar
             this.tipoBuscar= tipoBuscar
             this.secciones = secciones
@@ -321,6 +321,10 @@ class busquedas{
             alert("Error en campo de Observaciones");
             return false;
         }
+        if(!ex_datcort.test(this.regInmue)){
+            alert("Error en campo de Regimen");
+            return false;
+        }
         return true
     }
     veriProto(){
@@ -340,7 +344,7 @@ class busquedas{
             alert("Error en el formato de Tomo");
             return false;
         }
-        if(!ex_fecha.test(this.folioProtConst)){
+        if(!ex_trayec.test(this.folioProtConst)){
             alert("Error en el formato de Folio");
             return false;
         }
@@ -352,11 +356,7 @@ class busquedas{
             alert("Error en el formato de Trimestre");
             return false;
         }
-        if(!ex_fecha.test(this.dateProtConst)){
-            alert("Error en el formato de Fecha");
-            return false;
-        }
-        if(!ex_money.test(this.valorProtConst)){
+        if(!ex_trayec.test(this.valorProtConst)){
             alert("Error en el formato de Valor del inmueble");
             return false;
         }
@@ -414,6 +414,101 @@ class busquedas{
             return false
         }
         return true
+    }
+    veriGen(){
+        if(!ex_trayec.test(this.nortGen)){
+            alert("Error en el formato de Mts Norte general");
+            return false;
+        }
+        if(!ex_datcort.test(this.alindNort)){
+            alert("Error en el formato de Alinderado Norte");
+            return false;
+        }
+        if(!ex_trayec.test(this.surGen)){
+            alert("Error en el formato de Mts Sur");
+            return false;
+        }
+        if(!ex_datcort.test(this.alindSur)){
+            alert("Error en el formato de Alinderado Sur");
+            return false;
+        }
+        if(!ex_trayec.test(this.esteGen)){
+            alert("Error en el formato de Mts Este");
+            return false;
+        }
+        if(!ex_datcort.test(this.alindEste)){
+            alert("Error en el formato de Alinderado Este");
+            return false;
+        }
+        if(!ex_trayec.test(this.oesteGen)){
+            alert("Error en el formato de Mts Oeste");
+            return false;
+        }
+        if(!ex_datcort.test(this.alindOeste)){
+            alert("Error en el formato de Alinderado Oeste");
+            return false;
+        }
+        if(!ex_datcort.test(this.arTotal)){
+            alert("Error en el formato de Área Total");
+            return false;
+        }
+        if(!niveles.test(this.NivConstTotal)){
+            alert("Error en el formato de Niveles de Construcción");
+            return false;
+        }
+        if(!ex_datcort.test(this.arConstTotal)){
+            alert("Error en el formato de Área de Construcción");
+            return false;
+        }
+        if(!ex_datcort.test(this.uniNorte)){
+            alert("Error en el formato de Unidad de Norte");
+            return false;
+        }
+        if(!ex_datcort.test(this.puntNorte)){
+            alert("Error en el formato de Norte o NorEste");
+            return false;
+        }
+        if(!ex_datcort.test(this.uniSur)){
+            alert("Error en el formato de Unidad de Sur");
+            return false;
+        }
+        if(!ex_datcort.test(this.puntSur)){
+            alert("Error en el formato de Sur o SurEste");
+            return false;
+        }
+        if(!ex_datcort.test(this.puntEste)){
+            alert("Error en el formato de Este o SurOeste");
+            return false;
+        }
+        if(!ex_datcort.test(this.uniEste)){
+            alert("Error en el formato de Unidad de Este");
+            return false;
+        }
+        if(!ex_datcort.test(this.puntOeste)){
+            alert("Error en el formato de Oeste o NorOeste");
+            return false;
+        }
+        if(!ex_datcort.test(this.uniOeste)){
+            alert("Error en el formato de Unidad de Oeste");
+            return false;
+        }
+        if(!ex_trayec.test(this.arTotal)){
+            alert("Error en el formato de Area Total");
+            return false;
+        }
+        if(!ex_datcort.test(this.uniAreaT)){
+            alert("Error en el formato de Unidad de Area Total");
+            return false;
+        }
+        if(!ex_datcort.test(this.NivConstTotal)){
+            alert("Error en el formato de Nivel de construcción");
+            return false;
+        }
+        if(!ex_trayec.test(this.arConstTotal)){
+            alert("Error en el formato de Nivel de construcción");
+            return false;
+        }
+        return true//VERIFICADO
     }
     constExp(){
         var ajax = new objetoAjax();
@@ -490,291 +585,303 @@ class busquedas{
                }
                
     }
-    guarActProp(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('modificaciones');
-        var divsitiomaterial = document.getElementById('modificaciones');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`cedula=${this.cedula}&cedula2=${this.cedula2}&rif=${this.rif}&nomProp=${this.nomProp}&apelProp=${this.apelProp}&telefono=${this.telefono}&direcProp=${this.direcProp}&accion=actProp`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
+    //PROPIETARIOS LISTO
+        guarActProp(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`cedula=${this.cedula}&cedula2=${this.cedula2}&rif=${this.rif}&nomProp=${this.nomProp}&apelProp=${this.apelProp}&telefono=${this.telefono}&telefono2=${this.telefono2}&direcProp=${this.direcProp}&accion=actProp`); 
+    		ajax.onreadystatechange=function()
                 {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
-    guarActInmue(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('modificaciones');
-        var divsitiomaterial = document.getElementById('modificaciones');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`telefono=${this.telefono}&parrInmue=${this.parrInmue}&secInmue=${this.secInmue}&direcInmue=${this.direcInmue}&ambInmue=${this.ambInmue}&idInmueble=${this.idInmueble}&accion=actInmue`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+    			     }
+    	       	}
+        }
+    //INMUEBLE LISTO
+        guarActInmue(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`parrInmue=${this.parrInmue}&secInmue=${this.secInmue}&direcInmue=${this.direcInmue}&ambInmue=${this.ambInmue}&idInmueble=${this.idInmueble}&accion=actInmue`); 
+    		ajax.onreadystatechange=function()
                 {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
-    actCaracInmue(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('modificaciones');
-        var divsitiomaterial = document.getElementById('modificaciones');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`topoConst=${this.topoConst}&formaConst=${this.formaConst}&regInmue=${this.regInmue}&usoConst=${this.usoConst}&tenenConst=${this.tenenConst}&idCarac=${this.idCarac}&accion=actCaracInmue`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+    			     }
+    	       	}
+        }
+        elimInmue(){
+            var ajax = new objetoAjax();
+            var divsitioform = document.getElementById('campGeneral');
+            var divsitiomaterial = document.getElementById('campGeneral');
+            divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+            ajax=objetoAjax();
+            ajax.open("POST", "src/server/rec/recBuscar.php",true);
+            ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`expBuscar=${this.expBuscar}&accion=eliminarBus`); 
+            ajax.onreadystatechange=function()
                 {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
-    actConst(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('modificaciones');
-        var divsitiomaterial = document.getElementById('modificaciones');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`destConst=${this.destConst}&estConst=${this.estConst}&pareTipoInmue=${this.pareTipoInmue}&pareAcaInmue=${this.pareAcaInmue}&pintConst=${this.pintConst}&estConserv=${this.estConserv}&techoConst=${this.techoConst}&pisosConst=${this.pisosConst}&piezConst=${this.piezConst}&ventConst=${this.ventConst}&puertConst=${this.puertConst}&instElect=${this.instElect}&ambConst=${this.ambConst}&compConst=${this.compConst}&obsConst=${this.obsConst}&idCaracConst=${this.idCaracConst}&accion=actConst`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
+                if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+                     }
+                   }
+        }
+    //CARACACTERISTICAS DEL INMUEBLE
+        actCaracInmue(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`topoConst=${this.topoConst}&formaConst=${this.formaConst}&usoConst=${this.usoConst}&tenenConst=${this.tenenConst}&idCarac=${this.idCarac}&accion=actCaracInmue`); 
+    		ajax.onreadystatechange=function()
                 {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
-    actProtocol(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('modificaciones');
-        var divsitiomaterial = document.getElementById('modificaciones');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`docDebConst=${this.docDebConst}&direcProtConst=${this.direcProtConst}&numProtConst=${this.numProtConst}&tomoProtConst=${this.tomoProtConst}&folioProtConst=${this.folioProtConst}&protoConst=${this.protoConst}&trimProtConst=${this.trimProtConst}&dateProtConst=${this.dateProtConst}&valorProtConst=${this.valorProtConst}&idProto=${this.idProto}&accion=actProtocol`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+    			     }
+    	       	}
+        }
+    //CARACTERISTICAS DE LA CONSTRUCCION
+        actConst(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`destConst=${this.destConst}&estConst=${this.estConst}&pareTipoInmue=${this.pareTipoInmue}&pareAcaInmue=${this.pareAcaInmue}&pintConst=${this.pintConst}&techoConst=${this.techoConst}&pisosConst=${this.pisosConst}&ventConst=${this.ventConst}&instElect=${this.instElect}&obsConst=${this.obsConst}&idCaracConst=${this.idCaracConst}&regInmue=${this.regInmue}&accion=actConst`); 
+    		ajax.onreadystatechange=function()
                 {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
-    accioGeneral(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('identifiId');
-        var divsitiomaterial = document.getElementById('identifiId');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`idlindGen=${this.idlindGen}&accion=actGeneral`);
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+    			     }
+    	       	}
+        }
+    //DATOS DE PROTOCOLIZACION
+        actProtocol(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`docDebConst=${this.docDebConst}&direcProtConst=${this.direcProtConst}&numProtConst=${this.numProtConst}&tomoProtConst=${this.tomoProtConst}&folioProtConst=${this.folioProtConst}&protoConst=${this.protoConst}&trimProtConst=${this.trimProtConst}&dateProtConst=${this.dateProtConst}&valorProtConst=${this.valorProtConst}&idProto=${this.idProto}&accion=actProtocol`); 
+    		ajax.onreadystatechange=function()
                 {
-                    divsitioform.innerHTML = ajax.responseText;
-                    setTimeout(()=>{
-                        btnAplicGen()
-                    },300)
-                    
-			     }
-	       	}
-    }
-    accioPosVenta(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('identifiId2');
-        var divsitiomaterial = document.getElementById('identifiId2');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`idlindPosVenta=${this.idlindPosVenta}&accion=actPosVenta`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+    			     }
+    	       	}
+        }
+    //LINDEROS GENERAL
+        accioGeneral(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('identifiId');
+            var divsitiomaterial = document.getElementById('identifiId');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`idlindGen=${this.idlindGen}&accion=actGeneral`);
+    		ajax.onreadystatechange=function()
                 {
-                    divsitioform.innerHTML = ajax.responseText; 
-                    actPosVenta()
-                    setTimeout(()=>{
-                        btnAplicPosVenta()
-                    },300)
-			     }
-	       	}
-    }
-    accioSecDoc(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('identifiId3');
-        var divsitiomaterial = document.getElementById('identifiId3');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`idlindDocumento=${this.idlindDocumento}&accion=actSecDoc`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText;
+                        setTimeout(()=>{
+                            btnAplicGen()
+                        },300)
+                        
+    			     }
+    	       	}
+        }
+        guarActLind(){
+            var ajax = new objetoAjax();
+            var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
+            divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+            ajax=objetoAjax();
+            ajax.open("POST", "src/server/rec/recBuscar.php",true);
+            ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`puntNorte=${this.puntNorte}&nortGen=${this.nortGen}&uniNorte=${this.uniNorte}&alindNort=${this.alindNort}&puntSur=${this.puntSur}&surGen=${this.surGen}&uniSur=${this.uniSur}&alindSur=${this.alindSur}&puntEste=${this.puntEste}&esteGen=${this.esteGen}&uniEste=${this.uniEste}&alindEste=${this.alindEste}&puntOeste=${this.puntOeste}&oesteGen=${this.oesteGen}&uniOeste=${this.uniOeste}&alindOeste=${this.alindOeste}&arTotal=${this.arTotal}&uniAreaT=${this.uniAreaT}&NivConstTotal=${this.NivConstTotal}&arConstTotal=${this.arConstTotal}&uniAreaConst=${this.uniAreaConst}&idlindGen=${this.idlindGen}&idInmue=${this.idInmue}&accion=guarActLind`); 
+            ajax.onreadystatechange=function()
                 {
-                    divsitioform.innerHTML = ajax.responseText; 
-                    actSecDoc()
-                    setTimeout(()=>{
-                        btnAplicSecDoc()
-                    },300)
-                    
-			     }
-	       	}
-    }
+                if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+                     }
+                   }
+        }
+    //LINDEROS POSIBLE VENTA
+        accioPosVenta(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('identifiId2');
+            var divsitiomaterial = document.getElementById('identifiId2');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`idlindPosVenta=${this.idlindPosVenta}&accion=actPosVenta`); 
+    		ajax.onreadystatechange=function()
+                {
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+                        actPosVenta()
+                        setTimeout(()=>{
+                            btnAplicPosVenta()
+                        },300)
+    			     }
+    	       	}
+        }
+    //LINDEROS SEGUN DOCUMENTO
+        accioSecDoc(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('identifiId3');
+            var divsitiomaterial = document.getElementById('identifiId3');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`idlindDocumento=${this.idlindDocumento}&accion=actSecDoc`); 
+    		ajax.onreadystatechange=function()
+                {
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+                        actSecDoc()
+                        setTimeout(()=>{
+                            btnAplicSecDoc()
+                        },300)
+                        
+    			     }
+    	       	}
+        }
     
+    //SERVICIOS
+        guardActServ(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`Acue=${this.Acue}&AcueRural=${this.AcueRural}&AguasSub=${this.AguasSub}&AguasServ=${this.AguasServ}&PavFlex=${this.PavFlex}&PavRig=${this.PavRig}&viaEngran=${this.viaEngran}&acera=${this.acera}&AlumPublico=${this.AlumPublico}&aseo=${this.aseo}&transPublic=${this.transPublic}&pozoSept=${this.pozoSept}&ElectResidencial=${this.ElectResidencial}&ElectriIndust=${this.ElectriIndust}&linTelf=${this.linTelf}&idServ=${this.idServ}&accion=guarActServ`); 
+    		ajax.onreadystatechange=function()
+                {
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+    			     }
+    	       	}
+        }
+    //FACTURA
+        guardActFact(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`montoFact=${this.montoFact}&fechFact=${this.fechFact}&numFact=${this.numFact}&numFactHid=${this.numFactHid}&accion=guarActFact`); 
+            ajax.onreadystatechange=function()
+                {
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+    			     }
+    	       	}
+        }
+    //PAGOS
+        formPagosInmue(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('campGeneral');
+            var divsitiomaterial = document.getElementById('campGeneral');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`expBuscar=${this.expBuscar}&accion=formPagosInmue`); 
+    		ajax.onreadystatechange=function()
+                {
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+    			     }
+    	       	}
+        }
+        pagarInmue(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('campGeneral');
+            var divsitiomaterial = document.getElementById('campGeneral');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`expBuscar=${this.expBuscar}&montoFact=${this.montoFact}&numFact=${this.numFact}&fechFact=${this.fechFact}&accion=pagarInmue`); 
+    		ajax.onreadystatechange=function()
+                {
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+    			     }
+    	       	}
+        }
+        verPagos(){
+            var ajax = new objetoAjax();
+    		var divsitioform = document.getElementById('campGeneral');
+            var divsitiomaterial = document.getElementById('campGeneral');
+    		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+    		ajax=objetoAjax();
+    		ajax.open("POST", "src/server/rec/recBuscar.php",true);
+    		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`expBuscar=${this.expBuscar}&tipoBuscar=${this.tipoBuscar}&accion=verPagos`); 
+    		ajax.onreadystatechange=function()
+                {
+    			if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+    			     }
+    	       	}
+        }
+
     
-    guarActLind(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('modificaciones');
-        var divsitiomaterial = document.getElementById('modificaciones');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`nortGen=${this.nortGen}&uniNorte=${this.uniNorte}&alindNort=${this.alindNort}&surGen=${this.surGen}&uniSur=${this.uniSur}&alindSur=${this.alindSur}&esteGen=${this.esteGen}&uniEste=${this.uniEste}&alindEste=${this.alindEste}&oesteGen=${this.oesteGen}&uniOeste=${this.uniOeste}&alindOeste=${this.alindOeste}&arTotal=${this.arTotal}&NivConstTotal=${this.NivConstTotal}&arConstTotal=${this.arConstTotal}&nortPosVenta=${this.nortPosVenta}&uniNorte2=${this.uniNorte2}&alindPosNort=${this.alindPosNort}&surPosVenta=${this.surPosVenta}&uniSur2=${this.uniSur2}&alindPosSur=${this.alindPosSur}&estePosVenta=${this.estePosVenta}&uniEste2=${this.uniEste2}&alindPosEste=${this.alindPosEste}&oestePosVenta=${this.oestePosVenta}&uniOeste2=${this.uniOeste2}&alindPosOeste=${this.alindPosOeste}&arTotal2=${this.arTotal2}&NivConstTotal2=${this.NivConstTotal2}&arConstTotal2=${this.arConstTotal2}&nortSecDoc=${this.nortSecDoc}&uniNorte3=${this.uniNorte3}&alindSecNorte=${this.alindSecNorte}&surSecDoc=${this.surSecDoc}&uniSur3=${this.uniSur3}&alindSecSur=${this.alindSecSur}&esteSecDoc=${this.esteSecDoc}&uniEste3=${this.uniEste3}&alindSecEste=${this.alindSecEste}&oesteSecDoc=${this.oesteSecDoc}&uniOeste3=${this.uniOeste3}&alindSecOeste=${this.alindSecOeste}&arTotal3=${this.arTotal3}&NivConstTotal3=${this.NivConstTotal3}&arConstTotal3=${this.arConstTotal3}&idlindDocumento=${this.idlindDocumento}&idlindPosVenta=${this.idlindPosVenta}&idlindGen=${this.idlindGen}&puntNorte=${this.puntNorte}&puntSur=${this.puntSur}&puntEste=${this.puntEste}&puntOeste=${this.puntOeste}&uniAreaT=${this.uniAreaT}&uniAreaConst=${this.uniAreaConst}&puntNorte2=${this.puntNorte2}&puntSur2=${this.puntSur2}&puntEste2=${this.puntEste2}&puntOeste2=${this.puntOeste2}&uniAreaT2=${this.uniAreaT2}&uniAreaConst2=${this.uniAreaConst2}&puntNorte3=${this.puntNorte3}&puntSur3=${this.puntSur3}&puntEste3=${this.puntEste3}&puntOeste3=${this.puntOeste3}&uniAreaT3=${this.uniAreaT3}&uniAreaConst3=${this.uniAreaConst3}&accion=guarActLind`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
-    guardActServ(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('modificaciones');
-        var divsitiomaterial = document.getElementById('modificaciones');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`Acue=${this.Acue}&AcueRural=${this.AcueRural}&AguasSub=${this.AguasSub}&AguasServ=${this.AguasServ}&PavFlex=${this.PavFlex}&PavRig=${this.PavRig}&viaEngran=${this.viaEngran}&acera=${this.acera}&AlumPublico=${this.AlumPublico}&aseo=${this.aseo}&transPublic=${this.transPublic}&pozoSept=${this.pozoSept}&ElectResidencial=${this.ElectResidencial}&ElectriIndust=${this.ElectriIndust}&linTelf=${this.linTelf}&idServ=${this.idServ}&accion=guarActServ`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
-    guardActFact(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('modificaciones');
-        var divsitiomaterial = document.getElementById('modificaciones');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`montoFact=${this.montoFact}&fechFact=${this.fechFact}&numFact=${this.numFact}&numFactHid=${this.numFactHid}&accion=guarActFact`); 
-        ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
-    formPagosInmue(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
-        var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`expBuscar=${this.expBuscar}&accion=formPagosInmue`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
-    pagarInmue(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
-        var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`expBuscar=${this.expBuscar}&montoFact=${this.montoFact}&numFact=${this.numFact}&fechFact=${this.fechFact}&accion=pagarInmue`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
-    verPagos(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
-        var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`expBuscar=${this.expBuscar}&tipoBuscar=${this.tipoBuscar}&accion=verPagos`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
-    elimInmue(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
-        var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recBuscar.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`expBuscar=${this.expBuscar}&accion=eliminarBus`); 
-		ajax.onreadystatechange=function()
-            {
-			if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
-    }
 }
 function btnConsultExp(nuExp="0",tipBus="0"){
     let busque = new busquedas;
@@ -859,21 +966,21 @@ function dividirCed(secciones="no"){
         cedula = document.getElementById("divCedula").value;
         rif = document.getElementById("divRif").value;
         telf = document.getElementById("divTelf").value;
+        telf2 = document.getElementById("divTelf2").value;
         divCed= cedula.split('-')
         divRif = rif.split('-')
         divTelf = telf.split('-')
+        divTelf2 = telf2.split('-')
         document.getElementById("cedR").value=divCed[0];
         document.getElementById("cedConst").value=divCed[1];
         document.getElementById("rifR").value=divRif[0]
         document.getElementById("rifN").value=divRif[1]
         document.getElementById("codTelf").value= divTelf[0]
         document.getElementById("numTelf").value = divTelf[1]
+        document.getElementById("codTelf2").value= divTelf2[0]
+        document.getElementById("numTelf2").value = divTelf2[1]
     }
     if(secciones=="Inmueble"){
-        telefono = document.getElementById("telefono").value
-        diviTelef = telefono.split("-")
-        document.getElementById("codTelf2").value= diviTelef[0]
-        document.getElementById("numTelf2").value = diviTelef[1]
         parr=document.getElementById("parr").value
         
         if(parr=="Capital"){
@@ -898,13 +1005,12 @@ function dividirCed(secciones="no"){
         }
         setTimeout(function (){
             sectorCamb()
-        },100)
+        },200)
         
     }
     if(secciones=="Caract Terreno"){
         let topografia = document.getElementById("topografia").value
         let formaConst = document.getElementById("forma").value
-        let regimen = document.getElementById("regimen").value
         let tenencia = document.getElementById("tenencia").value
         if(topografia=="Terreno Llano"){
             document.getElementById("topoConst").selectedIndex=1
@@ -917,15 +1023,6 @@ function dividirCed(secciones="no"){
         }
         if(formaConst =="Irregular"){
             document.getElementById("formaConst").selectedIndex=2
-        }
-        if(regimen =="Propiedad Horizontal"){
-            document.getElementById("regInmue").selectedIndex=1
-        }
-        if(regimen =="Condominio"){
-            document.getElementById("regInmue").selectedIndex=2
-        }
-        if(regimen=="Sucesion"){
-            document.getElementById("regInmue").selectedIndex=3
         }
         setTimeout(function(){
             usoCarac()
@@ -951,104 +1048,23 @@ function dividirCed(secciones="no"){
             pinturaConstru()
         },100)
         setTimeout(function(){
-            estadoConstru()
-        },100)
-        setTimeout(function(){
             techoConstru()
         },100)
         setTimeout(function(){
             pisosConstru()
         },100)
         setTimeout(function(){
-            piezasConst()
-        },100)
-        setTimeout(function(){
             ventanasConst()
-        },100)
-        setTimeout(function(){
-            puertasConst()
         },100)
         setTimeout(function(){
             electConst()
         },100)
         setTimeout(function(){
-            compleConst()
-        },100)
-        setTimeout(function(){
-            ambConst()
+            regimConst()
         },100)
     }
     if(secciones=="Linderos"){
-        let lindGen = document.getElementById("lindGen").value
-        let lindPosVenta = document.getElementById("lindPosVenta").value
-        let lindDocumento = document.getElementById("lindDocumento").value
-        let lindGen2 = document.getElementById("lindGen2").value
-        let lindPosVenta2 = document.getElementById("lindPosVenta2").value
-        let lindDocumento2 = document.getElementById("lindDocumento2").value
-        let busque= new busquedas
         
-        if(lindGen!="nada"){
-            document.getElementById("lindGeneral").selectedIndex=1
-            busque.idlindGen = document.getElementById("idlindGen").value
-            actGeneral()
-            setTimeout(function(){
-                busque.accioGeneral()
-            },100)
-        }else{
-            if(lindGen2!="nada"){
-                document.getElementById("lindGeneral").selectedIndex=1
-                busque.idlindGen = document.getElementById("idlindGen").value
-                actGeneral()
-                setTimeout(function(){
-                    busque.accioGeneral()
-                },100)
-            }else{
-                document.getElementById("lindGeneral").selectedIndex=0
-                busque.idlindGen = "nada"
-            }
-            
-        }
-        if(lindPosVenta!="nada"){
-            document.getElementById("posVenta").selectedIndex=1
-            busque.idlindPosVenta = document.getElementById("idlindPosVenta").value
-            actPosVenta()
-            setTimeout(function(){
-                busque.accioPosVenta()
-            },100)
-        }else{
-            if(lindPosVenta2!="nada"){
-                document.getElementById("posVenta").selectedIndex=1
-                busque.idlindPosVenta = document.getElementById("idlindPosVenta").value
-                actPosVenta()
-                setTimeout(function(){
-                    busque.accioPosVenta()
-                },100)
-            }else{
-                document.getElementById("posVenta").selectedIndex=0
-                busque.idlindPosVenta = "nada"
-            }
-            
-        }
-        if(lindDocumento!="nada"){
-            document.getElementById("secDoc").selectedIndex=1
-            busque.idlindDocumento = document.getElementById("idlindDocumento").value
-            actSecDoc()
-            setTimeout(function (){
-                busque.accioSecDoc()
-            },100)
-        }else{
-            if(lindDocumento2!="nada"){
-                document.getElementById("secDoc").selectedIndex=1
-                busque.idlindDocumento = document.getElementById("idlindDocumento").value
-                actSecDoc()
-                setTimeout(function (){
-                    busque.accioSecDoc()
-                },100)
-            }else{
-                document.getElementById("secDoc").selectedIndex=0
-                busque.idlindDocumento = "nada"
-            }
-        }
     }
     if(secciones=="Servicios"){
         let acued = document.getElementById("acued").value
@@ -1157,6 +1173,9 @@ function btnActProp(){
     busque.codTelf = document.getElementById("codTelf").value
     busque.numTelf = document.getElementById("numTelf").value
     busque.telefono = busque.codTelf+"-"+busque.numTelf
+    busque.codTelf2 = document.getElementById("codTelf2").value
+    busque.numTelf2 = document.getElementById("numTelf2").value
+    busque.telefono2 = busque.codTelf2+"-"+busque.numTelf2
     busque.direcProp = document.getElementById("direcProp").value
     if(busque.veriActProp()==true){
         busque.guarActProp();
@@ -1175,9 +1194,6 @@ function sectorCamb(){
 }
 function btnActInmue(){
     let busque = new busquedas
-    codTelf2 = document.getElementById("codTelf2").value
-    numTelf2 = document.getElementById("numTelf2").value
-    busque.telefono = codTelf2+"-"+numTelf2
     busque.parrInmue = document.getElementById("parrInmue").value
     busque.secInmue = document.getElementById("secInmue").value
     busque.direcInmue = document.getElementById("direcInmue").value
@@ -1201,295 +1217,188 @@ function tenenciaCarac(){
         let tenencia = document.getElementById("tenencia").value
         let tenenConst = document.getElementById("tenenConst")
         let k=0
-    while(tenencia !=tenenConst.value){
-        document.getElementById("tenenConst").selectedIndex=k
-        k++
-    }
+        while(tenencia !=tenenConst.value){
+            document.getElementById("tenenConst").selectedIndex=k
+            k++
+        }
 }
 function btnActCaracInmue(){
     let busque = new busquedas
     busque.topoConst = document.getElementById("topoConst").value
     busque.formaConst = document.getElementById("formaConst").value
-    busque.regInmue = document.getElementById("regInmue").value
     busque.usoConst = document.getElementById("usoConst").value
     busque.tenenConst = document.getElementById("tenenConst").value
     busque.idCarac = document.getElementById("idCarac").value
     busque.actCaracInmue()
 }
 //CARACTERISTICAS DE LA CONSTRUCCION
-function destinoConstru(){
-    let destino = document.getElementById("destino").value
-    let destConst = document.getElementById("destConst")
-    let k=0
-    while(destino !=destConst.value){
-        document.getElementById("destConst").selectedIndex=k
-        k++
+    function destinoConstru(){
+        let destino = document.getElementById("destino").value
+        let destConst = document.getElementById("destConst")
+        let k=0
+        while(destino !=destConst.value){
+            document.getElementById("destConst").selectedIndex=k
+            k++
+        }
     }
-}
-function estructuraConst(){
-    let estructura = document.getElementById("estructura").value
-    let estConst = document.getElementById("estConst")
-    let k=0
-    while(estructura !=estConst.value){
-        document.getElementById("estConst").selectedIndex=k
-        k++
+    function estructuraConst(){
+        let estructura = document.getElementById("estructura").value
+        let estConst = document.getElementById("estConst")
+        let k=0
+        while(estructura !=estConst.value){
+            document.getElementById("estConst").selectedIndex=k
+            k++
+        }
     }
-}
-function paredesConstru(){
-    let paredes_tipo = document.getElementById("paredes_tipo").value
-    let pareTipoInmue = document.getElementById("pareTipoInmue")
-    let k=0
-    while(paredes_tipo !=pareTipoInmue.value){
-        document.getElementById("pareTipoInmue").selectedIndex=k
-        k++
+    function paredesConstru(){
+        let paredes_tipo = document.getElementById("paredes_tipo").value
+        let pareTipoInmue = document.getElementById("pareTipoInmue")
+        let k=0
+        while(paredes_tipo !=pareTipoInmue.value){
+            document.getElementById("pareTipoInmue").selectedIndex=k
+            k++
+        }
     }
-}
-function acabadoConstru(){
-    let paredes_acabado = document.getElementById("paredes_acabado").value
-    let pareAcaInmue = document.getElementById("pareAcaInmue")
-    let k=0
-    while(paredes_acabado !=pareAcaInmue.value){
-        document.getElementById("pareAcaInmue").selectedIndex=k
-        k++
+    function acabadoConstru(){
+        let paredes_acabado = document.getElementById("paredes_acabado").value
+        let pareAcaInmue = document.getElementById("pareAcaInmue")
+        let k=0
+        while(paredes_acabado !=pareAcaInmue.value){
+            document.getElementById("pareAcaInmue").selectedIndex=k
+            k++
+        }
     }
-}
-function pinturaConstru(){
-    let pintura = document.getElementById("pintura").value
-    let pintConst = document.getElementById("pintConst")
-    let k=0
-    while(pintura !=pintConst.value){
-        document.getElementById("pintConst").selectedIndex=k
-        k++
+    function pinturaConstru(){
+        let pintura = document.getElementById("pintura").value
+        let pintConst = document.getElementById("pintConst")
+        let k=0
+        while(pintura !=pintConst.value){
+            document.getElementById("pintConst").selectedIndex=k
+            k++
+        }
     }
-}
-function estadoConstru(){
-    let estado_conservacion = document.getElementById("estado_conservacion").value
-    let estConserv = document.getElementById("estConserv")
-    let k=0
-    while(estado_conservacion !=estConserv.value){
-        document.getElementById("estConserv").selectedIndex=k
-        k++
+    function techoConstru(){
+        let techo = document.getElementById("techo").value
+        let techoConst = document.getElementById("techoConst")
+        let k=0
+        while(techoConst.value != techo){
+            document.getElementById("techoConst").selectedIndex=k
+            k++
+        }
     }
-}
-function techoConstru(){
-    let techo = document.getElementById("techo").value
-    let techoConst = document.getElementById("techoConst")
-    let k=0
-    while(techo !=techoConst.value){
-        document.getElementById("techoConst").selectedIndex=k
-        k++
+    function pisosConstru(){
+        let pisos = document.getElementById("pisos").value
+        let pisosConst = document.getElementById("pisosConst")
+        let k=0
+        while(pisosConst.value !=pisos){
+            document.getElementById("pisosConst").selectedIndex=k
+            k++
+        }
     }
-}
-function pisosConstru(){
-    let pisos = document.getElementById("pisos").value
-    let pisosConst = document.getElementById("pisosConst")
-    let k=0
-    while(pisos !=pisosConst.value){
-        document.getElementById("pisosConst").selectedIndex=k
-        k++
+    function ventanasConst(){
+        let ventanas = document.getElementById("ventanas").value
+        let ventConst = document.getElementById("ventConst")
+        let k=0
+        while(ventanas !=ventConst.value){
+            document.getElementById("ventConst").selectedIndex=k
+            k++
+        }
     }
-}
-function piezasConst(){
-    let piezas_sanitarias = document.getElementById("piezas_sanitarias").value
-    let piezConst = document.getElementById("piezConst")
-    let k=0
-    while(piezas_sanitarias !=piezConst.value){
-        document.getElementById("piezConst").selectedIndex=k
-        k++
+    function electConst(){
+        let insta_electricas = document.getElementById("insta_electricas").value
+        let instElect = document.getElementById("instElect")
+        let k=0
+        while(insta_electricas !=instElect.value){
+            document.getElementById("instElect").selectedIndex=k
+            k++
+        }
     }
-}
-function ventanasConst(){
-    let ventanas = document.getElementById("ventanas").value
-    let ventConst = document.getElementById("ventConst")
-    let k=0
-    while(ventanas !=ventConst.value){
-        document.getElementById("ventConst").selectedIndex=k
-        k++
+    function regimConst(){
+        let regimen = document.getElementById("regimen").value
+        let regInmue = document.getElementById("regInmue")
+        let k=0
+        while(regimen !=regInmue.value){
+            document.getElementById("regInmue").selectedIndex=k
+            k++
+        }
     }
-}
-function puertasConst(){
-    let puertas = document.getElementById("puertas").value
-    let puertConst = document.getElementById("puertConst")
-    let k=0
-    while(puertas !=puertConst.value){
-        document.getElementById("puertConst").selectedIndex=k
-        k++
+    function btnActConst(){
+        let busque = new busquedas
+        busque.destConst = document.getElementById("destConst").value
+        busque.estConst = document.getElementById("estConst").value
+        busque.pareTipoInmue = document.getElementById("pareTipoInmue").value
+        busque.pareAcaInmue = document.getElementById("pareAcaInmue").value
+        busque.pintConst = document.getElementById("pintConst").value
+        busque.techoConst = document.getElementById("techoConst").value
+        busque.pisosConst = document.getElementById("pisosConst").value
+        busque.ventConst = document.getElementById("ventConst").value
+        busque.instElect = document.getElementById("instElect").value
+        busque.obsConst = document.getElementById("obsConst").value
+        busque.expBuscar = document.getElementById("expBuscar").value
+        busque.idCaracConst = document.getElementById("idCaracConst").value
+        busque.regInmue = document.getElementById("regInmue").value
+        if(busque.veriConst()==true){
+            busque.actConst()
+        }
     }
-}
-function electConst(){
-    let insta_electricas = document.getElementById("insta_electricas").value
-    let instElect = document.getElementById("instElect")
-    let k=0
-    while(insta_electricas !=instElect.value){
-        document.getElementById("instElect").selectedIndex=k
-        k++
-    }
-}
-function compleConst(){
-    let complementos = document.getElementById("complementos").value
-    let compConst = document.getElementById("compConst")
-    let k=0
-    while(complementos !=compConst.value){
-        document.getElementById("compConst").selectedIndex=k
-        k++
-    }
-}
-function ambConst(){
-    let ambientes = document.getElementById("ambientes").value
-    let ambConst = document.getElementById("ambConst")
-    let k=0
-    while(ambientes !=ambConst.value){
-        document.getElementById("ambConst").selectedIndex=k
-        k++
-    }
-}
-function btnActConst(){
-    let busque = new busquedas
-    busque.destConst = document.getElementById("destConst").value
-    busque.estConst = document.getElementById("estConst").value
-    busque.pareTipoInmue = document.getElementById("pareTipoInmue").value
-    busque.pareAcaInmue = document.getElementById("pareAcaInmue").value
-    busque.pintConst = document.getElementById("pintConst").value
-    busque.estConserv = document.getElementById("estConserv").value
-    busque.techoConst = document.getElementById("techoConst").value
-    busque.pisosConst = document.getElementById("pisosConst").value
-    busque.piezConst = document.getElementById("piezConst").value
-    busque.ventConst = document.getElementById("ventConst").value
-    busque.puertConst = document.getElementById("puertConst").value
-    busque.instElect = document.getElementById("instElect").value
-    busque.ambConst = document.getElementById("ambConst").value
-    busque.compConst = document.getElementById("compConst").value
-    busque.obsConst = document.getElementById("obsConst").value
-    busque.expBuscar = document.getElementById("expBuscar").value
-    busque.idCaracConst = document.getElementById("idCaracConst").value
-    if(busque.veriConst()==true){
-        busque.actConst()
-    }
-    
-
-}
 //DATOS DE PROTOCOLIZACION
-function btnActProtocol(){
-    let busque = new busquedas()
-    busque.docDebConst = document.getElementById("docDebConst").value
-    busque.direcProtConst = document.getElementById("direcProtConst").value
-    busque.numProtConst = document.getElementById("numProtConst").value
-    busque.tomoProtConst = document.getElementById("tomoProtConst").value
-    busque.folioProtConst = document.getElementById("folioProtConst").value
-    busque.protoConst = document.getElementById("protoConst").value
-    busque.trimProtConst= document.getElementById("trimProtConst").value
-    busque.dateProtConst = document.getElementById("dateProtConst").value
-    busque.valorProtConst = document.getElementById("valorProtConst").value
-    busque.idProto = document.getElementById("idProto").value
-    if(busque.veriProto()==true){
-        busque.actProtocol()
+    function btnActProtocol(){
+        let busque = new busquedas()
+        busque.docDebConst = document.getElementById("docDebConst").value
+        busque.direcProtConst = document.getElementById("direcProtConst").value
+        busque.numProtConst = document.getElementById("numProtConst").value
+        busque.tomoProtConst = document.getElementById("tomoProtConst").value
+        busque.folioProtConst = document.getElementById("folioProtConst").value
+        busque.protoConst = document.getElementById("protoConst").value
+        busque.trimProtConst= document.getElementById("trimProtConst").value
+        busque.dateProtConst = document.getElementById("dateProtConst").value
+        busque.valorProtConst = document.getElementById("valorProtConst").value
+        busque.idProto = document.getElementById("idProto").value
+        if(busque.veriProto()==true){
+            busque.actProtocol()
+        }
     }
-}
 //FACTURA
-function btnActFact(){
-    let busque = new busquedas
-    busque.montoFact = document.getElementById("montoFact").value
-    busque.fechFact = document.getElementById("fechFact").value
-    busque.numFact = document.getElementById("numFact").value
-    busque.numFactHid = document.getElementById("numFactHid").value
-    if(busque.veriActFact()==true){
-        busque.guardActFact();
+    function btnActFact(){
+        let busque = new busquedas
+        busque.montoFact = document.getElementById("montoFact").value
+        busque.fechFact = document.getElementById("fechFact").value
+        busque.numFact = document.getElementById("numFact").value
+        busque.numFactHid = document.getElementById("numFactHid").value
+        if(busque.veriActFact()==true){
+            busque.guardActFact();
+        }
     }
-}
 //LINDEROS
 function btnAplicGen(){
     let busque = new busquedas
-    n_gen = document.getElementById("no_gen").value
-    document.getElementById("nortGen").value=n_gen
-    e_gen = document.getElementById("es_gen").value
-    document.getElementById("esteGen").value=e_gen
-    o_gen = document.getElementById("oe_gen").value
-    document.getElementById("oesteGen").value=o_gen
-    s_gen = document.getElementById("su_gen").value
-    document.getElementById("surGen").value=s_gen
-    alindN_gen = document.getElementById("alindN_gen").value
-    document.getElementById("alindNort").value=alindN_gen
-    alindS_gen = document.getElementById("alindS_gen").value
-    document.getElementById("alindSur").value=alindS_gen
-    alindE_gen = document.getElementById("alindE_gen").value
-    document.getElementById("alindEste").value=alindE_gen
-    alindO_gen = document.getElementById("alindO_gen").value
-    document.getElementById("alindOeste").value=alindO_gen
-    area_gen = document.getElementById("area_gen").value
-    document.getElementById("arTotal").value=area_gen
-    niveles_gen = document.getElementById("niveles_gen").value
-    document.getElementById("NivConstTotal").value=niveles_gen
-    areaConst_gen = document.getElementById("areaConst_gen").value
-    document.getElementById("arConstTotal").value=areaConst_gen
-    uniN_gen = document.getElementById("uniN_gen").value
-    if(uniN_gen=="m"){
-        document.getElementById("uniNorte").selectedIndex=1
-    }
-    if(uniN_gen=="Lq"){
-        document.getElementById("uniNorte").selectedIndex=2
-    }
-    uniS_gen = document.getElementById("uniS_gen").value
-    if(uniS_gen=="m"){
-        document.getElementById("uniSur").selectedIndex=1
-    }
-    if(uniS_gen=="Lq"){
-        document.getElementById("uniSur").selectedIndex=2
-    }
-    uniE_gen = document.getElementById("uniE_gen").value
-    if(uniE_gen=="m"){
-        document.getElementById("uniEste").selectedIndex=1
-    }
-    if(uniE_gen=="Lq"){
-        document.getElementById("uniEste").selectedIndex=2
-    }
-    uniO_gen = document.getElementById("uniO_gen").value
-    if(uniO_gen=="m"){
-        document.getElementById("uniOeste").selectedIndex=1
-    }
-    if(uniO_gen=="Lq"){
-        document.getElementById("uniOeste").selectedIndex=2
-    }
+    busque.puntNorte = document.getElementById("puntNorte").value //LISTO
+    busque.nortGen = document.getElementById("nortGen").value //LISTO
+    busque.uniNorte = document.getElementById("uniNorte").value //LISTO
+    busque.alindNort = document.getElementById("alindNort").value //LISTO
+    busque.puntSur = document.getElementById("puntSur").value //LISTO
+    busque.surGen = document.getElementById("surGen").value //LISTO
+    busque.uniSur = document.getElementById("uniSur").value //LISTO
+    busque.alindSur = document.getElementById("alindSur").value //LISTO
+    busque.puntEste = document.getElementById("puntEste").value //LISTO
+    busque.esteGen = document.getElementById("esteGen").value //LISTO
+    busque.uniEste = document.getElementById("uniEste").value //LISTO
+    busque.alindEste = document.getElementById("alindEste").value //LISTO
+    busque.puntOeste = document.getElementById("puntOeste").value //LISTO
+    busque.oesteGen = document.getElementById("oesteGen").value //LISTO
+    busque.uniOeste = document.getElementById("uniOeste").value //LISTO
+    busque.alindOeste = document.getElementById("alindOeste").value //LISTO
+    busque.arTotal = document.getElementById("arTotal").value //LISTO
+    busque.uniAreaT = document.getElementById("uniAreaT").value //LISTO
+    busque.NivConstTotal = document.getElementById("NivConstTotal").value //LISTO
+    busque.arConstTotal = document.getElementById("arConstTotal").value //LISTO
+    busque.uniAreaConst = document.getElementById("uniAreaConst").value
 
-    lindGeneral = document.getElementById("lindGeneral").value
-    if(lindGeneral=="si"){
-        nortePunt = document.getElementById("nortePunt").value
-        if(nortePunt== "Norte"){
-            document.getElementById("puntNorte").selectedIndex=0
-        }else{
-            document.getElementById("puntNorte").selectedIndex=1
-        }
-        surPunt = document.getElementById("surPunt").value
-        if(surPunt== "Sur"){
-            document.getElementById("puntSur").selectedIndex=0
-        }else{
-            document.getElementById("puntSur").selectedIndex=1
-        }
-        estePunt = document.getElementById("estePunt").value
-        if(estePunt== "Sur"){
-            document.getElementById("puntEste").selectedIndex=0
-        }else{
-            document.getElementById("puntEste").selectedIndex=1
-        }
-        oestePunt = document.getElementById("oestePunt").value
-        if(oestePunt== "Oeste"){
-            document.getElementById("puntOeste").selectedIndex=0
-        }else{
-            document.getElementById("puntOeste").selectedIndex=1
-        }
+    busque.idlindGen = document.getElementById("idlindGen").value
+    busque.idInmue = document.getElementById("idInmue").value
+    if(busque.veriGen()==true){
+        busque.guarActLind()
     }
-    uniAreaTotal = document.getElementById("uniAreaTotal").value
-    if(uniAreaTotal=="m2"){
-        document.getElementById("uniAreaT").selectedIndex=1
-    }else{
-        document.getElementById("uniAreaT").selectedIndex=2
-    }
-    uniAreaC = document.getElementById("uniAreaC").value
-    if(uniAreaC=="m2"){
-        document.getElementById("uniAreaConst").selectedIndex=1
-    }else{
-        document.getElementById("uniAreaConst").selectedIndex=2
-    }
-    idGen = document.getElementById("idGen").value
 }
 function btnAplicPosVenta(){
     let busque = new busquedas

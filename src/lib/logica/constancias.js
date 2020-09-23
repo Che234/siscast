@@ -659,7 +659,7 @@ class constancias{
         }
         return true//VERIFICADO
     }
-    veriConserv(){
+    veriConserv(){//VERIFICADO
         if(!ex_trayec.test(this.ano_construc)){
             alert("Error en el formato de Año de Construcción");
             return false;
@@ -680,7 +680,7 @@ class constancias{
             alert("Error en el formato de Numero de Vivienda");
             return false;
         }
-        return true//VERIFICADO
+        return true
     }
     veriPiezSant(){
         if(!ex_datcort.test(this.porFina)){
@@ -1320,7 +1320,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`puntNorte=${this.puntNorte}&nortGen=${this.nortGen}&uniNorte=${this.uniNorte}&alindNort=${this.alindNort}&puntSur=${this.puntSur}&surGen=${this.surGen}&uniSur=${this.surGen}&uniSur=${this.uniSur}&alindSur=${this.alindSur}&puntEste=${this.puntEste}&esteGen=${this.esteGen}&uniEste=${this.uniEste}&alindEste=${this.alindEste}&puntOeste=${this.puntOeste}&oesteGen=${this.oesteGen}&uniOeste=${this.uniOeste}&alindOeste=${this.alindOeste}&arTotal=${this.arTotal}&uniAreaT=${this.uniAreaT}&NivConstTotal=${this.NivConstTotal}&arConstTotal=${this.arConstTotal}&accion=guarGeneral`); 
+        ajax.send(`puntNorte=${this.puntNorte}&nortGen=${this.nortGen}&uniNorte=${this.uniNorte}&alindNort=${this.alindNort}&puntSur=${this.puntSur}&surGen=${this.surGen}&uniSur=${this.uniSur}&alindSur=${this.alindSur}&puntEste=${this.puntEste}&esteGen=${this.esteGen}&uniEste=${this.uniEste}&alindEste=${this.alindEste}&puntOeste=${this.puntOeste}&oesteGen=${this.oesteGen}&uniOeste=${this.uniOeste}&alindOeste=${this.alindOeste}&arTotal=${this.arTotal}&uniAreaT=${this.uniAreaT}&NivConstTotal=${this.NivConstTotal}&arConstTotal=${this.arConstTotal}&uniAreaConst=${this.uniAreaConst}&accion=guarGeneral`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1827,7 +1827,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idServInmue=${this.idServInmue}&accion=veriF2`); 
+        ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idServInmue=${this.idServInmue}&accion=veriF2`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -2092,8 +2092,7 @@ function cambioTempParr(){
             document.getElementById("secInmue").selectedIndex=k
             k++
         }
-    },500)
-    
+    },500) 
 }
 
 //CARACTERISTICAS DEL TERRENO
@@ -2533,6 +2532,7 @@ function btnGuarGeneral(){
     consta.uniAreaT = document.getElementById("uniAreaT").value //LISTO
     consta.NivConstTotal = document.getElementById("NivConstTotal").value //LISTO
     consta.arConstTotal = document.getElementById("arConstTotal").value //LISTO
+    consta.uniAreaConst = document.getElementById("uniAreaConst").value
     if(consta.veriGen()==true){
         consta.guarGeneral()
     }
@@ -3009,4 +3009,7 @@ function btnCambSec(){
         let consta = new constancias()
         consta.parrInmue = document.getElementById("parrInmue").value
         consta.cambSect()
+}
+function mayusProp(e){
+     e.value = e.value.toUpperCase();
 }

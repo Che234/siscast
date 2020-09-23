@@ -2,12 +2,14 @@
 require('../../lib/fpdf/fpdf.php');
 
 class PDF extends FPDF{
+
+
     // Cabecera de página
     function Header(){
         // Logos
-        $this->Image('../../../assets/logo.jpg',25,5,34);
-        $this->Image('../../../assets/escudo.jpg',240,5,34);
-        $this->Image('../../../assets/fondoCabecera.jpg',63,5,172,30);
+        $this->Image('../../assets/logo.jpg',25,5,34);
+        $this->Image('../../assets/escudo.jpg',240,5,34);
+        $this->Image('../../assets/fondoCabecera.jpg',63,5,172,30);
         // Arial bold 15
         $this->SetFont('Times','B',10);
         // Título
@@ -33,7 +35,7 @@ class PDF extends FPDF{
     // Pie de página
     function Footer(){
         // Posición: a 1,5 cm del final
-        $this->Image('../../../assets/fondoFooter.jpg',19,395,260,20);
+        $this->Image('../../assets/fondoFooter.jpg',19,395,260,20);
         $this->SetY(395);    
         $this->SetX(100);
         $this->Cell(100,10,utf8_decode('PIÑAL, CALLE 3 ENTRE CARRERAS 3 Y 4,'),0,0,'C',false);
@@ -57,30 +59,21 @@ class f002{
     var $numFact= "";
     var $operacion= "";
     function imprimir(){
-        session_start();
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
+        session_start();
         //BUSQUEDA DE USUARIO
             $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
             $idUser= $resultUser->fetch_assoc();
         //BUSQUEDA FACTURA
-            $expFactSql= "SELECT * FROM factura where n_factura=".$this->numFact."";
+            $expFactSql= "SELECT * FROM factura where n_factura='".$this->numFact."'";
             $resExpFact= $link->query($expFactSql);
             $idExpFact= $resExpFact->fetch_array();
-        //INSERT CONSTANCIA
-            $fechaConst= date('Y-m-d');
-            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_expedi)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
-            $link->query($constansSql);
-            $idConstancias = $link->insert_id;
         //BUSQUEDA DEL EXPEDIENTE
             $busExpSQL = "SELECT * FROM expediente where id=".$this->nuExp."";
             $resBusEXP = $link->query($busExpSQL);
             $busExpedienteRes = $resBusEXP->fetch_array();
-        //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$this->nuExp.",".$idExpFact["id"].",'".$this->fechFact."')";
-            $link->query($pagoExpSql);
-            $idPagoExp= $link->insert_id;
         //BUSQUEDA DEL INMUEBLE
             $inmueDeSql= "SELECT * from inmueble where id=".$this->idInmueble."";
             $resInmueDe= $link->query($inmueDeSql);
@@ -94,6 +87,7 @@ class f002{
             $idcaracConstruccion= $resultInmueDe["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
             $propDeSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
+            echo $propDeSql;
             $resPropDe= $link->query($propDeSql);
             $resultPropieDe = $resPropDe->fetch_assoc();
             $nombreProp= ''.$resultPropieDe["nombre"].' '.$resultPropieDe["apellido"].'';
@@ -121,8 +115,18 @@ class f002{
             $carcConstSql= "SELECT * FROM caracteristicas_construccion where id='".$idcaracConstruccion."'";
             $resCaracConst= $link->query($carcConstSql);
             $resulCaracInmue= $resCaracConst->fetch_assoc();
+        //INSERT CONSTANCIA
+            $fechaConst= date('Y-m-d');
+            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_expedi)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
+            $link->query($constansSql);
+            $idConstancias = $link->insert_id;
+        //INSERT PAGOS
+            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$this->nuExp.",".$idExpFact["id"].",'".$this->fechFact."')";
+            $link->query($pagoExpSql);
+            $idPagoExp= $link->insert_id;
+
         // Creación del objeto de la clase heredada
-            $pdf = new PDF('P','mm','A3');
+            $pdf = new PDF('P','mm','Legal');
             $pdf->SetMargins(20,0,22);
             $pdf->AliasNbPages();
             $pdf->AddPage();
@@ -556,9 +560,14 @@ class f002{
             $pdf->SetY(212);    
             $pdf->SetX(59);
             if($resultLindDoc["areaTotal"]=="NO APLICA"){
-                $pdf->cell(40,6,'',1,0,'C');
+                $pdf->cell(40,6,'NO APLICA',1,0,'C');
             }else{
-                $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].' '.$resultLindDoc["uniAreaT"].'',1,0,'C');
+                if($resultLindDoc["uniAreaT"]=="N/A"){
+                    $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].'',1,0,'C');
+                }else{
+                     $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].''.$resultLindDoc["uniAreaT"].'',1,0,'C');
+                }
+                
             }
             $pdf->SetY(212);    
             $pdf->SetX(99);
@@ -577,17 +586,20 @@ class f002{
             $pdf->SetY(212);    
             $pdf->SetX(239);
             if($resultLindDoc["areaConst"]=="NO APLICA"){
-                $pdf->cell(36,6,'',1,0,'C');
+                $pdf->cell(36,6,'NO APLICA',1,0,'C');
             }else{
-                $pdf->cell(36,6,''.$resultLindDoc["areaConst"].' '.$resultLindDoc["uniAreaC"].'',1,0,'C');
+                if($resultLindDoc["uniAreaC"]=="N/A"){
+                    $pdf->cell(36,6,''.$resultLindDoc["areaConst"].'',1,0,'C');
+                }else{
+                    $pdf->cell(36,6,''.$resultLindDoc["areaConst"].' '.$resultLindDoc["uniAreaC"].'',1,0,'C');
+                }
             }
-            
             $pdf->SetY(218);    
             $pdf->SetX(19);
             $pdf->cell(60,6,utf8_decode('Dirección del Inmueble'),1,0,'L');
             $pdf->SetY(218);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$resultInmueDe["direccion"].'',1,0,'L');
+            $pdf->cell(0,6,''.utf8_decode($resultInmueDe["direccion"]).'',1,0,'L');
         //SERVICIOS 1
             $pdf->SetY(224);    
             $pdf->SetX(19);
@@ -1188,7 +1200,7 @@ class f002{
             mkdir($carpeta,0777,true);
             $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }else{
-            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
+            $pdf->Output('I','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }
         echo'
         <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf" />
@@ -1211,9 +1223,9 @@ class f001{
         $pdf->SetMargins(20,0,22);
         $pdf->AliasNbPages();
         $pdf->AddPage();
-        session_start();
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
+        session_start();
         //BUSQUEDA DE USUARIO
             $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
@@ -1738,14 +1750,13 @@ class f001{
             $pdf->SetY(190);    
             $pdf->SetX(59);
             if($resultLindDoc["areaTotal"]=="NO APLICA"){
-                $pdf->cell(40,6,'',1,0,'C');
+                $pdf->cell(40,6,'NO APLICA',1,0,'C');
             }else{
-                if($resultLindDoc["uniAreaT"]=="NA"){
+                if($resultLindDoc["uniAreaT"]=="N/A"){
                     $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].'',1,0,'C');
                 }else{
                     $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].' '.$resultLindDoc["uniAreaT"].'',1,0,'C');
                 }
-                
             }
             $pdf->SetY(190);    
             $pdf->SetX(99);
@@ -1753,7 +1764,7 @@ class f001{
             $pdf->SetY(190);    
             $pdf->SetX(159);
             if($resultLindDoc["nivelesConst"]=="NO APLICA"){
-                $pdf->cell(30,6,'',1,0,'C');
+                $pdf->cell(30,6,'NO APLICA',1,0,'C');
             }else{
                 $pdf->cell(30,6,''.$resultLindDoc["nivelesConst"].'',1,0,'C');
             }
@@ -1765,7 +1776,7 @@ class f001{
             if($resultLindDoc["areaConst"]=="NO APLICA"){
                 $pdf->cell(36,6,'',1,0,'C');
             }else{
-                if($resultLindDoc["uniAreaC"]=="NA"){
+                if($resultLindDoc["uniAreaC"]=="N/A"){
                     $pdf->cell(36,6,''.$resultLindDoc["areaConst"].'',1,0,'C');
                 }else{
                     $pdf->cell(36,6,''.$resultLindDoc["areaConst"].' '.$resultLindDoc["uniAreaC"].'',1,0,'C');
@@ -1951,9 +1962,9 @@ class f001{
             $pdf->SetY(231);    
             $pdf->SetX(59);
             if($resultLindGen["areaTotal"]=="NO APLICA"){
-                $pdf->cell(40,6,'',1,0,'C');
+                $pdf->cell(40,6,'NO APLICA',1,0,'C');
             }else{
-                if($resultLindGen["uniAreaT"]=="NA"){
+                if($resultLindGen["uniAreaT"]=="N/A"){
                     $pdf->cell(40,6,''.$resultLindGen["areaTotal"].'',1,0,'C');
                 }else{
                     $pdf->cell(40,6,''.$resultLindGen["areaTotal"].' '.$resultLindGen["uniAreaT"].'',1,0,'C');
@@ -1975,9 +1986,9 @@ class f001{
             $pdf->SetY(231);    
             $pdf->SetX(239);
             if($resultLindGen["areaConst"]=="NO APLICA"){
-                $pdf->cell(36,6,'',1,0,'C');
+                $pdf->cell(36,6,'NO APICA',1,0,'C');
             }else{
-                if($resultLindGen["uniAreaC"]=="NA"){
+                if($resultLindGen["uniAreaC"]=="N/A"){
                     $pdf->cell(36,6,''.$resultLindGen["areaConst"].'',1,0,'C');
                 }else{
                     $pdf->cell(36,6,''.$resultLindGen["areaConst"].' '.$resultLindGen["uniAreaC"].'',1,0,'C');
@@ -1989,7 +2000,7 @@ class f001{
             $pdf->cell(60,6,utf8_decode('Dirección del Inmueble'),1,0,'C');
             $pdf->SetY(237);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$resultInmueDe["direccion"].'',1,0,'C');
+            $pdf->cell(0,6,''.utf8_decode($resultInmueDe["direccion"]).'',1,0,'C');
             $pdf->SetY(243);    
             $pdf->SetX(19);
             $pdf->cell(60,6,utf8_decode('Régimen de la Propiedad'),1,0,'C');
@@ -2627,9 +2638,9 @@ class f003{
         $pdf->SetMargins(20,0,22);
         $pdf->AliasNbPages();
         $pdf->AddPage();
-        session_start();
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
+        session_start();
         //BUSQUEDA DE USUARIO
             $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
@@ -3405,7 +3416,7 @@ class f003{
             $pdf->cell(60,6,utf8_decode('Dirección del Inmueble'),1,0,'C');
             $pdf->SetY(237);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$resultInmueDe["direccion"].'',1,0,'C');
+            $pdf->cell(0,6,''.utf8_decode($resultInmueDe["direccion"]).'',1,0,'C');
             $pdf->SetY(243);    
             $pdf->SetX(19);
             $pdf->cell(60,6,utf8_decode('Régimen de la Propiedad'),1,0,'C');
@@ -4039,9 +4050,9 @@ class f004{
     var $numFact= "";
     var $operacion= "";
     function imprimir(){
-        session_start();
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
+        session_start();
         //BUSQUEDA DE USUARIO
             $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
@@ -4101,7 +4112,6 @@ class f004{
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
             $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_expedi)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$busExpedienteRes["id"].")";
-            echo $constansSql;
             $link->query($constansSql);
             $idConstancias = $link->insert_id;
         // Creación del objeto de la clase heredada
@@ -4533,7 +4543,20 @@ class f004{
             $pdf->cell(40,6,'Area de Terreno',1,0,'C');
             $pdf->SetY(200);    
             $pdf->SetX(59);
-            $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].' '.$resultLindDoc["uniAreaT"].'',1,0,'C');
+            if($resultLindDoc["uniAreaT"]=="N/A"){
+                if($resultLindDoc["areaTotal"]=="NO APLICA"){
+                    $pdf->cell(40,6,'NO APLICA',1,0,'C');
+                }else{
+                    $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].'',1,0,'C');
+                }
+            }else{
+                if($resultLindDoc["areaTotal"]=="NO APLICA"){
+                    $pdf->cell(40,6,'NO APLICA',1,0,'C');
+                }else{
+                    $pdf->cell(40,6,''.$resultLindDoc["areaTotal"].' '.$resultLindDoc["uniAreaT"].'',1,0,'C');
+                }
+            }
+            
             $pdf->SetY(200);    
             $pdf->SetX(99);
             $pdf->cell(60,6,utf8_decode('Niveles de Construcción'),1,0,'C');
@@ -4545,13 +4568,26 @@ class f004{
             $pdf->cell(50,6,utf8_decode('Area de Construcción'),1,0,'C');
             $pdf->SetY(200);    
             $pdf->SetX(239);
-            $pdf->cell(36,6,''.$resultLindDoc["areaConst"].' '.$resultLindDoc["uniAreaC"].'',1,0,'C');
+            if($resultLindDoc["uniAreaC"]=="N/A"){
+                if($resultLindDoc["areaTotal"]=="NO APLICA"){
+                    $pdf->cell(40,6,'NO APLICA',1,0,'C');
+                }else{
+                    $pdf->cell(36,6,''.$resultLindDoc["areaConst"].'',1,0,'C');
+                }
+            }else{
+                if($resultLindDoc["areaTotal"]=="NO APLICA"){
+                    $pdf->cell(40,6,'NO APLICA',1,0,'C');
+                }else{
+                    $pdf->cell(36,6,''.$resultLindDoc["areaConst"].' '.$resultLindDoc["uniAreaC"].'',1,0,'C');
+                }
+                
+            }
             $pdf->SetY(206);    
             $pdf->SetX(19);
             $pdf->cell(60,6,utf8_decode('Dirección del Inmueble'),1,0,'L');
             $pdf->SetY(206);    
             $pdf->SetX(79);
-            $pdf->cell(0,6,''.$resultInmueDe["direccion"].'',1,0,'C');
+            $pdf->cell(0,6,''.utf8_decode($resultInmueDe["direccion"]).'',1,0,'C');
         //SERVICIOS 1
             $pdf->SetY(212);    
             $pdf->SetX(19);
@@ -5179,9 +5215,10 @@ class fMulta{
 
     function imprimir(){
     
-        session_start();
+        
         $link= new mysqli("127.0.0.1", "root","","siscast") 
         or die(mysqli_error());
+        session_start();
         //BUSQUEDA DE USUARIO
             // $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";
             // $resultUser= $link->query($userSql);
@@ -5707,6 +5744,6 @@ class fMulta{
         
     }
 }
-// $F001 = new f001;
+// $F001 = new f002;
 // $F001->imprimir();
 ?>
