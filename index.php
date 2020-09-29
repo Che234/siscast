@@ -25,9 +25,9 @@
         if(!isset($_SESSION["nivel"])){
             $_SESSION["nivel"]="";
         }
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
-
+        include('./src/server/conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
     $busqueda="SELECT * from usuarios where nick='".$_SESSION["usuario"]."' and pass='".$_SESSION["pass"]."' ";
     $rest = $link->query($busqueda);
     $filas = $rest->num_rows;
@@ -56,6 +56,7 @@
     };
     ?>
 <script src="./src/lib/logica/ajax.js"></script>
+<script src="./src/lib/logica/reportes.js"></script>
 <script src="./src/lib/logica/expresiones.js"></script>
 <script src="./src/lib/logica/renovacion.js"></script>
 <script src="./src/lib/logica/login.js"></script>

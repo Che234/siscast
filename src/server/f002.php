@@ -59,8 +59,9 @@ class f002{
     var $numFact= "";
     var $operacion= "";
     function imprimir(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //BUSQUEDA DE USUARIO
             $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -1223,8 +1224,9 @@ class f001{
         $pdf->SetMargins(20,0,22);
         $pdf->AliasNbPages();
         $pdf->AddPage();
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //BUSQUEDA DE USUARIO
             $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -1465,7 +1467,22 @@ class f001{
             $pdf->cell(0,6,''.$resultPropieDe["cedula"].'',1,0,'L');
             $pdf->SetY(109);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'Rif',1,0,'L');
+            $divTelfSec = explode($resultPropieDe["telef"],'-');
+            $divRifSec = explode($resultPropieDe["rif"],'-');
+            if($divRifSec[0]=="N/A"){
+                if($divRifSec[1]=="NO APLICA"){
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }else{
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }
+            }else{
+                if($divRifSec[1]!="NO APLICA"){
+                    $pdf->cell(0,6,''.$resultPropieDe["rif"].'',1,0,'L');
+                }else{
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }
+                $pdf->cell(0,6,''.$resultPropieDe["rif"].'',1,0,'L');
+            }
             $pdf->SetY(109);
             $pdf->SetX(69);
             $pdf->cell(0,6,''.$resultPropieDe["rif"].'',1,0,'L');
@@ -1480,7 +1497,20 @@ class f001{
             $pdf->cell(50,6,utf8_decode('No de Teléfono'),1,0,'L');
             $pdf->SetY(121);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
+            if($divTelfSec[0]=="N/A"){
+                if($divTelfSec[1]=="NO APLICA"){
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }else{
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }
+            }else{
+                if($divTelfSec[1]!="NO APLICA"){
+                    $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
+                }else{
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }
+                $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
+            }
             $pdf->SetY(127);
             $pdf->SetX(19);
             $pdf->cell(50,6,utf8_decode('Dirección Del Propietario'),1,0,'L');
@@ -2638,8 +2668,9 @@ class f003{
         $pdf->SetMargins(20,0,22);
         $pdf->AliasNbPages();
         $pdf->AddPage();
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //BUSQUEDA DE USUARIO
             $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -2880,9 +2911,20 @@ class f003{
             $pdf->cell(50,6,'Rif',1,0,'L');
             $pdf->SetY(109);
             $pdf->SetX(69);
-            if($resultPropieDe["rif"]=="NA"){
-                $pdf->cell(0,6,'',1,0,'L');
+            $divTelfSec = explode($resultPropieDe["telef"],'-');
+            $divRifSec = explode($resultPropieDe["rif"],'-');
+            if($divRifSec[0]=="N/A"){
+                if($divRifSec[1]=="NO APLICA"){
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }else{
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }
             }else{
+                if($divRifSec[1]!="NO APLICA"){
+                    $pdf->cell(0,6,''.$resultPropieDe["rif"].'',1,0,'L');
+                }else{
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }
                 $pdf->cell(0,6,''.$resultPropieDe["rif"].'',1,0,'L');
             }
             $pdf->SetY(115);
@@ -2896,7 +2938,20 @@ class f003{
             $pdf->cell(50,6,utf8_decode('No de Teléfono'),1,0,'L');
             $pdf->SetY(121);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
+            if($divTelfSec[0]=="N/A"){
+                if($divTelfSec[1]=="NO APLICA"){
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }else{
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }
+            }else{
+                if($divTelfSec[1]!="NO APLICA"){
+                    $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
+                }else{
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }
+                $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
+            }
             $pdf->SetY(127);
             $pdf->SetX(19);
             $pdf->cell(50,6,utf8_decode('Dirección Del Propietario'),1,0,'L');
@@ -4050,8 +4105,9 @@ class f004{
     var $numFact= "";
     var $operacion= "";
     function imprimir(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //BUSQUEDA DE USUARIO
             $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -4289,7 +4345,21 @@ class f004{
             $pdf->cell(0,6,''.$resultPropieDe["cedula"].'',1,0,'L');
             $pdf->SetY(118);
             $pdf->SetX(19);
-            $pdf->cell(50,6,'Rif',1,0,'L');
+            $divRifSec = explode($resultPropieDe["rif"],'-');
+            if($divRifSec[0]=="N/A"){
+                if($divRifSec[1]=="NO APLICA"){
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }else{
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }
+            }else{
+                if($divRifSec[1]!="NO APLICA"){
+                    $pdf->cell(0,6,''.$resultPropieDe["rif"].'',1,0,'L');
+                }else{
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }
+                $pdf->cell(0,6,''.$resultPropieDe["rif"].'',1,0,'L');
+            }
             $pdf->SetY(118);
             $pdf->SetX(69);
             $pdf->cell(0,6,''.$resultPropieDe["rif"].'',1,0,'L');
@@ -4306,7 +4376,20 @@ class f004{
             $pdf->cell(50,6,utf8_decode('No de Teléfono '),1,0,'L');
             $pdf->SetY(130);
             $pdf->SetX(69);
-            $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
+            if($divTelfSec[0]=="N/A"){
+                if($divTelfSec[1]=="NO APLICA"){
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }else{
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }
+            }else{
+                if($divTelfSec[1]!="NO APLICA"){
+                    $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
+                }else{
+                    $pdf->cell(0,6,'NO APLICA',1,0,'L');
+                }
+                $pdf->cell(0,6,''.$resultPropieDe["telef"].'',1,0,'L');
+            }
             $pdf->SetY(136);
             $pdf->SetX(19);
             $pdf->cell(50,6,utf8_decode('Dirección Del Propietario'),1,0,'L');
@@ -5214,10 +5297,9 @@ class fMulta{
     var $operacion= "";
 
     function imprimir(){
-    
-        
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //BUSQUEDA DE USUARIO
             // $userSql = "SELECT id,nick,pass,nombre,apellido,cedula,direccion,telef,correo FROM usuarios where nick='".$_SESSION["usuario"]."'";

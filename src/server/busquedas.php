@@ -164,8 +164,9 @@ class busquedas{
     }
 
     function mostBusqueda(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         
         if($this->tipoBuscar=="Expediente"){
             //BUSQUEDA EXPEDIENTE
@@ -575,8 +576,9 @@ class busquedas{
     }
     //INMUEBLE LISTO
         function modifInmueble(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             //BUSQUEDA DEL EXPEDIENTE
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
@@ -645,15 +647,17 @@ class busquedas{
             ';
         }
         function actInmue(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             $inmueSql = "UPDATE inmueble SET direccion='".$this->direcInmue."',parroquia='".$this->parrInmue."',sector='".$this->secInmue."',ambito='".$this->ambInmue."' WHERE id='".$this->idInmueble."' ";
             $link->query($inmueSql);
             echo 'ACTUALIZADO CON EXITO';
         }
         function eliminarBus(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             //BUSQUEDA DE EXPEDIENTE
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
@@ -715,8 +719,9 @@ class busquedas{
         }
     //CARACTERISTICAS DEL INMUEBLE LISTO
         function modifcarcTerreno(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             //BUSQUEDA DEL EXPEDIENTE
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
@@ -802,16 +807,18 @@ class busquedas{
             ';
         }
         function actCaracInmue(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+           include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             $inmueSql = "UPDATE carc_inmueble SET topografia='".$this->topoConst."',forma='".$this->formaConst."',uso='".$this->usoConst."',tenencia='".$this->tenenConst."' WHERE id='".$this->idCarac."' ";
             $link->query($inmueSql);
             echo 'ACTUALIZADO CON EXITO';
         }
     //PROPIETARIO LISTO
         function modifPropietario(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             //BUSCAR EXPEDIENTE
                 $busExped = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExped = $link->query($busExped);
@@ -900,16 +907,18 @@ class busquedas{
                 </div>';
         }
         function actProp(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             $propSql = "UPDATE propietarios SET cedula='".$this->cedula."',rif='".$this->rif."',nombre='".$this->nomProp."',apellido='".$this->apelProp."',telef='".$this->telefono."',dir_hab='".$this->direcProp."',telef_hab='".$this->telefono2."' WHERE cedula='".$this->cedula2."' ";
             $link->query($propSql);
             echo 'ACTUALIZADO CON EXITO';
         }
     //CARACTERISTICAS DE LA CONSTRUCCION
         function modifcarcConstruccion(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             //BUSQUEDA DEL EXPEDIENTE
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
@@ -1119,16 +1128,18 @@ class busquedas{
             </table>';
         }
         function actConst(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             $inmueSql = "UPDATE caracteristicas_construccion SET destino='".$this->destConst."',estructura='".$this->estConst."',paredes_tipo='".$this->pareTipoInmue."',paredes_acabado='".$this->pareAcaInmue."',pintura='".$this->pintConst."',techo='".$this->techoConst."',pisos='".$this->pisosConst."',ventanas='".$this->ventConst."',insta_electricas='".$this->instElect."',observ='".$this->obsConst."', Regimen='".$this->regInmue."' WHERE id='".$this->idCaracConst."' ";
             $link->query($inmueSql);
             echo 'ACTUALIZADO CON EXITO';
         }
     //DATOS DE PROTOCOLIZACION
         function modificarProtocol(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             //BUSQUEDA DEL EXPEDIENTE
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
@@ -1235,16 +1246,18 @@ class busquedas{
             </div>';
         }
         function actProtocol(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             $inmueSql = "UPDATE datos_protocolizacion SET documento='".$this->docDebConst."',direccion='".$this->direcProtConst."',numero='".$this->numProtConst."',tomo='".$this->tomoProtConst."',folio='".$this->folioProtConst."',protocolo='".$this->protoConst."',trimestre='".$this->trimProtConst."',fecha='".$this->dateProtConst."',valor_inmueble='".$this->valorProtConst."' WHERE id='".$this->idProto."' ";
             $link->query($inmueSql);
             echo 'ACTUALIZADO CON EXITO';
         }
     //LINDEROS INSPECCION
         function modifLinderos(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             //BUSQUEDA DEL EXPEDIENTE
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
@@ -1652,8 +1665,9 @@ class busquedas{
                 
         }
         function guarActLind(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             if($this->puntNorte=="Norte"){
                 $Norte = $this->nortGen;
                 $norEste = "nada";
@@ -1699,8 +1713,9 @@ class busquedas{
         }
     //LINDEROS POSIBLE VENTA
         function actPosVenta(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+           include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             $lindPosVentaSql = "SELECT * FROM linderos_posible_venta where id=".$this->idlindPosVenta."";
             $resPosVenta = $link->query($lindPosVentaSql);
             $posVentaRes= $resPosVenta->fetch_assoc();
@@ -1747,8 +1762,9 @@ class busquedas{
         }
     //LINDEROS SEGUN DOCUMENTO
         function actSecDoc(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             $lindDocumentoSql = "SELECT * FROM linderos_documento where id=".$this->idlindDocumento."";
             $resDocumento = $link->query($lindDocumentoSql);
             $documentoRes= $resDocumento->fetch_assoc();
@@ -1794,8 +1810,9 @@ class busquedas{
         }
     //SERVICIOS
         function modifServi(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             //BUSQUEDA DEL EXPEDIENTE
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
@@ -1996,16 +2013,18 @@ class busquedas{
             ';
         }
         function guarActServ(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             $lindGenSql = "UPDATE servicios_inmue SET acued='".$this->Acue."',acuedRural='".$this->AcueRural."',aguasSubter='".$this->AguasSub."',aguasServ='".$this->AguasServ."',pavimentoFlex='".$this->PavFlex."',pavimentoRig='".$this->PavRig."',viaEngran='".$this->viaEngran."',acera='".$this->acera."',alumbradoPub='".$this->AlumPublico."',aseo='".$this->aseo."',transportePublic='".$this->transPublic."',pozoSept='".$this->pozoSept."',electriResi='".$this->ElectResidencial."',electriIndus='".$this->ElectriIndust."',lineaTelef='".$this->linTelf."' WHERE id='".$this->idServ."' ";
             $link->query($lindGenSql);
             echo 'ACTUALIZADO CON EXITO';
         }
     //FACTURA
         function modifFact(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             //BUSQUEDA DEL EXPEDIENTE
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
@@ -2051,8 +2070,9 @@ class busquedas{
                 }
         }
         function guarActFact(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             $actFactSql = "UPDATE factura SET monto='".$this->montoFact."',n_factura=".$this->numFact.",fecha='".$this->fechFact."' where n_factura=".$this->numFactHid." ";
             $link->query($actFactSql);
             echo '<b>ACTUALIZADO CON EXITO</b>';
@@ -2091,8 +2111,9 @@ class busquedas{
             <input type="hidden" value="'.$this->expBuscar.'" id="expBuscar" />';
         }
         function pagarInmue(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            $include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             
             //INSERT FACTURA
                 $factSql = "INSERT INTO factura(monto,n_factura,fecha)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."') ";
@@ -2112,8 +2133,9 @@ class busquedas{
             echo'PAGO REALIZADO CON EXITO';
         }
         function verPagos(){
-            $link= new mysqli("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             //BUSQUEDA DEL EXPEDIENTE
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);

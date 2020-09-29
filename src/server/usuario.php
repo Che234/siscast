@@ -94,8 +94,9 @@ class usuario{
         ';
     }
     function guardUsu(){
-        $link=mysqli_connect("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $busUsuSql = "SELECT * FROM usuarios  ";
         $resBusUsu = $link->query($busUsuSql);
         $busUsuRes = $resBusUsu->fetch_assoc();
@@ -134,8 +135,9 @@ class usuario{
     }
     function encUsu(){
         //BUSQUEDA DE USUARIO
-        $link=mysqli_connect("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
 
         $usuSql = "SELECT * FROM usuarios where cedula='".$this->cedUsu."'";
         $resUsu= $link->query($usuSql);
@@ -213,15 +215,17 @@ class usuario{
         ';
     }
     function actUsu(){
-        $link=mysqli_connect("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $modUsuSql = "UPDATE usuarios SET nick='".$this->user."', pass='".$this->contrasena."', nombre='".$this->nombre."', apellido='".$this->apellido."', cedula='".$this->cedu."', direccion='".$this->direc."', telef='".$this->telefono."', correo='".$this->correo."', nivel='".$this->nivUsu."' where id=".$this->idUsu." ";
         $link->query($modUsuSql);
         echo'USUARIO MODIFICADO CON EXITO';
     }
     function mostList(){
-            $link=mysqli_connect("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
             //BUSQUEDAS DE USUARIOS PARA FOR
                 $listSql = "SELECT COUNT(*) FROM usuarios";
                 $resList = $link->query($listSql);
@@ -297,8 +301,9 @@ class usuario{
             echo'</table>';
     }
     function eliminarUsu(){
-        $link=mysqli_connect("127.0.0.1", "root","","siscast") 
-            or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         //ELIMINAR USUARIO
             $elimSql = "DELETE FROM usuarios where cedula='".$this->cedu."'";
             $link->query($elimSql);

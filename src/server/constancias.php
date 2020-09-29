@@ -174,8 +174,9 @@ class constancias{
     }
     //MENU NUEVO INGRESO
     function secNuvIns(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         $busUser = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
         $resUser = $link->query($busUser);
@@ -485,8 +486,9 @@ class constancias{
     }
     //PROPIETARIOS
     function fPropietario(){//VERIFICADO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $busPropSql ="SELECT * FROM temp_propietarios where id='".$this->idProp."'";
         $resProp = $link->query($busPropSql);
         $propRes = $resProp->fetch_array();
@@ -582,8 +584,9 @@ class constancias{
         <div id="campGeneral2"></div>';
     }
     function guardProp(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
         $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -608,8 +611,9 @@ class constancias{
     }
     //INMUEBLE
     function fInmueble(){//VERIFICADO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $busSql = "SELECT * FROM temp_inmueble where id=".$this->idInmue."";
         $resBusInmue = $link->query($busSql);
         $busInmueRes = $resBusInmue->fetch_array();
@@ -666,8 +670,9 @@ class constancias{
         ';
     }
     function guarInmue(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
         $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -691,8 +696,9 @@ class constancias{
     }
     //CARACTERISTICAS DEL TERRENO
     function fCarTerreno(){ //VERIFICADO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $busCaracTer = "SELECT * FROM temp_carainmue where id=".$this->idCaraInmue."";
         $resCaraTer = $link->query($busCaracTer);
         $caraTerRes = $resCaraTer->fetch_assoc();
@@ -767,8 +773,9 @@ class constancias{
         </div>';
     }
     function guarCarTerr(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
             $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -792,8 +799,9 @@ class constancias{
     }
     //CARACTERISTICAS DE LA CONSTRUCCION
     function fcaracConst(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $constSql = "SELECT * FROM temp_caraconst where id=".$this->idCaraConst."";
         $resConst = $link->query($constSql);
         $constRes = $resConst->fetch_array();
@@ -981,8 +989,9 @@ class constancias{
         ';//VERIFICADO
     }
     function guarCaracConst(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
             $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -1005,8 +1014,9 @@ class constancias{
         }//LISTO//LISTO
     //PROTOCOLIZACION DEL INMUEBLE
     function fprotInmue(){//VERIFICADO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         
                 $protoSql = "SELECT * FROM temp_datos_protocolizacion where id=".$this->idProto."";
                 $resProto = $link->query($protoSql);
@@ -1102,8 +1112,9 @@ class constancias{
         </div>';
     }
     function guarProtInmue(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
             $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -1127,8 +1138,9 @@ class constancias{
     }
     //ESTADO DE CONSERVACION
     function fConserv(){//VERIFICADO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $conservSql = "SELECT * FROM temp_estado_conservacion where id=".$this->idEstConserv."";
         $resConserv = $link->query($conservSql);
         $conservRes = $resConserv->fetch_array();
@@ -1169,8 +1181,9 @@ class constancias{
         </div'; 
     }
     function guarConserv(){//LISTO//LISTO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
             $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -1194,8 +1207,9 @@ class constancias{
     }
     //PIEZAS SANITARIAS 
     function fPiezSant(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $piezSaSQL ="SELECT * FROM temp_piezas_sanitarias where id =".$this->idPiezSant."";
         $resPiezSan = $link->query($piezSaSQL);
         $piezSanRes = $resPiezSan->fetch_array();
@@ -1298,8 +1312,9 @@ class constancias{
         ';//VERIFICADO
     }
     function guarPiezSant(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
             $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -1323,8 +1338,9 @@ class constancias{
     }
     //PUERTAS
     function fpuertas(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $puertSQL ="SELECT * FROM temp_puertas where id=".$this->idPuertas."";
         $resPuertas = $link->query($puertSQL);
         $puertasRes = $resPuertas->fetch_array();
@@ -1380,8 +1396,9 @@ class constancias{
         ';//VERIFICADO
     }
     function guarPuertas(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
             $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -1405,8 +1422,9 @@ class constancias{
     }
     //AMBIENTES
     function fambien(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $ambienSql = "SELECT * FROM temp_ambientes where id=".$this->idAmbientes."";
         $resAmbiente = $link->query($ambienSql);
         $ambienteRes = $resAmbiente->fetch_array();
@@ -1466,8 +1484,9 @@ class constancias{
         ';//VERIFICADO//VERIFICADO
     }
     function guarAmbien(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
             $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -1491,8 +1510,9 @@ class constancias{
     }
     //COMPLEMENTOS
     function fConple(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $compleSQL = "SELECT * FROM temp_complementos where id=".$this->idComple."";
         $resComple = $link->query($compleSQL);
         $compleRes = $resComple->fetch_array();
@@ -1557,8 +1577,9 @@ class constancias{
         ';//VERIFICADO
     }
     function guarComple(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
             $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -1582,8 +1603,9 @@ class constancias{
     }
     //SERVICIOS
     function fServicios(){//VERIFICADO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $servSql = "SELECT * FROM temp_servicios_inmue where id=".$this->idServInmue."";
         $resServ = $link->query($servSql);
         $servRes = $resServ->fetch_array();
@@ -1775,8 +1797,9 @@ class constancias{
         </div>';
     }
     function guarServicios(){//LISTO//LISTO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
             $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -1800,8 +1823,9 @@ class constancias{
     }
     //EXPEDIENTE
     function fExpedient(){//VERIFICADO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $expSQL ="SELECT * FROM temp_expediente where id=".$this->idExp."";
         $resExp = $link->query($expSQL);
         $expRes = $resExp->fetch_array();
@@ -1844,8 +1868,9 @@ class constancias{
         ';
     }
     function guarExpe(){//LISTO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
             $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -1867,8 +1892,9 @@ class constancias{
             }
     }
     function busExpediente(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
 
         $expBusSql= "SELECT * FROM expediente where n_expediente=".$this->nuExp." ";
         $resExpBus = $link->query($expBusSql);
@@ -1884,8 +1910,9 @@ class constancias{
     } 
     //FACTURA
     function fFactura(){//VERIFICADO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $factSQL = "SELECT * FROM temp_factura where id=".$this->idFactura."";
         $resFact = $link->query($factSQL);
         $factRes = $resFact->fetch_array();
@@ -1932,8 +1959,9 @@ class constancias{
         ';
     }
     function guarFact(){//LISTO//LISTO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIOS
             $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -1954,119 +1982,7 @@ class constancias{
                 $link->query($upFactSql);
             }
     }
-    // function fCarac(){
-
-    //     $parte1 = array(
-    //         0 => $this->cedFul,
-    //         1 => $this->rifConst,
-    //         2 => $this->nomProp,
-    //         3 => $this->apelProp,
-    //         4 => $this->codTelf,
-    //         5 => $this->numText,
-    //         6 => $this->direcProp,
-    //         7 => $this->codTelf2,
-    //         8 => $this->numTelf2,
-    //         9 => $this->parrInmue,
-    //         10 => $this->secInmue,
-    //         11 => $this->direcInmue,
-    //         12 => $this->topoConst,
-    //         13 => $this->formaConst,
-    //         14 => $this->usoConst,
-    //         15 => $this->tenenConst,
-    //         16 => $this->ambInmue
-    //     );
-    //     echo'
-        
-        
-    //     <div class="btnSig1">
-    //         <input type="button" value="Siguiente" onclick="btnfLind()" class=" botones btn btn-primary" />
-    //     </div>
-    //     <input type="hidden" id="parte1" value="'.$parte1[0].'|'.$parte1[1].'|'.$parte1[2].'|'.$parte1[3].'|'.$parte1[4].'|'.$parte1[5].'|'.$parte1[6].'|'.$parte1[7].'|'.$parte1[8].'|'.$parte1[9].'|'.$parte1[10].'|'.$parte1[11].'|'.$parte1[12].'|'.$parte1[13].'|'.$parte1[14].'|'.$parte1[15].'|'.$parte1[16].'">
-    //     ';
-    //     }
-    // function fProtConst(){
-    //     $parte2= array(
-    //         0 => $this->destConst,
-    //         1 => $this->estConst,
-    //         2 => $this->pareTipoInmue,
-    //         3 => $this->pareAcaInmue,
-    //         4 => $this->pintConst,
-    //         5 => $this->techoConst,
-    //         6 => $this->pisosConst,
-    //         7 => $this->piezConst,
-    //         8 => $this->ventConst,
-    //         9 => $this->puertConst,
-    //         10 => $this->instElect,
-    //         11 => $this->ambConst,
-    //         12 => $this->compConst,
-    //         13 => $this->estConserv,
-    //         14 => $this->obsConst,
-    //         15 => $this->docDebConst,
-    //         16 => $this->direcProtConst,
-    //         17 => $this->numProtConst,
-    //         18 => $this->tomoProtConst,
-    //         19 => $this->folioProtConst,
-    //         20 => $this->protoConst,
-    //         21 => $this->trimProtConst,
-    //         22 => $this->dateProtConst,
-    //         23 => $this->valorProtConst,
-    //         24 => $this->regInmue
-    //     );
-    //     echo'
-    //     <table border="1px" class="taConst">
-    //         <tr>
-    //             <td colspan="2" class="tiConst">
-    //                 <p class="h1">Linderos</p>
-    //             </td>
-    //         </tr>
-    //         <tr>
-    //             <td>
-    //                 <p class="negritas">Inspección:</p>
-    //                 <select onchange="actGeneral()" id="lindGeneral">
-    //                     <option value="0"></option>
-    //                     <option value="si">Si</option>
-    //                     <option value="no">No</option>
-    //                 </select>
-    //             </td>
-    //             <td>
-    //                 <div id="lindActGen"></div>
-    //             </td>
-    //         </tr>
-    //         <tr>
-    //             <td>
-    //                 <p class="negritas">Posible Venta:</p>
-    //                 <select onchange="actPosVenta()" id="posVenta">
-    //                     <option value="0"></option>
-    //                     <option value="si">Si</option>
-    //                     <option value="no">No</option>
-    //                 </select>
-    //             </td>
-    //             <td>
-    //                 <div id="lindPosVenta"></div>
-    //             </td>
-    //         </tr>
-    //         <tr>
-    //             <td>
-    //                 <p class="negritas">Segun Documento:</p>
-    //                 <select onchange="actSecDoc()" id="secDoc">
-    //                     <option value="0"></option>
-    //                     <option value="si">Si</option>
-    //                     <option value="no">No</option>
-    //                 </select>
-    //             </td>
-    //             <td>
-    //                 <div id="lindSecDoc"></div>
-    //             </td>
-    //         </tr>
-    //     </table>
-        
-    //     <div id="campOculto"></div>
-    //         <input type="hidden" id="parte2" value="'.$parte2[0].'|'.$parte2[1].'|'.$parte2[2].'|'.$parte2[3].'|'.$parte2[4].'|'.$parte2[5].'|'.$parte2[6].'|'.$parte2[7].'|'.$parte2[8].'|'.$parte2[9].'|'.$parte2[10].'|'.$parte2[11].'|'.$parte2[12].'|'.$parte2[13].'|'.$parte2[14].'|'.$parte2[15].'|'.$parte2[16].'|'.$parte2[17].'|'.$parte2[18].'|'.$parte2[19].'|'.$parte2[20].'|'.$parte2[21].'|'.$parte2[22].'|'.$parte2[23].'|'.$parte2[24].'" />
-    //         <input type="hidden" id="parte1" value="'.$this->parte1.'"/>
-    //     <div class="btnSig1">
-    //         <input type="button" value="Guardar" onclick="btnGuardConst()" class=" botones btn btn-primary" />
-    //     </div>';
-    // }
+    
     function cambSect(){
         if($this->parrInmue=="Capital"){
             echo'
@@ -2186,8 +2102,9 @@ class constancias{
     }
     //LINDERO SEGUN INSPECCIÓN
     function actGeneral(){//VERIFICADO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $lindGenSql = "SELECT * FROM temp_linderos_general where id=".$this->idLindGen."";
         $reslindGen = $link->query($lindGenSql);
         $lindGenRes = $reslindGen->fetch_array();
@@ -2393,8 +2310,9 @@ class constancias{
         ';
     }
     function guarGeneral(){//LISTO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         if($this->puntNorte=="Norte"){
             $Norte = $this->nortGen;
             $norEste = "nada";
@@ -2445,8 +2363,9 @@ class constancias{
     }
     //LINDEROS POSIBLE VENTA
     function actPosVenta(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $lindPosSql = "SELECT * FROM temp_linderos_posible_venta where id=".$this->idPosVenta."";
         $resLindPos = $link->query($lindPosSql);
         $lindPosRes = $resLindPos->fetch_array();
@@ -2653,8 +2572,9 @@ class constancias{
         ';//VERIFCADO
     }
     function guarPosVenta(){//LISTO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         if($this->puntNorte2=="Norte"){
             $Norte2 = $this->nortPosVenta;
             $norEste2 = "nada";
@@ -2705,8 +2625,9 @@ class constancias{
     }
     //LINDEROS SEGUN DOCUMENTO
     function SecDoc(){//VERIFICADO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+       include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $secDocSql = "SELECT * FROM temp_linderos_documento where id=".$this->idLindDoc."";
         $resSecDoc = $link->query($secDocSql);
         $secDocRes = $resSecDoc->fetch_array();
@@ -2911,8 +2832,9 @@ class constancias{
         ';
     }
     function guarSecDoc(){//LISTO
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         if($this->puntNorte3=="Norte"){
             $Norte3 = $this->nortSecDoc;
             $norEste3 = "nada";
@@ -2963,8 +2885,9 @@ class constancias{
     }
     //VERIFICAR F003
     function veriF3(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIO
             $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -3339,8 +3262,9 @@ class constancias{
         }
     }
     function guardarRepConst3(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIO
             $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -3543,8 +3467,9 @@ class constancias{
     }
     //VERIFICAR F002
     function veriF2(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIO
             $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -3888,8 +3813,9 @@ class constancias{
         
     }
     function guardarRepConst(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIO
             $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -4076,8 +4002,9 @@ class constancias{
     }
     //VERIFICAR F001
     function veriF1(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIO
             $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -4449,8 +4376,9 @@ class constancias{
         }
     }
     function guardarRepConst1(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIO
             $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -4645,8 +4573,9 @@ class constancias{
     }
     //VERIFICAR F004 - EMPADRONAMIENTO
     function veriFEmpadro(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIO
             $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -5003,8 +4932,9 @@ class constancias{
         }
     }
     function guardarRepEmpa(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIO
             $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -5190,8 +5120,9 @@ class constancias{
     }
     //ELIMINAR TEMPORALES
     function elimReg(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
         //USUARIO
             $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
@@ -5254,9 +5185,9 @@ class constancias{
                 $link->query($elimUserSQL);
     }
     function guardConst(){
-
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         session_start();
 
         //LISTA DE INSERT SQL
@@ -5492,8 +5423,9 @@ class constancias{
         //     }
     }
     function revUsuario(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         $usuarioSql = "SELECT * FROM propietarios where cedula='".$this->cedFul."'";
         $resUsuario = $link->query($usuarioSql);
         $usuarioRes = $resUsuario->fetch_assoc();
@@ -5518,8 +5450,9 @@ class constancias{
         </div>';
     }
     function veriImpr(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         //BUSQUEDA DE EXPEDIENTE
             $expSql = "SELECT * FROM expediente where n_expediente=".$this->campBuscar."";
             $resExp = $link->query($expSql);
@@ -5544,8 +5477,9 @@ class constancias{
         }
     }
     function busFactura(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
 
         $veriFactSql = "SELECT * FROM factura where n_factura='".$this->numFact."'";
         $resVeriFact = $link->query($veriFactSql);

@@ -28,8 +28,9 @@ class login{
         </div> ';
     }
     function fEntrar(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
 
         $sql= "SELECT * from usuarios where nick='".$this->usuario."' and pass='".$this->pass."' ";
         $respuesta = $link->query($sql);

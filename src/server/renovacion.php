@@ -8,8 +8,9 @@ class renovacion{
     }
 
     function busRenov(){
-        $link= new mysqli("127.0.0.1", "root","","siscast") 
-        or die(mysqli_error());
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
         //BUSCAR EXPEDIENTE
             $busSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
             $resBus = $link->query($busSql);
