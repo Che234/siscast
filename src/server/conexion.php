@@ -4,7 +4,7 @@
         var $user = "root";
         var $pass = "";
         var $bd = "siscast";
-        var $serv= "127.0.0.1";
+        var $serv= "localhost";
         var $prefijoBD="";
 
         function conectar(){

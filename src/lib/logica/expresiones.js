@@ -1,7 +1,7 @@
 var er_areas = /^[A-Z\a-z\À-ÿ\s+\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\,\-\:]{3,125}$/;
 var ex_cedula = /^[0-9\.\a-z\A-Z\s+\-\,\:]{6,125}$/;
 var ex_nac = /^[a-z\À-ÿ\A-z\\u00f1\\u00d1]{1,2}$/;
-var ex_datcort= /^[A-Z\À-ÿ\a-z\s+\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\,\:]{1,65}$/;
+var ex_datcort= /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,100}$/;
 var ex_Telefono = /^[0-9\a-z\A-Z\(\)]{2,7}$/;
 var ex_Telef= /^[0-9\a-z\A-Z\(\s+\)]{7}$/;
 var ex_rif = /^[0-9\.\a-z\A-Z\s+\-]{6,125}$/;
@@ -18,4 +18,4 @@ var ex_money = /^[0-9\.\,\a-z\A-Z]{1,15}$/
 var ex_num = /^[0-9\-\.\/]{1,20}$/
 var ex_date = /^[0-12]{4}[-]{1}[0-12]{2}[-]{1}[0-31]{2}$/
 var expediente = /^[0-9\.\,\-\:]{1,10}$/
-var niveles = /^[0-9\.\-\A-Z\,\a-z]{2,22}$/
+var niveles = /^[0-9\.\-\A-Z\,\a-z\A-Z]{2,22}$/

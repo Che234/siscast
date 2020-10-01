@@ -188,7 +188,7 @@ class busquedas{
                     $idInmue = $expEmpaRes["fk_inmueble"];
                 }else{
                     echo'
-                    <a href="http://localhost/SisCast/"><input type="button" value="Regresar" class="botones btn btn-primary"/></a>
+                    <a href="http://10.200.0.62:8080/SisCast/"><input type="button" value="Regresar" class="botones btn btn-primary"/></a>
                     <b>EXPEDIENTE NO EXISTE</b>';
                 }
             }
@@ -263,11 +263,7 @@ class busquedas{
                         $resVeriRenov = $link->query($veriRenov);
                         $veriRenovRes = $resVeriRenov->fetch_array();
                         $fechaRenov = explode("-",$veriRenovRes["fecha"]);
-                        if($fechaConst[0] == date("Y")){
-                            if($veriConstRes["tipo_operacion"] == "Nueva Inscripción"){
-                                echo'<input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst()"/>';
-                            }
-                        }
+                        echo'<input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst()"/>';
                             echo' 
                             <input type"button" value="Eliminar" onclick="btnElimInmue()" class="botones btn btn-primary" />
                             <input type="hidden" value="'.$expRes["n_expediente"].'" id="expBuscar" />

@@ -10,6 +10,7 @@ class renovacion{
         fechFact
         numFact
         operacion
+        anoExp
     }
 
     busRenov(){
@@ -49,8 +50,9 @@ class renovacion{
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     let nuExp = document.getElementById("nuExp").value
-                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="http://localhost/SisCast/assets/constancias/${nuExp}.pdf" type="application/pdf"></div>`;
-			     }
+                    let ano = document.getElementById("anoExp").value
+                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="localhost/SisCast/assets/constancias/${ano}/${nuExp}.pdf" type="application/pdf"></div>`;
+                 }
 	       	}
     }
     form2(){
@@ -68,8 +70,10 @@ class renovacion{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
-                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="http://localhost/SisCast/assets/constancias/${nuExp}.pdf" type="application/pdf"></div>`;
-			     }
+                    let nuExp = document.getElementById("nuExp").value
+                    let ano = document.getElementById("anoExp").value
+                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="./assets/constancias/${ano}/${nuExp}.pdf" type="application/pdf"></div>`;
+                 }
 	       	}
     }
     form3(){
@@ -87,9 +91,33 @@ class renovacion{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
-                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="http://localhost/SisCast/assets/constancias/${nuExp}.pdf" type="application/pdf"></div>`;
+                    let nuExp = document.getElementById("nuExp").value
+                    let ano = document.getElementById("anoExp").value
+                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="./assets/constancias/${ano}/${nuExp}.pdf" type="application/pdf"></div>`;
+
 			     }
 	       	}
+    }
+    empaExp(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recRenovacion.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`idInmueble=${this.idInmueble}&idProp=${this.idProp}&nuExp=${this.nuExp}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&numFact=${this.numFact}&operacion=${this.operacion}&accion=empaExp`); 
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                    let nuExp = document.getElementById("nuExp").value
+                    let ano = document.getElementById("anoExp").value
+                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="./assets/constancias/${ano}/${nuExp}.pdf" type="application/pdf"></div>`;
+                 }
+               }
     }
 }
 function btnRevConst(){
@@ -112,27 +140,40 @@ function veriRenov(){
         lindPosVenta = document.getElementById("lindPosventa").value
         lindGeneral = document.getElementById("lindGeneral").value
         lindSecDoc = document.getElementById("lindSecDoc").value
+        condicionExp = document.getElementById("condicionExp").value
+        renov.anoExp = document.getElementById("anoExp").value
+        if(condicionExp!="nada"){
+            renov.empaExp();
+        }
         if(lindGeneral=="nada"){
             if(lindPosVenta =="nada"){
                 if(lindSecDoc !="nada"){
-                    renov.form2()
+                    if(condicionExp=="nada"){
+                        renov.form2()
+                    }
                 }
             }
         }
         if(lindGeneral!="nada"){
             if(lindSecDoc!="nada"){
                 if(lindPosVenta=="nada"){
-                    renov.form1()
+                    if(condicionExp=="nada"){
+                        renov.form1()
+                    }
+                    
                 }
             }
         }
         if(lindGeneral=="nada"){
             if(lindSecDoc!="nada"){
                 if(lindPosVenta!="nada"){
-                    renov.form3()
+                    if(condicionExp=="nada"){
+                        renov.form3()
+                    }
                 }
             }
         }
+
     }
     if(proceso=="No"){
         alert("NO HA REALIZADO EL PAGO DEL AÑO EN CURSO");

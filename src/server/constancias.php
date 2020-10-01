@@ -175,19 +175,21 @@ class constancias{
     //MENU NUEVO INGRESO
     function secNuvIns(){
         include('../conexion.php');
+        session_start();
         $MySql = new conexion;
         $link= $MySql->conectar();
-        session_start();
+        //BUSQUEDA USUARIO
         $busUser = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
         $resUser = $link->query($busUser);
         $userBusRes = $resUser->fetch_array();
-        
+
+        //BUSQUEDA TEMPORALES
         $tempUser = "SELECT * FROM user_temp where userId=".$userBusRes["id"]."";
-        $resUser = $link->query($tempUser);
-        $userRes = $resUser->fetch_array();
+        $resUserTemp = $link->query($tempUser);
+        $userRes = $resUserTemp->fetch_array();
         if($userRes["userId"]==0){
-            $tempUser = "INSERT INTO user_temp(userId,temp_ambientes,temp_caraconst,temp_carainmue,temp_complementos,temp_datos_protocolizacion,temp_expediente,temp_factura,temp_inmueble,temp_linderos_documento,temp_linderos_general,temp_linderos_posible_venta,temp_piezas_sanitarias,temp_propietarios,temp_puertas,temp_servicios_inmue,temp_estado_conservacion)value(".$userBusRes["id"].",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)";
-            $link->query($tempUser);
+            $tempInserUser = "INSERT INTO user_temp(userId,temp_ambientes,temp_caraconst,temp_carainmue,temp_complementos,temp_datos_protocolizacion,temp_expediente,temp_factura,temp_inmueble,temp_linderos_documento,temp_linderos_general,temp_linderos_posible_venta,temp_piezas_sanitarias,temp_propietarios,temp_puertas,temp_servicios_inmue,temp_estado_conservacion)value(".$userBusRes["id"].",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)";
+            $link->query($tempInserUser);
             $userId = $link->insert_id;
         }else{
             $userId = $userRes["id"];
@@ -466,7 +468,7 @@ class constancias{
                         <div class="campDat">
                             <b>Aplicar:</b>
                             <select id="multa"/>
-                                <option value="'.$expRes["condicion"].'">'.$expRes["condicion"].'</option>
+                                <option value=""></option>
                                 <option value="No Aplica">No Aplica</option>
                                 <option value="Multa">Multa</option>
                                 <option value="Empadronamiento">Empadronamiento</option>
@@ -601,7 +603,7 @@ class constancias{
             $propSql = "INSERT INTO temp_propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab)value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFull."','".$this->direcProp."','".$this->telfFull2."')";
             $link->query($propSql);
             $idProp= $link->insert_id;
-            $userTemp = "UPDATE user_temp SET temp_propietarios='".$idProp."'";
+            $userTemp = "UPDATE user_temp SET temp_propietarios='".$idProp."' where userId=".$userTempRes1["id"]."";
             $link->query($userTemp);
         }else{
             $propSql = "UPDATE temp_propietarios set cedula='".$this->cedFul."', rif='".$this->rifConst."', nombre='".$this->nomProp."',apellido='".$this->apelProp."',telef='".$this->telfFull."',dir_hab='".$this->direcProp."',telef_hab='".$this->telfFull2."' where id=".$userTempRes["temp_propietarios"]." ";
@@ -689,7 +691,7 @@ class constancias{
             $inmueSql = "INSERT INTO temp_inmueble(direccion,parroquia,sector,ambito)value('".$this->direcInmue."','".$this->parrInmue."','".$this->secInmue."','".$this->ambInmue."')";
             $link->query($inmueSql);
             $idInmue= $link->insert_id;
-            $inmueTemp = "UPDATE user_temp SET temp_inmueble='".$idInmue."'";
+            $inmueTemp = "UPDATE user_temp SET temp_inmueble='".$idInmue."' where userId=".$userTempRes1["id"]."";
             $link->query($inmueTemp);
         }//LISTO//LISTO
         
@@ -792,7 +794,7 @@ class constancias{
             $carcTerrSql = "INSERT INTO temp_carainmue(topografia,forma,uso,tenencia)value('".$this->topoConst."','".$this->formaConst."','".$this->usoConst."','".$this->tenenConst."')";
             $link->query($carcTerrSql);
             $idCarInmue= $link->insert_id;
-            $CarInmueTemp = "UPDATE user_temp SET temp_carainmue='".$idCarInmue."'";
+            $CarInmueTemp = "UPDATE user_temp SET temp_carainmue='".$idCarInmue."' where userId='".$userTempRes1["id"]."'";
             $link->query($CarInmueTemp);
         }//LISTO//LISTO
         
@@ -1008,7 +1010,7 @@ class constancias{
                 $caracConstSql= "INSERT INTO temp_caraconst(destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,ventanas,insta_electricas,observ,Regimen)value('".$this->destConst."','".$this->estConst."','".$this->pareTipoInmue."','".$this->pareAcaInmue."','".$this->pintConst."','".$this->techoConst."','".$this->pisosConst."','".$this->ventConst."','".$this->instElect."','".$this->obsConst."','".$this->regInmue."')";
                 $link->query($caracConstSql);
                 $idCarConst= $link->insert_id;
-                $CarConstTemp = "UPDATE user_temp SET temp_caraconst='".$idCarConst."'";
+                $CarConstTemp = "UPDATE user_temp SET temp_caraconst='".$idCarConst."' where userId='".$userTempRes1["id"]."'";
                 $link->query($CarConstTemp);
             }
         }//LISTO//LISTO
@@ -1129,7 +1131,7 @@ class constancias{
                 $protInmueSql ="INSERT INTO temp_datos_protocolizacion(documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble)value('".$this->docDebConst."','".$this->direcProtConst."','".$this->numProtConst."','".$this->tomoProtConst."','".$this->folioProtConst."','".$this->protoConst."','".$this->trimProtConst."','".$this->dateProtConst."','".$this->valorProtConst."')";
                 $link->query($protInmueSql);
                 $idProt= $link->insert_id;
-                $protTemp = "UPDATE user_temp SET temp_datos_protocolizacion='".$idProt."'";
+                $protTemp = "UPDATE user_temp SET temp_datos_protocolizacion='".$idProt."' where userId='".$userTempRes1["id"]."'";
                 $link->query($protTemp);
             }else{
                 $upProtSql = "UPDATE temp_datos_protocolizacion SET documento='".$this->docDebConst."',direccion='".$this->direcProtConst."',numero='".$this->numProtConst."',tomo='".$this->tomoProtConst."',folio='".$this->folioProtConst."',protocolo='".$this->protoConst."',trimestre='".$this->trimProtConst."',fecha='".$this->dateProtConst."',valor_inmueble='".$this->valorProtConst."' where id=".$userTempRes["temp_datos_protocolizacion"]."";
@@ -1198,7 +1200,7 @@ class constancias{
                 $conservSql = "INSERT INTO temp_estado_conservacion(ano_construccion,ano_refaccion,edad_efectiva,nro_planta,nro_vivienda)value('".$this->ano_construc."','".$this->ano_refac."','".$this->edadEfec."','".$this->numPlata."','".$this->numVivienda."')";
                 $link->query($conservSql);
                 $idConserv= $link->insert_id;
-                $conservTemp = "UPDATE user_temp SET temp_estado_conservacion='".$idConserv."'";
+                $conservTemp = "UPDATE user_temp SET temp_estado_conservacion='".$idConserv."' where userId='".$userTempRes1["id"]."'";
                 $link->query($conservTemp);
             }else{
                 $upConservSql = "UPDATE temp_estado_conservacion SET ano_construccion='".$this->ano_construc."',ano_refaccion='".$this->ano_refac."',edad_efectiva='".$this->edadEfec."',nro_planta='".$this->numPlata."',nro_vivienda='".$this->numVivienda."' where id=".$userTempRes["temp_estado_conservacion"]."";
@@ -1329,7 +1331,7 @@ class constancias{
                 $piezSant="INSERT INTO temp_piezas_sanitarias(porcelana_fina,porcelana_econ,banera,calentador,wc,bidet,lavamanos,ducha,urinario)value('".$this->porFina."','".$this->porceEcon."','".$this->banera."','".$this->calentador."','".$this->wc."','".$this->bidet."','".$this->lavamanos."','".$this->ducha."','".$this->urinario."')";
                 $link->query($piezSant);
                 $idpiezSant= $link->insert_id;
-                $piezSantTemp = "UPDATE user_temp SET temp_piezas_sanitarias='".$idpiezSant."'";
+                $piezSantTemp = "UPDATE user_temp SET temp_piezas_sanitarias='".$idpiezSant."' where userId='".$userTempRes1["id"]."'";
                 $link->query($piezSantTemp);
             }else{
                 $upPiezSantSql = "UPDATE temp_piezas_sanitarias SET porcelana_fina='".$this->porFina."',porcelana_econ='".$this->porceEcon."',banera='".$this->banera."',calentador='".$this->calentador."',wc='".$this->wc."',bidet='".$this->bidet."',lavamanos='".$this->lavamanos."',ducha='".$this->ducha."',urinario='".$this->urinario."' where id=".$userTempRes["temp_piezas_sanitarias"]."";
@@ -1413,7 +1415,7 @@ class constancias{
                 $puertaSql = "INSERT INTO temp_puertas(entamborada_fina,ent_econo,madera_cepi,hierro)value('".$this->entamFina."','".$this->entamEcon."','".$this->madeCepil."','".$this->hierro."')";
                 $link->query($puertaSql);
                 $idPuertas= $link->insert_id;
-                $puertasTemp = "UPDATE user_temp SET temp_puertas='".$idPuertas."'";
+                $puertasTemp = "UPDATE user_temp SET temp_puertas='".$idPuertas."' where userId='".$userTempRes1["id"]."'";
                 $link->query($puertasTemp);
             }else{
                 $upPuerSql= "UPDATE temp_puertas SET entamborada_fina='".$this->entamFina."', ent_econo='".$this->entamEcon."', madera_cepi='".$this->madeCepil."',hierro='".$this->hierro."' where id=".$userTempRes["temp_puertas"]."";
@@ -1501,7 +1503,7 @@ class constancias{
                 $ambSql = "INSERT INTO temp_ambientes(dormitorio,comedor,sala,banos,cocina,servicio,oficina,garaje,estacionamiento)value('".$this->dormit."','".$this->comedor."','".$this->sala."','".$this->banos."','".$this->Cocina."','".$this->Servicio."','".$this->oficina."','".$this->garaje."','".$this->estac."')";
                 $link->query($ambSql);
                 $idAmbient= $link->insert_id;
-                $ambientTemp = "UPDATE user_temp SET temp_ambientes='".$idAmbient."'";
+                $ambientTemp = "UPDATE user_temp SET temp_ambientes='".$idAmbient."' where userId='".$userTempRes1["id"]."'";
                 $link->query($ambientTemp);
             }else{
                 $upAmbSql = "UPDATE temp_ambientes SET dormitorio='".$this->dormit."', comedor='".$this->comedor."', sala='".$this->sala."', banos='".$this->banos."', cocina='".$this->Cocina."', servicio='".$this->Servicio."',oficina='".$this->oficina."', garaje='".$this->garaje."', estacionamiento='".$this->estac."' where id= ".$userTempRes["temp_ambientes"]."";
@@ -1594,7 +1596,7 @@ class constancias{
                 $compleSql = "INSERT INTO temp_complementos(ascensor,aire_acond,rejas,closets,porcelana)value('".$this->ascensor."','".$this->aireAcond."','".$this->rejas."','".$this->closets."','".$this->porcelana."')";
                 $link->query($compleSql);
                 $idcomple= $link->insert_id;
-                $compleTemp = "UPDATE user_temp SET temp_complementos='".$idcomple."'";
+                $compleTemp = "UPDATE user_temp SET temp_complementos='".$idcomple."' where userId='".$userTempRes1["id"]."'";
                 $link->query($compleTemp);
             }else{
                 $upCompleSQL = "UPDATE temp_complementos SET ascensor='".$this->ascensor."', aire_acond='".$this->aireAcond."', rejas='".$this->rejas."', closets='".$this->closets."', porcelana='".$this->porcelana."' where id=".$userTempRes["temp_complementos"]."";
@@ -1814,7 +1816,7 @@ class constancias{
                 $servSql = "INSERT INTO temp_servicios_inmue(acued,acuedRural,aguasSubter,aguasServ,pavimentoFlex,pavimentoRig,viaEngran,acera,alumbradoPub,aseo,transportePublic,pozoSept,electriResi,electriIndus,lineaTelef)value('".$this->Acue."','".$this->AcueRural."','".$this->AguasSub."','".$this->AguasServ."','".$this->PavFlex."','".$this->PavRig."','".$this->viaEngran."','".$this->acera."','".$this->AlumPublico."','".$this->aseo."','".$this->transPublic."','".$this->pozoSept."','".$this->ElectResidencial."','".$this->ElectriIndust."','".$this->linTelf."')";
                 $link->query($servSql);
                 $idServic= $link->insert_id;
-                $servicTemp = "UPDATE user_temp SET temp_servicios_inmue='".$idServic."'";
+                $servicTemp = "UPDATE user_temp SET temp_servicios_inmue='".$idServic."' where userId='".$userTempRes1["id"]."'";
                 $link->query($servicTemp);
             }else{
                 $upServiSql = "UPDATE temp_servicios_inmue SET acued='".$this->Acue."', acuedRural='".$this->AcueRural."', aguasSubter='".$this->AguasServ."', pavimentoFlex='".$this->PavFlex."', pavimentoRig='".$this->PavRig."', viaEngran='".$this->viaEngran."', acera='".$this->acera."', alumbradoPub='".$this->AlumPublico."', aseo='".$this->aseo."', transportePublic='".$this->transPublic."', pozoSept='".$this->pozoSept."', electriResi='".$this->ElectResidencial."', electriIndus='".$this->ElectriIndust."', lineaTelef='".$this->linTelf."' where id=".$userTempRes["temp_complementos"]."";
@@ -1884,7 +1886,7 @@ class constancias{
                 $expeSql = "INSERT INTO temp_expediente(no_expediente,condicion,fecha,valorInmue)value('".$this->nuExp."','nada','".$this->fechaExp."','".$this->valorInmue."')";
                 $link->query($expeSql);
                 $idExpediente= $link->insert_id;
-                $expedienteTemp = "UPDATE user_temp SET temp_expediente='".$idExpediente."'";
+                $expedienteTemp = "UPDATE user_temp SET temp_expediente='".$idExpediente."' where userId='".$userTempRes1["id"]."'";
                 $link->query($expedienteTemp);
             }else{
                 $upExpeSql = "UPDATE temp_expediente SET no_expediente='".$this->nuExp."', condicion='nada', fecha='".$this->fechaExp."', valorInmue='".$this->valorInmue."' where id=".$userTempRes["temp_expediente"]."";
@@ -1975,7 +1977,7 @@ class constancias{
                 $factSql = "INSERT INTO temp_factura(monto,n_factura,fecha,n_recibo)value('".$this->montoFact."','".$this->numFact."','".$this->fechFact."','".$this->recFact."')";
                 $link->query($factSql);
                 $idFact= $link->insert_id;
-                $factTemp = "UPDATE user_temp SET temp_factura='".$idFact."'";
+                $factTemp = "UPDATE user_temp SET temp_factura='".$idFact."' where userId='".$userTempRes1["id"]."'";
                 $link->query($factTemp);
             }else{
                 $upFactSql = "UPDATE temp_factura SET monto='".$this->montoFact."', n_factura='".$this->numFact."', fecha='".$this->fechFact."', n_recibo='".$this->recFact."' where id='".$userTempRes["temp_factura"]."' ";
@@ -2354,7 +2356,7 @@ class constancias{
                 $lindGen = "INSERT INTO temp_linderos_general(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte."','".$norEste."','".$Sur."','".$SurEste."','".$Este."','".$SurOeste."','".$Oeste."','".$NortOeste."','".$this->alindNort."','".$this->alindSur."','".$this->alindEste."','".$this->alindOeste."','".$this->arTotal."','".$this->uniAreaT."','".$this->NivConstTotal."','".$this->uniAreaConst."','".$this->arConstTotal."','".$this->uniNorte."','".$this->uniSur."','".$this->uniEste."','".$this->uniOeste."')";
                 $link->query($lindGen);
                 $idlindGen= $link->insert_id;
-                $lindGenTemp = "UPDATE user_temp SET temp_linderos_general='".$idlindGen."'";
+                $lindGenTemp = "UPDATE user_temp SET temp_linderos_general='".$idlindGen."' where userId='".$userTempRes1["id"]."'";
                 $link->query($lindGenTemp);
             }else{
                 $upLindGenSql ="UPDATE temp_linderos_general SET norte='".$Norte."', noreste='".$norEste."', sur='".$Sur."', sureste='".$SurEste."', este='".$Este."', suroeste='".$SurOeste."', oeste='".$Oeste."', noroeste='".$NortOeste."', alind_n='".$this->alindNort."', alind_s='".$this->alindSur."', alind_e='".$this->alindEste."', alind_o='".$this->alindOeste."', areaTotal='".$this->arTotal."', uniAreaT='".$this->uniAreaT."', nivelesConst='".$this->NivConstTotal."', uniAreaC='".$this->uniAreaConst."', areaConst='".$this->arConstTotal."', uniNorte='".$this->uniNorte."', uniSur='".$this->uniSur."', uniEste='".$this->uniEste."', uniOeste='".$this->uniOeste."' where id=".$userTempRes["temp_linderos_general"]."";
@@ -2616,7 +2618,7 @@ class constancias{
                 $lindPosVentaSql = "INSERT INTO temp_linderos_posible_venta(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte2."','".$norEste2."','".$Sur2."','".$SurEste2."','".$Este2."','".$SurOeste2."','".$Oeste2."','".$NortOeste2."','".$this->alindPosNort."','".$this->alindPosSur."','".$this->alindPosEste."','".$this->alindOeste."','".$this->arTotal2."','".$this->uniAreaT2."','".$this->NivConstTotal2."','".$this->uniAreaConst2."','".$this->arConstTotal2."','".$this->uniNorte2."','".$this->uniSur2."','".$this->uniEste2."','".$this->uniOeste2."')";
                 $link->query($lindPosVentaSql);
                 $idLindPosVenta = $link->insert_id;
-                $lindPosVentTemp = "UPDATE user_temp SET temp_linderos_posible_venta='".$idLindPosVenta."'";
+                $lindPosVentTemp = "UPDATE user_temp SET temp_linderos_posible_venta='".$idLindPosVenta."' where userId='".$userTempRes1["id"]."'";
                 $link->query($lindPosVentTemp);
             }else{
                 $upLindGenSql ="UPDATE temp_linderos_posible_venta SET norte='".$Norte2."', noreste='".$norEste2."', sur='".$Sur2."', sureste='".$SurEste2."', este='".$Este2."', suroeste='".$SurOeste2."', oeste='".$Oeste2."', noroeste='".$NortOeste2."', alind_n='".$this->alindPosNort."', alind_s='".$this->alindPosSur."', alind_e='".$this->alindPosEste."', alind_o='".$this->alindOeste."', areaTotal='".$this->arTotal2."', uniAreaT='".$this->uniAreaT2."', nivelesConst='".$this->NivConstTotal2."', uniAreaC='".$this->uniAreaConst2."', areaConst='".$this->arConstTotal2."', uniNorte='".$this->uniNorte2."', uniSur='".$this->uniSur2."', uniEste='".$this->uniEste2."', uniOeste='".$this->uniOeste2."' where id=".$userTempRes["temp_linderos_posible_venta"]."";
@@ -2876,7 +2878,7 @@ class constancias{
                 $lindDocSql = "INSERT INTO temp_linderos_documento(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte3."','".$norEste3."','".$Sur3."','".$SurEste3."','".$Este3."','".$SurOeste3."','".$Oeste3."','".$NortOeste3."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."','".$this->arTotal3."','".$this->uniAreaT3."','".$this->NivConstTotal3."','".$this->uniAreaConst3."','".$this->arConstTotal3."','".$this->uniNorte3."','".$this->uniSur3."','".$this->uniEste3."','".$this->uniOeste3."')";
                 $link->query($lindDocSql);
                 $idLindDoc= $link->insert_id;
-                $lindDocSQL = "UPDATE user_temp SET temp_linderos_documento='".$idLindDoc."'";
+                $lindDocSQL = "UPDATE user_temp SET temp_linderos_documento='".$idLindDoc."' where userId='".$userTempRes1["id"]."'";
                 $link->query($lindDocSQL);
             }else{
                 $upLindGenSql ="UPDATE temp_linderos_documento SET norte='".$Norte3."', noreste='".$norEste3."', sur='".$Sur3."', sureste='".$SurEste3."', este='".$Este3."', suroeste='".$SurOeste3."', oeste='".$Oeste3."', noroeste='".$NortOeste3."', alind_n='".$this->alindSecNorte."', alind_s='".$this->alindSecSur."', alind_e='".$this->alindSecEste."', alind_o='".$this->alindSecOeste."', areaTotal='".$this->arTotal3."', uniAreaT='".$this->uniAreaT3."', nivelesConst='".$this->NivConstTotal3."', uniAreaC='".$this->uniAreaConst3."', areaConst='".$this->arConstTotal3."', uniNorte='".$this->uniNorte3."', uniSur='".$this->uniSur3."', uniEste='".$this->uniEste3."', uniOeste='".$this->uniOeste3."' where id=".$userTempRes["temp_linderos_documento"]."";
@@ -5454,27 +5456,48 @@ class constancias{
         $MySql = new conexion;
         $link= $MySql->conectar();
         //BUSQUEDA DE EXPEDIENTE
-            $expSql = "SELECT * FROM expediente where n_expediente=".$this->campBuscar."";
+            $expSql = "SELECT * FROM expediente where n_expediente='".$this->campBuscar."'";
             $resExp = $link->query($expSql);
             $expRes = $resExp->fetch_assoc();
-        //BUSQUEDA DE PAGO
-            $pagSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." ORDER BY fechaPagos DESC";
-            $resPagos = $link->query($pagSql);
-            $pagosRes = $resPagos->fetch_array();
-            $anoPago = explode("-",$pagosRes["fechaPagos"]);
-        if($anoPago[0]==date("Y")){
-            //BUSQUEDA DE EXPEDIENTE - CONSTANCIA
-            $constSql  ="SELECT * FROM constancias INNER JOIN expediente where fk_expedi=".$pagosRes["fk_expedient"]."";
-            $resConst = $link->query($constSql);
-            $constRes = $resConst->fetch_array();
-            echo'
-            <div class="campDat"><embed id="embedPdf" src="http://localhost/SisCast/assets/constancias/'.$anoPago[0].'/'.$constRes["n_expediente"].'.pdf" type="application/pdf"></div>
-            ';
+        if($expRes["id"]!=0){
+            //BUSQUEDA DE PAGO
+                $pagSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." ORDER BY fechaPagos DESC";
+                $resPagos = $link->query($pagSql);
+                $pagosRes = $resPagos->fetch_array();
+                $anoPago = explode("-",$pagosRes["fechaPagos"]);
+            if($anoPago[0]==date("Y")){
+                //BUSQUEDA DE EXPEDIENTE - CONSTANCIA
+
+                echo'
+                <div class="campDat"><embed id="embedPdf" src="./assets/constancias/'.$anoPago[0].'/'.$expRes["n_expediente"].'.pdf" type="application/pdf"></div>
+                ';
+            }
+            if($anoPago[0] < date("Y")){
+                $this->formImpri();
+                echo'<center><br/><b>EL NUMERO DE EXPEDIENTE QUE INGRESO NO HA PAGADO EL AÑO EN CURSO</b></center>';
+            }
+        }else{
+            $expEmpadroSql = "SELECT * FROM expempadro where n_expediente='".$this->campBuscar."'";
+            $resExp = $link->query($expSql);
+            $expRes = $resExp->fetch_assoc();
+
+            //BUSQUEDA DE PAGO
+                $pagSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." ORDER BY fechaPagos DESC";
+                echo $pagSql;
+                $resPagos = $link->query($pagSql);
+                $pagosRes = $resPagos->fetch_array();
+                $anoPago = explode("-",$pagosRes["fechaPagos"]);
+            if($anoPago[0]==date("Y")){
+                echo'
+                <div class="campDat"><embed id="embedPdf" src="./assets/constancias/'.$anoPago[0].'/'.$expRes["n_expediente"].'.pdf" type="application/pdf"></div>
+                ';
+            }
+            if($anoPago[0] < date("Y")){
+                $this->formImpri();
+                echo'<center><br/><b>EL NUMERO DE EXPEDIENTE QUE INGRESO NO HA PAGADO EL AÑO EN CURSO</b></center>';
+            }
         }
-        if($anoPago[0] < date("Y")){
-            $this->formImpri();
-            echo'<center><br/><b>EL NUMERO DE EXPEDIENTE QUE INGRESO NO HA PAGADO EL AÑO EN CURSO</b></center>';
-        }
+        
     }
     function busFactura(){
         include('../conexion.php');

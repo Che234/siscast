@@ -36,6 +36,8 @@ class reportes{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
+                    let rutaPdf = document.getElementById("rutaPdf").value
+                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="${rutaPdf}" type="application/pdf"></div>`;
 			     }
 	       	}
 	}

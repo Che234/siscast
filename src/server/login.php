@@ -41,7 +41,7 @@ class login{
             $_SESSION["usuario"]=$this->usuario;
             $_SESSION["pass"]=$this->pass;
             $_SESSION["nivel"]=$filasRes["nivel"];
-            header("http://localhost/SisCast/index.php");
+            header("http://10.200.0.62:8080/SisCast/index.php");
         }
     }
     function fSalir(){

@@ -286,10 +286,6 @@ class constancias{
             alert("Error en el formato de Instalaciones electricas");
             return false;
         }
-        if(!er_areas.test(this.obsConst)){
-            alert("Error en el formato de Observación");
-            return false;
-        }
         return true//VERIFICADO// VERIFICADO
     }
     veriProt(){

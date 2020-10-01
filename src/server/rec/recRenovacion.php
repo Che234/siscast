@@ -1,12 +1,8 @@
 <?php
 
 include("../renovacion.php");
-include("../f002.php");
-$renov = new renovacion;
-$f002 = new f002;
-$f003 = new f003;
-$f001 = new f001;
 
+$renov = new renovacion;
 
 if(isset($_POST["accion"])){
     $accion = $_POST["accion"];
@@ -29,6 +25,8 @@ if($accion=="BusRenov"){
     $renov->busRenov();
 }
 if($accion=="form3"){
+    include("../f002.php");
+    $f003 = new f003;
     if(isset($_POST["idInmueble"])){
         $f003->idInmueble = $_POST["idInmueble"];
     }else{
@@ -64,10 +62,12 @@ if($accion=="form3"){
     }else{
         $f002->operacion = "nada";
     }
-    echo'<div id="enlacePdf"></div>';
+    
     $f003->imprimir();
 }
 if($accion=="form1"){
+    include("../f002.php");
+    $f001 = new f001;
     if(isset($_POST["idInmueble"])){
         $f001->idInmueble = $_POST["idInmueble"];
     }else{
@@ -103,46 +103,87 @@ if($accion=="form1"){
     }else{
         $f001->operacion = "nada";
     }
-    echo'<div id="enlacePdf"></div>';
     $f001->imprimir();
 }
 if($accion=="form2"){
+    include("../f001.php");
+    $f1 = new f1;
     if(isset($_POST["idInmueble"])){
-        $f002->idInmueble = $_POST["idInmueble"];
+        $f1->idInmueble = $_POST["idInmueble"];
     }else{
-        $f002->idInmueble = "nada";
+        $f1->idInmueble = "nada";
     }
     if(isset($_POST["idProp"])){
-        $f002->idProp = $_POST["idProp"];
+        $f1->idProp = $_POST["idProp"];
     }else{
-        $f002->idProp = "nada";
+        $f1->idProp = "nada";
     }
     if(isset($_POST["nuExp"])){
-        $f002->nuExp = $_POST["nuExp"];
+        $f1->nuExp = $_POST["nuExp"];
     }else{
-        $f002->nuExp = "nada";
+        $f1->nuExp = "nada";
     }
     if(isset($_POST["montoFact"])){
-        $f002->montoFact = $_POST["montoFact"];
+        $f1->montoFact = $_POST["montoFact"];
     }else{
-        $f002->montoFact = "nada";
+        $f1->montoFact = "nada";
     }
     if(isset($_POST["fechFact"])){
-        $f002->fechFact = $_POST["fechFact"];
+        $f1->fechFact = $_POST["fechFact"];
     }else{
-        $f002->fechFact = "nada";
+        $f1->fechFact = "nada";
     }
     if(isset($_POST["numFact"])){
-        $f002->numFact = $_POST["numFact"];
+        $f1->numFact = $_POST["numFact"];
     }else{
-        $f002->numFact = "nada";
+        $f1->numFact = "nada";
     }
     if(isset($_POST["operacion"])){
-        $f002->operacion = $_POST["operacion"];
+        $f1->operacion = $_POST["operacion"];
     }else{
-        $f002->operacion = "nada";
+        $f1->operacion = "nada";
     }
-    echo'<div id="enlacePdf"></div>';
-    $f002->imprimir();
+    $f1->imprimir();
 }
+if($accion=="empaExp"){
+    include("../f002.php");
+    $f004 = new f004;
+    if(isset($_POST["idInmueble"])){
+        $f004->idInmueble = $_POST["idInmueble"];
+    }else{
+        $f004->idInmueble = "nada";
+    }
+    if(isset($_POST["idProp"])){
+        $f004->idProp = $_POST["idProp"];
+    }else{
+        $f004->idProp = "nada";
+    }
+    if(isset($_POST["nuExp"])){
+        $f004->nuExp = $_POST["nuExp"];
+    }else{
+        $f004->nuExp = "nada";
+    }
+    if(isset($_POST["montoFact"])){
+        $f004->montoFact = $_POST["montoFact"];
+    }else{
+        $f004->montoFact = "nada";
+    }
+    if(isset($_POST["fechFact"])){
+        $f004->fechFact = $_POST["fechFact"];
+    }else{
+        $f004->fechFact = "nada";
+    }
+    if(isset($_POST["numFact"])){
+        $f004->numFact = $_POST["numFact"];
+    }else{
+        $f004->numFact = "nada";
+    }
+    if(isset($_POST["operacion"])){
+        $f004->operacion = $_POST["operacion"];
+    }else{
+        $f004->operacion = "nada";
+    }
+    $f004->imprimir();
+}
+echo'<div id="enlacePdf"></div>';
 ?>

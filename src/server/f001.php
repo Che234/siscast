@@ -65,6 +65,7 @@ class f1{
         $MySql = new conexion;
         $link= $MySql->conectar();
         session_start();
+
         //BUSQUEDA DE USUARIO
             $userSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resultUser= $link->query($userSql);
@@ -77,6 +78,10 @@ class f1{
             $busExpSQL = "SELECT * FROM expediente where id=".$this->nuExp."";
             $resBusEXP = $link->query($busExpSQL);
             $busExpedienteRes = $resBusEXP->fetch_array();
+            $fecha = explode('-',$busExpedienteRes["fecha"]);
+            $anoExp= $fecha[0];
+            echo '<input type="hidden" value="'.$anoExp.'" id="anoExp" />
+            <input type="hidden" value="'.$busExpedienteRes["n_expediente"].'" id="nuExp" />';
         //BUSQUEDA DEL INMUEBLE
             $inmueDeSql= "SELECT * from inmueble where id=".$this->idInmueble."";
             $resInmueDe= $link->query($inmueDeSql);
@@ -119,9 +124,19 @@ class f1{
             $resulCaracInmue= $resCaracConst->fetch_assoc();
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
-            $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_expedi)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
-            $link->query($constansSql);
-            $idConstancias = $link->insert_id;
+            $busConstSQL = "SELECT * FROM constancias where fk_expedi=".$this->nuExp."";
+            $resBusConst = $link->query($busConstSQL);
+            $busConstRes = $resBusConst->fetch_array();
+            if($busConstRes!=0){
+                $updateConst = "UPDATE constancias SET tipo_operacion='".$this->operacion."' where fk_expedi=".$this->nuExp."";
+                $resupdaConst = $link->query($updateConst);
+                $idConstancias = $busConstRes["id"];
+            }else{
+                $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_expedi)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
+                $link->query($constansSql);
+                $idConstancias = $link->insert_id;
+            }
+            
         //INSERT PAGOS
             $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$this->nuExp.",".$idExpFact["id"].",'".$this->fechFact."')";
             $link->query($pagoExpSql);
@@ -361,17 +376,25 @@ class f1{
             $pdf->cell(0,6,''.utf8_decode("DATOS DE PROTOCOLIZACIÓN").'',1,0,'C');
             $pdf->SetY(137);
             $pdf->SetX(19);
-            $pdf->cell(110,6,'Documento Debidamente: '.$resultProp["documento"].'',1,0,'L');
+            $pdf->cell(80,6,'Documento Debidamente: '.$resultProp["documento"].'',1,0,'L');
             $pdf->SetY(137);
-            $pdf->SetX(129);
-            $pdf->cell(0,6,utf8_decode('Dirección: '.$resultProp["direccion"].''),1,0,'L');
+            $pdf->SetX(99);
+            if($resultProp["direccion"]=="NO APLICA"){
+                $pdf->cell(0,6,utf8_decode('Dirección: NO APLICA'),1,0,'L');
+            }else{
+                $pdf->cell(0,6,utf8_decode('Dirección: '.$resultProp["direccion"].''),1,0,'L');
+            }
             $pdf->SetY(143);
             $pdf->SetX(19);
             $pdf->cell(25,6,utf8_decode('Número:'),1,0,'C');
             $pdf->SetY(149);
             $pdf->SetX(19);
             $pdf->SetFont('Times','B',9);
-            $pdf->cell(25,6,''.$resultProp["numero"].'',1,0,'C');
+            if($resultProp["numero"]=="NO APLICA"){
+                $pdf->cell(25,6,'NO APLICA',1,0,'C');
+            }else{
+                $pdf->cell(25,6,''.$resultProp["numero"].'',1,0,'C');
+            }
             $pdf->SetY(143);
             $pdf->SetX(44);
             $pdf->SetFont('Times','B',10);
@@ -379,7 +402,11 @@ class f1{
             $pdf->SetY(149);
             $pdf->SetX(44);
             $pdf->SetFont('Times','B',9);
-            $pdf->cell(25,6,''.$resultProp["tomo"].'',1,0,'C');
+            if($resultProp["tomo"]=="NO APLICA"){
+                $pdf->cell(25,6,'NO APLICA',1,0,'C');    
+            }else{
+                $pdf->cell(25,6,''.$resultProp["tomo"].'',1,0,'C');
+            }
             $pdf->SetY(143);
             $pdf->SetX(69);
             $pdf->SetFont('Times','B',10);
@@ -387,7 +414,11 @@ class f1{
             $pdf->SetY(149);
             $pdf->SetX(69);
             $pdf->SetFont('Times','B',9);
-            $pdf->cell(23,6,''.$resultProp["folio"].'',1,0,'C');
+            if($resultProp["folio"]=="NO APLICA"){
+                $pdf->cell(23,6,'NO APLICA',1,0,'C');
+            }else{
+                $pdf->cell(23,6,''.$resultProp["folio"].'',1,0,'C');
+            }
             $pdf->SetY(143);
             $pdf->SetX(92);
             $pdf->SetFont('Times','B',10);
@@ -395,7 +426,11 @@ class f1{
             $pdf->SetY(149);
             $pdf->SetX(92);
             $pdf->SetFont('Times','B',9);
-            $pdf->cell(23,6,''.$resultProp["protocolo"].'',1,0,'C');
+            if($resultProp["protocolo"]=="NO APLICA"){
+                $pdf->cell(23,6,'NO APLICA',1,0,'C');
+            }else{
+                $pdf->cell(23,6,''.$resultProp["protocolo"].'',1,0,'C');
+            }
             $pdf->SetY(143);
             $pdf->SetX(115);
             $pdf->SetFont('Times','B',10);
@@ -403,7 +438,11 @@ class f1{
             $pdf->SetY(149);
             $pdf->SetX(115);
             $pdf->SetFont('Times','B',9);
-            $pdf->cell(23,6,''.$resultProp["trimestre"].'',1,0,'C');
+            if($resultProp["trimestre"]=="NO APLICA"){
+                $pdf->cell(23,6,'NO APLICA',1,0,'C');
+            }else{
+                $pdf->cell(23,6,''.$resultProp["trimestre"].'',1,0,'C');
+            }
             $pdf->SetY(143);
             $pdf->SetX(138);
             $pdf->SetFont('Times','B',10);
@@ -411,7 +450,11 @@ class f1{
             $pdf->SetY(149);
             $pdf->SetX(138);
             $pdf->SetFont('Times','B',9);
-            $pdf->cell(23,6,''.$resultProp["fecha"].'',1,0,'C');
+            if($resultProp["fecha"]=="0000-00-00"){
+                $pdf->cell(23,6,'NO APLICA',1,0,'C');
+            }else{
+                $pdf->cell(23,6,''.$resultProp["fecha"].'',1,0,'C');
+            }
             $pdf->SetY(143);
             $pdf->SetX(161);
             $pdf->SetFont('Times','B',10);
@@ -419,7 +462,12 @@ class f1{
             $pdf->SetY(149);
             $pdf->SetX(161);
             $pdf->SetFont('Times','B',9);
-            $pdf->cell(0,6,''.$resultProp["valor_inmueble"].'',1,0,'C');
+            if($resultProp["valor_inmueble"]=="NO APLICA"){
+                $pdf->cell(0,6,'NO APLICA',1,0,'C');
+            }else{
+                $pdf->cell(0,6,''.$resultProp["valor_inmueble"].'',1,0,'C');
+            }
+            
         //DATOS DE COLINDANTES SEGUN DOCUMENTO
             $pdf->SetY(155);
             $pdf->SetX(19);
@@ -1236,10 +1284,12 @@ class f1{
             $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }
         echo'
-        <input type="hidden" id="rutaPdf" value="http://localhost/SisCast/assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf" />
+        <input type="hidden" id="rutaPdf" value="http://10.200.0.62:8080/SisCast/assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf" />
         <input type="hidden" id="numExp" value="'.$busExpedienteRes["n_expediente"].'">';
         
     }
 
 }
+// $f1 = new f1;
+// $f1->imprimir();
 ?>
