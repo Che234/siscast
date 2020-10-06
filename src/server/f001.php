@@ -124,21 +124,22 @@ class f1{
             $resulCaracInmue= $resCaracConst->fetch_assoc();
         //INSERT CONSTANCIA
             $fechaConst= date('Y-m-d');
-            $busConstSQL = "SELECT * FROM constancias where fk_expedi=".$this->nuExp."";
+            $busConstSQL = "SELECT * FROM constancias where fk_expedi=".$busExpedienteRes["n_expediente"]."";
             $resBusConst = $link->query($busConstSQL);
             $busConstRes = $resBusConst->fetch_array();
             if($busConstRes!=0){
-                $updateConst = "UPDATE constancias SET tipo_operacion='".$this->operacion."' where fk_expedi=".$this->nuExp."";
+                $updateConst = "UPDATE constancias SET tipo_operacion='".$this->operacion."' where fk_expedi=".$busExpedienteRes["n_expediente"]."";
                 $resupdaConst = $link->query($updateConst);
                 $idConstancias = $busConstRes["id"];
             }else{
-                $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_expedi)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$this->nuExp.")";
+                $constansSql= "INSERT INTO constancias(tipo_operacion,fecha,fk_redactor,fk_expedi)value('".$this->operacion."','".$fechaConst."',".$idUser["id"].",".$busExpedienteRes["n_expediente"].")";
                 $link->query($constansSql);
                 $idConstancias = $link->insert_id;
             }
             
         //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos)value(".$this->nuExp.",".$idExpFact["id"].",'".$this->fechFact."')";
+            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos,tipo)value(".$this->nuExp.",".$idExpFact["id"].",'".$this->fechFact."',DEFAULT)";
+            echo $pagoExpSql;
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
 
@@ -323,7 +324,7 @@ class f1{
             $pdf->cell(46,6,'Rif',1,0,'L');
             $pdf->SetY(107);
             $pdf->SetX(65);
-            $divRifSec = explode($resultPropieDe["rif"],'-');
+            $divRifSec = explode('-',$resultPropieDe["rif"]);
             if($divRifSec[0]=="N/A"){
                 if($divRifSec[1]=="NO APLICA"){
                     $pdf->cell(0,6,'NO APLICA',1,0,'L');
@@ -350,7 +351,7 @@ class f1{
             $pdf->cell(46,6,utf8_decode('No de Teléfono '),1,0,'L');
             $pdf->SetY(119);
             $pdf->SetX(65);
-            $divTelfSec = explode($resultPropieDe["telef"],'-');
+            $divTelfSec = explode('-',$resultPropieDe["telef"]);
             if($divTelfSec[0]=="N/A"){
                 if($divTelfSec[1]=="NO APLICA"){
                     $pdf->cell(0,6,'NO APLICA',1,0,'L');
@@ -1284,7 +1285,7 @@ class f1{
             $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }
         echo'
-        <input type="hidden" id="rutaPdf" value="http://10.200.0.62:8080/SisCast/assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf" />
+        <input type="hidden" id="rutaPdf" value="./assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf" />
         <input type="hidden" id="numExp" value="'.$busExpedienteRes["n_expediente"].'">';
         
     }

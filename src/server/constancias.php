@@ -525,7 +525,7 @@ class constancias{
                                 <option value="E">E</option>
                                 <option value="P">P</option>
                             </select>
-                            <input type="text" class="numText" value="'.$divCed[1].'" id="cedConst" onchange="btnRevUsuario()"/>
+                            <input type="text" class="numText" onKeyUp="mayusProp(this)" value="'.$divCed[1].'" id="cedConst" onchange="btnRevUsuario()"/>
                     </div>
                 </div>
                 <div class="col">
@@ -541,7 +541,7 @@ class constancias{
                                 <option value="P">P</option>
                                 <option value="C">C</option>
                             </select>
-                        <input type="text" class="numText" value="'.$divRif[1].'" id="rifN" />
+                        <input type="text" onKeyUp="mayusProp(this)" class="numText" value="'.$divRif[1].'" id="rifN" />
                     </div>
                 </div>
                 <div class="col">
@@ -5461,7 +5461,7 @@ class constancias{
             $expRes = $resExp->fetch_assoc();
         if($expRes["id"]!=0){
             //BUSQUEDA DE PAGO
-                $pagSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." ORDER BY fechaPagos DESC";
+                $pagSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." AND tipo='normal' ORDER BY fechaPagos DESC";
                 $resPagos = $link->query($pagSql);
                 $pagosRes = $resPagos->fetch_array();
                 $anoPago = explode("-",$pagosRes["fechaPagos"]);
@@ -5482,7 +5482,7 @@ class constancias{
             $expRes = $resExp->fetch_assoc();
 
             //BUSQUEDA DE PAGO
-                $pagSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." ORDER BY fechaPagos DESC";
+                $pagSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." AND tipo='EMPADRONAMIENTO' ORDER BY fechaPagos DESC";
                 echo $pagSql;
                 $resPagos = $link->query($pagSql);
                 $pagosRes = $resPagos->fetch_array();

@@ -20,9 +20,8 @@ class reportes{
 							<option value="usuarios">Usuarios</option>
 							<option value="parroquia">Parroquia</option>
 							<option value="uso">Uso</option>
-							<option value="rural">Rural</option>
-							<option value="urbano">Urbano</option>
-							<option value="Tenencia">Tenencia</option>
+							<option value="ambito">Ambito</option>
+							<option value="tenencia">Tenencia</option>
 							<option value="dia">Total Dia</option>
 							<option value="guardado">Total Guardado</option>
 						</select>

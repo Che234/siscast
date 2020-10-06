@@ -21,7 +21,7 @@ class login{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
-                    window.location.replace('http://10.200.0.62:8080/SisCast/'); 
+                    window.location.replace('./'); 
 			     }
 	       	}
     }
@@ -40,7 +40,7 @@ class login{
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-                    window.location.replace('http://10.200.0.62:8080/SisCast/');
+                    window.location.replace('./');
 			     }
 	       	}
     }

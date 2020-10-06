@@ -177,20 +177,28 @@ class busquedas{
                 $numExp = $expRes["n_expediente"];
                 $idProp = $expRes["fk_propietario"];
                 $idInmue = $expRes["fk_inmueble"];
+                $idExp = $expRes["id"];
                 
             }elseif($expRes["id"]==0){
                 $expEmpaSql = "SELECT * FROM expempadro where n_expediente=".$this->campBuscar."";
                 $resExpEmpa = $link->query($expEmpaSql);
                 $expEmpaRes = $resExpEmpa->fetch_array();
+                $expedientes = $expEmpaRes["id"];
                 if($expEmpaRes["id"]!=0){
                     $numExp = $expEmpaRes["n_expediente"];
                     $idProp = $expEmpaRes["fk_propietario"];
                     $idInmue = $expEmpaRes["fk_inmueble"];
+                    $idExp = $expEmpaRes["id"];
                 }else{
                     echo'
-                    <a href="http://10.200.0.62:8080/SisCast/"><input type="button" value="Regresar" class="botones btn btn-primary"/></a>
+                    <a href="./"><input type="button" value="Regresar" class="botones btn btn-primary"/></a>
                     <b>EXPEDIENTE NO EXISTE</b>';
                 }
+                //BUSQUEDA PAGOS
+                    $pagosSql = "SELECT * FROM pagos where fk_expedient=".$expEmpaRes["id"]." AND tipo='EMPADRONAMIENTO'";
+                    $resPago = $link->query($pagosSql);
+                    $pagoRes = $resPago->fetch_assoc();
+                    $fechPagosDiv = explode("-",$pagoRes["fechaPagos"]);
             }
             //BUSQUEDA PROPIETARIO
                     $propSql = "SELECT * FROM propietarios where id=".$idProp."";
@@ -205,72 +213,72 @@ class busquedas{
                     $rescaracInmue = $link->query($caracInmueSql);
                     $inmueResCarac = $rescaracInmue->fetch_assoc();
                 //BUSQUEDA PAGOS
-                    $pagosSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]."";
+                    $pagosSql = "SELECT * FROM pagos where fk_expedient=".$idExp." AND tipo='normal'";
                     $resPago = $link->query($pagosSql);
                     $pagoRes = $resPago->fetch_assoc();
                     $fechPagosDiv = explode("-",$pagoRes["fechaPagos"]);
                 echo'
-                <table border="1">
-                     <tr>
-                         <td colspan="5">
-                             <h2>Resultado</h2>
-                         </td>
-                     </tr>
-                     <tr>
-                         <td>
-                             <b>Propietario</b>
-                         </td>
-                         <td>
-                             <b>Expediente</b>
-                         </td>
-                         <td>
-                             <b>Fecha Pago</b>
-                         </td>
-                         <td>
-                             <b>Uso del Inmueble</b>
-                         </td>
-                         <td>
+                <div class="container">
+                    <div class="row">
+                        <div class="col">
+                            <h2>Resultado</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <b>Propietario:</b> '.$propRes["nombre"].' '.$propRes["apellido"].'
+                        </div>
+                        <div class="col">
+                            <b>Expediente:</b> '.$this->campBuscar.'
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <b>Ultima fecha pago</b>
+                        </div>
+                        <div class="col">
+                            <b>Uso del Inmueble</b>
+                        </div>
+                        <div class="col-7">
                             <b>Acción</b>
-                         </td>
-                     </tr>
-                     <tr>
-                         <td>
-                             '.$propRes["nombre"].' '.$propRes["apellido"].'
-                         </td>
-                         <td>
-                            '.$this->campBuscar.'
-                         </td>
-                         <td>';
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            '; 
                         if($fechPagosDiv[0] == date("Y")){
                             echo $pagoRes["fechaPagos"];
                         }else{
                             echo 'NO HA CANCELADO ESTE AÑO';
                         }
-                         echo'</td>
-                         <td>
+                        echo'
+                        </div>
+                        <div class="col">
                             '.$inmueResCarac["uso"].'
-                         </td>
-                         <td>';
-                         if($fechPagosDiv[0] == date("Y") ){
+                        </div>
+                        <div class="col-7">
+                            ';
+                            if($fechPagosDiv[0] == date("Y") ){
                             echo'<input type"button" value="Ver pagos" onclick="btnPagos()" class="botones btn btn-primary" />';
-                         }
-                         if($fechPagosDiv[0] < date("Y")){
-                            echo'<input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />';
-                         }
-                            echo'
-                            <input type"button" value="Modificar" class="botones btn btn-primary" onclick="mostTipModif()"/>';
-                        $veriRenov = "SELECT * FROM constancias where fk_expedi=".$expRes["id"]." ORDER BY fecha DESC";
+                             }
+                             if($fechPagosDiv[0] < date("Y")){
+                                echo'<input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />';
+                             }
+                             echo'
+                            <input type"button" value="Modificar" class="botones btn btn-primary " onclick="mostTipModif()"/>';
+                        $veriRenov = "SELECT * FROM constancias where fk_expedi=".$idExp." ORDER BY fecha DESC";
                         $resVeriRenov = $link->query($veriRenov);
                         $veriRenovRes = $resVeriRenov->fetch_array();
                         $fechaRenov = explode("-",$veriRenovRes["fecha"]);
-                        echo'<input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst()"/>';
-                            echo' 
+                        echo'<input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst()"/>
+
                             <input type"button" value="Eliminar" onclick="btnElimInmue()" class="botones btn btn-primary" />
-                            <input type="hidden" value="'.$expRes["n_expediente"].'" id="expBuscar" />
+                            <input type="hidden" value="'.$numExp.'" id="expBuscar" />
                             <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
-                         </td>
-                     </tr>
-                </table>
+                        </div>
+                    </div>
+                </div>
+                
                 <div id="MostResult"></div>';
         }
         if($this->tipoBuscar=="Cedula"){
@@ -2136,12 +2144,22 @@ class busquedas{
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
                 $expRes = $resExp->fetch_assoc();
+                if($expRes!=0){
+                    $propietarios = $expRes["fk_propietario"];
+                    $expediente = $expRes["id"];
+                }else{
+                    $expempadroSql = "SELECT * FROM expempadro where n_expediente=".$this->expBuscar."";
+                    $resExpempadro = $link->query($expempadroSql);
+                    $expempadroRes = $resExpempadro->fetch_assoc();
+                    $propietarios = $expempadroRes["fk_propietario"];
+                    $expediente = $expempadroRes["id"];
+                }
             //BUSQUEDA DEL PROPIETARIO
-                $propSql = "SELECT * FROM propietarios where id=".$expRes["fk_propietario"]."";
+                $propSql = "SELECT * FROM propietarios where id=".$propietarios."";
                 $resProp = $link->query($propSql);
                 $propRes = $resProp->fetch_assoc();
             //BUSQUEDA DE CANTIDAD DE PAGOS
-                $veriPagoSql = "SELECT COUNT(*) FROM pagos where fk_expedient=".$expRes["id"]." ORDER BY fechaPagos";
+                $veriPagoSql = "SELECT COUNT(*) FROM pagos where fk_expedient=".$expediente." ORDER BY fechaPagos";
                 $veriResPago = $link->query($veriPagoSql);
                 $veriPagoRes = $veriResPago->fetch_assoc();
             
@@ -2189,7 +2207,7 @@ class busquedas{
                     </td>
                 </tr>';
                     //BUSQUEDA DE PAGOS
-                        $pagoSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." ";
+                        $pagoSql = "SELECT * FROM pagos where fk_expedient=".$expediente." ";
                         $resPago = $link->query($pagoSql);
                         $pagoRes = $resPago->fetch_assoc();
                     //BUSQUEDA DE FACTURA
