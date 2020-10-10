@@ -38,29 +38,29 @@ if($accion=="form3"){
         $f003->idProp = "nada";
     }
     if(isset($_POST["nuExp"])){
-        $f002->nuExp = $_POST["nuExp"];
+        $f003->nuExp = $_POST["nuExp"];
     }else{
-        $f002->nuExp = "nada";
+        $f003->nuExp = "nada";
     }
     if(isset($_POST["montoFact"])){
-        $f002->montoFact = $_POST["montoFact"];
+        $f003->montoFact = $_POST["montoFact"];
     }else{
-        $f002->montoFact = "nada";
+        $f003->montoFact = "nada";
     }
     if(isset($_POST["fechFact"])){
-        $f002->fechFact = $_POST["fechFact"];
+        $f003->fechFact = $_POST["fechFact"];
     }else{
-        $f002->fechFact = "nada";
+        $f003->fechFact = "nada";
     }
     if(isset($_POST["numFact"])){
-        $f002->numFact = $_POST["numFact"];
+        $f003->numFact = $_POST["numFact"];
     }else{
-        $f002->numFact = "nada";
+        $f003->numFact = "nada";
     }
     if(isset($_POST["operacion"])){
-        $f002->operacion = $_POST["operacion"];
+        $f003->operacion = $_POST["operacion"];
     }else{
-        $f002->operacion = "nada";
+        $f003->operacion = "nada";
     }
     
     $f003->imprimir();

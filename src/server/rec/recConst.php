@@ -1163,6 +1163,11 @@ if(isset($_POST["accion"])){
         }else{
             $f001->nuExp= "nada";
         }
+        if(isset($_POST["idExp"])){
+            $f001->idExp=$_POST["idExp"];
+        }else{
+            $f001->idExp= "nada";
+        }
         if(isset($_POST["montoFact"])){
             $f001->montoFact=$_POST["montoFact"];
         }else{
@@ -1209,6 +1214,11 @@ if(isset($_POST["accion"])){
         }else{
             $f003->nuExp= "nada";
         }
+        if(isset($_POST["idExp"])){
+            $f003->idExp=$_POST["idExp"];
+        }else{
+            $f003->idExp= "";
+        }
         if(isset($_POST["montoFact"])){
             $f003->montoFact=$_POST["montoFact"];
         }else{
@@ -1254,6 +1264,11 @@ if(isset($_POST["accion"])){
             $f004->nuExp=$_POST["nuExp"];
         }else{
             $f004->nuExp= "nada";
+        }
+        if(isset($_POST["idExp"])){
+            $f004->idExp=$_POST["idExp"];
+        }else{
+            $f004->idExp= "";
         }
         if(isset($_POST["montoFact"])){
             $f004->montoFact=$_POST["montoFact"];

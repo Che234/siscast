@@ -14,10 +14,10 @@ class renovacion{
     }
 
     busRenov(){
-        var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
-        var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        let ajax = new objetoAjax();
+		let divsitioform = document.getElementById('BusqueDart');
+        let divsitiomaterial = document.getElementById('BusqueDart');
+		divsitioform.innerHTML="<img src='./assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recRenovacion.php",true);
@@ -36,8 +36,8 @@ class renovacion{
     }
     form1(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
-        var divsitiomaterial = document.getElementById('campGeneral');
+		var divsitioform = document.getElementById('MostResult');
+        var divsitiomaterial = document.getElementById('MostResult');
 		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
 		ajax=objetoAjax();
@@ -57,8 +57,8 @@ class renovacion{
     }
     form2(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
-        var divsitiomaterial = document.getElementById('campGeneral');
+		var divsitioform = document.getElementById('MostResult');
+        var divsitiomaterial = document.getElementById('MostResult');
 		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
 		ajax=objetoAjax();
@@ -78,9 +78,9 @@ class renovacion{
     }
     form3(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
-        var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+		var divsitioform = document.getElementById('MostResult');
+        var divsitiomaterial = document.getElementById('MostResult');
+		divsitioform.innerHTML="<img src='./assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recRenovacion.php",true);
@@ -100,8 +100,8 @@ class renovacion{
     }
     empaExp(){
         var ajax = new objetoAjax();
-        var divsitioform = document.getElementById('campGeneral');
-        var divsitiomaterial = document.getElementById('campGeneral');
+        var divsitioform = document.getElementById('MostResult');
+        var divsitiomaterial = document.getElementById('MostResult');
         divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
         ajax=objetoAjax();
@@ -142,17 +142,18 @@ function veriRenov(){
         lindSecDoc = document.getElementById("lindSecDoc").value
         condicionExp = document.getElementById("condicionExp").value
         renov.anoExp = document.getElementById("anoExp").value
+
         if(condicionExp!="nada"){
             renov.empaExp();
-        }
-        if(lindGeneral=="nada"){
-            if(lindPosVenta =="nada"){
-                if(lindSecDoc !="nada"){
-                    if(condicionExp=="nada"){
-                        renov.form2()
+        }else{
+            if(lindGeneral=="nada"){
+                if(lindPosVenta =="nada"){
+                    if(lindSecDoc !="nada"){
+                        if(condicionExp=="nada"){
+                            renov.form2()
+                        }
                     }
                 }
-            }
         }
         if(lindGeneral!="nada"){
             if(lindSecDoc!="nada"){
@@ -173,9 +174,21 @@ function veriRenov(){
                 }
             }
         }
+        if(lindGeneral!="nada"){
+            if(lindSecDoc!="nada"){
+                if(lindPosVenta!="nada"){
+                    if(condicionExp=="nada"){
+                        renov.form3()
+                    }
+                }
+            }
+        }
+    }
+        
 
     }
     if(proceso=="No"){
+        alert("hola");
         alert("NO HA REALIZADO EL PAGO DEL AÑO EN CURSO");
         tipoBuscar = document.getElementById("tipoBuscar").value
         nuExp = document.getElementById("nuExp").value

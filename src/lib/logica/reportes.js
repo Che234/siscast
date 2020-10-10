@@ -41,6 +41,24 @@ class reportes{
 			     }
 	       	}
 	}
+	cargSub(){
+		var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('subCampRept');
+        var divsitiomaterial = document.getElementById('subCampRept');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recRepor.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`campReport=${this.campReport}&accion=cargSub`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText;
+                }
+	       	}
+	}
 }
 function btnFReport(){
 	let report = new reportes();
@@ -50,4 +68,9 @@ function btnBusRepor(){
 	let report = new reportes()
 	report.campReport = document.getElementById("campReport").value
 	report.busReport();
+}
+function btnCargSub(){
+	let report = new reportes();
+	report.campReport = document.getElementById("campReport").value
+	report.cargSub();
 }

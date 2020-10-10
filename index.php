@@ -51,7 +51,8 @@
         echo'<div id="campGeneral">';
         $nlog= new login();
         $nlog->fLogin();
-        echo'</div>';
+        echo'</div>
+        ';
         
     };
     ?>

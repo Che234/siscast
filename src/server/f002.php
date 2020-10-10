@@ -79,7 +79,7 @@ class f001{
                 $resExpFact= $link->query($expFactSql);
                 $idExpFact= $resExpFact->fetch_array();
             //BUSQUEDA DEL EXPEDIENTE
-                $busExpSQL = "SELECT * FROM expediente where id=".$this->nuExp."";
+                $busExpSQL = "SELECT * FROM expediente where n_expediente=".$this->nuExp."";
                 $resBusEXP = $link->query($busExpSQL);
                 $busExpedienteRes = $resBusEXP->fetch_array();
                 $fecha = explode('-',$busExpedienteRes["fecha"]);
@@ -146,7 +146,7 @@ class f001{
                 }
             
             //INSERT PAGOS
-                $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos,tipo)value(".$this->nuExp.",".$idExpFact["id"].",'".$this->fechFact."',DEFAULT)";
+                $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos,tipo)value(".$busExpedienteRes["n_expediente"].",".$idExpFact["id"].",'".$this->fechFact."',DEFAULT)";
                 $link->query($pagoExpSql);
                 $idPagoExp= $link->insert_id;
             
@@ -1519,6 +1519,7 @@ class f003{
     var $idInmueble = "";
     var $idProp = "";
     var $nuExp = "";
+    var $idExp = "";
     var $montoFact = "";
     var $fechFact = "";
     var $numFact= "";
@@ -1541,28 +1542,32 @@ class f003{
             $resExpFact= $link->query($expFactSql);
             $idExpFact= $resExpFact->fetch_array();
         //BUSQUEDA DEL EXPEDIENTE
-            $busExpSQL = "SELECT * FROM expediente where id=".$this->nuExp."";
+            $busExpSQL = "SELECT * FROM expediente where n_expediente=".$this->nuExp."";
             $resBusEXP = $link->query($busExpSQL);
             $busExpedienteRes = $resBusEXP->fetch_array();
             $fecha = explode('-',$busExpedienteRes["fecha"]);
             $anoExp= $fecha[0];
             echo '<input type="hidden" value="'.$anoExp.'" id="anoExp" />
             <input type="hidden" value="'.$busExpedienteRes["n_expediente"].'" id="nuExp" />';
+        //INSERT PAGOS
+            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos,tipo)value(".$busExpedienteRes["n_expediente"].",".$idExpFact["id"].",'".$this->fechFact."',DEFAULT)";
+            $link->query($pagoExpSql);
+            $idPagoExp= $link->insert_id;
         //BUSQUEDA DEL INMUEBLE
             $inmueDeSql= "SELECT * from inmueble where id=".$this->idInmueble."";
             $resInmueDe= $link->query($inmueDeSql);
             $resultInmueDe = $resInmueDe->fetch_assoc();
             $idProt= $resultInmueDe["fk_protocolizacion"];
             $idLindDoc= $resultInmueDe["fk_lind_documento"];
-            $idLindGen= $resultInmueDe["fk_lind_general"];
+            $idLindPosVenta= $resultInmueDe["fk_lind_pos_venta"];
             $idConst= $resultInmueDe["fk_carac_construccion"];
             $idServicios= $resultInmueDe["fk_servicios"];
             $idCaracInmue= $resultInmueDe["fk_carac_inmuebles"];
             $idcaracConstruccion= $resultInmueDe["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
-            $propDeSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
+            $propDeSql= "SELECT * from propietarios where id=".$this->idProp."";
             $resPropDe= $link->query($propDeSql);
-            $resultPropieDe = $resPropDe->fetch_assoc();
+            $resultPropieDe = $resPropDe->fetch_array();
             $nombreProp= ''.$resultPropieDe["nombre"].' '.$resultPropieDe["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
             $protSql = "SELECT * from datos_protocolizacion where id='".$idProt."' ";
@@ -1606,10 +1611,7 @@ class f003{
                 $link->query($constansSql);
                 $idConstancias = $link->insert_id;
             }
-        //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos,tipo)value(".$this->nuExp.",".$idExpFact["id"].",'".$this->fechFact."',DEFAULT)";
-            $link->query($pagoExpSql);
-            $idPagoExp= $link->insert_id;
+        
         //CONTINUACION HEADER
             $pdf->SetFont('Times','B',12);
             $pdf->SetX(38);
@@ -2961,7 +2963,7 @@ class f003{
             $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }
         echo'
-        <input type="hidden" id="rutaPdf" value="./SisCast/assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf" />
+        <input type="hidden" id="rutaPdf" value="./assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf" />
         <input type="hidden" id="numExp" value="'.$busExpedienteRes["n_expediente"].'">';
     }
 }
@@ -2988,7 +2990,7 @@ class f004{
             $resExpFact= $link->query($expFactSql);
             $idExpFact= $resExpFact->fetch_array();
         //BUSQUEDA DEL EXPEDIENTE
-            $busExpSQL = "SELECT * FROM expempadro where id=".$this->nuExp."";
+            $busExpSQL = "SELECT * FROM expempadro where id='".$this->nuExp."'";
             $resBusEXP = $link->query($busExpSQL);
             $busExpedienteRes = $resBusEXP->fetch_array();
             $fecha = explode('-',$busExpedienteRes["fecha"]);
@@ -2996,7 +2998,7 @@ class f004{
             echo '<input type="hidden" value="'.$anoExp.'" id="anoExp" />
             <input type="hidden" value="'.$busExpedienteRes["n_expediente"].'" id="nuExp" />';
         //BUSQUEDA DEL INMUEBLE
-            $inmueDeSql= "SELECT * from inmueble where id=".$this->idInmueble."";
+            $inmueDeSql= "SELECT * from inmueble where id=".$busExpedienteRes["fk_inmueble"]."";
             $resInmueDe= $link->query($inmueDeSql);
             $resultInmueDe = $resInmueDe->fetch_assoc();
             $idProt= $resultInmueDe["fk_protocolizacion"];
@@ -3050,11 +3052,12 @@ class f004{
                 $idConstancias = $link->insert_id;
             }
         //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos,tipo)value(".$this->nuExp.",".$idExpFact["id"].",'".$this->fechFact."','EMPADRONAMIENTO')";
+            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos,tipo)value(".$busExpedienteRes["n_expediente"].",".$idExpFact["id"].",'".$this->fechFact."','EMPADRONAMIENTO')";
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
         // Creación del objeto de la clase heredada
-            $pdf = new PDF('P','mm','A3');
+            // $pdf = new PDF('P','mm','A3');
+            $pdf = new PDF('P','mm',array(216,330));
             $pdf->SetMargins(20,0,22);
             $pdf->AliasNbPages();
             $pdf->AddPage();
@@ -3577,9 +3580,9 @@ class f004{
             }
             $pdf->SetY(206);    
             $pdf->SetX(19);
-            $pdf->cell(60,6,utf8_decode('Dirección del Inmueble'),1,0,'L');
+            $pdf->cell(40,6,utf8_decode('Dirección del Inmueble'),1,0,'L');
             $pdf->SetY(206);    
-            $pdf->SetX(79);
+            $pdf->SetX(59);
             $pdf->cell(0,6,''.utf8_decode($resultInmueDe["direccion"]).'',1,0,'C');
         //SERVICIOS 1
             $pdf->SetY(212);    

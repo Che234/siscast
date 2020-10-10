@@ -1,11 +1,11 @@
-var er_areas = /^[A-Z\a-z\À-ÿ\s+\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\,\-\:]{3,125}$/;
-var ex_cedula = /^[0-9\.\a-z\A-Z\s+\-\,\:]{6,125}$/;
+var er_areas = /^[A-Z\a-z\À-ÿ\s+\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\,\-\:]{3,97}$/;
+var ex_cedula = /^[0-9\.\a-z\A-Z\s+\-\,\:]{6,97}$/;
 var ex_nac = /^[a-z\À-ÿ\A-z\\u00f1\\u00d1]{1,2}$/;
-var ex_datcort= /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,100}$/;
+var ex_datcort= /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,97}$/;
 var ex_Telefono = /^[0-9\a-z\A-Z\(\)]{2,7}$/;
 var ex_Telef= /^[0-9\a-z\A-Z\(\s+\)]{7}$/;
 var ex_rif = /^[0-9\.\a-z\A-Z\s+\-]{6,125}$/;
-var er_cont= /^[0-9\a-z\A-Z\À-ÿ\\u00f1\\u00d1]{5,65}$/;
+var er_cont= /^[0-9\a-z\A-Z\À-ÿ\\u00f1\\u00d1]{5,97}$/;
 var ex_datos= /^[A-Z\À-ÿ\s+\a-z\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1]{3,65}$/;
 var ex_carnet=/^[0-9\-\.\A-Z\s+]{1,19}$/;
 var ex_telef=/^[0-9\-]{2,18}$/;

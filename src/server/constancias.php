@@ -2926,6 +2926,7 @@ class constancias{
             $inmueDeSQL ="SELECT * FROM inmueble where direccion='".$inmueRes["direccion"]."'";
             $resDeInmue = $link->query($inmueDeSQL);
             $inmueDeRes = $resDeInmue->fetch_array();
+
         if($propDeRes["cedula"]==$propieRes["cedula"]){
             if($inmueDeRes["id"]!=0){
                 echo'<input type="hidden" value="true" id="verInmV">';
@@ -3020,10 +3021,10 @@ class constancias{
                     $link->query($inmuebleSQL);
                     $idInmueble = $link->insert_id;
                 //EXPEDIENTE
-                    $expSQL = "SELECT * FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
-                    $resExpe = $link->query($expSQL);
-                    $expeRes = $resExpe->fetch_array();
-                    $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$userRes["id"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','".$expeRes["condicion"]."','".$expeRes["valorInmue"]."')";
+                    $expTempSQL = "SELECT * FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
+                    $resTempExpe = $link->query($expTempSQL);
+                    $expeTempRes = $resTempExpe->fetch_array();
+                    $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$userRes["id"].",'".$expeTempRes["no_expediente"]."','".$expeTempRes["fecha"]."','".$expeTempRes["condicion"]."','".$expeTempRes["valorInmue"]."')";
                     $link->query($expedientSQL);
                     $idExpedient = $link->insert_id;
                 //FACTURA
@@ -3040,7 +3041,7 @@ class constancias{
                 <input type="hidden" value="'.$idProp2.'" id="idProp"/>
                 <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
                 <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
-                <input type="hidden" value="'.$idExpedient.'" id="nuExp"/>
+                <input type="hidden" value="'.$expeTempRes["no_expediente"].'" id="nuExp"/>
                 ';
                 //ELIMINAR SQL DE TEMP
                     //PROPIETARIO
@@ -3206,7 +3207,7 @@ class constancias{
             <input type="hidden" value="'.$idProp2.'" id="idProp"/>
             <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
             <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
-            <input type="hidden" value="'.$idExpedient.'" id="nuExp"/>
+            <input type="hidden" value="'.$expeRes["no_expediente"].'" id="nuExp"/>
             ';
             //ELIMINAR SQL DE TEMP
                 //PROPIETARIO
@@ -3412,7 +3413,7 @@ class constancias{
                 <input type="hidden" value="'.$idProp2.'" id="idProp"/>
                 <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
                 <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
-                <input type="hidden" value="'.$expeRes["id"].'" id="nuExp"/>
+                <input type="hidden" value="'.$expeRes["no_expediente"].'" id="nuExp"/>
                 ';
                 //ELIMINAR SQL DE TEMP
                     //PROPIETARIO
@@ -3592,7 +3593,7 @@ class constancias{
                     $expeTempRes = $resExpeTemp->fetch_array();
                     $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$userRes["id"].",'".$expeTempRes["no_expediente"]."','".$expeTempRes["fecha"]."','".$expeTempRes["condicion"]."','".$expeTempRes["valorInmue"]."')";
                     $link->query($expedientSQL);
-                    $idExpedient = $link->insert_id;    
+                    $idExpedient = $link->insert_id;
                 //FACTURA
                     $factSQL = "SELECT * FROM temp_factura where id=".$this->idFactura."";
                     $resFact = $link->query($factSQL);
@@ -5051,7 +5052,7 @@ class constancias{
             $expSQL = "SELECT * FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
             $resExpe = $link->query($expSQL);
             $expeRes = $resExpe->fetch_array();
-            $expedientSQL = "INSERT INTO expempadro(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idPropie.",".$userRes["id"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','".$expeRes["condicion"]."','".$expeRes["valorInmue"]."')";
+            $expedientSQL = "INSERT INTO expempadro(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idPropie.",".$userRes["id"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','EMPADRONAMIENTO','".$expeRes["valorInmue"]."')";
             $link->query($expedientSQL);
             $nuExpedient = $link->insert_id;
         //FACTURA

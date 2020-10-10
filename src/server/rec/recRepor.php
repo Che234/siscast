@@ -24,4 +24,14 @@ if($accion=="busReport"){
 	$f3->imprimir();
 }
 
+
+if($accion=="cargSub"){
+	if(isset($_POST['campReport'])){
+    	$repor->campReport= $_POST['campReport'];
+	}else{
+	    $repor->campReport= "nada";
+	}
+	$repor->cargSub();
+}
+
 ?>

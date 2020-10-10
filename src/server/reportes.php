@@ -15,7 +15,7 @@ class reportes{
 				</div>
 				<div class="row">
 					<div class="col">
-						<select id="campReport">
+						<select id="campReport" onChange="btnCargSub();">
 							<option value="NADA"></option>
 							<option value="usuarios">Usuarios</option>
 							<option value="parroquia">Parroquia</option>
@@ -27,10 +27,29 @@ class reportes{
 						</select>
 					</div>
 					<div class="col">
+						<select id="subCampRept">
+							<option value="NADA"></option>
+						</select>
+					</div>
+					<div class="col">
 						<button class="btn btn-primary" onclick="btnBusRepor()">Generar</button>
 					</div>
 				</div>
 			</div>';
+	}
+	function cargSub(){
+		if($this->campReport =="usuarios"){
+			$userBusSQl = "SELECT * FROM usuarios";
+			$resUserBus = $link->query();
+			$userResBus = $resUserBus->fetch_array();
+			echo $userBusSQl;
+			for($i = 0; $i < sizeof($userResBus); $i++){
+				echo'
+					<option value="'.$i.'">"'.$i.'"</option>
+
+				';
+			}
+		}
 	}
 }
 

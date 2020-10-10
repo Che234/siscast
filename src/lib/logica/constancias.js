@@ -1773,8 +1773,8 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idPosVenta=${this.idPosVenta}&idServInmue=${this.idServInmue}&accion=veriF3`); 
-		ajax.onreadystatechange=function()
+        ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idPosVenta=${this.idPosVenta}&idServInmue=${this.idServInmue}&accion=veriF3`); 
+        ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
@@ -1823,7 +1823,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idServInmue=${this.idServInmue}&accion=veriF2`); 
+        ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idServInmue=${this.idServInmue}&nuExp=${this.nuExp}&accion=veriF2`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -1873,7 +1873,7 @@ class constancias{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recConst.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idServInmue=${this.idServInmue}&accion=veriF1`); 
+        ajax.send(`idFactura=${this.idFactura}&nuExp=${this.nuExp}&idProp=${this.idProp}&idInmue=${this.idInmue}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idServInmue=${this.idServInmue}&accion=veriF1`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -2396,28 +2396,9 @@ function btnVeriImpri(){
                 consta.idLindGen = idLindGen
                 consta.veriF3();
             }else{
-            if(idLindDoc!=0){
-                if(idPosVenta!=0){
-                     //F003
-                    consta.idProp = idPropie
-                    consta.idInmue = idInmue
-                    consta.idCaraInmue = idCaraInmue
-                    consta.idCaraConst = idCaraConst
-                    consta.idProto = idProto
-                    consta.idServInmue = idServInmue
-                    consta.idEstConserv = idEstConserv
-                    consta.idPiezSant = idPiezSant
-                    consta.idAmbientes = idAmbientes
-                    consta.idPuertas = idPuertas
-                    consta.idComple = idComple
-                    consta.idFactura = idFactura
-                    consta.idExp = idExp
-                    consta.idLindDoc = idLindDoc
-                    consta.idPosVenta = idPosVenta
-                    consta.idLindGen = idLindGen
-                    consta.veriF3();
-                }else if(idLindGen!=0){
-                    //F001
+                if(idLindDoc!=0){
+                    if(idPosVenta!=0){
+                         //F003
                         consta.idProp = idPropie
                         consta.idInmue = idInmue
                         consta.idCaraInmue = idCaraInmue
@@ -2432,26 +2413,45 @@ function btnVeriImpri(){
                         consta.idFactura = idFactura
                         consta.idExp = idExp
                         consta.idLindDoc = idLindDoc
+                        consta.idPosVenta = idPosVenta
                         consta.idLindGen = idLindGen
-                        consta.veriF1();
-                }else{
-                     //F002
-                        consta.idProp = idPropie
-                        consta.idInmue = idInmue
-                        consta.idCaraInmue = idCaraInmue
-                        consta.idCaraConst = idCaraConst
-                        consta.idProto = idProto
-                        consta.idServInmue = idServInmue
-                        consta.idEstConserv = idEstConserv
-                        consta.idPiezSant = idPiezSant
-                        consta.idAmbientes = idAmbientes
-                        consta.idPuertas = idPuertas
-                        consta.idComple = idComple
-                        consta.idFactura = idFactura
-                        consta.idExp = idExp
-                        consta.idLindDoc = idLindDoc
-                        consta.veriF2();
-                }
+                        consta.veriF3();
+                    }else if(idLindGen!=0){
+                        //F001
+                            consta.idProp = idPropie
+                            consta.idInmue = idInmue
+                            consta.idCaraInmue = idCaraInmue
+                            consta.idCaraConst = idCaraConst
+                            consta.idProto = idProto
+                            consta.idServInmue = idServInmue
+                            consta.idEstConserv = idEstConserv
+                            consta.idPiezSant = idPiezSant
+                            consta.idAmbientes = idAmbientes
+                            consta.idPuertas = idPuertas
+                            consta.idComple = idComple
+                            consta.idFactura = idFactura
+                            consta.idExp = idExp
+                            consta.idLindDoc = idLindDoc
+                            consta.idLindGen = idLindGen
+                            consta.veriF1();
+                    }else{
+                         //F002
+                            consta.idProp = idPropie
+                            consta.idInmue = idInmue
+                            consta.idCaraInmue = idCaraInmue
+                            consta.idCaraConst = idCaraConst
+                            consta.idProto = idProto
+                            consta.idServInmue = idServInmue
+                            consta.idEstConserv = idEstConserv
+                            consta.idPiezSant = idPiezSant
+                            consta.idAmbientes = idAmbientes
+                            consta.idPuertas = idPuertas
+                            consta.idComple = idComple
+                            consta.idFactura = idFactura
+                            consta.idExp = idExp
+                            consta.idLindDoc = idLindDoc
+                            consta.veriF2();
+                    }
                 
                 }else{
                     alert("ERROR EN ELECCION DE LINDEROS");
