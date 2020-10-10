@@ -138,7 +138,7 @@ class f1{
             }
             
         //INSERT PAGOS
-            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos,tipo)value(".$busExpedienteRes["n_expediente"].",".$idExpFact["id"].",'".$date('Y','d','m')."',DEFAULT)";
+            $pagoExpSql= "INSERT INTO pagos(fk_expedient,fk_factura,fechaPagos,tipo)value(".$busExpedienteRes["n_expediente"].",".$idExpFact["id"].",'".date('Y-m-d')."',DEFAULT)";
             $link->query($pagoExpSql);
             $idPagoExp= $link->insert_id;
 

@@ -79,7 +79,8 @@ class f001{
                 $resExpFact= $link->query($expFactSql);
                 $idExpFact= $resExpFact->fetch_array();
             //BUSQUEDA DEL EXPEDIENTE
-                $busExpSQL = "SELECT * FROM expediente where n_expediente=".$this->nuExp."";
+                $busExpSQL = "SELECT * FROM expediente where id=".$this->nuExp."";
+                echo $busExpSQL;
                 $resBusEXP = $link->query($busExpSQL);
                 $busExpedienteRes = $resBusEXP->fetch_array();
                 $fecha = explode('-',$busExpedienteRes["fecha"]);
@@ -1565,7 +1566,7 @@ class f003{
             $idCaracInmue= $resultInmueDe["fk_carac_inmuebles"];
             $idcaracConstruccion= $resultInmueDe["fk_carac_construccion"];
         //BUSQUEDA DEL PROPIETARIO
-            $propDeSql= "SELECT * from propietarios where id=".$this->idProp."";
+            $propDeSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
             $resPropDe= $link->query($propDeSql);
             $resultPropieDe = $resPropDe->fetch_array();
             $nombreProp= ''.$resultPropieDe["nombre"].' '.$resultPropieDe["apellido"].'';
