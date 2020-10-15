@@ -25,7 +25,7 @@ if($accion=="BusRenov"){
     $renov->busRenov();
 }
 if($accion=="form3"){
-    include("../f002.php");
+    include("../f004.php");
     $f003 = new f003;
     if(isset($_POST["idInmueble"])){
         $f003->idInmueble = $_POST["idInmueble"];
@@ -66,7 +66,7 @@ if($accion=="form3"){
     $f003->imprimir();
 }
 if($accion=="form1"){
-    include("../f002.php");
+    include("../f004.php");
     $f001 = new f001;
     if(isset($_POST["idInmueble"])){
         $f001->idInmueble = $_POST["idInmueble"];

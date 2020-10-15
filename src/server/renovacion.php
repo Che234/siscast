@@ -16,7 +16,7 @@ class renovacion{
             $resBus = $link->query($busSql);
             $busRes = $resBus->fetch_array();
         if($busRes["id"] !=0){
-            $expResultado = $busRes["id"];
+            $expResultado = $busRes["n_expediente"];
             $anoExp = explode('-',$busRes["fecha"]);
             $condicionExp = $busRes["condicion"];
             $inmueble = $busRes["fk_inmueble"];
@@ -26,7 +26,7 @@ class renovacion{
             $busempaSql = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
             $resempadroBus = $link->query($busempaSql);
             $empadroBusRes = $resempadroBus->fetch_array();
-            $expResultado = $empadroBusRes["id"];
+            $expResultado = $empadroBusRes["n_expediente"];
             $numExpedientes = $empadroBusRes["n_expediente"];
             $anoExp = explode('-',$empadroBusRes["fecha"]);
             $condicionExp = $empadroBusRes["condicion"];
@@ -34,7 +34,7 @@ class renovacion{
             $tipo= "EMPADRONAMIENTO";
         }
         //BUSCAR PAGO
-            $pagSql = "SELECT * FROM pagos where fk_expedient=".$expResultado." AND tipo='".$tipo."' ORDER BY fechaPagos DESC";
+            $pagSql = "SELECT * FROM pagos where fk_expedient='".$expResultado."' AND tipo='".$tipo."' ORDER BY fechaPagos DESC";
             $resPag = $link->query($pagSql);
             $pagoRes = $resPag->fetch_array();
             $pagRes = explode("-",$pagoRes["fechaPagos"]);
@@ -91,7 +91,7 @@ class renovacion{
         if($pagRes[0] < date("Y")){
             echo'
             <input type="hidden" value="No" id="proceso" />
-            <input type="hidden" value="'.$busRes["id"].'" id="nuExp" />
+            <input type="hidden" value="'.$busRes["n_expediente"].'" id="nuExp" />
             <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
             <input type="hidden" value="'.$anoExp[0].'" id="anoExp" />
             ';   

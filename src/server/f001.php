@@ -646,7 +646,7 @@ class f1{
             $pdf->SetX(19);
             $pdf->cell(25,5,'Area de Terreno',1,0,'C');
             $pdf->SetY(169);    
-            $pdf->SetX(44);
+            $pdf->SetX(59);
             if($resultLindDoc["areaTotal"]=="NO APLICA"){
                 $pdf->cell(22,5,'NO APLICA',1,0,'C');
             }else{

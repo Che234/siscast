@@ -177,11 +177,11 @@ class busquedas{
                 $numExp = $expRes["n_expediente"];
                 $idProp = $expRes["fk_propietario"];
                 $idInmue = $expRes["fk_inmueble"];
-                $idExp = $expRes["id"];
+                $idExp = $expRes["n_expediente"];
                 $condicion = $expRes["condicion"];
 
                 //BUSQUEDA PAGOS
-                        $pagosSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." AND tipo='normal'";
+                        $pagosSql = "SELECT * FROM pagos where fk_expedient=".$expRes["n_expediente"]." AND tipo='normal'";
                         $resPago = $link->query($pagosSql);
                         $pagoRes = $resPago->fetch_assoc();
                         $fechPagosDiv = explode("-",$pagoRes["fechaPagos"]);
@@ -278,7 +278,7 @@ class busquedas{
                     $condicion = $expEmpaRes["condicion"];
                     $idExp = $expEmpaRes["id"];
                     //BUSQUEDA PAGOS
-                        $pagosSql = "SELECT * FROM pagos where fk_expedient=".$expEmpaRes["id"]." AND tipo='EMPADRONAMIENTO'";
+                        $pagosSql = "SELECT * FROM pagos where fk_expedient=".$expEmpaRes["n_expediente"]." AND tipo='EMPADRONAMIENTO'";
                         $resPago = $link->query($pagosSql);
                         $pagoRes = $resPago->fetch_assoc();
                         $fechPagosDiv = explode("-",$pagoRes["fechaPagos"]);
@@ -294,13 +294,8 @@ class busquedas{
                     $caracInmueSql = "SELECT * FROM carc_inmueble where id=".$inmueRes["fk_carac_inmuebles"]."";
                     $rescaracInmue = $link->query($caracInmueSql);
                     $inmueResCarac = $rescaracInmue->fetch_assoc();
-                //BUSQUEDA PAGOS
-                    $pagosSql = "SELECT * FROM pagos where fk_expedient=".$idExp." AND tipo='EMPADRONAMIENTO'";
-                    $resPago = $link->query($pagosSql);
-                    $pagoRes = $resPago->fetch_assoc();
-                    $fechPagosDiv = explode("-",$pagoRes["fechaPagos"]);
                 echo'
-                <div class="container busqueDat">
+                <div class="container " id="BusqueDart">
                     <div class="row">
                         <div class="col">
                             <h2>Resultado</h2>
@@ -329,7 +324,7 @@ class busquedas{
                         <div class="col">
                             '; 
                         if($fechPagosDiv[0] == date("Y")){
-                            echo $pagoRes["fechaPagos"];
+                            echo ''.$fechPagosDiv[2].'/'.$fechPagosDiv[1].'/'.$fechPagosDiv[0].'';
                         }else{
                             echo 'NO HA CANCELADO ESTE AÑO';
                         }

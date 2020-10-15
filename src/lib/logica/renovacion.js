@@ -44,14 +44,14 @@ class renovacion{
 		ajax.open("POST", "src/server/rec/recRenovacion.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idInmueble=${this.idInmueble}&idProp=${this.idProp}&nuExp=${this.nuExp}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&numFact=${this.numFact}&operacion=${this.operacion}&accion=form1`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     let nuExp = document.getElementById("nuExp").value
                     let ano = document.getElementById("anoExp").value
-                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="localhost/SisCast/assets/constancias/${ano}/${nuExp}.pdf" type="application/pdf"></div>`;
+                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="./assets/constancias/${ano}/${nuExp}.pdf" type="application/pdf"></div>`;
                  }
 	       	}
     }
@@ -188,7 +188,6 @@ function veriRenov(){
 
     }
     if(proceso=="No"){
-        alert("hola");
         alert("NO HA REALIZADO EL PAGO DEL AÑO EN CURSO");
         tipoBuscar = document.getElementById("tipoBuscar").value
         nuExp = document.getElementById("nuExp").value

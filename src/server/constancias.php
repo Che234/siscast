@@ -4154,7 +4154,7 @@ class constancias{
                 <input type="hidden" value="'.$idPropie.'" id="idProp"/>
                 <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
                 <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
-                <input type="hidden" value="'.$nuExpedient.'" id="nuExp"/>
+                <input type="hidden" value="'.$expeRes["no_expediente"].'" id="nuExp"/>
                 ';
                 //ELIMINAR SQL DE TEMP
                     //PROPIETARIO
@@ -4324,7 +4324,7 @@ class constancias{
                 <input type="hidden" value="'.$idPropie.'" id="idProp"/>
                 <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
                 <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
-                <input type="hidden" value="'.$nuExpedient.'" id="nuExp"/>
+                <input type="hidden" value="'.$expeRes["no_expediente"].'" id="nuExp"/>
                 ';
                 //ELIMINAR SQL DE TEMP
                     //PROPIETARIO
