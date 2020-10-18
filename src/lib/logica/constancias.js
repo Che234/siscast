@@ -193,16 +193,20 @@ class constancias{
     //TEST
     testProp(){
         
-        if(!er_areas.test(this.nomProp)){
+        if(!nombre.test(this.nomProp)){
             alert("Error en el formato de Nombre");
             return false;
         }
-        if(!er_areas.test(this.apelProp)){
+        if(!nombre.test(this.apelProp)){
             alert("Error en el formato de Apellido");
             return false;
         }
-        if(!er_areas.test(this.direcProp)){
+        if(!direcprop.test(this.direcProp)){
             alert("Error en el formato de direccion del propietario");
+            return false;
+        }
+        if(!ex_cedula.test(this.cedFul)){
+            alert("Error en el formato de Cedula");
             return false;
         }
         return true//VERIFICADO//VERIFICADO
@@ -220,7 +224,7 @@ class constancias{
             alert("Error en el formato de Ambito")
             return false
         }
-        if(!er_areas.test(this.direcInmue)){
+        if(!dirInmue.test(this.dirInmue)){
             alert("Error en el formato de Dirección del Inmueble");
             return false;
         }
@@ -286,6 +290,10 @@ class constancias{
             alert("Error en el formato de Instalaciones electricas");
             return false;
         }
+        if(!obsInmue.test(this.obsConst)){
+            alert("Error en el formato de Observaciones");
+            return false;
+        }
         return true//VERIFICADO// VERIFICADO
     }
     veriProt(){
@@ -293,19 +301,19 @@ class constancias{
             alert("Error en el formato de Documento debidamente");
             return false;
         }
-        if(!ex_datcort.test(this.direcProtConst)){
+        if(!protDirec.test(this.direcProtConst)){
             alert("Error en el formato de Dirección de protocolización");
             return false;
         }
-        if(!ex_carnet.test(this.numProtConst)){
+        if(!numProt.test(this.numProtConst)){
             alert("Error en el formato de Numero de protocolización");
             return false;
         }
-        if(!ex_trayec.test(this.tomoProtConst)){
+        if(!tomProt.test(this.tomoProtConst)){
             alert("Error en el formato de Tomo");
             return false;
         }
-        if(!ex_trayec.test(this.folioProtConst)){
+        if(!folioProt.test(this.folioProtConst)){
             alert("Error en el formato de Folio");
             return false;
         }
@@ -317,7 +325,7 @@ class constancias{
             alert("Error en el formato de Trimestre");
             return false;
         }
-        if(!ex_trayec.test(this.valorProtConst)){
+        if(!valorInmue.test(this.valorProtConst)){
             alert("Error en el formato de Valor del inmueble");
             return false;
         }
@@ -328,7 +336,7 @@ class constancias{
             alert("Error en el formato de Mts Norte general");
             return false;
         }
-        if(!ex_datcort.test(this.alindNort)){
+        if(!alindInmue.test(this.alindNort)){
             alert("Error en el formato de Alinderado Norte");
             return false;
         }
@@ -336,7 +344,7 @@ class constancias{
             alert("Error en el formato de Mts Sur");
             return false;
         }
-        if(!ex_datcort.test(this.alindSur)){
+        if(!alindInmue.test(this.alindSur)){
             alert("Error en el formato de Alinderado Sur");
             return false;
         }
@@ -344,7 +352,7 @@ class constancias{
             alert("Error en el formato de Mts Este");
             return false;
         }
-        if(!ex_datcort.test(this.alindEste)){
+        if(!alindInmue.test(this.alindEste)){
             alert("Error en el formato de Alinderado Este");
             return false;
         }
@@ -352,7 +360,7 @@ class constancias{
             alert("Error en el formato de Mts Oeste");
             return false;
         }
-        if(!ex_datcort.test(this.alindOeste)){
+        if(!alindInmue.test(this.alindOeste)){
             alert("Error en el formato de Alinderado Oeste");
             return false;
         }
@@ -360,7 +368,7 @@ class constancias{
             alert("Error en el formato de Área Total");
             return false;
         }
-        if(!niveles.test(this.NivConstTotal)){
+        if(!nivConst.test(this.NivConstTotal)){
             alert("Error en el formato de Niveles de Construcción");
             return false;
         }
@@ -408,10 +416,6 @@ class constancias{
             alert("Error en el formato de Unidad de Area Total");
             return false;
         }
-        if(!ex_datcort.test(this.NivConstTotal)){
-            alert("Error en el formato de Nivel de construcción");
-            return false;
-        }
         if(!ex_trayec.test(this.arConstTotal)){
             alert("Error en el formato de Nivel de construcción");
             return false;
@@ -423,7 +427,7 @@ class constancias{
             alert("Error en el formato de Mts Norte Segun Documento");
             return false;
         }
-        if(!ex_datcort.test(this.alindSecNorte)){
+        if(!alindInmue.test(this.alindSecNorte)){
             alert("Error en el formato de Alinderado Norte Segun Documento");
             return false;
         }
@@ -431,7 +435,7 @@ class constancias{
             alert("Error en el formato de Mts Sur Segun Documento");
             return false;
         }
-        if(!ex_datcort.test(this.alindSecSur)){
+        if(!alindInmue.test(this.alindSecSur)){
             alert("Error en el formato de Alinderado Sur Segun Documento");
             return false;
         }
@@ -439,7 +443,7 @@ class constancias{
             alert("Error en el formato de Mts Este Segun Documento");
             return false;
         }
-        if(!ex_datcort.test(this.alindSecEste)){
+        if(!alindInmue.test(this.alindSecEste)){
             alert("Error en el formato de Alinderado Este Segun Documento");
             return false;
         }
@@ -447,7 +451,7 @@ class constancias{
             alert("Error en el formato de Mts Oeste Segun Documento");
             return false;
         }
-        if(!ex_datcort.test(this.alindSecOeste)){
+        if(!alindInmue.test(this.alindSecOeste)){
             alert("Error en el formato de Alinderado Oeste Segun Documento");
             return false;
         }
@@ -491,7 +495,7 @@ class constancias{
             alert("Error en el formato de Unidad Area Total");
             return false;
         }
-        if(!ex_datcort.test(this.NivConstTotal3)){
+        if(!nivConst.test(this.NivConstTotal3)){
             alert("Error en el formato de Niveles de Construcción");
             return false;
         }
@@ -510,7 +514,7 @@ class constancias{
             alert("Error en el formato de Mts Norte posible Venta");
             return false;
         }
-        if(!ex_datcort.test(this.alindPosNort)){
+        if(!alindInmue.test(this.alindPosNort)){
             alert("Error en el formato de Alinderado Norte posible Venta");
             return false;
         }
@@ -518,7 +522,7 @@ class constancias{
             alert("Error en el formato de Mts Sur posible Venta");
             return false;
         }
-        if(!ex_datcort.test(this.alindPosSur)){
+        if(!alindInmue.test(this.alindPosSur)){
             alert("Error en el formato de Alinderado Sur posible Venta");
             return false;
         }
@@ -526,7 +530,7 @@ class constancias{
             alert("Error en el formato de Mts Este posible Venta");
             return false;
         }
-        if(!ex_datcort.test(this.alindPosEste)){
+        if(!alindInmue.test(this.alindPosEste)){
             alert("Error en el formato de Alinderado Este posible Venta");
             return false;
         }
@@ -534,7 +538,7 @@ class constancias{
             alert("Error en el formato de Mts Oeste posible Venta");
             return false;
         }
-        if(!ex_datcort.test(this.alindPosOeste)){
+        if(!alindInmue.test(this.alindPosOeste)){
             alert("Error en el formato de Alinderado Oeste posible Venta");
             return false;
         }
@@ -578,7 +582,7 @@ class constancias{
             alert("Error en el formato de Unidad de Area Total");
             return false;
         }
-        if(!ex_datcort.test(this.NivConstTotal2)){
+        if(!nivConst.test(this.NivConstTotal2)){
             alert("Error en el formato de Niveles de Construcción");
             return false;
         }
@@ -2638,30 +2642,24 @@ function calLind(){
     sur = document.getElementById("surGen").value
     este = document.getElementById("esteGen").value
     oeste = document.getElementById("oesteGen").value
-    norSur = (parseInt(norte) + parseInt(sur))/2
-    estOest = (parseInt(este)+parseInt(oeste))/2
-    area2 = norSur*estOest
-    document.getElementById("arTotal").value=area2
+    area2 = ((parseFloat(norte) + parseFloat(sur))/2)*((parseFloat(este)+parseFloat(oeste))/2)
+    document.getElementById("arTotal").value=area2.toFixed(2)
 }
 function calLindVenta(){
     norte = document.getElementById("nortPosVenta").value
     sur = document.getElementById("surPosVenta").value
     este = document.getElementById("estePosVenta").value
     oeste = document.getElementById("oestePosVenta").value
-    norSur = (parseInt(norte) + parseInt(sur))/2
-    estOest = (parseInt(este)+parseInt(oeste))/2
-    area2 = norSur*estOest
-    document.getElementById("arTotal2").value=area2
+    area2 = ((parseFloat(norte) + parseFloat(sur))/2)*((parseFloat(este)+parseFloat(oeste))/2)
+    document.getElementById("arTotal2").value=area2.toFixed(2)
 }
 function calLindDoc(){
     norte = document.getElementById("nortSecDoc").value
     sur = document.getElementById("surSecDoc").value
     este = document.getElementById("esteSecDoc").value
     oeste = document.getElementById("oesteSecDoc").value
-    norSur = (parseInt(norte) + parseInt(sur))/2
-    estOest = (parseInt(este)+parseInt(oeste))/2
-    area2 = norSur*estOest
-    document.getElementById("arTotal3").value=area2
+    area2 = ((parseFloat(norte) + parseFloat(sur))/2)*((parseFloat(este)+parseFloat(oeste))/2)
+    document.getElementById("arTotal3").value=area2.toFixed(2)
 }
 function btnGuardConst(){
     let consta = new constancias()

@@ -113,7 +113,16 @@ if(isset($_POST["verPass"])){
 }else{
     $nusu->verPass = "";
 }
-
+if(isset($_POST["antClav"])){
+    $nusu->antClav = $_POST["antClav"];
+}else{
+    $nusu->antClav = "";
+}
+if(isset($_POST["nuevaClav"])){
+    $nusu->nuevaClav = $_POST["nuevaClav"];
+}else{
+    $nusu->nuevaClav = "";
+}
 
 if ($accion == "mostReg"){
     $nusu->mostRegistro();
@@ -135,5 +144,11 @@ if($accion=="mostList"){
 }
 if($accion=="eliminarUsu"){
     $nusu->eliminarUsu();
+}
+if($accion=="cambClave"){
+    $nusu->cambClave();
+}
+if($accion=="actClave"){
+    $nusu->actClave();
 }
 ?>

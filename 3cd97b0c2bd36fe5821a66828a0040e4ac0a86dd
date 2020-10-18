@@ -1,0 +1,287 @@
+[33mcommit 696724e7737b9b9cf40e27718b6a4ec5f302c411[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Thu Oct 15 16:49:03 2020 -0400
+
+    mejoras formularios
+
+[33mcommit 3cd97b0c2bd36fe5821a66828a0040e4ac0a86dd[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sat Oct 10 12:24:19 2020 -0400
+
+    ajustes N de formularios
+
+[33mcommit e58b6539ac83cb7db6c7fc34b1dcad6758dfe70b[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sat Oct 10 11:28:13 2020 -0400
+
+    ajustes de nueva inscripcion
+
+[33mcommit d1ff424f23f1d4350145a98b9da69ef5938795e2[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Mon Oct 5 22:14:34 2020 -0400
+
+    completado reportes
+
+[33mcommit 4649e29dff0a6192f98bc39e3fec91bc47f2886c[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Thu Oct 1 18:18:31 2020 -0400
+
+    actualizacion de renovacion
+
+[33mcommit 0886c612a4897f304236547034016421a8dd15ab[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Tue Sep 29 08:28:08 2020 -0400
+
+    actualizacion de conexion y f2
+
+[33mcommit 8a871016ad77ab9adba65b029625532e42d41692[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Wed Sep 23 14:04:42 2020 -0400
+
+    ajustes a f002
+
+[33mcommit 48c6208b8050e6cc5087e597618d6cf3e284b024[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Wed Sep 16 20:14:28 2020 -0400
+
+    ACTUALIZACION EN SECCION NUEVO INGRESOS
+
+[33mcommit d921c70f127bbc1520cfded39081dc10d0495754[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Mon Sep 14 09:02:58 2020 -0400
+
+    actualizar guardado propietario
+
+[33mcommit c7ae6d1bf4927e529b95c998e5d05e7669664eb2[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sun Sep 13 02:58:31 2020 -0400
+
+    actualizacion f003
+
+[33mcommit 2af99ac45b30ca38850985d9b9e1cb4c0ea6e095[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sun Sep 13 02:17:20 2020 -0400
+
+    Arreglo a F001
+
+[33mcommit 6a16001246db1d447f10013f36f391da0f87b94f[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sun Sep 13 00:16:35 2020 -0400
+
+    Actualizacion de nueva inscripccion y form 2
+
+[33mcommit abb406f34bbb9c2150e209c24809e223657090f7[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Fri Sep 11 03:55:50 2020 -0400
+
+    Actualizacion de nuevas inscripciones y BD
+
+[33mcommit 3386ccab5ce780de8d908037e93aba2d8e3fb3bd[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Mon Sep 7 22:49:42 2020 -0400
+
+    Finalizando validaciones
+
+[33mcommit 3c17100fbe50f498a8a574b74904277baeb56ae0[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sat Aug 29 04:18:08 2020 -0400
+
+    validar temporales
+
+[33mcommit a693a53c039f21c28977545b60af61753a8d3928[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Thu Aug 27 09:08:59 2020 -0400
+
+    actualizacion de formulario de inscripcion
+
+[33mcommit 9b249498a40144ab8da9a220a2b693dc240dbd2d[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Fri Aug 7 11:54:42 2020 -0400
+
+    actualizacion en el formulario nuevo ingreso
+
+[33mcommit 58dcecc7565094d7c9db7aefa15c178eff808e82[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Wed Aug 5 21:11:15 2020 -0400
+
+    Actualizacion en formulario de nueva inscripcion
+
+[33mcommit cb85388f373c841d6500ca310fa69326cab9ef8b[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Wed Aug 5 14:12:30 2020 -0400
+
+    actualizacion de verificaciones y datos de registro
+
+[33mcommit f4e56489f328c292472bd90c785d7b2c963b7d64[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Wed Aug 5 07:14:02 2020 -0400
+
+    actualizacion de linderos y constancias con validaciones
+
+[33mcommit 6edc1eb3e105bda61778628c8689aa76700b0bc8[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Wed Aug 5 05:56:19 2020 -0400
+
+    actualizacion de linderos en nueva inscripcion
+
+[33mcommit bb4deb17e1dbc700892426e4159db985688b729e[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Tue Aug 4 05:37:11 2020 -0400
+
+    imprimir empadronamiento
+
+[33mcommit 49cbe55ceaaa6646921d9383482fdf1b740c3109[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Tue Aug 4 04:02:10 2020 -0400
+
+    dividir menu de admin con redactor
+
+[33mcommit 4ad04f24048b811c5e043c012bc167798379393f[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Mon Aug 3 16:00:42 2020 -0400
+
+    arreglo de constancias y estructurado de f004
+
+[33mcommit e1f0fe44faeb09b55d97d339ec3bf7ab72e51484[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Mon Aug 3 04:52:30 2020 -0400
+
+    arreglo de constancias y cambios de input
+
+[33mcommit e29f55c088e1edc1747bbc45ce3f92c94c273a2c[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sun Aug 2 13:26:26 2020 -0400
+
+    actualizacion de modificaciones y constancias
+
+[33mcommit c4a9c963243af0c352485755f45f51b6c833b4d7[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sun Aug 2 07:19:01 2020 -0400
+
+    actualizacion de validaciones y cambios en constancias
+
+[33mcommit e4d61f768f342cb7b12a09cd46b361b19b3aa58b[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sat Aug 1 21:19:46 2020 -0400
+
+    actualizaciones de verificaciones y culminacion de buscar ced
+
+[33mcommit 874cf750a67c007136a0a4ab49fc329ab2340f6b[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sat Aug 1 02:08:28 2020 -0400
+
+    terminado modulo de renovacion en busquedas
+
+[33mcommit 0b6f6b7b72930b127a9fd14490934ca22ce92118[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Fri Jul 31 13:26:26 2020 -0400
+
+    inicio de modulo de renovacion
+
+[33mcommit 32a922fc4a9bbce84654674fa933ea6a43e9d9bf[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Fri Jul 31 11:25:34 2020 -0400
+
+    culminacion de seccion imprimir
+
+[33mcommit 10be3b66f2a2d26ec030a875d93f7cf00f907a8a[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Fri Jul 31 08:03:51 2020 -0400
+
+    culminado de eliminacion y modificacion de usuario
+
+[33mcommit 0ea5808e11ec2d88393392bc17c5ed3d31412b8b[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Fri Jul 31 05:06:16 2020 -0400
+
+    modificar usuario y listado de pagos - culminados
+
+[33mcommit f691360e8dfb5700bd82a9347774b473ba28f2b1[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Thu Jul 30 16:42:23 2020 -0400
+
+    incluir estructura de la bd de la aplicacion
+
+[33mcommit f9fbe2904aa4cc35a70984a3aa8916152e86584e[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Tue Jul 28 14:14:20 2020 -0400
+
+    finalizando modificar usuario
+
+[33mcommit 56bd3edbb50889a92b0fb150244904f09ef9ad95[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sun Jul 26 01:38:10 2020 -0400
+
+    arreglo de busqueda de nuevo ingreso y otros detalles
+
+[33mcommit fa8b5b99bc0d578d550066e6fca16fec88fd70bb[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sat Jul 25 22:47:46 2020 -0400
+
+    actualizacion de busquedas y culminando ultimos ajust
+
+[33mcommit 1e8efd5f23c3954160cdb0cec441c1a8cd74ca8f[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sat Jul 25 11:43:02 2020 -0400
+
+    actualizacio terminando modificaciones
+
+[33mcommit b8e324a00f4784bf6ef30693150e56ffc3598da6[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sun Jul 19 15:10:37 2020 -0400
+
+    actualizacion de modificaciones
+
+[33mcommit 0a830deed40e9c652744a24822b0b7e436820179[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sun Jul 19 09:29:40 2020 -0400
+
+    modificaciones 3 caracteristicas del terreno
+
+[33mcommit e97a09cbe2f2ddb80780a619b035d74906f85a73[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Sun Jul 19 07:53:43 2020 -0400
+
+    modificaciones 2 Inmueble
+
+[33mcommit aaeb32a5c2aba55c5d7cb6c2d9a769bf8940d023[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Thu Jul 9 07:20:55 2020 -0400
+
+    completado de busqueda y actualizacion propietario
+
+[33mcommit 2bd41b029ec7054ca68336b3370e08f30c95aa16[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Wed Jul 8 22:20:46 2020 -0400
+
+    actualizar f002 y continuacion busqueda
+
+[33mcommit d7a887cad4acea9da9724ac5c65389ce0eefd6c4[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Wed Jul 8 18:24:15 2020 -0400
+
+    culminacion de guardado de constancias
+
+[33mcommit 1d47a79057ad9e2b5d6618942c6bbb96dc040cb7[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Wed Jul 8 09:27:05 2020 -0400
+
+    culminacion f002 y f001
+
+[33mcommit e9ec52e9c328bc46fc8f144901d148195a22f2be[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Tue Jul 7 20:38:39 2020 -0400
+
+    actualizacion en linderos
+
+[33mcommit 16adfe04a5f8fd063fda683c9f36b55408ccdb0b[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Tue Jul 7 03:32:51 2020 -0400
+
+    Correcciones a la constancia f002
+
+[33mcommit 485720c1e8f033b9325b7a9356ace2e3320b19a7[m
+Author: unknown <jimc.inf@gmail.com>
+Date:   Mon Jul 6 08:25:26 2020 -0400
+
+    Terminando de arreglar constancias

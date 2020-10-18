@@ -3591,7 +3591,7 @@ class constancias{
                     $expeTempSQL = "SELECT * FROM temp_expediente where id=".$this->idExp."";
                     $resExpeTemp = $link->query($expeTempSQL);
                     $expeTempRes = $resExpeTemp->fetch_array();
-                    $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$userRes["id"].",'".$expeTempRes["no_expediente"]."','".$expeTempRes["fecha"]."','".$expeTempRes["condicion"]."','".$expeTempRes["valorInmue"]."')";
+                    $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$tempUserRes["id"].",'".$expeTempRes["no_expediente"]."','".$expeTempRes["fecha"]."','".$expeTempRes["condicion"]."','".$expeTempRes["valorInmue"]."')";
                     $link->query($expedientSQL);
                     $idExpedient = $link->insert_id;
                 //FACTURA
@@ -3608,7 +3608,7 @@ class constancias{
                 <input type="hidden" value="'.$idProp2.'" id="idProp"/>
                 <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
                 <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
-                <input type="hidden" value="'.$idExpedient.'" id="nuExp"/>
+                <input type="hidden" value="'.$expeTempRes["no_expediente"].'" id="nuExp"/>
                 ';
                 //ELIMINAR SQL DE TEMP
                     //PROPIETARIO
@@ -3660,7 +3660,7 @@ class constancias{
                         $elimFactSQL = "DELETE FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
                         $link->query($elimFactSQL);
                     //USER
-                        $elimUserSQL = "DELETE FROM user_temp where userId=".$userRes["id"]."";
+                        $elimUserSQL = "DELETE FROM user_temp where userId=".$tempUserRes["id"]."";
                         $link->query($elimUserSQL);
             }
         }else{
@@ -3761,7 +3761,7 @@ class constancias{
             <input type="hidden" value="'.$idProp2.'" id="idProp"/>
             <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
             <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
-            <input type="hidden" value="'.$idExpedient.'" id="nuExp"/>
+            <input type="hidden" value="'.$expeTempRes["no_expediente"].'" id="nuExp"/>
             ';
             //ELIMINAR SQL DE TEMP
                 //PROPIETARIO
@@ -3948,7 +3948,7 @@ class constancias{
         <input type="hidden" value="'.$idProp2.'" id="idProp"/>
         <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
         <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
-        <input type="hidden" value="'.$idExpedient.'" id="nuExp"/>
+        <input type="hidden" value="'.$expeRes["no_expediente"].'" id="nuExp"/>
         ';
         //ELIMINAR SQL DE TEMP
             //PROPIETARIO

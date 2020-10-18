@@ -30,7 +30,7 @@
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="#" onclick="mostRegistro()">Registrar</a>
-                    <a class="dropdown-item" onclick="btnModUsu()" href="#">Modificar</a>
+                    <a class="dropdown-item" onclick="btnCambClave()" href="#">Cambio Clave</a>
                     <a class="dropdown-item" onclick="btnMostList()" href="#">Lista de usuarios</a>
                   </div>
                 </li>

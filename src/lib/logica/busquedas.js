@@ -510,6 +510,29 @@ class busquedas{
         }
         return true//VERIFICADO
     }
+    veriConserv(){
+        if(!ex_trayec.test(this.ano_construc)){
+            alert("Error en el formato de Año de Construcción");
+            return false;
+        }
+        if(!ex_trayec.test(this.ano_refac)){
+            alert("Error en el formato de Año de Refacción");
+            return false;
+        }
+        if(!ex_trayec.test(this.edadEfec)){
+            alert("Error en el formato de Edad Efectiva");
+            return false;
+        }
+        if(!ex_trayec.test(this.numPlata)){
+            alert("Error en el formato de Numero de Planta");
+            return false;
+        }
+        if(!ex_trayec.test(this.numVivienda)){
+            alert("Error en el formato de Numero de Vivienda");
+            return false;
+        }
+        return true
+    }
     constExp(){
         var ajax = new objetoAjax();
 		var divsitioform = document.getElementById('campGeneral');
@@ -880,8 +903,44 @@ class busquedas{
     			     }
     	       	}
         }
-
-    
+    //ESTADO DE CONSERVACION
+        mostConserv(){
+            var ajax = new objetoAjax();
+            var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
+            divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+            ajax=objetoAjax();
+            ajax.open("POST", "src/server/rec/recBuscar.php",true);
+            ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`expBuscar=${this.expBuscar}&accion=mostConserv`); 
+            ajax.onreadystatechange=function()
+                {
+                if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+                     }
+                   }
+        }
+        actConserv(){
+            var ajax = new objetoAjax();
+            var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
+            divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+            divsitiomaterial.innerHTML="";
+            ajax=objetoAjax();
+            ajax.open("POST", "src/server/rec/recBuscar.php",true);
+            ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+            ajax.send(`expBuscar=${this.expBuscar}&ano_construc=${this.ano_construc}&ano_refac=${this.ano_refac}&edadEfec=${this.edadEfec}&numPlata=${this.numPlata}&numVivienda=${this.numVivienda}&accion=actEstConst`); 
+            ajax.onreadystatechange=function()
+                {
+                if (ajax.readyState==4) 
+                    {
+                        divsitioform.innerHTML = ajax.responseText; 
+                        alert("Estado de conservacion actualizado con exito");
+                     }
+                   }
+        }
 }
 function btnConsultExp(nuExp="0",tipBus="0"){
     let busque = new busquedas;
@@ -1066,6 +1125,12 @@ function dividirCed(secciones="no"){
     if(secciones=="Linderos"){
         
     }
+    if(secciones=="conservacion"){
+        let busque = new busquedas;
+        busque.expBuscar = document.getElementById("expBuscar").value;
+        busque.mostConserv();
+
+    }
     if(secciones=="Servicios"){
         let acued = document.getElementById("acued").value
         if(acued == "si"){
@@ -1232,96 +1297,96 @@ function btnActCaracInmue(){
     busque.actCaracInmue()
 }
 //CARACTERISTICAS DE LA CONSTRUCCION
-    function destinoConstru(){
-        let destino = document.getElementById("destino").value
-        let destConst = document.getElementById("destConst")
-        let k=0
-        while(destino !=destConst.value){
-            document.getElementById("destConst").selectedIndex=k
-            k++
-        }
-    }
-    function estructuraConst(){
-        let estructura = document.getElementById("estructura").value
-        let estConst = document.getElementById("estConst")
-        let k=0
-        while(estructura !=estConst.value){
-            document.getElementById("estConst").selectedIndex=k
-            k++
-        }
-    }
-    function paredesConstru(){
-        let paredes_tipo = document.getElementById("paredes_tipo").value
-        let pareTipoInmue = document.getElementById("pareTipoInmue")
-        let k=0
-        while(paredes_tipo !=pareTipoInmue.value){
-            document.getElementById("pareTipoInmue").selectedIndex=k
-            k++
-        }
-    }
-    function acabadoConstru(){
-        let paredes_acabado = document.getElementById("paredes_acabado").value
-        let pareAcaInmue = document.getElementById("pareAcaInmue")
-        let k=0
-        while(paredes_acabado !=pareAcaInmue.value){
-            document.getElementById("pareAcaInmue").selectedIndex=k
-            k++
-        }
-    }
-    function pinturaConstru(){
-        let pintura = document.getElementById("pintura").value
-        let pintConst = document.getElementById("pintConst")
-        let k=0
-        while(pintura !=pintConst.value){
-            document.getElementById("pintConst").selectedIndex=k
-            k++
-        }
-    }
-    function techoConstru(){
-        let techo = document.getElementById("techo").value
-        let techoConst = document.getElementById("techoConst")
-        let k=0
-        while(techoConst.value != techo){
-            document.getElementById("techoConst").selectedIndex=k
-            k++
-        }
-    }
-    function pisosConstru(){
-        let pisos = document.getElementById("pisos").value
-        let pisosConst = document.getElementById("pisosConst")
-        let k=0
-        while(pisosConst.value !=pisos){
-            document.getElementById("pisosConst").selectedIndex=k
-            k++
-        }
-    }
-    function ventanasConst(){
-        let ventanas = document.getElementById("ventanas").value
-        let ventConst = document.getElementById("ventConst")
-        let k=0
-        while(ventanas !=ventConst.value){
-            document.getElementById("ventConst").selectedIndex=k
-            k++
-        }
-    }
-    function electConst(){
-        let insta_electricas = document.getElementById("insta_electricas").value
-        let instElect = document.getElementById("instElect")
-        let k=0
-        while(insta_electricas !=instElect.value){
-            document.getElementById("instElect").selectedIndex=k
-            k++
-        }
-    }
-    function regimConst(){
-        let regimen = document.getElementById("regimen").value
-        let regInmue = document.getElementById("regInmue")
-        let k=0
-        while(regimen !=regInmue.value){
-            document.getElementById("regInmue").selectedIndex=k
-            k++
-        }
-    }
+    // function destinoConstru(){
+    //     let destino = document.getElementById("destino").value
+    //     let destConst = document.getElementById("destConst")
+    //     let k=0
+    //     while(destino !=destConst.value){
+    //         document.getElementById("destConst").selectedIndex=k
+    //         k++
+    //     }
+    // }
+    // function estructuraConst(){
+    //     let estructura = document.getElementById("estructura").value
+    //     let estConst = document.getElementById("estConst")
+    //     let k=0
+    //     while(estructura !=estConst.value){
+    //         document.getElementById("estConst").selectedIndex=k
+    //         k++
+    //     }
+    // }
+    // function paredesConstru(){
+    //     let paredes_tipo = document.getElementById("paredes_tipo").value
+    //     let pareTipoInmue = document.getElementById("pareTipoInmue")
+    //     let k=0
+    //     while(paredes_tipo !=pareTipoInmue.value){
+    //         document.getElementById("pareTipoInmue").selectedIndex=k
+    //         k++
+    //     }
+    // }
+    // function acabadoConstru(){
+    //     let paredes_acabado = document.getElementById("paredes_acabado").value
+    //     let pareAcaInmue = document.getElementById("pareAcaInmue")
+    //     let k=0
+    //     while(paredes_acabado !=pareAcaInmue.value){
+    //         document.getElementById("pareAcaInmue").selectedIndex=k
+    //         k++
+    //     }
+    // }
+    // function pinturaConstru(){
+    //     let pintura = document.getElementById("pintura").value
+    //     let pintConst = document.getElementById("pintConst")
+    //     let k=0
+    //     while(pintura !=pintConst.value){
+    //         document.getElementById("pintConst").selectedIndex=k
+    //         k++
+    //     }
+    // }
+    // function techoConstru(){
+    //     let techo = document.getElementById("techo").value
+    //     let techoConst = document.getElementById("techoConst")
+    //     let k=0
+    //     while(techoConst.value != techo){
+    //         document.getElementById("techoConst").selectedIndex=k
+    //         k++
+    //     }
+    // }
+    // function pisosConstru(){
+    //     let pisos = document.getElementById("pisos").value
+    //     let pisosConst = document.getElementById("pisosConst")
+    //     let k=0
+    //     while(pisosConst.value !=pisos){
+    //         document.getElementById("pisosConst").selectedIndex=k
+    //         k++
+    //     }
+    // }
+    // function ventanasConst(){
+    //     let ventanas = document.getElementById("ventanas").value
+    //     let ventConst = document.getElementById("ventConst")
+    //     let k=0
+    //     while(ventanas !=ventConst.value){
+    //         document.getElementById("ventConst").selectedIndex=k
+    //         k++
+    //     }
+    // }
+    // function electConst(){
+    //     let insta_electricas = document.getElementById("insta_electricas").value
+    //     let instElect = document.getElementById("instElect")
+    //     let k=0
+    //     while(insta_electricas !=instElect.value){
+    //         document.getElementById("instElect").selectedIndex=k
+    //         k++
+    //     }
+    // }
+    // function regimConst(){
+    //     let regimen = document.getElementById("regimen").value
+    //     let regInmue = document.getElementById("regInmue")
+    //     let k=0
+    //     while(regimen !=regInmue.value){
+    //         document.getElementById("regInmue").selectedIndex=k
+    //         k++
+    //     }
+    // }
     function btnActConst(){
         let busque = new busquedas
         busque.destConst = document.getElementById("destConst").value
@@ -1774,7 +1839,19 @@ function btnPagos(){
     busque.tipoBuscar = document.getElementById("tipoBuscar").value
     busque.verPagos();
 }
-
+//ESTADO DE CONSERVACION
+function btnActConserv(){
+    let busque = new busquedas;
+    busque.ano_construc = document.getElementById("ano_construc").value;
+    busque.ano_refac = document.getElementById("ano_refac").value;
+    busque.edadEfec = document.getElementById("edadEfec").value;
+    busque.numPlata = document.getElementById("numPlata").value
+    busque.numVivienda = document.getElementById("numVivienda").value
+    busque.expBuscar = document.getElementById("expBuscar").value;
+    if(busque.veriConserv()==true){
+        busque.actConserv();
+    }
+}
 document.getElementById("tipoCed").hidden=true
 document.getElementById("tipoRif").hidden=true
 document.getElementById("consultExp").hidden=false

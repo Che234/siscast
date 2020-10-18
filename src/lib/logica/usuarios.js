@@ -213,6 +213,44 @@ class usuarios{
 			     }
 	       	}
 	}
+	cambClave(){
+		var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recUsuario.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send(`&accion=cambClave`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+				divsitioform.innerHTML = ajax.responseText;
+				
+			     }
+	       	}
+	}
+	actClave(){
+		var ajax = new objetoAjax();
+		var divsitioform = document.getElementById('campGeneral');
+        var divsitiomaterial = document.getElementById('campGeneral');
+		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+		ajax=objetoAjax();
+		ajax.open("POST", "src/server/rec/recUsuario.php",true);
+		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+		ajax.send(`antClav=${this.antClav}&nuevaClav=${this.nuevaClav}&accion=actClave`); 
+		ajax.onreadystatechange=function()
+            {
+			if (ajax.readyState==4) 
+                {
+				divsitioform.innerHTML = ajax.responseText;
+				
+			     }
+	       	}
+	}
 }
 function mostRegistro(){
 	let usu= new usuarios();
@@ -303,4 +341,21 @@ function btnEliminarUsu(cedula="nada"){
 	let usu = new usuarios
 	usu.cedu = cedula
 	usu.eliminarUsu();
+}
+function btnCambClave(){
+	let usu = new usuarios;
+	usu.cambClave();
+}
+function btnActClave(){
+	let usu = new usuarios;
+	usu.antClav = document.getElementById("antClav").value;
+	nuvClav = document.getElementById("nuvClav").value
+	verNuvClav = document.getElementById("verNuvClav").value
+	if(nuvClav !=verNuvClav){
+		alert("La nueva contraseña es distinta a la confirmacion");
+	}else{
+		usu.nuevaClav = nuvClav;
+		usu.actClave();
+	}
+	
 }

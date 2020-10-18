@@ -874,6 +874,31 @@ if(isset($_POST["uniAreaConst3"])){
 }else{
     $bus->uniAreaConst3 = "nada";
 }
+if(isset($_POST["ano_construc"])){
+    $bus->ano_construc = $_POST["ano_construc"];
+}else{
+    $bus->ano_construc = "nada";
+}
+if(isset($_POST["ano_refac"])){
+    $bus->ano_refac = $_POST["ano_refac"];
+}else{
+    $bus->ano_refac = "nada";
+}
+if(isset($_POST["edadEfec"])){
+    $bus->edadEfec = $_POST["edadEfec"];
+}else{
+    $bus->edadEfec = "nada";
+}
+if(isset($_POST["numPlata"])){
+    $bus->numPlata = $_POST["numPlata"];
+}else{
+    $bus->numPlata = "nada";
+}
+if(isset($_POST["numVivienda"])){
+    $bus->numVivienda = $_POST["numVivienda"];
+}else{
+    $bus->numVivienda = "nada";
+}
 
 if($accion =="busExp"){
     $bus->mostBusqueda();
@@ -946,6 +971,10 @@ if($accion=="guarActServ"){
 if($accion=="guarActFact"){
     $bus->guarActFact();
 }
+if($accion=="actEstConst"){
+    $bus->actEstConst();
+}
+
 if($accion=="pagarInmue"){
     $bus->pagarInmue();
 }
@@ -957,6 +986,9 @@ if($accion=="formPagosInmue"){
 }
 if($accion=="eliminarBus"){
     $bus->eliminarBus();
+}
+if($accion=="mostConserv"){
+    $bus->modifEstConserv();
 }
 
 if($_POST["parrInmue2"]=="Capital"){
