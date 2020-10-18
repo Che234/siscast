@@ -20,7 +20,8 @@ class usuario{
         $telfUsu = "";
         $corUsu = "";
         $idUsu = "";
-
+        $antClav = "";
+        $nuevaClav = "";
     }
 
         
@@ -116,6 +117,55 @@ class usuario{
             echo'USUARIO YA UTILIZADO';
         }
         $this->mostRegistro();
+    }
+    function cambClave(){
+        echo'
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col">
+                    <h3>INGRESA TU NUEVA CEDULA</h3>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <b>Clave anterior</b><input type="password" id="antClav">
+                </div>
+                <div class="col">
+                    <b>Nueva clave</b><input type="password" id="nuvClav">
+                </div>
+                <div class="col">
+                    <b>Verificar nueva clave</b><input type="password" id="verNuvClav">
+                </div>
+                <div class="col align-self-end">
+                    <button class="btn btn-primary" onclick="btnActClave()">Actualizar</button>
+                </div>
+            </div>
+        </div>';
+    }
+    function actClave(){
+        include('../conexion.php');
+        $MySql = new conexion;
+        $link= $MySql->conectar();
+
+        session_start();
+
+        $actUsuSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+        $resUsu = $link->query($actUsuSQL);
+        $usuRes = $resUsu->fetch_array();
+
+        if($usuRes["pass"]!=$this->antClav){
+            $this->cambClave();
+            echo'<p class="h4 text-center avisoError">Clave antigua ingresada no es la actual</p>';
+        }else{
+            if($usuRes["pass"]!=$this->nuevaClav){
+            $usuActSQL = "UPDATE usuarios SET pass='".$this->nuevaClav."' where nick='".$_SESSION["usuario"]."'";
+            $link->query($usuActSQL);
+            echo '<p class="confirmarAccion">Contraseña actualizada con exito</p>';
+            }else{
+                echo'<p class="h4 confirmarAccion">La nueva Contraseña enviada es igual a la anterior</p>';
+            }
+            
+        }
     }
     function ModUsu(){
         echo'
@@ -311,7 +361,6 @@ class usuario{
             $this->mostList();
     }
 }
-
 
 
 

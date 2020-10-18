@@ -3593,7 +3593,7 @@ class constancias{
                     $expeTempRes = $resExpeTemp->fetch_array();
                     $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$userRes["id"].",'".$expeTempRes["no_expediente"]."','".$expeTempRes["fecha"]."','".$expeTempRes["condicion"]."','".$expeTempRes["valorInmue"]."')";
                     $link->query($expedientSQL);
-                    $idExpedient = $link->insert_id;
+                    $idExpedient = $expeTempRes["no_expediente"];
                 //FACTURA
                     $factSQL = "SELECT * FROM temp_factura where id=".$this->idFactura."";
                     $resFact = $link->query($factSQL);
@@ -3746,7 +3746,7 @@ class constancias{
                 $expeTempRes = $resExpeTemp->fetch_array();
                 $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$tempUserRes["userId"].",'".$expeTempRes["no_expediente"]."','".$expeTempRes["fecha"]."','".$expeTempRes["condicion"]."','".$expeTempRes["valorInmue"]."')";
                 $link->query($expedientSQL);
-                $idExpedient = $link->insert_id;    
+                $idExpedient = $expeTempRes["no_expediente"];    
             //FACTURA
                 $factSQL = "SELECT * FROM temp_factura where id=".$this->idFactura."";
                 $resFact = $link->query($factSQL);
@@ -3933,7 +3933,7 @@ class constancias{
             $expeRes = $resExpe->fetch_array();
             $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$tempUserRes["userId"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','".$expeRes["condicion"]."','".$expeRes["valorInmue"]."')";
             $link->query($expedientSQL);
-            $idExpedient = $link->insert_id;    
+            $idExpedient = $expeRes["no_expediente"];    
         //FACTURA
             $factSQL = "SELECT * FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
             $resFact = $link->query($factSQL);
@@ -5462,7 +5462,7 @@ class constancias{
             $expRes = $resExp->fetch_assoc();
         if($expRes["id"]!=0){
             //BUSQUEDA DE PAGO
-                $pagSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." AND tipo='normal' ORDER BY fechaPagos DESC";
+                $pagSql = "SELECT * FROM pagos where fk_expedient=".$expRes["n_expediente"]." AND tipo='normal' ORDER BY fechaPagos DESC";
                 $resPagos = $link->query($pagSql);
                 $pagosRes = $resPagos->fetch_array();
                 $anoPago = explode("-",$pagosRes["fechaPagos"]);
@@ -5479,18 +5479,17 @@ class constancias{
             }
         }else{
             $expEmpadroSql = "SELECT * FROM expempadro where n_expediente='".$this->campBuscar."'";
-            $resExp = $link->query($expSql);
-            $expRes = $resExp->fetch_assoc();
+            $resExpEmpadro = $link->query($expEmpadroSql);
+            $expEmpadroRes = $resExpEmpadro->fetch_assoc();
 
             //BUSQUEDA DE PAGO
-                $pagSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." AND tipo='EMPADRONAMIENTO' ORDER BY fechaPagos DESC";
-                echo $pagSql;
+                $pagSql = "SELECT * FROM pagos where fk_expedient=".$expEmpadroRes["id"]." AND tipo='EMPADRONAMIENTO' ORDER BY fechaPagos DESC";
                 $resPagos = $link->query($pagSql);
                 $pagosRes = $resPagos->fetch_array();
                 $anoPago = explode("-",$pagosRes["fechaPagos"]);
             if($anoPago[0]==date("Y")){
                 echo'
-                <div class="campDat"><embed id="embedPdf" src="./assets/constancias/'.$anoPago[0].'/'.$expRes["n_expediente"].'.pdf" type="application/pdf"></div>
+                <div class="campDat"><embed id="embedPdf" src="./assets/constancias/'.$anoPago[0].'/'.$expEmpadroRes["n_expediente"].'.pdf" type="application/pdf"></div>
                 ';
             }
             if($anoPago[0] < date("Y")){

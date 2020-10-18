@@ -1146,7 +1146,7 @@ if(isset($_POST["accion"])){
         $f1->imprimir();
     }
     if($accion=="imprConst1"){
-        include('../f002.php');
+        include('../f004.php');
         $f001 = new f001;
         if(isset($_POST["idInmueble"])){
             $f001->idInmueble=$_POST["idInmueble"];
@@ -1197,7 +1197,7 @@ if(isset($_POST["accion"])){
         $f001->imprimir();
     }
     if($accion=="imprConst3"){
-        include('../f002.php');
+        include('../f004.php');
         $f003 = new f003;
         if(isset($_POST["idInmueble"])){
             $f003->idInmueble=$_POST["idInmueble"];

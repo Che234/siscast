@@ -51,7 +51,7 @@ class renovacion{
                     divsitioform.innerHTML = ajax.responseText;
                     let nuExp = document.getElementById("nuExp").value
                     let ano = document.getElementById("anoExp").value
-                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="localhost/SisCast/assets/constancias/${ano}/${nuExp}.pdf" type="application/pdf"></div>`;
+                    document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="./assets/constancias/${ano}/${nuExp}.pdf" type="application/pdf"></div>`;
                  }
 	       	}
     }

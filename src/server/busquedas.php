@@ -161,6 +161,11 @@ class busquedas{
         $puntOeste3 = "";
         $uniAreaT3 = "";
         $uniAreaConst3 = "";
+        $ano_construc ="";
+        $ano_refac = "";
+        $edadEfec = "";
+        $numPlata = "";
+        $numVivienda = "";
     }
 
     function mostBusqueda(){
@@ -177,11 +182,11 @@ class busquedas{
                 $numExp = $expRes["n_expediente"];
                 $idProp = $expRes["fk_propietario"];
                 $idInmue = $expRes["fk_inmueble"];
-                $idExp = $expRes["id"];
+                $idExp = $expRes["n_expediente"];
                 $condicion = $expRes["condicion"];
 
                 //BUSQUEDA PAGOS
-                        $pagosSql = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]." AND tipo='normal'";
+                        $pagosSql = "SELECT * FROM pagos where fk_expedient=".$expRes["n_expediente"]." AND tipo='normal'";
                         $resPago = $link->query($pagosSql);
                         $pagoRes = $resPago->fetch_assoc();
                         $fechPagosDiv = explode("-",$pagoRes["fechaPagos"]);
@@ -278,7 +283,7 @@ class busquedas{
                     $condicion = $expEmpaRes["condicion"];
                     $idExp = $expEmpaRes["id"];
                     //BUSQUEDA PAGOS
-                        $pagosSql = "SELECT * FROM pagos where fk_expedient=".$expEmpaRes["id"]." AND tipo='EMPADRONAMIENTO'";
+                        $pagosSql = "SELECT * FROM pagos where fk_expedient=".$expEmpaRes["n_expediente"]." AND tipo='EMPADRONAMIENTO'";
                         $resPago = $link->query($pagosSql);
                         $pagoRes = $resPago->fetch_assoc();
                         $fechPagosDiv = explode("-",$pagoRes["fechaPagos"]);
@@ -294,13 +299,8 @@ class busquedas{
                     $caracInmueSql = "SELECT * FROM carc_inmueble where id=".$inmueRes["fk_carac_inmuebles"]."";
                     $rescaracInmue = $link->query($caracInmueSql);
                     $inmueResCarac = $rescaracInmue->fetch_assoc();
-                //BUSQUEDA PAGOS
-                    $pagosSql = "SELECT * FROM pagos where fk_expedient=".$idExp." AND tipo='EMPADRONAMIENTO'";
-                    $resPago = $link->query($pagosSql);
-                    $pagoRes = $resPago->fetch_assoc();
-                    $fechPagosDiv = explode("-",$pagoRes["fechaPagos"]);
                 echo'
-                <div class="container busqueDat">
+                <div class="container " id="BusqueDart">
                     <div class="row">
                         <div class="col">
                             <h2>Resultado</h2>
@@ -329,7 +329,7 @@ class busquedas{
                         <div class="col">
                             '; 
                         if($fechPagosDiv[0] == date("Y")){
-                            echo $pagoRes["fechaPagos"];
+                            echo ''.$fechPagosDiv[2].'/'.$fechPagosDiv[1].'/'.$fechPagosDiv[0].'';
                         }else{
                             echo 'NO HA CANCELADO ESTE AÑO';
                         }
@@ -386,6 +386,7 @@ class busquedas{
                     $idExp = $expBusRes["id"];
                     $idPropie = $expBusRes["fk_propietario"];
                     $idInmuebles = $expBusRes["fk_inmueble"];
+                    $tipo = "normal";
                 }else{
                     $expEmpadroSql = "SELECT * FROM expempadro where fk_propietario=".$propRes["id"]." ORDER BY fecha ASC";
                     $resExpEmp = $link->query($expEmpadroSql);
@@ -393,7 +394,7 @@ class busquedas{
                     $idExp = $expEmpRes["id"];
                     $idPropie = $expEmpRes["fk_propietario"];
                     $idInmuebles = $expEmpRes["fk_inmueble"];
-                       
+                    $tipo = "EMPADRONAMIENTO";
                 }
                 //CONTAR EXPEDIENTES
                     $expedienteSql = "SELECT COUNT(*) FROM expediente where fk_propietario=".$idPropie."";
@@ -457,7 +458,7 @@ class busquedas{
 
                         $sqlExpeRes = $resSqlExpe->fetch_array();
                         
-                        $SqlFechaPago = "SELECT * FROM pagos where fk_expedient=".$sqlExpeRes["id"]." ";
+                        $SqlFechaPago = "SELECT * FROM pagos where fk_expedient=".$sqlExpeRes["n_expediente"]." AND tipo='".$tipo."' ";
                         $resSqlFechaPag = $link->query($SqlFechaPago);
                         $SqlFechaPagRes = $resSqlFechaPag->fetch_array();
                         $fechaPag= explode("-",$SqlFechaPagRes["fechaPagos"]);
@@ -593,7 +594,7 @@ class busquedas{
 
                     $sqlExpeRes = $resSqlExpe->fetch_array();
                     
-                    $SqlFechaPago = "SELECT * FROM pagos where fk_expedient=".$sqlExpeRes["id"]." ";
+                    $SqlFechaPago = "SELECT * FROM pagos where fk_expedient=".$sqlExpeRes["n_expediente"]." ";
                     $resSqlFechaPag = $link->query($SqlFechaPago);
                     $SqlFechaPagRes = $resSqlFechaPag->fetch_array();
                     $fechaPag= explode("-",$SqlFechaPagRes["fechaPagos"]);
@@ -667,6 +668,7 @@ class busquedas{
                 <option value="Caract Terreno">Caracteristicas del Terreno</option>
                 <option value="Caract Construccion">Caracteristicas de la Construcción</option>
                 <option value="Protocolizacion">Datos de Protocolizacion</option>
+                <option value="conservacion">Estado de Conservacion</option>
                 <option value="Linderos">Linderos Segun Inspeccion</option>
                 <option value="Servicios">Servicios</option>
                 <option value="Factura">Datos de la Factura</option>
@@ -685,8 +687,16 @@ class busquedas{
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
                 $expRes = $resExp->fetch_assoc();
+                if($expRes["id"]!=0){
+                    $idInmue = $expRes["fk_inmueble"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idInmue = $expEmpRes["fk_inmueble"];
+                }
             //BUSQUEDA DEL INMUEBLE
-                $inmuSql = "SELECT * FROM inmueble where id=".$expRes["id"]."";
+                $inmuSql = "SELECT * FROM inmueble where id=".$idInmue."";
                 $resInmue = $link->query($inmuSql);
                 $inmueRes = $resInmue->fetch_assoc();
             echo'
@@ -764,8 +774,18 @@ class busquedas{
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
                 $expRes = $resExp->fetch_assoc();
+                if($expRes["id"]!=0){
+                    $idInmue = $expRes["fk_inmueble"];
+                    $idExp = $expRes["id"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idInmue = $expEmpRes["fk_inmueble"];
+                    $idExp = $expEmpRes["id"];
+                }
             //BUSQUEDA DE INMUEBLE
-                $inmueSql = "SELECT * FROM inmueble where id=".$expRes["fk_inmueble"]."";
+                $inmueSql = "SELECT * FROM inmueble where id=".$idInmue."";
                 $resInmue = $link->query($inmueSql);
                 $inmueRes = $resInmue->fetch_assoc();
             //BUSQUEDA DE PAGOS
@@ -828,8 +848,16 @@ class busquedas{
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
                 $expRes = $resExp->fetch_assoc();
+                if($expRes["id"]!=0){
+                    $idInmue = $expRes["fk_inmueble"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idInmue = $expEmpRes["fk_inmueble"];
+                }
             //BUSQUEDA DEL INMUEBLE
-                $inmuSql = "SELECT * FROM inmueble where id=".$expRes["id"]."";
+                $inmuSql = "SELECT * FROM inmueble where id=".$idInmue."";
                 $resInmue = $link->query($inmuSql);
                 $inmueRes = $resInmue->fetch_assoc();
             //BUSQUEDA CARAC. INMUEBLE
@@ -925,9 +953,17 @@ class busquedas{
                 $busExped = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExped = $link->query($busExped);
                 $expedRes = $resExped->fetch_assoc();
+                if($expedRes["id"]!=0){
+                    $idProp = $expedRes["fk_propietario"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idProp = $expEmpSQL["fk_propietario"];
+                }
                 
             //BUSCAR PROPIETARIO
-                $propSql = "SELECT * FROM propietarios where id=".$expedRes["fk_propietario"]."";
+                $propSql = "SELECT * FROM propietarios where id=".$idProp."";
                 $resProp = $link->query($propSql);
                 $propRes = $resProp->fetch_assoc();
             echo'
@@ -1025,8 +1061,16 @@ class busquedas{
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
                 $expRes = $resExp->fetch_assoc();
+                if($expRes["id"]!=0){
+                    $idInmue = $expRes["fk_inmueble"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idInmue = $expEmpSQL["fk_inmueble"];
+                }
             //BUSQUEDA DEL INMUEBLE
-                $inmuSql = "SELECT * FROM inmueble where id=".$expRes["id"]."";
+                $inmuSql = "SELECT * FROM inmueble where id=".$idInmue."";
                 $resInmue = $link->query($inmuSql);
                 $inmueRes = $resInmue->fetch_assoc();
             //BUSQUEDA CARAC. INMUEBLE
@@ -1034,16 +1078,6 @@ class busquedas{
                 $inmuCarac = $link->query($inmuCaracSql);
                 $caracInmu = $inmuCarac->fetch_assoc();
             echo'
-            <input type="hidden" value="'.$caracInmu["destino"].'" id="destino"/>
-            <input type="hidden" value="'.$caracInmu["estructura"].'" id="estructura"/>
-            <input type="hidden" value="'.$caracInmu["paredes_tipo"].'" id="paredes_tipo"/>
-            <input type="hidden" value="'.$caracInmu["paredes_acabado"].'" id="paredes_acabado"/>
-            <input type="hidden" value="'.$caracInmu["pintura"].'" id="pintura"/>
-            <input type="hidden" value="'.$caracInmu["techo"].'" id="techo"/>
-            <input type="hidden" value="'.$caracInmu["pisos"].'" id="pisos"/>
-            <input type="hidden" value="'.$caracInmu["ventanas"].'" id="ventanas"/>
-            <input type="hidden" value="'.$caracInmu["insta_electricas"].'" id="insta_electricas"/>
-            <input type="hidden" value="'.$caracInmu["Regimen"].'" id="regimen"/>
             <input type="hidden" value="'.$caracInmu["id"].'" id="idCaracConst"/>
             <table border="1px" class="taConst">
                 <tr>
@@ -1055,8 +1089,13 @@ class busquedas{
                     <td class="tdConst">
                         <div class="campDat">
                             <p class="negritas">Destino</p>
-                            <select id="destConst">
+                            <select id="destConst">';
+                            if($caracInmu["destino"]){
+                               echo' <option value="'.$caracInmu["destino"].'">'.$caracInmu["destino"].'</option>';
+                            }
+                            echo'
                                 <option value="0"></option>
+                                <option value="NO APLICA">NO APLICA</option>
                                 <option value="Unifamiliar">Unifamiliar</option>
                                 <option value="Bifamiliar">Bifamiliar</option>
                                 <option value="Multifamiliar">Multifamiliar</option>
@@ -1071,8 +1110,13 @@ class busquedas{
                     <td >
                         <div class="campDat">
                             <p class="negritas">Estructura</p>
-                            <select id="estConst">
+                            <select id="estConst">';
+                                if($caracInmu["estructura"]){
+                                   echo' <option value="'.$caracInmu["estructura"].'">'.$caracInmu["estructura"].'</option>';
+                                }
+                                echo'
                                 <option value="0"></option>
+                                <option value="NO APLICA">NO APLICA</option>
                                 <option value="Concreto">Concreto</option>
                                 <option value="Acero ">Acero</option>
                                 <option value="Concreto-Acero">Concreto-Acero</option>
@@ -1085,9 +1129,13 @@ class busquedas{
                     </td>
                     <td >
                         <div class="campDat">
-                            <p class="negritas">Paredes</p>
-                            <select id="pareTipoInmue">
+                            <p class="negritas">Paredes</p>';
+                            if($caracInmu["paredes_tipo"]){
+                               echo' <option value="'.$caracInmu["paredes_tipo"].'">'.$caracInmu["paredes_tipo"].'</option>';
+                            }
+                            echo'<select id="pareTipoInmue">
                                 <option value="">Tipo</option>
+                                <option value="NO APLICA">NO APLICA</option>
                                 <option value="Concreto">Ladrillo</option>
                                 <option value="Metalica">Bloque</option>
                                 <option value="Madera">Adobe Tapia</option>
@@ -1095,8 +1143,13 @@ class busquedas{
                                 <option value="Metalica">Madera</option>
                                 <option value="Madera">Prefabricado</option>
                             </select>
-                            <select id="pareAcaInmue">
+                            <select id="pareAcaInmue">';
+                            if($caracInmu["paredes_acabado"]){
+                               echo' <option value="'.$caracInmu["paredes_acabado"].'">'.$caracInmu["paredes_acabado"].'</option>';
+                            }
+                            echo'
                                 <option value="0">Acabado</option>
+                                <option value="NO APLICA">NO APLICA</option>
                                 <option value="Concreto">Lujoso</option>
                                 <option value="Metalica">Friso liso</option>
                                 <option value="Madera">Friso rustico</option>
@@ -1110,8 +1163,13 @@ class busquedas{
                     <td>
                         <div class="campDat">
                             <p class="negritas">Pintura</p>
-                            <select id="pintConst">
+                            <select id="pintConst">';
+                            if($caracInmu["pintura"]){
+                               echo' <option value="'.$caracInmu["pintura"].'">'.$caracInmu["pintura"].'</option>';
+                            }
+                            echo '
                                 <option value="0"></option>
+                                <option value="NO APLICA">NO APLICA</option>
                                 <option disabled>Pintura C</option>
                                 <option value="Caucho">Caucho</option>
                                 <option value="Óleo">Óleo</option>
@@ -1131,8 +1189,13 @@ class busquedas{
                     <td>
                         <div class="campDat">
                             <p class="negritas">Techo</p>
-                            <select id="techoConst">
+                            <select id="techoConst">';
+                            if($caracInmu["techo"]){
+                               echo' <option value="'.$caracInmu["techo"].'">'.$caracInmu["techo"].'</option>';
+                            }
+                            echo '
                                 <option value="0"></option>
+                                <option value="NO APLICA">NO APLICA</option>
                                 <option value="Madera-teja">Madera-teja</option>
                                 <option value="Placa-teja">Placa-teja</option>
                                 <option value="Platabanda">Platabanda</option>
@@ -1156,8 +1219,13 @@ class busquedas{
                     <td>
                         <div class="campDat">
                             <p class="negritas">Pisos</p>
-                            <select id="pisosConst">
-                                <option value="N/A">N/A</option>
+                            <select id="pisosConst">';
+                            if($caracInmu["pisos"]){
+                               echo' <option value="'.$caracInmu["pisos"].'">'.$caracInmu["pisos"].'</option>';
+                            }
+                            echo'
+                                <option value="0"></option>
+                                <option value="NO APLICA">NO APLICA</option>
                                 <option value="Lujoso">Lujoso</option>
                                 <option value="Baldosas/Terracota">Baldosas/Terracota</option>
                                 <option value="Cerámica">Cerámica</option>
@@ -1174,8 +1242,13 @@ class busquedas{
                     <td>
                         <div class="campDat">
                             <p class="negritas">Ventanas</p>
-                            <select id="ventConst">
+                            <select id="ventConst">';
+                            if($caracInmu["ventanas"]){
+                               echo' <option value="'.$caracInmu["ventanas"].'">'.$caracInmu["ventanas"].'</option>';
+                            }
+                            echo'
                                 <option value="0"></option>
+                                <option value="NO APLICA">NO APLICA</option>
                                 <option value="Vetanal">Vetanal</option>
                                 <option value="Celosial">Celosial</option>
                                 <option value="Corredora">Corredora</option>
@@ -1186,12 +1259,16 @@ class busquedas{
                     </td>
                 </tr>
                 <tr>
-                    
                     <td>
                         <div class="campDat">
                             <p class="negritas">Instal. Electricas</p>
-                            <select id="instElect">
+                            <select id="instElect">';
+                            if($caracInmu["insta_electricas"]){
+                               echo' <option value="'.$caracInmu["insta_electricas"].'">'.$caracInmu["insta_electricas"].'</option>';
+                            }
+                            echo'
                                 <option value="0"></option>
+                                <option value="NO APLICA">NO APLICA</option>
                                 <option value="Embutidas">Embutidas</option>
                                 <option value="Externa">Externa</option>
                                 <option value="Industrial">Industrial</option>
@@ -1206,8 +1283,13 @@ class busquedas{
                     <td>
                         <div class="campDat">
                             <p class="negritas">Regimen</p>
-                            <select id="regInmue">
+                            <select id="regInmue">';
+                            if($caracInmu["Regimen"]){
+                               echo' <option value="'.$caracInmu["Regimen"].'">'.$caracInmu["Regimen"].'</option>';
+                            }
+                            echo'
                                 <option value="0"></option>
+                                <option value="NO APLICA">NO APLICA</option>
                                 <option value="Propiedad Horizontal">Propiedad Horizontal</option>
                                 <option value="Condominio">Condominio</option>
                                 <option value="Sucesion">Sucesion</option>
@@ -1246,8 +1328,16 @@ class busquedas{
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
                 $expRes = $resExp->fetch_assoc();
+                if($expRes["id"]!=0){
+                    $idInmue = $expRes["fk_inmueble"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idInmue = $expEmpSQL["fk_inmueble"];
+                }
             //BUSQUEDA DEL INMUEBLE
-                $inmuSql = "SELECT * FROM inmueble where id=".$expRes["id"]."";
+                $inmuSql = "SELECT * FROM inmueble where id=".$idInmue."";
                 $resInmue = $link->query($inmuSql);
                 $inmueRes = $resInmue->fetch_assoc();
             //BUSQUEDA CARAC. INMUEBLE
@@ -1355,6 +1445,99 @@ class busquedas{
             $link->query($inmueSql);
             echo 'ACTUALIZADO CON EXITO';
         }
+    //ESTADO DE CONSERVACION
+        function modifEstConserv(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+
+            $expSQL = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+            $resExp = $link->query($expSQL);
+            $expRes = $resExp->fetch_array();
+            if($expRes["id"]!=0){
+                $idInmue = $expRes["fk_inmueble"];
+            }else{
+                $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                $resEmpExp = $link->query($expEmpSQL);
+                $expEmpRes = $resEmpExp->fetch_array();
+                $idInmue = $expEmpRes["fk_inmueble"];
+            }
+            $inmueSQL = "SELECT * FROM inmueble where id=".$idInmue."";
+            $resInmue = $link->query($inmueSQL);
+            $inmueRes = $resInmue->fetch_array();
+
+            $caraConstSQL = "SELECT * FROM caracteristicas_construccion where id=".$inmueRes["fk_carac_construccion"]."";
+            $resCaraConst = $link->query($caraConstSQL);
+            $caraConstRes = $resCaraConst->fetch_array();
+
+            $estConSQL = "SELECT * FROM estado_conservacion where id=".$caraConstRes["fk_estadoConserv"]."";
+            $resEstConst = $link->query($estConSQL);
+            $estConstRes = $resEstConst->fetch_array();
+
+            
+            echo'<div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <p class="h1">Estado de Conservación</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <b>Año de Construcción</b>
+                    <input type="text" value="'.$estConstRes["ano_construccion"].'" id="ano_construc">
+                </div>
+                <div class="col">
+                    <b>Año de Refacción</b>
+                    <input type="text" value="'.$estConstRes["ano_refaccion"].'"id="ano_refac">
+                </div>
+                <div class="col">
+                    <b>Edad Efectiva</b>
+                    <input type="text" value="'.$estConstRes["edad_efectiva"].'"id="edadEfec"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <b>Nº de planta</b>
+                    <input type="text" value="'.$estConstRes["nro_planta"].'" id="numPlata" />
+                </div>
+                <div class="col">
+                    <b>Nº de Vivienda</b>
+                    <input type="text" value="'.$estConstRes["nro_vivienda"].'" id="numVivienda" />
+                </div>
+            </div>
+            </div>
+            <div class="btnSig1">
+                <input type="button" value="Siguiente" onclick="btnActConserv()" class="botones btn btn-primary" />
+            </div';
+        }
+        function actEstConst(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+
+            $expSQL = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+            $resExp = $link->query($expSQL);
+            $expRes = $resExp->fetch_array();
+            if($expRes["id"]!=0){
+                $idInmue = $expRes["fk_inmueble"];
+            }else{
+                $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                $resEmpExp = $link->query($expEmpSQL);
+                $expEmpRes = $resEmpExp->fetch_array();
+                $idInmue = $expEmpRes["fk_inmueble"];
+            }
+                $inmueSQL = "SELECT * FROM inmueble where id=".$idInmue."";
+                $resInmue = $link->query($inmueSQL);
+                $inmueRes = $resInmue->fetch_array();
+
+                $caraConstSQL = "SELECT * FROM caracteristicas_construccion where id=".$inmueRes["fk_carac_construccion"]."";
+                $resCaraConst = $link->query($caraConstSQL);
+                $caraConstRes = $resCaraConst->fetch_array();
+
+                $actEstSQL = "UPDATE estado_conservacion SET ano_construccion=".$this->ano_construc.",ano_refaccion=".$this->ano_refac.",edad_efectiva=".$this->edadEfec.",nro_planta=".$this->numPlata.",nro_vivienda=".$this->numVivienda." where id=".$caraConstRes["fk_estadoConserv"]."";
+                $resActEst = $link->query($actEstSQL);
+            
+        }
     //LINDEROS INSPECCION
         function modifLinderos(){
             include('../conexion.php');
@@ -1364,8 +1547,16 @@ class busquedas{
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
                 $expRes = $resExp->fetch_assoc();
+                if($expRes["id"]!=0){
+                    $idInmue = $expRes["fk_inmueble"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idInmue = $expEmpSQL["fk_inmueble"];
+                }
             //BUSQUEDA DEL INMUEBLE
-                $inmuSql = "SELECT * FROM inmueble where id=".$expRes["fk_inmueble"]."";
+                $inmuSql = "SELECT * FROM inmueble where id=".$idInmue."";
                 $resInmue = $link->query($inmuSql);
                 $inmueRes = $resInmue->fetch_assoc();
             if($inmueRes["fk_lind_general"]==0){
@@ -1919,8 +2110,16 @@ class busquedas{
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
                 $expRes = $resExp->fetch_assoc();
+                if($expRes["id"]!=0){
+                    $idInmue = $expRes["fk_inmueble"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idInmue = $expEmpRes["fk_inmueble"];
+                }
             //BUSQUEDA DEL INMUEBLE
-                $inmuSql = "SELECT * FROM inmueble where id=".$expRes["id"]."";
+                $inmuSql = "SELECT * FROM inmueble where id=".$idInmue."";
                 $resInmue = $link->query($inmuSql);
                 $inmueRes = $resInmue->fetch_assoc();
             //BUSQUEDA DE SERVICIOS
@@ -2131,12 +2330,24 @@ class busquedas{
                 $expSql = "SELECT * FROM expediente where n_expediente=".$this->expBuscar."";
                 $resExp = $link->query($expSql);
                 $expRes = $resExp->fetch_assoc();
+                if($expRes["id"]!=0){
+                    $IdExp = $expRes["n_expediente"];
+                    $idFact= $expRes["fk_factura"];
+                    $tipo = "normal";
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $IdExp = $expEmpRes["no_expediente"];
+                    $idFact= $expEmpRes["fk_factura"];
+                    $tipo = "EMPADRONAMIENTO";
+                }
             //BUSQUEDA DE FACTURA
-                $pagosSQL = "SELECT * FROM pagos where fk_expedient=".$expRes["id"]."";
-                $resPagos = $link->query($expSql);
-                $pagosRes = $resPagos->fetch_assoc();
+                $pagosSQL = "SELECT * FROM pagos where fk_expedient='".$IdExp."'  AND tipo='".$tipo."'";
+                $resPagos = $link->query($pagosSQL);
+                $pagosRes = $resPagos->fetch_array();
                 if($pagosRes["id"]!=0){
-                    $factSql = "SELECT * FROM factura where id=".$expRes["fk_factura"]."";
+                    $factSql = "SELECT * FROM factura where id=".$pagosRes["fk_factura"]."";
                     $resFact = $link->query($factSql);
                     $factRes = $resFact->fetch_array();
                     echo'
@@ -2335,6 +2546,7 @@ class busquedas{
                 echo'
             </table>';
         }
+    //
 }
 
 

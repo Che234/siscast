@@ -16,9 +16,9 @@ class renovacion{
             $resBus = $link->query($busSql);
             $busRes = $resBus->fetch_array();
         if($busRes["id"] !=0){
-            $expResultado = $busRes["id"];
+            $expResultado = $busRes["n_expediente"];
             $anoExp = explode('-',$busRes["fecha"]);
-            $condicionExp = $busRes["condicion"];
+            $condicionExp = "nada";
             $inmueble = $busRes["fk_inmueble"];
             $tipo = "normal";
             $numExpedientes = $busRes["n_expediente"];
@@ -26,10 +26,10 @@ class renovacion{
             $busempaSql = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
             $resempadroBus = $link->query($busempaSql);
             $empadroBusRes = $resempadroBus->fetch_array();
-            $expResultado = $empadroBusRes["id"];
+            $expResultado = $empadroBusRes["n_expediente"];
             $numExpedientes = $empadroBusRes["n_expediente"];
             $anoExp = explode('-',$empadroBusRes["fecha"]);
-            $condicionExp = $empadroBusRes["condicion"];
+            $condicionExp = "EMPADRONAMIENTO";
             $inmueble = $empadroBusRes["fk_inmueble"];
             $tipo= "EMPADRONAMIENTO";
         }

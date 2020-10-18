@@ -75,7 +75,7 @@ class f1{
             $resExpFact= $link->query($expFactSql);
             $idExpFact= $resExpFact->fetch_array();
         //BUSQUEDA DEL EXPEDIENTE
-            $busExpSQL = "SELECT * FROM expediente where id=".$this->nuExp."";
+            $busExpSQL = "SELECT * FROM expediente where n_expediente=".$this->nuExp."";
             $resBusEXP = $link->query($busExpSQL);
             $busExpedienteRes = $resBusEXP->fetch_array();
             $fecha = explode('-',$busExpedienteRes["fecha"]);
@@ -143,7 +143,6 @@ class f1{
             $idPagoExp= $link->insert_id;
 
         // Creación del objeto de la clase heredada
-            // $pdf = new PDF1('P','mm',array(215.9,355.6));
             $pdf = new PDF1('P','mm',array(216,335));
             $pdf->SetMargins(20,0,22);
             $pdf->AliasNbPages();
@@ -860,7 +859,7 @@ class f1{
             $pdf->Cell(30,6,'Observaciones:',0,0,'L');
             $pdf->SetY(243);    
             $pdf->SetX(20);
-            $pdf->MultiCell(75,8,$resultConst["observ"],0,"L");
+            $pdf->MultiCell(75,4,$resultConst["observ"],0,"L");
             //TOPOGRAFIA
                 $pdf->SetY(203);    
                 $pdf->SetX(19);
@@ -1292,6 +1291,7 @@ class f1{
     }
 
 }
+
 // $f1 = new f1;
 // $f1->imprimir();
 ?>

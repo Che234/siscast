@@ -193,16 +193,20 @@ class constancias{
     //TEST
     testProp(){
         
-        if(!er_areas.test(this.nomProp)){
+        if(!nombre.test(this.nomProp)){
             alert("Error en el formato de Nombre");
             return false;
         }
-        if(!er_areas.test(this.apelProp)){
+        if(!nombre.test(this.apelProp)){
             alert("Error en el formato de Apellido");
             return false;
         }
-        if(!er_areas.test(this.direcProp)){
+        if(!direcprop.test(this.direcProp)){
             alert("Error en el formato de direccion del propietario");
+            return false;
+        }
+        if(!ex_cedula.test(this.cedFul)){
+            alert("Error en el formato de Cedula");
             return false;
         }
         return true//VERIFICADO//VERIFICADO
@@ -220,7 +224,7 @@ class constancias{
             alert("Error en el formato de Ambito")
             return false
         }
-        if(!er_areas.test(this.direcInmue)){
+        if(!dirInmue.test(this.dirInmue)){
             alert("Error en el formato de Dirección del Inmueble");
             return false;
         }
@@ -286,6 +290,10 @@ class constancias{
             alert("Error en el formato de Instalaciones electricas");
             return false;
         }
+        if(!obsInmue.test(this.obsConst)){
+            alert("Error en el formato de Observaciones");
+            return false;
+        }
         return true//VERIFICADO// VERIFICADO
     }
     veriProt(){
@@ -293,19 +301,19 @@ class constancias{
             alert("Error en el formato de Documento debidamente");
             return false;
         }
-        if(!ex_datcort.test(this.direcProtConst)){
+        if(!protDirec.test(this.direcProtConst)){
             alert("Error en el formato de Dirección de protocolización");
             return false;
         }
-        if(!ex_carnet.test(this.numProtConst)){
+        if(!numProt.test(this.numProtConst)){
             alert("Error en el formato de Numero de protocolización");
             return false;
         }
-        if(!ex_trayec.test(this.tomoProtConst)){
+        if(!tomProt.test(this.tomoProtConst)){
             alert("Error en el formato de Tomo");
             return false;
         }
-        if(!ex_trayec.test(this.folioProtConst)){
+        if(!folioProt.test(this.folioProtConst)){
             alert("Error en el formato de Folio");
             return false;
         }
@@ -317,7 +325,7 @@ class constancias{
             alert("Error en el formato de Trimestre");
             return false;
         }
-        if(!ex_trayec.test(this.valorProtConst)){
+        if(!valorInmue.test(this.valorProtConst)){
             alert("Error en el formato de Valor del inmueble");
             return false;
         }
@@ -328,7 +336,7 @@ class constancias{
             alert("Error en el formato de Mts Norte general");
             return false;
         }
-        if(!ex_datcort.test(this.alindNort)){
+        if(!alindInmue.test(this.alindNort)){
             alert("Error en el formato de Alinderado Norte");
             return false;
         }
@@ -336,7 +344,7 @@ class constancias{
             alert("Error en el formato de Mts Sur");
             return false;
         }
-        if(!ex_datcort.test(this.alindSur)){
+        if(!alindInmue.test(this.alindSur)){
             alert("Error en el formato de Alinderado Sur");
             return false;
         }
@@ -344,7 +352,7 @@ class constancias{
             alert("Error en el formato de Mts Este");
             return false;
         }
-        if(!ex_datcort.test(this.alindEste)){
+        if(!alindInmue.test(this.alindEste)){
             alert("Error en el formato de Alinderado Este");
             return false;
         }
@@ -352,7 +360,7 @@ class constancias{
             alert("Error en el formato de Mts Oeste");
             return false;
         }
-        if(!ex_datcort.test(this.alindOeste)){
+        if(!alindInmue.test(this.alindOeste)){
             alert("Error en el formato de Alinderado Oeste");
             return false;
         }
@@ -360,7 +368,7 @@ class constancias{
             alert("Error en el formato de Área Total");
             return false;
         }
-        if(!niveles.test(this.NivConstTotal)){
+        if(!nivConst.test(this.NivConstTotal)){
             alert("Error en el formato de Niveles de Construcción");
             return false;
         }
@@ -408,10 +416,6 @@ class constancias{
             alert("Error en el formato de Unidad de Area Total");
             return false;
         }
-        if(!ex_datcort.test(this.NivConstTotal)){
-            alert("Error en el formato de Nivel de construcción");
-            return false;
-        }
         if(!ex_trayec.test(this.arConstTotal)){
             alert("Error en el formato de Nivel de construcción");
             return false;
@@ -423,7 +427,7 @@ class constancias{
             alert("Error en el formato de Mts Norte Segun Documento");
             return false;
         }
-        if(!ex_datcort.test(this.alindSecNorte)){
+        if(!alindInmue.test(this.alindSecNorte)){
             alert("Error en el formato de Alinderado Norte Segun Documento");
             return false;
         }
@@ -431,7 +435,7 @@ class constancias{
             alert("Error en el formato de Mts Sur Segun Documento");
             return false;
         }
-        if(!ex_datcort.test(this.alindSecSur)){
+        if(!alindInmue.test(this.alindSecSur)){
             alert("Error en el formato de Alinderado Sur Segun Documento");
             return false;
         }
@@ -439,7 +443,7 @@ class constancias{
             alert("Error en el formato de Mts Este Segun Documento");
             return false;
         }
-        if(!ex_datcort.test(this.alindSecEste)){
+        if(!alindInmue.test(this.alindSecEste)){
             alert("Error en el formato de Alinderado Este Segun Documento");
             return false;
         }
@@ -447,7 +451,7 @@ class constancias{
             alert("Error en el formato de Mts Oeste Segun Documento");
             return false;
         }
-        if(!ex_datcort.test(this.alindSecOeste)){
+        if(!alindInmue.test(this.alindSecOeste)){
             alert("Error en el formato de Alinderado Oeste Segun Documento");
             return false;
         }
@@ -491,7 +495,7 @@ class constancias{
             alert("Error en el formato de Unidad Area Total");
             return false;
         }
-        if(!ex_datcort.test(this.NivConstTotal3)){
+        if(!nivConst.test(this.NivConstTotal3)){
             alert("Error en el formato de Niveles de Construcción");
             return false;
         }
@@ -510,7 +514,7 @@ class constancias{
             alert("Error en el formato de Mts Norte posible Venta");
             return false;
         }
-        if(!ex_datcort.test(this.alindPosNort)){
+        if(!alindInmue.test(this.alindPosNort)){
             alert("Error en el formato de Alinderado Norte posible Venta");
             return false;
         }
@@ -518,7 +522,7 @@ class constancias{
             alert("Error en el formato de Mts Sur posible Venta");
             return false;
         }
-        if(!ex_datcort.test(this.alindPosSur)){
+        if(!alindInmue.test(this.alindPosSur)){
             alert("Error en el formato de Alinderado Sur posible Venta");
             return false;
         }
@@ -526,7 +530,7 @@ class constancias{
             alert("Error en el formato de Mts Este posible Venta");
             return false;
         }
-        if(!ex_datcort.test(this.alindPosEste)){
+        if(!alindInmue.test(this.alindPosEste)){
             alert("Error en el formato de Alinderado Este posible Venta");
             return false;
         }
@@ -534,7 +538,7 @@ class constancias{
             alert("Error en el formato de Mts Oeste posible Venta");
             return false;
         }
-        if(!ex_datcort.test(this.alindPosOeste)){
+        if(!alindInmue.test(this.alindPosOeste)){
             alert("Error en el formato de Alinderado Oeste posible Venta");
             return false;
         }
@@ -578,7 +582,7 @@ class constancias{
             alert("Error en el formato de Unidad de Area Total");
             return false;
         }
-        if(!ex_datcort.test(this.NivConstTotal2)){
+        if(!nivConst.test(this.NivConstTotal2)){
             alert("Error en el formato de Niveles de Construcción");
             return false;
         }
@@ -827,276 +831,276 @@ class constancias{
     }
     formConst(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
+        var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send("&accion=fProp"); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     cambSect(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('secInmue');
+        var divsitioform = document.getElementById('secInmue');
         var divsitiomaterial = document.getElementById('secInmue');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`parrInmue=${this.parrInmue}&accion=cambSect`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     fCarac(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
+        var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send("cedFul="+this.cedFul+"&rifConst="+this.rifConst+"&nomProp="+this.nomProp+"&apelProp="+this.apelProp+"&codTelf="+this.codTelf+"&numText="+this.numText+"&direcProp="+this.direcProp+"&codTelf2="+this.codTelf2+"&numTelf2="+this.numTelf2+"&parrInmue="+this.parrInmue+"&secInmue="+this.secInmue+"&direcInmue="+this.direcInmue+"&topoConst="+this.topoConst+"&formaConst="+this.formaConst+"&usoConst="+this.usoConst+"&tenenConst="+this.tenenConst+"&ambInmue="+this.ambInmue+"&accion=fCarac"); 
         ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     
-			     }
-	       	}
+                 }
+            }
     }
     fLind(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
+        var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`destConst=${this.destConst}&estConst=${this.estConst}&pareTipoInmue=${this.pareTipoInmue}&pareAcaInmue=${this.pareAcaInmue}&pintConst=${this.pintConst}&techoConst=${this.techoConst}&pisosConst=${this.pisosConst}&piezConst=${this.piezConst}&ventConst=${this.ventConst}&puertConst=${this.puertConst}&instElect=${this.instElect}&ambConst=${this.ambConst}&compConst=${this.compConst}&estConserv=${this.estConserv}&obsConst=${this.obsConst}&docDebConst=${this.docDebConst}&direcProtConst=${this.direcProtConst}&numProtConst=${this.numProtConst}&tomoProtConst=${this.tomoProtConst}&folioProtConst=${this.folioProtConst}&protoConst=${this.protoConst}&trimProtConst=${this.trimProtConst}&dateProtConst=${this.dateProtConst}&valorProtConst=${this.valorProtConst}&regInmue=${this.regInmue}&parte1=${this.parte1}&accion=fLid`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     
-			     }
-	       	}
+                 }
+            }
     }
     GuardConst(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
+        var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`nortGen=${this.nortGen}&alindNort=${this.alindNort}&surGen=${this.surGen}&alindSur=${this.alindSur}&esteGen=${this.esteGen}&alindEste=${this.alindEste}&oesteGen=${this.oesteGen}&alindOeste=${this.alindOeste}&nortPosVenta=${this.nortPosVenta}&alindPosNort=${this.alindPosNort}&surPosVenta=${this.surPosVenta}&alindPosSur=${this.alindPosSur}&estePosVenta=${this.estePosVenta}&alindPosEste=${this.alindPosEste}&oestePosVenta=${this.oestePosVenta}&alindPosOeste=${this.alindPosOeste}&nortSecDoc=${this.nortSecDoc}&alindSecNorte=${this.alindSecNorte}&surSecDoc=${this.surSecDoc}&alindSecSur=${this.alindSecSur}&esteSecDoc=${this.esteSecDoc}&alindSecEste=${this.alindSecEste}&oesteSecDoc=${this.oesteSecDoc}&alindSecOeste=${this.alindSecOeste}&arTotal=${this.arTotal}&NivConstTotal=${this.NivConstTotal}&arConstTotal=${this.arConstTotal}&parte2=${this.parte2}&parte1=${this.parte1}&cedFul=${this.cedFul}&rifConst=${this.rifConst}&nomProp=${this.nomProp}&apelProp=${this.apelProp}&telfFul=${this.telfFul}&direcProp=${this.direcProp}&telfFul2=${this.telfFul2}&parrInmue=${this.parrInmue}&secInmue=${this.secInmue}&direcInmue=${this.direcInmue}&topoConst=${this.topoConst}&formaConst=${this.formaConst}&usoConst=${this.usoConst}&tenenConst=${this.tenenConst}&regInmue=${this.regInmue}&destConst=${this.destConst}&estConst=${this.estConst}&pareTipoInmue=${this.pareTipoInmue}&pareAcaInmue=${this.pareAcaInmue}&pintConst=${this.pintConst}&techoConst=${this.techoConst}&pisosConst=${this.pisosConst}&piezConst=${this.piezConst}&ventConst=${this.ventConst}&puertConst=${this.puertConst}&instElect=${this.instElect}&ambConst=${this.ambConst}&compConst=${this.compConst}&estConserv=${this.estConserv}&obsConst=${this.obsConst}&docDebConst=${this.docDebConst}&direcProtConst=${this.direcProtConst}&numProtConst=${this.numProtConst}&tomoProtConst=${this.tomoProtConst}&folioProtConst=${this.folioProtConst}&protoConst=${this.protoConst}&trimProtConst=${this.trimProtConst}&dateProtConst=${this.dateProtConst}&valorProtConst=${this.valorProtConst}&Acue=${this.Acue}&AcueRural=${this.AcueRural}&AguasSub=${this.AguasSub}&AguasServ=${this.AguasServ}&PavFlex=${this.PavFlex}&PavRig=${this.PavRig}&viaEngran=${this.viaEngran}&acera=${this.acera}&AlumPublico=${this.AlumPublico}&aseo=${this.aseo}&transPublic=${this.transPublic}&pozoSept=${this.pozoSept}&ElectResidencial=${this.ElectResidencial}&ElectriIndust=${this.ElectriIndust}&linTelf=${this.linTelf}&multa=${this.multa}&ambInmue=${this.ambInmue}&arTotal2=${this.arTotal2}&NivConstTotal2=${this.NivConstTotal2}&arConstTotal2=${this.arConstTotal2}&arTotal3=${this.arTotal3}&NivConstTotal3=${this.NivConstTotal3}&arConstTotal3=${this.arConstTotal3}&uniNorte=${this.uniNorte}&uniSur=${this.uniSur}&uniEste=${this.uniEste}&uniOeste=${this.uniOeste}&uniNorte2=${this.uniNorte2}&uniSur2=${this.uniSur2}&uniEste2=${this.uniEste2}&uniOeste2=${this.uniOeste2}&uniNorte3=${this.uniNorte3}&uniSur3=${this.uniSur3}&uniEste3=${this.uniEste3}&uniOeste3=${this.uniOeste3}&nuExp=${this.nuExp}&uniAreaT=${this.uniAreaT}&uniAreaT2=${this.uniAreaT2}&uniAreaT3=${this.uniAreaT3}&uniAreaConst3=${this.uniAreaConst3}&uniAreaConst2=${this.uniAreaConst2}&uniAreaConst=${this.uniAreaConst}&puntNorte=${this.puntNorte}&puntSur=${this.puntSur}&puntEste=${this.puntEste}&puntOeste=${this.puntOeste}&puntNorte2=${this.puntNorte2}&puntSur2=${this.puntSur2}&puntEste2=${this.puntEste2}&puntOeste2=${this.puntOeste2}&puntNorte3=${this.puntNorte3}&puntSur3=${this.puntSur3}&puntEste3=${this.puntEste3}&puntOeste3=${this.puntOeste3}&accion=guardConst`)
         ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     
-			     }
-	       	}
+                 }
+            }
     }
     //IMPRIMIR
     imprConst(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
+        var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst2`);
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     let rutaPdf = document.getElementById("rutaPdf").value
                     document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="${rutaPdf}" type="application/pdf"></div>`;
-			     }
-	       	}
+                 }
+            }
     }
     imprConst1(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
+        var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst1`);
         ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     let nuExp = document.getElementById("numExp").value
                     let rutaPdf = document.getElementById("rutaPdf").value
                     document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="${rutaPdf}" type="application/pdf"></div>`;
-			     }
-	       	}
+                 }
+            }
     }
     imprConst3(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
+        var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst3`);
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     let nuExp = document.getElementById("numExp").value
                     let rutaPdf = document.getElementById("rutaPdf").value
                     document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="${rutaPdf}" type="application/pdf"></div>`;
-			     }
-	       	}
+                 }
+            }
     }
     imprConstEmpa(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
+        var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`operacion=${this.operacion}&montoFact=${this.montoFact}&fechFact=${this.fechFact}&idProp=${this.idProp}&idInmueble=${this.idInmueble}&numFact=${this.numFact}&nuExp=${this.nuExp}&accion=imprConst4`);
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     let nuExp = document.getElementById("numExp").value
                     let rutaPdf = document.getElementById("rutaPdf").value
                     document.getElementById("enlacePdf").innerHTML=`<div class='campDat'><embed id="embedPdf" src="${rutaPdf}" type="application/pdf"></div>`;
-			     }
-	       	}
+                 }
+            }
     }
     
     formImpri(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
+        var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send("accion=formImpri"); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     veriImpr(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campGeneral');
+        var divsitioform = document.getElementById('campGeneral');
         var divsitiomaterial = document.getElementById('campGeneral');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`campBuscar=${this.campBuscar}&accion=veriImpr`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     veriFact(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('campOculto');
+        var divsitioform = document.getElementById('campOculto');
         var divsitiomaterial = document.getElementById('campOculto');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`numFact=${this.numFact}&accion=busFactura`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     //PROPIETARIO
     formProp(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idProp=${this.idProp}&accion=formProp`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     guardProp(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`cedFul=${this.cedFul}&rifConst=${this.rifConst}&nomProp=${this.nomProp}&apelProp=${this.apelProp}&telfFull=${this.telfFull}&direcProp=${this.direcProp}&telfFull2=${this.telfFull2}&accion=guardProp`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     revUsuario(){
         var ajax = new objetoAjax();
@@ -1123,582 +1127,582 @@ class constancias{
     //INMUEBLE
     formInmue(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idInmue=${this.idInmue}&accion=formInmue`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         cambioTempParr()
                     },100)
-			     }
-	       	}
+                 }
+            }
     }
     guarInmue(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`parrInmue=${this.parrInmue}&secInmue=${this.secInmue}&ambInmue=${this.ambInmue}&direcInmue=${this.direcInmue}&accion=guarInmue`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //CARACTERISTICAS DEL TERRENO
     formCarTerr(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idCaraInmue=${this.idCaraInmue}&accion=formCarTerr`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     guarCarTerr(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`topoConst=${this.topoConst}&formaConst=${this.formaConst}&usoConst=${this.usoConst}&tenenConst=${this.tenenConst}&accion=guarCarTerr`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //CARACTERISTICAS DE LA CONSTRUCCIÓN
     fcaracConst(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idCaraConst=${this.idCaraConst}&accion=fcaracConst`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     guarCaracConst(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`destConst=${this.destConst}&estConst=${this.estConst}&pareTipoInmue=${this.pareTipoInmue}&pareAcaInmue=${this.pareAcaInmue}&pintConst=${this.pintConst}&techoConst=${this.techoConst}&pisosConst=${this.pisosConst}&ventConst=${this.ventConst}&instElect=${this.instElect}&regInmue=${this.regInmue}&obsConst=${this.obsConst}&accion=guarCaracConst`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //PROTOCOLIZACION DEL INMUEBLE
     fprotInmue(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idProto=${this.idProto}&accion=fprotInmue`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     guarProt(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`docDebConst=${this.docDebConst}&direcProtConst=${this.direcProtConst}&numProtConst=${this.numProtConst}&tomoProtConst=${this.tomoProtConst}&folioProtConst=${this.folioProtConst}&protoConst=${this.protoConst}&trimProtConst=${this.trimProtConst}&dateProtConst=${this.dateProtConst}&valorProtConst=${this.valorProtConst}&accion=guarProtInmue`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //LINDEROS SEGUN INSPECCION
     fActGeneral(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idLindGen=${this.idLindGen}&accion=fActGeneral`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     
-			     }
-	       	}
+                 }
+            }
     }
     guarGeneral(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`puntNorte=${this.puntNorte}&nortGen=${this.nortGen}&uniNorte=${this.uniNorte}&alindNort=${this.alindNort}&puntSur=${this.puntSur}&surGen=${this.surGen}&uniSur=${this.uniSur}&alindSur=${this.alindSur}&puntEste=${this.puntEste}&esteGen=${this.esteGen}&uniEste=${this.uniEste}&alindEste=${this.alindEste}&puntOeste=${this.puntOeste}&oesteGen=${this.oesteGen}&uniOeste=${this.uniOeste}&alindOeste=${this.alindOeste}&arTotal=${this.arTotal}&uniAreaT=${this.uniAreaT}&NivConstTotal=${this.NivConstTotal}&arConstTotal=${this.arConstTotal}&uniAreaConst=${this.uniAreaConst}&accion=guarGeneral`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //LINDEROS SEGUN DOCUMENTO
     factSecDoc(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idLindDoc=${this.idLindDoc}&accion=factSecDoc`) 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     
-			     }
-	       	}
+                 }
+            }
     }
     guarSecDoc(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`puntNorte3=${this.puntNorte3}&nortSecDoc=${this.nortSecDoc}&uniNorte3=${this.uniNorte3}&alindSecNorte=${this.alindSecNorte}&puntSur3=${this.puntSur3}&surSecDoc=${this.surSecDoc}&uniSur3=${this.uniSur3}&alindSecSur=${this.alindSecSur}&puntEste3=${this.puntEste3}&esteSecDoc=${this.esteSecDoc}&uniEste3=${this.uniEste3}&alindSecEste=${this.alindSecEste}&puntOeste3=${this.puntOeste3}&oesteSecDoc=${this.oesteSecDoc}&uniOeste3=${this.uniOeste3}&alindSecOeste=${this.alindSecOeste}&arTotal3=${this.arTotal3}&uniAreaT3=${this.uniAreaT3}&NivConstTotal3=${this.NivConstTotal3}&arConstTotal3=${this.arConstTotal3}&uniAreaConst3=${this.uniAreaConst3}&accion=guarSecDoc`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //LINDEROS POSIBLE VENTA
     factPosVenta(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idPosVenta=${this.idPosVenta}&accion=factPosVenta`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     
-			     }
-	       	}
+                 }
+            }
     }
     guarPosVenta(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`puntNorte2=${this.puntNorte2}&nortPosVenta=${this.nortPosVenta}&uniNorte2=${this.uniNorte2}&alindPosNort=${this.alindPosNort}&puntSur2=${this.puntSur2}&surPosVenta=${this.surPosVenta}&uniSur2=${this.uniSur2}&alindPosSur=${this.alindPosSur}&puntEste2=${this.puntEste2}&estePosVenta=${this.estePosVenta}&uniEste2=${this.uniEste2}&alindPosEste=${this.alindPosEste}&puntOeste2=${this.puntOeste2}&oestePosVenta=${this.oestePosVenta}&uniOeste2=${this.uniOeste2}&alindPosOeste=${this.alindPosOeste}&arTotal2=${this.arTotal2}&uniAreaT2=${this.uniAreaT2}&NivConstTotal2=${this.NivConstTotal2}&arConstTotal2=${this.arConstTotal2}&uniAreaConst2=${this.uniAreaConst2}&accion=guarPosVenta`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //ESTADO DE CONSERVACIÓN
     fConserv(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idEstConserv=${this.idEstConserv}&accion=fConserv`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     guarConserv(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`ano_construc=${this.ano_construc}&ano_refac=${this.ano_refac}&edadEfec=${this.edadEfec}&numPlata=${this.numPlata}&numVivienda=${this.numVivienda}&accion=guarConserv`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //PIEZAS SANITARIAS
     fPiezSant(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idPiezSant=${this.idPiezSant}&accion=fPiezSant`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     guarPiezSant(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`porFina=${this.porFina}&porceEcon=${this.porceEcon}&banera=${this.banera}&calentador=${this.calentador}&wc=${this.wc}&bidet=${this.bidet}&lavamanos=${this.lavamanos}&ducha=${this.ducha}&urinario=${this.urinario}&accion=guarPiezSant`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //PUERTAS
     fPuertas(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idPuertas=${this.idPuertas}&accion=fpuertas`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     guarPuertas(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`entamFina=${this.entamFina}&entamEcon=${this.entamEcon}&madeCepil=${this.madeCepil}&hierro=${this.hierro}&accion=guarPuertas`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //AMBIENTES
     fAmbi(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idAmbientes=${this.idAmbientes}&accion=fAmbi`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     guarAmbien(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`dormit=${this.dormit}&comedor=${this.comedor}&sala=${this.sala}&banos=${this.banos}&Cocina=${this.Cocina}&Servicio=${this.Servicio}&oficina=${this.oficina}&garaje=${this.garaje}&estac=${this.estac}&accion=guarAmbien`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //COMPLEMENTOS
     fComple(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idComple=${this.idComple}&accion=fComple`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     guarComple(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`ascensor=${this.ascensor}&aireAcond=${this.aireAcond}&rejas=${this.rejas}&closets=${this.closets}&porcelana=${this.porcelana}&accion=guarComple`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //SERVICIOS
     fServicios(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idServInmue=${this.idServInmue}&accion=fServicios`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     guarServicios(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`Acue=${this.Acue}&AcueRural=${this.AcueRural}&AguasSub=${this.AguasSub}&PavFlex=${this.PavFlex}&PavRig=${this.PavRig}&viaEngran=${this.viaEngran}&AlumPublico=${this.AlumPublico}&ElectResidencial=${this.ElectResidencial}&transPublic=${this.transPublic}&ElectriIndust=${this.ElectriIndust}&linTelf=${this.linTelf}&aseo=${this.aseo}&pozoSept=${this.pozoSept}&AguasServ=${this.AguasServ}&acera=${this.acera}&accion=guarServicios`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //EXPEDIENTE
     fExpedient(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idExp=${this.idExp}&accion=fExpedient`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
-			     }
-	       	}
+                 }
+            }
     }
     guarExpe(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`valorInmue=${this.valorInmue}&nuExp=${this.nuExp}&expVerificado=${this.expVerificado}&fechaExp=${this.fechaExp}&accion=guarExpe`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     busExpediente(){
         var ajax = new objetoAjax();
@@ -1721,62 +1725,62 @@ class constancias{
     //FACTURA
     fFactura(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idFactura=${this.idFactura}&accion=fFactura`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnVeriFact()
                     },200)
                     
-			     }
-	       	}
+                 }
+            }
     }
     guarFact(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`montoFact=${this.montoFact}&numFact=${this.numFact}&fechFact=${this.fechFact}&recFact=${this.recFact}&accion=guarFact`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText; 
                     setTimeout(()=>{
                         btnFormConst();
                     },200)
                     alert("PROCESO COMPLETADO CON EXITO")
-			     }
-	       	}
+                 }
+            }
     }
     //VERIFICACION
     veriF3(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idPosVenta=${this.idPosVenta}&idServInmue=${this.idServInmue}&accion=veriF3`); 
         ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     setTimeout(()=>{
@@ -1792,8 +1796,8 @@ class constancias{
                             }
                         }
                     },200)
-			     }
-	       	}
+                 }
+            }
     }
     guardarRepConst3(){
         var ajax = new objetoAjax();
@@ -1816,17 +1820,17 @@ class constancias{
     }
     veriF2(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idFactura=${this.idFactura}&idProp=${this.idProp}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idServInmue=${this.idServInmue}&nuExp=${this.nuExp}&accion=veriF2`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     setTimeout(()=>{
@@ -1842,8 +1846,8 @@ class constancias{
                             }
                         }
                     },200)
-			     }
-	       	}
+                 }
+            }
     }
     guardarRepConst2(){
         var ajax = new objetoAjax();
@@ -1866,17 +1870,17 @@ class constancias{
     }
     veriF1(){
         var ajax = new objetoAjax();
-		var divsitioform = document.getElementById('formsInscrip');
+        var divsitioform = document.getElementById('formsInscrip');
         var divsitiomaterial = document.getElementById('formsInscrip');
-		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
         divsitiomaterial.innerHTML="";
-		ajax=objetoAjax();
-		ajax.open("POST", "src/server/rec/recConst.php",true);
-		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
         ajax.send(`idFactura=${this.idFactura}&nuExp=${this.nuExp}&idProp=${this.idProp}&idInmue=${this.idInmue}&idInmue=${this.idInmue}&idCaraInmue=${this.idCaraInmue}&idCaraConst=${this.idCaraConst}&idProto=${this.idProto}&idServInmue=${this.idServInmue}&idEstConserv=${this.idEstConserv}&idPiezSant=${this.idPiezSant}&idAmbientes=${this.idAmbientes}&idPuertas=${this.idPuertas}&idComple=${this.idComple}&idExp=${this.idExp}&idLindDoc=${this.idLindDoc}&idLindGen=${this.idLindGen}&idServInmue=${this.idServInmue}&accion=veriF1`); 
-		ajax.onreadystatechange=function()
+        ajax.onreadystatechange=function()
             {
-			if (ajax.readyState==4) 
+            if (ajax.readyState==4) 
                 {
                     divsitioform.innerHTML = ajax.responseText;
                     setTimeout(()=>{
@@ -1892,8 +1896,8 @@ class constancias{
                             }
                         }
                     },100)
-			     }
-	       	}
+                 }
+            }
     }
     guardarRepConst1(){
         var ajax = new objetoAjax();
@@ -2638,30 +2642,24 @@ function calLind(){
     sur = document.getElementById("surGen").value
     este = document.getElementById("esteGen").value
     oeste = document.getElementById("oesteGen").value
-    norSur = (parseInt(norte) + parseInt(sur))/2
-    estOest = (parseInt(este)+parseInt(oeste))/2
-    area2 = norSur*estOest
-    document.getElementById("arTotal").value=area2
+    area2 = ((parseFloat(norte) + parseFloat(sur))/2)*((parseFloat(este)+parseFloat(oeste))/2)
+    document.getElementById("arTotal").value=area2.toFixed(2)
 }
 function calLindVenta(){
     norte = document.getElementById("nortPosVenta").value
     sur = document.getElementById("surPosVenta").value
     este = document.getElementById("estePosVenta").value
     oeste = document.getElementById("oestePosVenta").value
-    norSur = (parseInt(norte) + parseInt(sur))/2
-    estOest = (parseInt(este)+parseInt(oeste))/2
-    area2 = norSur*estOest
-    document.getElementById("arTotal2").value=area2
+    area2 = ((parseFloat(norte) + parseFloat(sur))/2)*((parseFloat(este)+parseFloat(oeste))/2)
+    document.getElementById("arTotal2").value=area2.toFixed(2)
 }
 function calLindDoc(){
     norte = document.getElementById("nortSecDoc").value
     sur = document.getElementById("surSecDoc").value
     este = document.getElementById("esteSecDoc").value
     oeste = document.getElementById("oesteSecDoc").value
-    norSur = (parseInt(norte) + parseInt(sur))/2
-    estOest = (parseInt(este)+parseInt(oeste))/2
-    area2 = norSur*estOest
-    document.getElementById("arTotal3").value=area2
+    area2 = ((parseFloat(norte) + parseFloat(sur))/2)*((parseFloat(este)+parseFloat(oeste))/2)
+    document.getElementById("arTotal3").value=area2.toFixed(2)
 }
 function btnGuardConst(){
     let consta = new constancias()
