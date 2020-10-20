@@ -32,6 +32,6 @@ var numProt = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E
 var tomProt =/^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,15}$/;
 var folioProt = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,13}$/;
 var valorInmue = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,13}$/;
-var cedPropie = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,89}$/;
+var cedPropie = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,70}$/;
 var nombre = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,70}$/;
 var direcprop = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,76}$/;

@@ -899,6 +899,112 @@ if(isset($_POST["numVivienda"])){
 }else{
     $bus->numVivienda = "nada";
 }
+if(isset($_POST["porFina"])){
+    $bus->porFina = $_POST["porFina"];
+}else{
+    $bus->porFina = "nada";
+}
+if(isset($_POST["porceEcon"])){
+    $bus->porceEcon = $_POST["porceEcon"];
+}else{
+    $bus->porceEcon = "nada";
+}
+if(isset($_POST["banera"])){
+    $bus->banera = $_POST["banera"];
+}else{
+    $bus->banera = "nada";
+}
+if(isset($_POST["calentador"])){
+    $bus->calentador = $_POST["calentador"];
+}else{
+    $bus->calentador = "nada";
+}
+if(isset($_POST["wc"])){
+    $bus->wc = $_POST["wc"];
+}else{
+    $bus->wc = "nada";
+}
+if(isset($_POST["bidet"])){
+    $bus->bidet = $_POST["bidet"];
+}else{
+    $bus->bidet = "nada";
+}
+if(isset($_POST["ducha"])){
+    $bus->ducha = $_POST["ducha"];
+}else{
+    $bus->ducha = "nada";
+}
+if(isset($_POST["urinario"])){
+    $bus->urinario = $_POST["urinario"];
+}else{
+    $bus->urinario = "nada";
+}
+if(isset($_POST["entamFina"])){
+    $bus->entamFina = $_POST["entamFina"];
+}else{
+    $bus->entamFina = "nada";
+}
+if(isset($_POST["entamEcon"])){
+    $bus->entamEcon = $_POST["entamEcon"];
+}else{
+    $bus->entamEcon = "nada";
+}
+if(isset($_POST["madeCepil"])){
+    $bus->madeCepil = $_POST["madeCepil"];
+}else{
+    $bus->madeCepil = "nada";
+}
+if(isset($_POST["hierro"])){
+    $bus->hierro = $_POST["hierro"];
+}else{
+    $bus->hierro = "nada";
+}
+if(isset($_POST["dormit"])){
+    $bus->dormit = $_POST["dormit"];
+}else{
+    $bus->dormit = "nada";
+}
+if(isset($_POST["comedor"])){
+    $bus->comedor = $_POST["comedor"];
+}else{
+    $bus->comedor = "nada";
+}
+if(isset($_POST["sala"])){
+    $bus->sala = $_POST["sala"];
+}else{
+    $bus->sala = "nada";
+}
+if(isset($_POST["banos"])){
+    $bus->banos = $_POST["banos"];
+}else{
+    $bus->banos = "nada";
+}
+if(isset($_POST["Cocina"])){
+    $bus->Cocina = $_POST["Cocina"];
+}else{
+    $bus->Cocina = "nada";
+}
+if(isset($_POST["Servicio"])){
+    $bus->Servicio = $_POST["Servicio"];
+}else{
+    $bus->Servicio = "nada";
+}
+if(isset($_POST["oficina"])){
+    $bus->oficina = $_POST["oficina"];
+}else{
+    $bus->oficina = "nada";
+}
+if(isset($_POST["garaje"])){
+    $bus->garaje = $_POST["garaje"];
+}else{
+    $bus->garaje = "nada";
+}
+if(isset($_POST["estac"])){
+    $bus->estac = $_POST["estac"];
+}else{
+    $bus->estac = "nada";
+}
+
 
 if($accion =="busExp"){
     $bus->mostBusqueda();
@@ -935,6 +1041,7 @@ if($secciones == "Factura"){
 }
 
 
+
 if($accion == "actProp"){
     $bus->actProp();
 }
@@ -953,14 +1060,20 @@ if($accion=="actConst"){
 if($accion=="actProtocol"){
     $bus->actProtocol();
 }
-if($accion=="actGeneral"){
-    $bus->actGeneral();
+if($accion=="mostInsp"){
+    $bus->mostInsp();
 }
-if($accion=="actPosVenta"){
-    $bus->actPosVenta();
+if($accion=="mostLindVenta"){
+    $bus->mostLindVenta();
 }
-if($accion=="actSecDoc"){
-    $bus->actSecDoc();
+if($accion=="actLindVenta"){
+    $bus->actLindVenta();
+}
+if($accion=="mostLindDoc"){
+    $bus->mostLindDoc();
+}
+if($accion=="actLindDoc"){
+    $bus->actLindDoc();
 }
 if($accion=="guarActLind"){
     $bus->guarActLind();
@@ -973,6 +1086,9 @@ if($accion=="guarActFact"){
 }
 if($accion=="actEstConst"){
     $bus->actEstConst();
+}
+if($accion=="elimGen"){
+    $bus->elimGen();
 }
 
 if($accion=="pagarInmue"){
@@ -989,6 +1105,24 @@ if($accion=="eliminarBus"){
 }
 if($accion=="mostConserv"){
     $bus->modifEstConserv();
+}
+if($accion=="mostPiezSant"){
+    $bus->mostPiezSant();
+}
+if($accion=="actPiez"){
+    $bus->actPiez();
+}
+if($accion=="mostPuert"){
+    $bus->mostPuert();
+}
+if($accion=="mostAmbien"){
+    $bus->mostAmbien();
+}
+if($accion=="actPuertas"){
+    $bus->actPuertas();
+}
+if($accion=="actAmbien"){
+    $bus->actAmbien();
 }
 
 if($_POST["parrInmue2"]=="Capital"){

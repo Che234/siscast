@@ -2,6 +2,28 @@
 class busquedas{
 
     function construct(){
+        $dormit= "";
+        $sala = "";
+        $comedor = "";
+        $banos = "";
+        $Cocina= "";
+        $Servicio= "";
+        $oficina = "";
+        $garaje = "";
+        $estac= "";
+        $entamFina="";
+        $entamEcon="";
+        $madeCepil = "";
+        $hierro = "";
+        $porFina ="";
+        $porceEcon = "";
+        $banera = "";
+        $calentador = "";
+        $wc = "";
+        $bidet = "";
+        $lavamanos = "";
+        $ducha = "";
+        $urinario = "";
         $campBuscar = "";
         $tipoBuscar = "";
         $tipoCed = "";
@@ -167,7 +189,7 @@ class busquedas{
         $numPlata = "";
         $numVivienda = "";
     }
-
+//MOSTRAR LA BUSQUEDA
     function mostBusqueda(){
         include('../conexion.php');
         $MySql = new conexion;
@@ -659,6 +681,7 @@ class busquedas{
         }
        
     }
+//MODIFICACIONES DE DATOS
     function mostModif(){
         echo'
             <select id="secciones" onChange="btnFormCambios()">
@@ -669,7 +692,12 @@ class busquedas{
                 <option value="Caract Construccion">Caracteristicas de la Construcción</option>
                 <option value="Protocolizacion">Datos de Protocolizacion</option>
                 <option value="conservacion">Estado de Conservacion</option>
-                <option value="Linderos">Linderos Segun Inspeccion</option>
+                <option value="Piezas">Piezas Sanitarias</option>
+                <option value="Puertas">Puertas</option>
+                <option value="ambientes">Ambientes</option>
+                <option value="LinderosDoc">Linderos Segun Documento</option>
+                <option value="LinderosInspec">Linderos Segun Inspeccion</option>
+                <option value="LinderosVenta">Linderos Posible Venta</option>
                 <option value="Servicios">Servicios</option>
                 <option value="Factura">Datos de la Factura</option>
             </select>
@@ -1538,8 +1566,430 @@ class busquedas{
                 $resActEst = $link->query($actEstSQL);
             
         }
+    //PIEZAS SANITARIAS
+        function mostPiezSant(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+
+            $expSQL = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+            $resExp = $link->query($expSQL);
+            $expRes = $resExp->fetch_array();
+            if($expRes["id"]!=0){
+                $idInmue = $expRes["fk_inmueble"];
+            }else{
+                $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                $resEmpExp = $link->query($expEmpSQL);
+                $expEmpRes = $resEmpExp->fetch_array();
+                $idInmue = $expEmpRes["fk_inmueble"];
+            }
+            $inmueSQL = "SELECT * FROM inmueble where id=".$idInmue."";
+            $resInmue = $link->query($inmueSQL);
+            $inmueRes = $resInmue->fetch_array();
+
+            $caraConstSQL = "SELECT * FROM caracteristicas_construccion where id=".$inmueRes["fk_carac_construccion"]."";
+            $resCaraConst = $link->query($caraConstSQL);
+            $caraConstRes = $resCaraConst->fetch_array();
+
+            $estConSQL = "SELECT * FROM piezas_sanitarias where id=".$caraConstRes["fk_piezasSanitarias"]."";
+            $resEstConst = $link->query($estConSQL);
+            $estConstRes = $resEstConst->fetch_array();
+            echo'
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <p class="h1">Piezas Sanitarias</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>Porcelana Fina</b>
+                        <select id="porFina">';
+                            if($estConstRes["porcelana_fina"]){
+                                echo'
+                                    <option value="'.$estConstRes["porcelana_fina"].'">'.$estConstRes["porcelana_fina"].'</option>
+                                ';
+                            }
+                        echo'
+                            
+                            <option value="N/A">N/A</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Porcelana Econ.</b>
+                        <select id="porceEcon">';
+                            if($estConstRes["porcelana_econ"]){
+                                echo'
+                                    <option value="'.$estConstRes["porcelana_econ"].'">'.$estConstRes["porcelana_econ"].'</option>
+                                ';
+                            }
+                            echo'
+                            <option value="N/A">N/A</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Bañera</b>
+                        <select id="banera">';
+
+                            if($estConstRes["banera"]){
+                                echo'
+                                    <option value="'.$estConstRes["banera"].'">'.$estConstRes["banera"].'</option>
+                                ';
+                            }
+                            echo'
+                            <option value="N/A">N/A</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Calentador</b>
+                        <select id="calentador">';
+                            if($estConstRes["calentador"]){
+                                echo'
+                                    <option value="'.$estConstRes["calentador"].'">'.$estConstRes["calentador"].'</option>
+                                ';
+                            }
+                        echo'
+                            <option value="N/A">N/A</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>W.C.</b>
+                        <select id="wc">';
+                            if($estConstRes["wc"]){
+                                echo'
+                                    <option value="'.$estConstRes["wc"].'">'.$estConstRes["wc"].'</option>
+                                ';
+                            }
+                        echo'
+                            <option value="N/A">N/A</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Bidet</b>
+                        <select id="bidet">';
+                            if($estConstRes["bidet"]){
+                                echo'
+                                    <option value="'.$estConstRes["bidet"].'">'.$estConstRes["bidet"].'</option>
+                                ';
+                            }
+                        echo'
+                            <option value="'.$piezSanRes["bidet"].'">'.$piezSanRes["bidet"].'</option>
+                            <option value="N/A">N/A</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Lavamanos</b>
+                        <select id="lavamanos">';
+                            if($estConstRes["lavamanos"]){
+                                echo'
+                                    <option value="'.$estConstRes["lavamanos"].'">'.$estConstRes["lavamanos"].'</option>
+                                ';
+                            }
+                        echo'
+                            <option value="'.$piezSanRes["lavamanos"].'">'.$piezSanRes["lavamanos"].'</option>
+                            <option value="N/A">N/A</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Ducha</b>
+                        <select id="ducha">';
+                            if($estConstRes["ducha"]){
+                                echo'
+                                    <option value="'.$estConstRes["ducha"].'">'.$estConstRes["ducha"].'</option>
+                                ';
+                            }
+                        echo'
+                            <option value="'.$piezSanRes["ducha"].'">'.$piezSanRes["ducha"].'</option>
+                            <option value="N/A">N/A</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Urinario</b>
+                        <select id="urinario">';
+                            if($estConstRes["urinario"]){
+                                echo'
+                                    <option value="'.$estConstRes["urinario"].'">'.$estConstRes["urinario"].'</option>
+                                ';
+                            }
+                        echo'
+                            <option value="'.$piezSanRes["urinario"].'">'.$piezSanRes["urinario"].'</option>
+                            <option value="N/A">N/A</option>s
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="btnSig1">
+                <input type="button" value="Actualizar" onclick="btnActPiez()" class="botones btn btn-primary" />
+            </div>
+            ';
+        }
+        function actPiez(){
+           include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+
+            $expSQL = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+            $resExp = $link->query($expSQL);
+            $expRes = $resExp->fetch_array();
+            if($expRes["id"]!=0){
+                $idInmue = $expRes["fk_inmueble"];
+            }else{
+                $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                $resEmpExp = $link->query($expEmpSQL);
+                $expEmpRes = $resEmpExp->fetch_array();
+                $idInmue = $expEmpRes["fk_inmueble"];
+            }
+                $inmueSQL = "SELECT * FROM inmueble where id=".$idInmue."";
+                $resInmue = $link->query($inmueSQL);
+                $inmueRes = $resInmue->fetch_array();
+
+                $caraConstSQL = "SELECT * FROM caracteristicas_construccion where id=".$inmueRes["fk_carac_construccion"]."";
+                $resCaraConst = $link->query($caraConstSQL);
+                $caraConstRes = $resCaraConst->fetch_array();
+
+                $actEstSQL = "UPDATE piezas_sanitarias SET porcelana_fina='".$this->porFina."',porcelana_econ='".$this->porceEcon."',banera='".$this->banera."',calentador='".$this->calentador."',wc='".$this->wc."',bidet='".$this->bidet."',lavamanos='".$lavamanos."',ducha='".$this->ducha."',urinario='".$this->urinario."' where id=".$caraConstRes["fk_piezasSanitarias"]."";
+                $resActEst = $link->query($actEstSQL); 
+
+        }
+    //PUERTAS
+        function mostPuert(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+
+            $expSQL = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+            $resExp = $link->query($expSQL);
+            $expRes = $resExp->fetch_array();
+            if($expRes["id"]!=0){
+                $idInmue = $expRes["fk_inmueble"];
+            }else{
+                $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                $resEmpExp = $link->query($expEmpSQL);
+                $expEmpRes = $resEmpExp->fetch_array();
+                $idInmue = $expEmpRes["fk_inmueble"];
+            }
+            $inmueSQL = "SELECT * FROM inmueble where id=".$idInmue."";
+            $resInmue = $link->query($inmueSQL);
+            $inmueRes = $resInmue->fetch_array();
+
+            $caraConstSQL = "SELECT * FROM caracteristicas_construccion where id=".$inmueRes["fk_carac_construccion"]."";
+            $resCaraConst = $link->query($caraConstSQL);
+            $caraConstRes = $resCaraConst->fetch_array();
+
+            $estConSQL = "SELECT * FROM puertas where id=".$caraConstRes["fk_puertas"]."";
+            $resEstConst = $link->query($estConSQL);
+            $estConstRes = $resEstConst->fetch_array();
+
+            echo'
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <p class="h1">Puertas</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>Entamborada Fina</b>
+                        <select id="entamFina">
+                            <option value="'.$estConstRes["entamborada_fina"].'">'.$estConstRes["entamborada_fina"].'</option>
+                            <option value="N/A">N/A</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Ent. Economica</b>
+                        <select id="entamEcon">
+                            <option value="'.$estConstRes["ent_econo"].'">'.$estConstRes["ent_econo"].'</option>
+                            <option value="N/A">N/A</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Madera cepillada</b>
+                        <select id="madeCepil">
+                            <option value="'.$estConstRes["madera_cepi"].'">'.$estConstRes["madera_cepi"].'</option>
+                            <option value="N/A">N/A</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <b>Hierro</b>
+                        <select id="hierro">
+                            <option value="'.$estConstRes["hierro"].'">'.$estConstRes["hierro"].'</option>
+                            <option value="N/A">N/A</option>
+                            <option value="Si">Si</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="btnSig1">
+                <input type="button" value="Actualizar" onclick="btnActPuertas()" class="botones btn btn-primary" />
+            </div>
+            ';
+        }
+        function actPuertas(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+
+            $expSQL = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+            $resExp = $link->query($expSQL);
+            $expRes = $resExp->fetch_array();
+            if($expRes["id"]!=0){
+                $idInmue = $expRes["fk_inmueble"];
+            }else{
+                $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                $resEmpExp = $link->query($expEmpSQL);
+                $expEmpRes = $resEmpExp->fetch_array();
+                $idInmue = $expEmpRes["fk_inmueble"];
+            }
+                $inmueSQL = "SELECT * FROM inmueble where id=".$idInmue."";
+                $resInmue = $link->query($inmueSQL);
+                $inmueRes = $resInmue->fetch_array();
+
+                $caraConstSQL = "SELECT * FROM caracteristicas_construccion where id=".$inmueRes["fk_carac_construccion"]."";
+                $resCaraConst = $link->query($caraConstSQL);
+                $caraConstRes = $resCaraConst->fetch_array();
+
+                $actEstSQL = "UPDATE puertas SET entamborada_fina='".$this->entamFina."',ent_econo='".$this->entamEcon."',madera_cepi='".$this->madeCepil."',hierro='".$this->hierro."' where id=".$caraConstRes["fk_puertas"]."";
+                $resActEst = $link->query($actEstSQL);
+        }
+    //AMBIENTE
+        function mostAmbien(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+
+            $expSQL = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+            $resExp = $link->query($expSQL);
+            $expRes = $resExp->fetch_array();
+            if($expRes["id"]!=0){
+                $idInmue = $expRes["fk_inmueble"];
+            }else{
+                $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                $resEmpExp = $link->query($expEmpSQL);
+                $expEmpRes = $resEmpExp->fetch_array();
+                $idInmue = $expEmpRes["fk_inmueble"];
+            }
+            $inmueSQL = "SELECT * FROM inmueble where id=".$idInmue."";
+            $resInmue = $link->query($inmueSQL);
+            $inmueRes = $resInmue->fetch_array();
+
+            $caraConstSQL = "SELECT * FROM caracteristicas_construccion where id=".$inmueRes["fk_carac_construccion"]."";
+            $resCaraConst = $link->query($caraConstSQL);
+            $caraConstRes = $resCaraConst->fetch_array();
+
+            $estConSQL = "SELECT * FROM ambientes where id=".$caraConstRes["fk_ambientes"]."";
+            $resEstConst = $link->query($estConSQL);
+            $estConstRes = $resEstConst->fetch_array();
+            echo'
+                <div class="contaniner-fluid">
+            <div class="row">
+                <div class="col">
+                    <p class="h1">Ambientes</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <b>Dormitorio</b>
+                    <input type="text" value="'.$estConstRes["dormitorio"].'" class="text" id="dormit">
+                </div>
+                <div class="col">
+                    <b>Comedor</b>
+                    <input type="text" value="'.$estConstRes["comedor"].'" class="text" id="comedor">
+                </div>
+                <div class="col">
+                    <b>Sala</b>
+                    <input type="text" value="'.$estConstRes["sala"].'" class="text" id="sala">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <b>Baños</b>
+                    <input type="text" value="'.$estConstRes["banos"].'" class="text" id="banos" />
+                </div>
+                <div class="col">
+                    <b>Cocina</b>
+                    <input type="text" value="'.$estConstRes["cocina"].'" class="text" id="Cocina" />
+                </div>
+                <div class="col">
+                    <b>Servicio</b>
+                    <input type="text" value="'.$estConstRes["servicio"].'" class="text" id="Servicio" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <b>Oficina</b>
+                    <input type="text" value="'.$estConstRes["oficina"].'" class="text" id="oficina" />
+                </div>
+                <div class="col">
+                    <b>Garaje</b>
+                    <input type="text" value="'.$estConstRes["garaje"].'" class="text" id="garaje" />
+                </div>
+                <div class="col">
+                    <b>Estacionamiento</b>
+                    <input type="text" value="'.$estConstRes["estacionamiento"].'" class="text" id="estac" />
+                </div>
+            </div>
+            </div>
+            <div class="btnSig1">
+                <input type="button" value="Guardar" onclick="btnActAmbien()" class="botones btn btn-primary" />
+            </div>
+            ';
+        }
+        function actAmbien(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+
+            $expSQL = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+            $resExp = $link->query($expSQL);
+            $expRes = $resExp->fetch_array();
+            if($expRes["id"]!=0){
+                $idInmue = $expRes["fk_inmueble"];
+            }else{
+                $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                $resEmpExp = $link->query($expEmpSQL);
+                $expEmpRes = $resEmpExp->fetch_array();
+                $idInmue = $expEmpRes["fk_inmueble"];
+            }
+                $inmueSQL = "SELECT * FROM inmueble where id=".$idInmue."";
+                $resInmue = $link->query($inmueSQL);
+                $inmueRes = $resInmue->fetch_array();
+
+                $caraConstSQL = "SELECT * FROM caracteristicas_construccion where id=".$inmueRes["fk_carac_construccion"]."";
+                $resCaraConst = $link->query($caraConstSQL);
+                $caraConstRes = $resCaraConst->fetch_array();
+
+                $actEstSQL = "UPDATE ambientes SET dormitorio=".$this->dormit.", comedor=".$this->comedor.", sala=".$this->sala.", banos=".$this->banos.",cocina=".$this->Cocina.", Servicio=".$this->Servicio.", oficina=".$this->oficina.", garaje=".$this->garaje.", estacionamiento=".$this->estac." where id=".$caraConstRes["fk_ambientes"]."";
+                $resActEst = $link->query($actEstSQL);
+        }
     //LINDEROS INSPECCION
-        function modifLinderos(){
+        function mostInsp(){
             include('../conexion.php');
             $MySql = new conexion;
             $link= $MySql->conectar();
@@ -1558,7 +2008,7 @@ class busquedas{
             //BUSQUEDA DEL INMUEBLE
                 $inmuSql = "SELECT * FROM inmueble where id=".$idInmue."";
                 $resInmue = $link->query($inmuSql);
-                $inmueRes = $resInmue->fetch_assoc();
+                $inmueRes = $resInmue->fetch_array();
             if($inmueRes["fk_lind_general"]==0){
                 echo'<div class="container-fluid">
                 <div class="row">
@@ -1715,13 +2165,12 @@ class busquedas{
                 <div class="btnSig1">
                     <input type="button" value="Actualizar" onclick="btnAplicGen()" class="botones btn btn-primary" />
                 </div>
-                <input type="hidden" value="0" id="idlindGen">
-                <input type="hidden" value="'.$inmueRes["id"].'" id="idInmue">';
+                <input type="hidden" value="0" id="idlindGen">';
             }else{
                 //LINDEROS GENERAL
                     $lindGenSql = "SELECT * FROM linderos_general where id=".$inmueRes["fk_lind_general"]."";
                     $resLindGen = $link->query($lindGenSql);
-                    $lindGenRes= $resLindGen->fetch_assoc();
+                    $lindGenRes= $resLindGen->fetch_array();
 
                     if($lindGenRes["norte"]=="nada"){
                         $norteGen = "NorteEste";
@@ -1900,67 +2349,30 @@ class busquedas{
                 </div>
                 <div class="btnSig1">
                     <input type="button" value="Actualizar" onclick="btnAplicGen()" class="botones btn btn-primary" />
-                </div>
-                <input type="hidden" value="'.$lindGenRes["id"].'" id="idlindGen">
-                <input type="hidden" value="'.$inmueRes["id"].'" id="idInmue">';
+                </div>';
             }
-            
-            // //LINDEROS POSIBLE VENTA
-            //     $lindPosVentaSql = "SELECT * FROM linderos_posible_venta where id=".$inmueRes["fk_lind_pos_venta"]."";
-            //     $resPosVenta = $link->query($lindPosVentaSql);
-            //     $posVentaRes= $resPosVenta->fetch_assoc();
-
-            //     if($posVentaRes["norte"]=="nada"){
-            //         $nortePosVenta = "Norte";
-            //     }else{
-            //         $nortePosVenta = "NorteEste";
-            //     }
-            //     if($posVentaRes["sur"]=="nada"){
-            //         $surPosVenta = "Sur";
-            //     }else{
-            //         $surPosVenta = "SurEste";
-            //     }
-            //     if($posVentaRes["este"]=="nada"){
-            //         $estePosVenta = "Este";
-            //     }else{
-            //         $estePosVenta = "SurOeste";
-            //     }
-            //     if($posVentaRes["oeste"]=="nada"){
-            //         $oestePosVenta = "Oeste";
-            //     }else{
-            //         $oestePosVenta = "NortOeste";
-            //     }
-            // //LINDEROS SEGUN DOCUMENTO
-            //     $lindDocumentoSql = "SELECT * FROM linderos_documento where id=".$inmueRes["fk_lind_documento"]."";
-            //     $resDocumento = $link->query($lindDocumentoSql);
-            //     $documentoRes= $resDocumento->fetch_assoc();
-
-            //     if($documentoRes["norte"]=="nada"){
-            //         $norteSecDoc = "Norte";
-            //     }else{
-            //         $norteSecDoc = "NorteEste";
-            //     }
-            //     if($documentoRes["sur"]=="nada"){
-            //         $surSecDoc = "Sur";
-            //     }else{
-            //         $surSecDoc = "SurEste";
-            //     }
-            //     if($documentoRes["este"]=="nada"){
-            //         $esteSecDoc = "Este";
-            //     }else{
-            //         $esteSecDoc = "SurOeste";
-            //     }
-            //     if($documentoRes["oeste"]=="nada"){
-            //         $oesteSecDoc = "Oeste";
-            //     }else{
-            //         $oesteSecDoc = "NortOeste";
-            //     }
                 
         }
         function guarActLind(){
             include('../conexion.php');
             $MySql = new conexion;
             $link= $MySql->conectar();
+            //BUSQUEDA DEL EXPEDIENTE
+                $expSql = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+                $resExp = $link->query($expSql);
+                $expRes = $resExp->fetch_array();
+                if($expRes["id"]!=0){
+                    $idInmue = $expRes["fk_inmueble"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idInmue = $expEmpRes["fk_inmueble"];
+                }
+            //BUSQUEDA DEL INMUEBLE
+                $inmuSql = "SELECT * FROM inmueble where id=".$idInmue."";
+                $resInmue = $link->query($inmuSql);
+                $inmueRes = $resInmue->fetch_array();
             if($this->puntNorte=="Norte"){
                 $Norte = $this->nortGen;
                 $norEste = "nada";
@@ -2004,103 +2416,628 @@ class busquedas{
                     
             echo 'ACTUALIZADO CON EXITO'; 
         }
+
     //LINDEROS POSIBLE VENTA
-        function actPosVenta(){
-           include('../conexion.php');
-            $MySql = new conexion;
-            $link= $MySql->conectar();
-            $lindPosVentaSql = "SELECT * FROM linderos_posible_venta where id=".$this->idlindPosVenta."";
-            $resPosVenta = $link->query($lindPosVentaSql);
-            $posVentaRes= $resPosVenta->fetch_assoc();
-            if($posVentaRes["norte"]=="nada"){
-                $nortPosVenta = $posVentaRes["noreste"];
-            }else{
-                $nortPosVenta = $posVentaRes["norte"];
-            }
-            if($posVentaRes["sur"]=="nada"){
-                $surPosVenta = $posVentaRes["sureste"];
-            }else{
-                $surPosVenta = $posVentaRes["sur"];
-            }
-            if($posVentaRes["este"]=="nada"){
-                $estePosVenta = $posVentaRes["suroeste"];
-            }else{
-                $estePosVenta = $posVentaRes["este"];
-            }
-            if($posVentaRes["oeste"]=="nada"){
-                $oestePosVenta = $posVentaRes["noroeste"];
-            }else{
-                $oestePosVenta = $posVentaRes["oeste"];
-            }
-            echo'
-            <input type="hidden" value="'.$nortPosVenta.'" id="n_posVenta"/>
-            <input type="hidden" value="'.$surPosVenta.'" id="s_posVenta"/>
-            <input type="hidden" value="'.$estePosVenta.'" id="e_posVenta"/>
-            <input type="hidden" value="'.$oestePosVenta.'" id="o_posVenta"/>
-            <input type="hidden" value="'.$posVentaRes["alind_n"].'" id="alindN_posVenta"/>
-            <input type="hidden" value="'.$posVentaRes["alind_s"].'" id="alindS_posVenta"/>
-            <input type="hidden" value="'.$posVentaRes["alind_e"].'" id="alindE_posVenta"/>
-            <input type="hidden" value="'.$posVentaRes["alind_o"].'" id="alindO_posVenta"/>
-            <input type="hidden" value="'.$posVentaRes["uniNorte"].'" id="uniN_posVenta"/>
-            <input type="hidden" value="'.$posVentaRes["uniSur"].'" id="uniS_posVenta"/>
-            <input type="hidden" value="'.$posVentaRes["uniEste"].'" id="uniE_posVenta"/>
-            <input type="hidden" value="'.$posVentaRes["uniOeste"].'" id="uniO_posVenta"/>
-            <input type="hidden" value="'.$posVentaRes["areaTotal"].'" id="area_posVenta"/>
-            <input type="hidden" value="'.$posVentaRes["nivelesConst"].'" id="niveles_posVenta"/>
-            <input type="hidden" value="'.$posVentaRes["areaConst"].'" id="areaConst_posVenta"/>
-            <input type="hidden" value="'.$posVentaRes["id"].'" id="idPosVenta"/>
-            <input type="hidden" value="'.$posVentaRes["uniAreaT"].'" id="uniAreaTotal2"/>
-            <input type="hidden" value="'.$posVentaRes["uniAreaC"].'" id="uniAreaC2"/>
-            ';
-        }
-    //LINDEROS SEGUN DOCUMENTO
-        function actSecDoc(){
+        function mostLindVenta(){
             include('../conexion.php');
             $MySql = new conexion;
             $link= $MySql->conectar();
-            $lindDocumentoSql = "SELECT * FROM linderos_documento where id=".$this->idlindDocumento."";
-            $resDocumento = $link->query($lindDocumentoSql);
-            $documentoRes= $resDocumento->fetch_assoc();
-            if($documentoRes["norte"]=="nada"){
-                $nortDoc = $documentoRes["noreste"];
-            }else{
-                $nortDoc = $documentoRes["norte"];
-            }
-            if($documentoRes["sur"]=="nada"){
-                $surDoc = $documentoRes["sureste"];
-            }else{
-                $surDoc = $documentoRes["sur"];
-            }
-            if($documentoRes["este"]=="nada"){
-                $esteDoc = $documentoRes["suroeste"];
-            }else{
-                $esteDoc = $documentoRes["este"];
-            }
-            if($documentoRes["oeste"]=="nada"){
-                $oesteDoc = $documentoRes["noroeste"];
-            }else{
-                $oesteDoc = $documentoRes["oeste"];
-            }
+            //BUSQUEDA DEL EXPEDIENTE
+                $expSql = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+                $resExp = $link->query($expSql);
+                $expRes = $resExp->fetch_assoc();
+                if($expRes["id"]!=0){
+                    $idInmue = $expRes["fk_inmueble"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idInmue = $expEmpSQL["fk_inmueble"];
+                }
+            //BUSQUEDA DEL INMUEBLE
+                $inmuSql = "SELECT * FROM inmueble where id=".$idInmue."";
+                $resInmue = $link->query($inmuSql);
+                $inmueRes = $resInmue->fetch_array();
+                if($inmueRes["fk_lind_pos_venta"]){
+                    $lindSQL = "SELECT * FROM linderos_posible_venta where id=".$inmueRes["fk_lind_pos_venta"]."";
+                    $resLind = $link->query($lindSQL);
+                    $lindRes= $resLind->fetch_array();
+                }else{
+                    $lindSQL = "SELECT * FROM linderos_posible_venta where id='0'";
+                    $resLind = $link->query($lindSQL);
+                    $lindRes= $resLind->fetch_array();
+                }
+            //BUSQUEDA DE LINDERO
+                
+
+                if($lindRes["norte"]=="nada"){
+                    $norte = $lindRes["noreste"];
+                    $puntNort = "NorEste";
+                }elseif(!$lindRes["norte"]){
+                    $norte = "";
+                    $puntNort = "";
+                }else{
+                    $norte = $lindRes["norte"];
+                    $puntNort = "Norte";
+                }
+                if($lindRes["sur"]=="nada"){
+                    $sur = $lindRes["sureste"];
+                    $puntSur = "SurEste";
+                }elseif(!$lindRes["sur"]){
+                    $sur = "";
+                    $puntSur = "";
+                }else{
+                    $sur = $lindRes["sur"];
+                    $puntSur = "Sur";
+                }
+                if($lindRes["este"]=="nada"){
+                    $este = $lindRes["suroeste"];
+                    $puntEste = "SurOeste";
+                }elseif(!$lindRes["este"]){
+                    $este = "";
+                    $puntEste = "";
+                }else{
+                    $este = $lindRes["este"];
+                    $puntEste = "Este";
+                }
+                if($lindRes["oeste"]=="nada"){
+                    $oeste = $lindRes["noroeste"];
+                    $puntOeste = "NorOeste";
+                }elseif(!$lindRes["oeste"]){
+                    $oeste = "";
+                    $puntOeste = "   ";
+                }else{
+                    $oeste = $lindRes["oeste"];
+                    $puntOeste = "Oeste";
+                }
             echo'
-            <input type="hidden" value="'.$nortDoc.'" id="no_SecDoc"/>
-            <input type="hidden" value="'.$surDoc.'" id="su_SecDoc"/>
-            <input type="hidden" value="'.$esteDoc.'" id="es_SecDoc"/>
-            <input type="hidden" value="'.$oesteDoc.'" id="oe_SecDoc"/>
-            <input type="hidden" value="'.$documentoRes["alind_n"].'" id="alindN_SecDoc"/>
-            <input type="hidden" value="'.$documentoRes["alind_s"].'" id="alindS_SecDoc"/>
-            <input type="hidden" value="'.$documentoRes["alind_e"].'" id="alindE_SecDoc"/>
-            <input type="hidden" value="'.$documentoRes["alind_o"].'" id="alindO_SecDoc"/>
-            <input type="hidden" value="'.$documentoRes["uniNorte"].'" id="uniN_SecDoc"/>
-            <input type="hidden" value="'.$documentoRes["uniSur"].'" id="uniS_SecDoc"/>
-            <input type="hidden" value="'.$documentoRes["uniEste"].'" id="uniE_SecDoc"/>
-            <input type="hidden" value="'.$documentoRes["uniOeste"].'" id="uniO_SecDoc"/>
-            <input type="hidden" value="'.$documentoRes["areaTotal"].'" id="area_SecDoc"/>
-            <input type="hidden" value="'.$documentoRes["nivelesConst"].'" id="niveles_SecDoc"/>
-            <input type="hidden" value="'.$documentoRes["areaConst"].'" id="areaConst_SecDoc"/>
-            <input type="hidden" value="'.$documentoRes["uniAreaT"].'" id="uniAreaTotal3"/>
-            <input type="hidden" value="'.$documentoRes["uniAreaC"].'" id="uniAreaC3"/>
+                <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <b class="h1">LINDEROS POSIBLE VENTA</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <select id="puntNorte2">
+                            <option value='.$puntNort.'>'.$puntNort.'</option>
+                            <option value="Norte">Norte</option>
+                            <option value="NorteEste">NortEste</option>
+                        </select>
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="text" value="'.$norte.'" class="text" id="nortPosVenta" />
+                                <select id="uniNorte2">';
+                                    if($lindRes["uniNorte"]){
+                                        echo'
+                                            <option value="'.$lindRes["uniNorte"].'">'.$lindRes["uniNorte"].'</option>
+                                        ';
+                                    }
+                                    echo'
+                                    <option value="N/A">N/A</option>
+                                    <option value="m">m</option>
+                                    <option value="Lq">Lq</option>
+                                    <option value="Ld">Ld</option>
+                                    <option value="otros">otros</option>
+                                </select>
+                            </div>
+                            <div class="col-8">
+                                <b>Alinderado</b>
+                                <input type="text" onKeyUp="mayusProp(this)" value="'.$lindRes["alind_n"].'"class="text" id="alindPosNort" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <select id="puntSur2">
+                            <option value="'.$puntSur.'">'.$puntSur.'</option>
+                            <option value="Sur">Sur</option>
+                            <option value="SurEste">SurEste</option>
+                        </select>
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="text" value="'.$sur.'" class="text" id="surPosVenta" />
+                                <select id="uniSur2">';
+
+                                    if($lindRes["uniSur"]){
+                                        echo'
+                                            <option value="'.$lindRes["uniSur"].'">'.$lindRes["uniSur"].'</option>
+                                        ';
+                                    }
+                                    echo'
+                                    <option value="N/A">N/A</option>
+                                    <option value="m">m</option>
+                                    <option value="Lq">Lq</option>
+                                    <option value="Ld">Ld</option>
+                                    <option value="otros">otros</option>
+                                </select>
+                            </div>
+                            <div class="col-8">
+                                <b>Alinderado</b>
+                                <input type="text" onKeyUp="mayusProp(this)" value="'.$lindRes["alind_s"].'" class="text" id="alindPosSur" />
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <select id="puntEste2">
+                            <option value="'.$puntEste.'">'.$puntEste.'</option>
+                            <option value="Este">Este</option>
+                            <option value="SurOeste">SurOeste</option>
+                        </select>
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="text" value="'.$este.'" class="text" id="estePosVenta" />
+                                <select id="uniEste2">
+                                    <option value="'.$lindRes["uniEste"].'">'.$lindRes["uniEste"].'</option>
+                                    <option value="m">m</option>
+                                    <option value="Lq">Lq</option>
+                                    <option value="Ld">Ld</option>
+                                    <option value="otros">otros</option>
+                                </select>
+                            </div>
+                            <div class="col-8">
+                                <b>Alinderado</b>
+                                <input type="text" onKeyUp="mayusProp(this)" value="'.$lindRes["alind_e"].'" class="text" id="alindPosEste" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <select id="puntOeste2">
+                            <option value="'.$puntOeste.'">'.$puntOeste.'</option>
+                            <option value="Oeste">Oeste</option>
+                            <option value="NortOeste">NortOeste</option>
+                        </select>
+                    </div>
+                    <div class="col-10">
+                        <div class="row">
+                            <div class="col-4">
+                                <input type="text" value="'.$oeste.'" class="text" id="oestePosVenta" />
+                                <select id="uniOeste2">
+                                    <option value="'.$lindRes["uniOeste"].'">'.$lindRes["uniOeste"].'</option>
+                                    <option value="m">m</option>
+                                    <option value="Lq">Lq</option>
+                                    <option value="Ld">Ld</option>
+                                    <option value="otros">otros</option>
+                                </select>
+                            </div>
+                            <div class="col-8">
+                                <b>Alinderado</b>
+                                <input type="text" onKeyUp="mayusProp(this)" value="'.$lindRes["alind_o"].'"class="text"id="alindPosOeste" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row" > 
+                    <div class="col">
+                        <div class="campDat">
+                            <b>Área Total</b>
+                            <input type="text" value="'.$lindRes["areaTotal"].'"class="text" id="arTotal2" >
+                            <select id="uniAreaT2">
+                                <option value="'.$lindRes["uniAreaT"].'">'.$lindRes["uniAreaT"].'</option>
+                                <option value="N/A">N/A</option>
+                                <option value="m2">m2</option>
+                                <option value="Ha">Ha</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="campDat">
+                            <b>Niveles de Construcción</b>
+                            <input type="text" onKeyUp="mayusProp(this)" value="'.$lindRes["nivelesConst"].'"class="text" id="NivConstTotal2" >
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="campDat">
+                            <b>Área de Construcción</b>
+                            <input type="text" value="'.$lindRes["areaConst"].'"class="text" id="arConstTotal2" >
+                            <select id="uniAreaConst2">
+                                <option value="'.$lindRes["uniAreaC"].'">'.$lindRes["uniAreaC"].'</option>
+                                <option value="N/A">N/A</option>//
+                                <option value="m2">m2</option>
+                                <option value="Ha">Ha</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <input type="button" onKeyUp="mayusProp(this)" class="btn btn-success" onclick="calLindVenta()" value="Calcular">
+                    </div>
+                </div>
+            </div>
+            <div class="btnSig1">
+                <input type="button" value="Guardar" onclick="btnActVenta()" class="botones btn btn-primary" />
+            </div>
             ';
         }
+        function actLindVenta(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+            $expSql = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+                $resExp = $link->query($expSql);
+                $expRes = $resExp->fetch_assoc();
+                if($expRes["id"]!=0){
+                    $idInmue = $expRes["fk_inmueble"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idInmue = $expEmpSQL["fk_inmueble"];
+                }
+            //BUSQUEDA DEL INMUEBLE
+                $inmuSql = "SELECT * FROM inmueble where id=".$idInmue."";
+                $resInmue = $link->query($inmuSql);
+                $inmueRes = $resInmue->fetch_array();
+
+            if($inmueRes["fk_lind_pos_venta"]){
+                $lindPosVentaSql = "SELECT * FROM linderos_posible_venta where id=".$inmueRes["fk_lind_pos_venta"]."";
+                $resPosVenta = $link->query($lindPosVentaSql);
+                $posVentaRes= $resPosVenta->fetch_assoc();
+                $idPosVenta= $posVentaRes["id"];
+            }else{
+                $lindPosVentaSql = "SELECT * FROM linderos_posible_venta where id='0'";
+                $resPosVenta = $link->query($lindPosVentaSql);
+                $posVentaRes= $resPosVenta->fetch_assoc();
+                $idPosVenta= "0";
+            }
+            
+            if($this->puntNorte2=="Norte"){
+                $Norte = $this->nortPosVenta;
+                $norEste = "nada";
+            }else{
+                $Norte = "nada";
+                $norEste = $this->nortPosVenta;
+            }
+            if($this->puntSur2=="Sur"){
+                $Sur = $this->surPosVenta;
+                $SurEste = "nada";
+            }else{
+                $Sur = "nada";
+                $SurEste = $this->surPosVenta;
+            }
+            if($this->puntEste2=="Este"){
+                $Este = $this->estePosVenta;
+                $SurOeste = "nada";
+            }else{
+                $Este = "nada";
+                $SurOeste = $this->estePosVenta;
+            }
+            if($this->puntOeste2=="Oeste"){
+                $Oeste = $this->oestePosVenta;
+                $NortOeste = "nada";
+            }else{
+                $Oeste = "nada";
+                $NortOeste = $this->oestePosVenta;
+            }
+            if($posVentaRes["id"]==0){
+                $lindGeneralSQL = "INSERT INTO linderos_posible_venta(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte."','".$norEste."','".$Sur."','".$SurEste."','".$Este."','".$SurOeste."','".$Oeste."','".$NortOeste."','".$this->alindPosNort."','".$this->alindPosSur."','".$this->alindPosEste."','".$this->alindPosOeste."','".$this->arTotal2."','".$this->uniAreaT2."','".$this->NivConstTotal2."','".$this->uniAreaConst2."','".$this->arConstTotal2."','".$this->uniNorte2."','".$this->uniSur2."','".$this->uniEste2."','".$this->uniOeste2."')";
+                $link->query($lindGeneralSQL);
+                $idLindVenta= $link->insert_id;
+
+                $inmuSql = "UPDATE inmueble SET fk_lind_pos_venta=".$idLindVenta." where id=".$idInmue."";
+                $resInmue = $link->query($inmuSql);
+            }else{
+                $lindGeneralSQL = "UPDATE linderos_posible_venta SET norte='".$Norte."',noreste='".$norEste."',sur='".$Sur."',sureste='".$SurEste."',este='".$Este."',suroeste='".$SurOeste."',oeste='".$Oeste."',noroeste='".$NortOeste."',alind_n='".$this->alindPosNort."',alind_s='".$this->alindPosSur."',alind_e='".$this->alindPosEste."',alind_o='".$this->alindPosOeste."',areaTotal='".$this->arTotal2."',uniAreaT='".$this->uniAreaT2."',nivelesConst='".$this->NivConstTotal2."',uniAreaC='".$this->uniAreaConst2."',areaConst='".$this->arConstTotal2."',uniNorte='".$this->uniNorte2."',uniSur='".$this->uniSur2."',uniEste='".$this->uniEste2."',uniOeste='".$this->uniOeste2."' where id=".$inmueRes["fk_lind_pos_venta"]."";
+                $link->query($lindGeneralSQL);
+            }
+        }
+    //LINDEROS SEGUN DOCUMENTO
+        function mostLindDoc(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+            //BUSQUEDA DEL EXPEDIENTE
+                $expSql = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+                $resExp = $link->query($expSql);
+                $expRes = $resExp->fetch_assoc();
+                if($expRes["id"]!=0){
+                    $idInmue = $expRes["fk_inmueble"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idInmue = $expEmpSQL["fk_inmueble"];
+                }
+            //BUSQUEDA DEL INMUEBLE
+                $inmuSql = "SELECT * FROM inmueble where id=".$idInmue."";
+                $resInmue = $link->query($inmuSql);
+                $inmueRes = $resInmue->fetch_array();
+                if($inmueRes["fk_lind_pos_venta"]){
+                    $lindSQL = "SELECT * FROM linderos_documento where id=".$inmueRes["fk_lind_documento"]."";
+                    $resLind = $link->query($lindSQL);
+                    $lindRes= $resLind->fetch_array();
+                }else{
+                    $lindSQL = "SELECT * FROM linderos_documento where id='0'";
+                    $resLind = $link->query($lindSQL);
+                    $lindRes= $resLind->fetch_array();
+                }
+            if($lindRes["norte"]=="nada"){
+                    $norte = $lindRes["noreste"];
+                    $puntNort = "NorEste";
+                }elseif(!$lindRes["norte"]){
+                    $norte = "";
+                    $puntNort = "";
+                }else{
+                    $norte = $lindRes["norte"];
+                    $puntNort = "Norte";
+                }
+                if($lindRes["sur"]=="nada"){
+                    $sur = $lindRes["sureste"];
+                    $puntSur = "SurEste";
+                }elseif(!$lindRes["sur"]){
+                    $sur = "";
+                    $puntSur = "";
+                }else{
+                    $sur = $lindRes["sur"];
+                    $puntSur = "Sur";
+                }
+                if($lindRes["este"]=="nada"){
+                    $este = $lindRes["suroeste"];
+                    $puntEste = "SurOeste";
+                }elseif(!$lindRes["este"]){
+                    $este = "";
+                    $puntEste = "";
+                }else{
+                    $este = $lindRes["este"];
+                    $puntEste = "Este";
+                }
+                if($lindRes["oeste"]=="nada"){
+                    $oeste = $lindRes["noroeste"];
+                    $puntOeste = "NorOeste";
+                }elseif(!$lindRes["oeste"]){
+                    $oeste = "";
+                    $puntOeste = "   ";
+                }else{
+                    $oeste = $lindRes["oeste"];
+                    $puntOeste = "Oeste";
+                }
+            echo'
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <p class="h1">LINDEROS SEGUN DOCUMENTO</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <select id="puntNorte3">
+                                <option value="'.$puntNort.'">'.$puntNort.'</option>
+                                <option value="Norte">Norte</option>
+                                <option value="NorteEste">NortEste</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <input type="text" value="'.$norte.'" class="text" id="nortSecDoc" />
+                                    <select id="uniNorte3">
+                                        <option value="'.$lindRes["uniNorte"].'">'.$lindRes["uniNorte"].'</option>
+                                        <option value="m">m</option>
+                                        <option value="Lq">Lq</option>
+                                        <option value="Ld">Ld</option>
+                                        <option value="otros">otros</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-8">
+                                    <b>Alinderado</b>
+                                    <input type="text" onKeyUp="mayusProp(this)" value="'.$lindRes["alind_n"].'" class="text" id="alindSecNorte" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <select id="puntSur3">
+                                <option value="'.$puntSur.'">'.$puntSur.'</option>
+                                <option value="Sur">Sur</option>
+                                <option value="SurEste">SurEste</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <input type="text" value="'.$sur.'" class="text" id="surSecDoc" />
+                                    <select id="uniSur3">
+                                        <option value="'.$lindRes["uniSur"].'">'.$lindRes["uniSur"].'</option>
+                                        <option value="m">m</option>
+                                        <option value="Lq">Lq</option>
+                                        <option value="Ld">Ld</option>
+                                        <option value="otros">otros</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-8">
+                                    <b >Alinderado</b>
+                                    <input type="text" onKeyUp="mayusProp(this)" value="'.$lindRes["alind_s"].'" class="text" id="alindSecSur" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <select id="puntEste3">
+                                <option value="'.$puntEste.'">'.$puntEste.'</option>
+                                <option value="Este">Este</option>
+                                <option value="SurOeste">SurOeste</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <input type="text" value="'.$este.'" class="text" id="esteSecDoc" />
+                                    <select id="uniEste3">
+                                        <option value="'.$lindRes["uniEste"].'">'.$lindRes["uniEste"].'</option>
+                                        <option value="m">m</option>
+                                        <option value="Lq">Lq</option>
+                                        <option value="Ld">Ld</option>
+                                        <option value="otros">otros</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-8">
+                                    <b>Alinderado</b>
+                                    <input type="text" onKeyUp="mayusProp(this)" value="'.$lindRes["alind_e"].'" class="text" id="alindSecEste" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <select id="puntOeste3">
+                                <option value="'.$puntOeste.'">'.$puntOeste.'</option>
+                                <option value="Oeste">Oeste</option>
+                                <option value="NortOeste">NortOeste</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-10">
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <input type="text" value="'.$oeste.'" class="text" id="oesteSecDoc" />
+                                    <select id="uniOeste3">
+                                        <option value="'.$lindRes["uniOeste"].'">'.$lindRes["uniOeste"].'</option>
+                                        <option value="m">m</option>
+                                        <option value="Lq">Lq</option>
+                                        <option value="Ld">Ld</option>
+                                        <option value="otros">otros</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-8">
+                                    <b>Alinderado</b>
+                                    <input type="text" onKeyUp="mayusProp(this)" value="'.$lindRes["alind_o"].'" class="text" id="alindSecOeste" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                            <div class="campDat">
+                                <b>Área Total</b>
+                                <input type="text" onKeyUp="mayusProp(this)" value="'.$lindRes["areaTotal"].'" class="text" id="arTotal3" >
+                                <select id="uniAreaT3">
+                                    <option value="'.$lindRes["uniAreaT"].'">'.$lindRes["uniAreaT"].'</option>
+                                    <option value="N/A">N/A</option>
+                                    <option value="m2">m2</option>
+                                    <option value="Ha">Ha</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="campDat">
+                                <b>Niveles de Construcción</b>
+                                <input type="text" onKeyUp="mayusProp(this)" value="'.$lindRes["nivelesConst"].'" class="text" id="NivConstTotal3" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-7">
+                            <div class="campDat">
+                                <b>Área de Construcción</b>
+                                <input type="text" onKeyUp="mayusProp(this)" value="'.$lindRes["areaConst"].'" id="arConstTotal3" >
+                                <select id="uniAreaConst3">
+                                    <option value="'.$lindRes["uniAreaC"].'">'.$lindRes["uniAreaC"].'</option>
+                                    <option value="N/A">N/A</option>
+                                    <option value="m2">m2</option>
+                                    <option value="Ha">Ha</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-5">
+                            <input type="button" class="btn btn-success" onclick="calLindDoc()" value="Calcular">
+                        </div>
+                    </div>
+                </div>
+                <div class="btnSig1">
+                    <input type="button" value="Actualizar" onclick="btnActDoc()" class="botones btn btn-primary" />
+                </div>
+            ';
+        }
+        function actLindDoc(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+            $expSql = "SELECT * FROM expediente where n_expediente='".$this->expBuscar."'";
+                $resExp = $link->query($expSql);
+                $expRes = $resExp->fetch_array();
+                if($expRes["id"]!=0){
+                    $idInmue = $expRes["fk_inmueble"];
+                }else{
+                    $expEmpSQL = "SELECT * FROM expempadro where n_expediente='".$this->expBuscar."'";
+                    $resEmpExp = $link->query($expEmpSQL);
+                    $expEmpRes = $resEmpExp->fetch_array();
+                    $idInmue = $expEmpSQL["fk_inmueble"];
+                }
+            //BUSQUEDA DEL INMUEBLE
+                $inmuSql = "SELECT * FROM inmueble where id=".$idInmue."";
+                $resInmue = $link->query($inmuSql);
+                $inmueRes = $resInmue->fetch_array();
+
+            if($inmueRes["fk_lind_documento"]){
+                $lindPosVentaSql = "SELECT * FROM linderos_documento where id=".$inmueRes["fk_lind_documento"]."";
+                $resPosVenta = $link->query($lindPosVentaSql);
+                $posVentaRes= $resPosVenta->fetch_array();
+                $idPosVenta= $posVentaRes["id"];
+            }else{
+                $lindPosVentaSql = "SELECT * FROM linderos_documento where id='0'";
+                $resPosVenta = $link->query($lindPosVentaSql);
+                $posVentaRes= $resPosVenta->fetch_array();
+                $idPosVenta= "0";
+            }
+            
+            if($this->puntNorte2=="Norte"){
+                $Norte = $this->nortPosVenta;
+                $norEste = "nada";
+            }else{
+                $Norte = "nada";
+                $norEste = $this->nortPosVenta;
+            }
+            if($this->puntSur2=="Sur"){
+                $Sur = $this->surPosVenta;
+                $SurEste = "nada";
+            }else{
+                $Sur = "nada";
+                $SurEste = $this->surPosVenta;
+            }
+            if($this->puntEste2=="Este"){
+                $Este = $this->estePosVenta;
+                $SurOeste = "nada";
+            }else{
+                $Este = "nada";
+                $SurOeste = $this->estePosVenta;
+            }
+            if($this->puntOeste2=="Oeste"){
+                $Oeste = $this->oestePosVenta;
+                $NortOeste = "nada";
+            }else{
+                $Oeste = "nada";
+                $NortOeste = $this->oestePosVenta;
+            }
+            if($posVentaRes["id"]==0){
+                $lindGeneralSQL = "INSERT INTO linderos_posible_venta(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte."','".$norEste."','".$Sur."','".$SurEste."','".$Este."','".$SurOeste."','".$Oeste."','".$NortOeste."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."','".$this->arTotal3."','".$this->uniAreaT3."','".$this->NivConstTotal3."','".$this->uniAreaConst3."','".$this->arConstTotal3."','".$this->uniNorte3."','".$this->uniSur3."','".$this->uniEste3."','".$this->uniOeste3."')";
+                $link->query($lindGeneralSQL);
+                $idLindVenta= $link->insert_id;
+
+                $inmuSql = "UPDATE inmueble SET fk_lind_documento=".$idLindVenta." where id=".$idInmue."";
+                $resInmue = $link->query($inmuSql);
+            }else{
+                $lindGeneralSQL = "UPDATE linderos_documento SET norte='".$Norte."',noreste='".$norEste."',sur='".$Sur."',sureste='".$SurEste."',este='".$Este."',suroeste='".$SurOeste."',oeste='".$Oeste."',noroeste='".$NortOeste."',alind_n='".$this->alindSecNorte."',alind_s='".$this->alindSecSur."',alind_e='".$this->alindSecEste."',alind_o='".$this->alindSecOeste."',areaTotal='".$this->arTotal3."',uniAreaT='".$this->uniAreaT3."',nivelesConst='".$this->NivConstTotal3."',uniAreaC='".$this->uniAreaConst3."',areaConst='".$this->arConstTotal3."',uniNorte='".$this->uniNorte3."',uniSur='".$this->uniSur3."',uniEste='".$this->uniEste3."',uniOeste='".$this->uniOeste3."' where id=".$inmueRes["fk_lind_documento"]."";
+                $link->query($lindGeneralSQL);
+        }
+    }
     //SERVICIOS
         function modifServi(){
             include('../conexion.php');
@@ -2546,7 +3483,6 @@ class busquedas{
                 echo'
             </table>';
         }
-    //
 }
 
 
