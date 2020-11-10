@@ -205,10 +205,6 @@ class constancias{
             alert("Error en el formato de direccion del propietario");
             return false;
         }
-        if(!ex_cedula.test(this.cedFul)){
-            alert("Error en el formato de Cedula");
-            return false;
-        }
         return true//VERIFICADO//VERIFICADO
     }
     veriInmue(){
@@ -823,10 +819,16 @@ class constancias{
             alert("Numero de factura ya se encuentra registrado");
             return false
         }
+        let reciboFact = document.getElementById("reciboFact").value
+        if(reciboFact == this.recFact){
+            alert("El numero de recibo ya se encuentra registrado");
+            return false;
+        }
         if(!ex_datcort.test(this.recFact)){
             alert("Error en el formato de Recibo");
             return false;
         }
+
         return true//VERIFICADO
     }
     formConst(){
@@ -1043,24 +1045,7 @@ class constancias{
                  }
             }
     }
-    veriFact(){
-        var ajax = new objetoAjax();
-        var divsitioform = document.getElementById('campOculto');
-        var divsitiomaterial = document.getElementById('campOculto');
-        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
-        divsitiomaterial.innerHTML="";
-        ajax=objetoAjax();
-        ajax.open("POST", "src/server/rec/recConst.php",true);
-        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`numFact=${this.numFact}&accion=busFactura`); 
-        ajax.onreadystatechange=function()
-            {
-            if (ajax.readyState==4) 
-                {
-                    divsitioform.innerHTML = ajax.responseText; 
-                 }
-            }
-    }
+    
     //PROPIETARIO
     formProp(){
         var ajax = new objetoAjax();
@@ -1767,6 +1752,42 @@ class constancias{
                  }
             }
     }
+    veriReci(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('campOculto2');
+        var divsitiomaterial = document.getElementById('campOculto2');
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`recFact=${this.recFact}&accion=busRecFact`); 
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+                 }
+            }
+    }
+    veriFact(){
+        var ajax = new objetoAjax();
+        var divsitioform = document.getElementById('campOculto');
+        var divsitiomaterial = document.getElementById('campOculto');
+        divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
+        divsitiomaterial.innerHTML="";
+        ajax=objetoAjax();
+        ajax.open("POST", "src/server/rec/recConst.php",true);
+        ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        ajax.send(`numFact=${this.numFact}&accion=busFactura`); 
+        ajax.onreadystatechange=function()
+            {
+            if (ajax.readyState==4) 
+                {
+                    divsitioform.innerHTML = ajax.responseText; 
+                 }
+            }
+    }
     //VERIFICACION
     veriF3(){
         var ajax = new objetoAjax();
@@ -2028,12 +2049,12 @@ function btnGuarProp(){
     if(rifR=="NA"){
         consta.rifConst= "NO APLICA";
     }else{
-        consta.rifConst= rifR+"-"+rifN;
+        consta.rifConst= rifR+"|"+rifN;
     }
-    if(cedR=="NA"){
+    if(cedR=="N/A"){
         consta.cedFul= "NO APLICA";
     }else{
-        consta.cedFul= cedR+"-"+cedConst;
+        consta.cedFul= cedR+"|"+cedConst;
     }
    
     consta.nomProp= document.getElementById("nomProp").value;
@@ -2053,7 +2074,7 @@ function btnRevUsuario(){
     let consta = new constancias
     let cedR = document.getElementById("cedR").value
     let cedConst = document.getElementById("cedConst").value
-    consta.cedFul = cedR+"-"+cedConst
+    consta.cedFul = cedR+"|"+cedConst
     consta.revUsuario()
 }
 //INMUEBLE
@@ -2317,6 +2338,16 @@ function btnGuarFact(){
     if(consta.veriFactura()==true){
         consta.guarFact()
     }
+}
+function btnVeriReci(){
+    let consta = new constancias
+    consta.recFact= document.getElementById("recFact").value
+    consta.veriReci();
+}
+function btnVeriFact(){
+    let consta = new constancias
+    consta.numFact = document.getElementById("numFact").value
+    consta.veriFact()
 }
 //IMPRIMIR
 function btnVeriImpri(){
@@ -2871,6 +2902,7 @@ function btnGuardConst(){
 }
 function btnImprConst(){
     let consta = new constancias
+    alert(document.getElementById("nuExp").value);
     consta.montoFact = document.getElementById("montoFact").value
     consta.fechFact = document.getElementById("fechFact").value
     consta.idInmueble = document.getElementById("idInmueble").value
@@ -2878,6 +2910,7 @@ function btnImprConst(){
     consta.numFact= document.getElementById("numFact").value
     consta.operacion = document.getElementById("operacion").value
     consta.nuExp = document.getElementById("nuExp").value
+
     consta.imprConst()
 }
 function btnImprConst1(){
@@ -2928,7 +2961,7 @@ function mostProp(){
     let cedula = document.getElementById("cedula").value
     if(cedula!=0){
         rifBus = document.getElementById("rifBus").value
-        divRif = rifBus.split("-")
+        divRif = rifBus.split("|")
         if(rifBus=="NO APLICA"){
             document.getElementById("rifR").selectedIndex=1
             document.getElementById("rifN").value="NO APLICA"
@@ -2983,11 +3016,7 @@ function mostProp(){
     
 }
 
-function btnVeriFact(){
-    let consta = new constancias
-    consta.numFact = document.getElementById("numFact").value
-    consta.veriFact()
-}
+
 //IMPRIMIR
 function btnFormImpri(){
     let consta = new constancias

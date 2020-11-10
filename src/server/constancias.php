@@ -494,8 +494,8 @@ class constancias{
             $busPropSql ="SELECT * FROM temp_propietarios where id='".$this->idProp."'";
             $resProp = $link->query($busPropSql);
             $propRes = $resProp->fetch_array();
-            $divCed = explode('-',$propRes["cedula"]);
-            $divRif = explode('-',$propRes["rif"]);
+            $divCed = explode('|',$propRes["cedula"]);
+            $divRif = explode('|',$propRes["rif"]);
             $divTelfHab = explode('-',$propRes["telef_hab"]);
             $divTelef = explode('-',$propRes["telef"]);
             if($propRes["cedula"]=="NO APLICA"){
@@ -590,6 +590,8 @@ class constancias{
             $MySql = new conexion;
             $link= $MySql->conectar();
             session_start();
+            $rif= explode("|",$this->rifConst);
+            $rifTot = $rif[0]."|".$rif[1];
             //USUARIOS
             $userTempSql = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
             $resUserTemp = $link->query($userTempSql);
@@ -600,13 +602,13 @@ class constancias{
             $userTempRes = $resUserTemp->fetch_array();
             
             if($userTempRes["temp_propietarios"]==0){
-                $propSql = "INSERT INTO temp_propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab)value('".$this->cedFul."','".$this->rifConst."','".$this->nomProp."','".$this->apelProp."','".$this->telfFull."','".$this->direcProp."','".$this->telfFull2."')";
+                $propSql = "INSERT INTO temp_propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab)value('".$this->cedFul."','".$rifTot."','".$this->nomProp."','".$this->apelProp."','".$this->telfFull."','".$this->direcProp."','".$this->telfFull2."')";
                 $link->query($propSql);
                 $idProp= $link->insert_id;
                 $userTemp = "UPDATE user_temp SET temp_propietarios='".$idProp."' where userId=".$userTempRes1["id"]."";
                 $link->query($userTemp);
             }else{
-                $propSql = "UPDATE temp_propietarios set cedula='".$this->cedFul."', rif='".$this->rifConst."', nombre='".$this->nomProp."',apellido='".$this->apelProp."',telef='".$this->telfFull."',dir_hab='".$this->direcProp."',telef_hab='".$this->telfFull2."' where id=".$userTempRes["temp_propietarios"]." ";
+                $propSql = "UPDATE temp_propietarios set cedula='".$this->cedFul."', rif='".$rifTot."', nombre='".$this->nomProp."',apellido='".$this->apelProp."',telef='".$this->telfFull."',dir_hab='".$this->direcProp."',telef_hab='".$this->telfFull2."' where id=".$userTempRes["temp_propietarios"]." ";
                 $link->query($propSql);
             }//LISTO//LISTO
             
@@ -670,6 +672,123 @@ class constancias{
                 <input type="button" value="Guardar" onclick="btnGuarInmue()" class="botones btn btn-primary" />
             </div>
             ';
+        }
+        function cambSect(){
+            if($this->parrInmue=="Capital"){
+                echo'
+                    <option value="0"></option>
+                    <option value="URB RENATO LAPORTA">URB RENATO LAPORTA</option>
+                    <option value="EL PIÑAL">EL PIÑAL</option>
+                    <option value="URB LOS LEONES">URB LOS LEONES</option>
+                    <option value="EL PIÑALITO">EL PIÑALITO</option>
+                    <option value="EL PLAN">EL PLAN</option>
+                    <option value="LA GUADALUPE">LA GUADALUPE</option>
+                    <option value="JOSE FRLIX RIVAS">JOSE FRLIX RIVAS</option>
+                    <option value="MORICHITOS">MORICHITOS</option>
+                    <option value="LA MILAGROSA">LA MILAGROSA</option>
+                    <option value="TECHO PARA MIS HIJOS">TECHO PARA MIS HIJOS</option>
+                    <option value="BRISAS DEL PIÑAL">BRISAS DEL PIÑAL</option>
+                    <option value="LA URIBANTINA"> LA URIBANTINA</option>
+                    <option value="EL ARAGUANEY">EL ARAGUANEY</option>
+                    <option value="BRISAS DE URIBANTE">BRISAS DE URIBANTE</option>
+                    <option value="PROHENSA">PROHENSA</option>
+                    <option value="CANTA RANA">CANTA RANA</option>
+                    <option value="CHURURU (TRONCAL)">CHURURU (TRONCAL)</option>
+                    <option value="LAS PALMERAS">LAS PALMERAS</option>
+                    <option value="MORONI">MORONI</option>
+                    <option value="LOS MIRTOS">LOS MIRTOS</option>
+                    <option value="JUAN PABLO">JUAN PABLO</option>
+                    <option value="BARRIO COLOMBIA">BARRIO COLOMBIA</option>
+                    <option value="COSTA RICA">COSTA RICA</option>
+                    <option value="MAPACA">MAPACA</option>
+                    <option value="KM 8">KM 8</option>
+                    <option value="SANTA MARIA">SANTA MARIA</option>
+                    <option value="TIERRA LINDA">TIERRA LINDA</option>
+                    <option value="EL PABELLON">EL PABELLON</option>
+                    <option value="EL OASIS">EL OASIS</option>
+                    <option value="LOS NARANJOS">LOS NARANJOS</option>
+                    <option value="GUAFITAS">GUAFITAS</option>
+                    <option value="DORADAS">DORADAS</option>
+                    <option value="SAN MIGUEL">SAN MIGUEL</option>
+                    <option value="EL MONERO">EL MONERO</option>
+                    <option value="EL CANAL">EL CANAL</option>
+                    <option value="RECTA DE AYARI">RECTA DE AYARI</option>
+                    <option value="CAÑO TIGRE">CAÑO TIGRE</option>
+                    <option value="EL YUYE">EL YUYE</option>
+                    <option value="LA ISLA DE BENTACOURT">LA ISLA DE BENTACOURT</option>
+                    <option value="EL TROMPEZON">EL TROMPEZON</option>
+                    <option value="EL ROISAL">EL ROISAL</option>
+                    <option value="LA ORQUIDEA">LA ORQUIDEA</option>
+                    <option value="19 DE ABRIL">19 DE ABRIL</option>
+                    <option value="COLINAS DE BELLO MONTE">COLINAS DE BELLO MONTE</option>
+                    <option value="IRCO">IRCO</option>
+                    <option value="VEGAS DE URIBANTE">VEGAS DE URIBANTE</option>
+                    <option value="LA VALERIA">LA VALERIA</option>
+                    <option value="SAN HISIDRO">SAN HISIDRO</option>
+                    <option value="EL TOPACIO">EL TOPACIO</option>
+                ';
+            }elseif($this->parrInmue=="Dr. Alberto Adriani"){
+                echo'
+                    <option value="0"></option>
+                    <option value="LA GABARRA (LA MORITA)">LA GABARRA (LA MORITA)</option>
+                    <option value="LA MORITA">LA MORITA</option>
+                    <option value="LOS MANGUTOS">LOS MANGUITOS</option>
+                    <option value="VILLA PARAISO">VILLA PARAISO</option>
+                    <option value="VALLE LORENA I">VALLE LORENA I</option>
+                    <option value="VALLE LORENA II">VALLE LORENA II</option>
+                    <option value="12 DE OCTUBRE">12 DE OCTUBRE</option>
+                    <option value="NARANJALES">NARANJALES</option>
+                    <option value="BARRIO LA PAZ">BARRIO LA PAZ</option>
+                    <option value="LA BOLIVARIANA">LA BOLIVARIANA</option>
+                    <option value="27 DE FEBRERO PARTE ALTA">27 DE FEBRERO PARTE ALTA</option>
+                    <option value="27 DE FEBRERO PARTE BAJA">27 DE FEBRERO PARTE BAJA</option>
+                    <option value="VILLA MORTERREY">VILLA MORTERREY</option>
+                    <option value="TETEO I">TETEO I</option>
+                    <option value="TETEO II">TETEO II</option>
+                    <option value="BUENOS AIRES">BUENOS AIRES</option>
+                    <option value="CAUCAGUITA">CAUCAGUITA</option>
+                    <option value="SAN ANTONIO">SAN ANTONIO</option>
+                    <option value="SANTA LUCIA">SANTA LUCIA</option>
+                    <option value="EL JORDAN">EL JORDAN</option>
+                    <option value="RANCHO CHIRE">RANCHO CHIRE</option>
+                    <option value="EL RENUEVO">EL RENUEVO</option>
+                    <option value="LA REFORMA">LA REFORMA</option>
+                    <option value="EL CRISOL">EL CRISOL</option>
+                    <option value="CUITE">CUITE</option>
+                    <option value="EL SOCORRO">EL SOCORRO</option>
+                    <option value="EL TALADRO">EL TALADRO</option>
+                    <option value="LA VICTORIA">LA VICTORIA</option>
+                    <option value="LA ZANCUDA">LA ZANCUDA</option>
+                    <option value="LA COLORADA">LA COLORADA</option>
+                    <option value="LA ESPUMA">LA ESPUMA</option>
+                    <option value="LA ROCHELA">LA ROCHELA</option>
+                ';
+            }elseif($this->parrInmue =="Santo Domingo"){
+                echo'
+                    <option value="0"></option>
+                    <option value="CHURURU VIEJO">CHURURU VIEJO</option>
+                    <option value="I ETAPA DE SAN LORENZO">I ETAPA DE SAN LORENZO</option>
+                    <option value="II ETAPA DE SAN LORENZO">II ETAPA DE SAN LORENZO</option>
+                    <option value="III ETAPA DE SAN LORENZO">III ETAPA DE SAN LORENZO</option>
+                    <option value="IV ETAPA DE SAN LORENZO">IV ETAPA DE SAN LORENZO</option>
+                    <option value="LA MANUELITA">LA MANUELITA</option>
+                    <option value="SAN LORENZO">SAN LORENZO</option>
+                    <option value="SANTO DOMINGO">SANTO DOMINGO</option>
+                    <option value="EL VARIANTE">EL VARIANTE</option>
+                    <option value="PUENTE URIBANTE">PUENTE URIBANTE</option>
+                    <option value="LA LAGUNA">LA LAGUNA</option>
+                    <option value="CESAR DARIO">CESAR DARIO</option>
+                    <option value="MATA DE CAFÉ">MATA DE CAFÉ</option>
+                    <option value="EL ZIG ZAG">EL ZIG ZAG</option>
+                    <option value="LA RAYA">LA RAYA</option>
+                    <option value="FUNDOS ZAMORANOS">FUNDOS ZAMORANOS</option>
+                    <option value="LA PALMITA">LA PALMITA</option>
+                    <option value="MANAURE">MANAURE</option>
+                    <option value="CAÑO NEGRO">CAÑO NEGRO</option>
+                    
+                ';
+            }
+
         }
         function guarInmue(){
             include('../conexion.php');
@@ -924,7 +1043,7 @@ class constancias{
                             <b>Pisos</b>
                             <select id="pisosConst">
                                 <option value="'.$constRes["pisos"].'">'.$constRes["pisos"].'</option>
-                                <option value="N/A">N/A</option>
+                                <option value="NO APLICA">NO APLICA</option>
                                 <option value="Lujoso">Lujoso</option>
                                 <option value="Baldosas/Terracota">Baldosas/Terracota</option>
                                 <option value="Cerámica">Cerámica</option>
@@ -1064,7 +1183,7 @@ class constancias{
                     </div>
                     <div class="col">
                         <div class="campDat">
-                            <b>Folios:</b>
+                            <b>Folio:</b>
                             <input type="text" onKeyUp="mayusProp(this)" value="'.$protoRes["folio"].'" id="folioProtConst"/>
                         </div>
                     </div>
@@ -1934,6 +2053,12 @@ class constancias{
                     </div>
                     <div class="col">
                         <div class="campDat">
+                            <b>Recibo:</b>
+                            <input type="text" value="'.$factRes["n_recibo"].'" onchange="btnVeriReci()" id="recFact"/>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="campDat">
                             <b>Número Factura:</b>
                             <input type="text" value="'.$factRes["n_factura"].'" id="numFact" onchange="btnVeriFact()"/>
                         </div>
@@ -1944,15 +2069,12 @@ class constancias{
                             <input type="date" value="'.$factRes["fecha"].'" id="fechFact"/>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="campDat">
-                            <b>Recibo:</b>
-                            <input type="text" value="'.$factRes["n_recibo"].'" id="recFact"/>
-                        </div>
-                    </div>
                 </div>
             </div>
             <div id="campOculto">
+                
+                </div>
+                <div id="campOculto2">
                 
                 </div>
             <div class="btnSig1">
@@ -1983,6 +2105,29 @@ class constancias{
                     $upFactSql = "UPDATE temp_factura SET monto='".$this->montoFact."', n_factura='".$this->numFact."', fecha='".$this->fechFact."', n_recibo='".$this->recFact."' where id='".$userTempRes["temp_factura"]."' ";
                     $link->query($upFactSql);
                 }
+        }
+        function busRecFact(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+
+            $reciSQL = "SELECT * FROM factura where n_recibo='".$this->recFact."'";
+            $resReci = $link->query($reciSQL);
+            $reciRes = $resReci->fetch_array();
+                echo'
+                    <input type="hidden" value="'.$reciRes["n_recibo"].'" id="reciboFact">
+                ';
+        }
+        function busFactura(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+
+            $veriFactSql = "SELECT * FROM factura where n_factura='".$this->numFact."'";
+            $resVeriFact = $link->query($veriFactSql);
+            $veriFactRes = $resVeriFact->fetch_array();
+
+                echo'<input type="hidden" value="'.$veriFactRes["n_factura"].'" id="numFactura" />';
         }
     //LINDERO SEGUN INSPECCIÓN
         function actGeneral(){//VERIFICADO
@@ -2072,7 +2217,8 @@ class constancias{
                             <select id="puntSur">
                                 <option value="'.$puntSurGen.'">'.$puntSurGen.'</option>
                                 <option value="Sur">Sur</option>
-                                <option value="SurEste">SurEste</option>
+                                <option value="SurOeste">SurOeste</option>
+                                
                             </select>
                         </div>
                         <div class="col-10">
@@ -2099,7 +2245,7 @@ class constancias{
                             <select id="puntEste">
                                 <option value="'.$puntEsteGen.'">'.$puntEsteGen.'</option>
                                 <option value="Este">Este</option>
-                                <option value="SurOeste">SurOeste</option>
+                                <option value="SurEste">SurEste</option>
                             </select>
                         </div>
                         <div class="col-10">
@@ -2333,7 +2479,7 @@ class constancias{
                         <select id="puntSur2">
                             <option value="'.$puntSurPos.'">'.$puntSurPos.'</option>
                             <option value="Sur">Sur</option>
-                            <option value="SurEste">SurEste</option>
+                            <option value="SurOeste">SurOeste</option>
                         </select>
                     </div>
                     <div class="col-10">
@@ -2361,7 +2507,7 @@ class constancias{
                         <select id="puntEste2">
                             <option value="'.$puntEstePos.'">'.$puntEstePos.'</option>
                             <option value="Este">Este</option>
-                            <option value="SurOeste">SurOeste</option>
+                            <option value="SurEste">SurEste</option>
                         </select>
                     </div>
                     <div class="col-10">
@@ -2594,7 +2740,7 @@ class constancias{
                             <select id="puntSur3">
                                 <option value="'.$puntSurDoc.'">'.$puntSurDoc.'</option>
                                 <option value="Sur">Sur</option>
-                                <option value="SurEste">SurEste</option>
+                                <option value="SurOeste">SurOeste</option>
                             </select>
                         </div>
                         <div class="col-lg-10">
@@ -2621,7 +2767,8 @@ class constancias{
                             <select id="puntEste3">
                                 <option value="'.$puntEsteDoc.'">'.$puntEsteDoc.'</option>
                                 <option value="Este">Este</option>
-                                <option value="SurOeste">SurOeste</option>
+                                <option value="SurEste">SurEste</option>
+                                
                             </select>
                         </div>
                         <div class="col-lg-10">
@@ -2767,173 +2914,220 @@ class constancias{
                     $link->query($upLindGenSql);
                 }
         }
-    
-
-    //CAMBIO DE SELECT DE SECTOR
-        function cambSect(){
-            if($this->parrInmue=="Capital"){
-                echo'
-                    <option value="0"></option>
-                    <option value="URB RENATO LAPORTA">URB RENATO LAPORTA</option>
-                    <option value="EL PIÑAL">EL PIÑAL</option>
-                    <option value="URB LOS LEONES">URB LOS LEONES</option>
-                    <option value="EL PIÑALITO">EL PIÑALITO</option>
-                    <option value="EL PLAN">EL PLAN</option>
-                    <option value="LA GUADALUPE">LA GUADALUPE</option>
-                    <option value="JOSE FRLIX RIVAS">JOSE FRLIX RIVAS</option>
-                    <option value="MORICHITOS">MORICHITOS</option>
-                    <option value="LA MILAGROSA">LA MILAGROSA</option>
-                    <option value="TECHO PARA MIS HIJOS">TECHO PARA MIS HIJOS</option>
-                    <option value="BRISAS DEL PIÑAL">BRISAS DEL PIÑAL</option>
-                    <option value="LA URIBANTINA"> LA URIBANTINA</option>
-                    <option value="EL ARAGUANEY">EL ARAGUANEY</option>
-                    <option value="BRISAS DE URIBANTE">BRISAS DE URIBANTE</option>
-                    <option value="PROHENSA">PROHENSA</option>
-                    <option value="CANTA RANA">CANTA RANA</option>
-                    <option value="CHURURU (TRONCAL)">CHURURU (TRONCAL)</option>
-                    <option value="LAS PALMERAS">LAS PALMERAS</option>
-                    <option value="MORONI">MORONI</option>
-                    <option value="LOS MIRTOS">LOS MIRTOS</option>
-                    <option value="JUAN PABLO">JUAN PABLO</option>
-                    <option value="BARRIO COLOMBIA">BARRIO COLOMBIA</option>
-                    <option value="COSTA RICA">COSTA RICA</option>
-                    <option value="MAPACA">MAPACA</option>
-                    <option value="KM 8">KM 8</option>
-                    <option value="SANTA MARIA">SANTA MARIA</option>
-                    <option value="TIERRA LINDA">TIERRA LINDA</option>
-                    <option value="EL PABELLON">EL PABELLON</option>
-                    <option value="EL OASIS">EL OASIS</option>
-                    <option value="LOS NARANJOS">LOS NARANJOS</option>
-                    <option value="GUAFITAS">GUAFITAS</option>
-                    <option value="DORADAS">DORADAS</option>
-                    <option value="SAN MIGUEL">SAN MIGUEL</option>
-                    <option value="EL MONERO">EL MONERO</option>
-                    <option value="EL CANAL">EL CANAL</option>
-                    <option value="RECTA DE AYARI">RECTA DE AYARI</option>
-                    <option value="CAÑO TIGRE">CAÑO TIGRE</option>
-                    <option value="EL YUYE">EL YUYE</option>
-                    <option value="LA ISLA DE BENTACOURT">LA ISLA DE BENTACOURT</option>
-                    <option value="EL TROMPEZON">EL TROMPEZON</option>
-                    <option value="EL ROISAL">EL ROISAL</option>
-                    <option value="LA ORQUIDEA">LA ORQUIDEA</option>
-                    <option value="19 DE ABRIL">19 DE ABRIL</option>
-                    <option value="COLINAS DE BELLO MONTE">COLINAS DE BELLO MONTE</option>
-                    <option value="IRCO">IRCO</option>
-                    <option value="VEGAS DE URIBANTE">VEGAS DE URIBANTE</option>
-                    <option value="LA VALERIA">LA VALERIA</option>
-                    <option value="SAN HISIDRO">SAN HISIDRO</option>
-                    <option value="EL TOPACIO">EL TOPACIO</option>
-                ';
-            }elseif($this->parrInmue=="Dr. Alberto Adriani"){
-                echo'
-                    <option value="0"></option>
-                    <option value="LA GABARRA (LA MORITA)">LA GABARRA (LA MORITA)</option>
-                    <option value="LA MORITA">LA MORITA</option>
-                    <option value="LOS MANGUTOS">LOS MANGUITOS</option>
-                    <option value="VILLA PARAISO">VILLA PARAISO</option>
-                    <option value="VALLE LORENA I">VALLE LORENA I</option>
-                    <option value="VALLE LORENA II">VALLE LORENA II</option>
-                    <option value="12 DE OCTUBRE">12 DE OCTUBRE</option>
-                    <option value="NARANJALES">NARANJALES</option>
-                    <option value="BARRIO LA PAZ">BARRIO LA PAZ</option>
-                    <option value="LA BOLIVARIANA">LA BOLIVARIANA</option>
-                    <option value="27 DE FEBRERO PARTE ALTA">27 DE FEBRERO PARTE ALTA</option>
-                    <option value="27 DE FEBRERO PARTE BAJA">27 DE FEBRERO PARTE BAJA</option>
-                    <option value="VILLA MORTERREY">VILLA MORTERREY</option>
-                    <option value="TETEO I">TETEO I</option>
-                    <option value="TETEO II">TETEO II</option>
-                    <option value="BUENOS AIRES">BUENOS AIRES</option>
-                    <option value="CAUCAGUITA">CAUCAGUITA</option>
-                    <option value="SAN ANTONIO">SAN ANTONIO</option>
-                    <option value="SANTA LUCIA">SANTA LUCIA</option>
-                    <option value="EL JORDAN">EL JORDAN</option>
-                    <option value="RANCHO CHIRE">RANCHO CHIRE</option>
-                    <option value="EL RENUEVO">EL RENUEVO</option>
-                    <option value="LA REFORMA">LA REFORMA</option>
-                    <option value="EL CRISOL">EL CRISOL</option>
-                    <option value="CUITE">CUITE</option>
-                    <option value="EL SOCORRO">EL SOCORRO</option>
-                    <option value="EL TALADRO">EL TALADRO</option>
-                    <option value="LA VICTORIA">LA VICTORIA</option>
-                    <option value="LA ZANCUDA">LA ZANCUDA</option>
-                    <option value="LA COLORADA">LA COLORADA</option>
-                    <option value="LA ESPUMA">LA ESPUMA</option>
-                    <option value="LA ROCHELA">LA ROCHELA</option>
-                ';
-            }elseif($this->parrInmue =="Santo Domingo"){
-                echo'
-                    <option value="0"></option>
-                    <option value="CHURURU VIEJO">CHURURU VIEJO</option>
-                    <option value="I ETAPA DE SAN LORENZO">I ETAPA DE SAN LORENZO</option>
-                    <option value="II ETAPA DE SAN LORENZO">II ETAPA DE SAN LORENZO</option>
-                    <option value="III ETAPA DE SAN LORENZO">III ETAPA DE SAN LORENZO</option>
-                    <option value="IV ETAPA DE SAN LORENZO">IV ETAPA DE SAN LORENZO</option>
-                    <option value="LA MANUELITA">LA MANUELITA</option>
-                    <option value="Z SAN LORENZO">Z SAN LORENZO</option>
-                    <option value="SANTO DOMINGO">SANTO DOMINGO</option>
-                    <option value="EL VARIANTE">EL VARIANTE</option>
-                    <option value="PUENTE URIBANTE">PUENTE URIBANTE</option>
-                    <option value="LA LAGUNA">LA LAGUNA</option>
-                    <option value="CESAR DARIO">CESAR DARIO</option>
-                    <option value="MATA DE CAFÉ">MATA DE CAFÉ</option>
-                    <option value="EL ZIG ZAG">EL ZIG ZAG</option>
-                    <option value="LA RAYA">LA RAYA</option>
-                    <option value="FUNDOS ZAMORANOS">FUNDOS ZAMORANOS</option>
-                    <option value="LA PALMITA">LA PALMITA</option>
-                    <option value="MANAURE">MANAURE</option>
-                    <option value="CAÑO NEGRO">CAÑO NEGRO</option>
-                    
-                ';
-            }
-
-        }
+        
     //VERIFICAR F003
-    function veriF3(){
-        include('../conexion.php');
-        $MySql = new conexion;
-        $link= $MySql->conectar();
-        session_start();
-        //USUARIO
-            $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
-            $resUser = $link->query($userSQL);
-            $userRes = $resUser->fetch_array();
-        //USUARIOS TEMPORALES
-            $tempUserSQL ="SELECT * FROM user_temp where userId=".$userRes["id"]."";
-            $resTempUser = $link->query($tempUserSQL);
-            $tempUserRes = $resTempUser->fetch_array();
-        //PROPIETARIOS TEMP
-            $propSQL ="SELECT * FROM temp_propietarios where id=".$tempUserRes["temp_propietarios"]."";
-            $resProp = $link->query($propSQL);
-            $propieRes = $resProp->fetch_array();
-        //PROPIETARIOS
-            $propSqlDe= "SELECT * FROM propietarios where cedula='".$propieRes["cedula"]."'";
-            $resPropDe = $link->query($propSqlDe);
-            $propDeRes = $resPropDe->fetch_array();
-            //BUSQUEDA PROPIETARIO
-                
-                if($propSQLRes["cedula"]==$propieRes["cedula"]){
-                    $uptPropSQl = "UPDATE propietarios SET cedula='".$propieRes["cedula"]."', rif='".$propieRes["rif"]."', nombre='".$propieRes["nombre"]."', apellido='".$propieRes["apellido"]."',telef='".$propieRes["telef"]."',dir_hab='".$propieRes["dir_hab"]."', telef_hab='".$propieRes["telef_hab"]."' where cedula='".$propieRes["cedula"]."'";
-                    $resUptProp = $link->query($uptPropSQl);
-                    $idProp2 = $propSQLRes["id"];
-                }else{
-                    $propietarioSQL ="INSERT INTO propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab)value('".$propieRes['cedula']."','".$propieRes['rif']."','".$propieRes['nombre']."','".$propieRes['apellido']."','".$propieRes['telef']."','".$propieRes['dir_hab']."','".$propieRes['telef_hab']."') ";
-                    $link->query($propietarioSQL);
-                    $idProp2 = $link->insert_id;
-                }
-        //INMUEBLE TEMP
-            $inmueSQL ="SELECT * FROM temp_inmueble where id=".$tempUserRes["temp_inmueble"]."";
-            $resInmue = $link->query($inmueSQL);
-            $inmueRes = $resInmue->fetch_array();
-        //INMUEBLE
-            $inmueDeSQL ="SELECT * FROM inmueble where direccion='".$inmueRes["direccion"]."'";
-            $resDeInmue = $link->query($inmueDeSQL);
-            $inmueDeRes = $resDeInmue->fetch_array();
+        function veriF3(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+            session_start();
+            //USUARIO
+                $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+                $resUser = $link->query($userSQL);
+                $userRes = $resUser->fetch_array();
+            //USUARIOS TEMPORALES
+                $tempUserSQL ="SELECT * FROM user_temp where userId=".$userRes["id"]."";
+                $resTempUser = $link->query($tempUserSQL);
+                $tempUserRes = $resTempUser->fetch_array();
+            //PROPIETARIOS TEMP
+                $propSQL ="SELECT * FROM temp_propietarios where id=".$tempUserRes["temp_propietarios"]."";
+                $resProp = $link->query($propSQL);
+                $propieRes = $resProp->fetch_array();
+            //PROPIETARIOS
+                $propSqlDe= "SELECT * FROM propietarios where cedula='".$propieRes["cedula"]."'";
+                $resPropDe = $link->query($propSqlDe);
+                $propDeRes = $resPropDe->fetch_array();
+                //BUSQUEDA PROPIETARIO
+                    
+                    if($propSQLRes["cedula"]==$propieRes["cedula"]){
+                        $uptPropSQl = "UPDATE propietarios SET cedula='".$propieRes["cedula"]."', rif='".$propieRes["rif"]."', nombre='".$propieRes["nombre"]."', apellido='".$propieRes["apellido"]."',telef='".$propieRes["telef"]."',dir_hab='".$propieRes["dir_hab"]."', telef_hab='".$propieRes["telef_hab"]."' where cedula='".$propieRes["cedula"]."'";
+                        $resUptProp = $link->query($uptPropSQl);
+                        $idProp2 = $propSQLRes["id"];
+                    }else{
+                        $propietarioSQL ="INSERT INTO propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab)value('".$propieRes['cedula']."','".$propieRes['rif']."','".$propieRes['nombre']."','".$propieRes['apellido']."','".$propieRes['telef']."','".$propieRes['dir_hab']."','".$propieRes['telef_hab']."') ";
+                        $link->query($propietarioSQL);
+                        $idProp2 = $link->insert_id;
+                    }
+            //INMUEBLE TEMP
+                $inmueSQL ="SELECT * FROM temp_inmueble where id=".$tempUserRes["temp_inmueble"]."";
+                $resInmue = $link->query($inmueSQL);
+                $inmueRes = $resInmue->fetch_array();
+            //INMUEBLE
+                $inmueDeSQL ="SELECT * FROM inmueble where direccion='".$inmueRes["direccion"]."'";
+                $resDeInmue = $link->query($inmueDeSQL);
+                $inmueDeRes = $resDeInmue->fetch_array();
 
-        if($propDeRes["cedula"]==$propieRes["cedula"]){
-            if($inmueDeRes["id"]!=0){
-                echo'<input type="hidden" value="true" id="verInmV">';
+            if($propDeRes["cedula"]==$propieRes["cedula"]){
+                if($inmueDeRes["id"]!=0){
+                    echo'<input type="hidden" value="true" id="verInmV">';
+                }else{
+                    echo'<input type="hidden" value="false" id="verInmV">';
+                    //CARACTERISTICAS DEL INMUEBLE
+                        $caracInmueSQL = "SELECT * FROM temp_carainmue where id=".$tempUserRes["temp_carainmue"]." ";
+                        $resCaracInmue = $link->query($caracInmueSQL);
+                        $caracInmueRes = $resCaracInmue->fetch_array();
+                        $caraInmueSQL = "INSERT INTO carc_inmueble(topografia,forma,uso,tenencia)value('".$caracInmueRes["topografia"]."','".$caracInmueRes["forma"]."','".$caracInmueRes["uso"]."','".$caracInmueRes["tenencia"]."')";
+                        $link->query($caraInmueSQL);
+                        $idcaraInmue2 = $link->insert_id;
+                    //PUERTAS
+                        $puertSQL = "SELECT * FROM temp_puertas where id=".$tempUserRes["temp_puertas"]."";
+                        $resPuert = $link->query($puertSQL);
+                        $puertRes = $resPuert->fetch_array();
+                        $puertasSQL = "INSERT INTO puertas(entamborada_fina,ent_econo,madera_cepi,hierro)value('".$puertRes['entamborada_fina']."','".$puertRes['ent_econo']."','".$puertRes['madera_cepi']."','".$puertRes['hierro']."')";
+                        $link->query($puertasSQL);
+                        $idPuertas = $link->insert_id;
+                    //ESTADO DE CONSERVACION
+                        $estaConserSQL = "SELECT * FROM temp_estado_conservacion where id=".$tempUserRes["temp_estado_conservacion"]."";
+                        $resEstaConser = $link->query($estaConserSQL);
+                        $estaConserRes = $resEstaConser->fetch_array();
+                        $conservSQL = "INSERT INTO estado_conservacion(ano_construccion,ano_refaccion,edad_efectiva,nro_planta,nro_vivienda)value('".$estaConserRes["ano_construccion"]."','".$estaConserRes["ano_refaccion"]."','".$estaConserRes["edad_efectiva"]."','".$estaConserRes["nro_planta"]."','".$estaConserRes["nro_vivienda"]."')";
+                        $link->query($conservSQL);
+                        $idConserv = $link->insert_id;
+                    //PIEZAS SANITARIAS
+                        $piezSantSQL = "SELECT * FROM temp_piezas_sanitarias where id=".$tempUserRes["temp_piezas_sanitarias"]."";
+                        $resPiezSant = $link->query($piezSantSQL);
+                        $piezSantRes = $resPiezSant->fetch_array();
+                        $piezSQL = "INSERT INTO piezas_sanitarias(porcelana_fina,porcelana_econ,banera,calentador,wc,bidet,lavamanos,ducha,urinario)value('".$piezSantRes["porcelana_fina"]."','".$piezSantRes["porcelana_econ"]."','".$piezSantRes["banera"]."','".$piezSantRes["calentador"]."','".$piezSantRes["wc"]."','".$piezSantRes["bidet"]."','".$piezSantRes["lavamanos"]."','".$piezSantRes["ducha"]."','".$piezSantRes["urinario"]."')";
+                        $link->query($piezSQL);
+                        $idPiezSant = $link->insert_id;
+                    //COMPLEMENTOS
+                        $compleSQL ="SELECT * FROM temp_complementos where id=".$tempUserRes["temp_complementos"]."";
+                        $resComple = $link->query($compleSQL);
+                        $compleRes = $resComple->fetch_array();
+                        $complementSQL ="INSERT INTO complementos(ascensor,aire_acond,rejas,closets,porcelana)value('".$compleRes["ascensor"]."','".$compleRes["aire_acond"]."','".$compleRes["rejas"]."','".$compleRes["closets"]."','".$compleRes["porcelana"]."')";
+                        $link->query($complementSQL);
+                        $idComplement = $link->insert_id;
+                    //AMBIENTES
+                        $ambienSQL = "SELECT * FROM temp_ambientes where id=".$tempUserRes["temp_ambientes"]."";
+                        $resAmbiente = $link->query($ambienSQL);
+                        $ambientesRes = $resAmbiente->fetch_array();
+                        $ambientSQL = "INSERT INTO ambientes(dormitorio,comedor,sala,banos,cocina,servicio,oficina,garaje,estacionamiento)value('".$ambientesRes["dormitorio"]."','".$ambientesRes["comedor"]."','".$ambientesRes["sala"]."','".$ambientesRes["banos"]."','".$ambientesRes["cocina"]."','".$ambientesRes["servicio"]."','".$ambientesRes["oficina"]."','".$ambientesRes["garaje"]."','".$ambientesRes["estacionamiento"]."')";
+                        $link->query($ambientSQL);
+                        $idAmbientes = $link->insert_id;
+                    //CARACTERISTICAS DE LA CONSTRUCCION
+                        $caracConstSQL = "SELECT * FROM temp_caraconst where id=".$tempUserRes["temp_caraconst"]."";
+                        $resCaraConst = $link->query($caracConstSQL);
+                        $caraConstRes = $resCaraConst->fetch_array();
+                        $SQLcaraConst = "INSERT INTO caracteristicas_construccion(destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,ventanas,insta_electricas,observ,Regimen,fk_puertas,fk_estadoConserv,fk_piezasSanitarias,fk_complementos,fk_ambientes)value('".$caraConstRes["destino"]."','".$caraConstRes["estructura"]."','".$caraConstRes["paredes_tipo"]."','".$caraConstRes["paredes_acabado"]."','".$caraConstRes["pintura"]."','".$caraConstRes["techo"]."','".$caraConstRes["pisos"]."','".$caraConstRes["ventanas"]."','".$caraConstRes["insta_electricas"]."','".$caraConstRes["observ"]."','".$caraConstRes["Regimen"]."',".$idPuertas.",".$idConserv.",".$idPiezSant.",".$idComplement.",".$idAmbientes.")";
+                        $link->query($SQLcaraConst);
+                        $idCaraConst = $link->insert_id;
+                    //PROTOCOLIZACION DEL INMUEBLE
+                        $protoSQL = "SELECT * FROM temp_datos_protocolizacion where id=".$tempUserRes["temp_datos_protocolizacion"]."";
+                        $resProto = $link->query($protoSQL);
+                        $protoRes = $resProto->fetch_array();
+                        $protSQL = "INSERT INTO datos_protocolizacion(documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble)value('".$protoRes["documento"]."','".$protoRes["direccion"]."','".$protoRes["numero"]."','".$protoRes["tomo"]."','".$protoRes["folio"]."','".$protoRes["protocolo"]."','".$protoRes["trimestre"]."','".$protoRes["fecha"]."','".$protoRes["valor_inmueble"]."')";
+                        $link->query($protSQL);
+                        $idProt = $link->insert_id;
+                    //SERVICIOS
+                        $serviciosSQL ="SELECT * FROM temp_servicios_inmue where id=".$tempUserRes["temp_servicios_inmue"]."";
+                        $resServicios = $link->query($serviciosSQL);
+                        $serviciosRes = $resServicios->fetch_array();
+                        $servSQL = "INSERT INTO servicios_inmue(acued,acuedRural,aguasSubter,aguasServ,pavimentoFlex,pavimentoRig,viaEngran,acera,alumbradoPub,aseo,transportePublic,pozoSept,electriResi,electriIndus,lineaTelef)VALUE('".$serviciosRes["acued"]."','".$serviciosRes["acuedRural"]."','".$serviciosRes["aguasSubter"]."','".$serviciosRes["aguasServ"]."','".$serviciosRes["pavimentoFlex"]."','".$serviciosRes["pavimentoRig"]."','".$serviciosRes["viaEngran"]."','".$serviciosRes["acera"]."','".$serviciosRes["alumbradoPub"]."','".$serviciosRes["aseo"]."','".$serviciosRes["transportePublic"]."','".$serviciosRes["pozoSept"]."','".$serviciosRes["electriResi"]."','".$serviciosRes["electriIndus"]."','".$serviciosRes["lineaTelef"]."')";
+                        $link->query($servSQL);
+                        $idServ = $link->insert_id;
+                    //LINDEROS SEGUN DOC
+                        $lindDocSQL = "SELECT * FROM temp_linderos_documento where id=".$tempUserRes["temp_linderos_documento"]."";
+                        $resLindDoc = $link->query($lindDocSQL);
+                        $lindDocRes = $resLindDoc->fetch_array();
+                        $lindDocumSQL = "INSERT INTO linderos_documento(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$lindDocRes["norte"]."','".$lindDocRes["noreste"]."','".$lindDocRes["sur"]."','".$lindDocRes["sureste"]."','".$lindDocRes["este"]."','".$lindDocRes["suroeste"]."','".$lindDocRes["oeste"]."','".$lindDocRes["noroeste"]."','".$lindDocRes["alind_n"]."','".$lindDocRes["alind_s"]."','".$lindDocRes["alind_e"]."','".$lindDocRes["alind_o"]."','".$lindDocRes["areaTotal"]."','".$lindDocRes["uniAreaT"]."','".$lindDocRes["nivelesConst"]."','".$lindDocRes["uniAreaC"]."','".$lindDocRes["areaConst"]."','".$lindDocRes["uniNorte"]."','".$lindDocRes["uniSur"]."','".$lindDocRes["uniEste"]."','".$lindDocRes["uniOeste"]."')";
+                        $link->query($lindDocumSQL);
+                        $idLinDocum = $link->insert_id;
+                    //LINDEROS SEGUN INSPEC
+                        $lindGenSQL = "SELECT * FROM temp_linderos_general where id=".$tempUserRes["temp_linderos_general"]."";
+                        $resLindGen = $link->query($lindGenSQL);
+                        $lindGenRes = $resLindGen->fetch_array();
+                        $lindGeneralSQL = "INSERT INTO linderos_general(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$lindGenRes["norte"]."','".$lindGenRes["noreste"]."','".$lindGenRes["sur"]."','".$lindGenRes["sureste"]."','".$lindGenRes["este"]."','".$lindGenRes["suroeste"]."','".$lindGenRes["oeste"]."','".$lindGenRes["noroeste"]."','".$lindGenRes["alind_n"]."','".$lindGenRes["alind_s"]."','".$lindGenRes["alind_e"]."','".$lindGenRes["alind_o"]."','".$lindGenRes["areaTotal"]."','".$lindGenRes["uniAreaT"]."','".$lindGenRes["nivelesConst"]."','".$lindGenRes["uniAreaC"]."','".$lindGenRes["areaConst"]."','".$lindGenRes["uniNorte"]."','".$lindGenRes["uniSur"]."','".$lindGenRes["uniEste"]."','".$lindGenRes["uniOeste"]."')";
+                        $link->query($lindGeneralSQL);
+                        $idLinGeneral = $link->insert_id;
+                    //LINDEROS POSIBLE VENTA
+                        $lindPosSQL = "SELECT * FROM temp_linderos_posible_venta where id=".$tempUserRes["temp_linderos_posible_venta"]."";
+                        $resLindPos = $link->query($lindPosSQL);
+                        $lindPosRes = $resLindPos->fetch_array();
+                        $lindVentaSQL = "INSERT INTO linderos_posible_venta(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$lindPosRes["norte"]."','".$lindPosRes["noreste"]."','".$lindPosRes["sur"]."','".$lindPosRes["sureste"]."','".$lindPosRes["este"]."','".$lindPosRes["suroeste"]."','".$lindPosRes["oeste"]."','".$lindPosRes["noroeste"]."','".$lindPosRes["alind_n"]."','".$lindPosRes["alind_s"]."','".$lindPosRes["alind_e"]."','".$lindPosRes["alind_o"]."','".$lindPosRes["areaTotal"]."','".$lindPosRes["uniAreaT"]."','".$lindPosRes["nivelesConst"]."','".$lindPosRes["uniAreaC"]."','".$lindPosRes["areaConst"]."','".$lindPosRes["uniNorte"]."','".$lindPosRes["uniSur"]."','".$lindPosRes["uniEste"]."','".$lindPosRes["uniOeste"]."')";
+                        $link->query($lindVentaSQL);
+                        $idLinVenta = $link->insert_id;
+                    //INMUEBLE 
+                        $inmuebleSQL = "INSERT INTO inmueble(direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_servicios)value('".$inmueRes["direccion"]."','".$inmueRes["parroquia"]."','".$inmueRes["sector"]."','".$inmueRes["ambito"]."',".$idCaraConst.",".$idProt.",".$idcaraInmue2.",".$idLinDocum.",".$idLinGeneral.",".$idLinVenta.",".$idServ.")";
+                        $link->query($inmuebleSQL);
+                        $idInmueble = $link->insert_id;
+                    //EXPEDIENTE
+                        $expTempSQL = "SELECT * FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
+                        $resTempExpe = $link->query($expTempSQL);
+                        $expeTempRes = $resTempExpe->fetch_array();
+                        $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$userRes["id"].",'".$expeTempRes["no_expediente"]."','".$expeTempRes["fecha"]."','".$expeTempRes["condicion"]."','".$expeTempRes["valorInmue"]."')";
+                        $link->query($expedientSQL);
+                        $idExpedient = $link->insert_id;
+                    //FACTURA
+                        $factSQL = "SELECT * FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
+                        $resFact = $link->query($factSQL);
+                        $factRes = $resFact->fetch_array();
+                        $facturaSQL = "INSERT INTO factura(monto,n_factura,fecha,n_recibo)value('".$factRes["monto"]."','".$factRes["n_factura"]."','".$factRes["fecha"]."','".$factRes["n_recibo"]."')";
+                        $link->query($facturaSQL);
+                        $idFactura = $link->insert_id;
+                    echo'
+                    <input type="hidden" value="'.$factRes["monto"].'" id="montoFact"/>
+                    <input type="hidden" value="'.$factRes["fecha"].'" id="fechFact"/>
+                    <input type="hidden" value="'.$idInmueble.'" id="idInmueble"/>
+                    <input type="hidden" value="'.$idProp2.'" id="idProp"/>
+                    <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
+                    <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
+                    <input type="hidden" value="'.$expeTempRes["no_expediente"].'" id="nuExp"/>
+                    ';
+                    //ELIMINAR SQL DE TEMP
+                        //PROPIETARIO
+                            $eliPropSQL ="DELETE FROM temp_propietarios where id=".$tempUserRes["temp_propietarios"]."";
+                            $link->query($eliPropSQL);
+                        //CARACTERISTICAS DEL INMUEBLE
+                            $elimCaracInmueSQL = "DELETE FROM temp_carainmue where id=".$tempUserRes["temp_carainmue"]."";
+                            $link->query($elimCaracInmueSQL);
+                        //PUERTAS
+                            $elimPuertasSQL = "DELETE FROM temp_puertas where id=".$tempUserRes["temp_puertas"]."";
+                            $link->query($elimPuertasSQL);
+                        //ESTADO CONSERVACION
+                            $elimConservSQL = "DELETE FROM temp_estado_conservacion where id=".$tempUserRes["temp_estado_conservacion"]."";
+                            $link->query($elimConservSQL);
+                        //PIEZAS SANITARIAS
+                            $elimPiezSan = "DELETE FROM temp_piezas_sanitarias where id=".$tempUserRes["temp_piezas_sanitarias"]."";
+                            $link->query($elimPiezSan);
+                        //COMPLEMENTOS
+                            $elimComple = "DELETE FROM temp_complementos where id=".$tempUserRes["temp_complementos"]."";
+                            $link->query($elimComple);
+                        //AMBIENTES 
+                            $elimAmbientSQL = "DELETE FROM temp_ambientes where id=".$tempUserRes["temp_ambientes"]."";
+                            $link->query($elimAmbientSQL);
+                        //CARACTERISTICAS DE LA CONSTRUCCION
+                            $elimCaracConstSQL = "DELETE FROM temp_caraconst where id=".$tempUserRes["temp_caraconst"]."";
+                            $link->query($elimCaracConstSQL);
+                        //PROTOCOLIZACION DEL INMUEBLE
+                            $elimProtInmueSQL = "DELETE FROM temp_datos_protocolizacion where id=".$tempUserRes["temp_datos_protocolizacion"]."";
+                            $link->query($elimProtInmueSQL);
+                        //SERVICIOS
+                            $elimServSQL = "DELETE FROM temp_servicios_inmue where id=".$tempUserRes["temp_servicios_inmue"]." ";
+                            $link->query($elimServSQL);
+                        //LINDEROS SEGUN DOC
+                            $elimLindDocSQL = "DELETE FROM temp_linderos_documento where id=".$tempUserRes["temp_linderos_documento"]."";
+                            $link->query($elimLindDocSQL);
+                        //LINDEROS SEGUN INSPECCION
+                            $elimLindInspSQL = "DELETE FROM temp_linderos_general where id=".$tempUserRes["temp_linderos_general"]."";
+                            $link->query($elimLindInspSQL);
+                        //LINDEROS POSIBLE VENTA
+                            $elimLindPosSQL ="DELETE FROM temp_linderos_posible_venta where id=".$tempUserRes["temp_linderos_posible_venta"]."";
+                            $link->query($elimLindPosSQL);
+                        //INMUEBLE
+                            $elimInmueSQL ="DELETE FROM temp_inmueble where id=".$tempUserRes["temp_inmueble"]."";
+                            $link->query($elimInmueSQL);
+                        //EXPEDIENTE
+                            $elimExpSQL = "DELETE FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
+                            $link->query($elimExpSQL);
+                        //FACTURA
+                            $elimFactSQL = "DELETE FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
+                            $link->query($elimFactSQL);
+                        //USER
+                            $elimUserSQL = "DELETE FROM user_temp where userId=".$userRes["id"]."";
+                            $link->query($elimUserSQL);
+                
+                }
             }else{
-                echo'<input type="hidden" value="false" id="verInmV">';
                 //CARACTERISTICAS DEL INMUEBLE
                     $caracInmueSQL = "SELECT * FROM temp_carainmue where id=".$tempUserRes["temp_carainmue"]." ";
                     $resCaracInmue = $link->query($caracInmueSQL);
@@ -3023,10 +3217,10 @@ class constancias{
                     $link->query($inmuebleSQL);
                     $idInmueble = $link->insert_id;
                 //EXPEDIENTE
-                    $expTempSQL = "SELECT * FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
-                    $resTempExpe = $link->query($expTempSQL);
-                    $expeTempRes = $resTempExpe->fetch_array();
-                    $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$userRes["id"].",'".$expeTempRes["no_expediente"]."','".$expeTempRes["fecha"]."','".$expeTempRes["condicion"]."','".$expeTempRes["valorInmue"]."')";
+                    $expSQL = "SELECT * FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
+                    $resExpe = $link->query($expSQL);
+                    $expeRes = $resExpe->fetch_array();
+                    $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$userRes["id"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','".$expeRes["condicion"]."','".$expeRes["valorInmue"]."')";
                     $link->query($expedientSQL);
                     $idExpedient = $link->insert_id;
                 //FACTURA
@@ -3036,378 +3230,6 @@ class constancias{
                     $facturaSQL = "INSERT INTO factura(monto,n_factura,fecha,n_recibo)value('".$factRes["monto"]."','".$factRes["n_factura"]."','".$factRes["fecha"]."','".$factRes["n_recibo"]."')";
                     $link->query($facturaSQL);
                     $idFactura = $link->insert_id;
-                echo'
-                <input type="hidden" value="'.$factRes["monto"].'" id="montoFact"/>
-                <input type="hidden" value="'.$factRes["fecha"].'" id="fechFact"/>
-                <input type="hidden" value="'.$idInmueble.'" id="idInmueble"/>
-                <input type="hidden" value="'.$idProp2.'" id="idProp"/>
-                <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
-                <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
-                <input type="hidden" value="'.$expeTempRes["no_expediente"].'" id="nuExp"/>
-                ';
-                //ELIMINAR SQL DE TEMP
-                    //PROPIETARIO
-                        $eliPropSQL ="DELETE FROM temp_propietarios where id=".$tempUserRes["temp_propietarios"]."";
-                        $link->query($eliPropSQL);
-                    //CARACTERISTICAS DEL INMUEBLE
-                        $elimCaracInmueSQL = "DELETE FROM temp_carainmue where id=".$tempUserRes["temp_carainmue"]."";
-                        $link->query($elimCaracInmueSQL);
-                    //PUERTAS
-                        $elimPuertasSQL = "DELETE FROM temp_puertas where id=".$tempUserRes["temp_puertas"]."";
-                        $link->query($elimPuertasSQL);
-                    //ESTADO CONSERVACION
-                        $elimConservSQL = "DELETE FROM temp_estado_conservacion where id=".$tempUserRes["temp_estado_conservacion"]."";
-                        $link->query($elimConservSQL);
-                    //PIEZAS SANITARIAS
-                        $elimPiezSan = "DELETE FROM temp_piezas_sanitarias where id=".$tempUserRes["temp_piezas_sanitarias"]."";
-                        $link->query($elimPiezSan);
-                    //COMPLEMENTOS
-                        $elimComple = "DELETE FROM temp_complementos where id=".$tempUserRes["temp_complementos"]."";
-                        $link->query($elimComple);
-                    //AMBIENTES 
-                        $elimAmbientSQL = "DELETE FROM temp_ambientes where id=".$tempUserRes["temp_ambientes"]."";
-                        $link->query($elimAmbientSQL);
-                    //CARACTERISTICAS DE LA CONSTRUCCION
-                        $elimCaracConstSQL = "DELETE FROM temp_caraconst where id=".$tempUserRes["temp_caraconst"]."";
-                        $link->query($elimCaracConstSQL);
-                    //PROTOCOLIZACION DEL INMUEBLE
-                        $elimProtInmueSQL = "DELETE FROM temp_datos_protocolizacion where id=".$tempUserRes["temp_datos_protocolizacion"]."";
-                        $link->query($elimProtInmueSQL);
-                    //SERVICIOS
-                        $elimServSQL = "DELETE FROM temp_servicios_inmue where id=".$tempUserRes["temp_servicios_inmue"]." ";
-                        $link->query($elimServSQL);
-                    //LINDEROS SEGUN DOC
-                        $elimLindDocSQL = "DELETE FROM temp_linderos_documento where id=".$tempUserRes["temp_linderos_documento"]."";
-                        $link->query($elimLindDocSQL);
-                    //LINDEROS SEGUN INSPECCION
-                        $elimLindInspSQL = "DELETE FROM temp_linderos_general where id=".$tempUserRes["temp_linderos_general"]."";
-                        $link->query($elimLindInspSQL);
-                    //LINDEROS POSIBLE VENTA
-                        $elimLindPosSQL ="DELETE FROM temp_linderos_posible_venta where id=".$tempUserRes["temp_linderos_posible_venta"]."";
-                        $link->query($elimLindPosSQL);
-                    //INMUEBLE
-                        $elimInmueSQL ="DELETE FROM temp_inmueble where id=".$tempUserRes["temp_inmueble"]."";
-                        $link->query($elimInmueSQL);
-                    //EXPEDIENTE
-                        $elimExpSQL = "DELETE FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
-                        $link->query($elimExpSQL);
-                    //FACTURA
-                        $elimFactSQL = "DELETE FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
-                        $link->query($elimFactSQL);
-                    //USER
-                        $elimUserSQL = "DELETE FROM user_temp where userId=".$userRes["id"]."";
-                        $link->query($elimUserSQL);
-            
-            }
-        }else{
-            //CARACTERISTICAS DEL INMUEBLE
-                $caracInmueSQL = "SELECT * FROM temp_carainmue where id=".$tempUserRes["temp_carainmue"]." ";
-                $resCaracInmue = $link->query($caracInmueSQL);
-                $caracInmueRes = $resCaracInmue->fetch_array();
-                $caraInmueSQL = "INSERT INTO carc_inmueble(topografia,forma,uso,tenencia)value('".$caracInmueRes["topografia"]."','".$caracInmueRes["forma"]."','".$caracInmueRes["uso"]."','".$caracInmueRes["tenencia"]."')";
-                $link->query($caraInmueSQL);
-                $idcaraInmue2 = $link->insert_id;
-            //PUERTAS
-                $puertSQL = "SELECT * FROM temp_puertas where id=".$tempUserRes["temp_puertas"]."";
-                $resPuert = $link->query($puertSQL);
-                $puertRes = $resPuert->fetch_array();
-                $puertasSQL = "INSERT INTO puertas(entamborada_fina,ent_econo,madera_cepi,hierro)value('".$puertRes['entamborada_fina']."','".$puertRes['ent_econo']."','".$puertRes['madera_cepi']."','".$puertRes['hierro']."')";
-                $link->query($puertasSQL);
-                $idPuertas = $link->insert_id;
-            //ESTADO DE CONSERVACION
-                $estaConserSQL = "SELECT * FROM temp_estado_conservacion where id=".$tempUserRes["temp_estado_conservacion"]."";
-                $resEstaConser = $link->query($estaConserSQL);
-                $estaConserRes = $resEstaConser->fetch_array();
-                $conservSQL = "INSERT INTO estado_conservacion(ano_construccion,ano_refaccion,edad_efectiva,nro_planta,nro_vivienda)value('".$estaConserRes["ano_construccion"]."','".$estaConserRes["ano_refaccion"]."','".$estaConserRes["edad_efectiva"]."','".$estaConserRes["nro_planta"]."','".$estaConserRes["nro_vivienda"]."')";
-                $link->query($conservSQL);
-                $idConserv = $link->insert_id;
-            //PIEZAS SANITARIAS
-                $piezSantSQL = "SELECT * FROM temp_piezas_sanitarias where id=".$tempUserRes["temp_piezas_sanitarias"]."";
-                $resPiezSant = $link->query($piezSantSQL);
-                $piezSantRes = $resPiezSant->fetch_array();
-                $piezSQL = "INSERT INTO piezas_sanitarias(porcelana_fina,porcelana_econ,banera,calentador,wc,bidet,lavamanos,ducha,urinario)value('".$piezSantRes["porcelana_fina"]."','".$piezSantRes["porcelana_econ"]."','".$piezSantRes["banera"]."','".$piezSantRes["calentador"]."','".$piezSantRes["wc"]."','".$piezSantRes["bidet"]."','".$piezSantRes["lavamanos"]."','".$piezSantRes["ducha"]."','".$piezSantRes["urinario"]."')";
-                $link->query($piezSQL);
-                $idPiezSant = $link->insert_id;
-            //COMPLEMENTOS
-                $compleSQL ="SELECT * FROM temp_complementos where id=".$tempUserRes["temp_complementos"]."";
-                $resComple = $link->query($compleSQL);
-                $compleRes = $resComple->fetch_array();
-                $complementSQL ="INSERT INTO complementos(ascensor,aire_acond,rejas,closets,porcelana)value('".$compleRes["ascensor"]."','".$compleRes["aire_acond"]."','".$compleRes["rejas"]."','".$compleRes["closets"]."','".$compleRes["porcelana"]."')";
-                $link->query($complementSQL);
-                $idComplement = $link->insert_id;
-            //AMBIENTES
-                $ambienSQL = "SELECT * FROM temp_ambientes where id=".$tempUserRes["temp_ambientes"]."";
-                $resAmbiente = $link->query($ambienSQL);
-                $ambientesRes = $resAmbiente->fetch_array();
-                $ambientSQL = "INSERT INTO ambientes(dormitorio,comedor,sala,banos,cocina,servicio,oficina,garaje,estacionamiento)value('".$ambientesRes["dormitorio"]."','".$ambientesRes["comedor"]."','".$ambientesRes["sala"]."','".$ambientesRes["banos"]."','".$ambientesRes["cocina"]."','".$ambientesRes["servicio"]."','".$ambientesRes["oficina"]."','".$ambientesRes["garaje"]."','".$ambientesRes["estacionamiento"]."')";
-                $link->query($ambientSQL);
-                $idAmbientes = $link->insert_id;
-            //CARACTERISTICAS DE LA CONSTRUCCION
-                $caracConstSQL = "SELECT * FROM temp_caraconst where id=".$tempUserRes["temp_caraconst"]."";
-                $resCaraConst = $link->query($caracConstSQL);
-                $caraConstRes = $resCaraConst->fetch_array();
-                $SQLcaraConst = "INSERT INTO caracteristicas_construccion(destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,ventanas,insta_electricas,observ,Regimen,fk_puertas,fk_estadoConserv,fk_piezasSanitarias,fk_complementos,fk_ambientes)value('".$caraConstRes["destino"]."','".$caraConstRes["estructura"]."','".$caraConstRes["paredes_tipo"]."','".$caraConstRes["paredes_acabado"]."','".$caraConstRes["pintura"]."','".$caraConstRes["techo"]."','".$caraConstRes["pisos"]."','".$caraConstRes["ventanas"]."','".$caraConstRes["insta_electricas"]."','".$caraConstRes["observ"]."','".$caraConstRes["Regimen"]."',".$idPuertas.",".$idConserv.",".$idPiezSant.",".$idComplement.",".$idAmbientes.")";
-                $link->query($SQLcaraConst);
-                $idCaraConst = $link->insert_id;
-            //PROTOCOLIZACION DEL INMUEBLE
-                $protoSQL = "SELECT * FROM temp_datos_protocolizacion where id=".$tempUserRes["temp_datos_protocolizacion"]."";
-                $resProto = $link->query($protoSQL);
-                $protoRes = $resProto->fetch_array();
-                $protSQL = "INSERT INTO datos_protocolizacion(documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble)value('".$protoRes["documento"]."','".$protoRes["direccion"]."','".$protoRes["numero"]."','".$protoRes["tomo"]."','".$protoRes["folio"]."','".$protoRes["protocolo"]."','".$protoRes["trimestre"]."','".$protoRes["fecha"]."','".$protoRes["valor_inmueble"]."')";
-                $link->query($protSQL);
-                $idProt = $link->insert_id;
-            //SERVICIOS
-                $serviciosSQL ="SELECT * FROM temp_servicios_inmue where id=".$tempUserRes["temp_servicios_inmue"]."";
-                $resServicios = $link->query($serviciosSQL);
-                $serviciosRes = $resServicios->fetch_array();
-                $servSQL = "INSERT INTO servicios_inmue(acued,acuedRural,aguasSubter,aguasServ,pavimentoFlex,pavimentoRig,viaEngran,acera,alumbradoPub,aseo,transportePublic,pozoSept,electriResi,electriIndus,lineaTelef)VALUE('".$serviciosRes["acued"]."','".$serviciosRes["acuedRural"]."','".$serviciosRes["aguasSubter"]."','".$serviciosRes["aguasServ"]."','".$serviciosRes["pavimentoFlex"]."','".$serviciosRes["pavimentoRig"]."','".$serviciosRes["viaEngran"]."','".$serviciosRes["acera"]."','".$serviciosRes["alumbradoPub"]."','".$serviciosRes["aseo"]."','".$serviciosRes["transportePublic"]."','".$serviciosRes["pozoSept"]."','".$serviciosRes["electriResi"]."','".$serviciosRes["electriIndus"]."','".$serviciosRes["lineaTelef"]."')";
-                $link->query($servSQL);
-                $idServ = $link->insert_id;
-            //LINDEROS SEGUN DOC
-                $lindDocSQL = "SELECT * FROM temp_linderos_documento where id=".$tempUserRes["temp_linderos_documento"]."";
-                $resLindDoc = $link->query($lindDocSQL);
-                $lindDocRes = $resLindDoc->fetch_array();
-                $lindDocumSQL = "INSERT INTO linderos_documento(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$lindDocRes["norte"]."','".$lindDocRes["noreste"]."','".$lindDocRes["sur"]."','".$lindDocRes["sureste"]."','".$lindDocRes["este"]."','".$lindDocRes["suroeste"]."','".$lindDocRes["oeste"]."','".$lindDocRes["noroeste"]."','".$lindDocRes["alind_n"]."','".$lindDocRes["alind_s"]."','".$lindDocRes["alind_e"]."','".$lindDocRes["alind_o"]."','".$lindDocRes["areaTotal"]."','".$lindDocRes["uniAreaT"]."','".$lindDocRes["nivelesConst"]."','".$lindDocRes["uniAreaC"]."','".$lindDocRes["areaConst"]."','".$lindDocRes["uniNorte"]."','".$lindDocRes["uniSur"]."','".$lindDocRes["uniEste"]."','".$lindDocRes["uniOeste"]."')";
-                $link->query($lindDocumSQL);
-                $idLinDocum = $link->insert_id;
-            //LINDEROS SEGUN INSPEC
-                $lindGenSQL = "SELECT * FROM temp_linderos_general where id=".$tempUserRes["temp_linderos_general"]."";
-                $resLindGen = $link->query($lindGenSQL);
-                $lindGenRes = $resLindGen->fetch_array();
-                $lindGeneralSQL = "INSERT INTO linderos_general(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$lindGenRes["norte"]."','".$lindGenRes["noreste"]."','".$lindGenRes["sur"]."','".$lindGenRes["sureste"]."','".$lindGenRes["este"]."','".$lindGenRes["suroeste"]."','".$lindGenRes["oeste"]."','".$lindGenRes["noroeste"]."','".$lindGenRes["alind_n"]."','".$lindGenRes["alind_s"]."','".$lindGenRes["alind_e"]."','".$lindGenRes["alind_o"]."','".$lindGenRes["areaTotal"]."','".$lindGenRes["uniAreaT"]."','".$lindGenRes["nivelesConst"]."','".$lindGenRes["uniAreaC"]."','".$lindGenRes["areaConst"]."','".$lindGenRes["uniNorte"]."','".$lindGenRes["uniSur"]."','".$lindGenRes["uniEste"]."','".$lindGenRes["uniOeste"]."')";
-                $link->query($lindGeneralSQL);
-                $idLinGeneral = $link->insert_id;
-            //LINDEROS POSIBLE VENTA
-                $lindPosSQL = "SELECT * FROM temp_linderos_posible_venta where id=".$tempUserRes["temp_linderos_posible_venta"]."";
-                $resLindPos = $link->query($lindPosSQL);
-                $lindPosRes = $resLindPos->fetch_array();
-                $lindVentaSQL = "INSERT INTO linderos_posible_venta(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$lindPosRes["norte"]."','".$lindPosRes["noreste"]."','".$lindPosRes["sur"]."','".$lindPosRes["sureste"]."','".$lindPosRes["este"]."','".$lindPosRes["suroeste"]."','".$lindPosRes["oeste"]."','".$lindPosRes["noroeste"]."','".$lindPosRes["alind_n"]."','".$lindPosRes["alind_s"]."','".$lindPosRes["alind_e"]."','".$lindPosRes["alind_o"]."','".$lindPosRes["areaTotal"]."','".$lindPosRes["uniAreaT"]."','".$lindPosRes["nivelesConst"]."','".$lindPosRes["uniAreaC"]."','".$lindPosRes["areaConst"]."','".$lindPosRes["uniNorte"]."','".$lindPosRes["uniSur"]."','".$lindPosRes["uniEste"]."','".$lindPosRes["uniOeste"]."')";
-                $link->query($lindVentaSQL);
-                $idLinVenta = $link->insert_id;
-            //INMUEBLE 
-                $inmuebleSQL = "INSERT INTO inmueble(direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_servicios)value('".$inmueRes["direccion"]."','".$inmueRes["parroquia"]."','".$inmueRes["sector"]."','".$inmueRes["ambito"]."',".$idCaraConst.",".$idProt.",".$idcaraInmue2.",".$idLinDocum.",".$idLinGeneral.",".$idLinVenta.",".$idServ.")";
-                $link->query($inmuebleSQL);
-                $idInmueble = $link->insert_id;
-            //EXPEDIENTE
-                $expSQL = "SELECT * FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
-                $resExpe = $link->query($expSQL);
-                $expeRes = $resExpe->fetch_array();
-                $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$userRes["id"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','".$expeRes["condicion"]."','".$expeRes["valorInmue"]."')";
-                $link->query($expedientSQL);
-                $idExpedient = $link->insert_id;
-            //FACTURA
-                $factSQL = "SELECT * FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
-                $resFact = $link->query($factSQL);
-                $factRes = $resFact->fetch_array();
-                $facturaSQL = "INSERT INTO factura(monto,n_factura,fecha,n_recibo)value('".$factRes["monto"]."','".$factRes["n_factura"]."','".$factRes["fecha"]."','".$factRes["n_recibo"]."')";
-                $link->query($facturaSQL);
-                $idFactura = $link->insert_id;
-            echo'
-            <input type="hidden" value="'.$factRes["monto"].'" id="montoFact"/>
-            <input type="hidden" value="'.$factRes["fecha"].'" id="fechFact"/>
-            <input type="hidden" value="'.$idInmueble.'" id="idInmueble"/>
-            <input type="hidden" value="'.$idProp2.'" id="idProp"/>
-            <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
-            <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
-            <input type="hidden" value="'.$expeRes["no_expediente"].'" id="nuExp"/>
-            ';
-            //ELIMINAR SQL DE TEMP
-                //PROPIETARIO
-                    $eliPropSQL ="DELETE FROM temp_propietarios where id=".$tempUserRes["temp_propietarios"]."";
-                    $link->query($eliPropSQL);
-                //CARACTERISTICAS DEL INMUEBLE
-                    $elimCaracInmueSQL = "DELETE FROM temp_carainmue where id=".$tempUserRes["temp_carainmue"]."";
-                    $link->query($elimCaracInmueSQL);
-                //PUERTAS
-                    $elimPuertasSQL = "DELETE FROM temp_puertas where id=".$tempUserRes["temp_puertas"]."";
-                    $link->query($elimPuertasSQL);
-                //ESTADO CONSERVACION
-                    $elimConservSQL = "DELETE FROM temp_estado_conservacion where id=".$tempUserRes["temp_estado_conservacion"]."";
-                    $link->query($elimConservSQL);
-                //PIEZAS SANITARIAS
-                    $elimPiezSan = "DELETE FROM temp_piezas_sanitarias where id=".$tempUserRes["temp_piezas_sanitarias"]."";
-                    $link->query($elimPiezSan);
-                //COMPLEMENTOS
-                    $elimComple = "DELETE FROM temp_complementos where id=".$tempUserRes["temp_complementos"]."";
-                    $link->query($elimComple);
-                //AMBIENTES 
-                    $elimAmbientSQL = "DELETE FROM temp_ambientes where id=".$tempUserRes["temp_ambientes"]."";
-                    $link->query($elimAmbientSQL);
-                //CARACTERISTICAS DE LA CONSTRUCCION
-                    $elimCaracConstSQL = "DELETE FROM temp_caraconst where id=".$tempUserRes["temp_caraconst"]."";
-                    $link->query($elimCaracConstSQL);
-                //PROTOCOLIZACION DEL INMUEBLE
-                    $elimProtInmueSQL = "DELETE FROM temp_datos_protocolizacion where id=".$tempUserRes["temp_datos_protocolizacion"]."";
-                    $link->query($elimProtInmueSQL);
-                //SERVICIOS
-                    $elimServSQL = "DELETE FROM temp_servicios_inmue where id=".$tempUserRes["temp_servicios_inmue"]." ";
-                    $link->query($elimServSQL);
-                //LINDEROS SEGUN DOC
-                    $elimLindDocSQL = "DELETE FROM temp_linderos_documento where id=".$tempUserRes["temp_linderos_documento"]."";
-                    $link->query($elimLindDocSQL);
-                //LINDEROS SEGUN INSPECCION
-                    $elimLindInspSQL = "DELETE FROM temp_linderos_general where id=".$tempUserRes["temp_linderos_general"]."";
-                    $link->query($elimLindInspSQL);
-                //LINDEROS POSIBLE VENTA
-                    $elimLindPosSQL ="DELETE FROM temp_linderos_posible_venta where id=".$tempUserRes["temp_linderos_posible_venta"]."";
-                    $link->query($elimLindPosSQL);
-                //INMUEBLE
-                    $elimInmueSQL ="DELETE FROM temp_inmueble where id=".$tempUserRes["temp_inmueble"]."";
-                    $link->query($elimInmueSQL);
-                //EXPEDIENTE
-                    $elimExpSQL = "DELETE FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
-                    $link->query($elimExpSQL);
-                //FACTURA
-                    $elimFactSQL = "DELETE FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
-                    $link->query($elimFactSQL);
-                //USER
-                    $elimUserSQL = "DELETE FROM user_temp where userId=".$userRes["id"]."";
-                    $link->query($elimUserSQL);
-            echo'<input type="hidden" value="false" id="verInmV">';
-        }
-    }
-    function guardarRepConst3(){
-        include('../conexion.php');
-        $MySql = new conexion;
-        $link= $MySql->conectar();
-        session_start();
-        //USUARIO
-            $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
-            $resUser = $link->query($userSQL);
-            $userRes = $resUser->fetch_array();
-        //USUARIOS TEMPORALES
-            $tempUserSQL ="SELECT * FROM user_temp where userId=".$userRes["id"]."";
-            $resTempUser = $link->query($tempUserSQL);
-            $tempUserRes = $resTempUser->fetch_array();
-        //PROPIETARIOS TEMP
-            $propSQL ="SELECT * FROM temp_propietarios where id=".$tempUserRes["temp_propietarios"]."";
-            $resProp = $link->query($propSQL);
-            $propieRes = $resProp->fetch_array();
-        //PROPIETARIOS
-            $propSqlDe= "SELECT * FROM propietarios where cedula='".$propieRes["cedula"]."'";
-            $resPropDe = $link->query($propSqlDe);
-            $propDeRes = $resPropDe->fetch_array();
-            //BUSQUEDA PROPIETARIO
-                
-                if($propSQLRes["cedula"]==$propieRes["cedula"]){
-                    $uptPropSQl = "UPDATE propietarios SET cedula='".$propieRes["cedula"]."', rif='".$propieRes["rif"]."', nombre='".$propieRes["nombre"]."', apellido='".$propieRes["apellido"]."',telef='".$propieRes["telef"]."',dir_hab='".$propieRes["dir_hab"]."', telef_hab='".$propieRes["telef_hab"]."' where cedula='".$propieRes["cedula"]."'";
-                    $resUptProp = $link->query($uptPropSQl);
-                    $idProp2 = $propSQLRes["id"];
-                }else{
-                    $propietarioSQL ="INSERT INTO propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab)value('".$propieRes['cedula']."','".$propieRes['rif']."','".$propieRes['nombre']."','".$propieRes['apellido']."','".$propieRes['telef']."','".$propieRes['dir_hab']."','".$propieRes['telef_hab']."') ";
-                    $link->query($propietarioSQL);
-                    $idProp2 = $link->insert_id;
-                }
-        //INMUEBLE TEMP
-            $inmueSQL ="SELECT * FROM temp_inmueble where id=".$tempUserRes["temp_inmueble"]."";
-            $resInmue = $link->query($inmueSQL);
-            $inmueRes = $resInmue->fetch_array();
-        //INMUEBLE
-            $inmueDeSQL ="SELECT * FROM inmueble where direccion='".$inmueRes["direccion"]."'";
-            $resDeInmue = $link->query($inmueDeSQL);
-            $inmueDeRes = $resDeInmue->fetch_array();
-        //CARACTERISTICAS DEL INMUEBLE
-            $caracInmueSQL = "SELECT * FROM temp_carainmue where id=".$tempUserRes["temp_carainmue"]." ";
-            $resCaracInmue = $link->query($caracInmueSQL);
-            $caracInmueRes = $resCaracInmue->fetch_array();
-            $caraInmueSQL = "INSERT INTO carc_inmueble(topografia,forma,uso,tenencia)value('".$caracInmueRes["topografia"]."','".$caracInmueRes["forma"]."','".$caracInmueRes["uso"]."','".$caracInmueRes["tenencia"]."')";
-            $link->query($caraInmueSQL);
-            $idcaraInmue2 = $link->insert_id;
-        //PUERTAS
-            $puertSQL = "SELECT * FROM temp_puertas where id=".$tempUserRes["temp_puertas"]."";
-            $resPuert = $link->query($puertSQL);
-            $puertRes = $resPuert->fetch_array();
-            $puertasSQL = "INSERT INTO puertas(entamborada_fina,ent_econo,madera_cepi,hierro)value('".$puertRes['entamborada_fina']."','".$puertRes['ent_econo']."','".$puertRes['madera_cepi']."','".$puertRes['hierro']."')";
-            $link->query($puertasSQL);
-            $idPuertas = $link->insert_id;
-        //ESTADO DE CONSERVACION
-            $estaConserSQL = "SELECT * FROM temp_estado_conservacion where id=".$tempUserRes["temp_estado_conservacion"]."";
-            $resEstaConser = $link->query($estaConserSQL);
-            $estaConserRes = $resEstaConser->fetch_array();
-            $conservSQL = "INSERT INTO estado_conservacion(ano_construccion,ano_refaccion,edad_efectiva,nro_planta,nro_vivienda)value('".$estaConserRes["ano_construccion"]."','".$estaConserRes["ano_refaccion"]."','".$estaConserRes["edad_efectiva"]."','".$estaConserRes["nro_planta"]."','".$estaConserRes["nro_vivienda"]."')";
-            $link->query($conservSQL);
-            $idConserv = $link->insert_id;
-        //PIEZAS SANITARIAS
-            $piezSantSQL = "SELECT * FROM temp_piezas_sanitarias where id=".$tempUserRes["temp_piezas_sanitarias"]."";
-            $resPiezSant = $link->query($piezSantSQL);
-            $piezSantRes = $resPiezSant->fetch_array();
-            $piezSQL = "INSERT INTO piezas_sanitarias(porcelana_fina,porcelana_econ,banera,calentador,wc,bidet,lavamanos,ducha,urinario)value('".$piezSantRes["porcelana_fina"]."','".$piezSantRes["porcelana_econ"]."','".$piezSantRes["banera"]."','".$piezSantRes["calentador"]."','".$piezSantRes["wc"]."','".$piezSantRes["bidet"]."','".$piezSantRes["lavamanos"]."','".$piezSantRes["ducha"]."','".$piezSantRes["urinario"]."')";
-            $link->query($piezSQL);
-            $idPiezSant = $link->insert_id;
-        //COMPLEMENTOS
-            $compleSQL ="SELECT * FROM temp_complementos where id=".$tempUserRes["temp_complementos"]."";
-            $resComple = $link->query($compleSQL);
-            $compleRes = $resComple->fetch_array();
-            $complementSQL ="INSERT INTO complementos(ascensor,aire_acond,rejas,closets,porcelana)value('".$compleRes["ascensor"]."','".$compleRes["aire_acond"]."','".$compleRes["rejas"]."','".$compleRes["closets"]."','".$compleRes["porcelana"]."')";
-            $link->query($complementSQL);
-            $idComplement = $link->insert_id;
-        //AMBIENTES
-            $ambienSQL = "SELECT * FROM temp_ambientes where id=".$tempUserRes["temp_ambientes"]."";
-            $resAmbiente = $link->query($ambienSQL);
-            $ambientesRes = $resAmbiente->fetch_array();
-            $ambientSQL = "INSERT INTO ambientes(dormitorio,comedor,sala,banos,cocina,servicio,oficina,garaje,estacionamiento)value('".$ambientesRes["dormitorio"]."','".$ambientesRes["comedor"]."','".$ambientesRes["sala"]."','".$ambientesRes["banos"]."','".$ambientesRes["cocina"]."','".$ambientesRes["servicio"]."','".$ambientesRes["oficina"]."','".$ambientesRes["garaje"]."','".$ambientesRes["estacionamiento"]."')";
-            $link->query($ambientSQL);
-            $idAmbientes = $link->insert_id;
-        //CARACTERISTICAS DE LA CONSTRUCCION
-            $caracConstSQL = "SELECT * FROM temp_caraconst where id=".$tempUserRes["temp_caraconst"]."";
-            $resCaraConst = $link->query($caracConstSQL);
-            $caraConstRes = $resCaraConst->fetch_array();
-            $SQLcaraConst = "INSERT INTO caracteristicas_construccion(destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,ventanas,insta_electricas,observ,Regimen,fk_puertas,fk_estadoConserv,fk_piezasSanitarias,fk_complementos,fk_ambientes,fk_estadoCons)value('".$caraConstRes["destino"]."','".$caraConstRes["estructura"]."','".$caraConstRes["paredes_tipo"]."','".$caraConstRes["paredes_acabado"]."','".$caraConstRes["pintura"]."','".$caraConstRes["techo"]."','".$caraConstRes["pisos"]."','".$caraConstRes["ventanas"]."','".$caraConstRes["insta_electricas"]."','".$caraConstRes["observ"]."','".$caraConstRes["Regimen"]."',".$idPuertas.",".$idConserv.",".$idPiezSant.",".$idComplement.",".$idComplement.",".$idAmbientes.")";
-            $link->query($SQLcaraConst);
-            $idCaraConst = $link->insert_id;
-        //PROTOCOLIZACION DEL INMUEBLE
-            $protoSQL = "SELECT * FROM temp_datos_protocolizacion where id=".$tempUserRes["temp_datos_protocolizacion"]."";
-            $resProto = $link->query($protoSQL);
-            $protoRes = $resProto->fetch_array();
-            $protSQL = "INSERT INTO datos_protocolizacion(documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble)value('".$protoRes["documento"]."','".$protoRes["direccion"]."','".$protoRes["numero"]."','".$protoRes["tomo"]."','".$protoRes["folio"]."','".$protoRes["protocolo"]."','".$protoRes["trimestre"]."','".$protoRes["fecha"]."','".$protoRes["valor_inmueble"]."')";
-            $link->query($protSQL);
-            $idProt = $link->insert_id;
-        //SERVICIOS
-            $serviciosSQL ="SELECT * FROM temp_servicios_inmue where id=".$tempUserRes["temp_servicios_inmue"]."";
-            $resServicios = $link->query($serviciosSQL);
-            $serviciosRes = $resServicios->fetch_array();
-            $servSQL = "INSERT INTO servicios_inmue(acued,acuedRural,aguasSubter,aguasServ,pavimentoFlex,pavimentoRig,viaEngran,acera,alumbradoPub,aseo,transportePublic,pozoSept,electriResi,electriIndus,lineaTelef)VALUE('".$serviciosRes["acued"]."','".$serviciosRes["acuedRural"]."','".$serviciosRes["aguasSubter"]."','".$serviciosRes["aguasServ"]."','".$serviciosRes["pavimentoFlex"]."','".$serviciosRes["pavimentoRig"]."','".$serviciosRes["viaEngran"]."','".$serviciosRes["acera"]."','".$serviciosRes["alumbradoPub"]."','".$serviciosRes["aseo"]."','".$serviciosRes["transportePublic"]."','".$serviciosRes["pozoSept"]."','".$serviciosRes["electriResi"]."','".$serviciosRes["electriIndus"]."','".$serviciosRes["lineaTelef"]."')";
-            $link->query($servSQL);
-            $idServ = $link->insert_id;
-        //LINDEROS SEGUN DOC
-            $lindDocSQL = "SELECT * FROM temp_linderos_documento where id=".$tempUserRes["temp_linderos_documento"]."";
-            $resLindDoc = $link->query($lindDocSQL);
-            $lindDocRes = $resLindDoc->fetch_array();
-            $lindDocumSQL = "INSERT INTO linderos_documento(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$lindDocRes["norte"]."','".$lindDocRes["noreste"]."','".$lindDocRes["sur"]."','".$lindDocRes["sureste"]."','".$lindDocRes["este"]."','".$lindDocRes["suroeste"]."','".$lindDocRes["oeste"]."','".$lindDocRes["noroeste"]."','".$lindDocRes["alind_n"]."','".$lindDocRes["alind_s"]."','".$lindDocRes["alind_e"]."','".$lindDocRes["alind_o"]."','".$lindDocRes["areaTotal"]."','".$lindDocRes["uniAreaT"]."','".$lindDocRes["nivelesConst"]."','".$lindDocRes["uniAreaC"]."','".$lindDocRes["areaConst"]."','".$lindDocRes["uniNorte"]."','".$lindDocRes["uniSur"]."','".$lindDocRes["uniEste"]."','".$lindDocRes["uniOeste"]."')";
-            $link->query($lindDocumSQL);
-            $idLinDocum = $link->insert_id;
-        //LINDEROS SEGUN INSPEC
-            $lindGenSQL = "SELECT * FROM temp_linderos_general where id=".$tempUserRes["temp_linderos_general"]."";
-            $resLindGen = $link->query($lindGenSQL);
-            $lindGenRes = $resLindGen->fetch_array();
-            $lindGeneralSQL = "INSERT INTO linderos_general(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$lindGenRes["norte"]."','".$lindGenRes["noreste"]."','".$lindGenRes["sur"]."','".$lindGenRes["sureste"]."','".$lindGenRes["este"]."','".$lindGenRes["suroeste"]."','".$lindGenRes["oeste"]."','".$lindGenRes["noroeste"]."','".$lindGenRes["alind_n"]."','".$lindGenRes["alind_s"]."','".$lindGenRes["alind_e"]."','".$lindGenRes["alind_o"]."','".$lindGenRes["areaTotal"]."','".$lindGenRes["uniAreaT"]."','".$lindGenRes["nivelesConst"]."','".$lindGenRes["uniAreaC"]."','".$lindGenRes["areaConst"]."','".$lindGenRes["uniNorte"]."','".$lindGenRes["uniSur"]."','".$lindGenRes["uniEste"]."','".$lindGenRes["uniOeste"]."')";
-            $link->query($lindGeneralSQL);
-            $idLinGeneral = $link->insert_id;
-        //LINDEROS POSIBLE VENTA
-            $lindPosSQL = "SELECT * FROM temp_linderos_posible_venta where id=".$tempUserRes["temp_linderos_posible_venta"]."";
-            $resLindPos = $link->query($lindPosSQL);
-            $lindPosRes = $resLindPos->fetch_array();
-            $lindVentaSQL = "INSERT INTO linderos_posible_venta(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$lindPosRes["norte"]."','".$lindPosRes["noreste"]."','".$lindPosRes["sur"]."','".$lindPosRes["sureste"]."','".$lindPosRes["este"]."','".$lindPosRes["suroeste"]."','".$lindPosRes["oeste"]."','".$lindPosRes["noroeste"]."','".$lindPosRes["alind_n"]."','".$lindPosRes["alind_s"]."','".$lindPosRes["alind_e"]."','".$lindPosRes["alind_o"]."','".$lindPosRes["areaTotal"]."','".$lindPosRes["uniAreaT"]."','".$lindPosRes["nivelesConst"]."','".$lindPosRes["uniAreaC"]."','".$lindPosRes["areaConst"]."','".$lindPosRes["uniNorte"]."','".$lindPosRes["uniSur"]."','".$lindPosRes["uniEste"]."','".$lindPosRes["uniOeste"]."')";
-            $link->query($lindVentaSQL);
-            $idLinVenta = $link->insert_id;
-        //INMUEBLE 
-            $inmuebleSQL = "INSERT INTO inmueble(direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_servicios)value('".$inmueRes["direccion"]."','".$inmueRes["parroquia"]."','".$inmueRes["sector"]."','".$inmueRes["ambito"]."',".$idCaraConst.",".$idProt.",".$idcaraInmue2.",".$idLinDocum.",".$idLinGeneral.",".$idLinVenta.",".$idServ.")";
-            $link->query($inmuebleSQL);
-            $idInmueble = $link->insert_id;
-        //EXPEDIENTE
-            $expSQL = "SELECT * FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
-            $resExpe = $link->query($expSQL);
-            $expeRes = $resExpe->fetch_array();
-            $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$userRes["id"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','".$expeRes["condicion"]."','".$expeRes["valorInmue"]."')";
-            $link->query($expedientSQL);
-            $idExpedient = $link->insert_id;
-        //FACTURA
-            $factSQL = "SELECT * FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
-            $resFact = $link->query($factSQL);
-            $factRes = $resFact->fetch_array();
-            $facturaSQL = "INSERT INTO factura(monto,n_factura,fecha,n_recibo)value('".$factRes["monto"]."','".$factRes["n_factura"]."','".$factRes["fecha"]."','".$factRes["n_recibo"]."')";
-            $link->query($facturaSQL);
-            $idFactura = $link->insert_id;
                 echo'
                 <input type="hidden" value="'.$factRes["monto"].'" id="montoFact"/>
                 <input type="hidden" value="'.$factRes["fecha"].'" id="fechFact"/>
@@ -3469,7 +3291,213 @@ class constancias{
                     //USER
                         $elimUserSQL = "DELETE FROM user_temp where userId=".$userRes["id"]."";
                         $link->query($elimUserSQL);
-    }
+                echo'<input type="hidden" value="false" id="verInmV">';
+            }
+        }
+        function guardarRepConst3(){
+            include('../conexion.php');
+            $MySql = new conexion;
+            $link= $MySql->conectar();
+            session_start();
+            //USUARIO
+                $userSQL = "SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+                $resUser = $link->query($userSQL);
+                $userRes = $resUser->fetch_array();
+            //USUARIOS TEMPORALES
+                $tempUserSQL ="SELECT * FROM user_temp where userId=".$userRes["id"]."";
+                $resTempUser = $link->query($tempUserSQL);
+                $tempUserRes = $resTempUser->fetch_array();
+            //PROPIETARIOS TEMP
+                $propSQL ="SELECT * FROM temp_propietarios where id=".$tempUserRes["temp_propietarios"]."";
+                $resProp = $link->query($propSQL);
+                $propieRes = $resProp->fetch_array();
+            //PROPIETARIOS
+                $propSqlDe= "SELECT * FROM propietarios where cedula='".$propieRes["cedula"]."'";
+                $resPropDe = $link->query($propSqlDe);
+                $propDeRes = $resPropDe->fetch_array();
+                //BUSQUEDA PROPIETARIO
+                    
+                    if($propSQLRes["cedula"]==$propieRes["cedula"]){
+                        $uptPropSQl = "UPDATE propietarios SET cedula='".$propieRes["cedula"]."', rif='".$propieRes["rif"]."', nombre='".$propieRes["nombre"]."', apellido='".$propieRes["apellido"]."',telef='".$propieRes["telef"]."',dir_hab='".$propieRes["dir_hab"]."', telef_hab='".$propieRes["telef_hab"]."' where cedula='".$propieRes["cedula"]."'";
+                        $resUptProp = $link->query($uptPropSQl);
+                        $idProp2 = $propSQLRes["id"];
+                    }else{
+                        $propietarioSQL ="INSERT INTO propietarios(cedula,rif,nombre,apellido,telef,dir_hab,telef_hab)value('".$propieRes['cedula']."','".$propieRes['rif']."','".$propieRes['nombre']."','".$propieRes['apellido']."','".$propieRes['telef']."','".$propieRes['dir_hab']."','".$propieRes['telef_hab']."') ";
+                        $link->query($propietarioSQL);
+                        $idProp2 = $link->insert_id;
+                    }
+            //INMUEBLE TEMP
+                $inmueSQL ="SELECT * FROM temp_inmueble where id=".$tempUserRes["temp_inmueble"]."";
+                $resInmue = $link->query($inmueSQL);
+                $inmueRes = $resInmue->fetch_array();
+            //INMUEBLE
+                $inmueDeSQL ="SELECT * FROM inmueble where direccion='".$inmueRes["direccion"]."'";
+                $resDeInmue = $link->query($inmueDeSQL);
+                $inmueDeRes = $resDeInmue->fetch_array();
+            //CARACTERISTICAS DEL INMUEBLE
+                $caracInmueSQL = "SELECT * FROM temp_carainmue where id=".$tempUserRes["temp_carainmue"]." ";
+                $resCaracInmue = $link->query($caracInmueSQL);
+                $caracInmueRes = $resCaracInmue->fetch_array();
+                $caraInmueSQL = "INSERT INTO carc_inmueble(topografia,forma,uso,tenencia)value('".$caracInmueRes["topografia"]."','".$caracInmueRes["forma"]."','".$caracInmueRes["uso"]."','".$caracInmueRes["tenencia"]."')";
+                $link->query($caraInmueSQL);
+                $idcaraInmue2 = $link->insert_id;
+            //PUERTAS
+                $puertSQL = "SELECT * FROM temp_puertas where id=".$tempUserRes["temp_puertas"]."";
+                $resPuert = $link->query($puertSQL);
+                $puertRes = $resPuert->fetch_array();
+                $puertasSQL = "INSERT INTO puertas(entamborada_fina,ent_econo,madera_cepi,hierro)value('".$puertRes['entamborada_fina']."','".$puertRes['ent_econo']."','".$puertRes['madera_cepi']."','".$puertRes['hierro']."')";
+                $link->query($puertasSQL);
+                $idPuertas = $link->insert_id;
+            //ESTADO DE CONSERVACION
+                $estaConserSQL = "SELECT * FROM temp_estado_conservacion where id=".$tempUserRes["temp_estado_conservacion"]."";
+                $resEstaConser = $link->query($estaConserSQL);
+                $estaConserRes = $resEstaConser->fetch_array();
+                $conservSQL = "INSERT INTO estado_conservacion(ano_construccion,ano_refaccion,edad_efectiva,nro_planta,nro_vivienda)value('".$estaConserRes["ano_construccion"]."','".$estaConserRes["ano_refaccion"]."','".$estaConserRes["edad_efectiva"]."','".$estaConserRes["nro_planta"]."','".$estaConserRes["nro_vivienda"]."')";
+                $link->query($conservSQL);
+                $idConserv = $link->insert_id;
+            //PIEZAS SANITARIAS
+                $piezSantSQL = "SELECT * FROM temp_piezas_sanitarias where id=".$tempUserRes["temp_piezas_sanitarias"]."";
+                $resPiezSant = $link->query($piezSantSQL);
+                $piezSantRes = $resPiezSant->fetch_array();
+                $piezSQL = "INSERT INTO piezas_sanitarias(porcelana_fina,porcelana_econ,banera,calentador,wc,bidet,lavamanos,ducha,urinario)value('".$piezSantRes["porcelana_fina"]."','".$piezSantRes["porcelana_econ"]."','".$piezSantRes["banera"]."','".$piezSantRes["calentador"]."','".$piezSantRes["wc"]."','".$piezSantRes["bidet"]."','".$piezSantRes["lavamanos"]."','".$piezSantRes["ducha"]."','".$piezSantRes["urinario"]."')";
+                $link->query($piezSQL);
+                $idPiezSant = $link->insert_id;
+            //COMPLEMENTOS
+                $compleSQL ="SELECT * FROM temp_complementos where id=".$tempUserRes["temp_complementos"]."";
+                $resComple = $link->query($compleSQL);
+                $compleRes = $resComple->fetch_array();
+                $complementSQL ="INSERT INTO complementos(ascensor,aire_acond,rejas,closets,porcelana)value('".$compleRes["ascensor"]."','".$compleRes["aire_acond"]."','".$compleRes["rejas"]."','".$compleRes["closets"]."','".$compleRes["porcelana"]."')";
+                $link->query($complementSQL);
+                $idComplement = $link->insert_id;
+            //AMBIENTES
+                $ambienSQL = "SELECT * FROM temp_ambientes where id=".$tempUserRes["temp_ambientes"]."";
+                $resAmbiente = $link->query($ambienSQL);
+                $ambientesRes = $resAmbiente->fetch_array();
+                $ambientSQL = "INSERT INTO ambientes(dormitorio,comedor,sala,banos,cocina,servicio,oficina,garaje,estacionamiento)value('".$ambientesRes["dormitorio"]."','".$ambientesRes["comedor"]."','".$ambientesRes["sala"]."','".$ambientesRes["banos"]."','".$ambientesRes["cocina"]."','".$ambientesRes["servicio"]."','".$ambientesRes["oficina"]."','".$ambientesRes["garaje"]."','".$ambientesRes["estacionamiento"]."')";
+                $link->query($ambientSQL);
+                $idAmbientes = $link->insert_id;
+            //CARACTERISTICAS DE LA CONSTRUCCION
+                $caracConstSQL = "SELECT * FROM temp_caraconst where id=".$tempUserRes["temp_caraconst"]."";
+                $resCaraConst = $link->query($caracConstSQL);
+                $caraConstRes = $resCaraConst->fetch_array();
+                $SQLcaraConst = "INSERT INTO caracteristicas_construccion(destino,estructura,paredes_tipo,paredes_acabado,pintura,techo,pisos,ventanas,insta_electricas,observ,Regimen,fk_puertas,fk_estadoConserv,fk_piezasSanitarias,fk_complementos,fk_ambientes,fk_estadoCons)value('".$caraConstRes["destino"]."','".$caraConstRes["estructura"]."','".$caraConstRes["paredes_tipo"]."','".$caraConstRes["paredes_acabado"]."','".$caraConstRes["pintura"]."','".$caraConstRes["techo"]."','".$caraConstRes["pisos"]."','".$caraConstRes["ventanas"]."','".$caraConstRes["insta_electricas"]."','".$caraConstRes["observ"]."','".$caraConstRes["Regimen"]."',".$idPuertas.",".$idConserv.",".$idPiezSant.",".$idComplement.",".$idComplement.",".$idAmbientes.")";
+                $link->query($SQLcaraConst);
+                $idCaraConst = $link->insert_id;
+            //PROTOCOLIZACION DEL INMUEBLE
+                $protoSQL = "SELECT * FROM temp_datos_protocolizacion where id=".$tempUserRes["temp_datos_protocolizacion"]."";
+                $resProto = $link->query($protoSQL);
+                $protoRes = $resProto->fetch_array();
+                $protSQL = "INSERT INTO datos_protocolizacion(documento,direccion,numero,tomo,folio,protocolo,trimestre,fecha,valor_inmueble)value('".$protoRes["documento"]."','".$protoRes["direccion"]."','".$protoRes["numero"]."','".$protoRes["tomo"]."','".$protoRes["folio"]."','".$protoRes["protocolo"]."','".$protoRes["trimestre"]."','".$protoRes["fecha"]."','".$protoRes["valor_inmueble"]."')";
+                $link->query($protSQL);
+                $idProt = $link->insert_id;
+            //SERVICIOS
+                $serviciosSQL ="SELECT * FROM temp_servicios_inmue where id=".$tempUserRes["temp_servicios_inmue"]."";
+                $resServicios = $link->query($serviciosSQL);
+                $serviciosRes = $resServicios->fetch_array();
+                $servSQL = "INSERT INTO servicios_inmue(acued,acuedRural,aguasSubter,aguasServ,pavimentoFlex,pavimentoRig,viaEngran,acera,alumbradoPub,aseo,transportePublic,pozoSept,electriResi,electriIndus,lineaTelef)VALUE('".$serviciosRes["acued"]."','".$serviciosRes["acuedRural"]."','".$serviciosRes["aguasSubter"]."','".$serviciosRes["aguasServ"]."','".$serviciosRes["pavimentoFlex"]."','".$serviciosRes["pavimentoRig"]."','".$serviciosRes["viaEngran"]."','".$serviciosRes["acera"]."','".$serviciosRes["alumbradoPub"]."','".$serviciosRes["aseo"]."','".$serviciosRes["transportePublic"]."','".$serviciosRes["pozoSept"]."','".$serviciosRes["electriResi"]."','".$serviciosRes["electriIndus"]."','".$serviciosRes["lineaTelef"]."')";
+                $link->query($servSQL);
+                $idServ = $link->insert_id;
+            //LINDEROS SEGUN DOC
+                $lindDocSQL = "SELECT * FROM temp_linderos_documento where id=".$tempUserRes["temp_linderos_documento"]."";
+                $resLindDoc = $link->query($lindDocSQL);
+                $lindDocRes = $resLindDoc->fetch_array();
+                $lindDocumSQL = "INSERT INTO linderos_documento(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$lindDocRes["norte"]."','".$lindDocRes["noreste"]."','".$lindDocRes["sur"]."','".$lindDocRes["sureste"]."','".$lindDocRes["este"]."','".$lindDocRes["suroeste"]."','".$lindDocRes["oeste"]."','".$lindDocRes["noroeste"]."','".$lindDocRes["alind_n"]."','".$lindDocRes["alind_s"]."','".$lindDocRes["alind_e"]."','".$lindDocRes["alind_o"]."','".$lindDocRes["areaTotal"]."','".$lindDocRes["uniAreaT"]."','".$lindDocRes["nivelesConst"]."','".$lindDocRes["uniAreaC"]."','".$lindDocRes["areaConst"]."','".$lindDocRes["uniNorte"]."','".$lindDocRes["uniSur"]."','".$lindDocRes["uniEste"]."','".$lindDocRes["uniOeste"]."')";
+                $link->query($lindDocumSQL);
+                $idLinDocum = $link->insert_id;
+            //LINDEROS SEGUN INSPEC
+                $lindGenSQL = "SELECT * FROM temp_linderos_general where id=".$tempUserRes["temp_linderos_general"]."";
+                $resLindGen = $link->query($lindGenSQL);
+                $lindGenRes = $resLindGen->fetch_array();
+                $lindGeneralSQL = "INSERT INTO linderos_general(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$lindGenRes["norte"]."','".$lindGenRes["noreste"]."','".$lindGenRes["sur"]."','".$lindGenRes["sureste"]."','".$lindGenRes["este"]."','".$lindGenRes["suroeste"]."','".$lindGenRes["oeste"]."','".$lindGenRes["noroeste"]."','".$lindGenRes["alind_n"]."','".$lindGenRes["alind_s"]."','".$lindGenRes["alind_e"]."','".$lindGenRes["alind_o"]."','".$lindGenRes["areaTotal"]."','".$lindGenRes["uniAreaT"]."','".$lindGenRes["nivelesConst"]."','".$lindGenRes["uniAreaC"]."','".$lindGenRes["areaConst"]."','".$lindGenRes["uniNorte"]."','".$lindGenRes["uniSur"]."','".$lindGenRes["uniEste"]."','".$lindGenRes["uniOeste"]."')";
+                $link->query($lindGeneralSQL);
+                $idLinGeneral = $link->insert_id;
+            //LINDEROS POSIBLE VENTA
+                $lindPosSQL = "SELECT * FROM temp_linderos_posible_venta where id=".$tempUserRes["temp_linderos_posible_venta"]."";
+                $resLindPos = $link->query($lindPosSQL);
+                $lindPosRes = $resLindPos->fetch_array();
+                $lindVentaSQL = "INSERT INTO linderos_posible_venta(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$lindPosRes["norte"]."','".$lindPosRes["noreste"]."','".$lindPosRes["sur"]."','".$lindPosRes["sureste"]."','".$lindPosRes["este"]."','".$lindPosRes["suroeste"]."','".$lindPosRes["oeste"]."','".$lindPosRes["noroeste"]."','".$lindPosRes["alind_n"]."','".$lindPosRes["alind_s"]."','".$lindPosRes["alind_e"]."','".$lindPosRes["alind_o"]."','".$lindPosRes["areaTotal"]."','".$lindPosRes["uniAreaT"]."','".$lindPosRes["nivelesConst"]."','".$lindPosRes["uniAreaC"]."','".$lindPosRes["areaConst"]."','".$lindPosRes["uniNorte"]."','".$lindPosRes["uniSur"]."','".$lindPosRes["uniEste"]."','".$lindPosRes["uniOeste"]."')";
+                $link->query($lindVentaSQL);
+                $idLinVenta = $link->insert_id;
+            //INMUEBLE 
+                $inmuebleSQL = "INSERT INTO inmueble(direccion,parroquia,sector,ambito,fk_carac_construccion,fk_protocolizacion,fk_carac_inmuebles,fk_lind_documento,fk_lind_general,fk_lind_pos_venta,fk_servicios)value('".$inmueRes["direccion"]."','".$inmueRes["parroquia"]."','".$inmueRes["sector"]."','".$inmueRes["ambito"]."',".$idCaraConst.",".$idProt.",".$idcaraInmue2.",".$idLinDocum.",".$idLinGeneral.",".$idLinVenta.",".$idServ.")";
+                $link->query($inmuebleSQL);
+                $idInmueble = $link->insert_id;
+            //EXPEDIENTE
+                $expSQL = "SELECT * FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
+                $resExpe = $link->query($expSQL);
+                $expeRes = $resExpe->fetch_array();
+                $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$userRes["id"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','".$expeRes["condicion"]."','".$expeRes["valorInmue"]."')";
+                $link->query($expedientSQL);
+                $idExpedient = $link->insert_id;
+            //FACTURA
+                $factSQL = "SELECT * FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
+                $resFact = $link->query($factSQL);
+                $factRes = $resFact->fetch_array();
+                $facturaSQL = "INSERT INTO factura(monto,n_factura,fecha,n_recibo)value('".$factRes["monto"]."','".$factRes["n_factura"]."','".$factRes["fecha"]."','".$factRes["n_recibo"]."')";
+                $link->query($facturaSQL);
+                $idFactura = $link->insert_id;
+                    echo'
+                    <input type="hidden" value="'.$factRes["monto"].'" id="montoFact"/>
+                    <input type="hidden" value="'.$factRes["fecha"].'" id="fechFact"/>
+                    <input type="hidden" value="'.$idInmueble.'" id="idInmueble"/>
+                    <input type="hidden" value="'.$idProp2.'" id="idProp"/>
+                    <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
+                    <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
+                    <input type="hidden" value="'.$expeRes["no_expediente"].'" id="nuExp"/>
+                    ';
+                    //ELIMINAR SQL DE TEMP
+                        //PROPIETARIO
+                            $eliPropSQL ="DELETE FROM temp_propietarios where id=".$tempUserRes["temp_propietarios"]."";
+                            $link->query($eliPropSQL);
+                        //CARACTERISTICAS DEL INMUEBLE
+                            $elimCaracInmueSQL = "DELETE FROM temp_carainmue where id=".$tempUserRes["temp_carainmue"]."";
+                            $link->query($elimCaracInmueSQL);
+                        //PUERTAS
+                            $elimPuertasSQL = "DELETE FROM temp_puertas where id=".$tempUserRes["temp_puertas"]."";
+                            $link->query($elimPuertasSQL);
+                        //ESTADO CONSERVACION
+                            $elimConservSQL = "DELETE FROM temp_estado_conservacion where id=".$tempUserRes["temp_estado_conservacion"]."";
+                            $link->query($elimConservSQL);
+                        //PIEZAS SANITARIAS
+                            $elimPiezSan = "DELETE FROM temp_piezas_sanitarias where id=".$tempUserRes["temp_piezas_sanitarias"]."";
+                            $link->query($elimPiezSan);
+                        //COMPLEMENTOS
+                            $elimComple = "DELETE FROM temp_complementos where id=".$tempUserRes["temp_complementos"]."";
+                            $link->query($elimComple);
+                        //AMBIENTES 
+                            $elimAmbientSQL = "DELETE FROM temp_ambientes where id=".$tempUserRes["temp_ambientes"]."";
+                            $link->query($elimAmbientSQL);
+                        //CARACTERISTICAS DE LA CONSTRUCCION
+                            $elimCaracConstSQL = "DELETE FROM temp_caraconst where id=".$tempUserRes["temp_caraconst"]."";
+                            $link->query($elimCaracConstSQL);
+                        //PROTOCOLIZACION DEL INMUEBLE
+                            $elimProtInmueSQL = "DELETE FROM temp_datos_protocolizacion where id=".$tempUserRes["temp_datos_protocolizacion"]."";
+                            $link->query($elimProtInmueSQL);
+                        //SERVICIOS
+                            $elimServSQL = "DELETE FROM temp_servicios_inmue where id=".$tempUserRes["temp_servicios_inmue"]." ";
+                            $link->query($elimServSQL);
+                        //LINDEROS SEGUN DOC
+                            $elimLindDocSQL = "DELETE FROM temp_linderos_documento where id=".$tempUserRes["temp_linderos_documento"]."";
+                            $link->query($elimLindDocSQL);
+                        //LINDEROS SEGUN INSPECCION
+                            $elimLindInspSQL = "DELETE FROM temp_linderos_general where id=".$tempUserRes["temp_linderos_general"]."";
+                            $link->query($elimLindInspSQL);
+                        //LINDEROS POSIBLE VENTA
+                            $elimLindPosSQL ="DELETE FROM temp_linderos_posible_venta where id=".$tempUserRes["temp_linderos_posible_venta"]."";
+                            $link->query($elimLindPosSQL);
+                        //INMUEBLE
+                            $elimInmueSQL ="DELETE FROM temp_inmueble where id=".$tempUserRes["temp_inmueble"]."";
+                            $link->query($elimInmueSQL);
+                        //EXPEDIENTE
+                            $elimExpSQL = "DELETE FROM temp_expediente where id=".$tempUserRes["temp_expediente"]."";
+                            $link->query($elimExpSQL);
+                        //FACTURA
+                            $elimFactSQL = "DELETE FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
+                            $link->query($elimFactSQL);
+                        //USER
+                            $elimUserSQL = "DELETE FROM user_temp where userId=".$userRes["id"]."";
+                            $link->query($elimUserSQL);
+        }
     //VERIFICAR F002
     function veriF2(){
         include('../conexion.php');
@@ -3593,7 +3621,7 @@ class constancias{
                     $expeTempSQL = "SELECT * FROM temp_expediente where id=".$this->idExp."";
                     $resExpeTemp = $link->query($expeTempSQL);
                     $expeTempRes = $resExpeTemp->fetch_array();
-                    $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$userRes["id"].",'".$expeTempRes["no_expediente"]."','".$expeTempRes["fecha"]."','".$expeTempRes["condicion"]."','".$expeTempRes["valorInmue"]."')";
+                    $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idProp2.",".$usuarioRes["id"].",'".$expeTempRes["no_expediente"]."','".$expeTempRes["fecha"]."','".$expeTempRes["condicion"]."','".$expeTempRes["valorInmue"]."')";
                     $link->query($expedientSQL);
                     $idExpedient = $expeTempRes["no_expediente"];
                 //FACTURA
@@ -3662,7 +3690,7 @@ class constancias{
                         $elimFactSQL = "DELETE FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
                         $link->query($elimFactSQL);
                     //USER
-                        $elimUserSQL = "DELETE FROM user_temp where userId=".$userRes["id"]."";
+                        $elimUserSQL = "DELETE FROM user_temp where userId=".$usuarioRes["id"]."";
                         $link->query($elimUserSQL);
             }
         }else{
@@ -3812,7 +3840,7 @@ class constancias{
                     $elimFactSQL = "DELETE FROM temp_factura where id=".$this->idFactura."";
                     $link->query($elimFactSQL);
                 //USER
-                    $elimUserSQL = "DELETE FROM user_temp where userId=".$tempUserRes["id"]."";
+                    $elimUserSQL = "DELETE FROM user_temp where userId=".$usuarioRes["id"]."";
                     $link->query($elimUserSQL);
             }
         
@@ -4002,7 +4030,7 @@ class constancias{
                 $elimFactSQL = "DELETE FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
                 $link->query($elimFactSQL);
             //USER
-                $elimUserSQL = "DELETE FROM user_temp where userId=".$tempUserRes["userId"]."";
+                $elimUserSQL = "DELETE FROM user_temp where userId=".$userRes["userId"]."";
                 $link->query($elimUserSQL);
     }
     //VERIFICAR F001
@@ -4141,7 +4169,7 @@ class constancias{
                     $expeRes = $resExpe->fetch_array();
                     $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idPropie.",".$userRes["id"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','".$expeRes["condicion"]."','".$expeRes["valorInmue"]."')";
                     $link->query($expedientSQL);
-                    $nuExpedient = $link->insert_id;
+                    $nuExpedient = $expeRes["no_expediente"];
                 //FACTURA
                     $factSQL = "SELECT * FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
                     $resFact = $link->query($factSQL);
@@ -4311,7 +4339,7 @@ class constancias{
                     $expeRes = $resExpe->fetch_array();
                     $expedientSQL = "INSERT INTO expediente(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idPropie.",".$userRes["id"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','".$expeRes["condicion"]."','".$expeRes["valorInmue"]."')";
                     $link->query($expedientSQL);
-                    $nuExpedient = $link->insert_id;
+                    $nuExpedient = $expeRes["no_expediente"];
                 //FACTURA
                     $factSQL = "SELECT * FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
                     $resFact = $link->query($factSQL);
@@ -4524,7 +4552,7 @@ class constancias{
             <input type="hidden" value="'.$idPropie.'" id="idProp"/>
             <input type="hidden" value="'.$factRes["n_factura"].'" id="numFact"/>
             <input type="hidden" value="Nuevo Ingreso" id="operacion"/>
-            <input type="hidden" value="'.$nuExpedient.'" id="nuExp"/>
+            <input type="hidden" value="'.$expeRes["no_expediente"].'" id="nuExp"/>
             ';
             //ELIMINAR SQL DE TEMP
                 //PROPIETARIO
@@ -4706,7 +4734,7 @@ class constancias{
                     $expeRes = $resExpe->fetch_array();
                     $expedientSQL = "INSERT INTO expempadro(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idPropie.",".$userRes["id"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','".$expeRes["condicion"]."','".$expeRes["valorInmue"]."')";
                     $link->query($expedientSQL);
-                    $nuExpedient = $link->insert_id;
+                    $nuExpedient = $expeRes["no_expediente"];
                 //FACTURA
                     $factSQL = "SELECT * FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
                     $resFact = $link->query($factSQL);
@@ -4868,7 +4896,7 @@ class constancias{
                 $expeRes = $resExpe->fetch_array();
                 $expedientSQL = "INSERT INTO expempadro(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idPropie.",".$userRes["id"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','".$expeRes["condicion"]."','".$expeRes["valorInmue"]."')";
                 $link->query($expedientSQL);
-                $nuExpedient = $link->insert_id;
+                $nuExpedient = $expeRes["no_expediente"];
             //FACTURA
                 $factSQL = "SELECT * FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
                 $resFact = $link->query($factSQL);
@@ -5056,7 +5084,7 @@ class constancias{
             $expeRes = $resExpe->fetch_array();
             $expedientSQL = "INSERT INTO expempadro(fk_inmueble,fk_propietario,fk_usuario,n_expediente,fecha,condicion,valorInmue)value(".$idInmueble.",".$idPropie.",".$userRes["id"].",'".$expeRes["no_expediente"]."','".$expeRes["fecha"]."','EMPADRONAMIENTO','".$expeRes["valorInmue"]."')";
             $link->query($expedientSQL);
-            $nuExpedient = $link->insert_id;
+            $nuExpedient = $expeRes["no_expediente"];
         //FACTURA
             $factSQL = "SELECT * FROM temp_factura where id=".$tempUserRes["temp_factura"]."";
             $resFact = $link->query($factSQL);
@@ -5500,17 +5528,6 @@ class constancias{
             }
         }
         
-    }
-    function busFactura(){
-        include('../conexion.php');
-        $MySql = new conexion;
-        $link= $MySql->conectar();
-
-        $veriFactSql = "SELECT * FROM factura where n_factura='".$this->numFact."'";
-        $resVeriFact = $link->query($veriFactSql);
-        $veriFactRes = $resVeriFact->fetch_array();
-
-            echo'<input type="hidden" value="'.$veriFactRes["n_factura"].'" id="numFactura" />';
     }
 }
 

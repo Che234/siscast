@@ -120,9 +120,14 @@ class renovacion{
                }
     }
 }
-function btnRevConst(){
+function btnRevConst(renovac){
     let renov = new renovacion()
-    renov.expBuscar = document.getElementById("expBuscar").value
+    if(renovac){
+        renov.expBuscar = renovac
+    }else{
+        renov.expBuscar = document.getElementById("expBuscar").value
+    }
+   
     renov.tipoBuscar = document.getElementById("tipoBuscar").value
     renov.busRenov();
 }

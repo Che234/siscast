@@ -1050,6 +1050,12 @@ if(isset($_POST["accion"])){
     if($accion=="guarFact"){
         $nconst->guarFact();
     }
+    if($accion=="busRecFact"){
+        $nconst->busRecFact();
+    }
+    if($accion=="busFactura"){
+        $nconst->busFactura();
+    }
     //VERIFICACION
     if($accion=="veriF3"){
         $nconst->veriF3();
@@ -1307,7 +1313,5 @@ if(isset($_POST["accion"])){
     if($accion=="busExpediente"){
         $nconst->busExpediente();
     }
-    if($accion=="busFactura"){
-        $nconst->busFactura();
-    }
+    
 ?>

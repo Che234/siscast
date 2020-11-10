@@ -89,6 +89,11 @@ if(isset($_POST["direcInmue"])){
 }else{
     $bus->direcInmue = "nada";
 }
+if(isset($_POST["expBuscar2"])){
+    $bus->expBuscar2 = $_POST["expBuscar2"];
+}else{
+    $bus->expBuscar2 = "nada";
+}
 if(isset($_POST["ambInmue"])){
     $bus->ambInmue = $_POST["ambInmue"];
 }else{

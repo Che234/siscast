@@ -27,11 +27,14 @@ if($accion=="busReport"){
 
 if($accion=="cargSub"){
 	if(isset($_POST['campReport'])){
-    	$repor->campReport= $_POST['campReport'];
+		$campReport= $_POST['campReport'];
 	}else{
-	    $repor->campReport= "nada";
+	    $campReport= "nada";
 	}
-	$repor->cargSub();
+
+	if($campReport=="usuarios"){
+		$repor->mostUsuarios();
+	}
 }
 
 ?>

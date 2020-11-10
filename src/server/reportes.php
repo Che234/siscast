@@ -15,7 +15,7 @@ class reportes{
 				</div>
 				<div class="row">
 					<div class="col">
-						<select id="campReport" onChange="btnCargSub();">
+						<select id="campReport" onChange="btnCargSub()">
 							<option value="NADA"></option>
 							<option value="usuarios">Usuarios</option>
 							<option value="parroquia">Parroquia</option>
@@ -32,24 +32,28 @@ class reportes{
 						</select>
 					</div>
 					<div class="col">
-						<button class="btn btn-primary" onclick="btnBusRepor()">Generar</button>
+						<button class="btn btn-primary" onclick="btnBusRepor()">General
+						</button>
+						<button class="btn btn-primary" onclick="btnBusRepor()">Detallado
+						</button>
 					</div>
 				</div>
 			</div>';
 	}
-	function cargSub(){
-		if($this->campReport =="usuarios"){
-			$userBusSQl = "SELECT * FROM usuarios";
-			$resUserBus = $link->query();
-			$userResBus = $resUserBus->fetch_array();
-			echo $userBusSQl;
-			for($i = 0; $i < sizeof($userResBus); $i++){
-				echo'
-					<option value="'.$i.'">"'.$i.'"</option>
+	function mostUsuarios(){
+		include('../conexion.php');
+        session_start();
+        $MySql = new conexion;
+        $link= $MySql->conectar();
 
-				';
-			}
-		}
+        $busUsuSQL = "SELECT * FROM usuarios";
+        $resBusUsu = $link->query($busUsuSQL);
+
+        while($enconUsu = $resBusUsu->fetch_array()){
+        	echo'
+        		<option value="'.$enconUsu["nick"].'">'.$enconUsu["nick"].'</option>
+        	';
+        }
 	}
 }
 

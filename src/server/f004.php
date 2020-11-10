@@ -87,7 +87,7 @@ class f001{
             //BUSQUEDA DEL PROPIETARIO
                 $propDeSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
                 $resPropDe= $link->query($propDeSql);
-                $resultPropieDe = $resPropDe->fetch_assoc();
+                $resultPropieDe = $resPropDe->fetch_array();
                 $nombreProp= ''.$resultPropieDe["nombre"].' '.$resultPropieDe["apellido"].'';
             //BUSQUEDA DE PROTOCOLIZACION
                 $protSql = "SELECT * from datos_protocolizacion where id='".$idProt."' ";
@@ -155,20 +155,20 @@ class f001{
             $pdf->SetFont('Times','B',10);
             $pdf->SetDrawColor(0,0,0,0);
             $pdf->SetLineWidth(0.5);
-            $pdf->Cell(31,5,'HACE CONSTAR:','0,0,0,B:1',0,'C');
+            $pdf->Cell(31,5,'HACE CONSTAR','0,0,0,B:1',0,'C');
             $pdf->SetY(48);
             $pdf->SetX(22);
             $pdf->SetFont('Times','B',10);
             $pdf->cell(40,10,'Fecha: '.date('d-m-Y').'');
             $pdf->SetY(48);
             $pdf->SetX(140);
-            $pdf->cell(40,10,'No de Factura: '.$this->numFact.'');
+            $pdf->cell(40,10,utf8_decode('Nº de Factura: '.$this->numFact.''));
             $pdf->SetY(52);
             $pdf->SetX(22);
-            $pdf->cell(40,10,'No Civico: No Aplica');
+            $pdf->cell(40,10,utf8_decode('Nº Civico: No Aplica'));
             $pdf->SetY(52);
             $pdf->SetX(140);
-            $pdf->cell(40,10,'No Expediente: '.$busExpedienteRes["n_expediente"].'');
+            $pdf->cell(40,10,utf8_decode('Nº Expediente: '.$busExpedienteRes["n_expediente"].''));
             $pdf->SetY(56);
             $pdf->SetX(22);
             $pdf->cell(40,10,''.utf8_decode('Tipo de Operación: '.$this->operacion.'').'');
@@ -309,16 +309,20 @@ class f001{
             $pdf->cell(0,4,'DATOS DEL PROPIETARIO',1,0,'C');
             $pdf->SetY(82);
             $pdf->SetX(19);
-            $pdf->cell(46,4,'No de Cedula',1,0,'L');
+            $pdf->cell(46,4,utf8_decode('Nº de Cedula'),1,0,'L');
             $pdf->SetY(82);
             $pdf->SetX(65);
-            $pdf->cell(0,4,''.$resultPropieDe["cedula"].'',1,0,'L');
+            if($resultPropieDe["cedula"]=="NO APLICA"){
+                $pdf->cell(0,5,'NO APLICA',1,0,'L');//89
+            }else{
+                $pdf->cell(0,5,''.$resultPropieDe["cedula"].'',1,0,'L');//89
+            }
             $pdf->SetY(86);
             $pdf->SetX(19);
             $pdf->cell(46,4,'Rif',1,0,'L');
             $pdf->SetY(86);
             $pdf->SetX(65);
-            $divRifSec = explode('-',$resultPropieDe["rif"]);
+            $divRifSec = explode('|',$resultPropieDe["rif"]);
             if($divRifSec[0]=="N/A"){
                 if($divRifSec[1]=="NO APLICA"){
                     $pdf->cell(0,4,'NO APLICA',1,0,'L');
@@ -327,7 +331,7 @@ class f001{
                 }
             }else{
                 if($divRifSec[1]!="NO APLICA"){
-                    $pdf->cell(0,4,''.$resultPropieDe["rif"].'',1,0,'L');
+                    $pdf->cell(0,4,''.$divRifSec[0]."-".$divRifSec[1].'',1,0,'L');
                 }else{
                     $pdf->cell(0,4,'NO APLICA',1,0,'L');
                 }
@@ -342,7 +346,7 @@ class f001{
             $pdf->Cell(0,4,'' ,0,0,'L');
             $pdf->SetY(94);
             $pdf->SetX(19);
-            $pdf->cell(46,4,utf8_decode('No de Teléfono '),1,0,'L');
+            $pdf->cell(46,4,utf8_decode('Nº de Teléfono '),1,0,'L');
             $pdf->SetY(94);
             $pdf->SetX(65);
             $divTelfSec = explode('-',$resultPropieDe["telef"]);
@@ -1543,7 +1547,7 @@ class f003{
             $resExpFact= $link->query($expFactSql);
             $idExpFact= $resExpFact->fetch_array();
         //BUSQUEDA DEL EXPEDIENTE
-            $busExpSQL = "SELECT * FROM expediente where n_expediente=".$this->nuExp."";
+            $busExpSQL = "SELECT * FROM expediente where n_expediente='".$this->nuExp."'";
             $resBusEXP = $link->query($busExpSQL);
             $busExpedienteRes = $resBusEXP->fetch_array();
             $fecha = explode('-',$busExpedienteRes["fecha"]);
@@ -1569,6 +1573,8 @@ class f003{
             $propDeSql= "SELECT * from propietarios where id=".$busExpedienteRes["fk_propietario"]."";
             $resPropDe= $link->query($propDeSql);
             $resultPropieDe = $resPropDe->fetch_array();
+            $ced= explode('|',$resultPropieDe["cedula"]);
+            $cedFul = $ced[0]."-".$ced[1];
             $nombreProp= ''.$resultPropieDe["nombre"].' '.$resultPropieDe["apellido"].'';
         //BUSQUEDA DE PROTOCOLIZACION
             $protSql = "SELECT * from datos_protocolizacion where id='".$idProt."' ";
@@ -1630,20 +1636,20 @@ class f003{
             $pdf->SetFont('Times','B',10);
             $pdf->SetDrawColor(0,0,0,0);
             $pdf->SetLineWidth(0.5);
-            $pdf->Cell(31,5,'HACE CONSTAR:','0,0,0,B:1',0,'C');
+            $pdf->Cell(31,5,'HACE CONSTAR','0,0,0,B:1',0,'C');
             $pdf->SetY(48);
             $pdf->SetX(22);
             $pdf->SetFont('Times','B',10);
             $pdf->cell(40,10,'Fecha: '.date('d-m-Y').'');
             $pdf->SetY(48);
             $pdf->SetX(140);
-            $pdf->cell(40,10,'No de Factura: '.$this->numFact.'');
+            $pdf->cell(40,10,utf8_decode('Nº de Factura: '.$this->numFact.''));
             $pdf->SetY(52);
             $pdf->SetX(22);
-            $pdf->cell(40,10,'No Civico: No Aplica');
+            $pdf->cell(40,10,utf8_decode('Nº Civico: No Aplica'));
             $pdf->SetY(52);
             $pdf->SetX(140);
-            $pdf->cell(40,10,'No Expediente: '.$busExpedienteRes["n_expediente"].'');
+            $pdf->cell(40,10,utf8_decode('Nº Expediente: '.$busExpedienteRes["n_expediente"].''));
             $pdf->SetY(56);
             $pdf->SetX(22);
             $pdf->cell(40,10,''.utf8_decode('Tipo de Operación: '.$this->operacion.'').'');
@@ -1784,16 +1790,20 @@ class f003{
             $pdf->cell(0,4,'DATOS DEL PROPIETARIO',1,0,'C');
             $pdf->SetY(82);
             $pdf->SetX(19);
-            $pdf->cell(46,4,'No de Cedula',1,0,'L');
+            $pdf->cell(46,4,utf8_decode('Nº de Cedula'),1,0,'L');
             $pdf->SetY(82);
             $pdf->SetX(65);
-            $pdf->cell(0,4,''.$resultPropieDe["cedula"].'',1,0,'L');
+            if($resultPropieDe["cedula"]=="NO APLICA"){
+                $pdf->cell(0,5,'NO APLICA',1,0,'L');//89
+            }else{
+                $pdf->cell(0,5,''.$cedFul.'',1,0,'L');//89
+            }
             $pdf->SetY(86);
             $pdf->SetX(19);
             $pdf->cell(46,4,'Rif',1,0,'L');
             $pdf->SetY(86);
             $pdf->SetX(65);
-            $divRifSec = explode('-',$resultPropieDe["rif"]);
+            $divRifSec = explode('|',$resultPropieDe["rif"]);
             if($divRifSec[0]=="N/A"){
                 if($divRifSec[1]=="NO APLICA"){
                     $pdf->cell(0,4,'NO APLICA',1,0,'L');
@@ -1802,7 +1812,7 @@ class f003{
                 }
             }else{
                 if($divRifSec[1]!="NO APLICA"){
-                    $pdf->cell(0,4,''.$resultPropieDe["rif"].'',1,0,'L');
+                    $pdf->cell(0,4,''.$divRifSec[0]."-".$divRifSec[1].'',1,0,'L');
                 }else{
                     $pdf->cell(0,4,'NO APLICA',1,0,'L');
                 }
@@ -1856,7 +1866,7 @@ class f003{
             }
             $pdf->SetY(110);
             $pdf->SetX(19);
-            $pdf->cell(25,4,utf8_decode('Número:'),1,0,'C');
+            $pdf->cell(25,4,utf8_decode('Número'),1,0,'C');
             $pdf->SetY(114);
             $pdf->SetX(19);
             $pdf->SetFont('Times','B',9);

@@ -386,10 +386,6 @@ class busquedas{
             alert("Error en el formato del numero de la factura");
             return false;
         }
-        if(!ex_date.test(this.fechFact)){
-            alert("Error en el formato de la fecha");
-            return false;
-        }
         if(this.numFactura == this.numFact){
             alert("Numero de factura ya se encuentra registrado");
             return false
@@ -849,7 +845,7 @@ class busquedas{
 		ajax=objetoAjax();
 		ajax.open("POST", "src/server/rec/recBuscar.php",true);
 		ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-        ajax.send(`accion=mostRest`); 
+        ajax.send(`expBuscar=${this.expBuscar}&accion=mostRest`); 
 		ajax.onreadystatechange=function()
             {
 			if (ajax.readyState==4) 
@@ -995,8 +991,8 @@ class busquedas{
     //LINDEROS GENERAL
         mostLindInsp(){
             var ajax = new objetoAjax();
-    		var divsitioform = document.getElementById('identifiId');
-            var divsitiomaterial = document.getElementById('identifiId');
+    		var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
     		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
             divsitiomaterial.innerHTML="";
     		ajax=objetoAjax();
@@ -1053,8 +1049,8 @@ class busquedas{
     //LINDEROS POSIBLE VENTA
         mostLindVenta(){
             var ajax = new objetoAjax();
-    		var divsitioform = document.getElementById('identifiId2');
-            var divsitiomaterial = document.getElementById('identifiId2');
+    		var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
     		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
             divsitiomaterial.innerHTML="";
     		ajax=objetoAjax();
@@ -1071,8 +1067,8 @@ class busquedas{
         }
         actLindVenta(){
             var ajax = new objetoAjax();
-            var divsitioform = document.getElementById('identifiId2');
-            var divsitiomaterial = document.getElementById('identifiId2');
+            var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
             divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
             divsitiomaterial.innerHTML="";
             ajax=objetoAjax();
@@ -1091,8 +1087,8 @@ class busquedas{
     //LINDEROS SEGUN DOCUMENTO
         mostLindDoc(){
             var ajax = new objetoAjax();
-    		var divsitioform = document.getElementById('identifiId3');
-            var divsitiomaterial = document.getElementById('identifiId3');
+    		var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
     		divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
             divsitiomaterial.innerHTML="";
     		ajax=objetoAjax();
@@ -1109,8 +1105,8 @@ class busquedas{
         }
         actSecDoc(){
             var ajax = new objetoAjax();
-            var divsitioform = document.getElementById('identifiId3');
-            var divsitiomaterial = document.getElementById('identifiId3');
+            var divsitioform = document.getElementById('modificaciones');
+            var divsitiomaterial = document.getElementById('modificaciones');
             divsitioform.innerHTML="<img src='assets/cargando.gif'> cargando";
             divsitiomaterial.innerHTML="";
             ajax=objetoAjax();
@@ -1435,14 +1431,19 @@ function btnCampCed(){
         document.getElementById("tipoCed").hidden=true
     }
 }
-function mostTipModif(){
+function mostTipModif(expediente){
     let busque = new busquedas;
+    if(expediente){
+        busque.expBuscar = expediente
+    }else{
+        busque.expBuscar = document.getElementById("expBuscar").value
+    }
     busque.tipoModif();
 }
 function btnFormCambios(){
     let busque = new busquedas;
     busque.secciones = document.getElementById("secciones").value
-    busque.expBuscar = document.getElementById("expBuscar").value
+    busque.expBuscar = document.getElementById("expeBus").value
     busque.FormCambios();
 }
 function btnElimInmue(){
@@ -1457,8 +1458,8 @@ function dividirCed(secciones="no"){
         rif = document.getElementById("divRif").value;
         telf = document.getElementById("divTelf").value;
         telf2 = document.getElementById("divTelf2").value;
-        divCed= cedula.split('-')
-        divRif = rif.split('-')
+        divCed= cedula.split('|')
+        divRif = rif.split('|')
         divTelf = telf.split('-')
         divTelf2 = telf2.split('-')
         document.getElementById("cedR").value=divCed[0];

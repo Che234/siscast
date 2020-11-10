@@ -21,17 +21,20 @@ var expediente = /^[0-9\.\,\-\:]{1,10}$/
 var niveles = /^[0-9\.\-\A-Z\,\a-z\A-Z]{2,22}$/
 
 
-//VALIDACIONES ESPECIALES LOTE DE TERRENO PROPIO Y SOBRE EL CONSTRUIDO UNA EDIFICACIÓN DE 3 N
-
+//VALIDACIONES ESPECIALES LOTE DE TERRENO PROPIO Y SOBRE EL CONSTRUIDO UNA EDIFICACIÓN DE 3 NSOBRE EL CONSTRUIDO UNA EDIFICACIÓN1524
+//1.350-2.007 L.R.P
 var dirInmue = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,130}$/;
 var nivConst = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,15}$/;
-var obsInmue = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,70}$/;
+var obsInmue = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,68}$/;
 var alindInmue = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,108}$/;
 var protDirec = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,39}$/;
-var numProt = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,15}$/;
-var tomProt =/^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,15}$/;
+var numProt = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,17}$/;
+var tomProt =/^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,17}$/;
 var folioProt = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,13}$/;
 var valorInmue = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,13}$/;
 var cedPropie = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,70}$/;
 var nombre = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,70}$/;
-var direcprop = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,76}$/;
+var direcprop = /^[A-Z\À-ÿ\a-z\s+\,\0-9\\u00f1\\u00d1\\u00C1\\u00E1\\u00C9\\u00E9\\u00CD\\u00ED\\u00D3\\u00F3\\u00DA\\u00FA\\u00DC\\u00FC\\u00D1\\u00F1\.\-\/\:\°]{1,66}$/;
+
+
+//VALIDACIONES ESPECIALES LOTE DE TERRENO PROPIO Y SOBRE EL CONSTRUI

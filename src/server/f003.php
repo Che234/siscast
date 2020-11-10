@@ -59,8 +59,10 @@ class report{
         session_start();
         $MySql = new conexion;
         $link= $MySql->conectar();
-        
+        $count =0;
 
+        $pdf->SetFont('Times','B',11);
+        
         if($this->campReport=="usuarios"){
             $pdf->SetFont('Times','B',9);
             $userConstSql = "SELECT * FROM constancias ORDER BY fk_redactor";
@@ -69,8 +71,40 @@ class report{
             $c;
             $userConstRes=0;
             $count = 0;
+            $pdf->SetY(50);
+            $pdf->SetX(140);
+            $pdf->Cell(10,10,'REPORTE POR USUARIOS');
+            $pdf->SetY(60);
+            $pdf->SetX(12);
+            $pdf->Cell(16,7,utf8_decode('Nº'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(28);
+            $pdf->Cell(21,7,utf8_decode('Expediente'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(49);
+            $pdf->Cell(80,7,utf8_decode('Nombre'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(129);
+            $pdf->Cell(30,7,utf8_decode('Cedula'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(159);
+            $pdf->Cell(110,7,utf8_decode('Direccion'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(269);
+            $pdf->Cell(26,7,utf8_decode('Pago'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(295);
+            $pdf->Cell(50,7,utf8_decode('Redactor'),1,0,'C');
+
             while ($userConstRes = $resUserConst->fetch_array()) {
                 
+                if($count == 7){
+                    $pdf->AddPage();
+                    $count =0;
+                    $y=67;
+                }else{
+                    $count +=1;
+                }
                 $pdf->SetY($y);
                 $pdf->SetX(12);
                 $pdf->Cell(16,15,utf8_decode($c+=1),1,0,'C');
@@ -80,7 +114,7 @@ class report{
                 $idRedactor = $userConstRes["fk_redactor"];
                 if($nExpedienteRes!=0){
                     $numExp = $nExpedienteRes["n_expediente"];
-                    $idExp = $nExpedienteRes["id"];
+                    $idExp = $nExpedienteRes["n_expediente"];
                     $tipo = "normal";
                     $propietario = $nExpedienteRes["fk_propietario"];
                 }else{
@@ -88,7 +122,7 @@ class report{
                     $resNEmpadro = $link->query($nExpeEmpadroSQL);
                     $nEmpadroRes = $resNEmpadro->fetch_array();
                     $numExp = $nEmpadroRes["n_expediente"];
-                    $idExp = $nEmpadroRes["id"];
+                    $idExp = $nEmpadroRes["n_expediente"];
                     $propietario = $nEmpadroRes["fk_propietario"];
                     $tipo = "EMPADRONAMIENTO";
                 }
@@ -100,58 +134,41 @@ class report{
                 $pdf->Cell(21,15,utf8_decode($numExp),1,0,'C');
                 $pdf->SetY($y);
                 $pdf->SetX(49);
-                $pdf->MultiCell(80,15,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),1,'C');
+                $pdf->Cell(80,15,'',1,'C');
+                $pdf->SetY($y);
+                $pdf->SetX(49);
+                $pdf->MultiCell(80,5,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),0,'C');
                 $pdf->SetY($y);
                 $pdf->SetX(129);
-                $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                if($propirRes["cedula"]=="NO APLICA"){
+                    $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                }else{
+                    $cediv= explode("|",$propirRes["cedula"]);
+                    $cedFul = $cediv[0]."-".$cediv[1];
+                    $pdf->MultiCell(30,15,utf8_decode($cedFul),1,'C');
+                }
                 $pdf->SetY($y);
                 $pdf->SetX(159);
-                $pdf->Cell(110,15,utf8_decode($propirRes["dir_hab"]),1,'L');
-                $pagosSQL = "SELECT * FROM pagos where fk_expedient=".$idExp." AND tipo='".$tipo."'";
+                $pdf->Cell(110,15,'',1,'L');
+                $pdf->SetY($y);
+                $pdf->SetX(159);
+                $pdf->MultiCell(110,5,utf8_decode($propirRes["dir_hab"]),'L');
+                $pagosSQL = "SELECT * FROM pagos where fk_expedient='".$idExp."' AND tipo='".$tipo."'";
                 $resPagosConst = $link->query($pagosSQL);
                 $pagosConstRes = $resPagosConst->fetch_array();
                 $pdf->SetY($y);
                 $pdf->SetX(269);
                 $pdf->Cell(26,15,utf8_decode($pagosConstRes["fechaPagos"]),1,0,'C');
                 $redactSQL = "SELECT * FROM usuarios where id=".$idRedactor."";
+                
                 $resRedact = $link->query($redactSQL);
                 $redactRes = $resRedact->fetch_array();
                 $pdf->SetY($y);
                 $pdf->SetX(295);
                 $pdf->Cell(50,15,utf8_decode($redactRes["nombre"].' '.$redactRes["apellido"]),1,0,'C');
                 $y+=15;
-                if($count == 6){
-                    $pdf->SetAutoPageBreak();
-                    $count =0;
-                }else{
-                    $count++;
-                }
             }
-                $pdf->SetFont('Times','B',11);
-                $pdf->SetY(50);
-                $pdf->SetX(140);
-                $pdf->Cell(10,10,'REPORTE POR USUARIO');
-                $pdf->SetY(60);
-                $pdf->SetX(12);
-                $pdf->Cell(16,7,utf8_decode('Nº'),1,0,'C');
-                $pdf->SetY(60);
-                $pdf->SetX(28);
-                $pdf->Cell(21,7,utf8_decode('Expediente'),1,0,'C');
-                $pdf->SetY(60);
-                $pdf->SetX(49);
-                $pdf->Cell(80,7,utf8_decode('Nombre'),1,0,'C');
-                $pdf->SetY(60);
-                $pdf->SetX(129);
-                $pdf->Cell(30,7,utf8_decode('Cedula'),1,0,'C');
-                $pdf->SetY(60);
-                $pdf->SetX(159);
-                $pdf->Cell(110,7,utf8_decode('Direccion'),1,0,'C');
-                $pdf->SetY(60);
-                $pdf->SetX(269);
-                $pdf->Cell(26,7,utf8_decode('Pago'),1,0,'C');
-                $pdf->SetY(60);
-                $pdf->SetX(295);
-                $pdf->Cell(50,7,utf8_decode('Redactor'),1,0,'C');
+                
         }
         if($this->campReport=="parroquia"){
             $pdf->SetFont('Times','B',9);
@@ -160,58 +177,10 @@ class report{
             $y =67;
             $c;
             $userConstRes=0;
-            while ($userConstRes = $resUserConst->fetch_array()) {
-                $pdf->SetY($y);
-                $pdf->SetX(12);
-                $pdf->Cell(16,15,utf8_decode($c+=1),1,0,'C');
-                $nExpedientSQL = "SELECT * FROM expediente where fk_inmueble=".$userConstRes["id"]."";
-                $resNExpediente = $link->query($nExpedientSQL);
-                $nExpedienteRes = $resNExpediente->fetch_array();
-                $idRedactor = $userConstRes["fk_redactor"];
-                if($nExpedienteRes!=0){
-                    $numExp = $nExpedienteRes["n_expediente"];
-                    $idExp = $nExpedienteRes["id"];
-                    $tipo = "normal";
-                    $propietario = $nExpedienteRes["fk_propietario"];
-                }else{
-                    $nExpeEmpadroSQL = "SELECT * FROM expempadro where fk_inmueble=".$userConstRes["id"]."";
-                    $resNEmpadro = $link->query($nExpeEmpadroSQL);
-                    $nEmpadroRes = $resNEmpadro->fetch_array();
-                    $numExp = $nEmpadroRes["n_expediente"];
-                    $idExp = $nEmpadroRes["id"];
-                    $propietario = $nEmpadroRes["fk_propietario"];
-                    $tipo = "EMPADRONAMIENTO";
-                }
-                $propirSQL = "SELECT * FROM propietarios where id=".$propietario."";
-                $resPropir = $link->query($propirSQL);
-                $propirRes = $resPropir->fetch_array();
-                $pdf->SetY($y);
-                $pdf->SetX(28);
-                $pdf->Cell(21,15,utf8_decode($numExp),1,0,'C');
-                $pdf->SetY($y);
-                $pdf->SetX(49);
-                $pdf->MultiCell(80,15,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),1,'C');
-                $pdf->SetY($y);
-                $pdf->SetX(129);
-                $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
-                $pdf->SetY($y);
-                $pdf->SetX(159);
-                $pdf->Cell(110,15,utf8_decode($propirRes["dir_hab"]),1,'L');
-                $pagosSQL = "SELECT * FROM pagos where fk_expedient=".$idExp." AND tipo='".$tipo."'";
-                $resPagosConst = $link->query($pagosSQL);
-                $pagosConstRes = $resPagosConst->fetch_array();
-                $pdf->SetY($y);
-                $pdf->SetX(269);
-                $pdf->Cell(26,15,utf8_decode($pagosConstRes["fechaPagos"]),1,0,'C');
-                $pdf->SetY($y);
-                $pdf->SetX(295);
-                $pdf->Cell(50,15,utf8_decode($userConstRes["parroquia"]),1,0,'C');
-                $y+=15;
-            }
-            $pdf->SetFont('Times','B',11);
+            $count = 0;
             $pdf->SetY(50);
             $pdf->SetX(140);
-            $pdf->Cell(10,10,'REPORTE POR USUARIO');
+            $pdf->Cell(10,10,'REPORTE POR PARROQUIA');
             $pdf->SetY(60);
             $pdf->SetX(12);
             $pdf->Cell(16,7,utf8_decode('Nº'),1,0,'C');
@@ -233,6 +202,73 @@ class report{
             $pdf->SetY(60);
             $pdf->SetX(295);
             $pdf->Cell(50,7,utf8_decode('Parroquia'),1,0,'C');
+            while ($userConstRes = $resUserConst->fetch_array()) {
+                if($count == 7){
+                    $pdf->AddPage();
+                    $count =0;
+                    $y=67;
+                }else{
+                    $count +=1;
+                }
+                $pdf->SetY($y);
+                $pdf->SetX(12);
+                $pdf->Cell(16,15,utf8_decode($c+=1),1,0,'C');
+                $nExpedientSQL = "SELECT * FROM expediente where fk_inmueble=".$userConstRes["id"]."";
+                $resNExpediente = $link->query($nExpedientSQL);
+                $nExpedienteRes = $resNExpediente->fetch_array();
+                $idRedactor = $userConstRes["fk_redactor"];
+                if($nExpedienteRes!=0){
+                    $numExp = $nExpedienteRes["n_expediente"];
+                    $idExp = $nExpedienteRes["n_expediente"];
+                    $tipo = "normal";
+                    $propietario = $nExpedienteRes["fk_propietario"];
+                }else{
+                    $nExpeEmpadroSQL = "SELECT * FROM expempadro where fk_inmueble=".$userConstRes["id"]."";
+                    $resNEmpadro = $link->query($nExpeEmpadroSQL);
+                    $nEmpadroRes = $resNEmpadro->fetch_array();
+                    $numExp = $nEmpadroRes["n_expediente"];
+                    $idExp = $nEmpadroRes["n_expediente"];
+                    $propietario = $nEmpadroRes["fk_propietario"];
+                    $tipo = "EMPADRONAMIENTO";
+                }
+                $propirSQL = "SELECT * FROM propietarios where id=".$propietario."";
+                $resPropir = $link->query($propirSQL);
+                $propirRes = $resPropir->fetch_array();
+                $pdf->SetY($y);
+                $pdf->SetX(28);
+                $pdf->Cell(21,15,utf8_decode($numExp),1,0,'C');
+                $pdf->SetY($y);
+                $pdf->SetX(49);
+                $pdf->Cell(80,15,'',1,'C');
+                $pdf->SetY($y);
+                $pdf->SetX(49);
+                $pdf->MultiCell(80,5,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),0,'C');
+                $pdf->SetY($y);
+                $pdf->SetX(129);
+                if($propirRes["cedula"]=="NO APLICA"){
+                    $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                }else{
+                    $cediv= explode("|",$propirRes["cedula"]);
+                    $cedFul = $cediv[0]."-".$cediv[1];
+                    $pdf->MultiCell(30,15,utf8_decode($cedFul),1,'C');
+                }
+                $pdf->SetY($y);
+                $pdf->SetX(159);
+                $pdf->Cell(110,15,'',1,'L');
+                $pdf->SetY($y);
+                $pdf->SetX(159);
+                $pdf->MultiCell(110,5,utf8_decode($propirRes["dir_hab"]),'L');
+                $pagosSQL = "SELECT * FROM pagos where fk_expedient=".$idExp." AND tipo='".$tipo."'";
+                $resPagosConst = $link->query($pagosSQL);
+                $pagosConstRes = $resPagosConst->fetch_array();
+                $pdf->SetY($y);
+                $pdf->SetX(269);
+                $pdf->Cell(26,15,utf8_decode($pagosConstRes["fechaPagos"]),1,0,'C');
+                $pdf->SetY($y);
+                $pdf->SetX(295);
+                $pdf->Cell(50,15,utf8_decode($userConstRes["parroquia"]),1,0,'C');
+                $y+=15;
+            }
         }
         if($this->campReport=="uso"){
             $pdf->SetFont('Times','B',9);
@@ -241,7 +277,39 @@ class report{
             $y =67;
             $c;
             $userConstRes=0;
+            $count = 0;
+            $pdf->SetY(50);
+            $pdf->SetX(140);
+            $pdf->Cell(10,10,'REPORTE POR USO');
+            $pdf->SetY(60);
+            $pdf->SetX(12);
+            $pdf->Cell(16,7,utf8_decode('Nº'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(28);
+            $pdf->Cell(21,7,utf8_decode('Expediente'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(49);
+            $pdf->Cell(80,7,utf8_decode('Nombre'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(129);
+            $pdf->Cell(30,7,utf8_decode('Cedula'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(159);
+            $pdf->Cell(110,7,utf8_decode('Direccion'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(269);
+            $pdf->Cell(26,7,utf8_decode('Pago'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(295);
+            $pdf->Cell(50,7,utf8_decode('Uso'),1,0,'C');
             while ($userConstRes = $resUserConst->fetch_array()) {
+                if($count == 6){
+                    $pdf->AddPage();
+                    $count =0;
+                    $y=67;
+                }else{
+                    $count +=1;
+                }
                 $pdf->SetY($y);
                 $pdf->SetX(12);
                 $pdf->Cell(16,15,utf8_decode($c+=1),1,0,'C');
@@ -254,7 +322,7 @@ class report{
                 $nExpedienteRes = $resNExpediente->fetch_array();
                 if($nExpedienteRes!=0){
                     $numExp = $nExpedienteRes["n_expediente"];
-                    $idExp = $nExpedienteRes["id"];
+                    $idExp = $nExpedienteRes["n_expediente"];
                     $tipo = "normal";
                     $propietario = $nExpedienteRes["fk_propietario"];
                 }else{
@@ -262,7 +330,7 @@ class report{
                     $resNEmpadro = $link->query($nExpeEmpadroSQL);
                     $nEmpadroRes = $resNEmpadro->fetch_array();
                     $numExp = $nEmpadroRes["n_expediente"];
-                    $idExp = $nEmpadroRes["id"];
+                    $idExp = $nEmpadroRes["n_expediente"];
                     $propietario = $nEmpadroRes["fk_propietario"];
                     $tipo = "EMPADRONAMIENTO";
                 }
@@ -274,14 +342,26 @@ class report{
                 $pdf->Cell(21,15,utf8_decode($numExp),1,0,'C');
                 $pdf->SetY($y);
                 $pdf->SetX(49);
-                $pdf->MultiCell(80,15,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),1,'C');
+                $pdf->Cell(80,15,'',1,'C');
+                $pdf->SetY($y);
+                $pdf->SetX(49);
+                $pdf->MultiCell(80,5,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),0,'C');
                 $pdf->SetY($y);
                 $pdf->SetX(129);
-                $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                if($propirRes["cedula"]=="NO APLICA"){
+                    $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                }else{
+                    $cediv= explode("|",$propirRes["cedula"]);
+                    $cedFul = $cediv[0]."-".$cediv[1];
+                    $pdf->MultiCell(30,15,utf8_decode($cedFul),1,'C');
+                }
                 $pdf->SetY($y);
                 $pdf->SetX(159);
-                $pdf->Cell(110,15,utf8_decode($propirRes["dir_hab"]),1,'L');
-                $pagosSQL = "SELECT * FROM pagos where fk_expedient=".$idExp." AND tipo='".$tipo."'";
+                $pdf->Cell(110,15,'',1,'L');
+                $pdf->SetY($y);
+                $pdf->SetX(159);
+                $pdf->MultiCell(110,5,utf8_decode($propirRes["dir_hab"]),'L');
+                $pagosSQL = "SELECT * FROM pagos where fk_expedient='".$idExp."' AND tipo='".$tipo."'";
                 $resPagosConst = $link->query($pagosSQL);
                 $pagosConstRes = $resPagosConst->fetch_array();
                 $pdf->SetY($y);
@@ -325,7 +405,36 @@ class report{
             $y =67;
             $c;
             $userConstRes=0;
+            $count = 0;
+            $pdf->SetY(60);
+            $pdf->SetX(12);
+            $pdf->Cell(16,7,utf8_decode('Nº'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(28);
+            $pdf->Cell(21,7,utf8_decode('Expediente'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(49);
+            $pdf->Cell(80,7,utf8_decode('Nombre'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(129);
+            $pdf->Cell(30,7,utf8_decode('Cedula'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(159);
+            $pdf->Cell(110,7,utf8_decode('Direccion'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(269);
+            $pdf->Cell(26,7,utf8_decode('Pago'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(295);
+            $pdf->Cell(50,7,utf8_decode('Ambito'),1,0,'C');
             while ($userConstRes = $resUserConst->fetch_array()) {
+                if($count == 6){
+                    $pdf->AddPage();
+                    $count =0;
+                    $y=67;
+                }else{
+                    $count +=1;
+                }
                 $pdf->SetY($y);
                 $pdf->SetX(12);
                 $pdf->Cell(16,15,utf8_decode($c+=1),1,0,'C');
@@ -335,7 +444,7 @@ class report{
                 $nExpedienteRes = $resNExpediente->fetch_array();
                 if($nExpedienteRes!=0){
                     $numExp = $nExpedienteRes["n_expediente"];
-                    $idExp = $nExpedienteRes["id"];
+                    $idExp = $nExpedienteRes["n_expediente"];
                     $tipo = "normal";
                     $propietario = $nExpedienteRes["fk_propietario"];
                 }else{
@@ -343,7 +452,7 @@ class report{
                     $resNEmpadro = $link->query($nExpeEmpadroSQL);
                     $nEmpadroRes = $resNEmpadro->fetch_array();
                     $numExp = $nEmpadroRes["n_expediente"];
-                    $idExp = $nEmpadroRes["id"];
+                    $idExp = $nEmpadroRes["n_expediente"];
                     $propietario = $nEmpadroRes["fk_propietario"];
                     $tipo = "EMPADRONAMIENTO";
                 }
@@ -355,14 +464,26 @@ class report{
                 $pdf->Cell(21,15,utf8_decode($numExp),1,0,'C');
                 $pdf->SetY($y);
                 $pdf->SetX(49);
-                $pdf->MultiCell(80,15,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),1,'C');
+                $pdf->Cell(80,15,'',1,'C');
+                $pdf->SetY($y);
+                $pdf->SetX(49);
+                $pdf->MultiCell(80,5,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),0,'C');
                 $pdf->SetY($y);
                 $pdf->SetX(129);
-                $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                if($propirRes["cedula"]=="NO APLICA"){
+                    $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                }else{
+                    $cediv= explode("|",$propirRes["cedula"]);
+                    $cedFul = $cediv[0]."-".$cediv[1];
+                    $pdf->MultiCell(30,15,utf8_decode($cedFul),1,'C');
+                }
                 $pdf->SetY($y);
                 $pdf->SetX(159);
-                $pdf->Cell(110,15,utf8_decode($propirRes["dir_hab"]),1,'L');
-                $pagosSQL = "SELECT * FROM pagos where fk_expedient=".$idExp." AND tipo='".$tipo."'";
+                $pdf->Cell(110,15,'',1,'L');
+                $pdf->SetY($y);
+                $pdf->SetX(159);
+                $pdf->MultiCell(110,5,utf8_decode($propirRes["dir_hab"]),'L');
+                $pagosSQL = "SELECT * FROM pagos where fk_expedient='".$idExp."' AND tipo='".$tipo."'";
                 $resPagosConst = $link->query($pagosSQL);
                 $pagosConstRes = $resPagosConst->fetch_array();
                 $pdf->SetY($y);
@@ -406,7 +527,36 @@ class report{
             $y =67;
             $c;
             $userConstRes=0;
+            $count=0;
+            $pdf->SetY(60);
+            $pdf->SetX(12);
+            $pdf->Cell(16,7,utf8_decode('Nº'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(28);
+            $pdf->Cell(21,7,utf8_decode('Expediente'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(49);
+            $pdf->Cell(80,7,utf8_decode('Nombre'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(129);
+            $pdf->Cell(30,7,utf8_decode('Cedula'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(159);
+            $pdf->Cell(110,7,utf8_decode('Direccion'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(269);
+            $pdf->Cell(26,7,utf8_decode('Pago'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(295);
+            $pdf->Cell(50,7,utf8_decode('Tenencia'),1,0,'C');
             while ($userConstRes = $resUserConst->fetch_array()) {
+                if($count == 6){
+                    $pdf->AddPage();
+                    $count =0;
+                    $y=67;
+                }else{
+                    $count +=1;
+                }
                 $pdf->SetY($y);
                 $pdf->SetX(12);
                 $pdf->Cell(16,15,utf8_decode($c+=1),1,0,'C');
@@ -419,7 +569,7 @@ class report{
                 $nExpedienteRes = $resNExpediente->fetch_array();
                 if($nExpedienteRes!=0){
                     $numExp = $nExpedienteRes["n_expediente"];
-                    $idExp = $nExpedienteRes["id"];
+                    $idExp = $nExpedienteRes["n_expediente"];
                     $tipo = "normal";
                     $propietario = $nExpedienteRes["fk_propietario"];
                 }else{
@@ -427,7 +577,7 @@ class report{
                     $resNEmpadro = $link->query($nExpeEmpadroSQL);
                     $nEmpadroRes = $resNEmpadro->fetch_array();
                     $numExp = $nEmpadroRes["n_expediente"];
-                    $idExp = $nEmpadroRes["id"];
+                    $idExp = $nEmpadroRes["n_expediente"];
                     $propietario = $nEmpadroRes["fk_propietario"];
                     $tipo = "EMPADRONAMIENTO";
                 }
@@ -439,14 +589,27 @@ class report{
                 $pdf->Cell(21,15,utf8_decode($numExp),1,0,'C');
                 $pdf->SetY($y);
                 $pdf->SetX(49);
-                $pdf->MultiCell(80,15,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),1,'C');
+                $pdf->Cell(80,15,'',1,'C');
+                $pdf->SetY($y);
+                $pdf->SetX(49);
+                $pdf->MultiCell(80,5,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),0,'C');
                 $pdf->SetY($y);
                 $pdf->SetX(129);
-                $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                if($propirRes["cedula"]=="NO APLICA"){
+                    $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                }else{
+                    $cediv= explode("|",$propirRes["cedula"]);
+                    $cedFul = $cediv[0]."-".$cediv[1];
+                    $pdf->MultiCell(30,15,utf8_decode($cedFul),1,'C');
+                }
                 $pdf->SetY($y);
                 $pdf->SetX(159);
-                $pdf->Cell(110,15,utf8_decode($propirRes["dir_hab"]),1,'L');
-                $pagosSQL = "SELECT * FROM pagos where fk_expedient=".$idExp." AND tipo='".$tipo."'";
+                $pdf->Cell(110,15,'',1,'L');
+                $pdf->SetY($y);
+                $pdf->SetX(159);
+                $direc = utf8_decode($propirRes["dir_hab"]);
+                $pdf->MultiCell(110,5,utf8_encode($direc),'L');
+                $pagosSQL = "SELECT * FROM pagos where fk_expedient='".$idExp."' AND tipo='".$tipo."'";
                 $resPagosConst = $link->query($pagosSQL);
                 $pagosConstRes = $resPagosConst->fetch_array();
                 $pdf->SetY($y);
@@ -487,10 +650,46 @@ class report{
             $pdf->SetFont('Times','B',9);
             $userConstSql = "SELECT * FROM constancias where fecha='".date("Y-m-d")."'";
             $resUserConst = $link->query($userConstSql);
+            
             $y =67;
             $c;
             $userConstRes=0;
+            $count=0;
+            $pdf->SetY(50);
+            $pdf->SetX(140);
+            $pdf->Cell(10,10,'REPORTE POR USUARIO');
+            $pdf->SetY(60);
+            $pdf->SetX(12);
+            $pdf->Cell(16,7,utf8_decode('Nº'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(28);
+            $pdf->Cell(21,7,utf8_decode('Expediente'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(49);
+            $pdf->Cell(80,7,utf8_decode('Nombre'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(129);
+            $pdf->Cell(30,7,utf8_decode('Cedula'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(159);
+            $pdf->Cell(110,7,utf8_decode('Direccion'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(269);
+            $pdf->Cell(26,7,utf8_decode('Pago'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(295);
+            $pdf->Cell(50,7,utf8_decode('Fecha'),1,0,'C');
             while ($userConstRes = $resUserConst->fetch_array()) {
+                if(!$userConstRes["id"]){
+                    echo 'EXPEDIENTE';
+                }
+                if($count == 6){
+                    $pdf->AddPage();
+                    $count =0;
+                    $y=67;
+                }else{
+                    $count +=1;
+                }
                 $pdf->SetY($y);
                 $pdf->SetX(24);
                 $pdf->Cell(16,15,utf8_decode($c+=1),1,0,'C');
@@ -500,7 +699,7 @@ class report{
                 $nExpedienteRes = $resNExpediente->fetch_array();
                 if($nExpedienteRes!=0){
                     $numExp = $nExpedienteRes["n_expediente"];
-                    $idExp = $nExpedienteRes["id"];
+                    $idExp = $nExpedienteRes["n_expediente"];
                     $tipo = "normal";
                     $propietario = $nExpedienteRes["fk_propietario"];
                 }else{
@@ -508,7 +707,7 @@ class report{
                     $resNEmpadro = $link->query($nExpeEmpadroSQL);
                     $nEmpadroRes = $resNEmpadro->fetch_array();
                     $numExp = $nEmpadroRes["n_expediente"];
-                    $idExp = $nEmpadroRes["id"];
+                    $idExp = $nEmpadroRes["n_expediente"];
                     $propietario = $nEmpadroRes["fk_propietario"];
                     $tipo = "EMPADRONAMIENTO";
                 }
@@ -520,13 +719,25 @@ class report{
                 $pdf->Cell(21,15,utf8_decode($numExp),1,0,'C');
                 $pdf->SetY($y);
                 $pdf->SetX(61);
-                $pdf->MultiCell(80,15,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),1,'C');
+                $pdf->Cell(80,15,'',1,'C');
+                $pdf->SetY($y);
+                $pdf->SetX(49);
+                $pdf->MultiCell(80,5,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),0,'C');
                 $pdf->SetY($y);
                 $pdf->SetX(141);
-                $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                if($propirRes["cedula"]=="NO APLICA"){
+                    $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                }else{
+                    $cediv= explode("|",$propirRes["cedula"]);
+                    $cedFul = $cediv[0]."-".$cediv[1];
+                    $pdf->MultiCell(30,15,utf8_decode($cedFul),1,'C');
+                }
                 $pdf->SetY($y);
                 $pdf->SetX(171);
-                $pdf->Cell(110,15,utf8_decode($propirRes["dir_hab"]),1,'L');
+                $pdf->Cell(110,15,'',1,'L');
+                $pdf->SetY($y);
+                $pdf->SetX(159);
+                $pdf->MultiCell(110,5,utf8_decode($propirRes["dir_hab"]),'L');
                 $pagosSQL = "SELECT * FROM pagos where fk_expedient=".$idExp." AND tipo='".$tipo."'";
                 $resPagosConst = $link->query($pagosSQL);
                 $pagosConstRes = $resPagosConst->fetch_array();
@@ -535,28 +746,6 @@ class report{
                 $pdf->Cell(26,15,utf8_decode($pagosConstRes["fechaPagos"]),1,0,'C');
                 $y+=15;
             }
-            $pdf->SetFont('Times','B',11);
-            $pdf->SetY(50);
-            $pdf->SetX(140);
-            $pdf->Cell(10,10,'REPORTE POR USUARIO');
-            $pdf->SetY(60);
-            $pdf->SetX(24);
-            $pdf->Cell(16,7,utf8_decode('Nº'),1,0,'C');
-            $pdf->SetY(60);
-            $pdf->SetX(40);
-            $pdf->Cell(21,7,utf8_decode('Expediente'),1,0,'C');
-            $pdf->SetY(60);
-            $pdf->SetX(61);
-            $pdf->Cell(80,7,utf8_decode('Nombre'),1,0,'C');
-            $pdf->SetY(60);
-            $pdf->SetX(141);
-            $pdf->Cell(30,7,utf8_decode('Cedula'),1,0,'C');
-            $pdf->SetY(60);
-            $pdf->SetX(171);
-            $pdf->Cell(110,7,utf8_decode('Direccion'),1,0,'C');
-            $pdf->SetY(60);
-            $pdf->SetX(281);
-            $pdf->Cell(26,7,utf8_decode('Pago'),1,0,'C');
         }
         if($this->campReport=="guardado"){
             $pdf->SetFont('Times','B',9);
@@ -565,9 +754,41 @@ class report{
             $y =67;
             $c;
             $userConstRes=0;
+            $count= 0;
+            $pdf->SetY(50);
+            $pdf->SetX(140);
+            $pdf->Cell(10,10,'REPORTE TOTAL GUARDADO');
+            $pdf->SetY(60);
+            $pdf->SetX(12);
+            $pdf->Cell(16,7,utf8_decode('Nº'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(28);
+            $pdf->Cell(21,7,utf8_decode('Expediente'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(49);
+            $pdf->Cell(80,7,utf8_decode('Nombre'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(129);
+            $pdf->Cell(30,7,utf8_decode('Cedula'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(159);
+            $pdf->Cell(110,7,utf8_decode('Direccion'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(269);
+            $pdf->Cell(26,7,utf8_decode('Pago'),1,0,'C');
+            $pdf->SetY(60);
+            $pdf->SetX(295);
+            $pdf->Cell(50,7,utf8_decode('Redactor'),1,0,'C');
             while ($userConstRes = $resUserConst->fetch_array()) {
+                if($count == 7){
+                    $pdf->AddPage();
+                    $count =0;
+                    $y=67;
+                }else{
+                    $count +=1;
+                }
                 $pdf->SetY($y);
-                $pdf->SetX(24);
+                $pdf->SetX(12);
                 $pdf->Cell(16,15,utf8_decode($c+=1),1,0,'C');
 
                 $nExpedientSQL = "SELECT * FROM expediente where n_expediente='".$userConstRes["fk_expedi"]."'";
@@ -575,15 +796,17 @@ class report{
                 $nExpedienteRes = $resNExpediente->fetch_array();
                 if($nExpedienteRes!=0){
                     $numExp = $nExpedienteRes["n_expediente"];
-                    $idExp = $nExpedienteRes["id"];
+                    $idExp = $nExpedienteRes["n_expediente"];
                     $tipo = "normal";
+                    $idUsu = $nExpedienteRes["fk_usuario"];
                     $propietario = $nExpedienteRes["fk_propietario"];
                 }else{
                     $nExpeEmpadroSQL = "SELECT * FROM expempadro where n_expediente='".$userConstRes["fk_expedi"]."'";
                     $resNEmpadro = $link->query($nExpeEmpadroSQL);
                     $nEmpadroRes = $resNEmpadro->fetch_array();
                     $numExp = $nEmpadroRes["n_expediente"];
-                    $idExp = $nEmpadroRes["id"];
+                    $idExp = $nEmpadroRes["n_expediente"];
+                    $idUsu = $nEmpadroRes["fk_usuario"];
                     $propietario = $nEmpadroRes["fk_propietario"];
                     $tipo = "EMPADRONAMIENTO";
                 }
@@ -591,58 +814,54 @@ class report{
                 $resPropir = $link->query($propirSQL);
                 $propirRes = $resPropir->fetch_array();
                 $pdf->SetY($y);
-                $pdf->SetX(40);
+                $pdf->SetX(28);
                 $pdf->Cell(21,15,utf8_decode($numExp),1,0,'C');
                 $pdf->SetY($y);
-                $pdf->SetX(61);
-                $pdf->MultiCell(80,15,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),1,'C');
+                $pdf->SetX(49);
+                $pdf->Cell(80,15,'',1,'C');
                 $pdf->SetY($y);
-                $pdf->SetX(141);
-                $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                $pdf->SetX(49);
+                $pdf->MultiCell(80,5,utf8_decode($propirRes["nombre"].' '.$userConstRes["apellido"]),0,'C');
                 $pdf->SetY($y);
-                $pdf->SetX(171);
-                $pdf->Cell(110,15,utf8_decode($propirRes["dir_hab"]),1,'L');
-                $pagosSQL = "SELECT * FROM pagos where fk_expedient=".$idExp." AND tipo='".$tipo."'";
+                $pdf->SetX(129);
+                if($propirRes["cedula"]=="NO APLICA"){
+                    $pdf->MultiCell(30,15,utf8_decode($propirRes["cedula"]),1,'C');
+                }else{
+                    $cediv= explode("|",$propirRes["cedula"]);
+                    $cedFul = $cediv[0]."-".$cediv[1];
+                    $pdf->MultiCell(30,15,utf8_decode($cedFul),1,'C');
+                }
+                $pdf->SetY($y);
+                $pdf->SetX(159);
+                $pdf->Cell(110,15,'',1,'L');
+                $pdf->SetY($y);
+                $pdf->SetX(159);
+                $pdf->MultiCell(110,5,utf8_decode($propirRes["dir_hab"]),'L');
+                $pagosSQL = "SELECT * FROM pagos where fk_expedient='".$idExp."' AND tipo='".$tipo."'";
                 $resPagosConst = $link->query($pagosSQL);
                 $pagosConstRes = $resPagosConst->fetch_array();
                 $pdf->SetY($y);
-                $pdf->SetX(281);
+                $pdf->SetX(269);
                 $pdf->Cell(26,15,utf8_decode($pagosConstRes["fechaPagos"]),1,0,'C');
+                $redactSQL = "SELECT * FROM usuarios where id=".$idUsu."";
+                $resRedact = $link->query($redactSQL);
+                $redactRes = $resRedact->fetch_array();
+                $pdf->SetY($y);
+                $pdf->SetX(295);
+                $pdf->Cell(50,15,utf8_decode($redactRes["nombre"]." ".$redactRes["apellido"]),1,0,'C');
                 $y+=15;
             }
-            $pdf->SetFont('Times','B',11);
-            $pdf->SetY(50);
-            $pdf->SetX(140);
-            $pdf->Cell(10,10,'REPORTE POR USUARIO');
-            $pdf->SetY(60);
-            $pdf->SetX(24);
-            $pdf->Cell(16,7,utf8_decode('Nº'),1,0,'C');
-            $pdf->SetY(60);
-            $pdf->SetX(40);
-            $pdf->Cell(21,7,utf8_decode('Expediente'),1,0,'C');
-            $pdf->SetY(60);
-            $pdf->SetX(61);
-            $pdf->Cell(80,7,utf8_decode('Nombre'),1,0,'C');
-            $pdf->SetY(60);
-            $pdf->SetX(141);
-            $pdf->Cell(30,7,utf8_decode('Cedula'),1,0,'C');
-            $pdf->SetY(60);
-            $pdf->SetX(171);
-            $pdf->Cell(110,7,utf8_decode('Direccion'),1,0,'C');
-            $pdf->SetY(60);
-            $pdf->SetX(281);
-            $pdf->Cell(26,7,utf8_decode('Pago'),1,0,'C');
         }
-        $carpeta ='../../../assets/constancias/'.date("Y").'';
+        $carpeta ='../../../assets/reportes/'.date("Y").'';
         if(!file_exists($carpeta)){
-            mkdir($carpeta,0777,true);
-            $pdf->Output('F','../../../../assets/constancias/'.date("Y").'/'.$numExp.'.pdf');
+            mkdir($carpeta,777);
+             $pdf->Output('F','../../../assets/reportes/'.date("Y").'/reporte'.date("dmY").'.pdf');
         }else{
-            $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$numExp.'.pdf');
+            $pdf->Output('F','../../../assets/reportes/'.date("Y").'/reporte'.date("dmY").'.pdf');
         }
         echo'
-        <input type="hidden" id="rutaPdf" value="./assets/constancias/'.date("Y").'/'.$numExp.'.pdf" />
-        <input type="hidden" id="numExp" value="'.$numExp.'">';
+        <input type="hidden" id="rutaPdf" value="./assets/reportes/'.date("Y").'/reporte'.date("dmY").'.pdf" />
+        <input type="hidden" id="numExp" value="reporte'.date("dmY").'">';
     }
 
 }

@@ -1,7 +1,7 @@
 <?php
     class conexion{
 
-        var $user = "root";
+        var $user = "sisroot";
         var $pass = "";
         var $bd = "siscast";
         var $serv= "localhost";
