@@ -194,6 +194,7 @@ class busquedas{
         include('../conexion.php');
         $MySql = new conexion;
         $link= $MySql->conectar();
+        session_start();
         
         if($this->tipoBuscar=="Expediente"){
             //BUSQUEDA EXPEDIENTE
@@ -239,7 +240,7 @@ class busquedas{
                     </div>
                     <div class="row">
                         <div class="col">
-                            <b>Propietario:</b> '.$propRes["nombre"].' '.$propRes["apellido"].'
+                            <b>Propietario:</b> '.utf8_encode($propRes["nombre"].' '.$propRes["apellido"]).'
                         </div>
                         <div class="col">
                             <b>Expediente:</b> '.$this->campBuscar.'
@@ -277,15 +278,24 @@ class busquedas{
                              if($fechPagosDiv[0] < date("Y")){
                                 echo'<input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />';
                              }
-                             echo'
-                            <input type"button" value="Modificar" class="botones btn btn-primary " onclick="mostTipModif()"/>';
+                             $usuBusSQL ="SELECT * FROM usuarios where nick='".$_SESSION["usuario"]."'";
+                             $resUsuBus = $link->query($usuBusSQL);
+                             $usuBusRes = $resUsuBus->fetch_array();
+                            if($usuBusRes["nivel"]==1){
+                                echo'
+                                <input type"button" value="Modificar" class="botones btn btn-primary " onclick="mostTipModif()"/>
+                                ';
+                            }
                         $veriRenov = "SELECT * FROM constancias where fk_expedi=".$idExp." ORDER BY fecha DESC";
                         $resVeriRenov = $link->query($veriRenov);
                         $veriRenovRes = $resVeriRenov->fetch_array();
                         $fechaRenov = explode("-",$veriRenovRes["fecha"]);
+                        if($usuBusRes["nivel"]==1){
+                            echo'
+                                <input type"button" value="Eliminar" onclick="btnElimInmue()" class="botones btn btn-primary" />
+                            ';
+                        }
                         echo'<input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst()"/>
-
-                            <input type"button" value="Eliminar" onclick="btnElimInmue()" class="botones btn btn-primary" />
                             <input type="hidden" value="'.$numExp.'" id="expBuscar" />
                             <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
                             <input type="hidden" value="'.$condicion.'" id="condicion"/>
@@ -368,15 +378,22 @@ class busquedas{
                              if($fechPagosDiv[0] < date("Y")){
                                 echo'<input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />';
                              }
-                             echo'
-                            <input type"button" value="Modificar" class="botones btn btn-primary " onclick="mostTipModif()"/>';
+                             if($usuBusRes["nivel"]==1){
+                                echo'
+                                <input type"button" value="Modificar" class="botones btn btn-primary " onclick="mostTipModif()"/>
+                                ';
+                            }
                         $veriRenov = "SELECT * FROM constancias where fk_expedi=".$idExp." ORDER BY fecha DESC";
                         $resVeriRenov = $link->query($veriRenov);
                         $veriRenovRes = $resVeriRenov->fetch_array();
                         $fechaRenov = explode("-",$veriRenovRes["fecha"]);
+                            if($usuBusRes["nivel"]==1){
+                                echo'
+                                    <input type"button" value="Eliminar" onclick="btnElimInmue()" class="botones btn btn-primary" />
+                                ';
+                            }
                         echo'<input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst()"/>
-
-                            <input type"button" value="Eliminar" onclick="btnElimInmue()" class="botones btn btn-primary" />
+                            
                             <input type="hidden" value="'.$numExp.'" id="expBuscar" />
                             <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
                         </div>
@@ -485,7 +502,12 @@ class busquedas{
                             </div>
                             <div class="col">
                                 <input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst('.$expNo.')"/>
-                                <input type"button" value="Modificar" class="botones btn btn-primary" onclick="mostTipModif('.$expNo.')"/>';
+                                ';
+                                if($usuBusRes["nivel"]==1){
+                                    echo'
+                                    <input type"button" value="Modificar" class="botones btn btn-primary" onclick="mostTipModif('.$expNo.')"/>
+                                    ';
+                                }
                                 if($pagosRes["fechaPagos"]){
                                     echo'<input type"button" value="Ver pagos" onclick="btnPagos()" class="botones btn btn-primary" />';
                                 }
@@ -493,8 +515,12 @@ class busquedas{
                                 if($fechaPag[0] < date("Y")){
                                     echo '<input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />';
                                 }
+                                if($usuBusRes["nivel"]==1){
+                                    echo'
+                                        <input type"button" value="Eliminar" onclick="btnElimInmue('.$expNo.')" class="botones btn btn-primary" />
+                                    ';
+                                }
                             echo'
-                                <input type"button" value="Eliminar" onclick="btnElimInmue('.$expNo.')" class="botones btn btn-primary" />
                                 <input type="hidden" value="'.$expedCount["n_expediente"].'" id="expBuscar" />
                                 <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
                             </div>
@@ -549,8 +575,13 @@ class busquedas{
                                 if($fechaPag2[0] < date("Y")){
                                     echo '<input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />';
                                 }
+                                if($usuBusRes["nivel"]==1){
+                                    echo'
+                                        <input type"button" value="Eliminar" onclick="btnElimInmue('.$expNo.')" class="botones btn btn-primary" />
+                                    ';
+                                }
                             echo'
-                                <input type"button" value="Eliminar" onclick="btnElimInmue('.$expNo.')" class="botones btn btn-primary" />
+                                
                                  <input type="hidden" value="'.$expedCount2["n_expediente"].'" id="expBuscar2" />
                                 <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
                             </div>
@@ -663,8 +694,12 @@ class busquedas{
                                 <b>'.$inmueRes["direccion"].'</b>
                             </div>
                             <div class="col">
-                                <input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst('.$noExp.')"/>
-                                <input type"button" value="Modificar" class="botones btn btn-primary" onclick="mostTipModif('. $noExp.')"/>';
+                                <input type"button" value="Renovación" class="botones btn btn-primary" onclick="btnRevConst('.$noExp.')"/>';
+                                if($usuBusRes["nivel"]==1){
+                                    echo'
+                                        <input type"button" value="Modificar" class="botones btn btn-primary" onclick="mostTipModif('. $noExp.')"/>
+                                    ';
+                                }
                                 if($pagosRes["fechaPagos"]){
                                     echo'<input type"button" value="Ver pagos" onclick="btnPagos()" class="botones btn btn-primary" />';
                                 }
@@ -672,8 +707,12 @@ class busquedas{
                                 if($fechaPag[0] < date("Y")){
                                     echo '<input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />';
                                 }
+                                if($usuBusRes["nivel"]==1){
+                                    echo'
+                                        <input type"button" value="Eliminar" onclick="btnElimInmue('.$expNo.')" class="botones btn btn-primary" />
+                                    ';
+                                }
                             echo'
-                                <input type"button" value="Eliminar" onclick="btnElimInmue('.$expNo.')" class="botones btn btn-primary" />
                                 <input type="hidden" value="'.$expNo.'" id="expBuscar" />
                                 <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
                             </div>
@@ -728,8 +767,12 @@ class busquedas{
                                 if($fechaPag2[0] < date("Y")){
                                     echo '<input type"button" value="Pagar" onclick="btnPagar()" class="botones btn btn-primary" />';
                                 }
+                                if($usuBusRes["nivel"]==1){
+                                    echo'
+                                        <input type"button" value="Eliminar" onclick="btnElimInmue('.$expNo.')" class="botones btn btn-primary" />
+                                    ';
+                                }
                             echo'
-                                <input type"button" value="Eliminar" onclick="btnElimInmue('.$expNo.')" class="botones btn btn-primary" />
                                  <input type="hidden" value="'.$expNo.'" id="expBuscar2" />
                                 <input type="hidden" value="'.$this->tipoBuscar.'" id="tipoBuscar" />
                             </div>
@@ -3076,35 +3119,35 @@ class busquedas{
             }
             
             if($this->puntNorte2=="Norte"){
-                $Norte = $this->nortPosVenta;
+                $Norte = $this->nortSecDoc;
                 $norEste = "nada";
             }else{
                 $Norte = "nada";
-                $norEste = $this->nortPosVenta;
+                $norEste = $this->nortSecDoc;
             }
             if($this->puntSur2=="Sur"){
-                $Sur = $this->surPosVenta;
+                $Sur = $this->surSecDoc;
                 $SurEste = "nada";
             }else{
                 $Sur = "nada";
-                $SurEste = $this->surPosVenta;
+                $SurEste = $this->surSecDoc;
             }
             if($this->puntEste2=="Este"){
-                $Este = $this->estePosVenta;
+                $Este = $this->esteSecDoc;
                 $SurOeste = "nada";
             }else{
                 $Este = "nada";
-                $SurOeste = $this->estePosVenta;
+                $SurOeste = $this->esteSecDoc;
             }
             if($this->puntOeste2=="Oeste"){
-                $Oeste = $this->oestePosVenta;
+                $Oeste = $this->oesteSecDoc;
                 $NortOeste = "nada";
             }else{
                 $Oeste = "nada";
-                $NortOeste = $this->oestePosVenta;
+                $NortOeste = $this->oesteSecDoc;
             }
             if($posVentaRes["id"]==0){
-                $lindGeneralSQL = "INSERT INTO linderos_posible_venta(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte."','".$norEste."','".$Sur."','".$SurEste."','".$Este."','".$SurOeste."','".$Oeste."','".$NortOeste."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."','".$this->arTotal3."','".$this->uniAreaT3."','".$this->NivConstTotal3."','".$this->uniAreaConst3."','".$this->arConstTotal3."','".$this->uniNorte3."','".$this->uniSur3."','".$this->uniEste3."','".$this->uniOeste3."')";
+                $lindGeneralSQL = "INSERT INTO linderos_documento(norte,noreste,sur,sureste,este,suroeste,oeste,noroeste,alind_n,alind_s,alind_e,alind_o,areaTotal,uniAreaT,nivelesConst,uniAreaC,areaConst,uniNorte,uniSur,uniEste,uniOeste)value('".$Norte."','".$norEste."','".$Sur."','".$SurEste."','".$Este."','".$SurOeste."','".$Oeste."','".$NortOeste."','".$this->alindSecNorte."','".$this->alindSecSur."','".$this->alindSecEste."','".$this->alindSecOeste."','".$this->arTotal3."','".$this->uniAreaT3."','".$this->NivConstTotal3."','".$this->uniAreaConst3."','".$this->arConstTotal3."','".$this->uniNorte3."','".$this->uniSur3."','".$this->uniEste3."','".$this->uniOeste3."')";
                 $link->query($lindGeneralSQL);
                 $idLindVenta= $link->insert_id;
 

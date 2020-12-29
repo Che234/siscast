@@ -678,6 +678,7 @@ class constancias{
                 echo'
                     <option value="0"></option>
                     <option value="URB RENATO LAPORTA">URB RENATO LAPORTA</option>
+                    <option value="RIO FRIO">RIO FRIO</option>
                     <option value="EL PIÑAL">EL PIÑAL</option>
                     <option value="URB LOS LEONES">URB LOS LEONES</option>
                     <option value="EL PIÑALITO">EL PIÑALITO</option>

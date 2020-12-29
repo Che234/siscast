@@ -1302,12 +1302,12 @@ class f004{
             $pdf->SetDrawColor(0,0,0,0);
             $pdf->SetFont('Times','B',7);
             $pdf->SetLineWidth(0.5);
-            $pdf->MultiCell(73,3,utf8_decode('ING. LENIS YONDELBER COLMENARES CONTRERAS PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-021
+            $pdf->MultiCell(73,3,utf8_decode('ING. ANA GABRIELA GARCIA HERNANDEZ PRESIDENTE DEL INSTITUTO AUTONOMO MUNICIPAL DE ORDENAMIENTO TERRITORIAL DEL MUNICIPIO FERNANDEZ FEO (I.A.M.O.T.F.F.) SEGÚN RESOLUCIÓN NRO. ABSMFF/2020-080 BAJO GACETA MUNICIPAL N° 242
             '),'T:1','C');
         
         $carpeta ='../../../assets/constancias/'.date("Y").'';
         if(!file_exists($carpeta)){
-            mkdir($carpeta,0777,true);
+            mkdir($carpeta,777,true);
             $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
         }else{
             $pdf->Output('F','../../../assets/constancias/'.date("Y").'/'.$busExpedienteRes["n_expediente"].'.pdf');
